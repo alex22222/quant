@@ -1,0 +1,82 @@
+{
+  "platforms": {
+    "x": {
+      "enabled": true,
+      "accounts": [
+        {
+          "name": "<填入你的配置>",
+          "id": "<填入你的配置>",
+          "keyword": "<填入你的配置>"
+        },
+        {
+          "name": "<填入你的配置>",
+          "id": "<填入你的配置>",
+          "keyword": "<填入你的配置>"
+        },
+        {
+          "name": "<填入你的配置>",
+          "id": "<填入你的配置>",
+          "keyword": "<填入你的配置>"
+        },
+        {
+          "name": "<填入你的配置>",
+          "id": "<填入你的配置>",
+          "keyword": "<填入你的配置>"
+        },
+        {
+          "name": "<填入你的配置>",
+          "id": "<填入你的配置>",
+          "keyword": "<填入你的配置>"
+        },
+        {
+          "name": "<填入你的配置>",
+          "id": "<填入你的配置>",
+          "keyword": "<填入你的配置>"
+        },
+        {
+          "name": "Laevitas",
+          "id": "<填入你的配置>",
+          "keyword": "<填入你的配置>"
+        },
+        {
+          "name": "<填入你的配置>",
+          "id": "<填入你的配置>",
+          "keyword": "<填入你的配置>"
+        },
+        {
+          "name": "<填入你的配置>",
+          "id": "MebFaber",
+          "keyword": "<填入你的配置>"
+        }
+      ]
+    },
+    "weibo": {
+      "enabled": false,
+      "accounts": []
+    },
+    "xiaohongshu": {
+      "enabled": false,
+      "accounts": []
+    },
+    "wechat_mp": {
+      "enabled": false,
+      "accounts": []
+    },
+    "wechat_channels": {
+      "enabled": false,
+      "accounts": []
+    }
+  },
+  "feishu": {
+    "app_id": "<填入你的配置>",
+    "app_secret": "<填入你的配置>",
+    "receive_id": "<填入你的配置>",
+    "receive_id_type": "chat_id"
+  },
+  "settings": {
+    "max_results_per_account": 3,
+    "lookback_hours": 24,
+    "dedup_enabled": true,
+    "state_file": "<填入你的配置>"
+  }
+}
