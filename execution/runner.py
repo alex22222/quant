@@ -21,7 +21,7 @@ HERE = Path(__file__).resolve().parent
 TZ = timezone(timedelta(hours=8))
 
 from . import market, signals  # noqa: E402
-from .broker_base import to_std  # noqa: E402
+from .broker_base import OrderResult, to_std  # noqa: E402
 from .broker_mock import MockBroker  # noqa: E402
 from .ledger import Ledger  # noqa: E402
 from .notifier import push_card  # noqa: E402
@@ -118,7 +118,11 @@ def main(argv=None):
     if not guard.halted:
         for o in guard.passed:
             fn = broker.buy if o.side == "buy" else broker.sell
-            r = fn(o.code, o.price, o.qty)
+            try:
+                r = fn(o.code, o.price, o.qty)
+            except Exception as e:
+                # 单笔异常不中断整批；记为 error，对账阶段以券商侧为准
+                r = OrderResult(ok=False, message=f"{type(e).__name__}: {e}")
             ledger.log_order(day, ts, o, args.mode, r)
             sent += 1
             if r.ok:
@@ -162,7 +166,7 @@ def main(argv=None):
             lines.append(("熔断", guard.halt_reason))
         push_card(title, lines,
                   color="red" if (args.mode == "live" or guard.halted) else "yellow",
-                  config_path=(ROOT / cfg["feishu_config"]).resolve()
+                  config_path=(HERE / cfg["feishu_config"]).resolve()
                   if cfg.get("feishu_config") else None)
 
     broker.close()

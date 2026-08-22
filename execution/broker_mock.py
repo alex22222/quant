@@ -44,6 +44,11 @@ class MockBroker(Broker):
             self._conn.execute("INSERT INTO account VALUES (1, ?, ?)",
                                (INIT_CASH, INIT_CASH))
             self._conn.commit()
+        # 单号从 DB 恢复，跨进程不重复（此前用内存计数器，重启后撞主键）
+        row = self._conn.execute(
+            "SELECT COALESCE(MAX(CAST(SUBSTR(order_id, 6) AS INTEGER)), 0) FROM entrusts"
+        ).fetchone()
+        self._ids = itertools.count(row[0] + 1)
 
     # ---------- Broker 接口 ----------
 
@@ -129,7 +134,7 @@ class MockBroker(Broker):
             else:
                 self._conn.execute(
                     "INSERT INTO positions VALUES (?,?,?,?)", (code, qty, 0, q.last))
-            self._conn.commit()
+            # 不在此处 commit：与 _record 的委托记录同一事务提交
             return self._record(side, code, price, qty, "已成", qty, q.last)
 
         # sell
@@ -146,7 +151,7 @@ class MockBroker(Broker):
             "UPDATE positions SET qty = qty - ?, available = available - ? WHERE code=?",
             (qty, qty, code))
         self._conn.execute("DELETE FROM positions WHERE qty <= 0")
-        self._conn.commit()
+        # 不在此处 commit：与 _record 的委托记录同一事务提交，避免半持久化
         return self._record(side, code, price, qty, "已成", qty, q.last)
 
     def _record(self, side, code, price, qty, status, filled_qty, filled_price):

@@ -7,7 +7,7 @@
 
     PARAMS: dict                      # 策略参数（唯一存放处，禁止别处复制）
     FAMILY: str                       # 策略族（去重用，如 "momentum_rotation"）
-    def generate_targets(data, params=None) -> SignalResult
+    def generate_targets(data, params=None, positions=None) -> SignalResult
 
 其中 `data` 是满足下方 StrategyData 协议的适配器：
 - Paper 侧用 BundleDataAdapter（kde_levels.BundleData 实现）
@@ -35,6 +35,10 @@ class StrategyData(Protocol):
     def closes(self, code: str, n: int) -> np.ndarray | None:
         """最近 n 根日线收盘价（不足 n 根返回 None）"""
 
+    def ohlc(self, code: str, n: int) -> dict[str, np.ndarray] | None:
+        """最近 n 根日线 OHLC（dict 键 open/high/low/close；不足 n 根返回 None）。
+        日线级策略（如海龟突破）需要完整 K 线时使用。"""
+
     def index_closes(self, code: str, n: int) -> np.ndarray | None:
         """指数最近 n 根日线收盘价"""
 
@@ -50,6 +54,12 @@ class SignalResult:
     targets: list[str]
     market_ok: bool
     detail: dict = field(default_factory=dict)
+
+
+# 策略模块可选属性：FREQUENCY = "monthly"（默认，每月首个交易日生成信号）
+# 或 "daily"（每个交易日生成信号，如海龟突破的日线入场/止损）；
+# generate_targets(data, params=None, positions=None)：positions 为当前持仓
+# {code: {"qty":..., "cost":...}}，日线策略的出场/加仓依赖它，月线策略忽略。
 
 
 def load_strategy(name: str):
@@ -82,6 +92,15 @@ class BundleDataAdapter:
             return None
         c = df["close"].values
         return c if len(c) >= n else None
+
+    def ohlc(self, code: str, n: int) -> dict[str, np.ndarray] | None:
+        try:
+            df = self._bd.load(code)
+        except Exception:
+            return None
+        if len(df) < n:
+            return None
+        return {k: df[k].values for k in ("open", "high", "low", "close")}
 
     def index_closes(self, code: str, n: int) -> np.ndarray | None:
         try:
