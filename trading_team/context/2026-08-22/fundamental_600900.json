@@ -1,0 +1,122 @@
+{
+  "financials": {
+    "reports": [
+      {
+        "report_date": "2026-03-31",
+        "eps": 0.2763,
+        "revenue_yi": 181.12,
+        "net_profit_yi": 67.61,
+        "deducted_profit_yi": 62.37,
+        "revenue_yoy": 6.442778170349,
+        "profit_yoy": 30.50157685081,
+        "deducted_yoy": 19.198321988101,
+        "roe_weighted": 3.01,
+        "gross_margin": 55.6463177522,
+        "net_margin": 38.0050350806,
+        "debt_ratio": 57.3270691817
+      },
+      {
+        "report_date": "2025-12-31",
+        "eps": 1.4101,
+        "revenue_yi": 862.42,
+        "net_profit_yi": 345.03,
+        "deducted_profit_yi": 334.46,
+        "revenue_yoy": 2.071287620863,
+        "profit_yoy": 6.174992912414,
+        "deducted_yoy": 2.88555509668,
+        "roe_weighted": 15.9,
+        "gross_margin": 61.6684875716,
+        "net_margin": 40.5246806803,
+        "debt_ratio": 58.2694597691
+      },
+      {
+        "report_date": "2025-09-30",
+        "eps": 1.1522,
+        "revenue_yi": 657.41,
+        "net_profit_yi": 281.93,
+        "deducted_profit_yi": 282.07,
+        "revenue_yoy": -0.888570804951,
+        "profit_yoy": 0.599292568456,
+        "deducted_yoy": 0.794251819523,
+        "roe_weighted": 13.01,
+        "gross_margin": 62.477197058,
+        "net_margin": 43.4361414457,
+        "debt_ratio": 59.0357796035
+      },
+      {
+        "report_date": "2025-06-30",
+        "eps": 0.5336,
+        "revenue_yi": 366.98,
+        "net_profit_yi": 130.56,
+        "deducted_profit_yi": 131.9,
+        "revenue_yoy": 5.338497451203,
+        "profit_yoy": 14.855374254379,
+        "deducted_yoy": 16.004914139683,
+        "roe_weighted": 6.09,
+        "gross_margin": 56.1225369146,
+        "net_margin": 36.1947881302,
+        "debt_ratio": 61.5165462506
+      }
+    ]
+  },
+  "announcements": [
+    {
+      "date": "2026-08-06",
+      "title": "长江电力:长江电力关于公司总法律顾问辞职的公告",
+      "columns": [
+        "高管人员任职变动"
+      ]
+    },
+    {
+      "date": "2026-07-18",
+      "title": "长江电力:长江电力关于公司控股股东发行可交换公司债券对持有的部分本公司A股股票办理补充担保及信托登记的公告",
+      "columns": [
+        "提供/对外担保公告"
+      ]
+    },
+    {
+      "date": "2026-07-10",
+      "title": "长江电力:长江电力2025年年度权益分派实施公告",
+      "columns": [
+        "分配方案实施"
+      ]
+    },
+    {
+      "date": "2026-07-07",
+      "title": "长江电力:长江电力第七届董事会第二次会议决议公告",
+      "columns": [
+        "董事会决议公告"
+      ]
+    },
+    {
+      "date": "2026-07-07",
+      "title": "长江电力:长江电力2026年半年度发电量完成情况公告",
+      "columns": [
+        "月度经营情况"
+      ]
+    },
+    {
+      "date": "2026-06-25",
+      "title": "长江电力:长江电力第七届董事会第一次会议决议公告",
+      "columns": [
+        "高管人员任职变动",
+        "董事会决议公告"
+      ]
+    },
+    {
+      "date": "2026-06-24",
+      "title": "长江电力:长江电力2026年第一次临时股东会决议公告",
+      "columns": [
+        "股东大会决议公告",
+        "高管人员任职变动"
+      ]
+    },
+    {
+      "date": "2026-06-24",
+      "title": "长江电力:北京市天元律师事务所关于中国长江电力股份有限公司2026年第一次临时股东会的法律意见",
+      "columns": [
+        "法律意见书"
+      ]
+    }
+  ]
+}

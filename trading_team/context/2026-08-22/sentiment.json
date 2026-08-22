@@ -86,7 +86,7 @@
     "dt_count": 13
   },
   "breadth": {
-    "up_gt5": 5552,
+    "up_gt5": null,
     "up": null,
     "down": null,
     "down_gt5": null,
@@ -97,6 +97,11 @@
       "turnover_rate": 0.27,
       "volume_ratio": 0.8,
       "pct_chg": -1.45
+    },
+    "000858": {
+      "turnover_rate": 0.51,
+      "volume_ratio": 0.77,
+      "pct_chg": -1.25
     },
     "600036": {
       "turnover_rate": 0.25,
@@ -112,6 +117,31 @@
       "turnover_rate": 0.48,
       "volume_ratio": 1.11,
       "pct_chg": 1.6
+    },
+    "002594": {
+      "turnover_rate": 0.51,
+      "volume_ratio": 0.72,
+      "pct_chg": -0.01
+    },
+    "601899": {
+      "turnover_rate": 1.46,
+      "volume_ratio": 1.28,
+      "pct_chg": 2.69
+    },
+    "000333": {
+      "turnover_rate": 0.26,
+      "volume_ratio": 0.73,
+      "pct_chg": -1.26
+    },
+    "600900": {
+      "turnover_rate": 0.26,
+      "volume_ratio": 0.74,
+      "pct_chg": -0.71
+    },
+    "601012": {
+      "turnover_rate": 0.72,
+      "volume_ratio": 0.71,
+      "pct_chg": 0.08
     },
     "000063": {
       "turnover_rate": 1.21,

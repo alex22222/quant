@@ -1,0 +1,122 @@
+{
+  "financials": {
+    "reports": [
+      {
+        "report_date": "2026-03-31",
+        "eps": 2.0772,
+        "revenue_yi": 228.38,
+        "net_profit_yi": 80.63,
+        "deducted_profit_yi": 80.36,
+        "revenue_yoy": 33.666963608643,
+        "profit_yoy": 82.567785670964,
+        "deducted_yoy": 81.9176103814,
+        "roe_weighted": 6.5,
+        "gross_margin": 81.4343854062,
+        "net_margin": 36.4470249653,
+        "debt_ratio": 34.3133085128
+      },
+      {
+        "report_date": "2025-12-31",
+        "eps": 2.3068,
+        "revenue_yi": 405.29,
+        "net_profit_yi": 89.54,
+        "deducted_profit_yi": 88.16,
+        "revenue_yoy": -54.551804064166,
+        "profit_yoy": -71.888962730611,
+        "deducted_yoy": -72.227184004169,
+        "roe_weighted": 6.89,
+        "gross_margin": 77.5418415205,
+        "net_margin": 22.9890347252,
+        "debt_ratio": 35.6890530354
+      },
+      {
+        "report_date": "2025-09-30",
+        "eps": 1.668,
+        "revenue_yi": 306.38,
+        "net_profit_yi": 64.75,
+        "deducted_profit_yi": 64.58,
+        "revenue_yoy": -54.888513645422,
+        "profit_yoy": -74.029889444931,
+        "deducted_yoy": -73.992885052964,
+        "roe_weighted": 4.89,
+        "gross_margin": 75.7249950858,
+        "net_margin": 22.1523382106,
+        "debt_ratio": 31.5960296263
+      },
+      {
+        "report_date": "2025-06-30",
+        "eps": 1.1912,
+        "revenue_yi": 235.1,
+        "net_profit_yi": 46.24,
+        "deducted_profit_yi": 46.12,
+        "revenue_yoy": -53.581662234871,
+        "profit_yoy": -75.736516359528,
+        "deducted_yoy": -75.650258332366,
+        "roe_weighted": 3.41,
+        "gross_margin": 77.8661751665,
+        "net_margin": 20.7584428649,
+        "debt_ratio": 36.5081257721
+      }
+    ]
+  },
+  "announcements": [
+    {
+      "date": "2026-08-07",
+      "title": "五粮液:关于四川省宜宾五粮液集团有限公司增持公司股票的进展公告",
+      "columns": [
+        "股东/实际控制人股份增持"
+      ]
+    },
+    {
+      "date": "2026-08-04",
+      "title": "五粮液:关于回购公司股份进展的公告",
+      "columns": [
+        "回购进展情况"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "title": "五粮液:第七届董事会2026年第10次会议决议公告",
+      "columns": [
+        "高管人员任职变动",
+        "董事会决议公告"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "title": "五粮液:关于变更董事会秘书的公告",
+      "columns": [
+        "高管人员任职变动"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "title": "五粮液:关于董事辞职的公告",
+      "columns": [
+        "高管人员任职变动"
+      ]
+    },
+    {
+      "date": "2026-07-28",
+      "title": "五粮液:第七届董事会2026年第9次会议决议公告",
+      "columns": [
+        "高管人员任职变动",
+        "董事会决议公告"
+      ]
+    },
+    {
+      "date": "2026-07-18",
+      "title": "五粮液:关于董事辞职的公告",
+      "columns": [
+        "高管人员任职变动"
+      ]
+    },
+    {
+      "date": "2026-07-16",
+      "title": "五粮液:关于2025年度分红派息实施后调整回购股份价格上限的公告",
+      "columns": [
+        "回购方案修订"
+      ]
+    }
+  ]
+}

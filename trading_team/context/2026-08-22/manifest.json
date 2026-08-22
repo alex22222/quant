@@ -1,16 +1,24 @@
 {
   "date": "2026-08-22",
-  "started_at": "2026-08-22T22:38:33",
+  "started_at": "2026-08-22T23:45:57",
   "sources": {
     "snapshot": {
       "ok": true,
-      "detail": "东财 6 只"
+      "detail": "腾讯兜底 12 只 (东财失败: ProxyError(MaxRetryError(\"HTTPSConnectionPool(host='push2.eastmoney.com', port=4)"
     },
     "technical_600519": {
       "ok": true,
       "detail": "as_of 2026-08-21"
     },
     "fundamental_600519": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
+    "technical_000858": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_000858": {
       "ok": true,
       "detail": "4 期财报, 8 条公告"
     },
@@ -38,6 +46,46 @@
       "ok": true,
       "detail": "4 期财报, 8 条公告"
     },
+    "technical_002594": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_002594": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
+    "technical_601899": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_601899": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
+    "technical_000333": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_000333": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
+    "technical_600900": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_600900": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
+    "technical_601012": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_601012": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
     "technical_000063": {
       "ok": true,
       "detail": "as_of 2026-08-21"
@@ -61,5 +109,5 @@
   },
   "ok": true,
   "latest_trade_date": "2026-08-21",
-  "finished_at": "2026-08-22T22:40:30"
+  "finished_at": "2026-08-22T23:48:54"
 }

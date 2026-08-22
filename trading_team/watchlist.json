@@ -1,13 +1,19 @@
 {
-  "name": "A股核心观察池 v1",
-  "note": "与 momentum_rotation 策略股票池风格一致：高流动性大盘蓝筹，覆盖消费/金融/新能源/医药/科技",
+  "name": "A股核心观察池 v2",
+  "note": "对齐 momentum_rotation 策略全池 10 只（消费/金融/新能源/有色/公用事业）；中兴通讯为 Loop #5 遗留的事件观察标的（中报暴雷跟踪），非策略池成分",
   "updated_at": "2026-08-22",
   "stocks": [
-    {"code": "600519", "secid": "1.600519", "name": "贵州茅台", "sector": "白酒/消费"},
-    {"code": "600036", "secid": "1.600036", "name": "招商银行", "sector": "银行"},
-    {"code": "601318", "secid": "1.601318", "name": "中国平安", "sector": "保险"},
-    {"code": "300750", "secid": "0.300750", "name": "宁德时代", "sector": "新能源/电池"},
-    {"code": "000063", "secid": "0.000063", "name": "中兴通讯", "sector": "通信/科技"}
+    {"code": "600519", "secid": "1.600519", "name": "贵州茅台", "sector": "白酒/消费", "tag": "core"},
+    {"code": "000858", "secid": "0.000858", "name": "五粮液", "sector": "白酒/消费", "tag": "core"},
+    {"code": "600036", "secid": "1.600036", "name": "招商银行", "sector": "银行", "tag": "core"},
+    {"code": "601318", "secid": "1.601318", "name": "中国平安", "sector": "保险", "tag": "core"},
+    {"code": "300750", "secid": "0.300750", "name": "宁德时代", "sector": "新能源/电池", "tag": "core"},
+    {"code": "002594", "secid": "0.002594", "name": "比亚迪", "sector": "汽车/新能源", "tag": "core"},
+    {"code": "601899", "secid": "1.601899", "name": "紫金矿业", "sector": "有色/黄金", "tag": "core"},
+    {"code": "000333", "secid": "0.000333", "name": "美的集团", "sector": "家电/消费", "tag": "core"},
+    {"code": "600900", "secid": "1.600900", "name": "长江电力", "sector": "公用事业/水电", "tag": "core"},
+    {"code": "601012", "secid": "1.601012", "name": "隆基绿能", "sector": "光伏/新能源", "tag": "core"},
+    {"code": "000063", "secid": "0.000063", "name": "中兴通讯", "sector": "通信/科技", "tag": "event-watch"}
   ],
   "benchmark": {"code": "000300", "secid": "1.000300", "name": "沪深300"}
 }

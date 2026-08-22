@@ -1,0 +1,120 @@
+{
+  "financials": {
+    "reports": [
+      {
+        "report_date": "2026-03-31",
+        "eps": 1.69,
+        "revenue_yi": 1315.81,
+        "net_profit_yi": 126.75,
+        "deducted_profit_yi": 109.62,
+        "revenue_yoy": 2.454635021947,
+        "profit_yoy": 2.031220956812,
+        "deducted_yoy": -14.024812964716,
+        "roe_weighted": 5.56,
+        "gross_margin": 25.5711317621,
+        "net_margin": 9.8090375503,
+        "debt_ratio": 60.0181626889
+      },
+      {
+        "report_date": "2025-12-31",
+        "eps": 5.8,
+        "revenue_yi": 4585.02,
+        "net_profit_yi": 439.45,
+        "deducted_profit_yi": 412.67,
+        "revenue_yoy": 12.080186188339,
+        "profit_yoy": 14.033631938896,
+        "deducted_yoy": 15.460536568527,
+        "roe_weighted": 19.7,
+        "gross_margin": 26.3910058433,
+        "net_margin": 9.7535386496,
+        "debt_ratio": 61.1650097449
+      },
+      {
+        "report_date": "2025-09-30",
+        "eps": 4.98,
+        "revenue_yi": 3647.16,
+        "net_profit_yi": 378.83,
+        "deducted_profit_yi": 371.4,
+        "revenue_yoy": 13.849326829738,
+        "profit_yoy": 19.509280290926,
+        "deducted_yoy": 22.2648805981,
+        "roe_weighted": 16.79,
+        "gross_margin": 25.873999517,
+        "net_margin": 10.6423656614,
+        "debt_ratio": 60.5422940646
+      },
+      {
+        "report_date": "2025-06-30",
+        "eps": 3.41,
+        "revenue_yi": 2523.31,
+        "net_profit_yi": 260.14,
+        "deducted_profit_yi": 262.35,
+        "revenue_yoy": 15.683736739447,
+        "profit_yoy": 25.040712979933,
+        "deducted_yoy": 30.001276455861,
+        "roe_weighted": 11.29,
+        "gross_margin": 25.6198651952,
+        "net_margin": 10.6112455791,
+        "debt_ratio": 64.0421580115
+      }
+    ]
+  },
+  "announcements": [
+    {
+      "date": "2026-08-06",
+      "title": "美的集团:关于以集中竞价交易方式回购A股股份进展情况的公告",
+      "columns": [
+        "回购进展情况"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "title": "美的集团:2026年7月29日投资者关系活动记录表",
+      "columns": [
+        "调研活动"
+      ]
+    },
+    {
+      "date": "2026-07-20",
+      "title": "美的集团:关于以集中竞价交易方式回购A股股份进展情况的公告",
+      "columns": [
+        "回购进展情况"
+      ]
+    },
+    {
+      "date": "2026-07-16",
+      "title": "美的集团:关于2023年限制性股票激励计划的第三次解除限售期解锁上市流通的提示性公告",
+      "columns": [
+        "限售股份上市流通"
+      ]
+    },
+    {
+      "date": "2026-07-14",
+      "title": "美的集团:关于自主行权模式下第九期股权激励计划第三个行权期符合行权条件开始行权的提示性公告",
+      "columns": [
+        "股权激励进展公告"
+      ]
+    },
+    {
+      "date": "2026-07-09",
+      "title": "美的集团:关于2022年限制性股票激励计划的第三次解除限售期解锁上市流通的提示性公告",
+      "columns": [
+        "限售股份上市流通"
+      ]
+    },
+    {
+      "date": "2026-07-09",
+      "title": "美的集团:关于以集中竞价交易方式回购A股股份达总股本1%的进展公告",
+      "columns": [
+        "回购进展情况"
+      ]
+    },
+    {
+      "date": "2026-07-03",
+      "title": "美的集团:关于以集中竞价交易方式回购A股股份进展情况的公告",
+      "columns": [
+        "回购进展情况"
+      ]
+    }
+  ]
+}

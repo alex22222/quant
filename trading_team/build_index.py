@@ -31,7 +31,7 @@ def summarize(day_dir: Path) -> dict:
     rfile = day_dir / "05_researcher.md"
     if rfile.exists():
         text = rfile.read_text(encoding="utf-8")
-        m = re.search(r"综合评级[：:](.+)", text)
+        m = re.search(r"综合评级\*{0,2}[：:]\s*(.+)", text)
         if m:
             item["ratings_line"] = m.group(1).strip()[:200]
 

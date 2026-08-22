@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>量化闭环控制台</title>
+<title>HQCapital 控制台</title>
 <style>
   :root {
     --bg: #0d1117; --panel: #161b22; --border: #30363d; --sidebar: #0a0d12;
@@ -109,19 +109,44 @@
   .news-body li { margin: 7px 0 7px 18px; font-size: 13px; }
   .news-body a { color: var(--accent); }
   .news-body b, .news-body strong { color: var(--text); }
+  .news-body table { margin: 10px 0; font-size: 12.5px; }
+  .news-body h3 { font-size: 13.5px; margin: 14px 0 4px; color: var(--text); }
+
+  /* 交易团队日报 */
+  .team-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+  .team-tab { padding: 4px 11px; border-radius: 99px; border: 1px solid var(--border);
+              color: var(--dim); font-size: 12px; cursor: pointer; user-select: none; }
+  .team-tab:hover { color: var(--text); border-color: var(--dim); }
+  .team-tab.active { color: var(--accent); border-color: var(--accent); font-weight: 600; }
+  .team-hl { background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+             border-radius: 10px; padding: 13px 16px; margin-bottom: 12px; font-size: 13.5px; }
+  .team-hl .meta { color: var(--dim); font-size: 11.5px; margin-top: 6px; }
+  .team-hl .meta b { color: var(--text); font-weight: 600; }
+
+  /* 老板审批面板 */
+  .appr-btn { padding: 3px 12px; border-radius: 6px; border: 1px solid var(--border);
+              background: var(--bg); color: var(--dim); font-size: 12px; cursor: pointer; margin-left: 6px; }
+  .appr-btn:hover { color: var(--text); border-color: var(--dim); }
+  .appr-btn.ok { color: var(--ok); border-color: var(--ok); }
+  .appr-btn.no { color: var(--fail); border-color: var(--fail); }
+  .pill.approved { color: var(--ok); border-color: var(--ok); }
+  .pill.rejected { color: var(--fail); border-color: var(--fail); }
+  .pill.reduced { color: var(--run); border-color: var(--run); }
+  .appr-note { color: var(--dim); font-size: 11px; margin-top: 2px; }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="brand"><b>量化闭环</b><span>虚拟投资公司 · v1</span></div>
+  <div class="brand"><b>HQCapital</b><span>虚拟投资公司 · 多智能体交易团队</span></div>
   <div class="menu">
     <div class="menu-label">总部</div>
     <div class="mi active" data-v="overview">📊 公司概览</div>
     <div class="mi" data-v="org">🏢 组织架构</div>
     <div class="mi" data-v="news">📰 量化新闻 <span class="st" id="nav-news"></span></div>
     <div class="menu-label">业务线（按流程）</div>
-    <div class="mi" data-v="meeting">🤖 晨会 · LLM团队 <span class="st" id="nav-meeting"></span></div>
+    <div class="mi" data-v="team">🤖 交易团队日报 <span class="st" id="nav-team"></span></div>
+    <div class="mi" data-v="pool">🎯 标的池 <span class="st" id="nav-pool"></span></div>
     <div class="mi" data-v="data">🗄️ 数据部 <span class="st" id="nav-data"></span></div>
     <div class="mi" data-v="strategy">📈 投研部 <span class="st" id="nav-strategy"></span></div>
     <div class="mi" data-v="backtest">🛡️ 风控部 <span class="st" id="nav-backtest"></span></div>
@@ -140,55 +165,120 @@
       <div class="card"><div class="sub">Paper 净值（初始 ¥100,000）</div><div class="metric" id="equity">—</div><div class="sub" id="equity-sub"></div></div>
       <div class="card"><div class="sub">最新 Loop</div><div id="last-loop" style="font-size:13px;margin-top:6px">—</div></div>
     </div>
-  </section>
-
-  <!-- 组织架构 -->
-  <section class="view" id="v-org">
-    <div class="vhead"><h1>组织架构</h1><p>参考 TradingAgents 多角色交易公司 · 点击部门卡片跳转对应业务线 · v1 为确定性代码实现</p></div>
-    <div class="card">
-      <div class="org-ceo">👤 老板（你） · 最终决策与门禁审批</div>
-      <div class="org-row" id="org"></div>
-      <div class="org-phase3">Phase 3 已入职（晨会制）：基本面/情绪/新闻/技术分析师 · 多空研究员 · 交易员 · 风控经理 —— 见「🤖 晨会」菜单，老板终审后才可执行</div>
-    </div>
-    <div class="card">
-      <div class="sub" style="margin-bottom:8px">运作规则（AGENT.md 摘要）</div>
-      <div style="font-size:12.5px;color:var(--dim)">
-        ① 一条命令一个 Loop：pipeline.run ② 门禁不可绕过：只有 live 策略进交易台
-        ③ 事实源：status.json（机器写）+ AGENT.md（共同写）④ 凭证永不入库 ⑤ 每次 Loop 必须留日志
+    <div class="card" style="margin-top:12px">
+      <div class="sub" style="margin-bottom:10px;font-weight:600;color:var(--text)">🏢 HQCapital 角色职责（引用 TradingAgents 多智能体框架）</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;font-size:12.5px">
+        <div>
+          <div style="color:var(--accent);font-weight:600;margin-bottom:4px">📊 分析师团队（Analyst Team）</div>
+          <div style="color:var(--dim);margin-bottom:6px">四位分析师并行采集市场信息，覆盖多维度数据：</div>
+          <div style="margin-bottom:4px"><b>基本面分析师</b>：分析财报、收益报告、内部交易等数据，评估公司内在价值，判断股票是否被低估或高估，为长期投资提供参考。</div>
+          <div style="margin-bottom:4px"><b>情绪分析师</b>：关注社交媒体、舆情打分及公司内部情绪等公众信息，预测短期投资者行为可能对股价带来的影响。</div>
+          <div style="margin-bottom:4px"><b>新闻分析师</b>：追踪宏观经济指标、重大新闻及公司事件，识别对市场有潜在影响的突发消息或政策变化，为把握行情拐点提供依据。</div>
+          <div style="margin-bottom:4px"><b>技术分析师</b>：计算 MACD、RSI 等技术指标，分析价量关系和价格形态，判断买卖时机和趋势走势。</div>
+        </div>
+        <div>
+          <div style="color:var(--accent);font-weight:600;margin-bottom:4px">🔬 研究团队（Research Team）</div>
+          <div style="color:var(--dim);margin-bottom:6px">对分析师团队的数据进行批判性评估，以多空两个视角展开多轮辩论：</div>
+          <div style="margin-bottom:4px"><b>多头研究员（Bullish）</b>：强调积极面与增长空间，为看多策略提供支撑性论据。</div>
+          <div style="margin-bottom:4px"><b>空头研究员（Bearish）</b>：着重揭示潜在风险与消极信号，为避免盲目入场提供「对立」观点。</div>
+          <div style="color:var(--accent);font-weight:600;margin-bottom:4px;margin-top:10px">💼 交易员代理（Trader Agent）</div>
+          <div style="color:var(--dim);margin-bottom:6px">汇总分析师及研究员的意见后，结合量化数据与情感信息等多维输入：</div>
+          <div style="margin-bottom:4px"><b>交易员</b>：评估分析师及研究员的建议，决定交易时机与规模，执行买卖指令，动态调整持仓。</div>
+          <div style="color:var(--accent);font-weight:600;margin-bottom:4px;margin-top:10px">🛡️ 风险管理团队（Risk Management Team）</div>
+          <div style="color:var(--dim);margin-bottom:6px">实时跟踪交易组合的风险敞口，确保交易活动符合风险参数：</div>
+          <div style="margin-bottom:4px"><b>风险经理</b>：评估市场波动、流动性、对手方风险等；执行风险缓释策略（止损、头寸分散）；向交易员提供风险反馈；确保整体组合与公司风险偏好匹配。</div>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:12px;color:var(--dim)">
+        <b>工作纪律</b>：每日工作必须严格围绕上述角色职责展开——分析师只输出本维度的研究报告，研究员只组织多空辩论，交易员只将研究结论转化为可执行计划，风险经理只审核风险敞口与下达调整建议。任何角色的产出不得越权替代其他角色的职能。
       </div>
     </div>
   </section>
 
-  <!-- 晨会 · LLM 交易团队 -->
-  <section class="view" id="v-meeting">
-    <div class="vhead"><h1>🤖 晨会 · LLM 交易团队</h1><p>TradingAgents 五角色：分析师 ×4 → 多空辩论 → 交易员 → 风控 · 产出交易提案，老板（PM）终审 · 每周六 10:17 自动召开</p></div>
-    <div id="meeting-latest">—</div>
-    <div class="card"><div class="sub" style="margin-bottom:8px">历史晨会</div><div id="meeting-list">—</div></div>
+  <!-- 组织架构 -->
+  <section class="view" id="v-org">
+    <div class="vhead"><h1>组织架构</h1><p>HQCapital 参考 TradingAgents 多角色交易公司 · 七角色流水线 + v1 确定性支撑层</p></div>
+
+    <!-- CEO -->
+    <div class="card">
+      <div class="org-ceo">👤 老板（Portfolio Manager）· 最终决策与门禁审批 · LLM 只出提案，不动 paper 台账</div>
+    </div>
+
+    <!-- 第一层：TradingAgents 七角色 -->
+    <div class="card">
+      <div class="sub" style="margin-bottom:10px;font-weight:600;color:var(--text)">📊 第一层：TradingAgents 交易团队（Phase 3 · 日报制）</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px" id="org-analysts"></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px" id="org-execution"></div>
+      <div class="org-phase3" style="border-top:1px dashed var(--border);margin-top:10px;padding-top:10px">
+        晨会流程：分析师 ×4 并行 → 研究员多空辩论 → 交易员定计划 → 风险经理审敞口 → 老板终审 → 执行
+      </div>
+    </div>
+
+    <!-- 第二层：v1 确定性流水线 -->
+    <div class="card">
+      <div class="sub" style="margin-bottom:10px;font-weight:600;color:var(--text)">⚙️ 第二层：v1 确定性支撑层（传统 Loop 流水线）</div>
+      <div class="org-row" id="org"></div>
+      <div class="org-phase3">为交易团队提供数据、策略注册、回测门禁、Paper 记账、复盘基础设施</div>
+    </div>
+
+    <div class="card">
+      <div class="sub" style="margin-bottom:8px">运作规则（AGENT.md 摘要）</div>
+      <div style="font-size:12.5px;color:var(--dim)">
+        ① 角色边界不可逾越：分析师只出报告，研究员只组织辩论，交易员只转计划，风险经理只审敞口  <br>
+        ② 一条命令一个 Loop：pipeline.run ③ 门禁不可绕过：只有 live 策略进交易台  <br>
+        ④ 事实源：status.json（机器写）+ AGENT.md（共同写）⑤ 凭证永不入库 ⑥ 每次 Loop 必须留日志
+      </div>
+    </div>
+  </section>
+
+  <!-- 交易团队日报 -->
+  <section class="view" id="v-team">
+    <div class="vhead"><h1>🤖 交易团队日报</h1><p>TradingAgents 七角色流水线：分析师 ×4 → 研究员辩论 → 交易员 → 风控经理 · 每日盘前自动运行 · 审批后执行到 Paper · 源存档 trading_team/outputs/ & decisions/</p></div>
+    <div class="news-wrap">
+      <div class="card news-list" id="team-list">—</div>
+      <div style="flex:1;min-width:0">
+        <div id="team-headline">—</div>
+        <div id="team-approve"></div>
+        <div class="card" style="padding:10px 12px">
+          <div class="team-tabs" id="team-tabs"></div>
+          <div class="news-body" id="team-body" style="margin-top:10px">—</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 标的池 -->
+  <section class="view" id="v-pool">
+    <div class="vhead"><h1>🎯 标的池</h1><p>trading_team/watchlist.json · 对齐 momentum_rotation 策略全池 · 行情取最近一次采集快照</p></div>
+    <div class="card"><table id="pool"><thead><tr>
+      <th>代码</th><th>名称</th><th>板块</th><th>定位</th><th>收盘</th><th>涨跌幅</th><th>换手</th><th>PE(TTM)</th><th>PB</th><th>最新提案</th>
+    </tr></thead><tbody></tbody></table></div>
+    <div class="card sub" id="pool-meta">—</div>
   </section>
 
   <!-- 数据部 -->
   <section class="view" id="v-data">
-    <div class="vhead"><h1>🗄️ 数据部</h1><p>职责：A股日线数据采集、更新与新鲜度保障 · 产出：status.data</p></div>
+    <div class="vhead"><h1>🗄️ 数据部</h1><p>职责：为分析师团队提供 A 股日线数据基础设施——采集、更新、新鲜度保障 · 产出：status.data · 数据来源：东财主源 + 腾讯兜底</p></div>
     <div class="card" id="data-card">—</div>
   </section>
 
   <!-- 投研部 -->
   <section class="view" id="v-strategy">
-    <div class="vhead"><h1>📈 投研部（技术分析师）</h1><p>职责：策略注册与状态机 research → candidate → live → retired · 产出：策略注册表</p></div>
+    <div class="vhead"><h1>📈 投研部（技术分析师）</h1><p>职责：技术分析师角色——基于日线数据计算 MACD/RSI 等指标，分析价量关系和价格形态，判断买卖时机；同时维护策略注册表与状态机 research → candidate → live → retired · 产出：策略注册表</p></div>
     <div class="card"><table id="reg"><thead><tr><th>策略</th><th>状态</th><th>参数</th><th>说明</th></tr></thead><tbody></tbody></table></div>
     <div class="card sub">状态变更方式：编辑 status.json 的 strategy_registry 段落，变更须记录在 AGENT.md 的 Loop 条目「人工决策」中</div>
   </section>
 
   <!-- 风控部 -->
   <section class="view" id="v-backtest">
-    <div class="vhead"><h1>🛡️ 风控部（委员会）</h1><p>职责：统一区间回测 + 门禁判定 · 门禁：年化 &gt; 5% 且回撤 &lt; 30% 且夏普 &gt; 0.3</p></div>
+    <div class="vhead"><h1>🛡️ 风控部（风险管理团队）</h1><p>职责：风险经理角色——统一区间回测 + 门禁判定；评估市场波动、流动性、对手方风险；执行风险缓释策略（止损、头寸分散）；确保整体组合与公司风险偏好匹配 · 门禁：年化 &gt; 5% 且回撤 &lt; 30% 且夏普 &gt; 0.3</p></div>
     <div class="card"><table id="bt"><thead><tr><th>策略</th><th>总收益</th><th>年化</th><th>回撤</th><th>夏普</th><th>门禁</th></tr></thead><tbody></tbody></table></div>
     <div class="card sub" id="bt-meta">—</div>
   </section>
 
   <!-- 交易台 -->
   <section class="view" id="v-paper">
-    <div class="vhead"><h1>💼 交易台（Paper 交易）</h1><p>职责：按 live 策略执行调仓、SQLite 台账记账 · 假设：收盘价成交、免手续费、无T+1（v1简化）</p></div>
+    <div class="vhead"><h1>💼 交易台（交易员代理）</h1><p>职责：交易员角色——按 live 策略执行调仓、SQLite 台账记账；基于研究员辩论结论决定交易时机与规模，动态调整持仓 · 假设：收盘价成交、免手续费、无T+1（v1简化）</p></div>
     <div class="grid3">
       <div class="card"><div class="sub">净值</div><div class="metric" id="p-equity">—</div></div>
       <div class="card"><div class="sub">现金</div><div class="metric" id="p-cash">—</div></div>
@@ -201,7 +291,7 @@
 
   <!-- 投委会 -->
   <section class="view" id="v-review">
-    <div class="vhead"><h1>📋 投委会（复盘）</h1><p>职责：复盘报告 + AGENT.md 迭代日志 · 每次 Loop 留痕</p></div>
+    <div class="vhead"><h1>📋 投委会（复盘）</h1><p>职责：复盘报告 + AGENT.md 迭代日志 · 每次 Loop 留痕 · 老板（PM）拥有最终审批权：LLM 只出提案，不动 paper 台账</p></div>
     <div class="card"><div class="sub" style="margin-bottom:8px">最新复盘报告</div><pre id="review">—</pre></div>
     <div class="card"><div class="sub" style="margin-bottom:10px">Loop 迭代时间线（AGENT.md）</div><div id="loops">—</div></div>
   </section>
@@ -289,11 +379,32 @@ async function refresh() {
 
   /* 组织架构（点击跳业务线） */
   const liveNow = Object.keys(reg).filter(k => reg[k].state === "live");
+
+  /* 第一层：分析师团队 */
+  const ANALYSTS = [
+    ["📈","基本面分析师","分析财报/收益/内部交易，评估内在价值","见交易团队日报","team"],
+    ["😊","情绪分析师","关注社交媒体/舆情/市场情绪","见交易团队日报","team"],
+    ["📰","新闻分析师","追踪宏观/行业/公司事件","见交易团队日报","team"],
+    ["📉","技术分析师","计算 MACD/RSI，分析价量形态","见交易团队日报","team"],
+  ];
+  $("org-analysts").innerHTML = ANALYSTS.map(([icon,role,duty,holder,v]) =>
+    `<div class="org-node" onclick="gotoView('${v}')"><div class="role">${icon} ${role}</div><div class="duty">${duty}</div><div class="holder">${holder}</div></div>`).join("");
+
+  /* 第一层：研究与执行 */
+  const EXECUTION = [
+    ["🔬","研究员","多头 vs 空头辩论，整合共识与分歧","见交易团队日报","team"],
+    ["💼","交易员","评估建议，决定时机与规模，执行指令","见交易团队日报","team"],
+    ["🛡️","风险经理","评估波动/流动性/对手方风险，审敞口","见交易团队日报","team"],
+  ];
+  $("org-execution").innerHTML = EXECUTION.map(([icon,role,duty,holder,v]) =>
+    `<div class="org-node" onclick="gotoView('${v}')"><div class="role">${icon} ${role}</div><div class="duty">${duty}</div><div class="holder">${holder}</div></div>`).join("");
+
+  /* 第二层：v1 确定性支撑层 */
   const ORG = [
     ["🗄️","数据部门","A股日线数据采集、更新与新鲜度保障",`${stages.data?.result?.stocks??"—"} 只 · 最新 ${stages.data?.result?.latest_trading_day??"—"}`,"data"],
-    ["📈","技术分析师","策略注册表与状态机 research→live",`${Object.keys(reg).length} 个策略 · live: ${liveNow.join(",")||"无"}`,"strategy"],
+    ["📈","技术分析师（投研部）","策略注册表与状态机 research→live",`${Object.keys(reg).length} 个策略 · live: ${liveNow.join(",")||"无"}`,"strategy"],
     ["🛡️","风控委员会","统一区间回测 + 门禁判定",Object.entries(stages.backtest?.result?.results||{}).map(([k,v])=>`${k}:${v.gate||"?"}`).join(" ")||"未执行","backtest"],
-    ["💼","交易员","paper 账户执行调仓、SQLite 台账",p.equity!=null?`净值 ${fmtMoney(p.equity)}`:"未记账","paper"],
+    ["💼","交易员（交易台）","paper 账户执行调仓、SQLite 台账",p.equity!=null?`净值 ${fmtMoney(p.equity)}`:"未记账","paper"],
     ["📋","投委会","复盘报告、AGENT.md 迭代日志",stages.review?.result?`Loop #${stages.review.result.loop_no}`:"未执行","review"],
   ];
   $("org").innerHTML = ORG.map(([icon,role,duty,holder,v]) =>
@@ -345,18 +456,37 @@ setInterval(refresh, 30000);
 let newsDate = null;
 const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 function md2html(md) {
-  return md.split("\n").map(line => {
-    let prefix = "", body = line;
-    if (line.startsWith("## ")) { prefix = "h2"; body = line.slice(3); }
-    else if (line.startsWith("# ")) { prefix = "h1"; body = line.slice(2); }
-    else if (line.startsWith("> ")) { prefix = "blockquote"; body = line.slice(2); }
-    else if (line.startsWith("- ")) { prefix = "li"; body = line.slice(2); }
-    let t = esc(body)
-      .replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
-      .replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
-    if (prefix) return `<${prefix}>${t}</${prefix}>`;
-    return line.trim() ? `<div style="font-size:13px;margin:6px 0">${t}</div>` : "";
-  }).join("\n");
+  const lines = md.split("\n");
+  const out = [];
+  let i = 0;
+  const inline = s => esc(s)
+    .replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+    .replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+  while (i < lines.length) {
+    const line = lines[i];
+    /* 表格：连续以 | 开头的行 */
+    if (line.trim().startsWith("|")) {
+      const rows = [];
+      while (i < lines.length && lines[i].trim().startsWith("|")) { rows.push(lines[i]); i++; }
+      const cells = r => r.trim().replace(/^\||\|$/g, "").split("|").map(c => inline(c.trim()));
+      const head = cells(rows[0]);
+      const body = rows.slice(1).filter(r => !/^\s*\|[\s\-|]+\|\s*$/.test(r)).map(cells);
+      out.push(`<table><thead><tr>${head.map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${
+        body.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table>`);
+      continue;
+    }
+    let prefix = "", body2 = line;
+    if (line.startsWith("### ")) { prefix = "h3"; body2 = line.slice(4); }
+    else if (line.startsWith("## ")) { prefix = "h2"; body2 = line.slice(3); }
+    else if (line.startsWith("# ")) { prefix = "h1"; body2 = line.slice(2); }
+    else if (line.startsWith("> ")) { prefix = "blockquote"; body2 = line.slice(2); }
+    else if (/^\s*[-·] /.test(line)) { prefix = "li"; body2 = line.replace(/^\s*[-·] /, ""); }
+    const t = inline(body2);
+    if (prefix) out.push(`<${prefix}>${t}</${prefix}>`);
+    else if (line.trim()) out.push(`<div style="font-size:13px;margin:6px 0">${t}</div>`);
+    i++;
+  }
+  return out.join("\n");
 }
 async function showNews(date) {
   newsDate = date;
@@ -382,38 +512,140 @@ async function loadNews() {
 loadNews();
 setInterval(loadNews, 30000);
 
-/* ── 晨会 · LLM 交易团队 ── */
-async function loadMeeting() {
-  let idx;
-  try { idx = await (await fetch("/trading_team/decisions/index.json?_=" + Date.now())).json(); }
-  catch(e) { $("meeting-latest").innerHTML = `<div class="card sub">尚未召开晨会（每周六 10:17 自动召开，或手动触发 Automation）</div>`; $("meeting-list").textContent = "—"; return; }
-  $("nav-meeting").innerHTML = `<span class="dot ${idx.length ? "ok" : "idle"}"></span>`;
-  $("meeting-list").innerHTML = idx.map(m =>
-    `<div class="kv"><span>${m.date}</span><b>${m.market_ok ? "允许开仓" : "风控观望"} · ${m.plan_count} 项计划 · ${m.pm_status === "pending" ? "待老板审批" : m.pm_status}</b></div>`).join("") || "—";
-  const latest = idx[0];
-  if (!latest) return;
+/* ── 交易团队日报 ── */
+const TEAM_ROLES = [
+  ["daily_conclusion.md", "📌 晨会结论"],
+  ["01_fundamental.md", "基本面"],
+  ["02_sentiment.md", "情绪"],
+  ["03_news.md", "新闻"],
+  ["04_technical.md", "技术"],
+  ["05_researcher.md", "研究员辩论"],
+  ["06_trader.md", "交易员"],
+  ["07_risk_manager.md", "风控经理"],
+];
+let teamDate = null, teamTab = "daily_conclusion.md", teamDays = [];
+async function showTeam(date, tab) {
+  teamDate = date; if (tab) teamTab = tab;
+  document.querySelectorAll("#team-list .news-item").forEach(x =>
+    x.classList.toggle("active", x.dataset.d === date));
+  const day = teamDays.find(d => d.date === date);
+  $("team-headline").innerHTML = day ? `<div class="team-hl">${esc(day.headline || "（无结论摘要）")}
+    <div class="meta">数据截至 <b>${day.data_asof || "—"}</b> · 采集 ${day.collect_ok === false ? '<span style="color:var(--fail)">部分源异常</span>' : '<span style="color:var(--ok)">正常</span>'}${day.ratings_line ? " · 评级：" + esc(day.ratings_line) : ""}</div></div>` : "—";
+  const available = new Set((day?.reports || []).concat(day ? ["daily_conclusion.md"] : []));
+  $("team-tabs").innerHTML = TEAM_ROLES.map(([f, label]) =>
+    available.has(f)
+      ? `<div class="team-tab${f === teamTab ? " active" : ""}" onclick="showTeam('${date}','${f}')">${label}</div>`
+      : "").join("");
   try {
-    const d = await (await fetch(`/trading_team/decisions/${latest.date}/decision.json?_=` + Date.now())).json();
-    const plans = (d.plans || []).map(p =>
-      `<tr><td>${p.name||""} ${p.code||""}</td><td>${p.direction||""}</td><td class="num">${p.position_pct||"—"}</td><td class="num">${p.entry||"—"}</td><td class="num">${p.stop||"—"}</td><td style="color:var(--dim);font-size:12px">${p.invalid_if||""}</td><td class="num">${"★".repeat(p.confidence||0)||"—"}</td></tr>`).join("");
-    $("meeting-latest").innerHTML = `
-      <div class="grid2">
-        <div class="card"><div class="sub">最新晨会 · ${d.date}</div>
-          <div style="font-size:13px;margin-top:6px">${esc(d.trader_summary||"")}</div>
-          <div class="sub" style="margin-top:8px">风控裁决：${esc(d.risk_verdict||"—")}</div></div>
-        <div class="card"><div class="sub">PM 审批状态</div>
-          <div class="metric" style="font-size:18px;color:${d.pm_status==="pending"?"var(--run)":"var(--ok)"}">${d.pm_status==="pending"?"⏳ 待老板审批":esc(d.pm_status)}</div>
-          <div class="sub">审批方式：在 AGENT.md 最近 Loop 条目的「人工决策」中写明批准/否决</div></div>
-      </div>
-      <div class="card"><div class="sub" style="margin-bottom:8px">交易计划表</div>
-        <table><thead><tr><th>股票</th><th>方向</th><th>建议仓位</th><th>入场参考</th><th>止损</th><th>失效条件</th><th>信心</th></tr></thead><tbody>${plans}</tbody></table></div>
-      <div class="card"><div class="sub" style="margin-bottom:8px">晨会纪要 <a style="color:var(--accent)" href="/trading_team/decisions/${d.date}/meeting.md" target="_blank">查看原文</a></div>
-        <pre id="meeting-md">加载中…</pre></div>`;
-    try { $("meeting-md").textContent = await (await fetch(`/trading_team/decisions/${d.date}/meeting.md?_=` + Date.now())).text(); } catch(e) { $("meeting-md").textContent = "meeting.md 读取失败"; }
-  } catch(e) { $("meeting-latest").innerHTML = `<div class="card sub">decision.json 读取失败</div>`; }
+    const md = await (await fetch(`/trading_team/outputs/${date}/${teamTab}?_=` + Date.now())).text();
+    $("team-body").innerHTML = md2html(md);
+  } catch(e) { $("team-body").textContent = "报告读取失败"; }
+  renderApprove(date);
 }
-loadMeeting();
-setInterval(loadMeeting, 30000);
+
+/* ── 老板审批面板（集成 team.db）── */
+const DEC_LABEL = {approved: "✅ 已批准", rejected: "❌ 已否决", reduced: "降仓批准"};
+async function renderApprove(date) {
+  const box = $("team-approve");
+  let plan = null, decisions = [], teamDb = null;
+  try { plan = await (await fetch(`/trading_team/outputs/${date}/plan.json?_=` + Date.now())).json(); } catch(e) {}
+  try { decisions = (await (await fetch("/trading_team/loops/approvals.json?_=" + Date.now())).json()).decisions || []; } catch(e) {}
+  try { teamDb = await (await fetch("/api/team-db?_=" + Date.now())).json(); } catch(e) {}
+  if (!plan || !plan.proposals) { box.innerHTML = ""; return; }
+  const decidedOf = code => { for (let i = decisions.length - 1; i >= 0; i--)
+    if (decisions[i].date === date && decisions[i].code === code) return decisions[i]; return null; };
+  const pendCount = plan.proposals.filter(p => !decidedOf(p.code)).length;
+
+  // team.db 状态
+  const dbDec = teamDb?.ok ? teamDb.decisions.find(d => d.date === date) : null;
+  const dbLogs = teamDb?.ok ? teamDb.logs.filter(l => l.decision_date === date) : [];
+  let dbHtml = "";
+  if (dbDec) {
+    const execStatus = dbDec.executed_at
+      ? `<span style="color:var(--ok)">✅ 已执行</span> @ ${dbDec.executed_at.slice(0,19).replace("T"," ")}`
+      : (dbDec.pm_status === "approved" ? `<span style="color:var(--run)">⏳ 待执行（Automation 每5分钟轮询）</span>` : `<span style="color:var(--dim)">未 approved</span>`);
+    dbHtml = `<div style="margin:10px 0;padding:10px;background:var(--bg);border-radius:8px;font-size:12px">
+      <b>📦 team.db 状态</b> · 决策 ${dbDec.date} · ${dbDec.pm_status} · ${execStatus}
+      ${dbDec.execution_result ? `<br><span style="color:var(--dim)">结果: ${esc(dbDec.execution_result)}</span>` : ""}
+      ${dbLogs.length ? `<br><span style="color:var(--dim)">执行日志 (${dbLogs.length}条): ${dbLogs.map(l => `${l.code} ${l.side}×${l.qty}@¥${l.price}`).join(", ")}</span>` : ""}
+    </div>`;
+  }
+
+  const rows = plan.proposals.map(p => {
+    const d = decidedOf(p.code);
+    const right = d
+      ? `<span class="pill ${d.decision}">${DEC_LABEL[d.decision] || d.decision}</span>
+         <div class="appr-note">${esc(d.decided_at || "")} · ${esc(d.source || "")}${d.note ? " · " + esc(d.note) : ""}</div>`
+      : `<span style="white-space:nowrap"><button class="appr-btn ok" onclick="approve('${date}','${p.code}','${p.name}','approved')">批准</button><button class="appr-btn no" onclick="approve('${date}','${p.code}','${p.name}','rejected')">否决</button></span>`;
+    return `<div class="kv"><span>${p.name} ${p.code} · <b>${p.direction}</b> ${p.position_pct || ""}
+      <span style="color:var(--dim);font-size:11.5px">入场 ${p.entry} · 止损 ${p.stop ?? "—"}</span></span>
+      <span style="text-align:right">${right}</span></div>`;
+  }).join("");
+  box.innerHTML = `<div class="card"><div class="sub" style="margin-bottom:6px">🖐 老板审批 · ${date}
+    ${pendCount ? `<span style="color:var(--run)">${pendCount} 项待批复</span>` : `<span style="color:var(--ok)">全部已批复</span>`}
+    <span style="float:right">批复也可在 Kimi 对话中直接说</span></div>${rows}${dbHtml}</div>`;
+}
+async function approve(date, code, name, decision) {
+  try {
+    const r = await fetch("/api/approve", {method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({date, code, name, decision})});
+    const j = await r.json();
+    if (!j.ok) { alert("批复失败: " + (j.error || "")); return; }
+  } catch(e) { alert("批复请求失败"); return; }
+  renderApprove(date);
+}
+async function loadTeam() {
+  try { teamDays = await (await fetch("/trading_team/outputs/index.json?_=" + Date.now())).json(); }
+  catch(e) { $("team-list").textContent = "index.json 读取失败"; return; }
+  $("nav-team").innerHTML = `<span class="dot ${teamDays.length ? "ok" : "idle"}"></span>`;
+  $("team-list").innerHTML = teamDays.map(d =>
+    `<div class="news-item${d.date === teamDate ? " active" : ""}" data-d="${d.date}" onclick="showTeam('${d.date}')">
+       <div class="d">${d.date}</div>
+       <div class="h">${esc(d.headline || "")}</div>
+     </div>`).join("") || "暂无日报";
+  if (!teamDate && teamDays.length) showTeam(teamDays[0].date);
+}
+loadTeam();
+setInterval(loadTeam, 30000);
+
+/* ── 标的池 ── */
+const POOL_TAG = {core: ["策略池", "research"], "event-watch": ["事件观察", "candidate"]};
+async function loadPool() {
+  let wl, idx = [];
+  try { wl = await (await fetch("/trading_team/watchlist.json?_=" + Date.now())).json(); }
+  catch(e) { $("pool").querySelector("tbody").innerHTML = "<tr><td colspan=10>watchlist.json 读取失败</td></tr>"; return; }
+  try { idx = await (await fetch("/trading_team/outputs/index.json?_=" + Date.now())).json(); } catch(e) {}
+  const day = idx[0]?.date;
+  let snap = {}, planMap = {};
+  if (day) {
+    try { snap = await (await fetch(`/trading_team/context/${day}/snapshot.json?_=` + Date.now())).json(); } catch(e) {}
+    try {
+      const plan = await (await fetch(`/trading_team/outputs/${day}/plan.json?_=` + Date.now())).json();
+      (plan.proposals || []).forEach(p => planMap[p.code] = p);
+    } catch(e) {}
+  }
+  const pctCls = v => v == null ? "" : (v >= 0 ? "color:var(--up)" : "color:var(--down)");
+  const num = (v, d = 2) => v == null ? "—" : Number(v).toFixed(d);
+  $("pool").querySelector("tbody").innerHTML = wl.stocks.map(s => {
+    const q = snap[s.code] || {};
+    const p = planMap[s.code];
+    const [tagLabel, tagCls] = POOL_TAG[s.tag] || [s.tag || "—", "research"];
+    return `<tr><td class="num">${s.code}</td><td>${s.name}</td>
+      <td style="color:var(--dim)">${s.sector}</td><td><span class="pill ${tagCls}">${tagLabel}</span></td>
+      <td class="num">${num(q.close)}</td>
+      <td class="num" style="${pctCls(q.pct_chg)}">${q.pct_chg == null ? "—" : (q.pct_chg >= 0 ? "+" : "") + num(q.pct_chg) + "%"}</td>
+      <td class="num">${q.turnover_rate == null ? "—" : num(q.turnover_rate) + "%"}</td>
+      <td class="num">${num(q.pe_ttm, 1)}</td><td class="num">${num(q.pb)}</td>
+      <td>${p ? `<b>${p.direction}</b> <span style="color:var(--dim);font-size:11.5px">${p.position_pct || ""}</span>` : '<span style="color:var(--dim)">—</span>'}</td></tr>`;
+  }).join("");
+  const b = wl.benchmark, bq = snap[b.code] || {};
+  $("pool-meta").innerHTML = `共 ${wl.stocks.length} 只 · 更新于 ${wl.updated_at} · 行情快照 ${day || "—"}（数据截至 ${idx[0]?.data_asof || "—"}）` +
+    (bq.close ? ` · 基准 ${b.name} <b style="${pctCls(bq.pct_chg)}">${num(bq.close)}（${bq.pct_chg >= 0 ? "+" : ""}${num(bq.pct_chg)}%）</b>` : "") +
+    `<br>${esc(wl.note || "")}`;
+  $("nav-pool").innerHTML = `<span class="dot ${wl.stocks.length ? "ok" : "idle"}"></span>`;
+}
+loadPool();
+setInterval(loadPool, 30000);
 </script>
 </body>
 </html>

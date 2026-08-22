@@ -1,0 +1,19 @@
+[
+  {
+    "date": "2026-08-22",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md"
+    ],
+    "headline": "指数弱反弹下的结构市：做多保险（平安），等突破再做多新能源（宁德），回避消费（茅台）与通信（中兴）。",
+    "ratings": {},
+    "data_asof": "2026-08-21",
+    "ratings_line": "平安 看多(4) ｜ 宁德 中性偏多(3) ｜ 招行 中性(3) ｜ 茅台 看空(3) ｜ 中兴 看空(4)",
+    "collect_ok": true
+  }
+]
