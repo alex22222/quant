@@ -1,0 +1,8 @@
+{
+  "name": "quant-console",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "python3 console/serve.py"
+  }
+}

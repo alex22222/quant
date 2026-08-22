@@ -1,0 +1,169 @@
+{
+  "project": "quant-closed-loop",
+  "version": 1,
+  "stages": {
+    "data": {
+      "status": "ok",
+      "started_at": "2026-08-22T18:01:13+08:00",
+      "finished_at": "2026-08-22T18:01:13+08:00",
+      "elapsed_sec": 0.1,
+      "result": {
+        "bundle_path": "/Users/henry/.rqalpha/bundle",
+        "stocks": 5516,
+        "range": "20050104 ~ 20260731",
+        "latest_trading_day": "20260731",
+        "freshness_days": 22,
+        "update_triggered": false,
+        "updated": false,
+        "note": "月度包通常在月初更新；freshness_days > 35 时建议 --update"
+      }
+    },
+    "strategy": {
+      "status": "ok",
+      "started_at": "2026-08-22T18:01:13+08:00",
+      "finished_at": "2026-08-22T18:01:13+08:00",
+      "elapsed_sec": 0.0,
+      "result": {
+        "total": 4,
+        "by_state": {
+          "research": [
+            "reversal-during-earnings-announcements"
+          ],
+          "candidate": [
+            "momentum_rotation"
+          ],
+          "live": [
+            "momentum_stops"
+          ],
+          "retired": [
+            "demo_dual_ma"
+          ]
+        },
+        "hint": "修改策略状态：编辑 status.json 的 strategy_registry 段落"
+      }
+    },
+    "backtest": {
+      "status": "ok",
+      "started_at": "2026-08-22T18:01:13+08:00",
+      "finished_at": "2026-08-22T18:01:22+08:00",
+      "elapsed_sec": 9.3,
+      "result": {
+        "gate_thresholds": {
+          "annual_min": 0.05,
+          "maxdd_max": 0.3,
+          "sharpe_min": 0.3
+        },
+        "window": "2020-01-01~2026-08-01",
+        "benchmark": "沪深300",
+        "results": {
+          "momentum_rotation": {
+            "total_ret": 0.8741106899999995,
+            "annual": 0.1044014702559086,
+            "max_dd": 0.2815816131851043,
+            "sharpe": 0.458356379303532,
+            "gate": "pass",
+            "reasons": [],
+            "report": "reports/momentum_rotation"
+          },
+          "momentum_stops": {
+            "total_ret": 0.8741106899999995,
+            "annual": 0.1044014702559086,
+            "max_dd": 0.2815816131851043,
+            "sharpe": 0.458356379303532,
+            "gate": "pass",
+            "reasons": [],
+            "report": "reports/momentum_stops"
+          }
+        }
+      }
+    },
+    "paper": {
+      "status": "ok",
+      "started_at": "2026-08-22T18:03:23+08:00",
+      "finished_at": "2026-08-22T18:03:23+08:00",
+      "elapsed_sec": 0.2,
+      "result": {
+        "day": "2026-07-31",
+        "note": "调仓日",
+        "live_strategies": [
+          "momentum_stops"
+        ],
+        "market_ok_120ma": false,
+        "trades": [],
+        "cash": 100000.0,
+        "equity": 100000.0,
+        "cum_return": 0.0,
+        "max_drawdown": 0.0,
+        "positions": {},
+        "momentum_top5": [
+          {
+            "code": "601899.XSHG",
+            "mom": 0.1844
+          },
+          {
+            "code": "600519.XSHG",
+            "mom": 0.1307
+          },
+          {
+            "code": "000333.XSHE",
+            "mom": 0.1237
+          },
+          {
+            "code": "601318.XSHG",
+            "mom": 0.1184
+          },
+          {
+            "code": "600900.XSHG",
+            "mom": 0.1064
+          }
+        ],
+        "assumption": "收盘价成交、免手续费、无 T+1 限制（v1 简化）"
+      }
+    },
+    "review": {
+      "status": "ok",
+      "started_at": "2026-08-22T18:03:23+08:00",
+      "finished_at": "2026-08-22T18:03:23+08:00",
+      "elapsed_sec": 0.0,
+      "result": {
+        "report": "reviews/2026-08-22.md",
+        "loop_no": 2,
+        "agent_md_updated": true
+      }
+    }
+  },
+  "updated_at": "2026-08-22T18:03:23+08:00",
+  "strategy_registry": {
+    "demo_dual_ma": {
+      "state": "retired",
+      "file": "strategies/demo_dual_ma.py",
+      "summary": "双均线示例策略：验证 RQAlpha 全链路 标的：平安银行 000001.XSHE 规则：5 日均线上穿 20 日均线买入，下穿卖出（A股 T+1 由引擎自动处理）",
+      "params": {},
+      "registered_at": "2026-08-22T18:01:13+08:00"
+    },
+    "momentum_rotation": {
+      "state": "candidate",
+      "file": "strategies/momentum_rotation.py",
+      "summary": "多股票动量轮动策略 股票池：10 只高流动性大盘股（覆盖消费/金融/新能源/公用事业） 规则： 1. 每月第一个交易日调仓 2. 计算每只股票过去 20 个交易日的动量（区间涨幅） 3. 等权买入动量最强的 3 只 4. 风控：沪深300 ",
+      "params": {},
+      "registered_at": "2026-08-22T18:01:13+08:00"
+    },
+    "momentum_stops": {
+      "state": "live",
+      "file": "strategies/momentum_stops.py",
+      "summary": "多股票动量轮动 + 止损锚对照实验 用法（--extra-vars 注入 context.stop）： --extra-vars '{\"stop\":\"none\"}' 基线：无个股止损 --extra-vars '{\"stop\":\"atr\"}",
+      "params": {
+        "stop": "none"
+      },
+      "registered_at": "2026-08-22T18:01:13+08:00"
+    },
+    "reversal-during-earnings-announcements": {
+      "state": "research",
+      "file": "strategies/reversal-during-earnings-announcements.py",
+      "summary": "",
+      "params": {},
+      "registered_at": "2026-08-22T18:01:13+08:00"
+    }
+  },
+  "last_loop_at": "2026-08-22T18:03:23+08:00"
+}

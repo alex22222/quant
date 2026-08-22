@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>量化闭环控制台</title>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --border: #30363d;
+    --text: #e6edf3; --dim: #8b949e; --up: #f0524f; --down: #3fb950;
+    --ok: #3fb950; --fail: #f85149; --run: #d29922; --idle: #6e7681;
+    --accent: #58a6ff;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--text);
+         font: 14px/1.6 -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+         padding: 24px; max-width: 1080px; margin: 0 auto; }
+  h1 { font-size: 20px; font-weight: 600; letter-spacing: .5px; }
+  h1 small { color: var(--dim); font-weight: 400; font-size: 12px; margin-left: 10px; }
+  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 18px 0; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .stage { position: relative; }
+  .stage .name { font-size: 13px; color: var(--dim); display: flex; align-items: center; gap: 8px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .dot.ok { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+  .dot.failed { background: var(--fail); box-shadow: 0 0 8px var(--fail); }
+  .dot.running { background: var(--run); animation: pulse 1s infinite alternate; }
+  .dot.idle { background: var(--idle); }
+  @keyframes pulse { to { opacity: .4; } }
+  .stage .val { font-size: 13px; margin-top: 8px; min-height: 40px; }
+  .stage .time { font-size: 11px; color: var(--dim); margin-top: 6px; }
+  .flow { display: flex; align-items: center; gap: 6px; color: var(--dim); font-size: 12px; margin-top: 4px; }
+  .flow b { color: var(--text); font-weight: 500; }
+  h2 { font-size: 14px; margin: 22px 0 10px; color: var(--dim); font-weight: 600;
+       text-transform: uppercase; letter-spacing: 1px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  th { color: var(--dim); font-weight: 500; font-size: 12px; }
+  td.num { font-variant-numeric: tabular-nums; }
+  .pill { display: inline-block; padding: 1px 9px; border-radius: 99px; font-size: 11px; border: 1px solid; }
+  .pill.pass, .pill.live { color: var(--ok); border-color: var(--ok); }
+  .pill.reject, .pill.retired { color: var(--fail); border-color: var(--fail); }
+  .pill.candidate { color: var(--run); border-color: var(--run); }
+  .pill.research { color: var(--accent); border-color: var(--accent); }
+  .metric { font-size: 26px; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .metric.up { color: var(--up); } .metric.down { color: var(--down); }
+  .sub { color: var(--dim); font-size: 12px; margin-top: 2px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  pre { white-space: pre-wrap; font: 12px/1.7 ui-monospace, "SF Mono", Menlo, monospace;
+        color: var(--dim); background: var(--panel); border: 1px solid var(--border);
+        border-radius: 10px; padding: 14px 16px; max-height: 300px; overflow: auto; }
+  .err { color: var(--fail); font-size: 12px; }
+  footer { color: var(--dim); font-size: 11px; margin-top: 28px; text-align: center; }
+</style>
+</head>
+<body>
+<h1>量化闭环控制台 <small id="updated">加载中…</small></h1>
+<div class="flow">data <b>数据部门</b> → strategy <b>分析师</b> → backtest <b>风控门禁</b> → paper <b>交易员</b> → review <b>投委会</b></div>
+
+<div class="grid" id="stages"></div>
+
+<h2>Paper 账户</h2>
+<div class="two">
+  <div class="card"><div class="sub">账户净值（初始 ¥100,000）</div><div class="metric" id="equity">—</div><div class="sub" id="equity-sub"></div></div>
+  <div class="card"><div class="sub">最近操作</div><div id="trades" style="font-size:13px;margin-top:6px">—</div></div>
+</div>
+
+<h2>策略注册表</h2>
+<div class="card"><table id="reg"><thead><tr><th>策略</th><th>状态</th><th>说明</th></tr></thead><tbody></tbody></table></div>
+
+<h2>回测门禁</h2>
+<div class="card"><table id="bt"><thead><tr><th>策略</th><th>年化</th><th>回撤</th><th>夏普</th><th>门禁</th></tr></thead><tbody></tbody></table></div>
+
+<h2>最新复盘</h2>
+<pre id="review">—</pre>
+
+<footer>数据来自 status.json · 每 30s 自动刷新 · 控制台只读，操作请用 CLI：python -m pipeline.run</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const fmtPct = v => (v*100).toFixed(1) + "%";
+const stageDesc = {
+  data: r => r ? `${r.stocks} 只 · 最新 ${r.latest_trading_day} · 新鲜度 ${r.freshness_days}d` : "",
+  strategy: r => r ? `共 ${r.total} 个 · live: ${(r.by_state?.live||[]).join(",")||"无"}` : "",
+  backtest: r => r ? Object.entries(r.results||{}).map(([k,v])=>`${k}: ${v.gate||"?"}`).join(" · ") : "",
+  paper: r => r ? `${r.day||""} ${r.note||""} · 净值 ${r.equity??"—"}` : "",
+  review: r => r ? `Loop #${r.loop_no} · ${r.report}` : "",
+};
+async function refresh() {
+  let st;
+  try { st = await (await fetch("/status.json?_=" + Date.now())).json(); }
+  catch(e) { $("updated").textContent = "status.json 读取失败（先跑 pipeline.run）"; return; }
+  $("updated").textContent = "更新于 " + (st.updated_at || "—");
+  const stages = st.stages || {};
+  $("stages").innerHTML = ["data","strategy","backtest","paper","review"].map(n => {
+    const s = stages[n] || {};
+    const status = s.status || "idle";
+    return `<div class="card stage">
+      <div class="name"><span class="dot ${status}"></span>${n}</div>
+      <div class="val">${status==="failed" ? `<span class="err">${(s.error||"").slice(0,90)}</span>` : stageDesc[n](s.result)}</div>
+      <div class="time">${s.finished_at||""} ${s.elapsed_sec!=null ? "· "+s.elapsed_sec+"s" : ""}</div>
+    </div>`;
+  }).join("");
+
+  const p = stages.paper?.result || {};
+  if (p.equity != null) {
+    const ret = p.cum_return ?? (p.equity/100000-1);
+    const el = $("equity");
+    el.textContent = "¥" + Number(p.equity).toLocaleString();
+    el.className = "metric " + (ret >= 0 ? "up" : "down");
+    $("equity-sub").textContent = `累计 ${fmtPct(ret)} · 最大回撤 ${fmtPct(p.max_drawdown||0)} · 现金 ¥${Number(p.cash||0).toLocaleString()}`;
+    $("trades").innerHTML = (p.trades||[]).length
+      ? p.trades.map(t=>`${t.side==="buy"?"买入":"卖出"} ${t.code} ×${t.qty} @${t.price}`).join("<br>")
+      : (p.note || "无操作");
+    $("trades").innerHTML += `<div class="sub" style="margin-top:6px">持仓 ${Object.entries(p.positions||{}).map(([c,v])=>c+": ¥"+Number(v).toLocaleString()).join(" · ")||"空仓"}</div>`;
+  }
+
+  const reg = st.strategy_registry || {};
+  $("reg").querySelector("tbody").innerHTML = Object.entries(reg).map(([k,v]) =>
+    `<tr><td>${k}</td><td><span class="pill ${v.state}">${v.state}</span></td><td style="color:var(--dim)">${v.summary||""}</td></tr>`).join("") || "<tr><td colspan=3>—</td></tr>";
+
+  const bt = stages.backtest?.result?.results || {};
+  $("bt").querySelector("tbody").innerHTML = Object.entries(bt).map(([k,v]) =>
+    v.gate==="error"
+      ? `<tr><td>${k}</td><td colspan=4 class="err">回测失败</td></tr>`
+      : `<tr><td>${k}</td><td class="num">${fmtPct(v.annual)}</td><td class="num">${fmtPct(v.max_dd)}</td><td class="num">${v.sharpe}</td><td><span class="pill ${v.gate}">${v.gate}</span></td></tr>`
+  ).join("") || "<tr><td colspan=5>—</td></tr>";
+
+  const rep = stages.review?.result?.report;
+  if (rep) {
+    try { $("review").textContent = await (await fetch("/" + rep + "?_=" + Date.now())).text(); }
+    catch(e) {}
+  }
+}
+refresh();
+setInterval(refresh, 30000);
+</script>
+</body>
+</html>

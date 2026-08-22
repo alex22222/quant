@@ -18,3 +18,6 @@ kde_levels/out/event_study.csv
 # 含真实凭证/运行状态，不入库
 quant-x-monitor/config.json
 quant-x-monitor/state.json
+
+# 回测报告产物（可重算）
+reports/

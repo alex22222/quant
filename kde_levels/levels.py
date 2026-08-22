@@ -24,9 +24,16 @@ class BundleData:
     def __init__(self):
         self._stocks = h5py.File(BUNDLE / "stocks.h5", "r")
         self._factors = h5py.File(BUNDLE / "ex_cum_factor.h5", "r")
+        self._indexes = h5py.File(BUNDLE / "indexes.h5", "r")
 
     def list_stocks(self):
         return list(self._stocks.keys())
+
+    def load_index(self, code):
+        """指数日线（无复权）"""
+        df = pd.DataFrame(self._indexes[code][:])
+        df["date"] = pd.to_datetime(df["datetime"], format="%Y%m%d%H%M%S")
+        return df.set_index("date").sort_index()
 
     def load(self, code, start=None, end=None):
         arr = self._stocks[code][:]
