@@ -29,18 +29,45 @@ def main():
             lines.append(f"- 注册 {r.get('total')} 个策略：live={bs.get('live')}, "
                          f"candidate={bs.get('candidate')}, research={bs.get('research')}")
         elif name == "backtest" and r:
+            lines.append(f"- 门禁版本 {r.get('gate_version', 'v1')}；成本口径：{r.get('cost_model', '-')}")
             for n, res in r.get("results", {}).items():
                 if res.get("gate") == "error":
-                    lines.append(f"- {n}: 回测失败 {res.get('stderr', '')[:80]}")
-                else:
-                    lines.append(f"- {n}: 年化 {res['annual']:.1%} 回撤 {res['max_dd']:.1%} "
-                                 f"夏普 {res['sharpe']:.2f} → 门禁 **{res['gate']}** "
-                                 + (f"（{'；'.join(res['reasons'])}）" if res["reasons"] else ""))
+                    lines.append(f"- {n}: 回测失败 {res.get('error', '')[:80]}")
+                    continue
+                fam = res.get("family", {})
+                dup = f"｜族 {fam.get('family')} 代表={fam.get('family_representative')}" \
+                    if fam.get("family_dup") else ""
+                lines.append(f"- {n}: 年化 {res['annual']:.1%} 回撤 {res['max_dd']:.1%} "
+                             f"夏普 {res['sharpe']:.2f} 超额 {res.get('excess_annual', 0):.1%} "
+                             f"IR {res.get('ir', 0):.2f} → 门禁 **{res['gate']}**{dup}")
+                if res.get("worst_month") is not None:
+                    lines.append(f"  - 月度: 最差 {res['worst_month']:.1%} 最好 {res.get('best_month', 0):.1%} "
+                                 f"胜率 {res.get('monthly_win_rate', 0):.0%}（{res.get('months', 0)} 个月）")
+                # 失败样本必须展示原因（改进计划 Phase 2）
+                for reason in res.get("reasons", []):
+                    lines.append(f"  - ❌ {reason}")
+                oos = res.get("oos")
+                if oos:
+                    lines.append(f"  - 样本外: 年化 {oos['annual']:.1%} 回撤 {oos['max_dd']:.1%} "
+                                 f"夏普 {oos['sharpe']:.2f} 超额 {oos.get('excess_annual', 0):.1%}")
+                for p in res.get("perturbations", []):
+                    lines.append(f"  - 扰动 {p['variant']}: 年化 {p['annual']:.1%} "
+                                 f"回撤 {p['max_dd']:.1%} 夏普 {p['sharpe']:.2f}")
+                for sw in res.get("stage_windows", []):
+                    lines.append(f"  - 阶段 {sw['window']}: 年化 {sw['annual']:.1%} "
+                                 f"回撤 {sw['max_dd']:.1%} 夏普 {sw['sharpe']:.2f} "
+                                 f"超额 {(sw.get('excess_annual') or 0):.1%}")
         elif name == "paper" and r:
             lines.append(f"- 记账日 {r.get('day')}（{r.get('note')}）：净值 {r.get('equity')}，"
                          f"累计 {r.get('cum_return', 0):.1%}，持仓 {r.get('positions')}")
-            for t in r.get("trades", []):
-                lines.append(f"  - {t['side']} {t['code']} x{t['qty']} @{t['price']}（{t['reason']}）")
+            lines.append(f"- live 策略 {r.get('live_strategies')}"
+                         f"（族 {r.get('strategy_family')}），market_ok={r.get('market_ok')}")
+            for t in r.get("fills", []):
+                lines.append(f"  - {t['side']} {t['code']} x{t['qty']} @{t['price']}"
+                             f" 费 {t.get('fee', 0)}（{t['reason']}）")
+            for o in r.get("pending_orders", []):
+                lines.append(f"  - 挂单待成交: {o['side']} {o['code']} x{o['qty']}"
+                             f" 计划价 {o.get('planned_price')}")
             lines.append(f"- 假设：{r.get('assumption', '-')}")
         if s.get("error"):
             lines.append(f"- ❌ {s['error']}")

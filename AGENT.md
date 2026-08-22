@@ -278,3 +278,44 @@ data（数据部门）→ strategy（技术分析师）→ backtest（风控门�
   - 最优参数已写入 status.json `strategy_registry.turtle_bluechip.params`，官方门禁回测复核 pass（reports/turtle_bluechip/ 净值图已更新）
 - **人工决策**: （待老板批复——turtle_bluechip 已具备晋级 live 条件，是否晋级由老板决定）
 - **下一步**: ① 老板批复 turtle_bluechip 是否晋级 live（晋级后下周一 paper 自动双策略运行）；② rotation_300_500 结构性改良：加债券/红利 ETF 避险腿（如 511260 十年国债 ETF / 510880 红利 ETF）替代纯空仓；③ 控制台策略库可增加 sweep 对照表展示
+
+## Loop #14 — 2026-08-23
+
+- **执行**: A 股券商交易接口打通（老板指令：平安证券，easytrader 过渡，股票/ETF 全自动下单）——新建 `execution/` 实盘执行层
+- **内容**:
+  - 分层：signals（与 paper 线同一 momentum_rotation 逻辑）→ market（腾讯行情定价/涨跌停估算，GBK 解码）→ order_manager（整手/T+1 可卖/涨跌停拦截/先卖后买/滑点限价）→ risk_guard（单票≤35%、总仓≤98%、日亏3%熔断、订单数上限、脏价格、黑名单）→ broker（抽象层）→ ledger（execution.db）→ notifier（复用 quant-x-monitor 飞书凭证）→ runner（CLI 主循环，同日同 mode 幂等）
+  - 双通道：`broker_mock.py`（SQLite 模拟券商，macOS 可演练）+ `broker_easytrader.py`（同花顺 universal_client，仅 Windows，字段名多候选兜底）
+  - 部署文档 `docs/execution.md`：Windows + 同花顺客户端 + 平安证券验证清单 + 任务计划
+  - 纪律落地：默认 dry-run；live 需 config.json `live_enabled=true` + 显式 `--mode live`；execution/config.json 与 *.db 已入 .gitignore
+- **实测**:
+  - 两日 mock 演练全绿：Day1 三票建仓（紫金900/美的300/长电1100）、Day2 换仓（卖美的、加长电、新建平安500）、幂等跳过 OK、T+1 解冻 OK
+  - 风控 10 条边界用例全过（execution/tests/test_guard.py）：涨停不买/跌停不卖/熔断/黑名单/脏价格/单票批内累计/订单数上限/T+1/停牌/清仓信号
+  - 飞书卡片推送成功
+  - **修了两个真 bug**：① MockBroker 单号用内存计数器，跨进程重启撞主键导致委托 INSERT 失败且卖单已提前 commit 造成半持久化；改为 DB 恢复单号 + 统一事务提交；② 飞书配置相对路径基准错误（ROOT→HERE）
+- **发现**: 测试信号单票 50% 被 35% 上限正确拦截；茅台一手 17 万超过 10 万账户 33% 目标仓位，"偏差不足一手"正确跳过（小资金账户整手约束显著）
+- **人工决策**: 老板拍板——平安证券 + easytrader 过渡 + 全自动
+- **下一步**: ① Windows 环境部署并按 docs/execution.md 验证清单过一遍（首要验证：平安证券是否支持同花顺通用下单）；② 首笔 live 最小仓验证成交回报；③ 资金到 10 万档后评估迁 miniQMT（Broker 接口不变，新增 broker_xtquant.py 即可）
+
+## Loop #15 — 2026-08-23
+
+- **执行**: `pipeline.run` 全流程
+- **结果**: 数据新鲜度 22 天；
+  paper 净值 100000.0；
+  回测门禁 [('momentum_rotation', 'pass'), ('momentum_stops', 'pass'), ('ma_trend_bluechip', 'reject'), ('rotation_300_500', 'reject'), ('rsi2_reversal', 'reject'), ('sharpe_momentum', 'reject'), ('turtle_bluechip', 'pass'), ('week52_momentum', 'reject')]
+- **报告**: reviews/2026-08-23.md
+- **人工决策**: （待填写）
+- **下一步**: （待填写）
+
+## Loop #14 — 2026-08-23
+
+- **执行**: turtle_bluechip 晋级 live 的落地尝试 → 与并行改进计划（Phase 1/2）合并
+- **背景**: 老板批准 turtle 晋级（Loop #13 下一步①）；执行中发现另一会话正在实施 docs/PROJECT_REVIEW.md 改进计划——Phase 1（统一信号接口 strategies/base.py + T+1 撮合 paper/execution_model.py + stage_paper 重写，单 live 守卫）与 Phase 2（门禁 v2 pipeline/gate.py：全样本+样本外+超额+IR+换手+最长套牢+参数扰动+族去重）在 00:30~00:50 陆续落地，期间本会话的 stage_paper 分账户改写与控制台策略库页被覆盖
+- **内容（合并后）**:
+  - `trading_team/execute.py`：适配 Phase 1 schema（trades 全字段 + signal_source='llm' 留痕），dry-run 验证通过（每 5 分钟 auto_execute 依赖它，不断链）
+  - `strategies/turtle_bluechip.py`：接入统一接口——PARAMS/FAMILY=turtle/FREQUENCY="daily" + compute_targets 纯函数 + generate_targets(data, params, positions)，rqalpha 回测与 Paper 共用同一信号核心；修复 rqalpha 保留属性 universe 遮蔽问题（extra-vars 须从 context.__dict__ 读取）
+  - `strategies/base.py`：StrategyData 协议新增 ohlc()；momentum 两文件 generate_targets 签名统一加 positions=None
+  - `pipeline/stage_paper.py`：在并行会话版本上增量支持 FREQUENCY="daily"（日线策略每日生成信号）+ weight_cap 参数化（海龟 0.96）
+  - 控制台「策略库」页重应用，升级为门禁 v2 成绩单：超额年化/信息比率/年化换手/最长套牢 + 样本外行 + 拒绝原因 + 净值曲线
+- **结果**: 门禁 v2 下**全部策略 reject**——turtle_bluechip：全样本四项达标（年化 8.4%/回撤 28.5%/夏普 0.43/超额 +6.5%/IR 0.60），卡在最长套牢 2031 天（>1500）与样本外超额 -3.2%；momentum_stops（现 live）：超额回撤 40.7% 超线 + 样本外超额 -4.2% + 参数扰动 3 组全崩。Paper 阶段幂等正常（2026-08-21 已记账）
+- **人工决策**: 老板已批准 turtle 晋级 live（Loop #13）；但落地被两道新闸门拦截——① stage_paper 单 live 守卫（Phase 1 纪律）；② 门禁 v2 下 turtle 也未通过。**待老板二选一**：(A) 按旧门禁口径让 turtle 替换 momentum_stops 成唯一 live；(B) 接受门禁 v2 标准，全部策略回炉（momentum_stops 也应降级复检）
+- **下一步**: ① 老板定夺 A/B；② 若选 B：针对「最长套牢」和「样本外超额」改良（如加持有期上限、OOS 窗口重新寻优）；③ 与并行会话协调分工，避免互相覆盖（本 Loop 留痕即为协调记录）

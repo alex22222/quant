@@ -40,10 +40,21 @@ def _db():
     DB.parent.mkdir(exist_ok=True)
     conn = sqlite3.connect(DB)
     conn.executescript("""
+    CREATE TABLE IF NOT EXISTS meta(key TEXT PRIMARY KEY, value TEXT);
     CREATE TABLE IF NOT EXISTS account(day TEXT PRIMARY KEY, cash REAL, equity REAL, note TEXT);
-    CREATE TABLE IF NOT EXISTS positions(code TEXT PRIMARY KEY, qty REAL, avg_cost REAL);
-    CREATE TABLE IF NOT EXISTS trades(id INTEGER PRIMARY KEY AUTOINCREMENT,
-        day TEXT, code TEXT, side TEXT, qty REAL, price REAL, amount REAL, reason TEXT);
+    CREATE TABLE IF NOT EXISTS positions(code TEXT PRIMARY KEY, qty REAL, avg_cost REAL, buy_day TEXT);
+    CREATE TABLE IF NOT EXISTS pending_orders(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        signal_day TEXT, code TEXT, side TEXT, qty INTEGER,
+        planned_price REAL, signal_source TEXT,
+        status TEXT DEFAULT 'pending',
+        reason TEXT);
+    CREATE TABLE IF NOT EXISTS trades(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        day TEXT, code TEXT, side TEXT, qty REAL, price REAL, amount REAL,
+        fee REAL DEFAULT 0, reason TEXT,
+        signal_day TEXT, signal_source TEXT, data_version TEXT,
+        planned_price REAL, fill_price REAL, price_type TEXT, reject_reason TEXT);
     """)
     if conn.execute("SELECT COUNT(*) FROM account").fetchone()[0] == 0:
         conn.execute("INSERT INTO account VALUES ('init', ?, ?, '初始资金')",
@@ -116,7 +127,7 @@ def execute(day=None, confirm=False):
 
     # 幂等检查：该日期是否已有 LLM 交易记录
     if confirm and conn.execute(
-        "SELECT 1 FROM trades WHERE day=? AND reason LIKE 'LLM提案%' LIMIT 1", (day,)
+        "SELECT 1 FROM trades WHERE day=? AND signal_source='llm' LIMIT 1", (day,)
     ).fetchone():
         print(f"  {day} 已有 LLM 交易记录，幂等跳过")
         conn.close()
@@ -127,8 +138,8 @@ def execute(day=None, confirm=False):
     ).fetchone()
     cash = last[0]
     positions = {
-        r[0]: {"qty": r[1], "cost": r[2]}
-        for r in conn.execute("SELECT code, qty, avg_cost FROM positions")
+        r[0]: {"qty": r[1], "cost": r[2], "buy_day": r[3]}
+        for r in conn.execute("SELECT code, qty, avg_cost, buy_day FROM positions")
     }
 
     plans = dec.get("plans", [])
@@ -254,14 +265,19 @@ def execute(day=None, confirm=False):
 
     # ── 写库（confirm 模式）──────────────────────────────────────
     for t in trades:
+        # t = (day, code, side, qty, price, amount, reason)
         conn.execute(
-            "INSERT INTO trades(day,code,side,qty,price,amount,reason) VALUES (?,?,?,?,?,?,?)",
-            t
+            "INSERT INTO trades(day, code, side, qty, price, amount, fee, reason,"
+            " signal_day, signal_source, data_version, planned_price, fill_price,"
+            " price_type, reject_reason)"
+            " VALUES (?,?,?,?,?,?, 0, ?, ?, 'llm', ?, ?, ?, 'close', NULL)",
+            (t[0], t[1], t[2], t[3], t[4], t[5], t[6], day, day, t[4], t[4])
         )
     conn.execute("DELETE FROM positions")
     conn.executemany(
-        "INSERT INTO positions VALUES (?,?,?)",
-        [(c, p["qty"], p["cost"]) for c, p in positions.items()]
+        "INSERT INTO positions VALUES (?,?,?,?)",
+        [(c, p["qty"], p["cost"], p.get("buy_day") or day)
+         for c, p in positions.items()]
     )
     total_equity = cash
     for c, p in positions.items():

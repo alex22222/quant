@@ -7,29 +7,68 @@
   --extra-vars '{"stop":"kde"}'    KDE 位止损：入场时锚定下方最近筹码共识位，每周上移，只上不下
 
 三个变体共用同一套入场逻辑（动量轮动 + 120 日线风控），唯一差异是止损机制。
+
+改进计划 Phase 1：入场信号直接复用 strategies/momentum_rotation 的纯函数
+compute_targets()（同一家族，禁止复制参数与逻辑）；止损机制仅在回测引擎内生效。
+Paper 侧目前只支持 stop="none" 变体（无需周内止损）。
 """
+import os
 import sys
-sys.path.insert(0, "/Users/henry/projects/quant/kde_levels")
+
+# rqalpha 编译策略时会改写 __file__，统一从环境变量定位项目根
+_ROOT = os.environ.get("QUANT_ROOT", str(__import__("pathlib").Path.cwd()))
+for _p in (_ROOT, os.path.join(_ROOT, "kde_levels")):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 
 import numpy as np
 import pandas as pd
 from rqalpha.api import *
 from levels import compute_levels
 
+from strategies.base import SignalResult
+from strategies.momentum_rotation import PARAMS as _ENTRY_PARAMS, compute_targets
+
+FAMILY = "momentum_rotation"   # 与 momentum_rotation 同族（止损仅为变体）
+
+PARAMS = dict(_ENTRY_PARAMS)   # 入场参数唯一来源：momentum_rotation.PARAMS
+
 ATR_MULT = 2.5
 LEVEL_MAX_DROP = 0.20   # 只接受入场价下方 20% 以内的支撑位
 
 
+def generate_targets(data, params=None, positions=None) -> SignalResult:
+    """统一信号接口。params 可含 stop 变体；stop != 'none' 时 Paper 不支持，抛错。"""
+    p = dict(PARAMS)
+    if params:
+        p.update(params)
+    stop = p.get("stop", "none")
+    if stop != "none":
+        raise NotImplementedError(f"Paper 暂不支持 stop={stop} 变体（需周内止损调度）")
+    closes_map = {}
+    for code in p["universe"]:
+        if data.is_suspended(code):
+            continue
+        closes_map[code] = data.closes(code, p["momentum_days"] + 1)
+    index_close = data.index_closes(p["benchmark"], p["ma_days"])
+    result = compute_targets(closes_map, index_close, p)
+    result.detail["stop_variant"] = stop
+    return result
+
+
 def init(context):
-    context.stocks = [
-        "600519.XSHG", "000858.XSHE", "600036.XSHG", "601318.XSHG",
-        "300750.XSHE", "002594.XSHE", "601899.XSHG", "000333.XSHE",
-        "600900.XSHG", "601012.XSHG",
-    ]
-    context.momentum_days = 20
-    context.hold_num = 3
-    context.benchmark_index = "000300.XSHG"
-    context.ma_days = 120
+    # 入场参数唯一来源：PARAMS；--extra-vars 可覆盖标量参数与 stop 变体
+    context.params = dict(PARAMS)
+    for k in PARAMS:
+        if k != "universe" and hasattr(context, k):
+            context.params[k] = getattr(context, k)
+    context.stocks = context.params["universe"]
+    context.momentum_days = context.params["momentum_days"]
+    context.hold_num = context.params["hold_num"]
+    context.benchmark_index = context.params["benchmark"]
+    context.ma_days = context.params["ma_days"]
+    if not hasattr(context, "stop"):
+        context.stop = "none"
 
     context.stops = {}        # order_book_id -> 当前止损价
     context.hwm = {}          # order_book_id -> 持仓期间最高收盘

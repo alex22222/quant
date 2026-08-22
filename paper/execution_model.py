@@ -107,6 +107,47 @@ def simulate_fill(side: str, qty: int, exec_bar: Bar,
 
 
 # ─────────────────────────────────────────────────────────────
+# 止损三口径对比（审查要求：止损不能只用收盘触发）
+# ─────────────────────────────────────────────────────────────
+
+def compare_stop_fills(code: str, stop_price: float, qty: int,
+                       signal_bar: Bar, exec_bar: Bar,
+                       cfg: FeeConfig = DEFAULT_FEES) -> dict:
+    """同一止损触发，三种成交口径对比：
+
+    - close_trigger:    T 日收盘跌破止损，按 T 日收盘价卖出（最乐观，旧口径）
+    - next_open:        T+1 开盘卖出（含跌停拒卖）
+    - delayed_limit:    若 T+1 跌停无法卖出，标记延迟（实际应顺延到 T+2 再试，
+                        这里如实报告不可成交，不虚构成交）
+
+    返回 {"close_trigger": FillResult, "next_open": FillResult,
+          "delayed_limit": FillResult, "worst_slippage": float}
+    """
+    close_fill = None
+    if signal_bar.close is not None and signal_bar.close < stop_price:
+        amount = round(qty * signal_bar.close, 2)
+        close_fill = FillResult(True, "sell", qty=int(qty), price=signal_bar.close,
+                                amount=amount, fee=total_fee("sell", amount, cfg),
+                                price_type="close_trigger")
+    else:
+        close_fill = FillResult(False, "sell", reject_reason="收盘未触发止损")
+
+    next_open = simulate_fill("sell", int(qty), exec_bar, cfg)
+    delayed = next_open
+    if not next_open.filled and "跌停" in next_open.reject_reason:
+        delayed = FillResult(False, "sell",
+                             reject_reason=f"跌停延迟止损: {next_open.reject_reason}，需顺延至 T+2")
+
+    fills = [f for f in (close_fill, next_open) if f.filled]
+    worst = 0.0
+    if close_fill.filled and next_open.filled and close_fill.price:
+        worst = round(next_open.price / close_fill.price - 1, 4)
+
+    return {"close_trigger": close_fill, "next_open": next_open,
+            "delayed_limit": delayed, "worst_slippage": worst}
+
+
+# ─────────────────────────────────────────────────────────────
 # Bar 构造：从 BundleData 取指定日（或最新日）行情
 # ─────────────────────────────────────────────────────────────
 

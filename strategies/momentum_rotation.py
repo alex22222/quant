@@ -11,7 +11,15 @@
 改进计划 Phase 1：信号核心抽出为纯函数 compute_targets()，
 rqalpha 回测（init/rebalance）与 Paper（generate_targets）共用同一逻辑。
 """
+import os
+import sys
+
 import numpy as np
+
+# rqalpha 编译策略时会改写 __file__，统一从环境变量定位项目根
+_ROOT = os.environ.get("QUANT_ROOT", str(__import__("pathlib").Path.cwd()))
+if _ROOT not in sys.path:
+    sys.path.insert(0, _ROOT)
 
 from strategies.base import SignalResult
 
@@ -72,7 +80,7 @@ def compute_targets(closes_map: dict, index_close: np.ndarray, params: dict) -> 
     )
 
 
-def generate_targets(data, params=None) -> SignalResult:
+def generate_targets(data, params=None, positions=None) -> SignalResult:
     """统一信号接口（strategies/base.py 约定）。data: StrategyData。"""
     p = dict(PARAMS)
     if params:
@@ -93,6 +101,10 @@ def generate_targets(data, params=None) -> SignalResult:
 def init(context):
     from rqalpha.api import scheduler
     context.params = dict(PARAMS)
+    # --extra-vars 覆盖（门禁扰动测试用），universe 不支持覆盖
+    for k in PARAMS:
+        if k != "universe" and hasattr(context, k):
+            context.params[k] = getattr(context, k)
     context.stocks = context.params["universe"]
     scheduler.run_monthly(rebalance, tradingday=1)
 

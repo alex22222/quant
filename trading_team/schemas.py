@@ -112,7 +112,7 @@ def parse_entry(value):
 def is_buy(direction: str, position_pct: float = 0.0) -> bool:
     if any(w in direction for w in BUY_WORDS):
         return True
-    if any(w in direction for w in SELL_WORDS + WATCH_WORDS):
+    if any(w in direction for w in SELL_WORDS + WATCH_WORDS + HOLD_WORDS):
         return False
     return position_pct > 0
 
@@ -169,3 +169,48 @@ def compute_executable(plan: dict, market_ok: bool) -> tuple[bool, str]:
     if is_buy(direction, pct) and pct > 0 and not market_ok:
         return False, "market_ok=false 禁止买入"
     return True, ""
+
+
+# ─────────────────────────────────────────────────────────────
+# 组合级确定性风控（LLM 只能建议，不能绕过）
+# ─────────────────────────────────────────────────────────────
+
+PORTFOLIO_RULES = {
+    "single_position_max": 0.25,   # 单票目标仓位上限
+    "total_buy_max": 0.95,         # 全部买入仓位合计上限（至少留 5% 现金）
+    "max_new_buys": 5,             # 单日新开仓/加仓笔数上限
+}
+
+
+def validate_portfolio(plans: list[dict], market_ok: bool) -> list[str]:
+    """对一组计划做组合级风控校验，返回违规列表（空 = 通过）。
+
+    只约束**已获批（approved/reduced）**的计划——pending 的条件预案不违规，
+    但获批时若越界则 consistency_check 报冲突、执行器 fail closed。
+    """
+    problems = []
+    buys = []
+    for p in plans:
+        if p.get("approval", "pending") not in ("approved", "reduced"):
+            continue
+        direction = str(p.get("direction", ""))
+        try:
+            pct = parse_pct(p.get("position_pct"))
+        except SchemaError:
+            continue  # 解析失败由 validate_plan / compute_executable 报告
+        if is_buy(direction, pct) and pct > 0:
+            buys.append((p.get("code"), pct))
+            if pct > PORTFOLIO_RULES["single_position_max"]:
+                problems.append(
+                    f"{p.get('code')}: 单票仓位 {pct:.0%} > "
+                    f"{PORTFOLIO_RULES['single_position_max']:.0%} 上限")
+    total = sum(pct for _, pct in buys)
+    if total > PORTFOLIO_RULES["total_buy_max"]:
+        problems.append(
+            f"买入仓位合计 {total:.0%} > {PORTFOLIO_RULES['total_buy_max']:.0%} 上限")
+    if len(buys) > PORTFOLIO_RULES["max_new_buys"]:
+        problems.append(
+            f"单日买入笔数 {len(buys)} > {PORTFOLIO_RULES['max_new_buys']} 上限")
+    if not market_ok and buys:
+        problems.append(f"market_ok=false 但存在 {len(buys)} 条买入计划")
+    return problems

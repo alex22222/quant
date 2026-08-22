@@ -112,3 +112,46 @@ Week 4:  Phase 3（LLM 降级）+ 全链路联调
 - 不新增 LLM 角色 / 不新增飞书推送样式 / 不做 console 新页面
 - 不引入新数据源
 - 不优化策略本身的 alpha（先把度量修对，再谈策略好坏）
+
+---
+
+## 执行记录（2026-08-23 完成）
+
+### 已完成
+
+**Phase 0 止血（全部完成，实测验证）**
+- `trading_team/consistency_check.py`：三源一致性校验器，exit 1 fail closed。8-22 实测检出 7 项冲突
+- `trading_team/schemas.py`：`parse_pct`/`parse_entry` 严格解析（"15%（分批）"类文本直接 SchemaError）、`compute_executable` 单票门禁、`validate_portfolio` 组合级风控（单票 ≤25%、买入合计 ≤95%、单日 ≤5 笔、market_ok=false 禁买入）
+- `trading_team/approvals.py`：批复回写主事实源 decision.json（per-plan approval/executable/blocked_reason + pm_status 重算）；approvals.json 降级为日志
+- `trading_team/execute.py`：默认 dry-run、`--confirm` 才写库、前置一致性校验、per-plan executable 门禁、reduced 减半、现金不足整手下调、幂等
+- `trading_team/auto_execute.py`：默认冻结（dry-run），需 `QUANT_AUTO_EXECUTE=1` 才自动执行
+- 8-22 数据修复：审批回写主事实源、plan.json 由 decision.json 重建（原草稿备份于 `backups/2026-08-23-phase0/`）
+
+**Phase 1 可信账本（核心完成）**
+- `strategies/base.py`：统一信号接口 `generate_targets(data, params)` + `SignalResult` + `BundleDataAdapter`（并行会话后续扩展了 ohlc/FREQUENCY/positions，兼容）
+- `momentum_rotation.py`：信号核心抽出为纯函数 `compute_targets()`，rqalpha 与 Paper 共用；`momentum_stops.py` 同族复用，PARAMS 唯一来源
+- `paper/execution_model.py`：T+1 开盘成交、涨跌停/停牌拒单、整手、T+1 卖出限制、费用模型（佣金万2.5最低5元+印花税万5+过户费万0.2）、止损三口径对比 `compare_stop_fills`
+- `pipeline/stage_paper.py` v2：注册表加载 live 策略（多个 live 直接报错 fail closed——实测拦下了 turtle_bluechip 与 momentum_stops 同时 live 的冲突）、挂单-成交分离（信号日 T → T+1 撮合）、trades 扩展字段（signal_day/signal_source/data_version/planned_price/fill_price/fee/reject_reason）、幂等。旧台账归档 `backups/2026-08-23-phase0/paper_v1.db.bak`
+
+**Phase 2 门禁 v2（完成，实测验证）**
+- `pipeline/gate.py`：全样本+OOS 双达标、超额收益/信息比率/换手/最长回撤期门槛、参数扰动不得反转、策略族去重
+- `pipeline/stage_backtest.py`：全样本 + OOS（2024 起）+ 扰动变体 + 3 个市场阶段统计 + 月度指标（最差单月/月胜率，从 portfolio.csv 计算）；成本口径 pit-tax 历史印花税 + 滑点 0.2%
+- 实测：momentum_rotation 旧门禁通过（年化 10.4%），门禁 v2 **拒绝**（OOS 超额 -4.2%、扰动回撤 38-47%、最长回撤 1707 天）——验证了审查关于"虚假信心"的判断
+- `pipeline/stage_review.py`：复盘报告展示拒绝原因、OOS、扰动、阶段窗口、月度分布、挂单与成交明细
+
+**Phase 3 LLM 降级（完成）**
+- 三层契约写入 `prompts/06_trader.md`、`07_risk_manager.md`：research_signal → trade_proposal → executable_order；LLM 输出不得直接写 Paper；trader 必须输出结构化 JSON schema
+
+**Phase 4 测试（完成）**
+- `tests/` 98 项 pytest 全部通过：schemas/consistency/approvals/execute/gate/execution_model/stop_fills/data_patch/portfolio
+
+**数据层（完成）**
+- `patch_bundle_from_context.py`：量价单位自检（>30% 偏差拒写）、涨跌停字段自检、dtype 记录、patch_manifest.json 版本化 + 校验摘要、拒写时 exit 1。实测拦下紫金矿业重叠日 1.275% 偏差（除权未对齐）
+
+### 遗留（诚实清单）
+
+- `paper_prices` 未单独落库：Paper 仍经 adapter 直读 bundle（已有 manifest 版本化缓解）
+- 止损三口径工具已实现，但未接入 live 流程（Paper 暂不支持 stop≠none 变体）
+- 8 个 candidate 策略的门禁 v2 全量重跑未执行（约 15+ 分钟，留给月度流水线 `--stages backtest`）
+- `execution/` 模块为并行会话（alex22222）的另一套执行栈，与 `paper/` 的关系需要人工对齐
+- turtle_bluechip 已从 live 降回 candidate（未实现统一信号接口时晋升触发事实源冲突；其日线支持由并行会话开发中）

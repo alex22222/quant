@@ -28,7 +28,7 @@ APPROVALS_FILE = TEAM / "loops" / "approvals.json"
 TEAM_DB = TEAM / "team.db"
 
 sys.path.insert(0, str(TEAM))
-from schemas import is_buy, parse_pct, validate_plan, SchemaError  # noqa: E402
+from schemas import is_buy, parse_pct, validate_plan, validate_portfolio, SchemaError  # noqa: E402
 
 
 def _load_json(path: Path):
@@ -68,6 +68,10 @@ def check_day(day: str) -> dict:
             )
         if executable and is_buy(str(p.get("direction", "")), pct) and pct > 0 and not market_ok:
             conflicts.append(f"{p.get('code')}: market_ok=false 但买入计划被标记 executable")
+
+    # ── 1b. 组合级确定性风控（LLM 不得绕过）─────────────────────
+    for prob in validate_portfolio(plans, market_ok):
+        conflicts.append(f"组合风控: {prob}")
 
     # ── 2. approvals.json（日志）必须与主事实源同步 ──────────────
     appr = _load_json(APPROVALS_FILE) or {"decisions": []}

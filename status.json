@@ -20,23 +20,24 @@
     },
     "strategy": {
       "status": "ok",
-      "started_at": "2026-08-23T00:11:47+08:00",
-      "finished_at": "2026-08-23T00:11:47+08:00",
+      "started_at": "2026-08-23T00:54:09+08:00",
+      "finished_at": "2026-08-23T00:54:09+08:00",
       "elapsed_sec": 0.0,
       "result": {
-        "total": 10,
+        "total": 11,
         "by_state": {
           "research": [
             "reversal-during-earnings-announcements",
+            "base"
+          ],
+          "candidate": [
+            "momentum_rotation",
             "ma_trend_bluechip",
             "rotation_300_500",
             "rsi2_reversal",
             "sharpe_momentum",
             "turtle_bluechip",
             "week52_momentum"
-          ],
-          "candidate": [
-            "momentum_rotation"
           ],
           "live": [
             "momentum_stops"
@@ -50,115 +51,585 @@
     },
     "backtest": {
       "status": "ok",
-      "started_at": "2026-08-23T00:28:16+08:00",
-      "finished_at": "2026-08-23T00:28:57+08:00",
-      "elapsed_sec": 41.1,
+      "started_at": "2026-08-23T00:48:29+08:00",
+      "finished_at": "2026-08-23T00:51:11+08:00",
+      "elapsed_sec": 162.0,
       "result": {
+        "gate_version": "v2",
         "gate_thresholds": {
-          "annual_min": 0.05,
-          "maxdd_max": 0.3,
-          "sharpe_min": 0.3
+          "full": {
+            "annual_min": 0.05,
+            "max_dd_max": 0.3,
+            "sharpe_min": 0.3,
+            "excess_annual_min": 0.0,
+            "ir_min": 0.3,
+            "excess_max_dd_max": 0.4,
+            "turnover_annual_max": 25.0,
+            "longest_dd_days_max": 1500
+          },
+          "oos": {
+            "annual_min": 0.0,
+            "excess_annual_min": 0.0,
+            "max_dd_max": 0.35,
+            "sharpe_min": 0.0
+          }
         },
         "window": "2020-01-01~2026-08-01",
+        "oos_window": "2024-01-01~2026-08-01",
+        "cost_model": "rqalpha 默认佣金 + pit-tax 历史印花税 + 固定滑点0.2% + 最低佣金5元",
         "benchmark": "沪深300",
         "results": {
           "momentum_rotation": {
-            "total_ret": 0.8741106899999995,
-            "annual": 0.1044014702559086,
-            "max_dd": 0.2815816131851043,
-            "sharpe": 0.458356379303532,
-            "gate": "pass",
-            "reasons": [],
-            "report": "reports/momentum_rotation"
+            "report": "reports/momentum_rotation",
+            "annual": 0.09301968825655371,
+            "max_dd": 0.283028533482729,
+            "sharpe": 0.4051916339214279,
+            "excess_annual": 0.07361011767998216,
+            "ir": 0.487773807513088,
+            "excess_max_dd": 0.4067044835799656,
+            "turnover_annual": 16.75705587737452,
+            "longest_dd_days": 1735.0,
+            "total_ret": 0.755243335397999,
+            "oos": {
+              "annual": 0.07716433231968844,
+              "max_dd": 0.1976526175398383,
+              "sharpe": 0.3717963006495802,
+              "excess_annual": -0.04211452517115588,
+              "ir": 0.1313944012800835,
+              "excess_max_dd": 0.3840105643569441,
+              "turnover_annual": 15.3049956464825,
+              "longest_dd_days": 487.0,
+              "total_ret": 0.2020880856799996
+            },
+            "stage_windows": [
+              {
+                "window": "2020-01-01~2021-12-31",
+                "annual": 0.365722117245439,
+                "max_dd": 0.283028533482729,
+                "sharpe": 1.166616603516006,
+                "excess_annual": 0.2393301923909963
+              },
+              {
+                "window": "2022-01-01~2023-12-31",
+                "annual": -0.0875656330582858,
+                "max_dd": 0.185988862796,
+                "sharpe": -1.701793950362325,
+                "excess_annual": 0.1031520685436771
+              },
+              {
+                "window": "2024-01-01~2026-08-01",
+                "annual": 0.07716433231968844,
+                "max_dd": 0.1976526175398383,
+                "sharpe": 0.3717963006495802,
+                "excess_annual": -0.04211452517115588
+              }
+            ],
+            "gate": "reject",
+            "reasons": [
+              "全样本: excess_max_dd=40.7% 未满足 <= 40.0%",
+              "全样本: longest_dd_days=1735 未满足 <= 1500",
+              "样本外: excess_annual=-4.2% 未满足 >= 0.0%",
+              "策略族 momentum_rotation 已有代表 momentum_stops，同族不重复通过"
+            ],
+            "family": {
+              "family": "momentum_rotation",
+              "family_representative": "momentum_stops",
+              "family_dup": true
+            },
+            "perturbations": []
           },
           "momentum_stops": {
-            "total_ret": 0.8741106899999995,
-            "annual": 0.1044014702559086,
-            "max_dd": 0.2815816131851043,
-            "sharpe": 0.458356379303532,
-            "gate": "pass",
-            "reasons": [],
-            "report": "reports/momentum_stops"
+            "report": "reports/momentum_stops",
+            "annual": 0.09301968825655371,
+            "max_dd": 0.283028533482729,
+            "sharpe": 0.4051916339214279,
+            "excess_annual": 0.07361011767998216,
+            "ir": 0.487773807513088,
+            "excess_max_dd": 0.4067044835799656,
+            "turnover_annual": 16.75705587737452,
+            "longest_dd_days": 1735.0,
+            "total_ret": 0.755243335397999,
+            "oos": {
+              "annual": 0.07716433231968844,
+              "max_dd": 0.1976526175398383,
+              "sharpe": 0.3717963006495802,
+              "excess_annual": -0.04211452517115588,
+              "ir": 0.1313944012800835,
+              "excess_max_dd": 0.3840105643569441,
+              "turnover_annual": 15.3049956464825,
+              "longest_dd_days": 487.0,
+              "total_ret": 0.2020880856799996
+            },
+            "stage_windows": [
+              {
+                "window": "2020-01-01~2021-12-31",
+                "annual": 0.365722117245439,
+                "max_dd": 0.283028533482729,
+                "sharpe": 1.166616603516006,
+                "excess_annual": 0.2393301923909963
+              },
+              {
+                "window": "2022-01-01~2023-12-31",
+                "annual": -0.0875656330582858,
+                "max_dd": 0.185988862796,
+                "sharpe": -1.701793950362325,
+                "excess_annual": 0.1031520685436771
+              },
+              {
+                "window": "2024-01-01~2026-08-01",
+                "annual": 0.07716433231968844,
+                "max_dd": 0.1976526175398383,
+                "sharpe": 0.3717963006495802,
+                "excess_annual": -0.04211452517115588
+              }
+            ],
+            "gate": "reject",
+            "reasons": [
+              "全样本: excess_max_dd=40.7% 未满足 <= 40.0%",
+              "全样本: longest_dd_days=1735 未满足 <= 1500",
+              "样本外: excess_annual=-4.2% 未满足 >= 0.0%",
+              "扰动1({\"momentum_days\": 15, \"hold_num\": 2}): max_dd=38.0% 未满足 <= 30.0%",
+              "扰动2({\"momentum_days\": 15, \"hold_num\": 4}): max_dd=38.6% 未满足 <= 30.0%",
+              "扰动3({\"momentum_days\": 25, \"hold_num\": 2}): annual=4.4% 未满足 >= 5.0%",
+              "扰动3({\"momentum_days\": 25, \"hold_num\": 2}): max_dd=47.5% 未满足 <= 30.0%",
+              "扰动3({\"momentum_days\": 25, \"hold_num\": 2}): sharpe=0.18 未满足 >= 0.30"
+            ],
+            "family": {
+              "family": "momentum_rotation",
+              "family_representative": "momentum_stops",
+              "family_dup": false
+            },
+            "perturbations": [
+              {
+                "variant": "{\"momentum_days\": 15, \"hold_num\": 2}",
+                "annual": 0.09334522250478838,
+                "max_dd": 0.3801971497279135,
+                "sharpe": 0.3823470767144039,
+                "excess_annual": 0.07392987117235883
+              },
+              {
+                "variant": "{\"momentum_days\": 15, \"hold_num\": 4}",
+                "annual": 0.08446084056401482,
+                "max_dd": 0.3861095981806794,
+                "sharpe": 0.3934452573685142,
+                "excess_annual": 0.06520325586667974
+              },
+              {
+                "variant": "{\"momentum_days\": 25, \"hold_num\": 2}",
+                "annual": 0.04428032925430636,
+                "max_dd": 0.4746383317174318,
+                "sharpe": 0.1796832545844957,
+                "excess_annual": 0.02573626003930718
+              },
+              {
+                "variant": "{\"momentum_days\": 25, \"hold_num\": 4}",
+                "annual": 0.0974218564388345,
+                "max_dd": 0.298183433752709,
+                "sharpe": 0.4592877588731674,
+                "excess_annual": 0.07793411325938804
+              }
+            ]
           },
           "ma_trend_bluechip": {
-            "total_ret": 0.2756162549999994,
-            "annual": 0.03923456505234379,
-            "max_dd": 0.2723002170677897,
-            "sharpe": 0.1397011280668443,
+            "report": "reports/ma_trend_bluechip",
+            "annual": 0.02362590561418454,
+            "max_dd": 0.327287345134623,
+            "sharpe": 0.02170285736451309,
+            "excess_annual": 0.005448612494499905,
+            "ir": 0.1618491040016953,
+            "excess_max_dd": 0.4666277919622854,
+            "turnover_annual": 18.50849445986064,
+            "longest_dd_days": 1985.0,
+            "total_ret": 0.1591711044620001,
+            "oos": {
+              "annual": -0.03564346714743327,
+              "max_dd": 0.1926736243079642,
+              "sharpe": -0.4485110755321475,
+              "excess_annual": -0.1424306508678349,
+              "ir": -0.6027620024873225,
+              "excess_max_dd": 0.4741330051424002,
+              "turnover_annual": 15.78498997456533,
+              "longest_dd_days": 815.0,
+              "total_ret": -0.0859512442960002
+            },
+            "stage_windows": [
+              {
+                "window": "2020-01-01~2021-12-31",
+                "annual": 0.2187930072721755,
+                "max_dd": 0.1593198281358026,
+                "sharpe": 1.030973311188448,
+                "excess_annual": 0.105998762935732
+              },
+              {
+                "window": "2022-01-01~2023-12-31",
+                "annual": -0.08058909881360876,
+                "max_dd": 0.152566237323368,
+                "sharpe": -2.424317514493564,
+                "excess_annual": 0.1115868431007532
+              },
+              {
+                "window": "2024-01-01~2026-08-01",
+                "annual": -0.03564346714743327,
+                "max_dd": 0.1926736243079642,
+                "sharpe": -0.4485110755321475,
+                "excess_annual": -0.1424306508678349
+              }
+            ],
             "gate": "reject",
             "reasons": [
-              "年化 3.9% < 5%",
-              "夏普 0.14 < 0.3"
+              "全样本: annual=2.4% 未满足 >= 5.0%",
+              "全样本: max_dd=32.7% 未满足 <= 30.0%",
+              "全样本: sharpe=0.02 未满足 >= 0.30",
+              "全样本: ir=0.16 未满足 >= 0.30",
+              "全样本: excess_max_dd=46.7% 未满足 <= 40.0%",
+              "全样本: longest_dd_days=1985 未满足 <= 1500",
+              "样本外: annual=-3.6% 未满足 >= 0.0%",
+              "样本外: sharpe=-0.45 未满足 >= 0.00",
+              "样本外: excess_annual=-14.2% 未满足 >= 0.0%"
             ],
-            "report": "reports/ma_trend_bluechip"
+            "family": {
+              "family": "ma_trend_bluechip",
+              "family_representative": "ma_trend_bluechip",
+              "family_dup": false
+            },
+            "perturbations": []
           },
           "rotation_300_500": {
-            "total_ret": 0.4538227984000005,
-            "annual": 0.06094263414432688,
-            "max_dd": 0.2094163063882366,
-            "sharpe": 0.2708988035260781,
+            "report": "reports/rotation_300_500",
+            "annual": -0.02735073767212293,
+            "max_dd": 0.390338410796893,
+            "sharpe": -0.269546704419503,
+            "excess_annual": -0.04462280029481591,
+            "ir": -0.3113181826916586,
+            "excess_max_dd": 0.3521932345719341,
+            "turnover_annual": 71.81773023415481,
+            "longest_dd_days": 1782.0,
+            "total_ret": -0.1608906191615987,
+            "oos": {
+              "annual": 0.01323012159145565,
+              "max_dd": 0.2457411245840342,
+              "sharpe": 0.03924047487796042,
+              "excess_annual": -0.09896903656157297,
+              "ir": -0.4917522066466183,
+              "excess_max_dd": 0.3516273107002424,
+              "turnover_annual": 81.47058134357691,
+              "longest_dd_days": 471.0,
+              "total_ret": 0.03308087901600021
+            },
+            "stage_windows": [
+              {
+                "window": "2020-01-01~2021-12-31",
+                "annual": -0.003052899996339509,
+                "max_dd": 0.1927772174133767,
+                "sharpe": -0.05876588043722634,
+                "excess_annual": -0.09531622454559929
+              },
+              {
+                "window": "2022-01-01~2023-12-31",
+                "annual": -0.09608363903410277,
+                "max_dd": 0.1763581989359998,
+                "sharpe": -1.128855600791743,
+                "excess_annual": 0.09285362270193898
+              },
+              {
+                "window": "2024-01-01~2026-08-01",
+                "annual": 0.01323012159145565,
+                "max_dd": 0.2457411245840342,
+                "sharpe": 0.03924047487796042,
+                "excess_annual": -0.09896903656157297
+              }
+            ],
             "gate": "reject",
             "reasons": [
-              "夏普 0.27 < 0.3"
+              "全样本: annual=-2.7% 未满足 >= 5.0%",
+              "全样本: max_dd=39.0% 未满足 <= 30.0%",
+              "全样本: sharpe=-0.27 未满足 >= 0.30",
+              "全样本: excess_annual=-4.5% 未满足 >= 0.0%",
+              "全样本: ir=-0.31 未满足 >= 0.30",
+              "全样本: turnover_annual=71.8 未满足 <= 25.0",
+              "全样本: longest_dd_days=1782 未满足 <= 1500",
+              "样本外: excess_annual=-9.9% 未满足 >= 0.0%"
             ],
-            "report": "reports/rotation_300_500"
+            "family": {
+              "family": "rotation_300_500",
+              "family_representative": "rotation_300_500",
+              "family_dup": false
+            },
+            "perturbations": []
           },
           "rsi2_reversal": {
-            "total_ret": 0.1497579120999994,
-            "annual": 0.02230724704409881,
-            "max_dd": 0.2435125751844295,
-            "sharpe": -0.002176571694876468,
+            "report": "reports/rsi2_reversal",
+            "annual": -0.05175486488041636,
+            "max_dd": 0.3402899005129525,
+            "sharpe": -0.7471942282655123,
+            "excess_annual": -0.06859356510854486,
+            "ir": -0.6201848218580636,
+            "excess_max_dd": 0.4468897914670296,
+            "turnover_annual": 167.7568010920624,
+            "longest_dd_days": 2384.0,
+            "total_ret": -0.285480996732002,
+            "oos": {
+              "annual": -0.04655721155727521,
+              "max_dd": 0.1743259547607326,
+              "sharpe": -0.6447877390004211,
+              "excess_annual": -0.1521358712622654,
+              "ir": -0.8101261221437278,
+              "excess_max_dd": 0.4477550134523606,
+              "turnover_annual": 165.0935248993184,
+              "longest_dd_days": 813.0,
+              "total_ret": -0.1113523835339988
+            },
+            "stage_windows": [
+              {
+                "window": "2020-01-01~2021-12-31",
+                "annual": -0.06033852114582217,
+                "max_dd": 0.1930433521678834,
+                "sharpe": -0.4959364570619717,
+                "excess_annual": -0.147300298746301
+              },
+              {
+                "window": "2022-01-01~2023-12-31",
+                "annual": -0.06555483580683708,
+                "max_dd": 0.1300379844728245,
+                "sharpe": -1.824069013154859,
+                "excess_annual": 0.1297635788045377
+              },
+              {
+                "window": "2024-01-01~2026-08-01",
+                "annual": -0.04655721155727521,
+                "max_dd": 0.1743259547607326,
+                "sharpe": -0.6447877390004211,
+                "excess_annual": -0.1521358712622654
+              }
+            ],
             "gate": "reject",
             "reasons": [
-              "年化 2.2% < 5%",
-              "夏普 -0.00 < 0.3"
+              "全样本: annual=-5.2% 未满足 >= 5.0%",
+              "全样本: max_dd=34.0% 未满足 <= 30.0%",
+              "全样本: sharpe=-0.75 未满足 >= 0.30",
+              "全样本: excess_annual=-6.9% 未满足 >= 0.0%",
+              "全样本: ir=-0.62 未满足 >= 0.30",
+              "全样本: excess_max_dd=44.7% 未满足 <= 40.0%",
+              "全样本: turnover_annual=167.8 未满足 <= 25.0",
+              "全样本: longest_dd_days=2384 未满足 <= 1500",
+              "样本外: annual=-4.7% 未满足 >= 0.0%",
+              "样本外: sharpe=-0.64 未满足 >= 0.00",
+              "样本外: excess_annual=-15.2% 未满足 >= 0.0%"
             ],
-            "report": "reports/rsi2_reversal"
+            "family": {
+              "family": "rsi2_reversal",
+              "family_representative": "rsi2_reversal",
+              "family_dup": false
+            },
+            "perturbations": []
           },
           "sharpe_momentum": {
-            "total_ret": 0.3926653590000002,
-            "annual": 0.05375863403824566,
-            "max_dd": 0.3677323205171162,
-            "sharpe": 0.2213438383901097,
+            "report": "reports/sharpe_momentum",
+            "annual": 0.0444256707214814,
+            "max_dd": 0.3954057397275197,
+            "sharpe": 0.1720787020862172,
+            "excess_annual": 0.02587902056901581,
+            "ir": 0.2304578337872544,
+            "excess_max_dd": 0.4321288388612092,
+            "turnover_annual": 12.20633578928491,
+            "longest_dd_days": 2013.0,
+            "total_ret": 0.3164607557680001,
+            "oos": {
+              "annual": 0.01166883706379185,
+              "max_dd": 0.2361111453672311,
+              "sharpe": 0.0150926098059399,
+              "excess_annual": -0.1003574336020728,
+              "ir": -0.2504943788333137,
+              "excess_max_dd": 0.433504875479245,
+              "turnover_annual": 10.06094054114355,
+              "longest_dd_days": 802.0,
+              "total_ret": 0.02914358143599993
+            },
+            "stage_windows": [
+              {
+                "window": "2020-01-01~2021-12-31",
+                "annual": 0.2386015598919693,
+                "max_dd": 0.2672788678339706,
+                "sharpe": 0.9016790059744586,
+                "excess_annual": 0.123974116061587
+              },
+              {
+                "window": "2022-01-01~2023-12-31",
+                "annual": -0.09658918082695378,
+                "max_dd": 0.2115271819199999,
+                "sharpe": -1.615125567022391,
+                "excess_annual": 0.09224241219220342
+              },
+              {
+                "window": "2024-01-01~2026-08-01",
+                "annual": 0.01166883706379185,
+                "max_dd": 0.2361111453672311,
+                "sharpe": 0.0150926098059399,
+                "excess_annual": -0.1003574336020728
+              }
+            ],
             "gate": "reject",
             "reasons": [
-              "回撤 36.8% > 30%",
-              "夏普 0.22 < 0.3"
+              "全样本: annual=4.4% 未满足 >= 5.0%",
+              "全样本: max_dd=39.5% 未满足 <= 30.0%",
+              "全样本: sharpe=0.17 未满足 >= 0.30",
+              "全样本: ir=0.23 未满足 >= 0.30",
+              "全样本: excess_max_dd=43.2% 未满足 <= 40.0%",
+              "全样本: longest_dd_days=2013 未满足 <= 1500",
+              "样本外: excess_annual=-10.0% 未满足 >= 0.0%"
             ],
-            "report": "reports/sharpe_momentum"
+            "family": {
+              "family": "sharpe_momentum",
+              "family_representative": "sharpe_momentum",
+              "family_dup": false
+            },
+            "perturbations": []
           },
           "turtle_bluechip": {
-            "total_ret": 0.9924447130000003,
-            "annual": 0.1151436856626271,
-            "max_dd": 0.1977085194700455,
-            "sharpe": 0.6114022918532026,
-            "gate": "pass",
-            "reasons": [],
-            "report": "reports/turtle_bluechip"
-          },
-          "week52_momentum": {
-            "total_ret": 0.1933393410000004,
-            "annual": 0.02833787757280493,
-            "max_dd": 0.3087449789999998,
-            "sharpe": 0.07322233676584222,
+            "report": "reports/turtle_bluechip",
+            "annual": 0.08391386855454153,
+            "max_dd": 0.2847343074404451,
+            "sharpe": 0.425323772282503,
+            "excess_annual": 0.06466599684951135,
+            "ir": 0.5973457651064418,
+            "excess_max_dd": 0.2978584168946191,
+            "turnover_annual": 18.54882403435563,
+            "longest_dd_days": 2031.0,
+            "total_ret": 0.6647760773840006,
+            "oos": {
+              "annual": 0.08888463891742027,
+              "max_dd": 0.1261857582619433,
+              "sharpe": 0.5779127965630466,
+              "excess_annual": -0.03169205655271257,
+              "ir": 0.4582245962931752,
+              "excess_max_dd": 0.304201702292637,
+              "turnover_annual": 17.73589663138372,
+              "longest_dd_days": 357.0,
+              "total_ret": 0.2347361324400004
+            },
+            "stage_windows": [
+              {
+                "window": "2020-01-01~2021-12-31",
+                "annual": 0.2484879213673754,
+                "max_dd": 0.1863098267438755,
+                "sharpe": 1.069368378997864,
+                "excess_annual": 0.1329455357337483
+              },
+              {
+                "window": "2022-01-01~2023-12-31",
+                "annual": -0.05420534949594913,
+                "max_dd": 0.1246013865700902,
+                "sharpe": -1.184558383498824,
+                "excess_annual": 0.1434853430808327
+              },
+              {
+                "window": "2024-01-01~2026-08-01",
+                "annual": 0.08888463891742027,
+                "max_dd": 0.1261857582619433,
+                "sharpe": 0.5779127965630466,
+                "excess_annual": -0.03169205655271257
+              }
+            ],
             "gate": "reject",
             "reasons": [
-              "年化 2.8% < 5%",
-              "回撤 30.9% > 30%",
-              "夏普 0.07 < 0.3"
+              "全样本: longest_dd_days=2031 未满足 <= 1500",
+              "样本外: excess_annual=-3.2% 未满足 >= 0.0%"
             ],
-            "report": "reports/week52_momentum"
+            "family": {
+              "family": "turtle",
+              "family_representative": "turtle_bluechip",
+              "family_dup": false
+            },
+            "perturbations": [
+              {
+                "variant": "{\"hold_num\": 3}",
+                "annual": 0.1042237475322101,
+                "max_dd": 0.2625823712170771,
+                "sharpe": 0.4798199357278448,
+                "excess_annual": 0.08461521806991001
+              },
+              {
+                "variant": "{\"hold_num\": 5}",
+                "annual": 0.06833629610052894,
+                "max_dd": 0.2704502382379285,
+                "sharpe": 0.3532702386909709,
+                "excess_annual": 0.0493650470357001
+              }
+            ]
+          },
+          "week52_momentum": {
+            "report": "reports/week52_momentum",
+            "annual": 0.01707378600661791,
+            "max_dd": 0.3143145776999997,
+            "sharpe": 0.003059153134186887,
+            "excess_annual": -0.0009871562098615616,
+            "ir": 0.0740489268709539,
+            "excess_max_dd": 0.408721158819531,
+            "turnover_annual": 13.31265129926374,
+            "longest_dd_days": 1883.0,
+            "total_ret": 0.1130309305879997,
+            "oos": {
+              "annual": 0.07380577944802957,
+              "max_dd": 0.1751691031619767,
+              "sharpe": 0.3933370468585173,
+              "excess_annual": -0.04510117160539029,
+              "ir": 0.239934060675265,
+              "excess_max_dd": 0.4127053031191799,
+              "turnover_annual": 9.771458640529653,
+              "longest_dd_days": 525.0,
+              "total_ret": 0.1928285236060003
+            },
+            "stage_windows": [
+              {
+                "window": "2020-01-01~2021-12-31",
+                "annual": 0.03413754415512948,
+                "max_dd": 0.3143145776999997,
+                "sharpe": 0.1508500497307174,
+                "excess_annual": -0.06156760195002309
+              },
+              {
+                "window": "2022-01-01~2023-12-31",
+                "annual": -0.06969990223954226,
+                "max_dd": 0.1701550768481466,
+                "sharpe": -1.184029207843834,
+                "excess_annual": 0.1247521075413323
+              },
+              {
+                "window": "2024-01-01~2026-08-01",
+                "annual": 0.07380577944802957,
+                "max_dd": 0.1751691031619767,
+                "sharpe": 0.3933370468585173,
+                "excess_annual": -0.04510117160539029
+              }
+            ],
+            "gate": "reject",
+            "reasons": [
+              "全样本: annual=1.7% 未满足 >= 5.0%",
+              "全样本: max_dd=31.4% 未满足 <= 30.0%",
+              "全样本: sharpe=0.00 未满足 >= 0.30",
+              "全样本: excess_annual=-0.1% 未满足 >= 0.0%",
+              "全样本: ir=0.07 未满足 >= 0.30",
+              "全样本: excess_max_dd=40.9% 未满足 <= 40.0%",
+              "全样本: longest_dd_days=1883 未满足 <= 1500",
+              "样本外: excess_annual=-4.5% 未满足 >= 0.0%"
+            ],
+            "family": {
+              "family": "week52_momentum",
+              "family_representative": "week52_momentum",
+              "family_dup": false
+            },
+            "perturbations": []
           }
         }
       }
     },
     "paper": {
       "status": "ok",
-      "started_at": "2026-08-22T21:25:14+08:00",
-      "finished_at": "2026-08-22T21:25:14+08:00",
-      "elapsed_sec": 0.0,
+      "started_at": "2026-08-23T00:54:09+08:00",
+      "finished_at": "2026-08-23T00:54:11+08:00",
+      "elapsed_sec": 1.3,
       "result": {
-        "note": "2026-07-31 已记账，幂等跳过",
+        "note": "2026-08-21 已记账，幂等跳过",
         "equity": 100000.0,
         "live": [
           "momentum_stops"
@@ -167,17 +638,17 @@
     },
     "review": {
       "status": "ok",
-      "started_at": "2026-08-22T21:25:14+08:00",
-      "finished_at": "2026-08-22T21:25:14+08:00",
+      "started_at": "2026-08-23T00:47:34+08:00",
+      "finished_at": "2026-08-23T00:47:34+08:00",
       "elapsed_sec": 0.0,
       "result": {
-        "report": "reviews/2026-08-22.md",
-        "loop_no": 3,
+        "report": "reviews/2026-08-23.md",
+        "loop_no": 15,
         "agent_md_updated": true
       }
     }
   },
-  "updated_at": "2026-08-23T00:28:57+08:00",
+  "updated_at": "2026-08-23T00:54:11+08:00",
   "strategy_registry": {
     "demo_dual_ma": {
       "state": "retired",
@@ -274,7 +745,9 @@
       "origin": "github.com/ling-0729/KHunter 海龟 A股改良版",
       "category": "趋势突破",
       "pool": "蓝筹10只",
-      "note": "参数扫描最优（12组网格）：分散持仓 3→4 为回撤改善主因"
+      "note": "参数扫描最优（12组网格）：分散持仓 3→4 为回撤改善主因 | 2026-08-23 改回 candidate：未实现统一信号接口（PARAMS/generate_targets），且与 momentum_stops 同时 live 触发事实源冲突（stage_paper fail-closed）。实现接口并通过新门禁后可重新晋升。",
+      "promoted_at": "2026-08-23",
+      "promote_reason": "参数扫描过门禁（年化11.5%/回撤19.8%/夏普0.61），老板批准晋级（Loop #14）"
     },
     "week52_momentum": {
       "state": "candidate",
@@ -286,7 +759,14 @@
       "origin": "George & Hwang (2004) 52周高点动量",
       "category": "动量轮动",
       "pool": "蓝筹10只"
+    },
+    "base": {
+      "state": "research",
+      "file": "strategies/base.py",
+      "summary": "统一信号接口（改进计划 Phase 1） 目标：回测（rqalpha）、Paper（stage_paper）、日报提案共享同一套信号计算逻辑。 约定：每个可上线的策略模块必须暴露： PARAMS: dict # 策略参数（唯一存放处，禁止别",
+      "params": {},
+      "registered_at": "2026-08-23T00:47:33+08:00"
     }
   },
-  "last_loop_at": "2026-08-23T00:28:57+08:00"
+  "last_loop_at": "2026-08-23T00:54:11+08:00"
 }
