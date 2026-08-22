@@ -1,0 +1,256 @@
+{
+  "date": "2026-08-22",
+  "generated_at": "2026-08-23T00:07:12",
+  "ok": false,
+  "sections": {
+    "overnight_us": {
+      "ok": true,
+      "source": "腾讯行情",
+      "asof": "2026-08-21 17:15:59",
+      "data": {
+        "道琼斯": {
+          "name": "",
+          "close": 53277.01,
+          "change": 517.8,
+          "pct_chg": 0.98,
+          "time": "2026-08-21 16:41:57"
+        },
+        "纳斯达克": {
+          "name": "",
+          "close": 26180.45,
+          "change": 113.28,
+          "pct_chg": 0.43,
+          "time": "2026-08-21 17:15:59"
+        },
+        "标普500": {
+          "name": "500",
+          "close": 7674.37,
+          "change": 33.21,
+          "pct_chg": 0.43,
+          "time": "2026-08-21 16:41:52"
+        }
+      }
+    },
+    "vix": {
+      "ok": true,
+      "source": "CBOE 官方",
+      "asof": "08/21/2026",
+      "data": {
+        "close": 15.13,
+        "level": "平静",
+        "chg_5d": 0.88,
+        "recent": [
+          {
+            "date": "08/14/2026",
+            "close": 14.25
+          },
+          {
+            "date": "08/17/2026",
+            "close": 15.19
+          },
+          {
+            "date": "08/18/2026",
+            "close": 15.84
+          },
+          {
+            "date": "08/19/2026",
+            "close": 14.89
+          },
+          {
+            "date": "08/20/2026",
+            "close": 16.01
+          },
+          {
+            "date": "08/21/2026",
+            "close": 15.13
+          }
+        ]
+      }
+    },
+    "asia": {
+      "ok": true,
+      "source": "新浪/东财",
+      "asof": "2026-08-23",
+      "data": {
+        "日经指数": {
+          "close": 44946.64,
+          "change": -408.35,
+          "pct_chg": -0.9
+        },
+        "恒生指数": {
+          "close": 26009.46,
+          "change": 310.97,
+          "pct_chg": 1.21
+        },
+        "韩国KOSPI": null
+      },
+      "note": "KOSPI 数据源不稳定，允许缺失"
+    },
+    "commodities": {
+      "ok": true,
+      "source": "新浪国际期货",
+      "asof": "2026-08-23",
+      "data": {
+        "纽约黄金": {
+          "close": 4664.48,
+          "prev_settle": 4571.4,
+          "date": "2026-08-22"
+        },
+        "纽约原油": {
+          "close": 86.573,
+          "prev_settle": 86.83,
+          "date": "2026-08-22"
+        }
+      }
+    },
+    "forex": {
+      "ok": false,
+      "error": "ProxyError(MaxRetryError(\"HTTPSConnectionPool(host='push2.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/ulist.np/get?secids=133.USDCNH&fields=f2%2Cf3%2Cf14&fltt=2&invt=2 (Caused by"
+    },
+    "monetary_policy": {
+      "ok": true,
+      "source": "Federal Reserve 官方 RSS",
+      "asof": "Wed, 19 Aug 2026 18:00:00 GMT",
+      "data": [
+        {
+          "title": "Minutes of the Federal Open Market Committee, July 28–29, 2026",
+          "date": "Wed, 19 Aug 2026 18:00:00 GMT",
+          "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260819a.htm"
+        },
+        {
+          "title": "Federal Reserve issues FOMC statement",
+          "date": "Wed, 29 Jul 2026 18:00:00 GMT",
+          "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm"
+        },
+        {
+          "title": "Minutes of the Board's discount rate meetings on June 8 and June 17, 2026",
+          "date": "Tue, 14 Jul 2026 18:00:00 GMT",
+          "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260714a.htm"
+        },
+        {
+          "title": "Federal Reserve announces the leadership and objectives of its task forces to advance the conduct of monetary policy",
+          "date": "Thu, 9 Jul 2026 19:00:00 GMT",
+          "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260709a.htm"
+        },
+        {
+          "title": "Minutes of the Federal Open Market Committee, June 16-17, 2026",
+          "date": "Wed, 8 Jul 2026 18:00:00 GMT",
+          "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260708a.htm"
+        },
+        {
+          "title": "Federal Reserve issues FOMC statement",
+          "date": "Wed, 17 Jun 2026 18:00:00 GMT",
+          "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260617a.htm"
+        }
+      ]
+    },
+    "a_share_hotspots": {
+      "ok": true,
+      "source": "涨停池题材聚类（回退）",
+      "asof": "2026-08-21",
+      "data": {
+        "zt_theme_cluster": [
+          {
+            "theme": "化学制药",
+            "count": 3
+          },
+          {
+            "theme": "通用设备",
+            "count": 2
+          },
+          {
+            "theme": "饰品",
+            "count": 1
+          },
+          {
+            "theme": "专用设备",
+            "count": 1
+          },
+          {
+            "theme": "中药Ⅱ",
+            "count": 1
+          },
+          {
+            "theme": "一般零售",
+            "count": 1
+          },
+          {
+            "theme": "医疗服务",
+            "count": 1
+          },
+          {
+            "theme": "通信设备",
+            "count": 1
+          }
+        ]
+      }
+    },
+    "global_news": {
+      "ok": true,
+      "source": "新浪 7×24",
+      "asof": "2026-08-23 00:04:52",
+      "data": [
+        {
+          "time": "2026-08-23 00:04:52",
+          "text": "布伦特原油暗盘跌破92美元，日内跌超0.5%。"
+        },
+        {
+          "time": "2026-08-23 00:02:21",
+          "text": "卡塔尔外交部：以色列持续侵犯地区国家主权，此种做法十分危险，属于不可接受的局势升级行为。"
+        },
+        {
+          "time": "2026-08-23 00:02:05",
+          "text": "卡塔尔外交部：强烈谴责以色列对大马士革郊区一辆民用车辆发动的袭击。"
+        },
+        {
+          "time": "2026-08-23 00:01:26",
+          "text": "埃及与伊朗磋商地区局势降温及谅解备忘录相关事宜。"
+        },
+        {
+          "time": "2026-08-23 00:00:03",
+          "text": "伊朗第一副总统：绝不允许美国的经济恐怖主义动摇本国经济稳定与民众生计。"
+        },
+        {
+          "time": "2026-08-22 23:59:38",
+          "text": "加拿大总理卡尼：加拿大将对美国多个行业征收报复性关税。"
+        },
+        {
+          "time": "2026-08-22 23:57:51",
+          "text": "加拿大总理卡尼：与亚洲的石油、液化天然气贸易有助于降低（加）对美国的依赖。"
+        },
+        {
+          "time": "2026-08-22 23:56:55",
+          "text": "加拿大总理卡尼：我们将自行决定我们想要与哪些对象（国家）开展贸易。"
+        },
+        {
+          "time": "2026-08-22 23:56:37",
+          "text": "加拿大总理马克·卡尼：美方在谈判最后时刻抛出条款，试图限制我国与其他国家达成贸易协议的空间。加拿大是全球各国优先选择的合作伙伴，而美方却意图对此加以限制。这完全无法接受！"
+        },
+        {
+          "time": "2026-08-22 23:56:22",
+          "text": "加拿大总理卡尼谈及贸易争端：遭遇攻击，就必须予以反击。"
+        },
+        {
+          "time": "2026-08-22 23:54:46",
+          "text": "加拿大总理卡尼：我国关键矿产产业已取得长足发展。"
+        },
+        {
+          "time": "2026-08-22 23:54:38",
+          "text": "加拿大总理卡尼：关键矿产可作为对美谈判筹码。"
+        },
+        {
+          "time": "2026-08-22 23:53:32",
+          "text": "加拿大总理卡尼：（美加在）关键矿产领域错失合作机遇，责任在于美方。"
+        },
+        {
+          "time": "2026-08-22 23:53:01",
+          "text": "加拿大总理卡尼：不再敦促各省将美国酒类重新摆回商店货架。"
+        },
+        {
+          "time": "2026-08-22 23:52:53",
+          "text": "加拿大总理卡尼：将于下周公布扶持企业的具体方案。"
+        }
+      ]
+    }
+  }
+}

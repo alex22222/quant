@@ -11,12 +11,7 @@
       "stop": null,
       "invalid_if": "沪深300 未收复 120 日均线（4741）前任何开仓无效；或投资收益率继续恶化",
       "horizon": "预案：中线 4-8 周",
-      "confidence": 3,
-      "approval": "approved",
-      "approval_note": "",
-      "approved_at": "2026-08-22T23:53:14",
-      "executable": true,
-      "blocked_reason": ""
+      "confidence": 3
     },
     {
       "code": "600036",
@@ -27,12 +22,7 @@
       "stop": null,
       "invalid_if": "沪深300 未收复 120 日均线前不开仓；8/31 中报不良/拨备显著恶化则移出观察",
       "horizon": "预案：中线 4-8 周",
-      "confidence": 3,
-      "approval": "approved",
-      "approval_note": "",
-      "approved_at": "2026-08-22T23:53:16",
-      "executable": true,
-      "blocked_reason": ""
+      "confidence": 3
     },
     {
       "code": "300750",
@@ -43,12 +33,7 @@
       "stop": null,
       "invalid_if": "沪深300 未收复 120 日均线前不开仓；毛利率连续两季下滑则移出观察",
       "horizon": "预案：波段 2-4 周",
-      "confidence": 3,
-      "approval": "approved",
-      "approval_note": "",
-      "approved_at": "2026-08-22T23:53:13",
-      "executable": true,
-      "blocked_reason": ""
+      "confidence": 3
     },
     {
       "code": "600519",
@@ -59,12 +44,7 @@
       "stop": null,
       "invalid_if": "合同负债等前瞻指标未回升前不评估入场",
       "horizon": "季度级观察",
-      "confidence": 3,
-      "approval": "approved",
-      "approval_note": "",
-      "approved_at": "2026-08-22T23:53:17",
-      "executable": true,
-      "blocked_reason": ""
+      "confidence": 3
     },
     {
       "code": "000063",
@@ -75,12 +55,7 @@
       "stop": null,
       "invalid_if": "净利下滑趋势未见底、中报利空未消化（≥5 个交易日）前任何抄底提案无效",
       "horizon": "回避",
-      "confidence": 4,
-      "approval": "approved",
-      "approval_note": "",
-      "approved_at": "2026-08-22T23:53:18",
-      "executable": true,
-      "blocked_reason": ""
+      "confidence": 4
     }
   ],
   "trader_summary": "今日零操作：风控空仓状态下空仓即最优头寸；观察排序 平安>招行>宁德>茅台>中兴，待沪深300 收复 120 日线后优先评估平安、招行；下周一（8/24）只看不动，验证中兴利空消化与 120 日线攻防。",

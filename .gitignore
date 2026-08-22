@@ -19,5 +19,9 @@ kde_levels/out/event_study.csv
 quant-x-monitor/config.json
 quant-x-monitor/state.json
 
+# 实盘执行层：凭证与台账不入库
+execution/config.json
+execution/*.db
+
 # 回测报告产物（可重算）
 reports/

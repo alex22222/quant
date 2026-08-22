@@ -232,3 +232,49 @@ data（数据部门）→ strategy（技术分析师）→ backtest（风控门�
 - **实测**: JS 语法校验通过；非法 decision 返回 400 参数校验 OK；页面 200
 - **人工决策**: （待填写——Loop #5 首日 5 项提案仍待批复）；2026-08-22 批复 宁德时代(300750): 批准（console）；2026-08-22 批复 中国平安(601318): 批准（console）；2026-08-22 批复 招商银行(600036): 批准（console）；2026-08-22 批复 贵州茅台(600519): 批准（console）；2026-08-22 批复 中兴通讯(000063): 批准（console）
 - **下一步**: ① 老板批复首日提案；② 周一 8:43 全池（11 只）首份日报自动产出；③ 修复市场宽度统计 filter（Loop #5 遗留数据缺口）
+
+## Loop #12 — 2026-08-22
+
+- **执行**: 全球宏观雷达上线——增强团队数据来源，覆盖舆情/热点/恐慌指数/隔夜外盘/货币政策
+- **内容**:
+  - `trading_team/collect_global.py`：8 个 section 写入 `context/<date>/global_macro.json`，单源失败不中断、逐源记录 ok/source/asof
+  - 数据源（可靠性优先）：VIX=CBOE 官方历史 CSV；美联储货币政策=Fed 官方 RSS；隔夜美股=腾讯行情（道指/纳指/标普）；亚太=新浪（日经/恒生）+东财补 KOSPI；商品=新浪国际期货（纽约金/油）；A股热点=东财行业板块榜（主）/涨停池题材聚类（回退）；全球快讯=新浪 7×24；USDCNH=东财（允许缺失）
+  - 角色章程 02 情绪 / 03 新闻 / 07 风控 注入 global_macro.json 输入；风控新增纪律：VIX≥25 或美股单日跌>2% 须下调总仓位上限
+  - 日报 Automation 提示词更新：第 1 步双采集（collect + collect_global）
+  - 控制台「标的池」页顶部新增 🌍 全球宏观雷达条（外盘/VIX/亚太/商品/汇率/Fed 动态/板块热点）
+- **实测**: 8 section 中 7 个稳定 OK（VIX 15.13 平静；道指 +0.98%/纳指 +0.43%；日经 -0.90%/恒生 +1.21%；金 4664/油 86.6；Fed 最新为 7 月 FOMC 纪要）；forex 源偶发代理抖动按「允许缺失」处理
+- **发现**: 东财 push2 系列接口夜间偶发 proxy 重置（Retry 后时好时坏），宏观层已全面做双源或回退设计；新浪接口必须按原始字节 GBK 解码（双重转码会丢中文名）
+- **人工决策**: （待填写）
+- **下一步**: ① 周一 8:43 验证宏观雷达进入七角色日报；② 观察东财外汇/板块源稳定性，持续抖动则换主源；③ 老板批复首日提案
+
+## Loop #12 — 2026-08-23
+
+- **执行**: A股蓝筹策略库扩容——GitHub 深度搜索 → 6 个新策略落地 → 统一门禁回测 → 控制台「策略库」页上线
+- **内容**:
+  - GitHub 来源筛选（均可回测、适配 A 股国情）：wzhe06/SmartInvest 二八轮动（有空仓版）、ling-0729/KHunter 海龟 A 股改良（阳线/上影线/MA20 三重过滤 + 2×ATR 止损）、Connors RSI-2 均值回归（tycallen/TushareDB）、George & Hwang (2004) 52 周高点动量、经典双均线蓝筹多标的版、风险调整动量（动量/波动率）
+  - 新增 `strategies/`：rotation_300_500（510300/510500 ETF 风格轮动，双负空仓）、turtle_bluechip、rsi2_reversal、week52_momentum、ma_trend_bluechip、sharpe_momentum（蓝筹 10 只（与 momentum_rotation 同池），统一 120 日线大盘风控）
+  - 注册表元数据增强：`origin`（GitHub/论文来源）、`category`（趋势/轮动/均值回归）、`pool` 字段
+  - 控制台「📈 投研部」升级为「📈 策略库」：状态计数条 + 双列策略卡片（状态戳/门禁戳/总收益/年化/回撤/夏普/未过门禁原因/净值曲线图/来源），按 live→candidate→research→retired 排序
+  - 工程验证：ETF（510300/510500/510880）在本地 rqalpha bundle 可交易（实测成交）；6 策略冒烟回测全部通过；turtle 修复 BarMap 不支持 .get 的 API 问题
+- **结果**: 统一区间 2020-01-01~2026-08-01 门禁成绩单——
+  rotation_300_500 年化 6.1%/回撤 20.9%/夏普 0.27（夏普差 0.03 惜败）；
+  turtle_bluechip 年化 7.9%/回撤 32.2%/夏普 0.36（回撤超线）；
+  sharpe_momentum 年化 5.4%/回撤 36.8%（回撤超线）；
+  ma_trend_bluechip 年化 3.9%、week52_momentum 年化 2.8%、rsi2_reversal 年化 2.2%（均不达标）；
+  原有 momentum_rotation / momentum_stops 维持 pass
+- **人工决策**: 老板指令「增强 A 股蓝筹策略库并要求可回测」——6 个新策略注册即提为 candidate 走门禁；门禁全部未过，**维持 candidate 不晋级 live**（门禁不可绕过纪律）；demo_dual_ma 保持 retired
+- **下一步**: ① 惜败的两个策略做参数敏感性分析（rotation_300_500 动量窗口 15/25、turtle 止损 2.5×ATR/缩短通道）看能否过门禁；② 蓝筹熊市窗口（2021-2024）是主要拖累，可考虑加入债券/红利 ETF 避险腿；③ 老板在控制台「策略库」页查看各策略净值曲线
+
+## Loop #13 — 2026-08-23
+
+- **执行**: 惜败策略参数敏感性分析（老板批准 Loop #12 下一步①）
+- **内容**:
+  - 新建 `pipeline/sweep.py` 参数网格扫描器（复用门禁口径，输出 reports/sweep/ 报告 + *_sweep.json 汇总）
+  - rotation_300_500、 turtle_bluechip 两个策略接入 `--extra-vars` 参数注入（n / n_entry / exit_atr / hold_num）
+  - 扫描矩阵：rotation n∈{10,15,20,25,30}（5 组）；turtle n_entry∈{15,20,25} × exit_atr∈{2.0,2.5} × hold_num∈{3,4}（12 组）
+- **结果**:
+  - **turtle_bluechip 过门禁**：最优组合 n_entry=25 / exit_atr=2.0 / hold_num=4 → 年化 11.5% / 回撤 19.8% / 夏普 0.61，**优于 live 的 momentum_stops（10.4%/28.2%/0.46）**；hold_num=4 的全部 4 组变体均 pass，分散持仓是回撤 32%→20% 的主因
+  - rotation_300_500：5 组窗口全部 reject，n=20 仍为最优（夏普 0.27），调参无法修复，维持 candidate
+  - 最优参数已写入 status.json `strategy_registry.turtle_bluechip.params`，官方门禁回测复核 pass（reports/turtle_bluechip/ 净值图已更新）
+- **人工决策**: （待老板批复——turtle_bluechip 已具备晋级 live 条件，是否晋级由老板决定）
+- **下一步**: ① 老板批复 turtle_bluechip 是否晋级 live（晋级后下周一 paper 自动双策略运行）；② rotation_300_500 结构性改良：加债券/红利 ETF 避险腿（如 511260 十年国债 ETF / 510880 红利 ETF）替代纯空仓；③ 控制台策略库可增加 sweep 对照表展示

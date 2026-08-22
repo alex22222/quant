@@ -20,14 +20,20 @@
     },
     "strategy": {
       "status": "ok",
-      "started_at": "2026-08-22T21:24:53+08:00",
-      "finished_at": "2026-08-22T21:24:53+08:00",
+      "started_at": "2026-08-23T00:11:47+08:00",
+      "finished_at": "2026-08-23T00:11:47+08:00",
       "elapsed_sec": 0.0,
       "result": {
-        "total": 4,
+        "total": 10,
         "by_state": {
           "research": [
-            "reversal-during-earnings-announcements"
+            "reversal-during-earnings-announcements",
+            "ma_trend_bluechip",
+            "rotation_300_500",
+            "rsi2_reversal",
+            "sharpe_momentum",
+            "turtle_bluechip",
+            "week52_momentum"
           ],
           "candidate": [
             "momentum_rotation"
@@ -44,9 +50,9 @@
     },
     "backtest": {
       "status": "ok",
-      "started_at": "2026-08-22T21:24:53+08:00",
-      "finished_at": "2026-08-22T21:25:14+08:00",
-      "elapsed_sec": 21.0,
+      "started_at": "2026-08-23T00:28:16+08:00",
+      "finished_at": "2026-08-23T00:28:57+08:00",
+      "elapsed_sec": 41.1,
       "result": {
         "gate_thresholds": {
           "annual_min": 0.05,
@@ -73,6 +79,75 @@
             "gate": "pass",
             "reasons": [],
             "report": "reports/momentum_stops"
+          },
+          "ma_trend_bluechip": {
+            "total_ret": 0.2756162549999994,
+            "annual": 0.03923456505234379,
+            "max_dd": 0.2723002170677897,
+            "sharpe": 0.1397011280668443,
+            "gate": "reject",
+            "reasons": [
+              "年化 3.9% < 5%",
+              "夏普 0.14 < 0.3"
+            ],
+            "report": "reports/ma_trend_bluechip"
+          },
+          "rotation_300_500": {
+            "total_ret": 0.4538227984000005,
+            "annual": 0.06094263414432688,
+            "max_dd": 0.2094163063882366,
+            "sharpe": 0.2708988035260781,
+            "gate": "reject",
+            "reasons": [
+              "夏普 0.27 < 0.3"
+            ],
+            "report": "reports/rotation_300_500"
+          },
+          "rsi2_reversal": {
+            "total_ret": 0.1497579120999994,
+            "annual": 0.02230724704409881,
+            "max_dd": 0.2435125751844295,
+            "sharpe": -0.002176571694876468,
+            "gate": "reject",
+            "reasons": [
+              "年化 2.2% < 5%",
+              "夏普 -0.00 < 0.3"
+            ],
+            "report": "reports/rsi2_reversal"
+          },
+          "sharpe_momentum": {
+            "total_ret": 0.3926653590000002,
+            "annual": 0.05375863403824566,
+            "max_dd": 0.3677323205171162,
+            "sharpe": 0.2213438383901097,
+            "gate": "reject",
+            "reasons": [
+              "回撤 36.8% > 30%",
+              "夏普 0.22 < 0.3"
+            ],
+            "report": "reports/sharpe_momentum"
+          },
+          "turtle_bluechip": {
+            "total_ret": 0.9924447130000003,
+            "annual": 0.1151436856626271,
+            "max_dd": 0.1977085194700455,
+            "sharpe": 0.6114022918532026,
+            "gate": "pass",
+            "reasons": [],
+            "report": "reports/turtle_bluechip"
+          },
+          "week52_momentum": {
+            "total_ret": 0.1933393410000004,
+            "annual": 0.02833787757280493,
+            "max_dd": 0.3087449789999998,
+            "sharpe": 0.07322233676584222,
+            "gate": "reject",
+            "reasons": [
+              "年化 2.8% < 5%",
+              "回撤 30.9% > 30%",
+              "夏普 0.07 < 0.3"
+            ],
+            "report": "reports/week52_momentum"
           }
         }
       }
@@ -102,7 +177,7 @@
       }
     }
   },
-  "updated_at": "2026-08-22T21:25:14+08:00",
+  "updated_at": "2026-08-23T00:28:57+08:00",
   "strategy_registry": {
     "demo_dual_ma": {
       "state": "retired",
@@ -116,7 +191,10 @@
       "file": "strategies/momentum_rotation.py",
       "summary": "多股票动量轮动策略 股票池：10 只高流动性大盘股（覆盖消费/金融/新能源/公用事业） 规则： 1. 每月第一个交易日调仓 2. 计算每只股票过去 20 个交易日的动量（区间涨幅） 3. 等权买入动量最强的 3 只 4. 风控：沪深300 ",
       "params": {},
-      "registered_at": "2026-08-22T18:01:13+08:00"
+      "registered_at": "2026-08-22T18:01:13+08:00",
+      "origin": "自研",
+      "category": "动量轮动",
+      "pool": "蓝筹10只"
     },
     "momentum_stops": {
       "state": "live",
@@ -125,7 +203,10 @@
       "params": {
         "stop": "none"
       },
-      "registered_at": "2026-08-22T18:01:13+08:00"
+      "registered_at": "2026-08-22T18:01:13+08:00",
+      "origin": "自研（momentum_rotation 止损对照组）",
+      "category": "动量轮动",
+      "pool": "蓝筹10只"
     },
     "reversal-during-earnings-announcements": {
       "state": "research",
@@ -133,7 +214,79 @@
       "summary": "",
       "params": {},
       "registered_at": "2026-08-22T18:01:13+08:00"
+    },
+    "ma_trend_bluechip": {
+      "state": "candidate",
+      "file": "strategies/ma_trend_bluechip.py",
+      "summary": "双均线趋势跟随（蓝筹多标的版） 来源：经典 MA 金叉死叉体系（GitHub A股双均线实现的蓝筹增强版，替代已退役的 demo_dual_ma 单标的版） 股票池：10 只高流动性蓝筹（与 momentum_rotation 同池） 规则",
+      "params": {},
+      "registered_at": "2026-08-23T00:11:47+08:00",
+      "source": "github",
+      "origin": "经典双均线体系（蓝筹多标的增强）",
+      "category": "趋势跟随",
+      "pool": "蓝筹10只"
+    },
+    "rotation_300_500": {
+      "state": "candidate",
+      "file": "strategies/rotation_300_500.py",
+      "summary": "二八轮动（有空仓版）· 蓝筹风格轮动 来源：GitHub wzhe06/SmartInvest（王喆《程序化交易实战》配套），A股经典风格轮动 标的：510300.XSHG 沪深300ETF（蓝筹腿）/ 510500.XSHG 中证500E",
+      "params": {},
+      "registered_at": "2026-08-23T00:11:47+08:00",
+      "source": "github",
+      "origin": "github.com/wzhe06/SmartInvest（王喆《程序化交易实战》）",
+      "category": "风格轮动",
+      "pool": "沪深300ETF/中证500ETF",
+      "note": "动量窗口扫描 n∈{10,15,20,25,30} 无过门禁组合，n=20 仍为最优"
+    },
+    "rsi2_reversal": {
+      "state": "candidate",
+      "file": "strategies/rsi2_reversal.py",
+      "summary": "RSI-2 超跌反弹（蓝筹均值回归） 来源：Larry Connors RSI-2 经典均值回归体系（GitHub 多个 A股实现复用，如 TushareDB oversold_rebound） 逻辑：大盘股长期向上、短期超跌后回归均值，是",
+      "params": {},
+      "registered_at": "2026-08-23T00:11:47+08:00",
+      "source": "github",
+      "origin": "Connors RSI-2 体系 · github.com/tycallen/TushareDB",
+      "category": "均值回归",
+      "pool": "蓝筹10只"
+    },
+    "sharpe_momentum": {
+      "state": "candidate",
+      "file": "strategies/sharpe_momentum.py",
+      "summary": "夏普动量轮动（风险调整动量，蓝筹版） 来源：风险调整动量（Risk-adjusted Momentum）体系，GitHub 多因子社区常用复合因子 （动量收益 / 波动率），较纯动量在 A股蓝筹上回撤更小、胜率更高 股票池：10 只高流动性",
+      "params": {},
+      "registered_at": "2026-08-23T00:11:47+08:00",
+      "source": "github",
+      "origin": "风险调整动量因子（动量/波动率）",
+      "category": "动量轮动",
+      "pool": "蓝筹10只"
+    },
+    "turtle_bluechip": {
+      "state": "candidate",
+      "file": "strategies/turtle_bluechip.py",
+      "summary": "海龟突破（A股蓝筹改良版）· 趋势跟踪 来源：GitHub ling-0729/KHunter turtle_strategy（A股实战改良），经典唐奇安通道突破 股票池：10 只高流动性蓝筹（与 momentum_rotation 同池）",
+      "params": {
+        "n_entry": 25,
+        "exit_atr": 2.0,
+        "hold_num": 4
+      },
+      "registered_at": "2026-08-23T00:11:47+08:00",
+      "source": "github",
+      "origin": "github.com/ling-0729/KHunter 海龟 A股改良版",
+      "category": "趋势突破",
+      "pool": "蓝筹10只",
+      "note": "参数扫描最优（12组网格）：分散持仓 3→4 为回撤改善主因"
+    },
+    "week52_momentum": {
+      "state": "candidate",
+      "file": "strategies/week52_momentum.py",
+      "summary": "52周高点动量轮动（蓝筹版） 来源：George & Hwang (2004) \"The 52-Week High and Momentum Investing\"， GitHub 量化社区广泛复现；锚定效应使「距52周高点越近」的股票后续动",
+      "params": {},
+      "registered_at": "2026-08-23T00:11:47+08:00",
+      "source": "github",
+      "origin": "George & Hwang (2004) 52周高点动量",
+      "category": "动量轮动",
+      "pool": "蓝筹10只"
     }
   },
-  "last_loop_at": "2026-08-22T21:25:14+08:00"
+  "last_loop_at": "2026-08-23T00:28:57+08:00"
 }

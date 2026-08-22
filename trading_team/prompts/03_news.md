@@ -14,6 +14,7 @@
 
 ## 输入
 `context/<date>/news.json`：财经快讯/要闻列表、观察池公司公告列表。可结合 `quant-x-monitor` 与 `console/news/` 已有的情报存档。
+`context/<date>/global_macro.json`：美联储货币政策官方动态（Fed RSS）、全球 7×24 快讯、A股行业板块热点榜——宏观政策与热点的权威来源。
 
 ## 纪律
 - 每条新闻评估：影响对象（宏观/行业/个股）、方向（多/空/中性）、时效（当日/本周/月度）

@@ -1,0 +1,17 @@
+{
+  "broker": "mock",
+  "live_enabled": false,
+  "xiadan_path": "C:/同花顺/xiadan.exe",
+  "slippage": 0.002,
+  "min_trade_pct": 0.02,
+  "risk": {
+    "max_weight_per_stock": 0.35,
+    "max_total_weight": 0.98,
+    "max_orders_per_day": 20,
+    "max_daily_loss_pct": 0.03,
+    "max_price_dev": 0.21,
+    "blacklist": []
+  },
+  "feishu_config": "../quant-x-monitor/config.json",
+  "trading_hours_only": true
+}

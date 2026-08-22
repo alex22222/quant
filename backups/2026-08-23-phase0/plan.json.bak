@@ -1,0 +1,56 @@
+{
+  "date": "2026-08-22",
+  "data_asof": "2026-08-21",
+  "proposals": [
+    {
+      "code": "601318",
+      "name": "中国平安",
+      "direction": "买入",
+      "position_pct": "15%（8%+7% 分批）",
+      "entry": "53.5 / 回踩 52.2",
+      "stop": 50.6,
+      "horizon": "2-4 周",
+      "note": "风控降仓后放行；高开>3% 不追"
+    },
+    {
+      "code": "300750",
+      "name": "宁德时代",
+      "direction": "条件买入",
+      "position_pct": "15%",
+      "entry": "放量突破 408.6 回踩不破",
+      "stop": 388.0,
+      "horizon": "2-4 周",
+      "note": "风控附条件：指数大跌日顺延一日执行"
+    },
+    {
+      "code": "600036",
+      "name": "招商银行",
+      "direction": "观望",
+      "position_pct": "0%",
+      "entry": "—",
+      "stop": null,
+      "horizon": "—",
+      "note": "中报数据缺口未补"
+    },
+    {
+      "code": "600519",
+      "name": "贵州茅台",
+      "direction": "回避",
+      "position_pct": "0%",
+      "entry": "—",
+      "stop": null,
+      "horizon": "—",
+      "note": "站回 MA20(1322) 且增速企稳后重估"
+    },
+    {
+      "code": "000063",
+      "name": "中兴通讯",
+      "direction": "回避",
+      "position_pct": "0%",
+      "entry": "—",
+      "stop": null,
+      "horizon": "—",
+      "note": "中报利空定价完毕前不碰"
+    }
+  ]
+}
