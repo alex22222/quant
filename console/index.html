@@ -50,12 +50,26 @@
         color: var(--dim); background: var(--panel); border: 1px solid var(--border);
         border-radius: 10px; padding: 14px 16px; max-height: 300px; overflow: auto; }
   .err { color: var(--fail); font-size: 12px; }
+  .org-ceo { text-align: center; font-weight: 600; padding: 8px; border-bottom: 1px dashed var(--border); margin-bottom: 12px; }
+  .org-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .org-node { border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; position: relative; }
+  .org-node .role { font-weight: 600; font-size: 13px; }
+  .org-node .duty { color: var(--dim); font-size: 11px; margin-top: 4px; min-height: 44px; }
+  .org-node .holder { font-size: 11px; color: var(--accent); margin-top: 4px; }
+  .org-phase3 { margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border); color: var(--dim); font-size: 11px; text-align: center; }
   footer { color: var(--dim); font-size: 11px; margin-top: 28px; text-align: center; }
 </style>
 </head>
 <body>
 <h1>量化闭环控制台 <small id="updated">加载中…</small></h1>
 <div class="flow">data <b>数据部门</b> → strategy <b>分析师</b> → backtest <b>风控门禁</b> → paper <b>交易员</b> → review <b>投委会</b></div>
+
+<h2>虚拟公司组织架构 <span style="font-weight:400;text-transform:none;letter-spacing:0">（参考 TradingAgents，v1 为确定性代码实现）</span></h2>
+<div class="card">
+  <div class="org-ceo">👤 老板（你） · 最终决策与门禁审批</div>
+  <div class="org-row" id="org"></div>
+  <div class="org-phase3">Phase 3 待入职：多头研究员 / 空头研究员（LLM 辩论）· 新闻分析师 · 情绪分析师 · 基金经理 Agent</div>
+</div>
 
 <div class="grid" id="stages"></div>
 
@@ -92,6 +106,18 @@ async function refresh() {
   catch(e) { $("updated").textContent = "status.json 读取失败（先跑 pipeline.run）"; return; }
   $("updated").textContent = "更新于 " + (st.updated_at || "—");
   const stages = st.stages || {};
+  const reg0 = st.strategy_registry || {};
+  const liveNow = Object.keys(reg0).filter(k => reg0[k].state === "live");
+  const paper0 = stages.paper?.result || {};
+  const ORG = [
+    ["🗄️", "数据部门", "A股日线数据采集、更新与新鲜度保障", `${stages.data?.result?.stocks ?? "—"} 只 · 最新 ${stages.data?.result?.latest_trading_day ?? "—"}`],
+    ["📈", "技术分析师", "维护策略注册表与状态机 research→live", `${Object.keys(reg0).length} 个策略 · live: ${liveNow.join(",") || "无"}`],
+    ["🛡️", "风控委员会", "统一区间回测 + 门禁（年化>5% 回撤<30% 夏普>0.3）", Object.entries(stages.backtest?.result?.results || {}).map(([k,v])=>`${k}:${v.gate||"?"}`).join(" ") || "未执行"],
+    ["💼", "交易员", "paper 账户执行调仓、SQLite 台账", paper0.equity != null ? `净值 ¥${Number(paper0.equity).toLocaleString()}` : "未记账"],
+    ["📋", "投委会", "复盘报告、AGENT.md 迭代日志", stages.review?.result ? `Loop #${stages.review.result.loop_no}` : "未执行"],
+  ];
+  $("org").innerHTML = ORG.map(([icon, role, duty, holder]) =>
+    `<div class="org-node"><div class="role">${icon} ${role}</div><div class="duty">${duty}</div><div class="holder">${holder}</div></div>`).join("");
   $("stages").innerHTML = ["data","strategy","backtest","paper","review"].map(n => {
     const s = stages[n] || {};
     const status = s.status || "idle";
