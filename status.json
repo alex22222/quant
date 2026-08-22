@@ -4,24 +4,24 @@
   "stages": {
     "data": {
       "status": "ok",
-      "started_at": "2026-08-22T18:01:13+08:00",
-      "finished_at": "2026-08-22T18:01:13+08:00",
-      "elapsed_sec": 0.1,
+      "started_at": "2026-08-22T21:20:42+08:00",
+      "finished_at": "2026-08-22T21:24:53+08:00",
+      "elapsed_sec": 250.4,
       "result": {
         "bundle_path": "/Users/henry/.rqalpha/bundle",
         "stocks": 5516,
         "range": "20050104 ~ 20260731",
         "latest_trading_day": "20260731",
         "freshness_days": 22,
-        "update_triggered": false,
-        "updated": false,
+        "update_triggered": true,
+        "updated": true,
         "note": "月度包通常在月初更新；freshness_days > 35 时建议 --update"
       }
     },
     "strategy": {
       "status": "ok",
-      "started_at": "2026-08-22T18:01:13+08:00",
-      "finished_at": "2026-08-22T18:01:13+08:00",
+      "started_at": "2026-08-22T21:24:53+08:00",
+      "finished_at": "2026-08-22T21:24:53+08:00",
       "elapsed_sec": 0.0,
       "result": {
         "total": 4,
@@ -44,9 +44,9 @@
     },
     "backtest": {
       "status": "ok",
-      "started_at": "2026-08-22T18:01:13+08:00",
-      "finished_at": "2026-08-22T18:01:22+08:00",
-      "elapsed_sec": 9.3,
+      "started_at": "2026-08-22T21:24:53+08:00",
+      "finished_at": "2026-08-22T21:25:14+08:00",
+      "elapsed_sec": 21.0,
       "result": {
         "gate_thresholds": {
           "annual_min": 0.05,
@@ -79,60 +79,30 @@
     },
     "paper": {
       "status": "ok",
-      "started_at": "2026-08-22T18:03:23+08:00",
-      "finished_at": "2026-08-22T18:03:23+08:00",
-      "elapsed_sec": 0.2,
+      "started_at": "2026-08-22T21:25:14+08:00",
+      "finished_at": "2026-08-22T21:25:14+08:00",
+      "elapsed_sec": 0.0,
       "result": {
-        "day": "2026-07-31",
-        "note": "调仓日",
-        "live_strategies": [
-          "momentum_stops"
-        ],
-        "market_ok_120ma": false,
-        "trades": [],
-        "cash": 100000.0,
+        "note": "2026-07-31 已记账，幂等跳过",
         "equity": 100000.0,
-        "cum_return": 0.0,
-        "max_drawdown": 0.0,
-        "positions": {},
-        "momentum_top5": [
-          {
-            "code": "601899.XSHG",
-            "mom": 0.1844
-          },
-          {
-            "code": "600519.XSHG",
-            "mom": 0.1307
-          },
-          {
-            "code": "000333.XSHE",
-            "mom": 0.1237
-          },
-          {
-            "code": "601318.XSHG",
-            "mom": 0.1184
-          },
-          {
-            "code": "600900.XSHG",
-            "mom": 0.1064
-          }
-        ],
-        "assumption": "收盘价成交、免手续费、无 T+1 限制（v1 简化）"
+        "live": [
+          "momentum_stops"
+        ]
       }
     },
     "review": {
       "status": "ok",
-      "started_at": "2026-08-22T18:03:23+08:00",
-      "finished_at": "2026-08-22T18:03:23+08:00",
+      "started_at": "2026-08-22T21:25:14+08:00",
+      "finished_at": "2026-08-22T21:25:14+08:00",
       "elapsed_sec": 0.0,
       "result": {
         "report": "reviews/2026-08-22.md",
-        "loop_no": 2,
+        "loop_no": 3,
         "agent_md_updated": true
       }
     }
   },
-  "updated_at": "2026-08-22T18:03:23+08:00",
+  "updated_at": "2026-08-22T21:25:14+08:00",
   "strategy_registry": {
     "demo_dual_ma": {
       "state": "retired",
@@ -165,5 +135,5 @@
       "registered_at": "2026-08-22T18:01:13+08:00"
     }
   },
-  "last_loop_at": "2026-08-22T18:03:23+08:00"
+  "last_loop_at": "2026-08-22T21:25:14+08:00"
 }
