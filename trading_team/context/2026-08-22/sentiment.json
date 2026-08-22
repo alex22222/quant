@@ -1,0 +1,127 @@
+{
+  "trade_date": "2026-08-21",
+  "zt_pool": {
+    "date": "2026-08-21",
+    "zt_count": 54,
+    "samples": [
+      {
+        "name": "深中华A",
+        "code": "000017",
+        "reason": "饰品"
+      },
+      {
+        "name": "双鹭药业",
+        "code": "002038",
+        "reason": "化学制药"
+      },
+      {
+        "name": "达 意 隆",
+        "code": "002209",
+        "reason": "专用设备"
+      },
+      {
+        "name": "汉森制药",
+        "code": "002412",
+        "reason": "中药Ⅱ"
+      },
+      {
+        "name": "新华百货",
+        "code": "600785",
+        "reason": "一般零售"
+      },
+      {
+        "name": "键凯科技",
+        "code": "688356",
+        "reason": "化学制药"
+      },
+      {
+        "name": "中 关 村",
+        "code": "000931",
+        "reason": "化学制药"
+      },
+      {
+        "name": "杭齿前进",
+        "code": "601177",
+        "reason": "通用设备"
+      },
+      {
+        "name": "贝瑞基因",
+        "code": "000710",
+        "reason": "医疗服务"
+      },
+      {
+        "name": "楚天龙",
+        "code": "003040",
+        "reason": "通信设备"
+      },
+      {
+        "name": "哈森股份",
+        "code": "603958",
+        "reason": "服装家纺"
+      },
+      {
+        "name": "福华尚纬",
+        "code": "603333",
+        "reason": "电网设备"
+      },
+      {
+        "name": "亿利达",
+        "code": "002686",
+        "reason": "通用设备"
+      },
+      {
+        "name": "和远气体",
+        "code": "002971",
+        "reason": "化学制品"
+      },
+      {
+        "name": "科森科技",
+        "code": "603626",
+        "reason": "消费电子"
+      }
+    ]
+  },
+  "dt_pool": {
+    "date": "2026-08-21",
+    "dt_count": 13
+  },
+  "breadth": {
+    "up_gt5": 5552,
+    "up": null,
+    "down": null,
+    "down_gt5": null,
+    "flat": null
+  },
+  "watchlist_sentiment": {
+    "600519": {
+      "turnover_rate": 0.27,
+      "volume_ratio": 0.8,
+      "pct_chg": -1.45
+    },
+    "600036": {
+      "turnover_rate": 0.25,
+      "volume_ratio": 0.69,
+      "pct_chg": 0.1
+    },
+    "601318": {
+      "turnover_rate": 1.05,
+      "volume_ratio": 1.85,
+      "pct_chg": 2.32
+    },
+    "300750": {
+      "turnover_rate": 0.48,
+      "volume_ratio": 1.11,
+      "pct_chg": 1.6
+    },
+    "000063": {
+      "turnover_rate": 1.21,
+      "volume_ratio": 0.39,
+      "pct_chg": -0.18
+    },
+    "000300": {
+      "turnover_rate": 0.51,
+      "volume_ratio": 0.84,
+      "pct_chg": 0.57
+    }
+  }
+}

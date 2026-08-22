@@ -1,0 +1,64 @@
+{
+  "date": "2026-08-22",
+  "market_ok": false,
+  "plans": [
+    {
+      "code": "601318",
+      "name": "中国平安",
+      "direction": "观望",
+      "position_pct": 0,
+      "entry": null,
+      "stop": null,
+      "invalid_if": "沪深300 未收复 120 日均线（4741）前任何开仓无效；或投资收益率继续恶化",
+      "horizon": "预案：中线 4-8 周",
+      "confidence": 3
+    },
+    {
+      "code": "600036",
+      "name": "招商银行",
+      "direction": "观望",
+      "position_pct": 0,
+      "entry": null,
+      "stop": null,
+      "invalid_if": "沪深300 未收复 120 日均线前不开仓；8/31 中报不良/拨备显著恶化则移出观察",
+      "horizon": "预案：中线 4-8 周",
+      "confidence": 3
+    },
+    {
+      "code": "300750",
+      "name": "宁德时代",
+      "direction": "观望",
+      "position_pct": 0,
+      "entry": null,
+      "stop": null,
+      "invalid_if": "沪深300 未收复 120 日均线前不开仓；毛利率连续两季下滑则移出观察",
+      "horizon": "预案：波段 2-4 周",
+      "confidence": 3
+    },
+    {
+      "code": "600519",
+      "name": "贵州茅台",
+      "direction": "观望",
+      "position_pct": 0,
+      "entry": null,
+      "stop": null,
+      "invalid_if": "合同负债等前瞻指标未回升前不评估入场",
+      "horizon": "季度级观察",
+      "confidence": 3
+    },
+    {
+      "code": "000063",
+      "name": "中兴通讯",
+      "direction": "观望（回避）",
+      "position_pct": 0,
+      "entry": null,
+      "stop": null,
+      "invalid_if": "净利下滑趋势未见底、中报利空未消化（≥5 个交易日）前任何抄底提案无效",
+      "horizon": "回避",
+      "confidence": 4
+    }
+  ],
+  "trader_summary": "今日零操作：风控空仓状态下空仓即最优头寸；观察排序 平安>招行>宁德>茅台>中兴，待沪深300 收复 120 日线后优先评估平安、招行；下周一（8/24）只看不动，验证中兴利空消化与 120 日线攻防。",
+  "risk_verdict": "批准全部观望计划（5/5 通过，无修改无否决）；组合最大回撤预算为 0。核心提示：数据包截至 7/31 与最新市况存在约三周时滞（茅台快照偏差 -5.7%），建议老板授权刷新数据后再评估任何开仓；风控解除后的前瞻仓位约束已记录（单票≤20%、金融合计≤30%、创业板高波动≤10%）。",
+  "pm_status": "pending"
+}

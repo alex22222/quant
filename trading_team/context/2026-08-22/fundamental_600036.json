@@ -1,0 +1,121 @@
+{
+  "financials": {
+    "reports": [
+      {
+        "report_date": "2026-03-31",
+        "eps": 1.49,
+        "revenue_yi": 869.4,
+        "net_profit_yi": 378.52,
+        "deducted_profit_yi": 377.95,
+        "revenue_yoy": 3.807715728767,
+        "profit_yoy": 1.517996030682,
+        "deducted_yoy": 1.774558380009,
+        "roe_weighted": 3.37,
+        "gross_margin": null,
+        "net_margin": 43.7635150679,
+        "debt_ratio": 90.4293934496
+      },
+      {
+        "report_date": "2025-12-31",
+        "eps": 5.7,
+        "revenue_yi": 3375.32,
+        "net_profit_yi": 1501.81,
+        "deducted_profit_yi": 1500.07,
+        "revenue_yoy": 0.013037500593,
+        "profit_yoy": 1.206272617612,
+        "deducted_yoy": 1.348548418699,
+        "roe_weighted": 13.44,
+        "gross_margin": null,
+        "net_margin": 44.7738288518,
+        "debt_ratio": 90.2000937529
+      },
+      {
+        "report_date": "2025-09-30",
+        "eps": 4.43,
+        "revenue_yi": 2514.2,
+        "net_profit_yi": 1137.72,
+        "deducted_profit_yi": 1136.9,
+        "revenue_yoy": -0.510072850591,
+        "profit_yoy": 0.519508057676,
+        "deducted_yoy": 0.607948461545,
+        "roe_weighted": 10.47,
+        "gross_margin": null,
+        "net_margin": 45.5560416832,
+        "debt_ratio": 89.9151499813
+      },
+      {
+        "report_date": "2025-06-30",
+        "eps": 2.89,
+        "revenue_yi": 1699.69,
+        "net_profit_yi": 749.3,
+        "deducted_profit_yi": 748.19,
+        "revenue_yoy": -1.720778282113,
+        "profit_yoy": 0.250190653305,
+        "deducted_yoy": 0.261310034305,
+        "roe_weighted": 6.925,
+        "gross_margin": null,
+        "net_margin": 44.3639722538,
+        "debt_ratio": 89.7539343569
+      }
+    ]
+  },
+  "announcements": [
+    {
+      "date": "2026-08-22",
+      "title": "招商银行:招商银行股份有限公司关于召开2026年中期业绩说明会的公告",
+      "columns": [
+        "其他"
+      ]
+    },
+    {
+      "date": "2026-08-21",
+      "title": "招商银行:招商银行股份有限公司关于董事任职资格核准的公告",
+      "columns": [
+        "高管人员任职变动"
+      ]
+    },
+    {
+      "date": "2026-08-19",
+      "title": "招商银行:[H股公告]招商银行股份有限公司董事会会议召开日期",
+      "columns": [
+        "其他"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "title": "招商银行:招商银行股份有限公司关于行长任职资格核准的公告",
+      "columns": [
+        "高管人员任职变动"
+      ]
+    },
+    {
+      "date": "2026-07-11",
+      "title": "招商银行:[H股公告]招商银行股份有限公司更换联席公司秘书",
+      "columns": [
+        "其他"
+      ]
+    },
+    {
+      "date": "2026-07-11",
+      "title": "招商银行:招商银行股份有限公司董事会决议公告",
+      "columns": [
+        "高管人员任职变动",
+        "董事会决议公告"
+      ]
+    },
+    {
+      "date": "2026-07-11",
+      "title": "招商银行:招商银行投资者关系管理制度(2026年修订)",
+      "columns": [
+        "管理办法/制度"
+      ]
+    },
+    {
+      "date": "2026-07-11",
+      "title": "招商银行:招商银行内幕信息及知情人管理制度(2026年修订)",
+      "columns": [
+        "管理办法/制度"
+      ]
+    }
+  ]
+}

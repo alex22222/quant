@@ -121,6 +121,7 @@
     <div class="mi" data-v="org">🏢 组织架构</div>
     <div class="mi" data-v="news">📰 量化新闻 <span class="st" id="nav-news"></span></div>
     <div class="menu-label">业务线（按流程）</div>
+    <div class="mi" data-v="meeting">🤖 晨会 · LLM团队 <span class="st" id="nav-meeting"></span></div>
     <div class="mi" data-v="data">🗄️ 数据部 <span class="st" id="nav-data"></span></div>
     <div class="mi" data-v="strategy">📈 投研部 <span class="st" id="nav-strategy"></span></div>
     <div class="mi" data-v="backtest">🛡️ 风控部 <span class="st" id="nav-backtest"></span></div>
@@ -147,7 +148,7 @@
     <div class="card">
       <div class="org-ceo">👤 老板（你） · 最终决策与门禁审批</div>
       <div class="org-row" id="org"></div>
-      <div class="org-phase3">Phase 3 待入职：多头研究员 / 空头研究员（LLM 辩论）· 新闻分析师 · 情绪分析师 · 基金经理 Agent</div>
+      <div class="org-phase3">Phase 3 已入职（晨会制）：基本面/情绪/新闻/技术分析师 · 多空研究员 · 交易员 · 风控经理 —— 见「🤖 晨会」菜单，老板终审后才可执行</div>
     </div>
     <div class="card">
       <div class="sub" style="margin-bottom:8px">运作规则（AGENT.md 摘要）</div>
@@ -156,6 +157,13 @@
         ③ 事实源：status.json（机器写）+ AGENT.md（共同写）④ 凭证永不入库 ⑤ 每次 Loop 必须留日志
       </div>
     </div>
+  </section>
+
+  <!-- 晨会 · LLM 交易团队 -->
+  <section class="view" id="v-meeting">
+    <div class="vhead"><h1>🤖 晨会 · LLM 交易团队</h1><p>TradingAgents 五角色：分析师 ×4 → 多空辩论 → 交易员 → 风控 · 产出交易提案，老板（PM）终审 · 每周六 10:17 自动召开</p></div>
+    <div id="meeting-latest">—</div>
+    <div class="card"><div class="sub" style="margin-bottom:8px">历史晨会</div><div id="meeting-list">—</div></div>
   </section>
 
   <!-- 数据部 -->
@@ -373,6 +381,39 @@ async function loadNews() {
 }
 loadNews();
 setInterval(loadNews, 30000);
+
+/* ── 晨会 · LLM 交易团队 ── */
+async function loadMeeting() {
+  let idx;
+  try { idx = await (await fetch("/trading_team/decisions/index.json?_=" + Date.now())).json(); }
+  catch(e) { $("meeting-latest").innerHTML = `<div class="card sub">尚未召开晨会（每周六 10:17 自动召开，或手动触发 Automation）</div>`; $("meeting-list").textContent = "—"; return; }
+  $("nav-meeting").innerHTML = `<span class="dot ${idx.length ? "ok" : "idle"}"></span>`;
+  $("meeting-list").innerHTML = idx.map(m =>
+    `<div class="kv"><span>${m.date}</span><b>${m.market_ok ? "允许开仓" : "风控观望"} · ${m.plan_count} 项计划 · ${m.pm_status === "pending" ? "待老板审批" : m.pm_status}</b></div>`).join("") || "—";
+  const latest = idx[0];
+  if (!latest) return;
+  try {
+    const d = await (await fetch(`/trading_team/decisions/${latest.date}/decision.json?_=` + Date.now())).json();
+    const plans = (d.plans || []).map(p =>
+      `<tr><td>${p.name||""} ${p.code||""}</td><td>${p.direction||""}</td><td class="num">${p.position_pct||"—"}</td><td class="num">${p.entry||"—"}</td><td class="num">${p.stop||"—"}</td><td style="color:var(--dim);font-size:12px">${p.invalid_if||""}</td><td class="num">${"★".repeat(p.confidence||0)||"—"}</td></tr>`).join("");
+    $("meeting-latest").innerHTML = `
+      <div class="grid2">
+        <div class="card"><div class="sub">最新晨会 · ${d.date}</div>
+          <div style="font-size:13px;margin-top:6px">${esc(d.trader_summary||"")}</div>
+          <div class="sub" style="margin-top:8px">风控裁决：${esc(d.risk_verdict||"—")}</div></div>
+        <div class="card"><div class="sub">PM 审批状态</div>
+          <div class="metric" style="font-size:18px;color:${d.pm_status==="pending"?"var(--run)":"var(--ok)"}">${d.pm_status==="pending"?"⏳ 待老板审批":esc(d.pm_status)}</div>
+          <div class="sub">审批方式：在 AGENT.md 最近 Loop 条目的「人工决策」中写明批准/否决</div></div>
+      </div>
+      <div class="card"><div class="sub" style="margin-bottom:8px">交易计划表</div>
+        <table><thead><tr><th>股票</th><th>方向</th><th>建议仓位</th><th>入场参考</th><th>止损</th><th>失效条件</th><th>信心</th></tr></thead><tbody>${plans}</tbody></table></div>
+      <div class="card"><div class="sub" style="margin-bottom:8px">晨会纪要 <a style="color:var(--accent)" href="/trading_team/decisions/${d.date}/meeting.md" target="_blank">查看原文</a></div>
+        <pre id="meeting-md">加载中…</pre></div>`;
+    try { $("meeting-md").textContent = await (await fetch(`/trading_team/decisions/${d.date}/meeting.md?_=` + Date.now())).text(); } catch(e) { $("meeting-md").textContent = "meeting.md 读取失败"; }
+  } catch(e) { $("meeting-latest").innerHTML = `<div class="card sub">decision.json 读取失败</div>`; }
+}
+loadMeeting();
+setInterval(loadMeeting, 30000);
 </script>
 </body>
 </html>

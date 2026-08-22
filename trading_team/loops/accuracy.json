@@ -1,0 +1,33 @@
+{
+  "说明": "交易团队结论准确率追踪。每日记录研究员综合评级与交易员计划，T+5 交易日由 collect 后对照实际走势计分。评分规则：评级方向与 5 日实际涨跌一致得 1 分，相反 0 分，中性且 |涨跌|<2% 得 1 分。角色 20 期滚动准确率 <50% 时在风控日报中降权。",
+  "created_at": "2026-08-22",
+  "entries": [
+    {
+      "date": "2026-08-22",
+      "trade_date_ref": "2026-08-21",
+      "verify_after": "2026-08-28",
+      "verified": false,
+      "ratings": {
+        "601318": {"rating": "看多", "confidence": 4, "ref_price": 53.35},
+        "300750": {"rating": "中性偏多", "confidence": 3, "ref_price": 391.15},
+        "600036": {"rating": "中性", "confidence": 3, "ref_price": 38.90},
+        "600519": {"rating": "看空", "confidence": 3, "ref_price": 1272.83},
+        "000063": {"rating": "看空", "confidence": 4, "ref_price": 33.78}
+      },
+      "trader_plan": {
+        "601318": {"action": "买入15%(风控降仓后)", "entry": "53.5/52.2", "stop": 50.60},
+        "300750": {"action": "条件买入15%", "entry": "突破408.6回踩", "stop": 388.00},
+        "600036": {"action": "观望"},
+        "600519": {"action": "回避"},
+        "000063": {"action": "回避"}
+      },
+      "result_5d": null,
+      "score": null
+    }
+  ],
+  "role_accuracy": {
+    "说明": "按角色聚合的 20 期滚动准确率，由 verify 脚本维护",
+    "fundamental": [], "sentiment": [], "news": [], "technical": [],
+    "researcher": [], "trader": [], "risk_manager": []
+  }
+}
