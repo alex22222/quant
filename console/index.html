@@ -91,6 +91,24 @@
   .kv:last-child { border-bottom: none; }
   .kv b { font-variant-numeric: tabular-nums; }
   footer { color: var(--dim); font-size: 11px; margin-top: 30px; }
+
+  /* 量化新闻 */
+  .news-wrap { display: flex; gap: 12px; align-items: flex-start; }
+  .news-list { width: 210px; flex: none; padding: 8px; max-height: 70vh; overflow: auto; }
+  .news-item { padding: 9px 10px; border-radius: 8px; cursor: pointer; margin-bottom: 2px; }
+  .news-item:hover { background: var(--bg); }
+  .news-item.active { background: var(--bg); box-shadow: inset 2px 0 0 var(--accent); }
+  .news-item .d { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .news-item .h { font-size: 11px; color: var(--dim); margin-top: 2px;
+                  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .news-body { flex: 1; min-height: 300px; }
+  .news-body h1 { font-size: 17px; margin-bottom: 6px; }
+  .news-body h2 { font-size: 14px; margin: 16px 0 6px; color: var(--accent); }
+  .news-body blockquote { color: var(--dim); font-size: 12px; border-left: 3px solid var(--border);
+                          padding-left: 10px; margin: 8px 0; }
+  .news-body li { margin: 7px 0 7px 18px; font-size: 13px; }
+  .news-body a { color: var(--accent); }
+  .news-body b, .news-body strong { color: var(--text); }
 </style>
 </head>
 <body>
@@ -101,6 +119,7 @@
     <div class="menu-label">总部</div>
     <div class="mi active" data-v="overview">📊 公司概览</div>
     <div class="mi" data-v="org">🏢 组织架构</div>
+    <div class="mi" data-v="news">📰 量化新闻 <span class="st" id="nav-news"></span></div>
     <div class="menu-label">业务线（按流程）</div>
     <div class="mi" data-v="data">🗄️ 数据部 <span class="st" id="nav-data"></span></div>
     <div class="mi" data-v="strategy">📈 投研部 <span class="st" id="nav-strategy"></span></div>
@@ -177,6 +196,15 @@
     <div class="vhead"><h1>📋 投委会（复盘）</h1><p>职责：复盘报告 + AGENT.md 迭代日志 · 每次 Loop 留痕</p></div>
     <div class="card"><div class="sub" style="margin-bottom:8px">最新复盘报告</div><pre id="review">—</pre></div>
     <div class="card"><div class="sub" style="margin-bottom:10px">Loop 迭代时间线（AGENT.md）</div><div id="loops">—</div></div>
+  </section>
+
+  <!-- 量化新闻 -->
+  <section class="view" id="v-news">
+    <div class="vhead"><h1>📰 量化新闻</h1><p>quant-x-monitor 每日 X 量化博主监控日报 · agent 按日总结 · 源存档 quant-x-monitor/reports/</p></div>
+    <div class="news-wrap">
+      <div class="card news-list" id="news-list">—</div>
+      <div class="card news-body" id="news-body">—</div>
+    </div>
   </section>
 
   <footer>控制台只读 · 每 30s 自动刷新 · 操作请用 CLI：.venv/bin/python -m pipeline.run</footer>
@@ -304,6 +332,47 @@ async function refresh() {
 }
 refresh();
 setInterval(refresh, 30000);
+
+/* ── 量化新闻 ── */
+let newsDate = null;
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+function md2html(md) {
+  return md.split("\n").map(line => {
+    let prefix = "", body = line;
+    if (line.startsWith("## ")) { prefix = "h2"; body = line.slice(3); }
+    else if (line.startsWith("# ")) { prefix = "h1"; body = line.slice(2); }
+    else if (line.startsWith("> ")) { prefix = "blockquote"; body = line.slice(2); }
+    else if (line.startsWith("- ")) { prefix = "li"; body = line.slice(2); }
+    let t = esc(body)
+      .replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+      .replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+    if (prefix) return `<${prefix}>${t}</${prefix}>`;
+    return line.trim() ? `<div style="font-size:13px;margin:6px 0">${t}</div>` : "";
+  }).join("\n");
+}
+async function showNews(date) {
+  newsDate = date;
+  document.querySelectorAll(".news-item").forEach(x =>
+    x.classList.toggle("active", x.dataset.d === date));
+  try {
+    const md = await (await fetch(`/console/news/${date}.md?_=` + Date.now())).text();
+    $("news-body").innerHTML = md2html(md);
+  } catch(e) { $("news-body").textContent = "总结文件读取失败"; }
+}
+async function loadNews() {
+  let idx;
+  try { idx = await (await fetch("/console/news/index.json?_=" + Date.now())).json(); }
+  catch(e) { $("news-list").textContent = "index.json 读取失败"; return; }
+  $("nav-news").innerHTML = `<span class="dot ${idx.length ? "ok" : "idle"}"></span>`;
+  $("news-list").innerHTML = idx.map(n =>
+    `<div class="news-item${n.date===newsDate?" active":""}" data-d="${n.date}" onclick="showNews('${n.date}')">
+       <div class="d">${n.date} <span style="color:var(--dim);font-weight:400">· ${n.count} 条</span></div>
+       <div class="h">${esc(n.headline||"")}</div>
+     </div>`).join("") || "暂无存档";
+  if (!newsDate && idx.length) showNews(idx[0].date);
+}
+loadNews();
+setInterval(loadNews, 30000);
 </script>
 </body>
 </html>
