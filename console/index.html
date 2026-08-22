@@ -6,33 +6,57 @@
 <title>量化闭环控制台</title>
 <style>
   :root {
-    --bg: #0d1117; --panel: #161b22; --border: #30363d;
+    --bg: #0d1117; --panel: #161b22; --border: #30363d; --sidebar: #0a0d12;
     --text: #e6edf3; --dim: #8b949e; --up: #f0524f; --down: #3fb950;
     --ok: #3fb950; --fail: #f85149; --run: #d29922; --idle: #6e7681;
     --accent: #58a6ff;
   }
   * { box-sizing: border-box; margin: 0; }
-  body { background: var(--bg); color: var(--text);
-         font: 14px/1.6 -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
-         padding: 24px; max-width: 1080px; margin: 0 auto; }
-  h1 { font-size: 20px; font-weight: 600; letter-spacing: .5px; }
-  h1 small { color: var(--dim); font-weight: 400; font-size: 12px; margin-left: 10px; }
-  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 18px 0; }
-  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
-  .stage { position: relative; }
-  .stage .name { font-size: 13px; color: var(--dim); display: flex; align-items: center; gap: 8px; }
-  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
-  .dot.ok { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
-  .dot.failed { background: var(--fail); box-shadow: 0 0 8px var(--fail); }
+  body { background: var(--bg); color: var(--text); display: flex; min-height: 100vh;
+         font: 14px/1.6 -apple-system, "PingFang SC", "Helvetica Neue", sans-serif; }
+
+  /* ── 侧边菜单 ── */
+  nav { width: 220px; flex: none; background: var(--sidebar); border-right: 1px solid var(--border);
+        padding: 20px 0; position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; }
+  .brand { padding: 0 20px 18px; border-bottom: 1px solid var(--border); }
+  .brand b { font-size: 15px; letter-spacing: .5px; display: block; }
+  .brand span { font-size: 11px; color: var(--dim); }
+  .menu { padding: 12px 10px; flex: 1; overflow: auto; }
+  .menu-label { font-size: 10px; color: var(--dim); letter-spacing: 1.5px; padding: 12px 12px 6px; }
+  .mi { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 8px;
+        color: var(--dim); cursor: pointer; font-size: 13px; margin-bottom: 2px; user-select: none; }
+  .mi:hover { background: var(--panel); color: var(--text); }
+  .mi.active { background: var(--panel); color: var(--text); font-weight: 600;
+               box-shadow: inset 2px 0 0 var(--accent); }
+  .mi .st { margin-left: auto; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; display: inline-block; }
+  .dot.ok { background: var(--ok); box-shadow: 0 0 6px var(--ok); }
+  .dot.failed { background: var(--fail); box-shadow: 0 0 6px var(--fail); }
   .dot.running { background: var(--run); animation: pulse 1s infinite alternate; }
   .dot.idle { background: var(--idle); }
   @keyframes pulse { to { opacity: .4; } }
-  .stage .val { font-size: 13px; margin-top: 8px; min-height: 40px; }
-  .stage .time { font-size: 11px; color: var(--dim); margin-top: 6px; }
-  .flow { display: flex; align-items: center; gap: 6px; color: var(--dim); font-size: 12px; margin-top: 4px; }
-  .flow b { color: var(--text); font-weight: 500; }
-  h2 { font-size: 14px; margin: 22px 0 10px; color: var(--dim); font-weight: 600;
-       text-transform: uppercase; letter-spacing: 1px; }
+  .nav-foot { padding: 12px 20px; border-top: 1px solid var(--border); font-size: 11px; color: var(--dim); }
+
+  /* ── 主区 ── */
+  main { flex: 1; padding: 26px 32px; max-width: 980px; }
+  .view { display: none; }
+  .view.active { display: block; animation: fade .18s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } }
+  .vhead { margin-bottom: 18px; }
+  .vhead h1 { font-size: 19px; font-weight: 650; }
+  .vhead p { color: var(--dim); font-size: 12.5px; margin-top: 3px; }
+
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; }
+  .grid5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .metric { font-size: 24px; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .metric.up { color: var(--up); } .metric.down { color: var(--down); }
+  .sub { color: var(--dim); font-size: 12px; margin-top: 2px; }
+  .stage-mini .val { font-size: 12.5px; margin-top: 6px; min-height: 36px; }
+  .stage-mini .time { font-size: 10.5px; color: var(--dim); margin-top: 4px; }
+  .stage-mini .name { font-size: 12.5px; color: var(--dim); display: flex; gap: 7px; align-items: center; }
+
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
   th { color: var(--dim); font-weight: 500; font-size: 12px; }
@@ -42,57 +66,136 @@
   .pill.reject, .pill.retired { color: var(--fail); border-color: var(--fail); }
   .pill.candidate { color: var(--run); border-color: var(--run); }
   .pill.research { color: var(--accent); border-color: var(--accent); }
-  .metric { font-size: 26px; font-weight: 650; font-variant-numeric: tabular-nums; }
-  .metric.up { color: var(--up); } .metric.down { color: var(--down); }
-  .sub { color: var(--dim); font-size: 12px; margin-top: 2px; }
-  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  pre { white-space: pre-wrap; font: 12px/1.7 ui-monospace, "SF Mono", Menlo, monospace;
-        color: var(--dim); background: var(--panel); border: 1px solid var(--border);
-        border-radius: 10px; padding: 14px 16px; max-height: 300px; overflow: auto; }
   .err { color: var(--fail); font-size: 12px; }
-  .org-ceo { text-align: center; font-weight: 600; padding: 8px; border-bottom: 1px dashed var(--border); margin-bottom: 12px; }
+  pre { white-space: pre-wrap; font: 12px/1.7 ui-monospace, "SF Mono", Menlo, monospace;
+        color: var(--dim); background: var(--bg); border: 1px solid var(--border);
+        border-radius: 8px; padding: 14px 16px; max-height: 420px; overflow: auto; }
+
+  /* 组织架构 */
+  .org-ceo { text-align: center; font-weight: 600; padding: 10px; border-bottom: 1px dashed var(--border); margin-bottom: 14px; }
   .org-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
-  .org-node { border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; position: relative; }
+  .org-node { border: 1px solid var(--border); border-radius: 8px; padding: 12px 10px; text-align: center; cursor: pointer; transition: border-color .15s; }
+  .org-node:hover { border-color: var(--accent); }
   .org-node .role { font-weight: 600; font-size: 13px; }
-  .org-node .duty { color: var(--dim); font-size: 11px; margin-top: 4px; min-height: 44px; }
-  .org-node .holder { font-size: 11px; color: var(--accent); margin-top: 4px; }
-  .org-phase3 { margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border); color: var(--dim); font-size: 11px; text-align: center; }
-  footer { color: var(--dim); font-size: 11px; margin-top: 28px; text-align: center; }
+  .org-node .duty { color: var(--dim); font-size: 11px; margin-top: 5px; min-height: 44px; }
+  .org-node .holder { font-size: 11px; color: var(--accent); margin-top: 5px; }
+  .org-phase3 { margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--border); color: var(--dim); font-size: 11px; text-align: center; }
+
+  /* Loop 时间线 */
+  .loop { border-left: 2px solid var(--border); padding: 4px 0 4px 18px; margin-left: 6px; position: relative; }
+  .loop::before { content: ""; position: absolute; left: -6px; top: 9px; width: 10px; height: 10px;
+                  border-radius: 50%; background: var(--accent); }
+  .loop h3 { font-size: 13.5px; }
+  .loop p { color: var(--dim); font-size: 12.5px; white-space: pre-wrap; }
+  .kv { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .kv:last-child { border-bottom: none; }
+  .kv b { font-variant-numeric: tabular-nums; }
+  footer { color: var(--dim); font-size: 11px; margin-top: 30px; }
 </style>
 </head>
 <body>
-<h1>量化闭环控制台 <small id="updated">加载中…</small></h1>
-<div class="flow">data <b>数据部门</b> → strategy <b>分析师</b> → backtest <b>风控门禁</b> → paper <b>交易员</b> → review <b>投委会</b></div>
 
-<h2>虚拟公司组织架构 <span style="font-weight:400;text-transform:none;letter-spacing:0">（参考 TradingAgents，v1 为确定性代码实现）</span></h2>
-<div class="card">
-  <div class="org-ceo">👤 老板（你） · 最终决策与门禁审批</div>
-  <div class="org-row" id="org"></div>
-  <div class="org-phase3">Phase 3 待入职：多头研究员 / 空头研究员（LLM 辩论）· 新闻分析师 · 情绪分析师 · 基金经理 Agent</div>
-</div>
+<nav>
+  <div class="brand"><b>量化闭环</b><span>虚拟投资公司 · v1</span></div>
+  <div class="menu">
+    <div class="menu-label">总部</div>
+    <div class="mi active" data-v="overview">📊 公司概览</div>
+    <div class="mi" data-v="org">🏢 组织架构</div>
+    <div class="menu-label">业务线（按流程）</div>
+    <div class="mi" data-v="data">🗄️ 数据部 <span class="st" id="nav-data"></span></div>
+    <div class="mi" data-v="strategy">📈 投研部 <span class="st" id="nav-strategy"></span></div>
+    <div class="mi" data-v="backtest">🛡️ 风控部 <span class="st" id="nav-backtest"></span></div>
+    <div class="mi" data-v="paper">💼 交易台 <span class="st" id="nav-paper"></span></div>
+    <div class="mi" data-v="review">📋 投委会 <span class="st" id="nav-review"></span></div>
+  </div>
+  <div class="nav-foot" id="updated">—</div>
+</nav>
 
-<div class="grid" id="stages"></div>
+<main>
+  <!-- 公司概览 -->
+  <section class="view active" id="v-overview">
+    <div class="vhead"><h1>公司概览</h1><p>五阶段流水线实时状态 · 数据 → 投研 → 风控 → 交易 → 复盘</p></div>
+    <div class="grid5" id="stages"></div>
+    <div class="grid2" style="margin-top:12px">
+      <div class="card"><div class="sub">Paper 净值（初始 ¥100,000）</div><div class="metric" id="equity">—</div><div class="sub" id="equity-sub"></div></div>
+      <div class="card"><div class="sub">最新 Loop</div><div id="last-loop" style="font-size:13px;margin-top:6px">—</div></div>
+    </div>
+  </section>
 
-<h2>Paper 账户</h2>
-<div class="two">
-  <div class="card"><div class="sub">账户净值（初始 ¥100,000）</div><div class="metric" id="equity">—</div><div class="sub" id="equity-sub"></div></div>
-  <div class="card"><div class="sub">最近操作</div><div id="trades" style="font-size:13px;margin-top:6px">—</div></div>
-</div>
+  <!-- 组织架构 -->
+  <section class="view" id="v-org">
+    <div class="vhead"><h1>组织架构</h1><p>参考 TradingAgents 多角色交易公司 · 点击部门卡片跳转对应业务线 · v1 为确定性代码实现</p></div>
+    <div class="card">
+      <div class="org-ceo">👤 老板（你） · 最终决策与门禁审批</div>
+      <div class="org-row" id="org"></div>
+      <div class="org-phase3">Phase 3 待入职：多头研究员 / 空头研究员（LLM 辩论）· 新闻分析师 · 情绪分析师 · 基金经理 Agent</div>
+    </div>
+    <div class="card">
+      <div class="sub" style="margin-bottom:8px">运作规则（AGENT.md 摘要）</div>
+      <div style="font-size:12.5px;color:var(--dim)">
+        ① 一条命令一个 Loop：pipeline.run ② 门禁不可绕过：只有 live 策略进交易台
+        ③ 事实源：status.json（机器写）+ AGENT.md（共同写）④ 凭证永不入库 ⑤ 每次 Loop 必须留日志
+      </div>
+    </div>
+  </section>
 
-<h2>策略注册表</h2>
-<div class="card"><table id="reg"><thead><tr><th>策略</th><th>状态</th><th>说明</th></tr></thead><tbody></tbody></table></div>
+  <!-- 数据部 -->
+  <section class="view" id="v-data">
+    <div class="vhead"><h1>🗄️ 数据部</h1><p>职责：A股日线数据采集、更新与新鲜度保障 · 产出：status.data</p></div>
+    <div class="card" id="data-card">—</div>
+  </section>
 
-<h2>回测门禁</h2>
-<div class="card"><table id="bt"><thead><tr><th>策略</th><th>年化</th><th>回撤</th><th>夏普</th><th>门禁</th></tr></thead><tbody></tbody></table></div>
+  <!-- 投研部 -->
+  <section class="view" id="v-strategy">
+    <div class="vhead"><h1>📈 投研部（技术分析师）</h1><p>职责：策略注册与状态机 research → candidate → live → retired · 产出：策略注册表</p></div>
+    <div class="card"><table id="reg"><thead><tr><th>策略</th><th>状态</th><th>参数</th><th>说明</th></tr></thead><tbody></tbody></table></div>
+    <div class="card sub">状态变更方式：编辑 status.json 的 strategy_registry 段落，变更须记录在 AGENT.md 的 Loop 条目「人工决策」中</div>
+  </section>
 
-<h2>最新复盘</h2>
-<pre id="review">—</pre>
+  <!-- 风控部 -->
+  <section class="view" id="v-backtest">
+    <div class="vhead"><h1>🛡️ 风控部（委员会）</h1><p>职责：统一区间回测 + 门禁判定 · 门禁：年化 &gt; 5% 且回撤 &lt; 30% 且夏普 &gt; 0.3</p></div>
+    <div class="card"><table id="bt"><thead><tr><th>策略</th><th>总收益</th><th>年化</th><th>回撤</th><th>夏普</th><th>门禁</th></tr></thead><tbody></tbody></table></div>
+    <div class="card sub" id="bt-meta">—</div>
+  </section>
 
-<footer>数据来自 status.json · 每 30s 自动刷新 · 控制台只读，操作请用 CLI：python -m pipeline.run</footer>
+  <!-- 交易台 -->
+  <section class="view" id="v-paper">
+    <div class="vhead"><h1>💼 交易台（Paper 交易）</h1><p>职责：按 live 策略执行调仓、SQLite 台账记账 · 假设：收盘价成交、免手续费、无T+1（v1简化）</p></div>
+    <div class="grid3">
+      <div class="card"><div class="sub">净值</div><div class="metric" id="p-equity">—</div></div>
+      <div class="card"><div class="sub">现金</div><div class="metric" id="p-cash">—</div></div>
+      <div class="card"><div class="sub">累计收益</div><div class="metric" id="p-ret">—</div></div>
+    </div>
+    <div class="card"><div class="sub" style="margin-bottom:8px">当前持仓</div><div id="p-pos">—</div></div>
+    <div class="card"><div class="sub" style="margin-bottom:8px">最近操作</div><div id="p-trades">—</div></div>
+    <div class="card"><div class="sub" style="margin-bottom:8px">动量监测 Top5</div><div id="p-mom">—</div></div>
+  </section>
+
+  <!-- 投委会 -->
+  <section class="view" id="v-review">
+    <div class="vhead"><h1>📋 投委会（复盘）</h1><p>职责：复盘报告 + AGENT.md 迭代日志 · 每次 Loop 留痕</p></div>
+    <div class="card"><div class="sub" style="margin-bottom:8px">最新复盘报告</div><pre id="review">—</pre></div>
+    <div class="card"><div class="sub" style="margin-bottom:10px">Loop 迭代时间线（AGENT.md）</div><div id="loops">—</div></div>
+  </section>
+
+  <footer>控制台只读 · 每 30s 自动刷新 · 操作请用 CLI：.venv/bin/python -m pipeline.run</footer>
+</main>
 
 <script>
 const $ = id => document.getElementById(id);
 const fmtPct = v => (v*100).toFixed(1) + "%";
+const fmtMoney = v => "¥" + Number(v).toLocaleString();
+
+/* 菜单切换 */
+document.querySelectorAll(".mi").forEach(el => el.onclick = () => {
+  document.querySelectorAll(".mi").forEach(x => x.classList.remove("active"));
+  document.querySelectorAll(".view").forEach(x => x.classList.remove("active"));
+  el.classList.add("active");
+  $("v-" + el.dataset.v).classList.add("active");
+});
+const gotoView = v => document.querySelector(`.mi[data-v="${v}"]`).click();
+
 const stageDesc = {
   data: r => r ? `${r.stocks} 只 · 最新 ${r.latest_trading_day} · 新鲜度 ${r.freshness_days}d` : "",
   strategy: r => r ? `共 ${r.total} 个 · live: ${(r.by_state?.live||[]).join(",")||"无"}` : "",
@@ -100,63 +203,104 @@ const stageDesc = {
   paper: r => r ? `${r.day||""} ${r.note||""} · 净值 ${r.equity??"—"}` : "",
   review: r => r ? `Loop #${r.loop_no} · ${r.report}` : "",
 };
+
 async function refresh() {
   let st;
   try { st = await (await fetch("/status.json?_=" + Date.now())).json(); }
-  catch(e) { $("updated").textContent = "status.json 读取失败（先跑 pipeline.run）"; return; }
+  catch(e) { $("updated").textContent = "status.json 读取失败"; return; }
   $("updated").textContent = "更新于 " + (st.updated_at || "—");
   const stages = st.stages || {};
-  const reg0 = st.strategy_registry || {};
-  const liveNow = Object.keys(reg0).filter(k => reg0[k].state === "live");
-  const paper0 = stages.paper?.result || {};
-  const ORG = [
-    ["🗄️", "数据部门", "A股日线数据采集、更新与新鲜度保障", `${stages.data?.result?.stocks ?? "—"} 只 · 最新 ${stages.data?.result?.latest_trading_day ?? "—"}`],
-    ["📈", "技术分析师", "维护策略注册表与状态机 research→live", `${Object.keys(reg0).length} 个策略 · live: ${liveNow.join(",") || "无"}`],
-    ["🛡️", "风控委员会", "统一区间回测 + 门禁（年化>5% 回撤<30% 夏普>0.3）", Object.entries(stages.backtest?.result?.results || {}).map(([k,v])=>`${k}:${v.gate||"?"}`).join(" ") || "未执行"],
-    ["💼", "交易员", "paper 账户执行调仓、SQLite 台账", paper0.equity != null ? `净值 ¥${Number(paper0.equity).toLocaleString()}` : "未记账"],
-    ["📋", "投委会", "复盘报告、AGENT.md 迭代日志", stages.review?.result ? `Loop #${stages.review.result.loop_no}` : "未执行"],
-  ];
-  $("org").innerHTML = ORG.map(([icon, role, duty, holder]) =>
-    `<div class="org-node"><div class="role">${icon} ${role}</div><div class="duty">${duty}</div><div class="holder">${holder}</div></div>`).join("");
+  const reg = st.strategy_registry || {};
+
+  /* 菜单状态灯 */
+  for (const n of ["data","strategy","backtest","paper","review"]) {
+    $("nav-"+n).innerHTML = `<span class="dot ${stages[n]?.status||"idle"}"></span>`;
+  }
+
+  /* 概览 */
   $("stages").innerHTML = ["data","strategy","backtest","paper","review"].map(n => {
     const s = stages[n] || {};
     const status = s.status || "idle";
-    return `<div class="card stage">
+    return `<div class="card stage-mini" style="margin:0">
       <div class="name"><span class="dot ${status}"></span>${n}</div>
       <div class="val">${status==="failed" ? `<span class="err">${(s.error||"").slice(0,90)}</span>` : stageDesc[n](s.result)}</div>
-      <div class="time">${s.finished_at||""} ${s.elapsed_sec!=null ? "· "+s.elapsed_sec+"s" : ""}</div>
+      <div class="time">${(s.finished_at||"").slice(5,19)}${s.elapsed_sec!=null ? " · "+s.elapsed_sec+"s" : ""}</div>
     </div>`;
   }).join("");
 
   const p = stages.paper?.result || {};
   if (p.equity != null) {
-    const ret = p.cum_return ?? (p.equity/100000-1);
-    const el = $("equity");
-    el.textContent = "¥" + Number(p.equity).toLocaleString();
-    el.className = "metric " + (ret >= 0 ? "up" : "down");
-    $("equity-sub").textContent = `累计 ${fmtPct(ret)} · 最大回撤 ${fmtPct(p.max_drawdown||0)} · 现金 ¥${Number(p.cash||0).toLocaleString()}`;
-    $("trades").innerHTML = (p.trades||[]).length
-      ? p.trades.map(t=>`${t.side==="buy"?"买入":"卖出"} ${t.code} ×${t.qty} @${t.price}`).join("<br>")
-      : (p.note || "无操作");
-    $("trades").innerHTML += `<div class="sub" style="margin-top:6px">持仓 ${Object.entries(p.positions||{}).map(([c,v])=>c+": ¥"+Number(v).toLocaleString()).join(" · ")||"空仓"}</div>`;
+    const ret = p.cum_return ?? 0;
+    $("equity").textContent = fmtMoney(p.equity);
+    $("equity").className = "metric " + (ret >= 0 ? "up" : "down");
+    $("equity-sub").textContent = `累计 ${fmtPct(ret)} · 回撤 ${fmtPct(p.max_drawdown||0)} · 现金 ${fmtMoney(p.cash||0)}`;
+    $("p-equity").textContent = fmtMoney(p.equity);
+    $("p-equity").className = "metric " + (ret >= 0 ? "up" : "down");
+    $("p-cash").textContent = fmtMoney(p.cash||0);
+    $("p-ret").textContent = fmtPct(ret);
+    $("p-ret").className = "metric " + (ret >= 0 ? "up" : "down");
+    $("p-pos").innerHTML = Object.entries(p.positions||{}).length
+      ? Object.entries(p.positions).map(([c,v])=>`<div class="kv"><span>${c}</span><b>${fmtMoney(v)}</b></div>`).join("")
+      : `<span class="sub">空仓持币（${p.market_ok_120ma===false?"风控：大盘位于120日均线下方":"—"}）</span>`;
+    $("p-trades").innerHTML = (p.trades||[]).length
+      ? p.trades.map(t=>`<div class="kv"><span>${t.side==="buy"?"买入":"卖出"} ${t.code} ×${t.qty} @${t.price}</span><b>${t.reason}</b></div>`).join("")
+      : `<span class="sub">${p.day||""} ${p.note||"无操作"}</span>`;
+    $("p-mom").innerHTML = (p.momentum_top5||[]).map(m=>
+      `<div class="kv"><span>${m.code}</span><b class="${m.mom>=0?"":"down"}" style="color:${m.mom>=0?"var(--up)":"var(--down)"}">${fmtPct(m.mom)}</b></div>`).join("");
   }
+  $("last-loop").innerHTML = stages.review?.result
+    ? `Loop #${stages.review.result.loop_no} · <a style="color:var(--accent)" href="/${stages.review.result.report}" target="_blank">${stages.review.result.report}</a>` : "—";
 
-  const reg = st.strategy_registry || {};
+  /* 组织架构（点击跳业务线） */
+  const liveNow = Object.keys(reg).filter(k => reg[k].state === "live");
+  const ORG = [
+    ["🗄️","数据部门","A股日线数据采集、更新与新鲜度保障",`${stages.data?.result?.stocks??"—"} 只 · 最新 ${stages.data?.result?.latest_trading_day??"—"}`,"data"],
+    ["📈","技术分析师","策略注册表与状态机 research→live",`${Object.keys(reg).length} 个策略 · live: ${liveNow.join(",")||"无"}`,"strategy"],
+    ["🛡️","风控委员会","统一区间回测 + 门禁判定",Object.entries(stages.backtest?.result?.results||{}).map(([k,v])=>`${k}:${v.gate||"?"}`).join(" ")||"未执行","backtest"],
+    ["💼","交易员","paper 账户执行调仓、SQLite 台账",p.equity!=null?`净值 ${fmtMoney(p.equity)}`:"未记账","paper"],
+    ["📋","投委会","复盘报告、AGENT.md 迭代日志",stages.review?.result?`Loop #${stages.review.result.loop_no}`:"未执行","review"],
+  ];
+  $("org").innerHTML = ORG.map(([icon,role,duty,holder,v]) =>
+    `<div class="org-node" onclick="gotoView('${v}')"><div class="role">${icon} ${role}</div><div class="duty">${duty}</div><div class="holder">${holder}</div></div>`).join("");
+
+  /* 数据部 */
+  const d = stages.data?.result;
+  $("data-card").innerHTML = d ? `
+    <div class="kv"><span>数据包路径</span><b>${d.bundle_path}</b></div>
+    <div class="kv"><span>覆盖股票数</span><b>${d.stocks}</b></div>
+    <div class="kv"><span>数据区间</span><b>${d.range}</b></div>
+    <div class="kv"><span>最新交易日</span><b>${d.latest_trading_day}</b></div>
+    <div class="kv"><span>新鲜度</span><b>${d.freshness_days} 天${d.freshness_days>35?' ⚠️ 建议更新':''}</b></div>
+    <div class="kv"><span>月度更新</span><b>${d.updated ? "本次已更新" : "未触发（每月2号定时任务自动更新）"}</b></div>
+    <div class="sub" style="margin-top:8px">${d.note||""}</div>` : "—";
+
+  /* 投研部 */
   $("reg").querySelector("tbody").innerHTML = Object.entries(reg).map(([k,v]) =>
-    `<tr><td>${k}</td><td><span class="pill ${v.state}">${v.state}</span></td><td style="color:var(--dim)">${v.summary||""}</td></tr>`).join("") || "<tr><td colspan=3>—</td></tr>";
+    `<tr><td>${k}</td><td><span class="pill ${v.state}">${v.state}</span></td>
+     <td style="color:var(--dim);font-size:12px">${JSON.stringify(v.params||{})}</td>
+     <td style="color:var(--dim)">${v.summary||""}</td></tr>`).join("") || "<tr><td colspan=4>—</td></tr>";
 
-  const bt = stages.backtest?.result?.results || {};
-  $("bt").querySelector("tbody").innerHTML = Object.entries(bt).map(([k,v]) =>
+  /* 风控部 */
+  const btr = stages.backtest?.result || {};
+  $("bt").querySelector("tbody").innerHTML = Object.entries(btr.results||{}).map(([k,v]) =>
     v.gate==="error"
-      ? `<tr><td>${k}</td><td colspan=4 class="err">回测失败</td></tr>`
-      : `<tr><td>${k}</td><td class="num">${fmtPct(v.annual)}</td><td class="num">${fmtPct(v.max_dd)}</td><td class="num">${v.sharpe}</td><td><span class="pill ${v.gate}">${v.gate}</span></td></tr>`
-  ).join("") || "<tr><td colspan=5>—</td></tr>";
+      ? `<tr><td>${k}</td><td colspan=5 class="err">回测失败</td></tr>`
+      : `<tr><td>${k}</td><td class="num">${fmtPct(v.total_ret)}</td><td class="num">${fmtPct(v.annual)}</td><td class="num">${fmtPct(v.max_dd)}</td><td class="num">${v.sharpe}</td><td><span class="pill ${v.gate}">${v.gate}${v.reasons?.length?" ⚠":""}</span></td></tr>`
+  ).join("") || "<tr><td colspan=6>—</td></tr>";
+  $("bt-meta").textContent = btr.window ? `回测区间 ${btr.window} · 基准 ${btr.benchmark} · 本金 ¥100,000` : "未执行";
 
+  /* 投委会 */
   const rep = stages.review?.result?.report;
   if (rep) {
-    try { $("review").textContent = await (await fetch("/" + rep + "?_=" + Date.now())).text(); }
-    catch(e) {}
+    try { $("review").textContent = await (await fetch("/" + rep + "?_=" + Date.now())).text(); } catch(e) {}
   }
+  try {
+    const md = await (await fetch("/AGENT.md?_=" + Date.now())).text();
+    const entries = [...md.matchAll(/## Loop #(\d+) — ([\d-]+)\n([\s\S]*?)(?=\n## Loop #|$)/g)].reverse();
+    $("loops").innerHTML = entries.map(m =>
+      `<div class="loop"><h3>Loop #${m[1]} · ${m[2]}</h3><p>${m[3].trim().replace(/\n- /g,"\n· ").replace(/\*\*/g,"")}</p></div>`
+    ).join("") || "—";
+  } catch(e) { $("loops").textContent = "AGENT.md 读取失败"; }
 }
 refresh();
 setInterval(refresh, 30000);
