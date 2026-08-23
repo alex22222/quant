@@ -209,7 +209,7 @@ def init(context):
 
 
 def handle_bar(context, bar_dict):
-    from rqalpha.api import history_bars, is_suspended, order_target_percent, logger
+    from rqalpha.api import history_bars, is_suspended, logger
 
     p = context.p
     need = max(p["n_entry"], p["atr_period"], p.get("chandelier_days", 20), 20) + 2
@@ -248,12 +248,26 @@ def handle_bar(context, bar_dict):
     for e in sig.detail["entries"]:
         logger.info(f"{e['code']} {e['reason']} @{e['close']:.2f}，入场")
 
+    # ⚠️ 口径统一（策略库审查 P1）：T 日收盘出信号，T+1 开盘集合竞价成交，
+    # 与 Paper（stage_paper）收益口径一致；禁止在 handle_bar 直接下单
+    # （日线模式下会以当日收盘价成交，等于用产生信号的价格成交，高估收益）。
+    weight = sig.detail.get("weight_cap", p["weight_cap"]) / p["hold_num"]
+    context.pending_targets = (list(sig.targets), weight)
+
+
+def open_auction(context, bar_dict):
+    """T+1 开盘集合竞价统一执行 handle_bar 登记的挂单（实测成交价=次日开盘价）。"""
+    pending = getattr(context, "pending_targets", None)
+    if not pending:
+        return
+    context.pending_targets = None
+    targets, weight = pending
+    from rqalpha.api import order_target_percent
+    held = [c for c, pos in context.portfolio.positions.items() if pos.quantity > 0]
     # 卖出调出名单的持仓
-    for code in list(held):
-        if code not in sig.targets:
+    for code in held:
+        if code not in targets:
             order_target_percent(code, 0)
     # 等权对齐目标持仓（含已有持仓：权益滤波收缩时同步减仓）
-    if sig.targets:
-        weight = sig.detail.get("weight_cap", p["weight_cap"]) / p["hold_num"]
-        for code in sig.targets:
-            order_target_percent(code, weight)
+    for code in targets:
+        order_target_percent(code, weight)

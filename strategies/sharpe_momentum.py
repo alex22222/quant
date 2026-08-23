@@ -50,9 +50,8 @@ def sharpe_momentum(context, stock):
 
 def rebalance(context, bar_dict):
     if not market_ok(context):
-        for pos in get_positions():
-            order_target_percent(pos.order_book_id, 0)
-        logger.info("风控触发：指数低于120日均线，清仓持币")
+        context.pending = ([], 0.0)  # 风控清仓推迟到 T+1 开盘（口径统一，策略库审查 P1）
+        logger.info("风控触发：指数低于120日均线，将于次日开盘清仓持币")
         return
 
     scores = []
@@ -67,10 +66,20 @@ def rebalance(context, bar_dict):
 
     logger.info("夏普动量排名: " + ", ".join(f"{s}({v:.2f})" for s, v in scores[:5]))
 
+    # ⚠️ 口径统一：T 日信号，T+1 开盘集合竞价成交；这里只登记目标
+    weight = 0.98 / len(targets) if targets else 0.0
+    context.pending = (targets, weight)
+
+
+def open_auction(context, bar_dict):
+    """T+1 开盘集合竞价统一执行上一信号日登记的挂单。"""
+    pending = getattr(context, "pending", None)
+    if not pending:
+        return
+    context.pending = None
+    targets, weight = pending
     for pos in get_positions():
         if pos.order_book_id not in targets:
             order_target_percent(pos.order_book_id, 0)
-    if targets:
-        weight = 0.98 / len(targets)
-        for s in targets:
-            order_target_percent(s, weight)
+    for s in targets:
+        order_target_percent(s, weight)

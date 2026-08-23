@@ -37,11 +37,23 @@ def handle_bar(context, bar_dict):
     else:
         target = None  # 双负空仓
 
+    # ⚠️ 口径统一（策略库审查 P1）：T 日信号，T+1 开盘集合竞价成交
     for s in (context.etf_300, context.etf_500):
         w = 0.98 if s == target else 0
         pos = context.portfolio.positions.get(s)
         cur = pos.market_value / context.portfolio.total_value if pos else 0
         if abs(cur - w) > 0.02:  # 偏离超 2% 才调仓，减少无效换手
-            order_target_percent(s, w)
+            context.pending = getattr(context, "pending", {})
+            context.pending[s] = w
             logger.info(f"轮动: m300={m300:+.1%} m500={m500:+.1%} -> "
-                        f"{'空仓' if target is None else target}")
+                        f"{'空仓' if target is None else target}（次日开盘执行）")
+
+
+def open_auction(context, bar_dict):
+    """T+1 开盘集合竞价统一执行 handle_bar 登记的挂单。"""
+    pending = getattr(context, "pending", None)
+    if not pending:
+        return
+    context.pending = {}
+    for s, w in pending.items():
+        order_target_percent(s, w)

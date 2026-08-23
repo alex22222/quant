@@ -52,6 +52,10 @@ def handle_bar(context, bar_dict):
 
     held = [s for s in context.portfolio.positions.keys() if s in context.stocks]
 
+    # ⚠️ 口径统一（策略库审查 P1）：T 日信号，T+1 开盘集合竞价成交；
+    # handle_bar 只登记买卖名单，open_auction 统一执行
+    sells, buys = [], []
+
     # 1) 离场：RSI2 > 70 或收盘上穿 MA5
     for stock in list(held):
         closes = history_bars(stock, context.exit_ma + context.rsi_period + 2, "1d", "close")
@@ -60,30 +64,43 @@ def handle_bar(context, bar_dict):
         r = rsi(closes, context.rsi_period)
         ma5 = closes[-context.exit_ma:].mean()
         if (r is not None and r > context.sell_threshold) or closes[-1] > ma5:
-            order_target_percent(stock, 0)
-            logger.info(f"{stock} 均值回归完成离场 (RSI2={r:.0f})")
+            sells.append(stock)
+            logger.info(f"{stock} 均值回归完成离场 (RSI2={r:.0f})（次日开盘执行）")
 
-    if not bull:
-        return
+    if bull:
+        # 2) 入场
+        held = [s for s in held if s not in sells]
+        slots = context.hold_num - len(held)
+        weight = 0.96 / context.hold_num
+        for stock in context.stocks:
+            if slots <= 0:
+                break
+            if stock in held or is_suspended(stock):
+                continue
+            closes = history_bars(stock, context.trend_days, "1d", "close")
+            if closes is None or len(closes) < context.trend_days:
+                continue
+            if closes[-1] <= closes.mean():  # 自身处于上升趋势
+                continue
+            r = rsi(closes, context.rsi_period)
+            if r is not None and r < context.buy_threshold:
+                buys.append(stock)
+                logger.info(f"{stock} RSI2={r:.1f} 超跌买入 @{closes[-1]:.2f}（次日开盘执行）")
+                slots -= 1
 
-    # 2) 入场
-    held = [s for s in context.portfolio.positions.keys() if s in context.stocks]
-    slots = context.hold_num - len(held)
-    if slots <= 0:
+    context.pending_sells = sells
+    context.pending_buys = buys
+
+
+def open_auction(context, bar_dict):
+    """T+1 开盘集合竞价统一执行 handle_bar 登记的挂单。"""
+    sells = getattr(context, "pending_sells", None)
+    buys = getattr(context, "pending_buys", None)
+    if not sells and not buys:
         return
+    context.pending_sells, context.pending_buys = [], []
+    for stock in sells or []:
+        order_target_percent(stock, 0)
     weight = 0.96 / context.hold_num
-    for stock in context.stocks:
-        if slots <= 0:
-            break
-        if stock in held or is_suspended(stock):
-            continue
-        closes = history_bars(stock, context.trend_days, "1d", "close")
-        if closes is None or len(closes) < context.trend_days:
-            continue
-        if closes[-1] <= closes.mean():  # 自身处于上升趋势
-            continue
-        r = rsi(closes, context.rsi_period)
-        if r is not None and r < context.buy_threshold:
-            order_target_percent(stock, weight)
-            logger.info(f"{stock} RSI2={r:.1f} 超跌买入 @{closes[-1]:.2f}")
-            slots -= 1
+    for stock in buys or []:
+        order_target_percent(stock, weight)

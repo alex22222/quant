@@ -74,6 +74,8 @@ def init(context):
     context.hwm = {}          # order_book_id -> 持仓期间最高收盘
     context.entry_px = {}     # order_book_id -> 入场参考价
     context.stopped_out = set()  # 本月内被止损踢出的票，下月调仓前不再买回
+    context.pending_sells = set()       # T 日止损确认 → T+1 开盘卖出队列
+    context.pending_rebalance = None    # T 日调仓信号 → T+1 开盘执行
 
     scheduler.run_monthly(rebalance, tradingday=1)
     scheduler.run_weekly(update_stops, tradingday=5)  # 每周五上移止损
@@ -128,10 +130,9 @@ def rebalance(context, bar_dict):
     context.stopped_out = set()
 
     if not market_ok(context):
-        for pos in get_positions():
-            order_target_percent(pos.order_book_id, 0)
-            _clear(context, pos.order_book_id)
-        logger.info("风控触发：清仓持币")
+        # 风控清仓同样推迟到 T+1 开盘执行（口径统一，见策略库审查 P1）
+        context.pending_rebalance = ([], 0.0)
+        logger.info("风控触发：将于次日开盘清仓持币")
         return
 
     scores = []
@@ -144,14 +145,10 @@ def rebalance(context, bar_dict):
     scores.sort(key=lambda x: x[1], reverse=True)
     targets = [s for s, _ in scores[:context.hold_num]]
 
-    for pos in get_positions():
-        if pos.order_book_id not in targets:
-            order_target_percent(pos.order_book_id, 0)
-            _clear(context, pos.order_book_id)
-
     weight = 0.98 / len(targets)
+    # ⚠️ 口径统一：T 日信号，T+1 开盘集合竞价成交；这里只登记目标
+    context.pending_rebalance = (targets, weight)
     for s in targets:
-        order_target_percent(s, weight)
         context.entry_px.setdefault(s, bar_dict[s].close)
         # kde_profit 模式入场不挂止损，等浮盈激活；其余模式立即挂
         if context.stop in ("atr", "kde") and s not in context.stops:
@@ -160,6 +157,26 @@ def rebalance(context, bar_dict):
                 context.stops[s] = st
                 context.hwm[s] = bar_dict[s].close
                 logger.info(f"{s} 初始止损: {st:.2f} ({context.stop})")
+
+
+def open_auction(context, bar_dict):
+    """T+1 开盘集合竞价统一执行挂单：先执行止损卖出，再执行调仓。"""
+    sells = getattr(context, "pending_sells", None)
+    if sells:
+        context.pending_sells = set()
+        for s in sells:
+            order_target_percent(s, 0)
+            _clear(context, s)
+    pend = getattr(context, "pending_rebalance", None)
+    if pend is not None:
+        context.pending_rebalance = None
+        targets, weight = pend
+        for pos in get_positions():
+            if pos.order_book_id not in targets:
+                order_target_percent(pos.order_book_id, 0)
+                _clear(context, pos.order_book_id)
+        for s in targets:
+            order_target_percent(s, weight)
 
 
 PROFIT_ACTIVATE = 1.05   # 浮盈 5% 才激活 KDE 止损
@@ -220,10 +237,10 @@ def handle_bar(context, bar_dict):
         if s in context.stopped_out:
             continue
         if bar_dict[s].close < context.stops[s]:
-            order_target_percent(s, 0)
-            logger.info(f"{s} 触发止损 @{bar_dict[s].close:.2f} < {context.stops[s]:.2f}，离场")
+            # 止损以收盘确认 → T+1 开盘执行（口径统一，禁止当日收盘价成交）
+            context.pending_sells.add(s)
+            logger.info(f"{s} 触发止损 @{bar_dict[s].close:.2f} < {context.stops[s]:.2f}，次日开盘离场")
             context.stopped_out.add(s)
-            _clear(context, s)
 
 
 def _clear(context, s):

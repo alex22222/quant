@@ -132,7 +132,7 @@ class _RQData:
 
 
 def rebalance(context, bar_dict):
-    from rqalpha.api import get_positions, order_target_percent, logger
+    from rqalpha.api import logger
     p = context.params
     d = _RQData()
     result = compute_targets(
@@ -142,24 +142,33 @@ def rebalance(context, bar_dict):
     )
 
     if not result.market_ok:
-        for pos in get_positions():
-            order_target_percent(pos.order_book_id, 0)
-        logger.info("风控触发：指数低于120日均线，清仓持币")
+        context.pending = ([], 0.0)  # 风控清仓也推迟到 T+1 开盘执行
+        logger.info("风控触发：指数低于120日均线，将于次日开盘清仓持币")
         return
 
     targets = result.targets
     logger.info("动量排名: " + ", ".join(
         f"{t['code']}({t['mom']:+.1%})" for t in result.detail["momentum_table"][:5]))
 
-    # 卖出跌出名单的持仓
+    # ⚠️ 口径统一（策略库审查 P1）：T 日收盘出信号，T+1 开盘集合竞价成交；
+    # 禁止在 BAR 阶段直接下单（会以当日收盘价成交，高估收益）
+    weight = 0.98 / len(targets) if targets else 0.0
+    context.pending = (list(targets), weight)
+
+
+def open_auction(context, bar_dict):
+    """T+1 开盘集合竞价统一执行上一信号日登记的挂单。"""
+    pending = getattr(context, "pending", None)
+    if not pending:
+        return
+    context.pending = None
+    targets, weight = pending
+    from rqalpha.api import get_positions, order_target_percent
     for pos in get_positions():
         if pos.order_book_id not in targets:
             order_target_percent(pos.order_book_id, 0)
-
-    if targets:
-        weight = 0.98 / len(targets)
-        for s in targets:
-            order_target_percent(s, weight)
+    for s in targets:
+        order_target_percent(s, weight)
 
 
 def handle_bar(context, bar_dict):

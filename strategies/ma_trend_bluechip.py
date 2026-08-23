@@ -56,19 +56,22 @@ def handle_bar(context, bar_dict):
         today[stock] = d
         yesterday[stock] = context.prev_diff.get(stock)
 
+    # ⚠️ 口径统一（策略库审查 P1）：T 日信号，T+1 开盘集合竞价成交；
+    # handle_bar 只登记买卖名单，open_auction 统一执行
+    sells, buys = [], []
+
     # 2) 离场：死叉 或 大盘破位
     for stock in list(held):
         prev, cur = yesterday.get(stock), today.get(stock)
         dead_cross = prev is not None and cur is not None and prev > 0 >= cur
         if dead_cross or not bull:
-            order_target_percent(stock, 0)
+            sells.append(stock)
             held.remove(stock)
-            logger.info(f"{stock} {'大盘风控' if not bull else '死叉'}离场")
+            logger.info(f"{stock} {'大盘风控' if not bull else '死叉'}离场（次日开盘执行）")
 
     # 3) 入场：金叉且大盘向上，先到先占
     if bull:
         slots = context.hold_num - len(held)
-        weight = 0.96 / context.hold_num
         for stock in context.stocks:
             if slots <= 0:
                 break
@@ -76,10 +79,27 @@ def handle_bar(context, bar_dict):
                 continue
             prev, cur = yesterday.get(stock), today.get(stock)
             if prev is not None and cur is not None and prev <= 0 < cur:
-                order_target_percent(stock, weight)
+                buys.append(stock)
                 held.append(stock)
-                logger.info(f"{stock} 金叉建仓")
+                logger.info(f"{stock} 金叉建仓（次日开盘执行）")
                 slots -= 1
+
+    context.pending_sells = sells
+    context.pending_buys = buys
 
     # 4) 每日滚动保存差值快照
     context.prev_diff = today
+
+
+def open_auction(context, bar_dict):
+    """T+1 开盘集合竞价统一执行 handle_bar 登记的挂单。"""
+    sells = getattr(context, "pending_sells", None)
+    buys = getattr(context, "pending_buys", None)
+    if not sells and not buys:
+        return
+    context.pending_sells, context.pending_buys = [], []
+    for stock in sells or []:
+        order_target_percent(stock, 0)
+    weight = 0.96 / context.hold_num
+    for stock in buys or []:
+        order_target_percent(stock, weight)
