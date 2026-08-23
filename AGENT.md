@@ -341,3 +341,14 @@ data（数据部门）→ strategy（技术分析师）→ backtest（风控门�
   - registry：turtle_bluechip = 唯一 live；momentum_stops 已降 candidate（门禁 v2 族纪律，等复检）
 - **人工决策**: 老板此前已批准 turtle 晋级（Loop #13/14），并行会话完成落地，本会话确认事实生效
 - **下一步**: ① OOS 超额裕度仅 +0.5%，若后续复检转负需回炉（备选手段已备好：chandelier_atr 吊灯止盈、ma_slope_days 斜率过滤、max_hold_days 时间止损）；② momentum_stops 按门禁 v2 复检决定去留；③ 控制台策略库页核对最新成绩单展示
+
+### Loop #13 候选（2026-08-23 记录）：Quant-Wiki 四文改进建议
+- 产出：docs/improvement-suggestions-quant-wiki.md（8 条建议 + 落地顺序）
+- 下一 Loop 建议：P0 结构化 JSON 结论块（prompts 01~07 输出契约）+ 风控硬条款模板化
+
+## Loop #6 — 2026-08-23
+
+- **执行**: 生成系统白皮书 `docs/WHITEPAPER.md`（ELI5 大白话版，面向非技术读者）
+- **内容**: 公司定位、组织架构、三大核心机制（五步流水线 / 晨会提案制 / 新闻情报线）、控制台导览、安全纪律、当前状态、路线图
+- **人工决策**: （待填写）
+- **下一步**: Phase 4 —— 高价值新闻线索沉淀为 research 策略候选
