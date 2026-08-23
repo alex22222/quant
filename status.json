@@ -20,29 +20,29 @@
     },
     "strategy": {
       "status": "ok",
-      "started_at": "2026-08-23T22:32:51+08:00",
-      "finished_at": "2026-08-23T22:32:51+08:00",
+      "started_at": "2026-08-23T22:55:05+08:00",
+      "finished_at": "2026-08-23T22:55:05+08:00",
       "elapsed_sec": 0.0,
       "result": {
         "total": 11,
         "by_state": {
           "research": [
-            "reversal-during-earnings-announcements",
             "base"
           ],
           "candidate": [
             "momentum_rotation",
-            "momentum_stops",
             "ma_trend_bluechip",
-            "rotation_300_500",
-            "rsi2_reversal",
             "sharpe_momentum",
             "turtle_bluechip",
             "week52_momentum"
           ],
           "live": [],
           "retired": [
-            "demo_dual_ma"
+            "demo_dual_ma",
+            "momentum_stops",
+            "reversal-during-earnings-announcements",
+            "rotation_300_500",
+            "rsi2_reversal"
           ]
         },
         "hint": "修改策略状态：编辑 status.json 的 strategy_registry 段落"
@@ -771,18 +771,18 @@
     },
     "audit": {
       "status": "ok",
-      "started_at": "2026-08-23T22:49:42+08:00",
-      "finished_at": "2026-08-23T22:49:42+08:00",
+      "started_at": "2026-08-23T22:55:05+08:00",
+      "finished_at": "2026-08-23T22:55:05+08:00",
       "elapsed_sec": 0.0,
       "result": {
         "checked": 0,
         "healthy": [],
         "auto_demoted": [],
-        "audited_at": "2026-08-23T22:49:42+08:00"
+        "audited_at": "2026-08-23T22:55:05+08:00"
       }
     }
   },
-  "updated_at": "2026-08-23T22:49:42+08:00",
+  "updated_at": "2026-08-23T22:55:05+08:00",
   "strategy_registry": {
     "demo_dual_ma": {
       "state": "retired",
@@ -802,7 +802,7 @@
       "pool": "蓝筹10只"
     },
     "momentum_stops": {
-      "state": "candidate",
+      "state": "retired",
       "file": "strategies/momentum_stops.py",
       "summary": "多股票动量轮动 + 止损锚对照实验 用法（--extra-vars 注入 context.stop）： --extra-vars '{\"stop\":\"none\"}' 基线：无个股止损 --extra-vars '{\"stop\":\"atr\"}",
       "params": {
@@ -812,14 +812,28 @@
       "origin": "自研（momentum_rotation 止损对照组）",
       "category": "动量轮动",
       "pool": "蓝筹10只",
-      "note": "2026-08-23 门禁 v2 未通过（OOS 超额 -4.2%、最长回撤 1735 天、扰动回撤 38-47%），由 live 降为 candidate；与 momentum_rotation 同族。过门禁前不得回 live。详见 reports/gate_v2/summary.md"
+      "note": "2026-08-23 门禁 v2 未通过（OOS 超额 -4.2%、最长回撤 1735 天、扰动回撤 38-47%），由 live 降为 candidate；与 momentum_rotation 同族。过门禁前不得回 live。详见 reports/gate_v2/summary.md",
+      "promotion": {
+        "strategy_file": "strategies/momentum_stops.py",
+        "strategy_hash": "7dd49d585b00577d",
+        "params_hash": "24a7f3befcdeb063",
+        "gate_version": "v2",
+        "gate_hash": "9857538db4853416",
+        "data_version": "20260731",
+        "report": "reports/momentum_stops",
+        "to": "retired",
+        "reason": "与 momentum_rotation 同族，stop=none 时指标逐位相同（T+1 重跑证实），并入动量实验变体；文件保留供止损研究",
+        "approver": "老板（审查采纳）",
+        "promoted_at": "2026-08-23T22:55:05+08:00"
+      }
     },
     "reversal-during-earnings-announcements": {
-      "state": "research",
+      "state": "retired",
       "file": "strategies/reversal-during-earnings-announcements.py",
       "summary": "",
       "params": {},
-      "registered_at": "2026-08-22T18:01:13+08:00"
+      "registered_at": "2026-08-22T18:01:13+08:00",
+      "note": "文件已删除"
     },
     "ma_trend_bluechip": {
       "state": "candidate",
@@ -833,7 +847,7 @@
       "pool": "蓝筹10只"
     },
     "rotation_300_500": {
-      "state": "candidate",
+      "state": "retired",
       "file": "strategies/rotation_300_500.py",
       "summary": "二八轮动（有空仓版）· 蓝筹风格轮动 来源：GitHub wzhe06/SmartInvest（王喆《程序化交易实战》配套），A股经典风格轮动 标的：510300.XSHG 沪深300ETF（蓝筹腿）/ 510500.XSHG 中证500E",
       "params": {},
@@ -842,10 +856,23 @@
       "origin": "github.com/wzhe06/SmartInvest（王喆《程序化交易实战》）",
       "category": "风格轮动",
       "pool": "沪深300ETF/中证500ETF",
-      "note": "动量窗口扫描 n∈{10,15,20,25,30} 无过门禁组合，n=20 仍为最优"
+      "note": "动量窗口扫描 n∈{10,15,20,25,30} 无过门禁组合，n=20 仍为最优",
+      "promotion": {
+        "strategy_file": "strategies/rotation_300_500.py",
+        "strategy_hash": "c6a5257787777f6c",
+        "params_hash": "44136fa355b3678a",
+        "gate_version": "v2",
+        "gate_hash": "9857538db4853416",
+        "data_version": "20260731",
+        "report": "reports/rotation_300_500",
+        "to": "retired",
+        "reason": "T+1 口径重跑：换手 72 倍、夏普 0.25、验证集超额 -1.6%，无实用价值（策略库审查 P3）",
+        "approver": "老板（审查采纳）",
+        "promoted_at": "2026-08-23T22:55:04+08:00"
+      }
     },
     "rsi2_reversal": {
-      "state": "candidate",
+      "state": "retired",
       "file": "strategies/rsi2_reversal.py",
       "summary": "RSI-2 超跌反弹（蓝筹均值回归） 来源：Larry Connors RSI-2 经典均值回归体系（GitHub 多个 A股实现复用，如 TushareDB oversold_rebound） 逻辑：大盘股长期向上、短期超跌后回归均值，是",
       "params": {},
@@ -853,7 +880,20 @@
       "source": "github",
       "origin": "Connors RSI-2 体系 · github.com/tycallen/TushareDB",
       "category": "均值回归",
-      "pool": "蓝筹10只"
+      "pool": "蓝筹10只",
+      "promotion": {
+        "strategy_file": "strategies/rsi2_reversal.py",
+        "strategy_hash": "4d5fe05ad8ac5393",
+        "params_hash": "44136fa355b3678a",
+        "gate_version": "v2",
+        "gate_hash": "9857538db4853416",
+        "data_version": "20260731",
+        "report": "reports/rsi2_reversal",
+        "to": "retired",
+        "reason": "T+1 口径重跑：换手 162 倍、验证集超额 -5.9%，明显失败（策略库审查 P3）",
+        "approver": "老板（审查采纳）",
+        "promoted_at": "2026-08-23T22:55:04+08:00"
+      }
     },
     "sharpe_momentum": {
       "state": "candidate",
@@ -905,5 +945,5 @@
       "registered_at": "2026-08-23T00:47:33+08:00"
     }
   },
-  "last_loop_at": "2026-08-23T22:49:42+08:00"
+  "last_loop_at": "2026-08-23T22:55:05+08:00"
 }
