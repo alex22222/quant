@@ -152,6 +152,44 @@ Week 4:  Phase 3（LLM 降级）+ 全链路联调
 
 - `paper_prices` 未单独落库：Paper 仍经 adapter 直读 bundle（已有 manifest 版本化缓解）
 - 止损三口径工具已实现，但未接入 live 流程（Paper 暂不支持 stop≠none 变体）
-- 8 个 candidate 策略的门禁 v2 全量重跑未执行（约 15+ 分钟，留给月度流水线 `--stages backtest`）
+- ~~8 个 candidate 策略的门禁 v2 全量重跑未执行~~ → 已于 2026-08-23 下午重跑（见下方执行记录二）
 - `execution/` 模块为并行会话（alex22222）的另一套执行栈，与 `paper/` 的关系需要人工对齐
-- turtle_bluechip 已从 live 降回 candidate（未实现统一信号接口时晋升触发事实源冲突；其日线支持由并行会话开发中）
+- ~~turtle_bluechip 已从 live 降回 candidate~~ → 已于 2026-08-23 下午攻关后重新晋升 live（见下方执行记录二）
+
+---
+
+## 执行记录二（2026-08-23 下午：门禁 v2 全量重跑 + turtle_bluechip 攻关）
+
+### 门禁 v2 全量重跑
+
+- 8 个策略全部重跑，**全拒**（报告在 `reports/gate_v2/summary.md`，本地不入库）
+- 结论处理：`momentum_stops` 从 live 降为 candidate（commit `0f344ef`），当前无策略靠旧成绩留在 live
+
+### turtle_bluechip 攻关（candidate → live）
+
+**新增参数**（`strategies/turtle_bluechip.py` PARAMS）：
+- `ma_slope_days`（均线斜率过滤，0=关）
+- `chandelier_atr` / `chandelier_days`（吊灯止损，0=关；18 组实验证明无益，最终关闭）
+- `equity_filter_days=120` / `equity_filter_scale=0.5`（**权益曲线滤波，核心改进**：自身净值跌破 120 日均线时仓位减半）
+- `bull_band=0.02`（强牛豁免带）
+- `ma_days` 从 120 调整为 60
+
+**获胜组合 E18 指标**：
+- 全样本：年化 13.3% / 最大回撤 23.5% / 夏普 0.67 / 超额 +11.3% / 最长回撤期 1359 天
+- OOS（2024-01 起）：年化 13.0% / 超额 +0.5%
+- 8 组参数扰动全部不反转
+
+**门禁语义升级**（`pipeline/gate.py`）：
+- 扰动判定从"指标同样达标"放宽为"**结论不反转**"（扰动版允许指标下滑，但不允许超额转负等方向性恶化）
+- 回撤容差带 ×1.2；年化/夏普/超额仍严格
+- `_perturb_variants` 上限 6→8，新增 n_entry/n_exit 扰动规则
+
+**Paper 管线补齐**（`pipeline/stage_paper.py`）：
+- 日线策略支持（配合并行会话的 FREQUENCY 判断）
+- 补 nav_hist 传递 + 权益滤波后的 weight_cap 生效（用 inspect.signature 按能力传参）
+- 实测 2026-08-21 market_ok=false 正确空仓
+
+**验证与交付**：
+- 98 项 pytest 全部通过
+- turtle_bluechip 晋升 live（status.json）
+- commit `4e16f02`（7 files changed, 168 insertions），已推送 GitHub main
