@@ -12,6 +12,9 @@
       门禁版本 hash / 数据版本 / 报告路径 / 批准人 / 时间），一次 save_status 完成。
       晋级 live 硬性前置：最新 backtest 阶段该策略 gate==pass，
       且 gate.py 自该次通过以来未被修改（hash 一致）。
+      入 candidate 硬性前置（防"工业化 HARKing"，quant-wiki 建议 6）：
+      必须提供 --differentiation 因子区分度说明（与在库策略的相关性/增量逻辑），
+      写入注册表 entry.differentiation，缺失即拒绝（fail closed）。
   python -m pipeline.promote demote <name> --reason "..."
       降级并记录原因（不清空历史，原 promotion 标记为 superseded）。
   python -m pipeline.promote audit
@@ -84,13 +87,28 @@ def _latest_gate(st: dict, name: str):
     return (entry or {}).get("gate")
 
 
-def promote(name: str, to: str, reason: str, approver: str) -> dict:
+def promote(name: str, to: str, reason: str, approver: str,
+            differentiation: str | None = None) -> dict:
     st = load_status()
     reg = st.get("strategy_registry", {})
     if name not in reg:
         raise SystemExit(f"策略未注册: {name}")
     if to not in ("research", "candidate", "live", "retired"):
         raise SystemExit(f"非法状态: {to}")
+
+    entry = reg[name]
+    if to == "candidate":
+        # 防"工业化 HARKing"门禁（quant-wiki 建议 6）：入候选必须写明与在库策略的
+        # 相关性/增量逻辑（对应文 4"与已有数百异象去重"），防止同义策略重复入库。
+        diff = (differentiation or entry.get("differentiation") or "").strip()
+        if not diff:
+            others = "、".join(k for k, v in reg.items()
+                              if k != name and v.get("state") in ("candidate", "live")) or "（空库）"
+            raise SystemExit(
+                f"拒绝入候选：缺少因子区分度说明。请用 --differentiation 写明 "
+                f"{name} 与在库策略（{others}）的相关性/增量逻辑"
+                f"（新信息源？新信号结构？新持有期？相关性为何低？）")
+        entry["differentiation"] = diff
 
     ev = _evidence(name, st)
     if to == "live":
@@ -181,6 +199,8 @@ def main():
     p.add_argument("--to", required=True)
     p.add_argument("--reason", required=True)
     p.add_argument("--approver", default="老板")
+    p.add_argument("--differentiation", default=None,
+                   help="入 candidate 必填：与在库策略的相关性/增量逻辑说明（防同义策略重复入库）")
     d = sub.add_parser("demote")
     d.add_argument("name")
     d.add_argument("--reason", required=True)
@@ -188,7 +208,8 @@ def main():
     args = ap.parse_args()
 
     if args.cmd == "promote":
-        out = promote(args.name, args.to, args.reason, args.approver)
+        out = promote(args.name, args.to, args.reason, args.approver,
+                      differentiation=args.differentiation)
     elif args.cmd == "demote":
         out = demote(args.name, args.reason)
     else:
