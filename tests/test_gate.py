@@ -55,3 +55,24 @@ class TestGate:
         m["ir"] = None
         r = evaluate(m, _metrics(), [_metrics()], {"family_dup": False})
         assert r["gate"] == "reject"
+
+
+class TestDeflatedSharpe:
+    def test_many_trials_weak_sharpe_rejects(self):
+        """试验次数多、夏普仅略高于门槛 → DSR 不足拒绝"""
+        from pipeline.gate import evaluate
+        m = _metrics(sharpe=0.35)
+        # 试验簇夏普离散大（0.05~0.65），n_trials=20，月数 79
+        m["months"], m["skew"], m["kurt"] = 79, 0.0, 3.0
+        perts = [_metrics(sharpe=s) for s in (0.05, 0.15, 0.5, 0.65)]
+        r = evaluate(m, _metrics(), perts, {"family_dup": False}, n_trials=20)
+        assert r["gate"] == "reject"
+        assert any("多重试验" in x for x in r["reasons"])
+
+    def test_single_trial_no_dsr_block(self):
+        """单次试验无多重性问题，DSR 不参与判定"""
+        from pipeline.gate import evaluate
+        r = evaluate(_metrics(), _metrics(), [_metrics()],
+                     {"family_dup": False}, n_trials=1)
+        assert r["gate"] == "pass", r["reasons"]
+        assert r["detail"]["dsr"] is None

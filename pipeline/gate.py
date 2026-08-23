@@ -10,7 +10,11 @@
    另加固定滑点近似冲击成本）；
 4. 最长回撤持续天数封顶（套牢时间也是风险）；
 5. 参数扰动：动量窗口 ±25%、持仓数 ±1，扰动后基础门禁不得反转；
-6. 策略族去重：同族（FAMILY 相同）只允许一个代表通过门禁。
+6. 策略族去重：同族（FAMILY 相同）只允许一个代表通过门禁；
+7. 多重试验修正（2026-08-23 审查新增）：尝试越多参数组合，偶然通过概率越高。
+   采用简化版 Deflated Sharpe Ratio（Bailey & López de Prado, 2014）：
+   以扰动变体的夏普方差估计"试验簇"的夏普离散度，n_trials 取
+   实验台账中该策略的不同参数组合数 + 本次扰动数；DSR < 0.95 拒绝。
 
 指标来源：rqalpha report summary.xlsx（含基准对照指标）。
 
@@ -59,6 +63,30 @@ PERTURB_RULES = {
     "n_exit": lambda v: sorted({max(int(v * 0.75), 3), v, int(v * 1.25)}),
     "hold_num": lambda v: sorted({max(v - 1, 1), v, v + 1}),
 }
+
+DSR_MIN = 0.95  # 简化 DSR 门槛：在多重试验下仍有 95% 置信度夏普>期望最大伪夏普
+
+
+def deflated_sharpe(sr: float, n_trials: int, sr_var: float, T: int,
+                    skew: float = 0.0, kurt: float = 3.0) -> float | None:
+    """简化 Deflated Sharpe Ratio（Bailey & López de Prado）。
+
+    sr: 全样本夏普；n_trials: 试验次数；sr_var: 试验簇夏普方差；
+    T: 收益观测数（月）；skew/kurt: 月收益偏度/峰度。
+    返回 0~1 的置信度；输入不足返回 None（不参与判定）。"""
+    if n_trials < 2 or sr_var <= 0 or T < 12 or sr is None:
+        return None
+    from math import exp, log, pi, sqrt
+
+    from statistics import NormalDist
+    norm = NormalDist()
+    gamma = 0.5772156649  # Euler-Mascheroni
+    # 期望最大伪夏普 E[max SR]（N 次独立试验，SR~N(0, sr_var)）
+    z1 = norm.inv_cdf(1 - 1 / n_trials)
+    z2 = norm.inv_cdf(1 - 1 / (n_trials * exp(1)))
+    sr0 = sqrt(sr_var) * ((1 - gamma) * z1 + gamma * z2)
+    denom = sqrt(max(1 - skew * sr + (kurt - 1) / 4 * sr * sr, 1e-8))
+    return norm.cdf((sr - sr0) * sqrt(T - 1) / denom)
 
 METRIC_MAP = {
     "annual": "年化收益率",
@@ -115,7 +143,8 @@ def _check(m: dict, gate: dict, label: str) -> list[str]:
 
 def evaluate(full_metrics: dict, oos_metrics: dict | None,
              perturb_metrics: list[dict] | None,
-             family_status: dict | None) -> dict:
+             family_status: dict | None,
+             n_trials: int = 1) -> dict:
     """综合判定。返回 {"gate": pass/reject, "reasons": [...], "detail": {...}}"""
     reasons = []
 
@@ -141,7 +170,25 @@ def evaluate(full_metrics: dict, oos_metrics: dict | None,
         sub = _check(pm, base_gate, f"扰动{i+1}({pm.get('variant', '?')})")
         reasons += sub
 
-    # 4) 策略族去重
+    # 4) 多重试验修正：简化 DSR（试验簇夏普方差由扰动变体估计）
+    perts = perturb_metrics or []
+    sharpes = [p["sharpe"] for p in perts if p.get("sharpe") is not None]
+    sharpes = [full_metrics.get("sharpe")] + sharpes if full_metrics.get("sharpe") is not None else sharpes
+    dsr = None
+    if len(sharpes) >= 2:
+        import statistics
+        sr_var = statistics.pvariance(sharpes)
+        dsr = deflated_sharpe(full_metrics.get("sharpe"),
+                              n_trials=max(n_trials, len(sharpes)),
+                              sr_var=sr_var,
+                              T=int(full_metrics.get("months") or 0),
+                              skew=full_metrics.get("skew") or 0.0,
+                              kurt=full_metrics.get("kurt") or 3.0)
+        if dsr is not None and dsr < DSR_MIN:
+            reasons.append(f"多重试验: DSR={dsr:.2f} 未满足 >= {DSR_MIN:.2f}"
+                           f"（n_trials={max(n_trials, len(sharpes))}，试验越多门槛越高）")
+
+    # 5) 策略族去重
     if family_status and family_status.get("family_dup"):
         reasons.append(
             f"策略族 {family_status.get('family')} 已有代表 "
@@ -151,5 +198,6 @@ def evaluate(full_metrics: dict, oos_metrics: dict | None,
         "gate": "reject" if reasons else "pass",
         "reasons": reasons,
         "detail": {"full": full_metrics, "oos": oos_metrics,
-                   "perturbations": perturb_metrics or []},
+                   "perturbations": perturb_metrics or [],
+                   "dsr": dsr, "n_trials": n_trials},
     }

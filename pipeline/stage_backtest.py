@@ -18,7 +18,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from .common import ROOT, load_status
+from .common import ROOT, load_status, now
 from .gate import DATA_PARTITION, GATE_V2, PERTURB_RULES, evaluate, extract_metrics
 from .promote import GATE_FILE, _params_hash, _sha256
 
@@ -42,7 +42,7 @@ def _read_summary(xlsx):
 
 
 def _monthly_stats(portfolio_csv: Path) -> dict:
-    """从 portfolio.csv 计算月度收益分布指标：最差单月、月度胜率、正收益月占比。"""
+    """从 portfolio.csv 计算月度收益分布指标：最差单月、月度胜率、偏度、峰度。"""
     try:
         import pandas as pd
         df = pd.read_csv(portfolio_csv, index_col=0, parse_dates=True)
@@ -55,9 +55,35 @@ def _monthly_stats(portfolio_csv: Path) -> dict:
             "best_month": round(float(monthly.max()), 4),
             "monthly_win_rate": round(float((monthly > 0).mean()), 4),
             "months": int(len(monthly)),
+            "skew": round(float(monthly.skew()), 4),
+            "kurt": round(float(monthly.kurt() + 3), 4),  # pandas 为超额峰度，转回峰度
         }
     except Exception:
         return {}
+
+
+LEDGER = ROOT / "pipeline" / "experiment_ledger.jsonl"
+
+
+def _ledger_trials(name: str, params_hash: str) -> int:
+    """实验台账：记录本次参数组合，返回该策略累计不同参数组合数（多重试验修正用）。
+
+    台账落 git（pipeline/experiment_ledger.jsonl），跨轮审计可追溯——
+    "试了多少次"本身是门禁输入，必须可复现。"""
+    seen = set()
+    if LEDGER.exists():
+        for line in LEDGER.read_text(encoding="utf-8").splitlines():
+            try:
+                rec = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if rec.get("strategy") == name:
+                seen.add(rec.get("params_hash"))
+    seen.add(params_hash)
+    with LEDGER.open("a", encoding="utf-8") as f:
+        f.write(json.dumps({"ts": now(), "strategy": name,
+                            "params_hash": params_hash}, ensure_ascii=False) + "\n")
+    return len(seen)
 
 
 def _run(info, start, end, extra_vars, out_dir, tag):
@@ -171,13 +197,16 @@ def main(only=None):
                                     "max_dd": sm["max_dd"], "sharpe": sm["sharpe"],
                                     "excess_annual": sm.get("excess_annual")})
 
-        verdict = evaluate(full, oos, perturbs, family_rep[name])
+        n_trials = _ledger_trials(name, _params_hash(name, info.get("params"))) + len(perturbs)
+        verdict = evaluate(full, oos, perturbs, family_rep[name], n_trials=n_trials)
         results[name] = {**entry, **full, "oos": oos,
                          "strategy_hash": _sha256(ROOT / info["file"]),
                          "params_hash": _params_hash(name, info.get("params")),
                          "gate_hash": _sha256(GATE_FILE),
                          "stage_windows": stage_stats,
                          "gate": verdict["gate"], "reasons": verdict["reasons"],
+                         "dsr": verdict["detail"].get("dsr"),
+                         "n_trials": verdict["detail"].get("n_trials"),
                          "family": family_rep[name],
                          "perturbations": [
                              {"variant": p.pop("variant"),
