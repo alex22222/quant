@@ -3,7 +3,8 @@
 
 对每个 candidate/live 策略：
   1. 全样本回测（BT_START ~ BT_END）
-  2. 样本外回测（OOS_START ~ BT_END）
+  2. 验证集回测（OOS_START ~ BT_END；⚠️ 2024-01 起窗口已被调参使用，
+     语义为 validation，非独立样本外——见 pipeline/gate.py 数据分区声明）
   3. 参数扰动回测（策略暴露 PARAMS 且含 momentum_days/hold_num 时）
   4. 门禁 v2 判定（pipeline/gate.py），同族只留一个代表
 
@@ -18,7 +19,8 @@ import sys
 from pathlib import Path
 
 from .common import ROOT, load_status
-from .gate import GATE_V2, PERTURB_RULES, evaluate, extract_metrics
+from .gate import DATA_PARTITION, GATE_V2, PERTURB_RULES, evaluate, extract_metrics
+from .promote import GATE_FILE, _params_hash, _sha256
 
 RQALPHA = ROOT / ".venv" / "bin" / "rqalpha"
 BT_START, BT_END, CASH = "2020-01-01", "2026-08-01", "100000"
@@ -171,6 +173,9 @@ def main(only=None):
 
         verdict = evaluate(full, oos, perturbs, family_rep[name])
         results[name] = {**entry, **full, "oos": oos,
+                         "strategy_hash": _sha256(ROOT / info["file"]),
+                         "params_hash": _params_hash(name, info.get("params")),
+                         "gate_hash": _sha256(GATE_FILE),
                          "stage_windows": stage_stats,
                          "gate": verdict["gate"], "reasons": verdict["reasons"],
                          "family": family_rep[name],
@@ -183,6 +188,7 @@ def main(only=None):
 
     return {"gate_version": "v2", "gate_thresholds": GATE_V2,
             "window": f"{BT_START}~{BT_END}", "oos_window": f"{OOS_START}~{BT_END}",
+            "data_partition": DATA_PARTITION,
             "cost_model": "rqalpha 默认佣金 + pit-tax 历史印花税 + 固定滑点0.2% + 最低佣金5元",
             "benchmark": "沪深300", "results": results}
 

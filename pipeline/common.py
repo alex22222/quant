@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parent.parent
 STATUS_FILE = ROOT / "status.json"
 TZ = timezone(timedelta(hours=8))
 
-STAGES = ["data", "strategy", "backtest", "paper", "review"]
+STAGES = ["data", "strategy", "backtest", "paper", "review", "audit"]
 
 
 def now():

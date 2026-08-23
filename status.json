@@ -20,8 +20,8 @@
     },
     "strategy": {
       "status": "ok",
-      "started_at": "2026-08-23T00:54:09+08:00",
-      "finished_at": "2026-08-23T00:54:09+08:00",
+      "started_at": "2026-08-23T22:32:51+08:00",
+      "finished_at": "2026-08-23T22:32:51+08:00",
       "elapsed_sec": 0.0,
       "result": {
         "total": 11,
@@ -32,6 +32,7 @@
           ],
           "candidate": [
             "momentum_rotation",
+            "momentum_stops",
             "ma_trend_bluechip",
             "rotation_300_500",
             "rsi2_reversal",
@@ -39,9 +40,7 @@
             "turtle_bluechip",
             "week52_momentum"
           ],
-          "live": [
-            "momentum_stops"
-          ],
+          "live": [],
           "retired": [
             "demo_dual_ma"
           ]
@@ -658,9 +657,21 @@
         "loop_no": 15,
         "agent_md_updated": true
       }
+    },
+    "audit": {
+      "status": "ok",
+      "started_at": "2026-08-23T22:37:31+08:00",
+      "finished_at": "2026-08-23T22:37:31+08:00",
+      "elapsed_sec": 0.0,
+      "result": {
+        "checked": 0,
+        "healthy": [],
+        "auto_demoted": [],
+        "audited_at": "2026-08-23T22:37:31+08:00"
+      }
     }
   },
-  "updated_at": "2026-08-23T11:40:43+08:00",
+  "updated_at": "2026-08-23T22:37:31+08:00",
   "strategy_registry": {
     "demo_dual_ma": {
       "state": "retired",
@@ -745,20 +756,23 @@
       "pool": "蓝筹10只"
     },
     "turtle_bluechip": {
-      "state": "live",
+      "state": "candidate",
       "file": "strategies/turtle_bluechip.py",
       "summary": "海龟突破（A股蓝筹改良版）· 趋势跟踪 来源：GitHub ling-0729/KHunter turtle_strategy（A股实战改良），经典唐奇安通道突破 股票池：10 只高流动性蓝筹（与 momentum_rotation 同池）",
       "params": {
-        "note_params": "使用策略文件 PARAMS 默认值（E18 组合）"
+        "note_params": "使用策略文件 PARAMS 默认值（E18 组合）",
+        "frozen": true
       },
       "registered_at": "2026-08-23T00:11:47+08:00",
       "source": "github",
       "origin": "github.com/ling-0729/KHunter 海龟 A股改良版",
       "category": "趋势突破",
       "pool": "蓝筹10只",
-      "note": "2026-08-23 门禁 v2 通过（全样本年化 13.3%/回撤 23.5%/超额 +11.3%/最长回撤 1359 天；OOS 年化 13.0%/超额 +0.5%；8 组扰动全过）。E18 组合：MA60 风控 + 权益曲线滤波(120d,×0.5) + 强牛豁免(2%)。详见 reports/gate_v2/turtle_bluechip.json",
-      "promoted_at": "2026-08-23",
-      "promote_reason": "参数扫描过门禁（年化11.5%/回撤19.8%/夏普0.61），老板批准晋级（Loop #14）"
+      "note": "2026-08-23 晚降级：策略库审查（docs/STRATEGY_LIBRARY_REVIEW_A_SHARE.md）认定上午的晋级方法论不成立——E3-E18 调参使用了 2024-2026 窗口（应为 validation 而非 OOS），且回测当根收盘成交与 Paper T+1 开盘口径不一致。E18 参数自此刻冻结，禁止再依据 2020-2026 数据调参。再晋级条件：T+1 成交口径重跑门禁通过 + 6-12 个月纯前向 Paper 验证 + 原子晋级流程（pipeline/promote.py）记录。",
+      "demoted_at": "2026-08-23",
+      "demote_reason": "OOS 污染（调参窗口=验证窗口）+ 回测/Paper 成交时点不一致 + 晋级提交同时放宽门禁（治理冲突）",
+      "promoted_at": "2026-08-23（已作废）",
+      "promote_reason": "参数扫描过门禁（年化11.5%/回撤19.8%/夏普0.61），老板批准晋级（Loop #14）——后被策略库审查否决"
     },
     "week52_momentum": {
       "state": "candidate",
@@ -769,7 +783,8 @@
       "source": "github",
       "origin": "George & Hwang (2004) 52周高点动量",
       "category": "动量轮动",
-      "pool": "蓝筹10只"
+      "pool": "蓝筹10只",
+      "note": "2026-08-23 降级（live→candidate）：audit 自检发现证据失效：缺少 promotion 证据记录（疑似手工编辑晋级）"
     },
     "base": {
       "state": "research",
@@ -779,5 +794,5 @@
       "registered_at": "2026-08-23T00:47:33+08:00"
     }
   },
-  "last_loop_at": "2026-08-23T11:40:43+08:00"
+  "last_loop_at": "2026-08-23T22:37:31+08:00"
 }

@@ -48,7 +48,7 @@ def main():
                     lines.append(f"  - ❌ {reason}")
                 oos = res.get("oos")
                 if oos:
-                    lines.append(f"  - 样本外: 年化 {oos['annual']:.1%} 回撤 {oos['max_dd']:.1%} "
+                    lines.append(f"  - 验证集（非独立OOS）: 年化 {oos['annual']:.1%} 回撤 {oos['max_dd']:.1%} "
                                  f"夏普 {oos['sharpe']:.2f} 超额 {oos.get('excess_annual', 0):.1%}")
                 for p in res.get("perturbations", []):
                     lines.append(f"  - 扰动 {p['variant']}: 年化 {p['annual']:.1%} "

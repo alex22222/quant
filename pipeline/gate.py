@@ -4,7 +4,7 @@
 旧门禁（年化>5%、回撤<30%、夏普>0.3）只能证明"没崩"，不能证明有可交易 alpha。
 门禁 v2 要求：
 
-1. 全样本（FULL）与样本外（OOS）都达标；
+1. 全样本（FULL）与验证集（VALIDATION）都达标；
 2. 超额收益为正（几何年化超额 > 0），信息比率达标；
 3. 换手率封顶（防止成本敏感型策略伪装 alpha；rqalpha 回测已含佣金/印花税，
    另加固定滑点近似冲击成本）；
@@ -13,8 +13,22 @@
 6. 策略族去重：同族（FAMILY 相同）只允许一个代表通过门禁。
 
 指标来源：rqalpha report summary.xlsx（含基准对照指标）。
+
+⚠️ 数据分区语义（2026-08-23 策略库审查后更正）：
+2024-01-01~2026-08-01 窗口已被 E3-E18 等参数实验反复用于调参，
+它是 **validation（验证集）**，不是独立 OOS。本文件保留 "oos" 键名仅为兼容
+历史报告，展示口径一律称"验证集"。真正的 test set 是门禁冻结后的纯前向数据。
+门禁规则与策略参数必须分离提交；门禁改动须独立 commit 并对全部策略重跑生效，
+禁止与任何策略晋级出现在同一提交（见 docs/STRATEGY_LIBRARY_REVIEW_A_SHARE.md）。
 """
 from __future__ import annotations
+
+# 数据分区声明（报告与复盘统一引用此处，禁止各处自定义）
+DATA_PARTITION = {
+    "train": "2020-01-01~2023-12-31",
+    "validation": "2024-01-01~2026-08-01（已被调参使用，非独立样本外）",
+    "test": "纯前向数据（2026-08-23 起累积，尚未存在）",
+}
 
 GATE_V2 = {
     # 全样本门槛
@@ -28,7 +42,8 @@ GATE_V2 = {
         "turnover_annual_max": 25.0,   # 年化双边换手封顶
         "longest_dd_days_max": 1500,   # 最长回撤持续天数
     },
-    # 样本外门槛（更宽，但必须为正）
+    # 验证集门槛（更宽，但必须为正）
+    # ⚠️ 语义：2024-01 起的窗口是 validation（已被调参使用），不是独立 OOS
     "oos": {
         "annual_min": 0.0,
         "excess_annual_min": 0.0,
@@ -107,11 +122,11 @@ def evaluate(full_metrics: dict, oos_metrics: dict | None,
     # 1) 全样本
     reasons += _check(full_metrics, GATE_V2["full"], "全样本")
 
-    # 2) 样本外
+    # 2) 验证集（键名 oos 仅为历史兼容；2024-2026 已被调参，非独立样本外）
     if oos_metrics is None:
-        reasons.append("样本外: 未运行")
+        reasons.append("验证集: 未运行")
     else:
-        reasons += _check(oos_metrics, GATE_V2["oos"], "样本外")
+        reasons += _check(oos_metrics, GATE_V2["oos"], "验证集")
 
     # 3) 参数扰动：结论不得反转（仍有 alpha），允许风险指标在容差带内劣化
     #    容差带设计：回撤 ≤ 门禁×1.2（趋势策略集中持仓变体的回撤/收益同比例放大，
