@@ -132,15 +132,16 @@ def load_snapshot(day: str) -> list[str] | None:
 
 
 def _month_starts(start: str, end: str) -> list[str]:
-    """月首日历日列表（build 内部用当日实际数据，非交易日会自动剔除无成交股）。"""
-    dates = []
-    y, m = int(start[:4]), int(start[5:7])
-    while f"{y:04d}-{m:02d}-01" <= end:
-        dates.append(f"{y:04d}-{m:02d}-01")
-        m += 1
-        if m > 12:
-            y, m = y + 1, 1
-    return dates
+    """每月首个交易日列表（用 bundle 交易日历，避免元旦/劳动节等空快照）。"""
+    raw = np.load(BUNDLE / "trading_dates.npy", allow_pickle=True)
+    # int64 YYYYMMDD → YYYY-MM-DD
+    days = sorted(f"{int(d) // 10000}-{int(d) // 100 % 100:02d}-{int(d) % 100:02d}"
+                  for d in raw)
+    firsts = {}
+    for d in days:
+        firsts.setdefault(d[:7], d)
+    return [d for ym, d in sorted(firsts.items())
+            if start[:7] <= ym <= end[:7]]
 
 
 def main():
