@@ -250,11 +250,24 @@ def main():
     n_orders = 0
     if is_rebalance and not conn.execute(
             "SELECT 1 FROM pending_orders WHERE signal_day=?", (latest,)).fetchone():
-        signal = strat_mod.generate_targets(data, params, positions=positions)
+        # 按策略接口能力传参（positions/nav_hist 为可选）
+        import inspect
+        sig_params = inspect.signature(strat_mod.generate_targets).parameters
+        kwargs = {}
+        if "positions" in sig_params:
+            kwargs["positions"] = positions
+        if "nav_hist" in sig_params:
+            kwargs["nav_hist"] = [
+                e / INIT_CASH for _, e in conn.execute(
+                    "SELECT day, equity FROM account WHERE day != 'init' ORDER BY day"
+                ).fetchall()
+            ]
+        signal = strat_mod.generate_targets(data, params, **kwargs)
         n_orders = _make_rebalance_orders(
             conn, signal.targets, latest, cash, positions,
             strat_name, params["universe"], bd,
-            weight_cap=params.get("weight_cap", 0.98))
+            weight_cap=signal.detail.get("weight_cap",
+                                         params.get("weight_cap", 0.98)))
         if not signal.market_ok and positions:
             # 风控：清仓挂单（_make_rebalance_orders 已按空 targets 卖出全部）
             pass

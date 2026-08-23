@@ -112,7 +112,7 @@ def _perturb_variants(name):
     variants = [{}]
     for axis in axes:
         variants = [{**base, k: v} for base in variants for (k, v) in axis]
-    return variants[:6]  # 上限 6 个扰动组合，控制耗时
+    return variants[:8]  # 上限 8 个扰动组合，控制耗时
 
 
 def main(only=None):

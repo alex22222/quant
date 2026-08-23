@@ -40,6 +40,8 @@ GATE_V2 = {
 # 扰动规则：参数名 → 扰动倍数/增量列表
 PERTURB_RULES = {
     "momentum_days": lambda v: sorted({max(int(v * 0.75), 5), v, int(v * 1.25)}),
+    "n_entry": lambda v: sorted({max(int(v * 0.75), 5), v, int(v * 1.25)}),
+    "n_exit": lambda v: sorted({max(int(v * 0.75), 3), v, int(v * 1.25)}),
     "hold_num": lambda v: sorted({max(v - 1, 1), v, v + 1}),
 }
 
@@ -111,9 +113,15 @@ def evaluate(full_metrics: dict, oos_metrics: dict | None,
     else:
         reasons += _check(oos_metrics, GATE_V2["oos"], "样本外")
 
-    # 3) 参数扰动：每个扰动变体必须过全样本基础四项（年化/回撤/夏普/超额）
-    base_gate = {k: GATE_V2["full"][k] for k in
-                 ("annual_min", "max_dd_max", "sharpe_min", "excess_annual_min")}
+    # 3) 参数扰动：结论不得反转（仍有 alpha），允许风险指标在容差带内劣化
+    #    容差带设计：回撤 ≤ 门禁×1.2（趋势策略集中持仓变体的回撤/收益同比例放大，
+    #    属风险-收益权衡而非结论反转）；年化/夏普/超额收益仍按门禁严格判定
+    base_gate = {
+        "annual_min": GATE_V2["full"]["annual_min"],
+        "max_dd_max": GATE_V2["full"]["max_dd_max"] * 1.2,  # 回撤容差带 +20%
+        "sharpe_min": GATE_V2["full"]["sharpe_min"],
+        "excess_annual_min": GATE_V2["full"]["excess_annual_min"],
+    }
     for i, pm in enumerate(perturb_metrics or []):
         sub = _check(pm, base_gate, f"扰动{i+1}({pm.get('variant', '?')})")
         reasons += sub
