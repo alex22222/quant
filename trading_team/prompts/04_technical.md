@@ -30,3 +30,23 @@
 - **一句话结论**
 
 最后输出「技术团队每日结论」：3-5 条。
+
+## 结构化结论块（机器可读 · 必填）
+
+报告末尾必须追加一个 ```json 代码块（accuracy.json 自动回填的唯一事实源，缺失视为报告未完成）：
+
+```json
+{
+  "role": "technical",
+  "date": "YYYY-MM-DD",
+  "ratings": [
+    {"code": "601318", "name": "中国平安", "rating": "看多", "confidence": 4,
+     "support": 52.2, "resistance": 55.8, "one_line": "放量收复MA20，MACD将金叉"}
+  ]
+}
+```
+
+硬性要求：
+- `rating` ∈ 强烈看多 / 看多 / 中性偏多 / 中性 / 中性偏空 / 看空 / 强烈看空；`confidence` ∈ 1-5 整数
+- `support` / `resistance` 必须是数字或 null
+- ratings 覆盖观察池全部股票，一只不漏；JSON 必须合法，块后不得再有任何正文

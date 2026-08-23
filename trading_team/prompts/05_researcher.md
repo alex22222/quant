@@ -28,3 +28,27 @@
 ### 研究团队每日结论
 - 综合评级（每只股票：看多/中性/看空 + 信心度）
 - 最重要的 1-2 个分歧点
+
+## 结构化结论块（机器可读 · 必填）
+
+报告末尾必须追加一个 ```json 代码块（accuracy.json 自动回填的唯一事实源，缺失视为报告未完成）：
+
+```json
+{
+  "role": "researcher",
+  "date": "YYYY-MM-DD",
+  "market": {"view": "偏多|偏空|平衡", "confidence": 3},
+  "ratings": [
+    {"code": "601318", "name": "中国平安", "rating": "看多", "confidence": 4,
+     "one_line": "四方报告同向，中报超预期"},
+    {"code": "000858", "name": "五粮液", "rating": "中性", "confidence": 2,
+     "one_line": "基本面反转vs技术空头，最大分歧", "divergence": true}
+  ],
+  "top_divergences": ["五粮液：基本面反转 vs 技术空头排列"]
+}
+```
+
+硬性要求：
+- `rating` ∈ 强烈看多 / 看多 / 中性偏多 / 中性 / 中性偏空 / 看空 / 强烈看空；`confidence` ∈ 1-5 整数
+- ratings 覆盖观察池全部股票，一只不漏，与正文「综合评级」完全一致（两处矛盾视为报告作废）
+- JSON 必须合法，块后不得再有任何正文
