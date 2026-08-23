@@ -353,3 +353,16 @@ data（数据部门）→ strategy（技术分析师）→ backtest（风控门�
 - **内容**: 公司定位、组织架构、三大核心机制（五步流水线 / 晨会提案制 / 新闻情报线）、控制台导览、安全纪律、当前状态、路线图
 - **人工决策**: （待填写）
 - **下一步**: Phase 4 —— 高价值新闻线索沉淀为 research 策略候选
+
+## Loop #18 — 2026-08-24
+
+- **执行**: Quant-Wiki 八条改进建议落地（docs/improvement-suggestions-quant-wiki.md，老板指令"完成提到的改进项"）
+- **内容**:
+  - 建议 1+5（ea9c0b8）：七角色日报强制结构化 JSON 结论块（prompts 01-05/07 输出契约）；06/07 风控 5 条不可协商条款硬注入；`trading_team/conclusion_block.py` 结论块提取校验 + accuracy.json 幂等回填
+  - 建议 2+3（063c4f3）：指标扩充 Stochastic/VWAP/布林带（collect.py + prompt 04）；新闻逐条打分聚合温度 + 情绪周期幂等写入 plan.json（enrich_plan）
+  - 建议 6（f94e2e0）：入 candidate 强制 --differentiation 因子区分度说明（fail closed），AGENT.md 工作纪律第 7 条防"工业化 HARKing"
+  - 建议 7（fdf3259）：trading_team/README.md「团队纪律」7 条护栏成文（LLM 输出是研究辅助，执行前必须风控+人工批复）
+  - 建议 4（6a5e0d7）：`pipeline/research_ingest.py` 研究线索→策略草案流水线——quant-x-monitor 报告关键词分类（signal/risk/噪音），命中 signal 模板化生成统一接口草案入 research；URL 幂等去重 + 单次封顶 5；8-23 实测生成 4 份草案（Loop #4 挂起项正式打通）
+- **结果**: 全量 174 项 pytest 通过；建议 8 按文档约定暂缓（等 8-28 首批 accuracy 数据）
+- **人工决策**: （待填写）
+- **下一步**: ① 4 份 ingest 草案人工核实后走 promote --differentiation 评估（当前均 momentum 兜底模板，区分度存疑）；② 日报 Automation 提示词接入 enrich_plan/backfill 调用；③ 8-28 首批准确率验证后启动建议 8

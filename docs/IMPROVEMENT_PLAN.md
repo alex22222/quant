@@ -239,3 +239,39 @@ Week 4:  Phase 3（LLM 降级）+ 全链路联调
 - 回测收益归因（信号收益/开盘跳空/费用/滑点/未成交）未实现
 - 撮合模型仍缺：盘口封单量、部分成交、集合竞价冲击成本（审查"撮合适配"节）
 - turtle 再晋级路径：T+1 口径门禁通过 + 6-12 个月纯前向 Paper + promote.py 原子晋级
+
+---
+
+## 执行记录四：Quant-Wiki 八条改进建议落地（2026-08-23/24）
+
+来源：`docs/improvement-suggestions-quant-wiki.md`（quant-wiki 四文对照后的 8 条建议）。
+建议 8（绩效口径统一）按文档自身约定暂缓——等 8-28 首批 accuracy 数据后再做。
+
+### 建议 1+5（commit ea9c0b8）
+- prompts 01-05/07 末尾强制 ```json 结论块契约（rating 七档枚举 + confidence 1-5，块后禁正文）；03 含逐条打分 + temperature；07 含 reviews 决策块
+- 06/07 写入 5 条不可协商风控条款（单票 25% / 止损距入场 ≤15% / 现金 ≥5% 单日 ≤5 笔 / market_ok 禁买入 / 信心度 ≤2 减半）
+- `trading_team/conclusion_block.py`：extract_block（取最后一个 json 围栏块、按角色校验、fail closed）+ backfill_accuracy（幂等回填 loops/accuracy.json，已 verified 不覆盖）
+
+### 建议 2+3（commit 063c4f3）
+- `collect.py` 指标扩充：Stochastic %K/%D（14/3）、VWAP 20 日、布林带（20,2，收口 pct_b=None fail closed）；prompt 04 同步（旧 context 文件无新字段，下次采集生效）
+- `conclusion_block.py` 新增 news_temperature + enrich_plan：舆情温度与情绪周期幂等写入 plan.json（只追加只读上下文字段）；main() 子命令化 backfill|enrich
+
+### 建议 6（commit f94e2e0）
+- `pipeline/promote.py`：入 candidate 硬性前置 --differentiation 因子区分度说明（与在库策略相关性/增量逻辑），缺失即拒绝并列出在库策略对照；AGENT.md 工作纪律第 7 条成文
+- 样本外验证部分门禁 v2 已有（validation + DSR），不重复建设
+
+### 建议 7（commit fdf3259）
+- `trading_team/README.md` 新增「团队纪律（LLM 局限性护栏）」7 条：数据缺口标注 / 事实判断分离 / 单角色不单独成计划 / 准确率降权 / 结论块 fail closed / 防 HARKing / LLM 输出必须经风控+人工批复
+
+### 建议 4（commit 6a5e0d7）
+- `pipeline/research_ingest.py`：quant-x-monitor 报告 → 关键词分类（trading_signal/risk_management/噪音）→ 命中 signal 按关键词选型模板生成统一接口策略草案（research 状态入库，stage_strategy 自动扫描）
+- 幂等去重（ledger.jsonl 按 URL）、单次草案封顶 5、--dry-run；实测 8-23 摄取生成 4 份草案
+- Loop #4 挂起的"研究线索沉淀"正式打通
+
+### 验证
+- 全量 174 项 pytest 通过（新增 test_conclusion_block 8 项 / test_indicators 4 项 / test_promote 6 项 / test_research_ingest 11 项）
+
+### 遗留（新增）
+- 4 份 ingest 草案待人工核实逻辑后走 promote --differentiation 晋级评估（当前均为 momentum 模板兜底，区分度存疑，大概率应退役或改写）
+- enrich_plan/backfill 需在每日日报 Automation 提示词中接入调用（当前为手动 CLI）
+- 建议 8：等 8-28 首批 accuracy 数据后统一绩效口径
