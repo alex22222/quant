@@ -193,22 +193,22 @@
         <div>
           <div style="color:var(--accent);font-weight:600;margin-bottom:4px">📊 分析师团队（Analyst Team）</div>
           <div style="color:var(--dim);margin-bottom:6px">四位分析师并行采集市场信息，覆盖多维度数据：</div>
-          <div style="margin-bottom:4px"><b>基本面分析师</b>：分析财报、收益报告、内部交易等数据，评估公司内在价值，判断股票是否被低估或高估，为长期投资提供参考。</div>
-          <div style="margin-bottom:4px"><b>情绪分析师</b>：关注社交媒体、舆情打分及公司内部情绪等公众信息，预测短期投资者行为可能对股价带来的影响。</div>
-          <div style="margin-bottom:4px"><b>新闻分析师</b>：追踪宏观经济指标、重大新闻及公司事件，识别对市场有潜在影响的突发消息或政策变化，为把握行情拐点提供依据。</div>
-          <div style="margin-bottom:4px"><b>技术分析师</b>：计算 MACD、RSI 等技术指标，分析价量关系和价格形态，判断买卖时机和趋势走势。</div>
+          <div style="margin-bottom:4px"><b>基本面分析师（陈致远）</b>：分析财报、收益报告、内部交易等数据，评估公司内在价值，判断股票是否被低估或高估，为长期投资提供参考。</div>
+          <div style="margin-bottom:4px"><b>情绪分析师（林晓晴）</b>：关注社交媒体、舆情打分及公司内部情绪等公众信息，预测短期投资者行为可能对股价带来的影响。</div>
+          <div style="margin-bottom:4px"><b>新闻分析师（周文轩）</b>：追踪宏观经济指标、重大新闻及公司事件，识别对市场有潜在影响的突发消息或政策变化，为把握行情拐点提供依据。</div>
+          <div style="margin-bottom:4px"><b>技术分析师（赵铭远）</b>：计算 MACD、RSI 等技术指标，分析价量关系和价格形态，判断买卖时机和趋势走势。</div>
         </div>
         <div>
           <div style="color:var(--accent);font-weight:600;margin-bottom:4px">🔬 研究团队（Research Team）</div>
           <div style="color:var(--dim);margin-bottom:6px">对分析师团队的数据进行批判性评估，以多空两个视角展开多轮辩论：</div>
-          <div style="margin-bottom:4px"><b>多头研究员（Bullish）</b>：强调积极面与增长空间，为看多策略提供支撑性论据。</div>
-          <div style="margin-bottom:4px"><b>空头研究员（Bearish）</b>：着重揭示潜在风险与消极信号，为避免盲目入场提供「对立」观点。</div>
+          <div style="margin-bottom:4px"><b>多头研究员（吴思远 · Bullish）</b>：强调积极面与增长空间，为看多策略提供支撑性论据。</div>
+          <div style="margin-bottom:4px"><b>空头研究员（孙若兰 · Bearish）</b>：着重揭示潜在风险与消极信号，为避免盲目入场提供「对立」观点。</div>
           <div style="color:var(--accent);font-weight:600;margin-bottom:4px;margin-top:10px">💼 交易员代理（Trader Agent）</div>
           <div style="color:var(--dim);margin-bottom:6px">汇总分析师及研究员的意见后，结合量化数据与情感信息等多维输入：</div>
-          <div style="margin-bottom:4px"><b>交易员</b>：评估分析师及研究员的建议，决定交易时机与规模，执行买卖指令，动态调整持仓。</div>
+          <div style="margin-bottom:4px"><b>交易员（郑远航）</b>：评估分析师及研究员的建议，决定交易时机与规模，执行买卖指令，动态调整持仓。</div>
           <div style="color:var(--accent);font-weight:600;margin-bottom:4px;margin-top:10px">🛡️ 风险管理团队（Risk Management Team）</div>
           <div style="color:var(--dim);margin-bottom:6px">实时跟踪交易组合的风险敞口，确保交易活动符合风险参数：</div>
-          <div style="margin-bottom:4px"><b>风险经理</b>：评估市场波动、流动性、对手方风险等；执行风险缓释策略（止损、头寸分散）；向交易员提供风险反馈；确保整体组合与公司风险偏好匹配。</div>
+          <div style="margin-bottom:4px"><b>风险经理（黄守正）</b>：评估市场波动、流动性、对手方风险等；执行风险缓释策略（止损、头寸分散）；向交易员提供风险反馈；确保整体组合与公司风险偏好匹配。</div>
         </div>
       </div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:12px;color:var(--dim)">
@@ -408,19 +408,19 @@ async function refresh() {
 
   /* 第一层：分析师团队 */
   const ANALYSTS = [
-    ["📈","基本面分析师","分析财报/收益/内部交易，评估内在价值","见交易团队日报","team"],
-    ["😊","情绪分析师","关注社交媒体/舆情/市场情绪","见交易团队日报","team"],
-    ["📰","新闻分析师","追踪宏观/行业/公司事件","见交易团队日报","team"],
-    ["📉","技术分析师","计算 MACD/RSI，分析价量形态","见交易团队日报","team"],
+    ["📈","基本面分析师（陈致远）","分析财报/收益/内部交易，评估内在价值","见交易团队日报","team"],
+    ["😊","情绪分析师（林晓晴）","关注社交媒体/舆情/市场情绪","见交易团队日报","team"],
+    ["📰","新闻分析师（周文轩）","追踪宏观/行业/公司事件","见交易团队日报","team"],
+    ["📉","技术分析师（赵铭远）","计算 MACD/RSI，分析价量形态","见交易团队日报","team"],
   ];
   $("org-analysts").innerHTML = ANALYSTS.map(([icon,role,duty,holder,v]) =>
     `<div class="org-node" onclick="gotoView('${v}')"><div class="role">${icon} ${role}</div><div class="duty">${duty}</div><div class="holder">${holder}</div></div>`).join("");
 
   /* 第一层：研究与执行 */
   const EXECUTION = [
-    ["🔬","研究员","多头 vs 空头辩论，整合共识与分歧","见交易团队日报","team"],
-    ["💼","交易员","评估建议，决定时机与规模，执行指令","见交易团队日报","team"],
-    ["🛡️","风险经理","评估波动/流动性/对手方风险，审敞口","见交易团队日报","team"],
+    ["🔬","研究员（吴思远）","多头 vs 空头辩论，整合共识与分歧","见交易团队日报","team"],
+    ["💼","交易员（郑远航）","评估建议，决定时机与规模，执行指令","见交易团队日报","team"],
+    ["🛡️","风险经理（黄守正）","评估波动/流动性/对手方风险，审敞口","见交易团队日报","team"],
   ];
   $("org-execution").innerHTML = EXECUTION.map(([icon,role,duty,holder,v]) =>
     `<div class="org-node" onclick="gotoView('${v}')"><div class="role">${icon} ${role}</div><div class="duty">${duty}</div><div class="holder">${holder}</div></div>`).join("");
