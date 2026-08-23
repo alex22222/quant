@@ -127,12 +127,50 @@ def backfill_accuracy(date: str, team_dir: Path = TEAM_DIR) -> dict:
     return {"date": date, "updated": True, "ratings": len(ratings), "reason": "ok"}
 
 
+def news_temperature(date: str, team_dir: Path = TEAM_DIR) -> float | None:
+    """从当日新闻报告结论块提取舆情温度；块缺失/不合法返回 None。"""
+    report = team_dir / "outputs" / date / "03_news.md"
+    if not report.exists():
+        return None
+    block = extract_block(report.read_text(encoding="utf-8"), "news")
+    return block["temperature"] if block else None
+
+
+def enrich_plan(date: str, team_dir: Path = TEAM_DIR) -> dict:
+    """把当日舆情温度与情绪周期写进 plan.json（plan.json 仍为草稿，仅追加只读上下文字段）。
+
+    幂等：重复执行结果一致。plan.json 不存在或结论块缺失时返回原因，不改文件。"""
+    plan_path = team_dir / "outputs" / date / "plan.json"
+    if not plan_path.exists():
+        return {"date": date, "updated": False, "reason": "plan.json 不存在"}
+    temp = news_temperature(date, team_dir)
+    sent_report = team_dir / "outputs" / date / "02_sentiment.md"
+    cycle = None
+    if sent_report.exists():
+        block = extract_block(sent_report.read_text(encoding="utf-8"), "sentiment")
+        if block and block.get("market"):
+            cycle = block["market"]
+    if temp is None and cycle is None:
+        return {"date": date, "updated": False,
+                "reason": "新闻/情绪结论块均缺失或不合法（报告未完成）"}
+    plan = json.loads(plan_path.read_text(encoding="utf-8"))
+    if temp is not None:
+        plan["news_temperature"] = temp
+    if cycle is not None:
+        plan["sentiment_cycle"] = cycle
+    plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2), encoding="utf-8")
+    return {"date": date, "updated": True,
+            "news_temperature": temp, "sentiment_cycle": cycle}
+
+
 def main():
     import argparse
     ap = argparse.ArgumentParser(prog="trading_team.conclusion_block")
-    ap.add_argument("date", help="回填日期 YYYY-MM-DD")
+    ap.add_argument("cmd", choices=["backfill", "enrich"], nargs="?", default="backfill")
+    ap.add_argument("date", help="日期 YYYY-MM-DD")
     args = ap.parse_args()
-    print(json.dumps(backfill_accuracy(args.date), ensure_ascii=False, indent=2))
+    fn = backfill_accuracy if args.cmd == "backfill" else enrich_plan
+    print(json.dumps(fn(args.date), ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

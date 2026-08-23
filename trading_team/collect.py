@@ -195,6 +195,35 @@ def compute_indicators(rows: list[dict]) -> dict:
             ag = (ag * 13 + g) / 14; al = (al * 13 + l) / 14
         rsi14 = round(100 - 100 / (1 + ag / al), 2) if al > 0 else 100.0
 
+    # Stochastic Oscillator（14/3）：%K=(C-LL14)/(HH14-LL14)，%D=%K 的 3 日均值
+    def k_at(i):
+        win = rows[i - 13:i + 1]
+        hh = max(r["high"] for r in win); ll = min(r["low"] for r in win)
+        return (rows[i]["close"] - ll) / (hh - ll) * 100 if hh > ll else 50.0
+
+    stoch_k = stoch_d = None
+    if len(rows) >= 16:
+        ks = [k_at(i) for i in range(len(rows) - 3, len(rows))]
+        stoch_k, stoch_d = round(ks[-1], 2), round(sum(ks) / 3, 2)
+
+    # VWAP（日线近似：20 日典型价×成交量加权）
+    vwap_20d = None
+    if len(rows) >= 20:
+        win = rows[-20:]
+        pv = sum((r["high"] + r["low"] + r["close"]) / 3 * r["volume"] for r in win)
+        vv = sum(r["volume"] for r in win)
+        vwap_20d = round(pv / vv, 2) if vv else None
+
+    # 布林带（20, 2）
+    boll = {"mid": None, "upper": None, "lower": None, "pct_b": None}
+    if len(closes) >= 20:
+        win = closes[-20:]
+        mid = sum(win) / 20
+        sd = (sum((x - mid) ** 2 for x in win) / 20) ** 0.5
+        upper, lower = mid + 2 * sd, mid - 2 * sd
+        boll = {"mid": round(mid, 2), "upper": round(upper, 2), "lower": round(lower, 2),
+                "pct_b": round((closes[-1] - lower) / (upper - lower), 3) if upper > lower else None}
+
     last = rows[-1]
     recent = rows[-60:]
     return {
@@ -204,6 +233,8 @@ def compute_indicators(rows: list[dict]) -> dict:
         "dif": round(dif[-1], 3), "dea": round(dea[-1], 3), "macd_bar": round(macd_bar[-1], 3),
         "macd_bar_prev": round(macd_bar[-2], 3),
         "rsi14": rsi14,
+        "stoch_k": stoch_k, "stoch_d": stoch_d,
+        "vwap_20d": vwap_20d, "bollinger": boll,
         "vol_ma5": ma(vols, 5), "vol_ma20": ma(vols, 20),
         "vol_ratio_vs20": round(vols[-1] / (sum(vols[-21:-1]) / 20), 2) if len(vols) > 20 else None,
         "high_20d": max(r["high"] for r in rows[-20:]),

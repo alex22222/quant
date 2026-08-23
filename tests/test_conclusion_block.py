@@ -4,7 +4,12 @@ import json
 
 import pytest
 
-from trading_team.conclusion_block import backfill_accuracy, extract_block
+from trading_team.conclusion_block import (
+    backfill_accuracy,
+    enrich_plan,
+    extract_block,
+    news_temperature,
+)
 
 VALID_BLOCK = """### 研究团队每日结论
 - 综合评级：平安看多……
@@ -124,3 +129,82 @@ class TestBackfill:
             json.dumps({"entries": []}), encoding="utf-8")
         r = backfill_accuracy("2026-08-23", team_dir=tmp_path)
         assert not r["updated"] and "结论块" in r["reason"]
+
+
+SENTIMENT_BLOCK = """### 情绪团队每日结论
+```json
+{
+  "role": "sentiment", "date": "2026-08-23",
+  "market": "冰点期",
+  "ratings": [{"code": "601318", "name": "中国平安", "rating": "中性",
+               "confidence": 2, "one_line": "情绪中性"}]
+}
+```
+"""
+
+NEWS_NO_TEMP_BLOCK = """```json
+{"role": "news", "date": "2026-08-23",
+ "items": [{"title": "x", "sentiment": "Neutral", "score": 0}],
+ "ratings": []}
+```
+"""
+
+
+class TestEnrichPlan:
+    def _setup(self, tmp_path, news=NEWS_BLOCK, sentiment=SENTIMENT_BLOCK):
+        out = tmp_path / "outputs" / "2026-08-23"
+        out.mkdir(parents=True)
+        if news is not None:
+            (out / "03_news.md").write_text(news, encoding="utf-8")
+        if sentiment is not None:
+            (out / "02_sentiment.md").write_text(sentiment, encoding="utf-8")
+        (out / "plan.json").write_text(json.dumps(
+            {"date": "2026-08-23", "data_asof": "2026-08-23",
+             "proposals": [{"code": "601318"}]},
+            ensure_ascii=False), encoding="utf-8")
+        return tmp_path
+
+    def test_news_temperature_extracted(self, tmp_path):
+        team = self._setup(tmp_path)
+        assert news_temperature("2026-08-23", team_dir=team) == 0.1
+
+    def test_news_temperature_missing_report(self, tmp_path):
+        team = self._setup(tmp_path, news=None)
+        assert news_temperature("2026-08-23", team_dir=team) is None
+
+    def test_enrich_writes_both_fields(self, tmp_path):
+        team = self._setup(tmp_path)
+        r = enrich_plan("2026-08-23", team_dir=team)
+        assert r["updated"] and r["news_temperature"] == 0.1
+        assert r["sentiment_cycle"] == "冰点期"
+        plan = json.loads((team / "outputs" / "2026-08-23" / "plan.json").read_text())
+        assert plan["news_temperature"] == 0.1 and plan["sentiment_cycle"] == "冰点期"
+        assert plan["proposals"] == [{"code": "601318"}]  # 原字段不动
+
+    def test_enrich_idempotent(self, tmp_path):
+        team = self._setup(tmp_path)
+        enrich_plan("2026-08-23", team_dir=team)
+        first = (team / "outputs" / "2026-08-23" / "plan.json").read_text()
+        enrich_plan("2026-08-23", team_dir=team)
+        assert (team / "outputs" / "2026-08-23" / "plan.json").read_text() == first
+
+    def test_enrich_partial_news_only(self, tmp_path):
+        team = self._setup(tmp_path, sentiment=None)
+        r = enrich_plan("2026-08-23", team_dir=team)
+        assert r["updated"]
+        plan = json.loads((team / "outputs" / "2026-08-23" / "plan.json").read_text())
+        assert plan["news_temperature"] == 0.1 and "sentiment_cycle" not in plan
+
+    def test_enrich_fail_closed_no_blocks(self, tmp_path):
+        team = self._setup(tmp_path, news=NEWS_NO_TEMP_BLOCK, sentiment=None)
+        # news 块不合法（缺 temperature）且情绪报告不存在 → 不改 plan.json
+        before = (team / "outputs" / "2026-08-23" / "plan.json").read_text()
+        r = enrich_plan("2026-08-23", team_dir=team)
+        assert not r["updated"]
+        assert (team / "outputs" / "2026-08-23" / "plan.json").read_text() == before
+
+    def test_enrich_missing_plan(self, tmp_path):
+        team = self._setup(tmp_path)
+        (team / "outputs" / "2026-08-23" / "plan.json").unlink()
+        r = enrich_plan("2026-08-23", team_dir=team)
+        assert not r["updated"] and "plan.json" in r["reason"]
