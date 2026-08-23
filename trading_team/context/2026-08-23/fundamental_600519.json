@@ -1,0 +1,120 @@
+{
+  "financials": {
+    "reports": [
+      {
+        "report_date": "2026-06-30",
+        "eps": 35.57,
+        "revenue_yi": 922.78,
+        "net_profit_yi": 445.17,
+        "deducted_profit_yi": 444.64,
+        "revenue_yoy": 1.300099475569,
+        "profit_yoy": -1.951594855028,
+        "deducted_yoy": -2.040173883793,
+        "roe_weighted": 16.75,
+        "gross_margin": 89.5552128279,
+        "net_margin": 50.7515717487,
+        "debt_ratio": 15.1931121807
+      },
+      {
+        "report_date": "2026-03-31",
+        "eps": 21.76,
+        "revenue_yi": 547.03,
+        "net_profit_yi": 272.43,
+        "deducted_profit_yi": 272.4,
+        "revenue_yoy": 6.336009277123,
+        "profit_yoy": 1.471418294983,
+        "deducted_yoy": 1.452898253961,
+        "roe_weighted": 10.57,
+        "gross_margin": 89.7592176242,
+        "net_margin": 52.2244889889,
+        "debt_ratio": 12.1227489682
+      },
+      {
+        "report_date": "2025-12-31",
+        "eps": 65.66,
+        "revenue_yi": 1720.54,
+        "net_profit_yi": 823.2,
+        "deducted_profit_yi": 822.93,
+        "revenue_yoy": -1.200097176919,
+        "profit_yoy": -4.532254817158,
+        "deducted_yoy": -4.577640131939,
+        "roe_weighted": 32.53,
+        "gross_margin": 91.1795516835,
+        "net_margin": 50.5278865155,
+        "debt_ratio": 16.4153621922
+      },
+      {
+        "report_date": "2025-09-30",
+        "eps": 51.53,
+        "revenue_yi": 1309.04,
+        "net_profit_yi": 646.27,
+        "deducted_profit_yi": 646.81,
+        "revenue_yoy": 6.320001880648,
+        "profit_yoy": 6.245844952412,
+        "deducted_yoy": 6.419977286502,
+        "roe_weighted": 24.64,
+        "gross_margin": 91.2933832134,
+        "net_margin": 52.0800885914,
+        "debt_ratio": 12.8087525579
+      }
+    ]
+  },
+  "announcements": [
+    {
+      "date": "2026-08-15",
+      "title": "贵州茅台:贵州茅台关于召开2026年半年度业绩说明会的公告",
+      "columns": [
+        "其他"
+      ]
+    },
+    {
+      "date": "2026-08-15",
+      "title": "贵州茅台:贵州茅台关于贵州茅台集团财务有限公司的风险评估报告",
+      "columns": [
+        "其他"
+      ]
+    },
+    {
+      "date": "2026-08-15",
+      "title": "贵州茅台:贵州茅台2026年半年度报告摘要",
+      "columns": [
+        "半年度报告摘要"
+      ]
+    },
+    {
+      "date": "2026-08-15",
+      "title": "贵州茅台:贵州茅台关于会计政策变更的公告",
+      "columns": [
+        "其他"
+      ]
+    },
+    {
+      "date": "2026-08-15",
+      "title": "贵州茅台:贵州茅台第五届董事会2026年度第三次会议决议公告",
+      "columns": [
+        "董事会决议公告"
+      ]
+    },
+    {
+      "date": "2026-08-15",
+      "title": "贵州茅台:贵州茅台2026年半年度报告",
+      "columns": [
+        "半年度报告全文"
+      ]
+    },
+    {
+      "date": "2026-07-18",
+      "title": "贵州茅台:贵州茅台重大事项公告",
+      "columns": [
+        "其他"
+      ]
+    },
+    {
+      "date": "2026-06-22",
+      "title": "贵州茅台:贵州茅台2025年年度权益分派实施公告",
+      "columns": [
+        "分配方案实施"
+      ]
+    }
+  ]
+}

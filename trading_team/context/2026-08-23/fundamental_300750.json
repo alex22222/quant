@@ -1,0 +1,120 @@
+{
+  "financials": {
+    "reports": [
+      {
+        "report_date": "2026-06-30",
+        "eps": 9.51,
+        "revenue_yi": 2769.17,
+        "net_profit_yi": 432.84,
+        "deducted_profit_yi": 390.13,
+        "revenue_yoy": 54.800369148545,
+        "profit_yoy": 41.983941749454,
+        "deducted_yoy": 43.444603004956,
+        "roe_weighted": 12.08,
+        "gross_margin": 23.9283938867,
+        "net_margin": 16.9836844006,
+        "debt_ratio": 63.6524529171
+      },
+      {
+        "report_date": "2026-03-31",
+        "eps": 4.58,
+        "revenue_yi": 1291.31,
+        "net_profit_yi": 207.38,
+        "deducted_profit_yi": 180.93,
+        "revenue_yoy": 52.448695548242,
+        "profit_yoy": 48.523716069792,
+        "deducted_yoy": 52.949310399747,
+        "roe_weighted": 5.98,
+        "gross_margin": 24.8156219851,
+        "net_margin": 17.6078918159,
+        "debt_ratio": 62.3223404459
+      },
+      {
+        "report_date": "2025-12-31",
+        "eps": 16.14,
+        "revenue_yi": 4237.02,
+        "net_profit_yi": 722.01,
+        "deducted_profit_yi": 645.08,
+        "revenue_yoy": 17.040646606968,
+        "profit_yoy": 42.28344558352,
+        "deducted_yoy": 43.373369485096,
+        "roe_weighted": 24.91,
+        "gross_margin": 26.2728475704,
+        "net_margin": 18.1227228297,
+        "debt_ratio": 61.9392859503
+      },
+      {
+        "report_date": "2025-09-30",
+        "eps": 11.02,
+        "revenue_yi": 2830.72,
+        "net_profit_yi": 490.34,
+        "deducted_profit_yi": 436.19,
+        "revenue_yoy": 9.275323314892,
+        "profit_yoy": 36.201794979783,
+        "deducted_yoy": 35.562742331837,
+        "roe_weighted": 17.76,
+        "gross_margin": 25.3097598103,
+        "net_margin": 18.4747585073,
+        "debt_ratio": 61.2745239532
+      }
+    ]
+  },
+  "announcements": [
+    {
+      "date": "2026-08-12",
+      "title": "宁德时代:关于宁德时代新能源科技股份有限公司2026年第一次临时股东会的法律意见书",
+      "columns": [
+        "法律意见书"
+      ]
+    },
+    {
+      "date": "2026-08-12",
+      "title": "宁德时代:关于参与投资海南时代绿色产业投资基金合伙企业(有限合伙)的公告",
+      "columns": [
+        "投资设立公司"
+      ]
+    },
+    {
+      "date": "2026-08-12",
+      "title": "宁德时代:2026年第一次临时股东会决议公告",
+      "columns": [
+        "股东大会决议公告"
+      ]
+    },
+    {
+      "date": "2026-08-07",
+      "title": "宁德时代:关于回购股份事项前十名股东和前十名无限售条件股东持股情况的公告",
+      "columns": [
+        "回购进展情况"
+      ]
+    },
+    {
+      "date": "2026-08-06",
+      "title": "宁德时代:H股公告(截至2026年7月31日止股份发行人的证券变动月报表)",
+      "columns": [
+        "其他"
+      ]
+    },
+    {
+      "date": "2026-08-04",
+      "title": "宁德时代:2026年中期分红A股实施公告",
+      "columns": [
+        "分配方案实施"
+      ]
+    },
+    {
+      "date": "2026-07-30",
+      "title": "宁德时代:关于回购股份事项前十名股东和前十名无限售条件股东持股情况的公告",
+      "columns": [
+        "回购进展情况"
+      ]
+    },
+    {
+      "date": "2026-07-26",
+      "title": "宁德时代:2026年7月24日投资者关系活动记录表",
+      "columns": [
+        "调研活动"
+      ]
+    }
+  ]
+}

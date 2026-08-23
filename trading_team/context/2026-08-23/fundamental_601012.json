@@ -1,0 +1,124 @@
+{
+  "financials": {
+    "reports": [
+      {
+        "report_date": "2026-03-31",
+        "eps": -0.25,
+        "revenue_yi": 111.92,
+        "net_profit_yi": -19.2,
+        "deducted_profit_yi": -21.35,
+        "revenue_yoy": -18.025461201503,
+        "profit_yoy": -34.197566456205,
+        "deducted_yoy": -7.927535401383,
+        "roe_weighted": -3.61,
+        "gross_margin": -1.1879332758,
+        "net_margin": -17.7561393018,
+        "debt_ratio": 66.0777511155
+      },
+      {
+        "report_date": "2025-12-31",
+        "eps": -0.85,
+        "revenue_yi": 703.47,
+        "net_profit_yi": -64.2,
+        "deducted_profit_yi": -73.62,
+        "revenue_yoy": -14.815798483424,
+        "profit_yoy": 25.285377842608,
+        "deducted_yoy": 15.591276175383,
+        "roe_weighted": -11.15,
+        "gross_margin": 0.8097714984,
+        "net_margin": -9.2537135119,
+        "debt_ratio": 64.428043823
+      },
+      {
+        "report_date": "2025-09-30",
+        "eps": -0.45,
+        "revenue_yi": 509.15,
+        "net_profit_yi": -34.03,
+        "deducted_profit_yi": -44.54,
+        "revenue_yoy": -13.104240496,
+        "profit_yoy": 47.52212485657,
+        "deducted_yoy": 31.151274662235,
+        "roe_weighted": -5.76,
+        "gross_margin": 1.214175261,
+        "net_margin": -6.7830483781,
+        "debt_ratio": 62.4310401628
+      },
+      {
+        "report_date": "2025-06-30",
+        "eps": -0.34,
+        "revenue_yi": 328.13,
+        "net_profit_yi": -25.69,
+        "deducted_profit_yi": -33.04,
+        "revenue_yoy": -14.834541620953,
+        "profit_yoy": 50.878620683527,
+        "deducted_yoy": 37.230143245258,
+        "roe_weighted": -4.31,
+        "gross_margin": -0.8162187761,
+        "net_margin": -7.9181493409,
+        "debt_ratio": 60.7239744647
+      }
+    ]
+  },
+  "announcements": [
+    {
+      "date": "2026-08-05",
+      "title": "隆基绿能:关于提供担保的进展公告",
+      "columns": [
+        "提供/对外担保公告",
+        "对外担保"
+      ]
+    },
+    {
+      "date": "2026-08-01",
+      "title": "隆基绿能:第六届董事会2026年第二次会议决议公告",
+      "columns": [
+        "董事会决议公告",
+        "其它"
+      ]
+    },
+    {
+      "date": "2026-08-01",
+      "title": "隆基绿能:关于暂不向下修正“隆22转债”转股价格的公告",
+      "columns": [
+        "其他"
+      ]
+    },
+    {
+      "date": "2026-07-31",
+      "title": "隆基绿能:投资者关系活动记录表(2026年7月)",
+      "columns": [
+        "调研活动"
+      ]
+    },
+    {
+      "date": "2026-07-25",
+      "title": "隆基绿能:关于“隆22转债”预计满足转股价格向下修正条件的提示性公告",
+      "columns": [
+        "其他"
+      ]
+    },
+    {
+      "date": "2026-07-15",
+      "title": "隆基绿能:2026年半年度业绩预告",
+      "columns": [
+        "业绩预告",
+        "其它"
+      ]
+    },
+    {
+      "date": "2026-07-03",
+      "title": "隆基绿能:关于提供担保的进展公告",
+      "columns": [
+        "提供/对外担保公告",
+        "对外担保"
+      ]
+    },
+    {
+      "date": "2026-07-02",
+      "title": "隆基绿能:关于可转债转股结果暨股份变动公告",
+      "columns": [
+        "股本变动"
+      ]
+    }
+  ]
+}

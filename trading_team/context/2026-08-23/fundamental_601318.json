@@ -1,0 +1,120 @@
+{
+  "financials": {
+    "reports": [
+      {
+        "report_date": "2026-06-30",
+        "eps": 5.3,
+        "revenue_yi": 5751.38,
+        "net_profit_yi": 925.85,
+        "deducted_profit_yi": 877.12,
+        "revenue_yoy": 15.010118461994,
+        "profit_yoy": 36.060370038356,
+        "deducted_yoy": 19.220888665371,
+        "roe_weighted": 9,
+        "gross_margin": null,
+        "net_margin": 18.6934266211,
+        "debt_ratio": 89.8322867132
+      },
+      {
+        "report_date": "2026-03-31",
+        "eps": 1.43,
+        "revenue_yi": 2184.05,
+        "net_profit_yi": 250.22,
+        "deducted_profit_yi": 239.12,
+        "revenue_yoy": -6.183822234441,
+        "profit_yoy": -7.380811371039,
+        "deducted_yoy": -20.975577514128,
+        "roe_weighted": 2.5,
+        "gross_margin": null,
+        "net_margin": 15.229962684,
+        "debt_ratio": 89.8779437919
+      },
+      {
+        "report_date": "2025-12-31",
+        "eps": 7.68,
+        "revenue_yi": 10505.06,
+        "net_profit_yi": 1347.78,
+        "deducted_profit_yi": 1437.73,
+        "revenue_yoy": 2.097431785601,
+        "profit_yoy": 6.453829567086,
+        "deducted_yoy": 22.472570532915,
+        "roe_weighted": 14,
+        "gross_margin": null,
+        "net_margin": 15.0690238799,
+        "debt_ratio": 89.8119152819
+      },
+      {
+        "report_date": "2025-09-30",
+        "eps": 7.56,
+        "revenue_yi": 8329.4,
+        "net_profit_yi": 1328.56,
+        "deducted_profit_yi": 1420.57,
+        "revenue_yoy": 7.42304125832,
+        "profit_yoy": 11.473209041634,
+        "deducted_yoy": 26.872856530437,
+        "roe_weighted": 13.7,
+        "gross_margin": null,
+        "net_margin": 18.6168271424,
+        "debt_ratio": 89.9380314701
+      }
+    ]
+  },
+  "announcements": [
+    {
+      "date": "2026-08-21",
+      "title": "中国平安:中国平安2026年中期利润分配方案公告",
+      "columns": [
+        "分配预案"
+      ]
+    },
+    {
+      "date": "2026-08-21",
+      "title": "中国平安:中国平安第十三届董事会第十五次会议决议公告",
+      "columns": [
+        "董事会决议公告"
+      ]
+    },
+    {
+      "date": "2026-08-21",
+      "title": "中国平安:中国平安2026年中期投资者保护工作报告暨“提质增效重回报”执行情况报告",
+      "columns": [
+        "其他"
+      ]
+    },
+    {
+      "date": "2026-08-21",
+      "title": "中国平安:中国平安信息披露暂缓与豁免事务管理制度(2026版)",
+      "columns": [
+        "管理办法/制度"
+      ]
+    },
+    {
+      "date": "2026-08-21",
+      "title": "中国平安:中国平安信息披露事务管理制度(2026版)",
+      "columns": [
+        "管理办法/制度"
+      ]
+    },
+    {
+      "date": "2026-08-21",
+      "title": "中国平安:中国平安内幕信息知情人登记管理规定(2026版)",
+      "columns": [
+        "议事规则/实施细则"
+      ]
+    },
+    {
+      "date": "2026-08-21",
+      "title": "中国平安:中国平安投资者关系管理工作办法(2026版)",
+      "columns": [
+        "管理办法/制度"
+      ]
+    },
+    {
+      "date": "2026-08-21",
+      "title": "中国平安:中国平安2026年中期报告",
+      "columns": [
+        "半年度报告全文"
+      ]
+    }
+  ]
+}

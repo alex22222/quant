@@ -1,0 +1,120 @@
+{
+  "financials": {
+    "reports": [
+      {
+        "report_date": "2026-06-30",
+        "eps": 0.58,
+        "revenue_yi": 780.25,
+        "net_profit_yi": 27.53,
+        "deducted_profit_yi": 22.21,
+        "revenue_yoy": 9.045950641103,
+        "profit_yoy": -45.570215425547,
+        "deducted_yoy": -45.88569409586,
+        "roe_weighted": 3.65,
+        "gross_margin": 25.4848414091,
+        "net_margin": 3.5694202958,
+        "debt_ratio": 67.9383893915
+      },
+      {
+        "report_date": "2026-03-31",
+        "eps": 0.27,
+        "revenue_yi": 349.88,
+        "net_profit_yi": 13.1,
+        "deducted_profit_yi": 9.36,
+        "revenue_yoy": 6.12669555835,
+        "profit_yoy": -46.581650206345,
+        "deducted_yoy": -52.155363622426,
+        "roe_weighted": 1.72,
+        "gross_margin": 28.2761572042,
+        "net_margin": 3.7676570608,
+        "debt_ratio": 65.8709760192
+      },
+      {
+        "report_date": "2025-12-31",
+        "eps": 1.17,
+        "revenue_yi": 1338.95,
+        "net_profit_yi": 56.18,
+        "deducted_profit_yi": 33.7,
+        "revenue_yoy": 10.384861997591,
+        "profit_yoy": -33.31888787284,
+        "deducted_yoy": -45.454839701575,
+        "roe_weighted": 7.58,
+        "gross_margin": 30.2505716027,
+        "net_margin": 4.1562820726,
+        "debt_ratio": 65.2606511799
+      },
+      {
+        "report_date": "2025-09-30",
+        "eps": 1.11,
+        "revenue_yi": 1005.2,
+        "net_profit_yi": 53.22,
+        "deducted_profit_yi": 38.79,
+        "revenue_yoy": 11.633194824846,
+        "profit_yoy": -32.687658344762,
+        "deducted_yoy": -43.76969461871,
+        "roe_weighted": 7.2,
+        "gross_margin": 30.5493896767,
+        "net_margin": 5.3170496631,
+        "debt_ratio": 64.8821972805
+      }
+    ]
+  },
+  "announcements": [
+    {
+      "date": "2026-08-22",
+      "title": "中兴通讯:第十届董事会第三十三次会议决议公告",
+      "columns": [
+        "董事会决议公告"
+      ]
+    },
+    {
+      "date": "2026-08-22",
+      "title": "中兴通讯:关于“质量回报双提升”行动方案的进展公告",
+      "columns": [
+        "其他"
+      ]
+    },
+    {
+      "date": "2026-08-22",
+      "title": "中兴通讯:公司信用类债券信息披露管理制度",
+      "columns": [
+        "管理办法/制度"
+      ]
+    },
+    {
+      "date": "2026-08-22",
+      "title": "中兴通讯:2026年半年度报告",
+      "columns": [
+        "半年度报告全文"
+      ]
+    },
+    {
+      "date": "2026-08-22",
+      "title": "中兴通讯:2026年半年度报告摘要",
+      "columns": [
+        "半年度报告摘要"
+      ]
+    },
+    {
+      "date": "2026-08-22",
+      "title": "中兴通讯:2026年半年度非经营性资金占用及其他关联资金往来情况的专项说明",
+      "columns": [
+        "专项说明/独立意见"
+      ]
+    },
+    {
+      "date": "2026-08-12",
+      "title": "中兴通讯:关于按照《香港上市规则》公布董事会会议通告",
+      "columns": [
+        "其他"
+      ]
+    },
+    {
+      "date": "2026-08-05",
+      "title": "中兴通讯:关于按照《香港上市规则》公布2026年7月份证券变动月报表的公告",
+      "columns": [
+        "其他"
+      ]
+    }
+  ]
+}

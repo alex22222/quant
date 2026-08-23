@@ -1,0 +1,120 @@
+{
+  "financials": {
+    "reports": [
+      {
+        "report_date": "2026-03-31",
+        "eps": 0.448,
+        "revenue_yi": 1502.25,
+        "net_profit_yi": 40.85,
+        "deducted_profit_yi": 41.48,
+        "revenue_yoy": -11.819136563905,
+        "profit_yoy": -55.384405326715,
+        "deducted_yoy": -49.244208038375,
+        "roe_weighted": 1.65,
+        "gross_margin": 18.806213978,
+        "net_margin": 2.6699434957,
+        "debt_ratio": 70.9425655271
+      },
+      {
+        "report_date": "2025-12-31",
+        "eps": 3.58,
+        "revenue_yi": 8039.65,
+        "net_profit_yi": 326.19,
+        "deducted_profit_yi": 294.46,
+        "revenue_yoy": 3.456751786996,
+        "profit_yoy": -18.967701027859,
+        "deducted_yoy": -20.380193682554,
+        "roe_weighted": 15.31,
+        "gross_margin": 17.7445292336,
+        "net_margin": 4.1992822777,
+        "debt_ratio": 70.7445464985
+      },
+      {
+        "report_date": "2025-09-30",
+        "eps": 2.56,
+        "revenue_yi": 5662.66,
+        "net_profit_yi": 233.33,
+        "deducted_profit_yi": 204.9,
+        "revenue_yoy": 12.745458791355,
+        "profit_yoy": -7.547877486096,
+        "deducted_yoy": -11.649685833568,
+        "roe_weighted": 10.83,
+        "gross_margin": 17.873574459,
+        "net_margin": 4.2792050781,
+        "debt_ratio": 71.3503485402
+      },
+      {
+        "report_date": "2025-06-30",
+        "eps": 1.71,
+        "revenue_yi": 3712.81,
+        "net_profit_yi": 155.11,
+        "deducted_profit_yi": 136.0,
+        "revenue_yoy": 23.29724729536,
+        "profit_yoy": 13.786520201329,
+        "deducted_yoy": 10.428614092876,
+        "roe_weighted": 7.43,
+        "gross_margin": 18.0095044898,
+        "net_margin": 4.319892816,
+        "debt_ratio": 71.081429723
+      }
+    ]
+  },
+  "announcements": [
+    {
+      "date": "2026-08-14",
+      "title": "比亚迪:H股公告(董事会会议通告)",
+      "columns": [
+        "其他"
+      ]
+    },
+    {
+      "date": "2026-08-04",
+      "title": "比亚迪:H股公告(股份发行人及根据《上市规则》第十九B章上市的香港预托证券发行人的证券变动月报表)",
+      "columns": [
+        "其他"
+      ]
+    },
+    {
+      "date": "2026-08-03",
+      "title": "比亚迪:2026年7月产销快报",
+      "columns": [
+        "月度经营情况"
+      ]
+    },
+    {
+      "date": "2026-07-24",
+      "title": "比亚迪:2025年度利润分配实施公告",
+      "columns": [
+        "分配方案实施"
+      ]
+    },
+    {
+      "date": "2026-07-09",
+      "title": "比亚迪:2026年7月9日投资者关系活动记录表（二）",
+      "columns": [
+        "调研活动"
+      ]
+    },
+    {
+      "date": "2026-07-09",
+      "title": "比亚迪:2026年7月9日投资者关系活动记录表",
+      "columns": [
+        "调研活动"
+      ]
+    },
+    {
+      "date": "2026-07-02",
+      "title": "比亚迪:2026年7月2日投资者关系活动记录表",
+      "columns": [
+        "调研活动"
+      ]
+    },
+    {
+      "date": "2026-07-02",
+      "title": "比亚迪:2026年6月产销快报",
+      "columns": [
+        "月度经营情况"
+      ]
+    }
+  ]
+}

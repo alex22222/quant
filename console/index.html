@@ -281,7 +281,10 @@
   <!-- 数据部 -->
   <section class="view" id="v-data">
     <div class="vhead"><h1>🗄️ 数据部</h1><p>职责：为分析师团队提供 A 股日线数据基础设施——采集、更新、新鲜度保障 · 产出：status.data · 数据来源：东财主源 + 腾讯兜底</p></div>
-    <div class="card" id="data-card">—</div>
+    <div class="grid2" id="data-summary">—</div>
+    <div class="card" id="data-freshness" style="margin-top:12px">—</div>
+    <div class="card" style="margin-top:12px"><div class="sub" style="margin-bottom:10px;font-weight:600;color:var(--text)">🇨🇳 A股数据采集渠道</div><table id="data-a-sources"><thead><tr><th>渠道</th><th>状态</th><th>详情</th><th>采集时间</th></tr></thead><tbody></tbody></table></div>
+    <div class="card" style="margin-top:12px"><div class="sub" style="margin-bottom:10px;font-weight:600;color:var(--text)">🌍 全球宏观数据采集渠道</div><table id="data-global-sources"><thead><tr><th>渠道</th><th>状态</th><th>数据源</th><th>截至时间</th><th>备注</th></tr></thead><tbody></tbody></table></div>
   </section>
 
   <!-- 投研部 · 策略库 -->
@@ -434,16 +437,78 @@ async function refresh() {
     `<div class="org-node" onclick="gotoView('${v}')"><div class="role">${icon} ${role}</div><div class="duty">${duty}</div><div class="holder">${holder}</div></div>`).join("");
 
   /* 数据部 */
+  /* 数据部 */
   const d = stages.data?.result;
-  $("data-card").innerHTML = d ? `
-    <div class="kv"><span>数据包路径</span><b>${d.bundle_path}</b></div>
-    <div class="kv"><span>覆盖股票数</span><b>${d.stocks}</b></div>
-    <div class="kv"><span>数据区间</span><b>${d.range}</b></div>
-    <div class="kv"><span>最新交易日</span><b>${d.latest_trading_day}</b></div>
-    <div class="kv"><span>新鲜度</span><b>${d.freshness_days} 天${d.freshness_days>35?' ⚠️ 建议更新':''}</b></div>
-    <div class="kv"><span>月度更新</span><b>${d.updated ? "本次已更新" : "未触发（每月2号定时任务自动更新）"}</b></div>
-    <div class="sub" style="margin-top:8px">${d.note||""}</div>` : "—";
+  const _esc = s => String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  // 新鲜度信息（保留原有 bundle 信息）
+  $("data-freshness").innerHTML = d ? `
+    <div class="grid2">
+      <div><div class="sub">数据包路径</div><div style="font-size:13px;margin-top:4px">${d.bundle_path}</div></div>
+      <div><div class="sub">覆盖股票数</div><div style="font-size:13px;margin-top:4px">${d.stocks} 只</div></div>
+      <div><div class="sub">数据区间</div><div style="font-size:13px;margin-top:4px">${d.range}</div></div>
+      <div><div class="sub">最新交易日</div><div style="font-size:13px;margin-top:4px">${d.latest_trading_day}</div></div>
+    </div>
+    <div class="sub" style="margin-top:8px">新鲜度 ${d.freshness_days} 天${d.freshness_days>35?' ⚠️ 建议更新':''} · 月度更新 ${d.updated ? "本次已更新" : "未触发（每月2号定时任务自动更新）"}${d.note ? " · " + d.note : ""}</div>` : "—";
 
+  // 采集渠道健康状态
+  try {
+    const idx = await (await fetch("/trading_team/outputs/index.json?_=" + Date.now())).json();
+    const latestDate = idx[0]?.date || d?.latest_trading_day;
+    if (latestDate) {
+      let manifest = null, globalMacro = null;
+      try { manifest = await (await fetch(`/trading_team/context/${latestDate}/manifest.json?_=` + Date.now())).json(); } catch(e) {}
+      try { globalMacro = await (await fetch(`/trading_team/context/${latestDate}/global_macro.json?_=` + Date.now())).json(); } catch(e) {}
+
+      // A股渠道
+      const aSources = manifest?.sources || {};
+      const aEntries = Object.entries(aSources).map(([k, v]) => {
+        const nameMap = {
+          snapshot: "行情快照", technical_600519: "技术-茅台", fundamental_600519: "基本面-茅台",
+          technical_000858: "技术-五粮液", fundamental_000858: "基本面-五粮液",
+          technical_600036: "技术-招行", fundamental_600036: "基本面-招行",
+          technical_601318: "技术-平安", fundamental_601318: "基本面-平安",
+          technical_300750: "技术-宁德", fundamental_300750: "基本面-宁德",
+          technical_002594: "技术-比亚迪", fundamental_002594: "基本面-比亚迪",
+          technical_601899: "技术-紫金", fundamental_601899: "基本面-紫金",
+          technical_000333: "技术-美的", fundamental_000333: "基本面-美的",
+          technical_600900: "技术-长电", fundamental_600900: "基本面-长电",
+          technical_601012: "技术-隆基", fundamental_601012: "基本面-隆基",
+          technical_000063: "技术-中兴", fundamental_000063: "基本面-中兴",
+          technical_000300: "技术-沪深300", news: "新闻快讯", sentiment: "情绪数据"
+        };
+        return { key: k, name: nameMap[k] || k, ok: v.ok, detail: v.detail || "" };
+      });
+      const aOk = aEntries.filter(e => e.ok).length;
+      $("data-a-sources").querySelector("tbody").innerHTML = aEntries.map(e =>
+        `<tr><td>${_esc(e.name)}</td><td><span class="dot ${e.ok ? 'ok' : 'failed'}"></span> ${_esc(e.ok ? 'OK' : 'FAIL')}</td><td>${_esc(e.detail || "")}</td><td>${manifest?.finished_at ? manifest.finished_at.slice(11,19) : "—"}</td></tr>`
+      ).join("") || "<tr><td colspan=4>—</td></tr>";
+
+      // 全球宏观渠道
+      const gSections = globalMacro?.sections || {};
+      const gEntries = Object.entries(gSections).map(([k, v]) => {
+        const nameMap = { overnight_us: "隔夜美股", vix: "VIX恐慌指数", asia: "亚太市场", commodities: "大宗商品", forex: "外汇", monetary_policy: "货币政策", a_share_hotspots: "A股热点", global_news: "全球新闻" };
+        return { key: k, name: nameMap[k] || k, ok: v.ok, source: v.source || "—", asof: v.asof || "—", error: v.error || "", note: v.note || "" };
+      });
+      const gOk = gEntries.filter(e => e.ok).length;
+      $("data-global-sources").querySelector("tbody").innerHTML = gEntries.map(e =>
+        `<tr><td>${_esc(e.name)}</td><td><span class="dot ${e.ok ? 'ok' : 'failed'}"></span> ${_esc(e.ok ? 'OK' : 'FAIL')}</td><td>${_esc(e.source)}</td><td>${_esc(e.asof)}</td><td>${e.error ? '<span style="color:var(--fail)">' + _esc(e.error.slice(0,80)) + '</span>' : _esc(e.note)}</td></tr>`
+      ).join("") || "<tr><td colspan=5>—</td></tr>";
+
+      // 总览
+      const totalOk = aOk + gOk;
+      const totalFail = aEntries.length - aOk + gEntries.length - gOk;
+      const totalSources = aEntries.length + gEntries.length;
+      $("data-summary").innerHTML = `
+        <div class="card" style="margin:0"><div class="sub">A股渠道</div><div class="metric" style="font-size:20px"><span style="color:var(--ok)">${aOk}</span> / ${aEntries.length} OK</div></div>
+        <div class="card" style="margin:0"><div class="sub">全球宏观渠道</div><div class="metric" style="font-size:20px"><span style="color:var(--ok)">${gOk}</span> / ${gEntries.length} OK</div></div>
+        <div class="card" style="margin:0"><div class="sub">总成功率</div><div class="metric" style="font-size:20px;color:${totalFail===0?'var(--ok)':'var(--run)'}">${totalSources ? Math.round(totalOk/totalSources*100) : 0}%</div></div>
+        <div class="card" style="margin:0"><div class="sub">采集时间</div><div style="font-size:16px;font-weight:600;margin-top:4px">${manifest?.started_at?.slice(0,16)?.replace("T"," ") || "—"}</div><div class="sub">${globalMacro?.generated_at?.slice(0,16)?.replace("T"," ") || "—"}</div></div>`;
+    } else {
+      $("data-summary").innerHTML = `<div class="card" style="margin:0"><div class="sub">暂无采集记录</div></div>`;
+    }
+  } catch(e) {
+    $("data-summary").innerHTML = `<div class="card" style="margin:0"><div class="sub">渠道状态读取失败</div></div>`;
+  }
   /* 投研部 · 策略库（门禁 v2 成绩单） */
   const btr = stages.backtest?.result || {};
   const btResults = btr.results || {};

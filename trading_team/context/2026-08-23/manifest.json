@@ -1,0 +1,113 @@
+{
+  "date": "2026-08-23",
+  "started_at": "2026-08-23T08:43:38",
+  "sources": {
+    "snapshot": {
+      "ok": true,
+      "detail": "东财 12 只"
+    },
+    "technical_600519": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_600519": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
+    "technical_000858": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_000858": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
+    "technical_600036": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_600036": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
+    "technical_601318": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_601318": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
+    "technical_300750": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_300750": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
+    "technical_002594": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_002594": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
+    "technical_601899": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_601899": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
+    "technical_000333": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_000333": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
+    "technical_600900": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_600900": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
+    "technical_601012": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_601012": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
+    "technical_000063": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "fundamental_000063": {
+      "ok": true,
+      "detail": "4 期财报, 8 条公告"
+    },
+    "technical_000300": {
+      "ok": true,
+      "detail": "as_of 2026-08-21"
+    },
+    "news": {
+      "ok": true,
+      "detail": "10 条快讯"
+    },
+    "sentiment": {
+      "ok": true,
+      "detail": "涨停 54 / 跌停 13"
+    }
+  },
+  "ok": true,
+  "latest_trade_date": "2026-08-21",
+  "finished_at": "2026-08-23T08:44:46"
+}

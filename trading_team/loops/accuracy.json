@@ -23,6 +23,41 @@
       },
       "result_5d": null,
       "score": null
+    },
+    {
+      "date": "2026-08-23",
+      "trade_date_ref": "2026-08-21",
+      "verify_after": "2026-08-28",
+      "verified": false,
+      "note": "非交易日复盘版；观察池扩至 11 只",
+      "ratings": {
+        "601318": {"rating": "看多", "confidence": 4, "ref_price": 53.35},
+        "601899": {"rating": "看多", "confidence": 4, "ref_price": 34.74},
+        "300750": {"rating": "中性偏多", "confidence": 3, "ref_price": 391.15},
+        "600036": {"rating": "中性偏多", "confidence": 3, "ref_price": 38.90},
+        "000333": {"rating": "中性", "confidence": 2, "ref_price": 84.30},
+        "600900": {"rating": "中性", "confidence": 2, "ref_price": 27.96},
+        "000858": {"rating": "中性", "confidence": 2, "ref_price": 71.19},
+        "002594": {"rating": "中性偏空", "confidence": 2, "ref_price": 90.47},
+        "600519": {"rating": "看空", "confidence": 3, "ref_price": 1272.83},
+        "601012": {"rating": "看空", "confidence": 3, "ref_price": 12.42},
+        "000063": {"rating": "看空", "confidence": 4, "ref_price": 33.78}
+      },
+      "trader_plan": {
+        "601318": {"action": "买入15%", "entry": "53.0/52.2", "stop": 50.60},
+        "300750": {"action": "条件买入10%", "entry": "突破408.6", "stop": 388.00},
+        "601899": {"action": "条件买入8%(风控降仓)", "entry": "33.8/33.4", "stop": 32.20},
+        "600036": {"action": "条件买入5%", "entry": "38.5/38.0", "stop": 37.30},
+        "000858": {"action": "观望"},
+        "000333": {"action": "观望"},
+        "600900": {"action": "观望"},
+        "600519": {"action": "回避"},
+        "601012": {"action": "回避"},
+        "000063": {"action": "回避"},
+        "002594": {"action": "回避"}
+      },
+      "result_5d": null,
+      "score": null
     }
   ],
   "role_accuracy": {

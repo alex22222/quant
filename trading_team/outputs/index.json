@@ -1,5 +1,21 @@
 [
   {
+    "date": "2026-08-23",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md"
+    ],
+    "headline": "指数弱反弹下的结构市延续：做多保险（平安）+ 资源（紫金，降仓回踩买），等突破做多宁德，轻仓试错招行；回避茅台/中兴/隆基/比亚迪。",
+    "ratings": {},
+    "data_asof": "2026-08-21",
+    "collect_ok": true
+  },
+  {
     "date": "2026-08-22",
     "reports": [
       "01_fundamental.md",
