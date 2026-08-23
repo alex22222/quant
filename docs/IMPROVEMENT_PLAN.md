@@ -193,3 +193,49 @@ Week 4:  Phase 3（LLM 降级）+ 全链路联调
 - 98 项 pytest 全部通过
 - turtle_bluechip 晋升 live（status.json）
 - commit `4e16f02`（7 files changed, 168 insertions），已推送 GitHub main
+
+---
+
+## 执行记录三（2026-08-23 晚：策略库审查整改，Loop Engineering 方式）
+
+依据 `docs/STRATEGY_LIBRARY_REVIEW_A_SHARE.md`（同日审查，认定上午的 turtle 晋级方法论不成立），按"改 → 跑校验 → 看结果 → 修"闭环逐项整改：
+
+### P0 治理（commit f9e76ae）
+- turtle_bluechip live→candidate，E18 参数冻结（OOS 污染 + 成交口径不一致，晋级证据作废）
+- 2024-2026 正名为 validation（非独立 OOS），`gate.py DATA_PARTITION` 统一声明；复盘/测试文案同步
+- `pipeline/promote.py`：策略状态变更唯一入口，原子写入晋级证据（策略/参数/门禁 hash + 数据版本 + 报告路径 + 批准人）；晋级 live 硬性前置最新门禁 pass
+- `pipeline/stage_audit.py`：注册表↔门禁一致性自检自愈环路（接入 pipeline 默认阶段）；实测模拟脏编辑 live → 自动降级 + exit 1
+
+### P1 成交口径（commit c959297）
+- 探针实验证实：handle_bar 日线订单按**当日收盘价**成交（信号价=成交价）；open_auction 阶段订单按**次日开盘价**成交（对照 bundle 逐笔验证）
+- 7 个日线策略统一改造为 T 日信号 → T+1 开盘集合竞价执行，与 Paper 收益口径一致
+- T+1 口径门禁重跑：8 策略全拒。turtle 验证集超额 +0.5%→**-0.7%**，证实原晋级结果部分来自成交时点假设
+
+### P1 测试与 Paper（commit ac6b72a）
+- `tests/test_turtle_core.py` 20 项：审查清单 8 类策略核心行为（含 AST 源码守卫：下单只允许出现在 open_auction）
+- stage_paper 挂单顺延重试：涨停/跌停/停牌/T+1 限制保留 pending 顺延（上限 5 日作废），逻辑性拒单立即作废；schema v2→v3 含旧库迁移
+- `tests/test_paper_retry.py` 4 项
+
+### P3 策略库精简（commit d2fa97d）
+- rotation_300_500 / rsi2_reversal / momentum_stops → retired；美股财报反转策略移至 research/
+- 状态变更全部走 promote.py（dogfood）。当前库：5 candidate / 0 live / 5 retired
+
+### P2 门禁多重试验修正（commit f9309ac）
+- 简化 Deflated Sharpe Ratio（Bailey & López de Prado）：试验簇夏普方差由扰动变体估计，DSR < 0.95 拒绝，试得越多门槛越严
+- `pipeline/experiment_ledger.jsonl` 实验台账落 git（params_hash 去重计数，"试了多少次"可复现）
+- 冒烟实测：turtle DSR=0.9999（该项通过），仍因验证集超额被拒
+
+### P2 股票池一期（commit 2e5bee8）
+- `pipeline/universe.py`：point-in-time 可投资池（上市满 1 年 / 当日非 ST / 未停牌 / 20 日日均成交额 ≥5000 万，取前 100），消除固定 10 只蓝筹事后选择偏差；已退市股随数据终止自然排除
+- 81 期月度快照（2019-12~2026-08，每月首个交易日）落 git 可复现
+- `tests/test_universe.py` 10 项
+
+### 验证
+- 全量 134 项 pytest 通过
+
+### 遗留（更新）
+- 股票池快照尚未接入策略（turtle 参数冻结中；新策略须以快照池走 research→candidate 门禁）
+- 股票池/信号/择时收益归因分离未实现（审查 P2 第 4 条）
+- 回测收益归因（信号收益/开盘跳空/费用/滑点/未成交）未实现
+- 撮合模型仍缺：盘口封单量、部分成交、集合竞价冲击成本（审查"撮合适配"节）
+- turtle 再晋级路径：T+1 口径门禁通过 + 6-12 个月纯前向 Paper + promote.py 原子晋级
