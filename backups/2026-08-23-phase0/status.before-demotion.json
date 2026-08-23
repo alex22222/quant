@@ -625,12 +625,15 @@
     },
     "paper": {
       "status": "ok",
-      "started_at": "2026-08-23T11:25:41+08:00",
-      "finished_at": "2026-08-23T11:25:41+08:00",
-      "elapsed_sec": 0.0,
+      "started_at": "2026-08-23T00:54:09+08:00",
+      "finished_at": "2026-08-23T00:54:11+08:00",
+      "elapsed_sec": 1.3,
       "result": {
-        "note": "没有 live 策略，paper 跳过",
-        "live": []
+        "note": "2026-08-21 已记账，幂等跳过",
+        "equity": 100000.0,
+        "live": [
+          "momentum_stops"
+        ]
       }
     },
     "review": {
@@ -645,7 +648,7 @@
       }
     }
   },
-  "updated_at": "2026-08-23T11:25:41+08:00",
+  "updated_at": "2026-08-23T00:54:11+08:00",
   "strategy_registry": {
     "demo_dual_ma": {
       "state": "retired",
@@ -665,7 +668,7 @@
       "pool": "蓝筹10只"
     },
     "momentum_stops": {
-      "state": "candidate",
+      "state": "live",
       "file": "strategies/momentum_stops.py",
       "summary": "多股票动量轮动 + 止损锚对照实验 用法（--extra-vars 注入 context.stop）： --extra-vars '{\"stop\":\"none\"}' 基线：无个股止损 --extra-vars '{\"stop\":\"atr\"}",
       "params": {
@@ -674,8 +677,7 @@
       "registered_at": "2026-08-22T18:01:13+08:00",
       "origin": "自研（momentum_rotation 止损对照组）",
       "category": "动量轮动",
-      "pool": "蓝筹10只",
-      "note": "2026-08-23 门禁 v2 未通过（OOS 超额 -4.2%、最长回撤 1735 天、扰动回撤 38-47%），由 live 降为 candidate；与 momentum_rotation 同族。过门禁前不得回 live。详见 reports/gate_v2/summary.md"
+      "pool": "蓝筹10只"
     },
     "reversal-during-earnings-announcements": {
       "state": "research",
@@ -743,7 +745,7 @@
       "origin": "github.com/ling-0729/KHunter 海龟 A股改良版",
       "category": "趋势突破",
       "pool": "蓝筹10只",
-      "note": "参数扫描最优（12组网格）：分散持仓 3→4 为回撤改善主因 | 2026-08-23 门禁 v2 最接近通过（仅 2 项拒因：最长回撤 2031 天、OOS 超额 -3.2%），列为唯一重点迭代对象。",
+      "note": "参数扫描最优（12组网格）：分散持仓 3→4 为回撤改善主因 | 2026-08-23 改回 candidate：未实现统一信号接口（PARAMS/generate_targets），且与 momentum_stops 同时 live 触发事实源冲突（stage_paper fail-closed）。实现接口并通过新门禁后可重新晋升。",
       "promoted_at": "2026-08-23",
       "promote_reason": "参数扫描过门禁（年化11.5%/回撤19.8%/夏普0.61），老板批准晋级（Loop #14）"
     },
@@ -766,5 +768,5 @@
       "registered_at": "2026-08-23T00:47:33+08:00"
     }
   },
-  "last_loop_at": "2026-08-23T11:25:41+08:00"
+  "last_loop_at": "2026-08-23T00:54:11+08:00"
 }
