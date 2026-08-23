@@ -25,7 +25,30 @@ from paper.execution_model import (  # noqa: E402
 
 DB = ROOT / "paper" / "paper.db"
 INIT_CASH = 100000.0
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
+# 流动性/时点类拒单可顺延重试（涨停买不到、跌停卖不出、停牌、T+1 限制），
+# 其余（现金不足、无持仓、整手为 0 等逻辑错误）永久拒单
+RETRYABLE_REASONS = ("涨停", "跌停", "停牌", "T+1 限制")
+MAX_ORDER_RETRIES = 5  # 连续 5 个交易日仍不可成交则作废，防僵尸单
+
+
+def _reject_or_retry(conn, trades, oid, latest, code, side, qty, sday, source,
+                     planned, reason):
+    """拒单分流：流动性/时点类原因保留 pending 顺延 T+2 重试，其余永久拒单。"""
+    if any(k in reason for k in RETRYABLE_REASONS):
+        retries = conn.execute("SELECT retries FROM pending_orders WHERE id=?",
+                               (oid,)).fetchone()[0]
+        if retries < MAX_ORDER_RETRIES:
+            conn.execute("UPDATE pending_orders SET retries=?, reason=? WHERE id=?",
+                         (retries + 1, f"{reason}（第{retries + 1}次顺延）", oid))
+            trades.append((latest, code, side, 0, 0, 0, 0, f"{reason}（顺延重试）",
+                           sday, source, latest, planned, None, None, reason))
+            return
+        reason = f"{reason}（重试{MAX_ORDER_RETRIES}次仍不可成交，作废）"
+    conn.execute("UPDATE pending_orders SET status='rejected', reason=? WHERE id=?",
+                 (reason, oid))
+    trades.append((latest, code, side, 0, 0, 0, 0, reason,
+                   sday, source, latest, planned, None, None, reason))
 
 
 def _db():
@@ -40,7 +63,8 @@ def _db():
         signal_day TEXT, code TEXT, side TEXT, qty INTEGER,
         planned_price REAL, signal_source TEXT,
         status TEXT DEFAULT 'pending',  -- pending/filled/rejected
-        reason TEXT);
+        reason TEXT,
+        retries INTEGER DEFAULT 0);     -- 流动性拒单重试计数（策略库审查 P1）
     CREATE TABLE IF NOT EXISTS trades(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         day TEXT, code TEXT, side TEXT, qty REAL, price REAL, amount REAL,
@@ -51,6 +75,11 @@ def _db():
     if conn.execute("SELECT COUNT(*) FROM account").fetchone()[0] == 0:
         conn.execute("INSERT INTO account VALUES ('init', ?, ?, '初始资金')",
                      (INIT_CASH, INIT_CASH))
+    # 迁移：旧库补 retries 列（流动性拒单重试）
+    try:
+        conn.execute("ALTER TABLE pending_orders ADD COLUMN retries INTEGER DEFAULT 0")
+    except sqlite3.OperationalError:
+        pass  # 列已存在
     conn.execute("INSERT OR REPLACE INTO meta VALUES ('schema_version', ?)",
                  (str(SCHEMA_VERSION),))
     conn.commit()
@@ -101,18 +130,16 @@ def _fill_pending(conn, bd, latest, cash, positions, trades):
     for oid, sday, code, side, qty, planned, source in rows:
         bar = bar_from_bundle(bd, code, latest, index_latest)
 
-        # T+1：买入当日不可卖
+        # T+1：买入当日不可卖（顺延重试，次日自动可卖）
         pos = positions.get(code)
         if side == "sell" and pos and pos.get("buy_day") == latest:
-            conn.execute("UPDATE pending_orders SET status='rejected', reason=? WHERE id=?",
-                         ("T+1 限制：买入当日不可卖", oid))
-            trades.append((latest, code, "sell", 0, 0, 0, 0, "T+1 限制",
-                           sday, source, latest, planned, None, None, "T+1 限制"))
+            _reject_or_retry(conn, trades, oid, latest, code, side, qty,
+                             sday, source, planned, "T+1 限制：买入当日不可卖")
             continue
 
         if side == "sell" and (not pos or pos["qty"] <= 0):
-            conn.execute("UPDATE pending_orders SET status='rejected', reason=? WHERE id=?",
-                         ("无持仓可卖", oid))
+            _reject_or_retry(conn, trades, oid, latest, code, side, qty,
+                             sday, source, planned, "无持仓可卖")
             continue
         if side == "sell":
             qty = min(qty, int(pos["qty"]))
@@ -125,18 +152,14 @@ def _fill_pending(conn, bd, latest, cash, positions, trades):
                     break
                 qty -= 100
             if qty <= 0:
-                conn.execute("UPDATE pending_orders SET status='rejected', reason=? WHERE id=?",
-                             ("现金不足", oid))
-                trades.append((latest, code, "buy", 0, 0, 0, 0, "现金不足",
-                               sday, source, latest, planned, None, None, "现金不足"))
+                _reject_or_retry(conn, trades, oid, latest, code, side, qty,
+                                 sday, source, planned, "现金不足")
                 continue
 
         fill = simulate_fill(side, qty, bar, DEFAULT_FEES)
         if not fill.filled:
-            conn.execute("UPDATE pending_orders SET status='rejected', reason=? WHERE id=?",
-                         (fill.reject_reason, oid))
-            trades.append((latest, code, side, 0, 0, 0, 0, fill.reject_reason,
-                           sday, source, latest, planned, None, None, fill.reject_reason))
+            _reject_or_retry(conn, trades, oid, latest, code, side, qty,
+                             sday, source, planned, fill.reject_reason)
             continue
 
         if side == "buy":
