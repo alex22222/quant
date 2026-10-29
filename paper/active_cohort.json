@@ -1,0 +1,10 @@
+{
+  "schema": "paper_cohort.v1",
+  "cohort": "2026-09-28-forward",
+  "start_date": "2026-09-28",
+  "initial_cash": 100000,
+  "accounts": {
+    "gate": "paper/cohort_2026-09-28/llm_gate.db",
+    "no_gate": "paper/cohort_2026-09-28/llm_no_gate.db"
+  }
+}

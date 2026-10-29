@@ -1,0 +1,76 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 95,
+  "verified_at": "2026-09-23T13:21:53+08:00",
+  "classification_of_previous_goal_turn": "progress_real_data_quality_acceptance_and_sealed_market_review_bundle",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "isolated_team": "/private/tmp/quant-real-chain-v10.bEuzvv/trading_team",
+  "source_publication": {
+    "issue": "SATU-21",
+    "task_id": "01a0cc84-8e5c-71d3-9a00-e4d4936f2587",
+    "generation_hash": "c2a1e935f609037d2811b4540be3fdc633b38741798f667ac887a464977aec37",
+    "plan_hash": "7e7aaa14ae0c9306c5b8caf07d22915743ab4b79a8ebd06d571c810a3a7ab8c9"
+  },
+  "upstream_data_quality": {
+    "issue": "SATU-22",
+    "issue_status": "done",
+    "task_id": "01a0cc99-2d2e-74af-a149-d982173fe5f9",
+    "receipt_hash": "85bfc4e5d1e986b8c73784950445e2eba91b342e7d2e53a577de81371e8f818b",
+    "verdict": "accept"
+  },
+  "sealed_input": {
+    "role": "market-analysts",
+    "bundle_hash": "7513ecc6f7bf9f70f8838c5a3d9d85e8361da8fe25b2e1f371c8e5014e0af81b",
+    "bundle_file_sha256": "04de36b02e9a52f578b04369165cf1ffa2b0e863a1cf014f6cb46389ea363550",
+    "file_count": 52,
+    "repeat_prepare_same_hash": true,
+    "upstream_receipt_bound": true,
+    "remote_exact_hash_duplicates_before_dispatch": 0
+  },
+  "review": {
+    "issue": "SATU-23",
+    "issue_id": "01a0ccae-d910-74af-b787-ce69da311801",
+    "issue_status": "done",
+    "task_id": "01a0ccae-d926-7a70-997b-4ce5af71836d",
+    "task_status": "completed",
+    "task_count": 1,
+    "agent_id": "b765ae90-5a87-424f-9c26-fe3ce0644674",
+    "agent_model": "gpt-5.5",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "local_run_id": "758395b0f74b4a969c3dfe4a00cd607c",
+    "receipt_hash": "7cd13812a8d77d9530d72ff59827bcb6b0ee45ba4200af7d3a2678921a5a8612",
+    "response_file_sha256": "b9a57345bb4fd9f09f4b0a9c8982058ffac88745afe0cde2417b9f0a7f60b599",
+    "verdict": "reject",
+    "checks": {"facts_supported": "fail", "missing_data_disclosed": "pass"},
+    "remote_comment_matches_local_receipt": true,
+    "remote_message_count": 78,
+    "remote_tool_use_count": 26,
+    "submit_command_count": 1,
+    "force_command_count": 0,
+    "paper_approval_notification_command_count": 0
+  },
+  "independent_evidence": {
+    "unsupported_claim": "outputs/2026-09-23/02_sentiment.md says the 300750 rise was driven by existing-holder turnover",
+    "observed_price_change_percent": 2.53,
+    "observed_turnover_rate_percent": 1.11,
+    "observed_snapshot_volume_ratio": 0.95,
+    "observed_technical_volume_ratio_vs20": 1.42,
+    "holder_identity_or_trade_causality_source_present": false,
+    "evidence_files": ["outputs/2026-09-23/02_sentiment.md", "context/2026-09-23/sentiment.json", "context/2026-09-23/snapshot.json", "context/2026-09-23/technical_300750.json"],
+    "missing_data_disclosure": "passed by reviewer; optional forex and uncertified overseas snapshots explicitly disclosed",
+    "timing": "retrospective_M1_not_natural_day_M2_M3"
+  },
+  "protection": {
+    "isolated_decisions_present": false,
+    "isolated_paper_present": false,
+    "notification_sent": false,
+    "execution_authorized": false,
+    "downstream_roles": "blocked",
+    "old_kimi_direct_writer": "previously_paused_after_user_authorization; no repeat action this loop",
+    "legacy_production_autopilot": "not_modified_this_loop; last observed active with unscoped Runbook"
+  },
+  "tests": "No application code changed; last full suite in Loop92: 1209 passed. This loop independently verified the real remote task, local reject status, cited inputs, and absence of isolated decision/Paper output.",
+  "milestones": {"m1": "incomplete", "m2": "not_started", "m3": "not_started"},
+  "next": "Preserve SATU-23 rejection. Reproduce the unsupported causal sentence as a failing behavior case, then make the smallest scoped source/prompt guard correction without editing sealed v10 reports or weakening review criteria. Re-freeze affected inputs into a new isolated version, publish once through the authorized remote role, and restart independent review from the new generation. Production Autopilot change remains separately unauthorized."
+}

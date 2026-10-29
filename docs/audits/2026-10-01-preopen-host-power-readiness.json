@@ -1,0 +1,33 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-01T09:52:27+08:00",
+  "result": "future_preopen_host_power_risk",
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "host_power": {
+    "pmset_batt": "Now drawing from 'AC Power'; InternalBattery 100%; discharging; 5:17 remaining",
+    "ioreg_AppleSmartBattery": {
+      "ExternalConnected": false,
+      "ExternalChargeCapable": false,
+      "IsCharging": false,
+      "CurrentCapacity": 100
+    },
+    "interpretation": "The battery controller does not confirm an external power connection despite the pmset headline. Current runtime availability cannot establish availability at the next trading-day trigger."
+  },
+  "services": {
+    "archive_service": "healthy; heartbeat fresh; expected and latest verified session 2026-09-30; no missing or invalid sessions at 09:51:57",
+    "backup_service": "degraded; 07:45 latest registered snapshot verified but prompts_snapshot_current=false after the news charter change; heartbeat fresh at 09:45; offsite_verified=false"
+  },
+  "actions": [
+    "Read-only host and service checks only; no power, daemon, task, backup, Paper, notification, or Live operation."
+  ],
+  "next_check": "Before the next eligible trading-day 07:30 trigger, independently confirm stable external power, an awake host, the project runtime online, the unique scheduled task, current registered backup, and the actual trading calendar.",
+  "limitations": [
+    "A single battery-controller observation does not diagnose the cable, adapter, port, or operating-system reporting discrepancy.",
+    "No present-state check can guarantee that the host will remain awake on a future morning.",
+    "This holiday observation does not count toward M2 or M3."
+  ]
+}

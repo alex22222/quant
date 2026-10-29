@@ -1,0 +1,72 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 84,
+  "verified_at": "2026-09-23T07:35:58+08:00",
+  "previous_goal_turn": "progress: bounded fundamental period guard and 1193 passing tests",
+  "candidate": {
+    "isolated_team": "/private/tmp/quant-real-chain-v7.s3ku4lkx/trading_team",
+    "source_v6_freeze_sha256": "5f18bafcbb6319cf115e213d05d8445bfac492065e31aac904f62487d8037e93",
+    "v7_freeze_sha256": "7c81d73d6801eb490a7710184e04badab6813fd7f69f873362184b239b953d24",
+    "runner_sha256": "ee4cdc1d7f79f5a667df129490b0a69de689d121e417c0b110b70dc249734722",
+    "generation_input_count": 38,
+    "generation_inputs_equal_v6": true,
+    "fundamental_input_sha256": "7c1d913ff0b9de745842d305ed8efd25eba997e5ae8297bbbcce1fff99855c75",
+    "seeded_fingerprint_verified_roles": ["sentiment", "news", "technical"],
+    "failed_fundamental_cache_seeded": false,
+    "bootstrap_sha256": "1f938c9cbd72a355912e20758a4bb80e07a7fef6e22f940eb8114540b182bbc8",
+    "pre_dispatch_outputs_decisions_paper_absent": true
+  },
+  "remote": {
+    "workspace_id": "cfcca519-15f5-4666-b1d8-2b67241d8f7b",
+    "project_id": "a208df76-b63b-4cef-bd11-7512d7c80896",
+    "agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+    "model": "gpt-5.5",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "exact_freeze_issue_matches_before_dispatch": 0,
+    "local_cli_daemon_status": "stopped; not restarted because the assigned remote runtime was online",
+    "issue": "SATU-14",
+    "issue_id": "01a0cb6b-3b5b-72db-9efd-907c945f91d9",
+    "issue_status": "blocked",
+    "issue_revision": 4,
+    "task_id": "01a0cb6b-3b6a-755a-85dc-c21fb93a0513",
+    "task_status": "completed",
+    "task_completed_at": "2026-09-22T23:28:06Z",
+    "remote_message_count": 62,
+    "remote_tool_use_count": 14,
+    "publication_flag_exec_sequences": [23],
+    "force_flag_exec_sequences": [],
+    "only_patch_path": "/private/tmp/quant-real-chain-v7.s3ku4lkx/trading_team/.runs/multica/publication-result-comment.md",
+    "evidence_comment_id": "01a0cb72-73c3-7881-a553-aade50131574",
+    "comment_bound_to_task_and_failed_run": true
+  },
+  "local_run": {
+    "run_id": "35012155225d4158ad16fe3bb3778237",
+    "status": "failed",
+    "failed_step": "role_01",
+    "reason": "fundamental period comparison: full-year and partial-year claims must be separate",
+    "moonshot_request_id": "chatcmpl-6ab30df01808b843511086db",
+    "moonshot_model": "kimi-k3",
+    "moonshot_endpoint": "https://api.moonshot.cn/v1",
+    "known_moonshot_tokens": 23946,
+    "rejected_response_sha256": "c54c8de0501abaff43d50cc510dab1b610b2885889c687eb570e2d4affa009bd",
+    "rejected_metadata_sha256": "4f679b9bbad35ed9ee6a5107215f9c9943c26d56cb820674884e5fbe09a0c0d1",
+    "response_and_input_hashes_recomputed": true,
+    "guard_reproduced_from_rejected_response": true,
+    "observed_claim": "CATL section compares 2026H1 and Q1 revenue growth with the 2025 annual-report growth rate and calls the result an obvious acceleration, while trying to describe the comparison as independent YoY fields",
+    "generation_or_plan_created": false,
+    "decision_or_paper_created": false
+  },
+  "protected_prior_evidence": {
+    "v6_fundamental_report_sha256": "e2071032ecff1fb84f8d423bf9501d299853417f39637b2015403da79e6e522d",
+    "v6_data_quality_bundle_file_sha256": "2752586c3183d5d62625040df0b8df67e9285296bcdc36849d897040a2adca66"
+  },
+  "verification": {
+    "application_code_changed_this_loop": false,
+    "full_test_suite_rerun_this_loop": false,
+    "last_full_test_suite": "1193 passed in Loop83",
+    "git_diff_check": "passed",
+    "formal_data_quality_review": "not_started",
+    "execution_authorized": false
+  },
+  "next": "Preserve SATU-14 blocked Issue, failed Run and raw response. Diagnose why the role-01 charter still allows an independent-YoY juxtaposition to become a directional trend claim. Make a bounded evidence representation or claim-validation change with failing behavioral regression, then create a new isolated version; do not rerun SATU-14, patch the report, or weaken the guard."
+}

@@ -1,0 +1,182 @@
+{
+  "schema": "multica_role_model_allocation.v1",
+  "created_at": "2026-10-01T09:49:14+08:00",
+  "scope": "existing_seven_multica_agents_runtime_and_model_only",
+  "status": "configuration_verified",
+  "workspace_id": "cfcca519-15f5-4666-b1d8-2b67241d8f7b",
+  "project_id": "a208df76-b63b-4cef-bd11-7512d7c80896",
+  "daemon_id": "01a0c492-4f9e-797d-b6ba-653b1897dad2",
+  "roles": [
+    {
+      "name": "Research Lead",
+      "agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+      "before": {
+        "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "model": "gpt-5.5"
+      },
+      "target": {
+        "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "model": "gpt-5.5"
+      },
+      "provider": "codex",
+      "unchanged_fields_sha256": "bcc16d733c8bb2bdabde6c01dd0554f8d9888133dbfaeefdd41678310034aa00",
+      "status": "retained",
+      "after": {
+        "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "model": "gpt-5.5"
+      },
+      "unchanged_fields_match": true,
+      "final_readback_matches": true
+    },
+    {
+      "name": "Data Quality",
+      "agent_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd",
+      "before": {
+        "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "model": "gpt-5.5"
+      },
+      "target": {
+        "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+        "model": "kimi-code/k3-256k"
+      },
+      "provider": "kimi",
+      "unchanged_fields_sha256": "195894f332c4c46f0d50d6e90c1e448e6af6e1b10765dbd1b95205936d7b9e07",
+      "status": "updated_and_verified",
+      "after": {
+        "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+        "model": "kimi-code/k3-256k"
+      },
+      "unchanged_fields_match": true,
+      "final_readback_matches": true
+    },
+    {
+      "name": "Market Analysts",
+      "agent_id": "b765ae90-5a87-424f-9c26-fe3ce0644674",
+      "before": {
+        "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "model": "gpt-5.5"
+      },
+      "target": {
+        "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+        "model": "claude-sonnet-5"
+      },
+      "provider": "claude",
+      "unchanged_fields_sha256": "0210495331542d7d2661c2a0ca3884d2938e8ede090a724179a816527cbb73ab",
+      "status": "updated_and_verified",
+      "after": {
+        "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+        "model": "claude-sonnet-5"
+      },
+      "unchanged_fields_match": true,
+      "final_readback_matches": true
+    },
+    {
+      "name": "Strategy Research",
+      "agent_id": "5c69dae4-6ea4-48d3-8ec1-575d3f322a4e",
+      "before": {
+        "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "model": "gpt-5.5"
+      },
+      "target": {
+        "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+        "model": "claude-opus-5-5"
+      },
+      "provider": "claude",
+      "unchanged_fields_sha256": "59490eea8b66edbacbefb73d28f07309a5f8b2ded24586dade222ce694f46857",
+      "status": "updated_and_verified",
+      "after": {
+        "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+        "model": "claude-opus-5-5"
+      },
+      "unchanged_fields_match": true,
+      "final_readback_matches": true
+    },
+    {
+      "name": "Paper Trader",
+      "agent_id": "303a9540-46f1-4809-b3f7-0ce4de0e24ac",
+      "before": {
+        "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "model": "gpt-5.5"
+      },
+      "target": {
+        "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+        "model": "kimi-code/k3-256k"
+      },
+      "provider": "kimi",
+      "unchanged_fields_sha256": "12ea082a6ac1970f6e3f3b4c51328a640cbd3074600a4d7186e4915446abbd63",
+      "status": "updated_and_verified",
+      "after": {
+        "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+        "model": "kimi-code/k3-256k"
+      },
+      "unchanged_fields_match": true,
+      "final_readback_matches": true
+    },
+    {
+      "name": "Risk Manager",
+      "agent_id": "94249c35-4118-4eb7-8066-d5f5f1bff2fb",
+      "before": {
+        "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "model": "gpt-5.5"
+      },
+      "target": {
+        "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+        "model": "claude-opus-5-5"
+      },
+      "provider": "claude",
+      "unchanged_fields_sha256": "0133f7dafa60f0c5e4c571704421ea4a48d3cc20a2bf30ff52c96c717a474800",
+      "status": "updated_and_verified",
+      "after": {
+        "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+        "model": "claude-opus-5-5"
+      },
+      "unchanged_fields_match": true,
+      "final_readback_matches": true
+    },
+    {
+      "name": "Audit Verifier",
+      "agent_id": "91bfb847-5d2c-4d10-bb41-e2a514a30fe4",
+      "before": {
+        "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "model": "gpt-5.5"
+      },
+      "target": {
+        "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "model": "gpt-5.5"
+      },
+      "provider": "codex",
+      "unchanged_fields_sha256": "bd495f04b70685e7c085dd257d0f99eda04f1564862fbdf9465a28d9f3bb4dfc",
+      "status": "retained",
+      "after": {
+        "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "model": "gpt-5.5"
+      },
+      "unchanged_fields_match": true,
+      "final_readback_matches": true
+    }
+  ],
+  "autopilot_before_sha256": "4e89e9aa6fc06548facf5b61c9509ca00c85494fe343d777d0b3943a20fb1dde",
+  "protected_before": {
+    "docs/MULTICA_PRODUCTION_RUNBOOK.md": "b5123777c31efd666030651bf05772707925d019859c031b940de8df17e7c5c4",
+    "multica/workspace.json": "8dc9b251d1b9f4da89054a6b5a227f41198906602c120fc5cb3d2b2f93329daa",
+    "paper/active_cohort.json": "35a952b2192a01364f13145c161b30a42f37c014fe01cfc8b28bcd19070b4c3c",
+    "paper/cohort_2026-09-28/llm_gate.db": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c",
+    "paper/cohort_2026-09-28/llm_no_gate.db": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c",
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "paper/paper.db": "9975f6ada4c5e4e5aaebdd6c8d7d3d333aebf7f08eb3363f28322e409d831661",
+    "trading_team/.runs/multica/bootstrap.json": "1f938c9cbd72a355912e20758a4bb80e07a7fef6e22f940eb8114540b182bbc8"
+  },
+  "model_inference_performed": false,
+  "tasks_dispatched": false,
+  "internal_report_generation_changed": false,
+  "applied_at": "2026-10-01T09:49:35+08:00",
+  "autopilot_unchanged": true,
+  "protected_changed": [],
+  "daemon_after": {
+    "status": "running",
+    "active_task_count": 0,
+    "running_task_count": 0
+  },
+  "verified_at": "2026-10-01T09:50:40+08:00"
+}

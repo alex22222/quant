@@ -1,0 +1,93 @@
+{
+  "schema": "shared_state_acceptance.v1",
+  "observed_at": "2026-09-22T05:55:42.386209+08:00",
+  "scope": "isolated_concurrency_not_trading_authorization",
+  "isolated_root": "/private/tmp/quant-state-concurrency-gb4lLn",
+  "network_disabled": true,
+  "forward_performance": false,
+  "cases": {
+    "cross_process": {
+      "approval": true,
+      "same_date_finalize": true,
+      "different_date_finalize": true,
+      "paper": true,
+      "index": true,
+      "backup": true
+    },
+    "approval_race": {
+      "both_logs_preserved": true,
+      "materialization_preserves_rejections": true,
+      "changed_source_plan_refused": true,
+      "real_approvals": 0
+    },
+    "restored_account_history": {
+      "account_bytes_unchanged": true,
+      "audit_before_test_mutations": {
+        "gate": {
+          "conflict_count": 0,
+          "missing_count": 22,
+          "recorded_trade_count": 0
+        },
+        "no_gate": {
+          "conflict_count": 2,
+          "missing_count": 26,
+          "recorded_trade_count": 3
+        }
+      }
+    },
+    "backup_after_lock_release": {
+      "status": "verified",
+      "scope": "research_paper_workflow_evidence",
+      "path": "/private/tmp/quant-state-concurrency-gb4lLn/after-concurrency-snapshot",
+      "manifest_hash": "616183b538a5ecea6b994b5af9fce82562adc702f11666ebcf6b3388d71e6098",
+      "file_count": 694,
+      "database_count": 4,
+      "execution_authorized": false
+    },
+    "settled_paper": {
+      "concurrent_request_refused": true,
+      "first": {
+        "date": "2026-09-21",
+        "status": "reused",
+        "run_id": "9fb383726e9d4fccb541ece4e3adde00",
+        "plan_hash": "1757d388864162ba3b6bfdba36ba45eacf7f7d61473b04bbae4f4a7d4822c2c3"
+      },
+      "retry": {
+        "date": "2026-09-21",
+        "status": "reused",
+        "run_id": "9fb383726e9d4fccb541ece4e3adde00",
+        "plan_hash": "1757d388864162ba3b6bfdba36ba45eacf7f7d61473b04bbae4f4a7d4822c2c3"
+      },
+      "account_bytes_unchanged": true,
+      "duplicate_fills": 0
+    }
+  },
+  "source_hashes_before": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d"
+  },
+  "source_hashes_after": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d"
+  },
+  "production_sources_unchanged": true,
+  "model_calls": 0,
+  "notifications": 0,
+  "production_settlements": 0,
+  "remote_multica_dispatches": 0,
+  "limitations": [
+    "Advisory local filesystem locks require cooperating writers; no distributed lock or multi-file transaction.",
+    "A remote notification delivered before a process crash and local receipt can still be duplicated on retry.",
+    "Restore fixtures and retrospective account checks are not forward performance or live trading authorization."
+  ]
+}

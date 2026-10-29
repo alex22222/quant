@@ -1,0 +1,51 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-04T00:35:44+08:00",
+  "business_date": "2026-10-02",
+  "result": "holiday_skip_completed_after_host_low_power_sleep",
+  "remote": {
+    "issue": "SATU-81",
+    "issue_id": "01a0f9cd-e306-7446-aedf-750b42e10383",
+    "issue_status": "in_review",
+    "task_id": "01a0f9cd-e317-7f18-816f-7c39f0dc525a",
+    "task_count": 1,
+    "task_status": "completed",
+    "task_error": null,
+    "created_at": "2026-10-02T07:30:14+08:00",
+    "dispatched_at": "2026-10-02T08:30:11+08:00",
+    "started_at": "2026-10-02T08:30:12+08:00",
+    "completed_at": "2026-10-02T08:32:11+08:00",
+    "comment_id": "01a0fa06-708e-76fc-bc8a-e4a2a6c9054a",
+    "comment_claim": "calendar skip; no publication command or model call"
+  },
+  "independent_observation": {
+    "calendar_file_sha256": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+    "calendar_file_encoding": "int64 YYYYMMDD",
+    "october_2_trading_day": false,
+    "october_8_trading_day_in_current_local_file": true,
+    "dated_context_output_decision_directories": "absent",
+    "workflow_runs_for_october_2": 0,
+    "active_gate_trades_orders_receipts": [0, 0, 0],
+    "active_no_gate_trades_orders_receipts": [0, 0, 0],
+    "power_log": [
+      "2026-10-02 07:10:14 DarkWake on battery, 3 percent",
+      "2026-10-02 07:52:59 Low Power Sleep on battery, 2 percent",
+      "2026-10-02 08:30:01 Wake from Hibernate due to acattach, 1 percent"
+    ],
+    "daemon_status_on_october_4_host_check": "running; original daemon ID; zero active tasks",
+    "host_power_on_october_4_check": "AC Power; 78 percent; charging",
+    "sandbox_only_daemon_probe": "false stopped result; host-level read-only status is running"
+  },
+  "assessment": "The one-hour dispatch delay is explained by observed host low-power sleep. The holiday gate actually ran and skipped publication, but this does not prove the host will be powered or awake at the October 8 premarket window.",
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "next_boundary": "Before the next actual trading session, independently recheck external power, wake state, daemon and Research Lead runtime; preserve the original 07:30 task handle and 09:15 real-time cutoff. Do not create a replacement production issue or backdate a missed run.",
+  "limitations": [
+    "The current local calendar marks October 8 open, but the date must be confirmed again on that day.",
+    "Local Paper/Run absence does not independently prove the absence of every external notification or Live side effect.",
+    "No power setting, daemon configuration, production task, Paper account or Live endpoint was changed."
+  ]
+}

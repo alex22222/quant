@@ -1,0 +1,65 @@
+{
+  "schema": "revised_publication_title_mismatch.v1",
+  "loop": 74,
+  "verified_at": "2026-09-23T03:56:59+08:00",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "new_team": "/private/tmp/quant-real-chain-v3.aq1jzul6/trading_team",
+  "input_freeze": {
+    "sha256": "b6c2cdf4e88f2db45e5601e2ac138027c2e5048343b4a2ea6339df2902d494ba",
+    "source_sha256": "adcab57b2be8deeaf93fda7cd999eb6c455b48177ce5d7eebe768c0a0238f258",
+    "input_count": 38,
+    "only_changed_input": "prompts/01_fundamental.md",
+    "new_prompt_sha256": "d0db9d028bc05200b8410cc901f390647ab4e314131b8f9f3c49f6e649397f17",
+    "hash_mismatches": [],
+    "seeded_independent_role_caches": ["02", "03", "04"],
+    "old_outputs_or_decisions_copied": false
+  },
+  "first_issue": {
+    "id": "01a0caaa-00bf-7f3e-a129-fbaa630b3ec5",
+    "identifier": "SATU-8",
+    "created_title": "A-share daily research b6c2cdf4e88f2db45e5601e2ac138027c2e5048343b4a2ea6339df2902d494ba 2026-09-23",
+    "current_title": "A-share daily research 2026-09-23",
+    "current_status": "blocked",
+    "current_revision": 5,
+    "update_used_no_start": true,
+    "task_count_after_update": 1
+  },
+  "first_task": {
+    "id": "01a0caaa-00cf-7846-b8cc-72fbe8dfd7c4",
+    "status": "completed",
+    "started_at": "2026-09-22T19:48:54Z",
+    "completed_at": "2026-09-22T19:53:47Z",
+    "message_count": 80,
+    "tool_use_count": 25,
+    "publication_command_count": 1,
+    "forbidden_business_command_count": 0
+  },
+  "first_local_run": {
+    "run_id": "b1718e4180ef4cb8bb5b0d73ebda928b",
+    "status": "failed",
+    "attempt": 1,
+    "trigger_source": "multica_unverified",
+    "failed_step": "verify_multica_context",
+    "error": "ValueError: Multica issue business date/title mismatch",
+    "root_cause": "The issue title contained a freeze hash, but verify_execution_context requires exactly 'A-share daily research 2026-09-23'.",
+    "moonshot_request_count": 0,
+    "generation_published": false
+  },
+  "postconditions": {
+    "old_market_analysts_review": "rejected",
+    "old_execution_authorized": false,
+    "new_outputs_present": false,
+    "new_decisions_present": false,
+    "new_paper_present": false,
+    "notification_sent": false,
+    "protected_file_count": 17,
+    "protected_files_changed": [],
+    "application_code_changed": false,
+    "tests_rerun": false,
+    "m1_complete": false,
+    "m2_complete": false,
+    "m3_complete": false
+  },
+  "next": "Recheck SATU-8 revision 5, no active task, new freeze hash, failed local ledger and protection baseline; then rerun the same issue once under corrected title without --force. Do not create a second issue or infer Moonshot quota failure."
+}

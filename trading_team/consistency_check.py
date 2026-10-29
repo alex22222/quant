@@ -27,8 +27,10 @@ OUTPUTS_DIR = TEAM / "outputs"
 APPROVALS_FILE = TEAM / "loops" / "approvals.json"
 TEAM_DB = TEAM / "team.db"
 
-sys.path.insert(0, str(TEAM))
-from schemas import is_buy, parse_pct, validate_plan, validate_portfolio, SchemaError  # noqa: E402
+sys.path.insert(0, str(ROOT))
+from trading_team.schemas import compute_executable, is_buy, parse_pct, validate_plan, validate_portfolio, SchemaError  # noqa: E402
+from trading_team.decision_pipeline import canonical_plan_hash  # noqa: E402
+from trading_team.approval_audit import inspect_projection  # noqa: E402
 
 
 def _load_json(path: Path):
@@ -49,6 +51,12 @@ def check_day(day: str) -> dict:
     market_ok = bool(dec.get("market_ok", False))
     pm_status = dec.get("pm_status", "pending")
     plan_by_code = {str(p.get("code")): p for p in plans}
+    decision_hash = dec.get("plan_hash")
+    try:
+        audit = inspect_projection(dec, TEAM)
+        conflicts.extend(audit["reasons"])
+    except (OSError, ValueError, TypeError, KeyError) as exc:
+        conflicts.append(f"approval audit invalid: {exc}")
 
     # ── 1. 主事实源自身：schema + market_ok 约束 ─────────────────
     for p in plans:
@@ -56,6 +64,11 @@ def check_day(day: str) -> dict:
             warnings.append(f"decision.json {p.get('code')}: {prob}")
         approval = p.get("approval", "pending")
         executable = bool(p.get("executable", False))
+        if approval in ("approved", "rejected", "reduced"):
+            if p.get("approved_plan_hash") != decision_hash:
+                conflicts.append(
+                    f"{p.get('code')}: approved_plan_hash 与 decision.json plan_hash 不匹配"
+                )
         try:
             pct = parse_pct(p.get("position_pct"))
         except SchemaError:
@@ -68,6 +81,9 @@ def check_day(day: str) -> dict:
             )
         if executable and is_buy(str(p.get("direction", "")), pct) and pct > 0 and not market_ok:
             conflicts.append(f"{p.get('code')}: market_ok=false 但买入计划被标记 executable")
+        eligible, reason = compute_executable(p, market_ok, decision_hash)
+        if executable and not eligible:
+            conflicts.append(f"{p.get('code')}: executable 与当前执行契约冲突: {reason}")
 
     # ── 1b. 组合级确定性风控（LLM 不得绕过）─────────────────────
     for prob in validate_portfolio(plans, market_ok):
@@ -77,8 +93,8 @@ def check_day(day: str) -> dict:
     appr = _load_json(APPROVALS_FILE) or {"decisions": []}
     seen = {}
     for d in appr.get("decisions", []):
-        if d.get("date") == day:
-            seen[str(d.get("code"))] = d  # record() 保证同日同码唯一
+        if d.get("date") == day and d.get("plan_hash") == decision_hash:
+            seen[str(d.get("code"))] = d
     for code, a in seen.items():
         p = plan_by_code.get(code)
         if p is None:
@@ -94,6 +110,13 @@ def check_day(day: str) -> dict:
     # ── 3. plan.json（草稿）只读比对 ────────────────────────────
     plan_doc = _load_json(OUTPUTS_DIR / day / "plan.json")
     if plan_doc is not None:
+        current_hash = canonical_plan_hash(plan_doc)
+        if not decision_hash:
+            conflicts.append("decision.json 缺少 plan_hash")
+        elif decision_hash != current_hash:
+            conflicts.append(
+                f"decision.json plan_hash={decision_hash} 与当前 plan.json={current_hash} 不一致"
+            )
         for prop in plan_doc.get("proposals", []):
             code = str(prop.get("code"))
             p = plan_by_code.get(code)

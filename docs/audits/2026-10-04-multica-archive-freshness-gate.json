@@ -1,0 +1,16 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-04T02:00:00+08:00",
+  "result": "verified_multica_publication_rejects_stale_complete_archive_before_model",
+  "reproduction": "An isolated, valid 2026-09-17 closing archive and matching manifest/receipt were supplied for the 2026-09-21 publication, whose previous trading session is 2026-09-18. Original code proceeded to the model; the new regression failed with DID NOT RAISE ValueError.",
+  "change": "After manifest and raw archive verification, a verified Multica publication now requires manifest.latest_trade_date to equal the previous session in the project trading calendar before any role model call. Manual research and archived production outputs were not rewritten.",
+  "verification": {
+    "red_before_fix": "The isolated stale-but-complete archive was accepted; expected ValueError was not raised.",
+    "focused_after_fix": "59 passed",
+    "full_suite_after_fix": "1301 passed",
+    "model_calls_on_stale_input": 0,
+    "official_output_on_stale_input": false
+  },
+  "limitations": "This is a local regression, not a real 2026-10-08 publication or independent Multica review. The candidate trading date, calendar, archived session and runtime must be reverified on the day. Existing published-bundle reuse remains subject to its separate generation validation.",
+  "milestones": {"M1": "complete", "M2": "not_accepted", "M3": "not_started"}
+}

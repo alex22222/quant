@@ -65,7 +65,7 @@ class TestDirection:
         assert is_buy(d, pct) == expect
 
     @pytest.mark.parametrize("d,expect", [
-        ("卖出", True), ("减持", True), ("回避", True), ("观望（回避）", True),
+        ("卖出", True), ("减持", True), ("回避", False), ("观望（回避）", False),
         ("买入", False), ("观望", False), ("持有", False),
     ])
     def test_is_sell(self, d, expect):
@@ -95,7 +95,7 @@ class TestValidatePlan:
 class TestComputeExecutable:
     def plan(self, **kw):
         base = {"code": "601318", "direction": "买入", "position_pct": 0.15,
-                "approval": "approved"}
+                "approval": "approved", "entry": [53.5], "entry_type": "limit"}
         base.update(kw)
         return base
 

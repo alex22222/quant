@@ -1,0 +1,40 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-01T10:19:17+08:00",
+  "result": "console_busy_observation_repaired",
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "failure_reproduction": {
+    "condition": "A real Multica daemon task marker existed in the project working directory while another user-requested smoke task was running.",
+    "project_cwd_cli": "Read-only autopilot get returned the task-scoped MULTICA_TOKEN context guard error.",
+    "clean_cwd_cli": "The same read-only command from /private/tmp returned the exact project-bound autopilot.",
+    "served_before": "The console Multica observation reported unavailable and Evidence unavailable (RuntimeError), despite the daemon and task being active."
+  },
+  "change": {
+    "scope": "Only observe_multica constructs a MulticaCLI with a clean system temporary working directory; all other CLI callers retain the project-root default. Remote project, agent, runbook, trigger and runtime identity checks remain unchanged.",
+    "files_sha256": {
+      "trading_team/multica_adapter.py": "f7882856551e7db001b85f76d987c187aecaf5820922ddfede6b29edbb751acc",
+      "trading_team/multica_observation.py": "10ed09c0ec59f931cb78ff543815b5d55549b7368a959a667e85dc05b4d1c5e0",
+      "tests/test_multica_observation.py": "595da46b5008cb31d207c1d163751d204e4c7a9f8f47bebfc0b4d53103d5095b"
+    },
+    "test_first": "The new busy-context observation test failed with configuration=unavailable before the code change and passed afterward.",
+    "baseline_tests": "1279 passed in 46.25s",
+    "focused_tests": "34 passed in 2.44s",
+    "full_tests_after": "1280 passed in 45.48s"
+  },
+  "served_verification": {
+    "service": "Only gui/502/com.hqcapital.console was kickstarted; PID changed from 49436 to 16675 and remained running.",
+    "busy_marker": "A real daemon task marker was still present during the read-only post-reload check; it was not changed or deleted.",
+    "multica_observation": "status=attention; completion_verified=false; configuration=matched; history=available; runtime=matched; local_attempt=missing",
+    "review_2026_09_29": "source_unverified; execution_authorized=false; recorded Market Analysts rejection retained",
+    "paper_cohort": "Gate and no-gate each CNY 100000 cash, zero recorded trades, facts_hash 7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc"
+  },
+  "limitations": [
+    "This fixes read-only console observation during another task, not its task execution, local attempt linkage or business completion.",
+    "No publication, review, approval, Paper settlement, notification or Live action was performed by this repair.",
+    "M2 still requires a future qualified trading day and all six real reviews; M3 has not begun."
+  ]
+}

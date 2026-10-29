@@ -1,0 +1,34 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-10T23:45:36+08:00",
+  "scope": "Future publication validator and daily-report visibility; no historical run retry",
+  "baseline": {
+    "focused_tests": "102 passed",
+    "index_latest_before": "2026-09-23",
+    "last_published_draft": "2026-09-29",
+    "last_published_draft_review": "Market Analysts rejected; current source_unverified"
+  },
+  "changes": [
+    "Allow a quoted fund-flow or volume-causality phrase only when an anchored negation immediately governs it; later positive assertions remain rejected.",
+    "Rebuild the daily-report index after a verified publication-only handoff without creating decisions or Paper settlement.",
+    "Keep a verified publication successful if index rebuilding fails; retain the failed index step in the ledger.",
+    "Show the current independent-review state beside the selected report; display a stock-pool proposal only when its source passes the six-role review gate."
+  ],
+  "verification": {
+    "regression_before": "Three quoted negations and publication-only index were red; positive-claim controls passed.",
+    "regression_after": "Six original focused cases and the index-failure isolation case passed",
+    "full_suite": "1317 passed in tests/ and execution/tests/",
+    "console_script": "Node vm.Script syntax OK",
+    "served_index_latest": "2026-09-29",
+    "index_sha256": "67d5b85f68d3b5e0f847597a5bd06797920e1d46ee3018ac69861cc1518bd4f3",
+    "served_review": "source_unverified; execution_authorized=false",
+    "browser": "2026-09-29 report visibly says it is not an approved trading recommendation; stock-pool reviewed-proposal column is empty",
+    "protected_state": "Active cohort config, both active Paper databases, team.db, and 2026-09-29 generation/plan hashes unchanged"
+  },
+  "limits": [
+    "No new natural-day model call, independent review, decision, Paper settlement, or notification was performed.",
+    "The validator repair does not prove future model factual accuracy; 2026-09-24 and 2026-09-29 substantive review rejections stand.",
+    "Host sleep from low battery requires reliable external power; no system power settings or Multica scheduler were changed.",
+    "M2 remains unaccepted and M3 has not started; the long goal remains blocked pending future natural-day evidence."
+  ]
+}

@@ -5,7 +5,7 @@
 
 1. 读取 quant-x-monitor/reports/<date>.json 条目（platform/author/title/url/summary）
 2. 关键词分类（参照文 3 的句子分类器）：trading_signal / risk_management / 不相关
-3. 命中 trading_signal 的条目 → 按关键词选型生成 RQAlpha 策略**草案骨架**
+3. 只有命中明确策略机制的 trading_signal 条目 → 按关键词选型生成 RQAlpha 策略**草案骨架**
    （统一信号接口 PARAMS/FAMILY/generate_targets + rqalpha 月度入口），
    写入 strategies/ingest_<模板>_<hash>.py，由 stage_strategy 自动注册为 research
 4. 去重：pipeline/research_ingest_ledger.jsonl 按 URL 记账，幂等
@@ -74,21 +74,21 @@ def classify_item(item: dict) -> str | None:
     text = f"{item.get('title') or ''} {item.get('summary') or ''}".lower()
     if not text.strip() or any(n.lower() in text for n in NOISE_KEYWORDS):
         return None
-    if any(k in text for k in SIGNAL_KEYWORDS):
+    if any(k in text for k in SIGNAL_KEYWORDS) and pick_template(item)[0] is not None:
         return "trading_signal"
     if any(k in text for k in RISK_KEYWORDS):
         return "risk_management"
     return None
 
 
-def pick_template(item: dict) -> tuple[str, list[str]]:
-    """trading_signal 条目 → (模板名, 命中关键词)。无特定命中时用 momentum 兜底。"""
+def pick_template(item: dict) -> tuple[str | None, list[str]]:
+    """trading_signal 条目 → (模板名, 命中关键词)。无明确机制时不生成代码。"""
     text = f"{item.get('title') or ''} {item.get('summary') or ''}".lower()
     for name, keys in TEMPLATE_RULES:
         hit = [k for k in keys if k in text]
         if hit:
             return name, hit
-    return "momentum", []
+    return None, []
 
 
 # ─────────────────────────────────────────────────────────────
@@ -231,6 +231,8 @@ def _load_ledger_urls(ledger_path: Path) -> set[str]:
 def make_draft(item: dict, date: str, strat_dir: Path) -> str:
     """生成草案文件，返回策略名。"""
     template, hits = pick_template(item)
+    if template is None:
+        raise ValueError("线索未包含可实现的策略机制")
     name = _draft_name(template, item.get("url") or item.get("title") or "")
     title = re.sub(r"\s+", " ", (item.get("title") or "无标题"))[:60]
     code = _TEMPLATE.format(
@@ -239,7 +241,7 @@ def make_draft(item: dict, date: str, strat_dir: Path) -> str:
         date=date,
         author=item.get("author") or "未知",
         url=item.get("url") or "",
-        keywords="、".join(hits) or "（无特定命中，momentum 兜底）",
+        keywords="、".join(hits),
         universe=json.dumps(_UNIVERSE, ensure_ascii=False, indent=8),
     )
     (strat_dir / f"{name}.py").write_text(code, encoding="utf-8")

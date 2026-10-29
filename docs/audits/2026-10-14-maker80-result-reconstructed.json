@@ -1,0 +1,26 @@
+{
+  "schema": "isolated_data_quality_maker.v1",
+  "business_date": "2026-09-30",
+  "source_file_sha256": {
+    "bars": "ea5f10141fdb1200b1c710db3e2f059b59c465c03749a61f59c81a760139baae",
+    "receipt": "16ce662db2c71fc8c366d302e934a73f5ae3a25449b8948c095a46772a1aece6"
+  },
+  "bar_count": 12,
+  "receipt_code_count": 12,
+  "codes_match": true,
+  "payload_hash_match": true,
+  "invalid_date_count": 0,
+  "invalid_ohlc_count": 0,
+  "suspended_count": 0,
+  "findings": [
+    "bars.json sha256 与任务给定值一致: True",
+    "receipt.json sha256 与任务给定值一致: True",
+    "bars 数量=12, receipt codes 数量=12, 代码集合一致=True",
+    "两边 payload_hash 字段相同=True (7f8be2f08470b776027d233d1c4280665d6866b2eb1a8823921fc7eb5b273795)",
+    "business_date=2026-09-30; bar 日期不等于 business_date 的数量=0",
+    "非停牌 bar 违反 low<=open/close<=high 或 low>high 的数量=0",
+    "suspended=True 的 bar 数量=0"
+  ],
+  "execution_authorized": false,
+  "production_publication": false
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-04T01:45:51+08:00",
+  "result": "independent_remote_maker_not_accepted_under_current_publication_contract",
+  "source_inspection": {
+    "current_maker": "Research Lead process calls KimiClient.complete for each of seven role reports through the local Moonshot API.",
+    "publication_binding": "kimi_daily.inspect_generation checks one generation transport and model against all seven per-role run.json request records.",
+    "remote_roles": "multica_reviews binds six distinct remote reviewer identities to a frozen package after Research Lead publication and prevents reviewer task reuse as the publisher task.",
+    "missing_contract": "There is no per-role independent remote maker identity, task receipt, runtime/model provenance and no cross-check that a report maker differs from its reviewer."
+  },
+  "decision": "Do not inject an unbound remote-made report into a production or M2 generation receipt. Do not create a cosmetic maker task that cannot satisfy source verification. Keep the current sole publication and independent review path unchanged for the next natural-day M2 candidate.",
+  "future_acceptance_boundary": "After the natural-day M2/M3 chain, define a versioned per-report provenance contract, bind each maker task and output hash to the frozen inputs, reject same-identity self-review, and validate in isolation before any production switch; retain old generation receipts and failed runs.",
+  "operations": {"remote_task_dispatched": false, "model_called": false, "business_outputs_changed": false, "docs_changed": true, "paper_or_live_touched": false},
+  "milestones": {"M1": "complete", "M2": "not_accepted", "M3": "not_started", "independent_remote_maker": "not_accepted"}
+}

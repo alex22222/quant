@@ -1,0 +1,76 @@
+{
+  "schema": "quant.audit_backup_scope_fix.v1",
+  "observed_at": "2026-10-14 00:16:25 UTC",
+  "bug": {
+    "audit_files_excluded_from_existing_inventory": true,
+    "omitted_file_count": 147,
+    "omitted_bytes": 1146760,
+    "example": "docs/audits/2026-10-14-maker80-result-reconstructed.json"
+  },
+  "change": {
+    "files": [
+      "trading_team/workflow_recovery.py",
+      "tests/test_workflow_recovery.py",
+      "docs/WORKFLOW_RECOVERY.md"
+    ],
+    "new_scope": "non-hidden JSON beneath docs/audits only",
+    "runtime_code_and_environment_still_excluded": true,
+    "retention_policy_changed": false,
+    "max_store_bytes": 5368709120
+  },
+  "verification": {
+    "baseline": "64 passed",
+    "red": "new backup/restore test failed on missing maker-result.json",
+    "green": "65 passed workflow recovery and backup service; 19 passed backup API, readiness and cohort",
+    "real_inventory": {
+      "backup": {
+        "heartbeat": "fresh",
+        "issues": [
+          "runtime differs from latest snapshot"
+        ],
+        "max_store_bytes": 5368709120,
+        "runtime_snapshot_current": false,
+        "snapshot_count": 84,
+        "status": "degraded",
+        "storage_bytes": 4123535438
+      },
+      "included": {
+        "docs/audits/2026-10-14-maker80-independent-review.json": {
+          "hash": "3095df035f8a45033309b31c18736fa40d47d30609f8545e7f92b5fa6eed8b0f",
+          "size": 40069
+        },
+        "docs/audits/2026-10-14-maker80-reconstruction.json": {
+          "hash": "9bd57ae65422ef7cf0faf88c05f406721dee4532361c246cd89d57611454b27e",
+          "size": 7326
+        },
+        "docs/audits/2026-10-14-maker80-result-reconstructed.json": {
+          "hash": "4b0d43ea5fefe95129e5cca411f81f29d61fe5aa7e1990130bbd3b4377f2e7db",
+          "size": 1030
+        }
+      },
+      "inventory_file_count": 1206,
+      "paper": {
+        "gate": {
+          "facts_hash": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+          "status": "checked",
+          "trades": 0
+        },
+        "no_gate": {
+          "facts_hash": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+          "status": "checked",
+          "trades": 0
+        }
+      }
+    },
+    "production_snapshot_after_change": "pending_existing_schedule",
+    "forced_backup": false,
+    "production_restore": false,
+    "M2_credit": false,
+    "M3_credit": false
+  },
+  "limits": [
+    "The prior registered snapshot does not include these newly added audit artifacts or new runtime fingerprint.",
+    "Fixture restoration proves the changed backup/restore behavior, not M3 natural-day recovery acceptance.",
+    "No runtime code or offsite recovery is provided by this change."
+  ]
+}

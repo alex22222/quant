@@ -1,0 +1,150 @@
+{
+  "schema": "market_breadth_repair_acceptance.v1",
+  "loop": 62,
+  "observed_at": "2026-09-23T00:38:09+08:00",
+  "classification": "progress",
+  "production_ready": false,
+  "real_complete_fetch_verified": false,
+  "root_cause": {
+    "endpoint": "https://push2.eastmoney.com/api/qt/clist/get",
+    "probe_kind": "read-only parsed response excerpts, not byte-exact HTTP archives",
+    "common_request": {
+      "pn": 1,
+      "pz": 3,
+      "po": 1,
+      "np": 1,
+      "fltt": 2,
+      "invt": 2,
+      "fid": "f3",
+      "fs": "m:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23",
+      "fields": "f3,f12,f13,f124"
+    },
+    "probes": [
+      {
+        "filter": "(f3>5)",
+        "rc": 0,
+        "total": 5560
+      },
+      {
+        "filter": "(f3<0)",
+        "rc": 0,
+        "total": 5560
+      }
+    ],
+    "same_returned_rows": [
+      {
+        "f3": 683.29,
+        "f12": "301686",
+        "f13": 0,
+        "f124": 1790062488
+      },
+      {
+        "f3": 20.06,
+        "f12": "300110",
+        "f13": 0,
+        "f124": 1790062461
+      },
+      {
+        "f3": 20,
+        "f12": "688781",
+        "f13": 1,
+        "f124": 1790064704
+      }
+    ],
+    "conclusion": "The negative filter returned positive-change rows and the unfiltered total. Counting data.total per filter cannot compute market breadth; the old collector also swallowed transport failures into nulls while reporting sentiment success."
+  },
+  "implementation": {
+    "paths": [
+      "trading_team/collect.py",
+      "tests/test_market_breadth.py",
+      "tests/test_collect_workflow.py"
+    ],
+    "collector_schema_before": 6,
+    "collector_schema_after": 7,
+    "changes": [
+      "Paginate 100-row unfiltered SH/SZ universe sorted by code; count numeric percentage changes locally with strict >5/<-5 thresholds.",
+      "Require stable total, complete pages, unique market/code identities and expected Shanghai quote date for counted rows.",
+      "Preserve unavailable quotes explicitly; never count missing as flat, and reject an entirely unavailable source.",
+      "Preserve parsed raw pages in context/DATE/market_breadth.json, with a raw-file hash and compact summary in sentiment.json.",
+      "Failed breadth acquisition fails the manifest and sentiment source; retry retains failed attempts and reuses valid other inputs. Schema bump prevents reuse of pre-fix collector output."
+    ],
+    "limits": [
+      "Scope remains SH/SZ main board, ChiNext and STAR, not Beijing or all equity instruments.",
+      "No historical breadth backfill from a current snapshot; wrong-session numeric quotes are refused.",
+      "Page total limited to 20000 rows to bound remote work.",
+      "Real endpoint may truncate or disconnect; these conditions fail closed and are not successful collection."
+    ]
+  },
+  "verification": {
+    "baseline": "7 passed in 0.92s",
+    "bug_reproduction": "First regression failed because the old function returned 8 for all five buckets on an eight-row response, instead of 1/3/3/1/1.",
+    "red_contract_suite": "20 failed, 5 passed before implementation (includes changed day-argument contract).",
+    "focused": "25 passed in 2.27s",
+    "full": "1156 passed in 35.59s",
+    "diff_check": true,
+    "independent_fixture_readback": {
+      "test_directory": "/private/var/folders/xx/1h1hmbcn1xvgs5_sft5jmpgc0000gp/T/pytest-of-henry/pytest-376/test_collect_retry_reuses_succ1",
+      "manifest_ok": true,
+      "attempt": 2,
+      "attempt_statuses": [
+        "failed",
+        "succeeded"
+      ],
+      "steps": [
+        {
+          "name": "market_breadth",
+          "status": "failed",
+          "error": "ValueError: breadth incomplete page"
+        },
+        {
+          "name": "sentiment",
+          "status": "failed",
+          "error": "ValueError: market breadth source unavailable"
+        },
+        {
+          "name": "manifest",
+          "status": "failed",
+          "error": "one or more data gates failed"
+        },
+        {
+          "name": "market_breadth",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "name": "sentiment",
+          "status": "succeeded",
+          "error": null
+        },
+        {
+          "name": "manifest",
+          "status": "succeeded",
+          "error": null
+        }
+      ],
+      "sentiment": {
+        "up": 10,
+        "source_file": "market_breadth.json",
+        "source_hash": "c2afaa0845f61ab6220c2eac853b5021b8692decc11d859450d86b083ca585e4"
+      }
+    }
+  },
+  "real_fetch": {
+    "status": "failed",
+    "expected_date": "2026-09-22",
+    "error": "requests.exceptions.ConnectionError: RemoteDisconnected('Remote end closed connection without response')",
+    "completed_pages": 0,
+    "attempts_note": "An oversized page probe, a standard page probe and a no-filter control disconnected. The final implementation call exhausted the existing _get 3-attempt policy; no remote run or model retry was dispatched.",
+    "side_effects": "No context pack, report, approval, Paper settlement or notification was written by the real fetch."
+  },
+  "preservation": {
+    "protected_file_count": 17,
+    "protected_changed": [],
+    "old_review_status": "rejected",
+    "old_review_run_id": "ca87e47c994648fd98e16202252ec7ed",
+    "old_receipt_hash": "d7c4494da2cc0f087efacfbc63aa9dd2b14532f2e5cda7e0e4c9c30c1e670c76",
+    "new_remote_tasks": 0,
+    "new_model_calls": 0
+  },
+  "next": "Diagnose the actual quote transport/request failure with bounded read-only evidence, without changing global networking or inventing counts. Only a complete genuine same-session quote set independently recomputed may unblock new publication. Preserve the prior rejected research and do not re-review the unchanged bundle."
+}

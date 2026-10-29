@@ -1,0 +1,38 @@
+{
+  "schema": "fundamental_evidence_charter_repair.v1",
+  "loop": 73,
+  "verified_at": "2026-09-23T03:39:08+08:00",
+  "trigger": {
+    "issue": "SATU-7",
+    "review_run_id": "82fe2d03095b453f861ca38826f7c1a6",
+    "verdict": "reject",
+    "failed_check": "facts_supported"
+  },
+  "change": {
+    "charter": "trading_team/prompts/01_fundamental.md",
+    "old_isolated_sha256": "4bf07b5577f84775bbd2efed827da73a975781e45af059328da92449db9988c4",
+    "new_repo_sha256": "d0db9d028bc05200b8410cc901f390647ab4e314131b8f9f3c49f6e649397f17",
+    "requirements": [
+      "Causal business claims must cite archived input file and field or be labeled an unverified hypothesis excluded from ratings.",
+      "An announcement title does not establish unarchived business explanations.",
+      "Absent PE/PB or verifiable reference means valuation is indeterminate, separate from supported financial trend."
+    ]
+  },
+  "verification": {
+    "baseline_targeted_tests": "84 passed",
+    "new_regression_before_fix": "1 failed, 1 passed",
+    "model_identity_and_recovery_after_fix": "86 passed",
+    "review_and_handoff_after_fix": "35 passed",
+    "project_tests_after_fix": "1180 passed in 34.09s",
+    "old_publication_not_silently_reused": true,
+    "sealed_file_count": 52,
+    "sealed_file_mismatches": [],
+    "old_market_analysts_status": "rejected",
+    "protected_file_count": 17,
+    "protected_files_changed": [],
+    "new_model_output": false,
+    "new_remote_task": false,
+    "execution_authorized": false
+  },
+  "next": "Check the new charter, frozen inputs, runtime and dedupe; publish only a new isolated version with a bounded real model task. Preserve the old report and reject receipt. Independently review the new bundle before any deterministic Paper finalization."
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-10T01:24:52+08:00",
+  "result": "host_power_not_verified_for_next_premarket_run",
+  "read_only_observation": {
+    "pmset_power_source_label": "AC Power",
+    "pmset_battery_percent": 59,
+    "pmset_battery_state": "discharging",
+    "apple_smart_battery_external_connected": false,
+    "apple_smart_battery_charging": false,
+    "next_candidate_session": "2026-10-12"
+  },
+  "interpretation": "The AC Power heading does not establish physical external power: lower-level battery state shows no external connection and active discharge. Current online status cannot guarantee the host will be awake for the existing 07:30 Autopilot on the next candidate trading day.",
+  "action": "No system power setting, trigger, service, Paper account or Live route was changed. Recheck physical external power and wake state at the scheduled premarket preflight; the user must connect reliable power if the host is to run unattended.",
+  "limits": "This is a time-specific observation, not a prediction that the host will fail or proof of next-day readiness."
+}

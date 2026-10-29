@@ -1,0 +1,65 @@
+{
+  "schema": "isolated_maker_deterministic_reconstruction.v1",
+  "observed_at": "2026-10-14T08:03:41.852362+08:00",
+  "original_directory_missing": true,
+  "method": "deterministic_reconstruction_from_original_inputs_and_recorded_algorithm",
+  "source_sha256": {
+    "bars": "ea5f10141fdb1200b1c710db3e2f059b59c465c03749a61f59c81a760139baae",
+    "receipt": "16ce662db2c71fc8c366d302e934a73f5ae3a25449b8948c095a46772a1aece6"
+  },
+  "expected_result_sha256": "4b0d43ea5fefe95129e5cca411f81f29d61fe5aa7e1990130bbd3b4377f2e7db",
+  "actual_result_sha256": "4b0d43ea5fefe95129e5cca411f81f29d61fe5aa7e1990130bbd3b4377f2e7db",
+  "original_maker_issue": "SATU-80",
+  "original_maker_task": "01a0f7b2-0168-7530-a144-397e95ec3593",
+  "independent_remote_review": "pending",
+  "M2_credit": false,
+  "M3_credit": false,
+  "persistent_result_path": "docs/audits/2026-10-14-maker80-result-reconstructed.json",
+  "historical_audit_path": "docs/audits/2026-10-01-isolated-data-quality-maker.json",
+  "source_paths": {
+    "bars": "trading_team/market_archive/2026-09-30/7f8be2f08470b776027d233d1c4280665d6866b2eb1a8823921fc7eb5b273795.json",
+    "receipt": "trading_team/market_archive/receipts/e2439767125f6659bc801602b57c0080cdbbb39c19e7d4ab2309991543218cfe.json"
+  },
+  "original_recorded_algorithm": {
+    "command": "cd /private/tmp/quant-maker-dq-20261001-v1 && python3 << 'EOF'\nimport json, hashlib\n\ndef sha256(p):\n    h = hashlib.sha256()\n    with open(p,'rb') as f:\n        h.update(f.read())\n    return h.hexdigest()\n\nbars_sha = sha256('bars.json')\nreceipt_sha = sha256('receipt.json')\n\nbars_doc = json.load(open('bars.json'))\nreceipt = json.load(open('receipt.json'))\n\nbusiness_date = receipt.get('date')\nbars = bars_doc['bars']\nbar_codes = set(bars.keys())\nreceipt_codes = set(receipt['codes'])\ncodes_match = bar_codes == receipt_codes\npayload_hash_match = bars_doc.get('payload_hash') == receipt.get('payload_hash')\n\ninvalid_date = []\ninvalid_ohlc = []\nsuspended = []\nfor code, b in bars.items():\n    if b.get('date') != business_date:\n        invalid_date.append(code)\n    if b.get('suspended'):\n        suspended.append(code)\n        continue\n    o,h,l,c = b.get('open'), b.get('high'), b.get('low'), b.get('close')\n    bad = False\n    if l is None or h is None or l > h:\n        bad = True\n    else:\n        for x in (o,c):\n            if x is None or not (l <= x <= h):\n                bad = True\n    if bad:\n        invalid_ohlc.append(code)\n\nfindings = []\nfindings.append(f\"bars.json sha256 与任务给定值一致: {bars_sha == 'ea5f10141fdb1200b1c710db3e2f059b59c465c03749a61f59c81a760139baae'}\")\nfindings.append(f\"receipt.json sha256 与任务给定值一致: {receipt_sha == '16ce662db2c71fc8c366d302e934a73f5ae3a25449b8948c095a46772a1aece6'}\")\nfindings.append(f\"bars 数量={len(bars)}, receipt codes 数量={len(receipt['codes'])}, 代码集合一致={codes_match}\")\nfindings.append(f\"两边 payload_hash 字段相同={payload_hash_match} ({bars_doc.get('payload_hash')})\")\nfindings.append(f\"business_date={business_date}; bar 日期不等于 business_date 的数量={len(invalid_date)}\" + (f\" {invalid_date}\" if invalid_date else \"\"))\nfindings.append(f\"非停牌 bar 违反 low<=open/close<=high 或 low>high 的数量={len(invalid_ohlc)}\" + (f\" {invalid_ohlc}\" if invalid_ohlc else \"\"))\nfindings.append(f\"suspended=True 的 bar 数量={len(suspended)}\" + (f\" {suspended}\" if suspended else \"\"))\nmissing_in_bars = sorted(receipt_codes - bar_codes)\nmissing_in_receipt = sorted(bar_codes - receipt_codes)\nif missing_in_bars or missing_in_receipt:\n    findings.append(f\"receipt 有而 bars 无: {missing_in_bars}; bars 有而 receipt 无: {missing_in_receipt}\")\n\nresult = {\n    \"schema\": \"isolated_data_quality_maker.v1\",\n    \"business_date\": business_date,\n    \"source_file_sha256\": {\"bars\": bars_sha, \"receipt\": receipt_sha},\n    \"bar_count\": len(bars),\n    \"receipt_code_count\": len(receipt['codes']),\n    \"codes_match\": codes_match,\n    \"payload_hash_match\": payload_hash_match,\n    \"invalid_date_count\": len(invalid_date),\n    \"invalid_ohlc_count\": len(invalid_ohlc),\n    \"suspended_count\": len(suspended),\n    \"findings\": findings,\n    \"execution_authorized\": False,\n    \"production_publication\": False,\n}\nwith open('result.json','w',encoding='utf-8') as f:\n    json.dump(result, f, ensure_ascii=False, indent=2)\nprint(json.dumps(result, ensure_ascii=False, indent=2))\nEOF"
+  },
+  "remote_result_message": {
+    "call_id": "df2feb09-bc92-44d1-9c7d-55623f0065ef",
+    "created_at": "2026-10-01T13:41:26.938996Z",
+    "issue_id": "01a0f7b2-0156-7054-8e88-adf75af4af82",
+    "output_truncated": false,
+    "seq": 16,
+    "task_id": "01a0f7b2-0168-7530-a144-397e95ec3593",
+    "tool": "terminal",
+    "type": "tool_result"
+  },
+  "maker_comments": [
+    {
+      "attachments": [],
+      "author_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd",
+      "author_type": "agent",
+      "content": "隔离数据质量 maker 试点已完成，结果已写入 `/private/tmp/quant-maker-dq-20261001-v1/result.json`（UTF-8 JSON，schema `isolated_data_quality_maker.v1`）。\n\n核对事实（仅针对两份冻结归档副本的内部一致性，不代表交易所真实性或行情完整性）：\n\n- 两份输入文件 SHA256 与任务给定值一致（bars `ea5f10…baae`，receipt `16ce66…ece6`）。\n- `business_date` = 2026-09-30；bar 数 12，receipt 代码数 12，两边代码集合一致（`codes_match=true`）。\n- 两边 `payload_hash` 字段相同（`payload_hash_match=true`，`7f8be2…3795`）。\n- `invalid_date_count=0`，`invalid_ohlc_count=0`（非停牌 bar 均满足 low ≤ open/close ≤ high 且 low ≤ high），`suspended_count=0`。\n- `execution_authorized=false`，`production_publication=false`。\n\n未修改任何输入文件，未写项目目录，未触发交易、通知或其他 Agent。本结果仅为该隔离试点的字段级核对，不构成 M2/M3 或独立 maker 全链验收。",
+      "created_at": "2026-10-01T13:41:40Z",
+      "id": "01a0f7b3-069a-767a-9e51-6f4e013b11e3",
+      "issue_id": "01a0f7b2-0156-7054-8e88-adf75af4af82",
+      "last_activity_at": "2026-10-01T13:41:40Z",
+      "parent_id": null,
+      "reactions": [],
+      "reply_count": 0,
+      "resolved_at": null,
+      "resolved_by_id": null,
+      "resolved_by_type": null,
+      "revision": 1,
+      "source_task_id": "01a0f7b2-0168-7530-a144-397e95ec3593",
+      "type": "comment",
+      "updated_at": "2026-10-01T13:41:40Z"
+    }
+  ],
+  "limits": [
+    "The original temporary directory was lost; this is a newly reconstructed copy, never relabeled as the original file.",
+    "Remote tool-result message has output_truncated=false but no complete output payload; retained algorithm and matching archived inputs permit exact deterministic reconstruction.",
+    "Hash equality establishes byte identity relative to historical hash, not exchange authenticity, production publication, or complete remote maker pipeline.",
+    "A distinct remote reviewer has not yet accepted this maker artifact."
+  ],
+  "next": "Have a distinct Audit Verifier review retained archived input bytes and labeled reconstructed maker output, preserving pending production integration."
+}

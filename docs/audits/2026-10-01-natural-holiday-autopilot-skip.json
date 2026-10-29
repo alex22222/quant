@@ -1,0 +1,52 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-01T07:47:16+08:00",
+  "business_date": "2026-10-01",
+  "result": "natural_holiday_skip_verified",
+  "calendar": {
+    "project_calendar_hash": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+    "is_trading_day": false,
+    "previous_trading_day": "2026-09-30",
+    "next_announced_trading_day": "2026-10-08",
+    "sse_notice": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20260915_10832273.shtml",
+    "szse_notice": "https://www.szse.cn/www/disclosure/notice/general/t20260917_622911.html"
+  },
+  "remote": {
+    "autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "trigger_id": "97a59a0a-ceda-4115-81f8-bc583a7c5eef",
+    "triggered_at": "2026-10-01T07:30:13+08:00",
+    "autopilot_run_id": "01a0f4a7-815e-7aa1-b7f8-0623f6563f94",
+    "autopilot_status": "completed",
+    "issue": "SATU-66",
+    "issue_id": "01a0f4a7-816a-7bbb-8166-8bc5bdf3f2dd",
+    "issue_status": "in_review",
+    "task_id": "01a0f4a7-8182-7ebf-832c-7df47c794a83",
+    "task_status": "completed",
+    "task_started_at": "2026-10-01T07:30:14+08:00",
+    "task_completed_at": "2026-10-01T07:33:23+08:00",
+    "research_lead_agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "result_comment_id": "01a0f4aa-4e05-7310-a367-bdc47027f411"
+  },
+  "local_boundary": {
+    "output_directory": "absent",
+    "decision_directory": "absent",
+    "notification_outbox_directory": "absent",
+    "approval_log_entries_for_day": 0,
+    "daily_run_files_for_day": 0,
+    "gate_paper": "checked; 100000 CNY cash; zero recorded trades; facts_hash 7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+    "no_gate_paper": "checked; 100000 CNY cash; zero recorded trades; facts_hash 7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+    "archive_service": "healthy; expected_session and latest_verified_session both 2026-09-30"
+  },
+  "acceptance": {
+    "holiday_skip_boundary": "verified_for_this_trigger",
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "limitations": [
+    "A correctly skipped holiday is not a complete natural trading-day research and Paper chain.",
+    "Local absence of output and outbox does not independently prove every external notification or Live boundary.",
+    "The next trading day must be rechecked for emergency calendar changes and runtime availability before dispatch."
+  ]
+}

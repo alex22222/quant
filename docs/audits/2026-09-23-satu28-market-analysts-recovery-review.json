@@ -1,0 +1,103 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 102,
+  "verified_at": "2026-09-23T16:51:50+08:00",
+  "classification_of_previous_goal_turn": "progress_real_runtime_failure_and_contained_blocked_issue",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "isolated_team": "/private/tmp/quant-real-chain-v12.sBy3zU/trading_team",
+  "source": {
+    "publication_issue": "SATU-25",
+    "publication_task_id": "01a0ccef-9736-761a-8d1e-d895836ae8b8",
+    "data_quality_issue": "SATU-26",
+    "data_quality_receipt_hash": "2fe25aaca8f51a5fbf9c78b7227d25e2888d1ca1182c4d7770c0fd8feb8a4258",
+    "plan_hash": "7a7f1b0646925769a1f4330360d910eb2cb645864ec9d00051c45345dd1f9d2e",
+    "generation_hash": "199826c35ff889758435710262df8cc727a282863a4140b02b38970c135d2f80"
+  },
+  "old_failure_preserved": {
+    "issue": "SATU-27",
+    "issue_id": "01a0cd16-667c-7d70-aa14-5e41e63c1823",
+    "issue_status": "blocked",
+    "task_id": "01a0cd16-668d-781a-a734-008ce3a3f55b",
+    "task_count": 1,
+    "task_status": "failed",
+    "error": "request timed out",
+    "review_response_and_local_run_absent_before_new_task": true,
+    "rerun_old_issue": false
+  },
+  "preflight": {
+    "bundle_hash": "3b66f03943a88e9e990844341da36e8f59f4cffa64ee0554d4bbf020b4d77bc0",
+    "bundle_file_sha256": "40e0538ed73bb20df43c257c287c5d9bf80b4f81f31119d67368416234bb270e",
+    "file_count": 52,
+    "repeat_prepare_same_hash": true,
+    "embedded_and_disk_hash_mismatches": [],
+    "upstream_data_quality_receipt_bound": true,
+    "agent_model": "gpt-5.5",
+    "agent_active_tasks": 0,
+    "runtime_online_and_heartbeat_refreshed_twice": true,
+    "daemon_websocket_recently_acked": true,
+    "remote_exact_hash_issues_before_new_task": 1,
+    "only_prior_issue_was_blocked_SATU27": true,
+    "new_issue_duplicate_title_explicitly_allowed_for_traceability": true
+  },
+  "review": {
+    "issue": "SATU-28",
+    "issue_id": "01a0cd6e-0466-7bdd-bf45-c90c9c9ef0ee",
+    "issue_status": "done",
+    "task_id": "01a0cd6e-047a-72a2-9c46-3e2b37c400dc",
+    "task_status": "completed",
+    "task_count": 1,
+    "agent_id": "b765ae90-5a87-424f-9c26-fe3ce0644674",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "local_run_id": "ae80de59c4bf4bbfbdc9351b937b843d",
+    "local_run_status": "succeeded",
+    "local_attempt": 1,
+    "receipt_hash": "d8a45671d0f7810f84aa33c841ef5289fbdf9c86c7338c9f2f5a40eef3e43c1c",
+    "response_file_sha256": "485b791982300f18f3b52b8bd8dc9c02cf48a1e2693c20b309a6442b3c1534da",
+    "verdict": "accept",
+    "checks": {"facts_supported": "pass", "missing_data_disclosed": "pass"},
+    "remote_comment_matches_local_receipt": true,
+    "remote_message_count": 74,
+    "remote_tool_use_count": 23,
+    "submit_command_count": 1,
+    "force_command_count": 0,
+    "paper_execution_command_count": 0
+  },
+  "independent_readback": {
+    "role_02_prior_turnover_causality_sentence_repeated": false,
+    "role_02_prior_hard_fund_inflow_sentence_repeated": false,
+    "fundamental_601012_latest_date": "2026-06-30",
+    "fundamental_601012_latest_net_profit_yi": -36.84,
+    "fundamental_601012_latest_profit_yoy": -43.38616590965,
+    "fundamental_601012_2025_06_30_raw_row_present": false,
+    "limitation": "The archived YoY field supports reported direction, but the same-period raw base is absent; the loss-expansion magnitude cannot be independently recomputed from this bundle. Market Analysts acceptance does not remove this uncertainty, and downstream research must not upgrade it to verified trend evidence."
+  },
+  "sealed_next_review": {
+    "role": "strategy-research",
+    "bundle_hash": "59c958b6a8b6cbdaf153e034438c1afa92b41461f3be00c6c3c3899c8ae24bf2",
+    "bundle_file_sha256": "177f30f80d1453855c17337dea2f26180eea1a40d108cb131951f0709b4cdc65",
+    "file_count": 55,
+    "repeat_prepare_same_hash": true,
+    "embedded_and_disk_hash_mismatches": [],
+    "upstream_receipts": {
+      "data-quality": "2fe25aaca8f51a5fbf9c78b7227d25e2888d1ca1182c4d7770c0fd8feb8a4258",
+      "market-analysts": "d8a45671d0f7810f84aa33c841ef5289fbdf9c86c7338c9f2f5a40eef3e43c1c"
+    },
+    "remote_exact_hash_duplicates": 0,
+    "status": "pending",
+    "dispatched_this_loop": false
+  },
+  "protection": {
+    "v12_freeze_sha256": "d217bb5706b4933533b7094b60a687c019b062cbce119132dfa5fc13065cdc15",
+    "market_analysts_bundle_unchanged": true,
+    "source_v11_rejected_reply_sha256": "7321c39ccdd5d9e7e88c1864f30235219f67f491ee747cc9aed95c6cc054ad69",
+    "isolated_decisions_present": false,
+    "isolated_paper_present": false,
+    "notification_sent": false,
+    "execution_authorized": false,
+    "legacy_production_autopilot_modified": false
+  },
+  "tests": "No application code changed in Loop102; Loop98 full suite had 1224 passed. This loop verified live remote review, recovery traceability, receipt and next sealed bundle.",
+  "milestones": {"m1": "incomplete", "m2": "not_started", "m3": "not_started"},
+  "next": "Recheck SATU-28 unique terminal task, the 55-file Strategy Research bundle and both upstream receipts, independent agent/model/online runtime, and exact bundle-hash dedup. Dispatch at most one real strategy review and challenge claims-vs-evidence, including cross-period and capital-flow assertions. Do not infer Paper authority, settle, notify, or enable Live. Old production Autopilot still needs separate authorization."
+}

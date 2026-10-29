@@ -1,0 +1,26 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-04T01:40:00+08:00",
+  "result": "no_historical_all_rejected_mislabel;_console_reload_pending_authorization",
+  "decision_history": {
+    "files_read": 18,
+    "pm_status_counts": {"pending": 16, "partial": 2, "approved": 0},
+    "plan_approval_counts": {"pending": 189, "rejected": 1, "approved": 2},
+    "all_rejected_decisions": 0,
+    "all_rejected_with_approved_summary": 0,
+    "historical_rewrite_required_for_this_bug": false
+  },
+  "runtime": {
+    "console_launch_agent": "running; PID 39039; project console/serve.py on 127.0.0.1:7100",
+    "console_page": "HTTP 200 on read-only probe",
+    "approval_module_imported_at_process_start": true,
+    "console_has_loaded_new_approval_code": false,
+    "console_reload_performed": false,
+    "reload_authorization": "separately requested; no reply in this turn",
+    "legacy_local_daily_launch_agent": "disabled",
+    "auto_execute_launch_agent_plist_found": false
+  },
+  "limits": "No matching LaunchAgent plist is not proof that no other manual or remote executor exists. A transient sandbox localhost connection failure was not treated as server downtime; LaunchAgent remained running and the page returned HTTP 200 on another read-only probe.",
+  "milestones": {"M1": "complete", "M2": "not_accepted", "M3": "not_started"},
+  "next_boundary": "Do not restart the console until this scoped reload is authorized; before and after any authorized reload compare both active Paper accounts, page/port and approval endpoint. Future natural-day M2 evidence remains required."
+}

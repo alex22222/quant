@@ -1,0 +1,71 @@
+{
+  "schema": "isolated_remote_maker_audit.v1",
+  "observed_at": "2026-10-01T21:44:55+08:00",
+  "scope": "single Data Quality maker experiment on copied public 2026-09-30 market archive",
+  "production_publication": false,
+  "execution_authorized": false,
+  "m2_credit": false,
+  "m3_credit": false,
+  "independent_maker_pipeline_accepted": false,
+  "preflight": {
+    "project_id": "a208df76-b63b-4cef-bd11-7512d7c80896",
+    "agent_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd",
+    "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+    "daemon_id": "01a0c492-4f9e-797d-b6ba-653b1897dad2",
+    "historical_review_chain": "SATU-74 through SATU-78 Issue done; SATU-79 task completed; daemon idle before dispatch",
+    "exact_title_duplicates_before_dispatch": 0,
+    "active_daemon_tasks_before_dispatch": 0
+  },
+  "frozen_input": {
+    "directory": "/private/tmp/quant-maker-dq-20261001-v1",
+    "bars_file_sha256": "ea5f10141fdb1200b1c710db3e2f059b59c465c03749a61f59c81a760139baae",
+    "receipt_file_sha256": "16ce662db2c71fc8c366d302e934a73f5ae3a25449b8948c095a46772a1aece6",
+    "task_file_sha256": "f844bbc6c41fbb9881d053601504a846ff6dc5c0419cb128a91f1d0c62fb7430"
+  },
+  "remote": {
+    "issue": "SATU-80",
+    "issue_id": "01a0f7b2-0156-7054-8e88-adf75af4af82",
+    "issue_status_after_task": "in_review",
+    "task_id": "01a0f7b2-0168-7530-a144-397e95ec3593",
+    "task_status": "completed",
+    "started_at": "2026-10-01T13:40:34Z",
+    "completed_at": "2026-10-01T13:41:53Z",
+    "error": null,
+    "agent_and_runtime_matched": true,
+    "task_count_for_issue": 1,
+    "exact_title_issue_count": 1,
+    "model_usage": "unreported"
+  },
+  "output": {
+    "path": "/private/tmp/quant-maker-dq-20261001-v1/result.json",
+    "sha256": "4b0d43ea5fefe95129e5cca411f81f29d61fe5aa7e1990130bbd3b4377f2e7db",
+    "schema": "isolated_data_quality_maker.v1",
+    "source_hashes_matched": true,
+    "independent_check": {
+      "business_date": "2026-09-30",
+      "bar_count": 12,
+      "receipt_code_count": 12,
+      "codes_match": true,
+      "payload_hash_fields_match": true,
+      "invalid_date_count": 0,
+      "invalid_ohlc_count": 0,
+      "suspended_count": 0
+    },
+    "output_matches_independent_check": true,
+    "execution_authorized": false,
+    "production_publication": false
+  },
+  "paper_after": {
+    "gate_facts_hash": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+    "no_gate_facts_hash": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+    "recorded_trade_count_each": 0,
+    "conflict_count_each": 0
+  },
+  "limits": [
+    "This checks copied archive field consistency, not exchange authenticity or full market completeness.",
+    "No distinct remote reviewer accepted the maker output; Issue remains in_review.",
+    "The seven-role production generator and its uniform Moonshot transport were not changed.",
+    "No production decision, approval, Paper settlement, notification or Live action was requested.",
+    "Absence of local Paper changes does not independently prove absence of every external side effect."
+  ]
+}

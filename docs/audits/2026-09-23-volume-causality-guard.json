@@ -1,0 +1,45 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 96,
+  "verified_at": "2026-09-23T13:32:23+08:00",
+  "classification_of_previous_goal_turn": "progress_real_market_analysts_rejection_and_recorded_receipt",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "trigger": {
+    "issue": "SATU-23",
+    "issue_id": "01a0ccae-d910-74af-b787-ce69da311801",
+    "review_run_id": "758395b0f74b4a969c3dfe4a00cd607c",
+    "receipt_hash": "7cd13812a8d77d9530d72ff59827bcb6b0ee45ba4200af7d3a2678921a5a8612",
+    "verdict": "reject",
+    "failed_check": "facts_supported",
+    "source_report": "/private/tmp/quant-real-chain-v10.bEuzvv/trading_team/outputs/2026-09-23/02_sentiment.md",
+    "unsupported_claim": "宁德时代上涨由存量筹码换手推动"
+  },
+  "behavioral_reproduction": {
+    "preexisting_focused_suite": "54 passed",
+    "new_deterministic_causality_cases_before_fix": "2 failed, 2 passed",
+    "same_clause_caveat_cases_before_refinement": "2 failed, 4 passed",
+    "failure_mode": "The old validator only rejected asserted signed fund flows; it admitted unsupported volume-to-price causality, while a later uncertainty caveat could also mask a direct causal assertion."
+  },
+  "change": {
+    "application_files": ["trading_team/kimi_daily.py", "trading_team/prompts/02_sentiment.md", "trading_team/prompts/05_researcher.md"],
+    "test_file": "tests/test_model_identity.py",
+    "scope": "Role 02/05 report validation and charters; reject definitive price-causality claims derived from volume/turnover without an archived causal source, while allowing adjacent uncertainty or negation.",
+    "existing_fund_flow_guard_preserved": true,
+    "old_v10_report_or_receipt_modified": false
+  },
+  "verification": {
+    "focused": "62 passed in 2.72s",
+    "full_suite": "1217 passed in 36.04s",
+    "real_sealed_v10_report_probe": "ValueError: unverified volume causality: volume and turnover do not prove a price driver",
+    "sealed_v10_market_bundle_sha256": "04de36b02e9a52f578b04369165cf1ffa2b0e863a1cf014f6cb46389ea363550",
+    "sealed_v10_rejected_response_sha256": "b9a57345bb4fd9f09f4b0a9c8982058ffac88745afe0cde2417b9f0a7f60b599",
+    "git_diff_check": "passed",
+    "new_remote_task": false,
+    "moonshot_call": false,
+    "paper_or_approval_action": false
+  },
+  "limitations": "The bounded phrase guard is not a complete semantic fact checker. It recognizes targeted deterministic volume-to-price phrasing; independent Market Analysts review remains required. No new isolated generation or natural trading-day evidence was produced in this loop.",
+  "milestones": {"m1": "incomplete", "m2": "not_started", "m3": "not_started"},
+  "next": "Build a new isolated freeze bound to the updated runner and role 02/05 charters, invalidate affected cached roles, preserve SATU-23 rejection, then verify inputs/agent/runtime/exact hash and dispatch at most one Research Lead publication-only task. Do not use v10 review receipts for the new version."
+}

@@ -99,9 +99,61 @@ def init_db():
         note TEXT
     );
     """)
+    _ensure_column(conn, "decisions", "plan_hash", "TEXT")
+    _ensure_column(conn, "plans", "approval", "TEXT DEFAULT 'pending'")
+    _ensure_column(conn, "plans", "approved_plan_hash", "TEXT")
+    _ensure_column(conn, "plans", "executable", "BOOLEAN DEFAULT 0")
+    _ensure_column(conn, "approvals", "plan_hash", "TEXT")
     conn.commit()
     conn.close()
     print(f"[OK] 数据库初始化完成: {DB_PATH}")
+
+
+def _ensure_column(conn, table, name, declaration):
+    columns = {row[1] for row in conn.execute(f"PRAGMA table_info({table})")}
+    if name not in columns:
+        conn.execute(f"ALTER TABLE {table} ADD COLUMN {name} {declaration}")
+
+
+def sync_decision(dec, conn=None, *, commit=True):
+    """Idempotently mirror one decision.json into team.db."""
+    owns_conn = conn is None
+    if owns_conn:
+        init_db()
+        conn = get_conn()
+    day = dec["date"]
+    conn.execute("""
+        INSERT INTO decisions
+        (date, pm_status, market_ok, trader_summary, risk_verdict, created_at, plan_hash)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(date) DO UPDATE SET
+          pm_status=excluded.pm_status, market_ok=excluded.market_ok,
+          trader_summary=excluded.trader_summary, risk_verdict=excluded.risk_verdict,
+          plan_hash=excluded.plan_hash
+    """, (
+        day, dec.get("pm_status", "pending"), dec.get("market_ok"),
+        dec.get("trader_summary", ""), dec.get("risk_verdict", ""),
+        dec.get("materialized_at", day), dec.get("plan_hash"),
+    ))
+    conn.execute("DELETE FROM plans WHERE decision_date=?", (day,))
+    for plan in dec.get("plans", []):
+        conn.execute("""
+            INSERT INTO plans
+            (decision_date, code, name, direction, position_pct, entry, stop,
+             invalid_if, horizon, confidence, approval, approved_plan_hash, executable)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            day, plan.get("code"), plan.get("name"), plan.get("direction"),
+            plan.get("position_pct"), json.dumps(plan.get("entry"), ensure_ascii=False)
+            if plan.get("entry") is not None else None,
+            plan.get("stop"), plan.get("invalid_if"), plan.get("horizon"),
+            plan.get("confidence"), plan.get("approval", "pending"),
+            plan.get("approved_plan_hash"), bool(plan.get("executable", False)),
+        ))
+    if commit:
+        conn.commit()
+    if owns_conn:
+        conn.close()
 
 
 def migrate():
@@ -139,8 +191,8 @@ def migrate():
         date = dec.get("date", dec_dir.name)
         conn.execute("""
             INSERT OR REPLACE INTO decisions
-            (date, pm_status, market_ok, trader_summary, risk_verdict, created_at, executed_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            (date, pm_status, market_ok, trader_summary, risk_verdict, created_at, executed_at, plan_hash)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             date,
             dec.get("pm_status", "pending"),
@@ -148,15 +200,18 @@ def migrate():
             dec.get("trader_summary", ""),
             dec.get("risk_verdict", ""),
             date,
-            None  # executed_at 由 execute.py 更新
+            None,  # executed_at 由 execute.py 更新
+            dec.get("plan_hash")
         ))
 
         # 迁移 plans
+        conn.execute("DELETE FROM plans WHERE decision_date=?", (date,))
         for plan in dec.get("plans", []):
             conn.execute("""
-                INSERT OR REPLACE INTO plans
-                (decision_date, code, name, direction, position_pct, entry, stop, invalid_if, horizon, confidence)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO plans
+                (decision_date, code, name, direction, position_pct, entry, stop,
+                 invalid_if, horizon, confidence, approval, approved_plan_hash, executable)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
                 date,
                 plan.get("code"),
@@ -167,7 +222,8 @@ def migrate():
                 plan.get("stop"),
                 plan.get("invalid_if"),
                 plan.get("horizon"),
-                plan.get("confidence")
+                plan.get("confidence"), plan.get("approval", "pending"),
+                plan.get("approved_plan_hash"), bool(plan.get("executable", False))
             ))
         migrated += 1
 

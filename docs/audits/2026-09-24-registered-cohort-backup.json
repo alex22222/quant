@@ -1,0 +1,75 @@
+{
+  "schema": "registered_cohort_backup_audit.v1",
+  "observed_at": "2026-09-24T23:56:14+08:00",
+  "prior_catalog_state": {
+    "status": "healthy_under_time_only_policy",
+    "latest_id": "1feedeb908234bbe9e13e7bb9357bcfe",
+    "started_at": "2026-09-24T20:45:05.752179+08:00",
+    "cohort_config_in_snapshot": false,
+    "snapshot_count": 11
+  },
+  "change": "The existing backup service now reports a verified-snapshot gap when the active Paper cohort config hash differs, and uses its existing lock, retry, capacity and catalog flow to snapshot promptly.",
+  "regression": {
+    "red": "With a new active cohort and fresh accounts, the old service reported healthy and did not create a new snapshot at the next 15-minute tick.",
+    "green": "Status becomes degraded until a new registered snapshot includes the exact active-cohort config; tick then creates one and returns healthy.",
+    "tests": "1269 passed, .venv/bin/python -m pytest -q -p no:cacheprovider tests"
+  },
+  "registered_snapshot": {
+    "id": "c508038af1414b5c92fbfa163f83efae",
+    "started_at": "2026-09-24T23:55:52.372977+08:00",
+    "manifest_hash": "6a3174241cab2d5175cbbe7c14fc3b53fd63ade3946f784f0e13f50d92ba4da1",
+    "status": "succeeded",
+    "verified": true,
+    "catalog_snapshot_count": 12,
+    "catalog_attempt_count": 12,
+    "unregistered_count": 0,
+    "cohort_config_hash": "35a952b2192a01364f13145c161b30a42f37c014fe01cfc8b28bcd19070b4c3c",
+    "paper_database_paths": [
+      "paper/cohort_2026-09-28/llm_gate.db",
+      "paper/cohort_2026-09-28/llm_no_gate.db",
+      "paper/llm_gate.db",
+      "paper/llm_no_gate.db"
+    ],
+    "execution_authorized": false
+  },
+  "isolated_restore": {
+    "path": "/private/tmp/quant-registered-cohort-restored-20260924",
+    "status": "verified_isolated",
+    "runtime": "matched",
+    "new_gate": "checked",
+    "new_no_gate": "checked",
+    "readiness": "blocked",
+    "blockers": [
+      "research data invalid, stale or unknown",
+      "research publication evidence incomplete"
+    ],
+    "execution_authorized": false
+  },
+  "console_readback": {
+    "service": "com.hqcapital.console",
+    "pid_after_scoped_reload": 45745,
+    "api": "/api/backup-service",
+    "status": "healthy",
+    "cohort_snapshot_current": true,
+    "latest_id": "c508038af1414b5c92fbfa163f83efae"
+  },
+  "next_natural_check": {
+    "observed_at": "2026-09-25T00:00:01.034986+08:00",
+    "trigger_source": "launchd",
+    "launch_agent": "com.hqcapital.workflow-backup",
+    "last_exit_code": 0,
+    "heartbeat": "fresh",
+    "status": "healthy",
+    "cohort_snapshot_current": true,
+    "latest_id_unchanged": "c508038af1414b5c92fbfa163f83efae",
+    "snapshot_count": 12,
+    "attempt_count": 12,
+    "unregistered_count": 0,
+    "next_scheduled_at": "2026-09-25T00:15:00+08:00"
+  },
+  "limits": [
+    "The registered backup is on the same machine and does not satisfy offsite disaster recovery.",
+    "A matched local runtime fingerprint and fresh empty accounts do not prove a future natural trading-day business chain.",
+    "Older snapshots and historical Paper conflicts remain intact."
+  ]
+}

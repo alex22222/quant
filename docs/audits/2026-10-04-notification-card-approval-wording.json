@@ -1,0 +1,21 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-04T01:28:35+08:00",
+  "result": "notification_card_rejection_wording_corrected_not_delivery_verified",
+  "baseline": "tests/test_review_gate.py: 27 passed",
+  "reproduction": "When every proposal was rejected, build_card still rendered '当日提案已全部批复'; new regression failed before the fix.",
+  "change": "With no pending proposals, the card now reports approved, reduced and rejected counts, or no proposals if the plan list is empty.",
+  "verification": {
+    "notification_related": "63 passed before the count refinement",
+    "full_suite_after_refinement": "1298 passed",
+    "notification_outbox": "missing; no unknown or retryable delivery record",
+    "feishu_config": "required fields present; values not printed; no network delivery attempted",
+    "backup_after_code_change": "degraded: runtime_snapshot_current=false, runbook_snapshot_current=true, heartbeat=fresh, offsite_verified=false"
+  },
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "next_boundary": "Wait for the existing scheduled backup to capture the new runtime, then verify it independently. On a future qualified trading day, actual publication, six independent reviews, deterministic Paper close and Feishu provider acknowledgement remain required; this test does not prove delivery."
+}

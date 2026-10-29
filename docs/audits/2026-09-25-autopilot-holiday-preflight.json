@@ -1,0 +1,22 @@
+{
+  "observed_at_local": "2026-09-25 00:20 Asia/Shanghai",
+  "scope": "read-only preflight, not observed scheduled execution",
+  "autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+  "status": "active",
+  "trigger_id": "97a59a0a-ceda-4115-81f8-bc583a7c5eef",
+  "trigger_cron": "30 7 * * 1-5",
+  "trigger_timezone": "Asia/Shanghai",
+  "next_run_at_utc": "2026-09-24T23:30:00Z",
+  "remote_runbook_rule": "Check the A-share trading calendar first; on non-trading days only report skipped and do not generate a plan.",
+  "local_calendar_sha256": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+  "local_calendar_sessions": {
+    "2026-09-25": false,
+    "2026-09-26": false,
+    "2026-09-27": false,
+    "2026-09-28": true
+  },
+  "local_code_gate": "trading_team/kimi_daily.py KimiDaily.run checks load_trading_days before _run_locked and records a failed trading_session_gate on rejection.",
+  "observed_execution": false,
+  "m2_accepted": false,
+  "m3_started": false
+}

@@ -1,2 +1,5 @@
 {"ts": "2026-08-23T22:58:50+08:00", "strategy": "turtle_bluechip", "params_hash": "c70270ef55366532"}
 {"ts": "2026-08-23T22:59:52+08:00", "strategy": "turtle_bluechip", "params_hash": "c70270ef55366532"}
+{"ts": "2026-10-02T21:12:58+08:00", "strategy": "momentum_rotation", "params_hash": "6b3318adfae57347"}
+{"ts": "2026-10-02T21:13:38+08:00", "strategy": "turtle_bluechip", "params_hash": "c70270ef55366532"}
+{"ts": "2026-10-22T23:10:24+08:00", "strategy": "momentum_rotation", "params_hash": "6b3318adfae57347"}

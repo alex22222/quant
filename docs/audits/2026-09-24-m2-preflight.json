@@ -1,0 +1,96 @@
+{
+  "schema": "real_chain_m2_preflight.v1",
+  "checked_at_utc": "2026-09-23T20:15:41Z",
+  "execution_day": "2026-09-24",
+  "scope": "prospective M2 natural-session acceptance; preflight only",
+  "calendar": {
+    "path": "/Users/henry/.rqalpha/bundle/trading_dates.npy",
+    "sha256": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+    "execution_day_is_session": true,
+    "next_sessions": ["2026-09-28", "2026-09-29", "2026-09-30", "2026-10-08", "2026-10-09"],
+    "exchange_notice_sse": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20260915_10832273.shtml",
+    "exchange_notice_szse": "https://www.szse.cn/www/disclosure/notice/general/t20260917_622911.html",
+    "note": "Both exchanges close 2026-09-25 through 2026-09-27; M3 cannot count those calendar days."
+  },
+  "prospective_cutoff": "2026-09-24T09:15:00+08:00",
+  "unique_publication_entry": {
+    "autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "trigger_id": "97a59a0a-ceda-4115-81f8-bc583a7c5eef",
+    "scheduled_at": "2026-09-24T08:02:00+08:00",
+    "remote_readback_at_utc": "2026-09-23T20:16:59Z",
+    "remote_status": "active",
+    "remote_trigger_enabled": true,
+    "remote_last_fired_at": "2026-09-23T00:43:10Z",
+    "runbook_sha256": "bad0181023d83c3fb1c91b38e19e20cece7a07e71bd721779e5a90c0604719eb",
+    "scope": "publication-only --no-push",
+    "scheduled_issue_or_task_observed": false
+  },
+  "paper_account_cohort": {
+    "policy": "existing production accounts retained; no reset or copied isolated fills",
+    "gate": {
+      "path": "paper/llm_gate.db",
+      "sha256": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+      "last_account_day": "2026-09-11",
+      "last_recorded_equity": 100000.0,
+      "last_technical_valuation_day": "2026-09-18",
+      "positions": 0,
+      "historical_trades": 0,
+      "execution_receipts_table_exists": false,
+      "trade_position_inventory_check": "pass"
+    },
+    "no_gate": {
+      "path": "paper/llm_no_gate.db",
+      "sha256": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+      "last_account_day": "2026-09-11",
+      "last_recorded_equity": 99806.66,
+      "last_technical_valuation_day": "2026-09-18",
+      "last_technical_valuation_equity": 99338.66,
+      "positions": {"600036": 200, "601899": 200, "601318": 100},
+      "historical_trades": 3,
+      "execution_receipts_table_exists": false,
+      "trade_position_inventory_check": "pass"
+    },
+    "caveat": "Old accounts and valuations do not prove a 2026-09-24 execution or current equity; historical missing sessions remain missing."
+  },
+  "matching_contract": {
+    "model": "daily_bar_t1.v4",
+    "entry": "a_share_entry.v1",
+    "exit": "a_share_exit.v1",
+    "portfolio": "explicit_intent.v1",
+    "risk": "structured_risk.v1",
+    "inventory": "fifo_acquisition.v1",
+    "protection": "existing_position_stop.v1",
+    "slippage_rate": 0.002
+  },
+  "prior_session_archive_sha256": "f38fbe35846bcdeb09ae78c7afd44cbd905300177902ae9e97092acc3dc509bf",
+  "closing_archive_service": {
+    "readback_at": "2026-09-24T04:20:50+08:00",
+    "launchd_label": "com.hqcapital.market-archive",
+    "launchd_loaded": true,
+    "launchd_disabled": false,
+    "launchd_config_matches": true,
+    "launchd_last_exit_code": 0,
+    "business_status": "healthy",
+    "heartbeat": "fresh",
+    "expected_session": "2026-09-23",
+    "latest_verified_session": "2026-09-23",
+    "verified_count": 3,
+    "missing_sessions": [],
+    "invalid_sessions": [],
+    "errors": {},
+    "caveat": "The 2026-09-24 close is not yet due or captured."
+  },
+  "production_plan_exists_at_preflight": false,
+  "production_decision_exists_at_preflight": false,
+  "execution_day_archive_exists_at_preflight": false,
+  "notification_preflight": {
+    "existing_feishu_config_file_present": true,
+    "outbox_status": "missing",
+    "outbox_attempt_count": 0,
+    "delivery_verified": false,
+    "rule": "After real same-version review and settlement, send only to the configured authorized channel; unknown delivery is never blindly retried."
+  },
+  "m2_status": "waiting_for_real_scheduled_publication_and_same_version_reviews",
+  "m3_status": "not_started",
+  "live_enabled_or_approved": false
+}

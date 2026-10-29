@@ -1,0 +1,21 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-04T01:35:32+08:00",
+  "result": "all_rejected_summary_now_rejected_without_historical_rewrite",
+  "baseline": "approval and decision tests: 14 passed",
+  "reproduction": "Both approval write-back and same-version decision materialization labeled every-rejected proposals as pm_status=approved; two new regressions failed before the fix.",
+  "change": "Only the all-rejected branch now uses pm_status=rejected in both writers. Mixed completed decisions retain their prior approved summary semantics; pending and partial behavior is unchanged.",
+  "verification": {
+    "focused": "43 passed",
+    "full_suite": "1300 passed",
+    "automatic_execution_filter": "Source query selects pm_status=approved; the new rejected summary is excluded.",
+    "production_records_rewritten": false,
+    "backup": "The original 01:30 scheduled tick ran without a new snapshot under the existing six-hour runtime drift policy; previous valid snapshot remains, runtime_snapshot_current=false. Runtime code is fingerprinted, not included in the workflow snapshot."
+  },
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "next_boundary": "Preserve all old approvals and decisions. Wait for the existing backup cadence and verify a new registered snapshot; a future qualified trading day must still produce actual publication, independent reviews, Paper evidence and notification acknowledgement."
+}

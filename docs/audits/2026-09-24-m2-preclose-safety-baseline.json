@@ -1,0 +1,58 @@
+{
+  "schema": "real_chain_safety_baseline.v1",
+  "business_date": "2026-09-24",
+  "observed_at": "2026-09-24T09:44:22+08:00",
+  "scope": "read-only preclose baseline; not a completed-session or M2 acceptance result",
+  "review": {
+    "current_status": "source_unverified",
+    "execution_authorized": false,
+    "recorded_data_quality": "accepted_at_prior_version",
+    "recorded_market_analysts": "rejected_at_prior_version",
+    "generation_file_sha256": "76cae0d5411fb28cbbe24db36ec666393e3ddc1d130b455a5038a1944c2a5fc9",
+    "market_analysts_bundle_sha256": "a55c9610cf7d5f9860d1427ed806b7d4be2a5d3d0258bbad78d40089525ea13c",
+    "market_analysts_response_sha256": "0a5eb97975844a25ccf22574bd3777ed2ecea7011286a2d7615fc2ec8f58a689"
+  },
+  "decision_and_approval": {
+    "decision_directory_exists": false,
+    "approval_log_sha256": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+    "approval_log_entries_for_day": 0,
+    "daily_finalize_runs_for_day": 0
+  },
+  "paper": {
+    "gate_db_sha256": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "no_gate_db_sha256": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "each_account_counts_for_day": {
+      "trades": 0,
+      "account": 0,
+      "order_events": 0,
+      "pending_orders": 0
+    }
+  },
+  "notification": {
+    "outbox_directory_exists": false,
+    "interpretation": "No local outbox evidence at observation time; external delivery is not independently proven absent."
+  },
+  "market_archive": {
+    "research_execution_archive_date": "2026-09-23",
+    "execution_day_completed_archive_verified": false,
+    "reason": "Observation is before the 2026-09-24 close."
+  },
+  "archive_scheduler": {
+    "observed_at": "2026-09-24T09:45:18+08:00",
+    "launchd_status": "waiting",
+    "installed": true,
+    "loaded": true,
+    "disabled": false,
+    "config_matches": true,
+    "runs": 562,
+    "last_exit_code": 0,
+    "next_scheduled_at": "2026-09-24T09:50:00+08:00",
+    "service_status": "healthy",
+    "service_heartbeat": "fresh",
+    "expected_session": "2026-09-23",
+    "latest_verified_session": "2026-09-23",
+    "missing_sessions": [],
+    "interpretation": "Scheduler and archive evidence are current before the close; this does not verify the 2026-09-24 completed session."
+  },
+  "conclusion": "No observed local decision, approval or Paper side effect at this preclose checkpoint. This does not accept M2 or prove a full-day safe stop; repeat after completed-session archive and inspect notification and Live boundaries separately."
+}

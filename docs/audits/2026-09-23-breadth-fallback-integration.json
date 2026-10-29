@@ -1,0 +1,109 @@
+{
+  "schema": "breadth_fallback_integration_acceptance.v1",
+  "loop": 64,
+  "verified_at": "2026-09-23T01:04:03.236253+08:00",
+  "capture": {
+    "schema": "breadth_integration_capture.v1",
+    "loop": 64,
+    "date": "2026-09-22",
+    "started_at": "2026-09-23T01:01:41.602365+08:00",
+    "status": "captured",
+    "artifact": "/Users/henry/projects/quant/trading_team/.runs/breadth-integration-loop64/market_breadth.json",
+    "artifact_sha256": "e1b35c8aac20702d86d13319700f6dbd615ff732a38ea5dbd9edb9249557b076",
+    "counts": {
+      "up": 2284,
+      "down": 2781,
+      "flat": 156,
+      "up_gt5": 224,
+      "down_gt5": 43,
+      "unavailable": 0
+    },
+    "total": 5221,
+    "source": "https://qt.gtimg.cn/q=",
+    "primary_failure": {
+      "source": "https://push2.eastmoney.com/api/qt/clist/get",
+      "params": {
+        "pn": 1,
+        "pz": 100,
+        "po": 0,
+        "np": 1,
+        "fltt": 2,
+        "invt": 2,
+        "fid": "f12",
+        "fs": "m:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23",
+        "fields": "f3,f12,f13,f124"
+      },
+      "type": "ConnectionError",
+      "detail": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+    },
+    "raw_pages": 138,
+    "finished_at": "2026-09-23T01:02:55.536392+08:00",
+    "protected_changed": []
+  },
+  "independent": {
+    "universe_total": 5566,
+    "sh_sz_total": 5221,
+    "excluded_beijing": 345,
+    "universe_pages": 70,
+    "quote_batches": 66,
+    "counts": {
+      "up": 2284,
+      "down": 2781,
+      "flat": 156,
+      "up_gt5": 224,
+      "down_gt5": 43
+    },
+    "all_quote_dates": [
+      "20260922"
+    ],
+    "recomputed_percent_mismatches": 0,
+    "raw_hashes_verified": true
+  },
+  "tests": {
+    "baseline_focused": "25 passed in 0.40s",
+    "before_implementation": "14 failed, 26 passed in 0.58s",
+    "after_focused": "40 passed in 2.43s",
+    "full": "1171 passed in 33.67s",
+    "diff_check": "passed"
+  },
+  "protected_file_count": 17,
+  "protected_changed": [],
+  "old_review_status": {
+    "data-quality": {
+      "status": "rejected",
+      "run_id": "ca87e47c994648fd98e16202252ec7ed",
+      "receipt_hash": "d7c4494da2cc0f087efacfbc63aa9dd2b14532f2e5cda7e0e4c9c30c1e670c76"
+    },
+    "market-analysts": {
+      "status": "blocked"
+    },
+    "strategy-research": {
+      "status": "blocked"
+    },
+    "paper-trader": {
+      "status": "blocked"
+    },
+    "risk-manager": {
+      "status": "blocked"
+    },
+    "audit-verifier": {
+      "status": "blocked"
+    }
+  },
+  "code_hashes": {
+    "trading_team/collect.py": "71b36ad0a473c9ea030354ca96f07efa1dadb10d398fc35166a108e50b32f6c0",
+    "tests/test_market_breadth.py": "b1735cf869eed72999667ef7939b1aa480bf554d50064b36bb8fb888fdf5045d"
+  },
+  "boundaries": {
+    "real_function_capture": true,
+    "full_collect_day_accepted": false,
+    "new_research_published": false,
+    "new_multica_task": false,
+    "paper_executed": false,
+    "notification_sent": false,
+    "natural_day_accepted": false,
+    "milestone_m1_complete": false,
+    "coverage": "Complete within Sina hs_a selected SH/SZ universe; not exchange-certified membership"
+  },
+  "next": "Collect a new isolated dated input pack through collect_day, verify its whole manifest, then publish a new version via authorized Multica Lead. Never rewrite or re-review the rejected old bundle."
+}

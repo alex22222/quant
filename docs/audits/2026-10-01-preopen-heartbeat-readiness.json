@@ -1,0 +1,29 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-01T10:23:54+08:00",
+  "result": "existing_heartbeat_preopen_check_added",
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "reason": "The existing 07:45 check follows the sole 07:30 publication trigger. The host previously slept through that trigger on 2026-09-30 and still showed a discharging battery on 2026-10-01. The heartbeat prompt also named the past 2026-09-29 date as the next candidate.",
+  "automation": {
+    "id": "a",
+    "kind": "heartbeat",
+    "status": "ACTIVE",
+    "target_thread_id": "01a02a2a-c504-7c52-aa1d-1e4a43218aa2",
+    "previous_observation_times": ["07:45", "16:20"],
+    "current_observation_times": ["07:10", "07:45", "16:20"],
+    "timezone": "Asia/Shanghai",
+    "independent_readback": "The saved heartbeat configuration remained ACTIVE and a calendar-rule expansion yielded 2026-10-08 07:10, 07:45 and 16:20.",
+    "scope": "07:10 is a read-only power/runtime/calendar/cohort preflight. 07:45 continues to observe the existing task and, if qualified, sequential real review. 16:20 remains a postclose evidence check. The heartbeat is not a research generator."
+  },
+  "production_entry": "The existing Multica publication-only Autopilot and its 07:30 trigger were not changed, duplicated or manually triggered.",
+  "limitations": [
+    "A heartbeat cannot wake a sleeping or unpowered host; stable power still needs to be confirmed by the user before the next candidate trading day.",
+    "October 1-7 are exchange holidays and do not count toward M2/M3; October 8 is only a candidate subject to same-day verification.",
+    "No research, review, approval, Paper settlement, notification, backup creation or Live action occurred as part of this schedule update.",
+    "Offsite disaster recovery is deferred at the user's request and remains incomplete in the full objective."
+  ]
+}

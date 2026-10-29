@@ -1,0 +1,47 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-04T01:00:48+08:00",
+  "result": "production_runbook_now_in_backup_contract_old_snapshot_degraded",
+  "previous_snapshot": {
+    "id": "7a747a0fcbe14a68a776e7523aeae5d0",
+    "started_at": "2026-10-03T22:15:05.504683+08:00",
+    "manifest_hash": "ce93e46caaed4a5277013f27d9b6c4fb2985b3f14a92d285469331fa09e2694b",
+    "verified": true,
+    "production_runbook_in_files": false,
+    "production_runbook_in_runtime_fingerprints": false
+  },
+  "change": {
+    "snapshot_file_added": "docs/MULTICA_PRODUCTION_RUNBOOK.md",
+    "backup_status_checks_runbook_hash": true,
+    "isolated_recovery_checks_runbook_hash": true,
+    "legacy_snapshot_rewritten": false,
+    "manual_backup_triggered": false
+  },
+  "independent_readback": {
+    "backup_status": "degraded",
+    "latest_snapshot_verified": true,
+    "runbook_snapshot_current": false,
+    "issues": [
+      "runtime differs from latest snapshot",
+      "production runbook differs from latest snapshot"
+    ],
+    "offsite_verified": false
+  },
+  "tests": {
+    "focused_before": "71 passed",
+    "new_regressions_before_fix": "3 failed as expected",
+    "focused_after": "73 passed",
+    "full_after": "1296 passed"
+  },
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "next_boundary": "Wait for the existing scheduled backup to register a new snapshot; verify its manifest includes the exact current production Runbook, then restore in isolation and check readiness without activating any writer or scheduler.",
+  "limitations": [
+    "The previous snapshot remains valid historical evidence but cannot be claimed to contain the current production Runbook.",
+    "No new formal snapshot, offsite copy, remote task, Paper trade, notification or Live action was created.",
+    "A local isolated restore does not satisfy the deferred offsite disaster-recovery objective."
+  ]
+}

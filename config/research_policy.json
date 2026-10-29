@@ -1,0 +1,14 @@
+{
+  "mode": "factor_research",
+  "effective_date": "2026-10-22",
+  "capabilities": {
+    "llm_meeting": false,
+    "llm_plan": false,
+    "llm_execution": false,
+    "multica_dispatch": false,
+    "multica_review": false,
+    "live_execution": false
+  },
+  "reopen_condition": "Frozen factor portfolio completes at least three calendar months of prospective Paper with positive net excess return; separate human review required.",
+  "llm_scope": "Research summaries only; no ratings, target weights, approvals or orders."
+}

@@ -1,0 +1,55 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "business_date": "2026-09-24",
+  "observed_at": "2026-09-24T21:41:06+08:00",
+  "scope": "postclose read-only safe-stop audit and user-authorized project schedule adjustment",
+  "market_archive": {
+    "service_last_tick": "2026-09-24T21:30:06.947836+08:00",
+    "status": "checked",
+    "date": "2026-09-24",
+    "payload_hash": "7efa57e3f1110828a5b17aae3a2df8dd36ddb6cbbdd486682850f44576f409e1",
+    "receipt_hash": "509318bebfe94d124afb8f22f1e4c2f0842b7c192e584bf917dc49772f31c713",
+    "verified_symbols": 12,
+    "verification": "market_archive.verify_receipt passed calendar, receipt object, payload and symbol checks"
+  },
+  "rejected_source": {
+    "current_review_status": "source_unverified",
+    "execution_authorized": false,
+    "recorded_prior_version": {"data-quality": "accepted", "market-analysts": "rejected"},
+    "generation_file_sha256": "76cae0d5411fb28cbbe24db36ec666393e3ddc1d130b455a5038a1944c2a5fc9",
+    "market_analysts_bundle_sha256": "a55c9610cf7d5f9860d1427ed806b7d4be2a5d3d0258bbad78d40089525ea13c",
+    "market_analysts_response_sha256": "0a5eb97975844a25ccf22574bd3777ed2ecea7011286a2d7615fc2ec8f58a689",
+    "interpretation": "All three hashes match the 09:44 baseline; current prompt version invalidates old approvals, and historical rejection remains visible."
+  },
+  "local_side_effects": {
+    "decision_directory_exists": false,
+    "approval_entries_for_day": 0,
+    "approval_log_sha256": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+    "daily_finalize_runs_for_day": 0,
+    "gate_db_sha256": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "no_gate_db_sha256": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "both_accounts_day_rows": {"account": 0, "trades": 0, "pending_orders": 0, "order_events": 0},
+    "notification_outbox_directory_exists": false,
+    "notification_limit": "No local outbox or send workflow run; absence of external delivery was not independently proven.",
+    "live_limit": "No Live action was requested or executed by this audit; this is not a broker-side reconciliation."
+  },
+  "authorized_schedule_change": {
+    "autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "trigger_id": "97a59a0a-ceda-4115-81f8-bc583a7c5eef",
+    "project_id": "a208df76-b63b-4cef-bd11-7512d7c80896",
+    "status": "active",
+    "old_publish_time": "08:02 Asia/Shanghai, weekdays",
+    "new_publish_time": "07:30 Asia/Shanghai, weekdays",
+    "next_trigger": "2026-09-25T07:30:00+08:00; exchange holiday, Runbook and app gate must skip",
+    "runbook_old_sha256": "5b847d5386e2f6786e6d0c17c999deec220eee3c6c9c1703ec2d5551d531f484",
+    "runbook_new_sha256": "b5123777c31efd666030651bf05772707925d019859c031b940de8df17e7c5c4",
+    "runbook_remote_hash_matches_local": true,
+    "heartbeat_id": "a",
+    "old_heartbeat_times": ["08:20", "16:20"],
+    "new_heartbeat_times": ["07:45", "16:20"],
+    "heartbeat_status": "ACTIVE",
+    "heartbeat_target_thread_unchanged": true,
+    "rollback": "Restore the same trigger to 08:02 and heartbeat morning time to 08:20; restore the old Runbook timing line in both local file and remote Autopilot description. Do not create a second Autopilot or erase history."
+  },
+  "milestones": {"M1": "accepted", "M2": "not_accepted: valid independent review rejection and no full chain", "M3": "not_started"}
+}

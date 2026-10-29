@@ -1,0 +1,76 @@
+{
+  "schema": "approval_recovery_acceptance.v1",
+  "observed_at": "2026-09-22T06:23:32.393213+08:00",
+  "scope": "isolated_crash_and_projection_recovery_not_trading",
+  "isolated_root": "/private/tmp/quant-approval-recovery-SKBesm",
+  "source_hashes_before": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+    "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+    "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+    "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+    "trading_team/team.db": "acad0151f77237ab2d7cf0d75e2ef2bc3b968fed95eb06ffe2437d0723c37ef0"
+  },
+  "cases": {
+    "process_crash": {
+      "exit_code": 91,
+      "point": "after_database_commit_before_markdown_and_ack",
+      "before_recovery": "pending",
+      "event_count": 1,
+      "snapshot": {
+        "status": "verified",
+        "scope": "research_paper_workflow_evidence",
+        "path": "/private/tmp/quant-approval-recovery-SKBesm/pending-snapshot",
+        "manifest_hash": "9aa5043b8579c6419a2a7c19c0c1b27c1b07976c393ca3fd554f446843dc1a5e",
+        "file_count": 694,
+        "database_count": 4,
+        "execution_authorized": false
+      },
+      "after_isolated_restore": "complete",
+      "event_hash": "25595d97412ea66c8a9c9ba0234de3ea3f04a1935a0c4db286df00c4277df7c1",
+      "same_event_after_recovery": true,
+      "database_event_count": 1,
+      "markdown_marker_count": 1,
+      "retries_changed_no_projection_bytes": true,
+      "account_bytes_unchanged": true
+    },
+    "plan_replacement": {
+      "old_request_superseded": true,
+      "new_plans_pending": true,
+      "old_event_preserved": true,
+      "no_reapproval": true
+    }
+  },
+  "network_disabled": true,
+  "forward_performance": false,
+  "model_calls": 0,
+  "notifications": 0,
+  "production_approvals": 0,
+  "production_settlements": 0,
+  "remote_multica_dispatches": 0,
+  "source_hashes_after": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+    "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+    "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+    "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+    "trading_team/team.db": "acad0151f77237ab2d7cf0d75e2ef2bc3b968fed95eb06ffe2437d0723c37ef0"
+  },
+  "production_sources_unchanged": true,
+  "limitations": [
+    "Only newly recorded approvals have event evidence; historical approvals are not backfilled or recertified.",
+    "Event hashes detect inconsistency, not actor authentication or tamper-proof signatures.",
+    "Execution is blocked while projections are incomplete; this is not one transaction across JSON and SQLite.",
+    "Recovery restores recorded intent and projections only; it does not authorize or execute trades."
+  ]
+}

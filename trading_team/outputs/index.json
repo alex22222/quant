@@ -1,5 +1,306 @@
 [
   {
+    "date": "2026-09-29",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md"
+    ],
+    "headline": "市场闸门 market_ok=false（沪深300 收盘 4340.76 低于 MA60 4619.20 约 6%），条款 4 硬否决长江电力、招商银行两笔买入候选，9 只观望/回避计划全部通过，组合维持 100% 现金、零敞口，最坏情形",
+    "ratings": {},
+    "data_asof": "2026-09-28",
+    "collect_ok": true
+  },
+  {
+    "date": "2026-09-24",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md"
+    ],
+    "headline": "闸门第九日关闭（沪深300 4517.28 < MA60 4633.77）：风险经理否决全部 2 笔买入候选（000858/601899 各 8%，纯 market_gate 原因，保留待闸预案），9 条持有/观望/回避全部通过，今日实际新",
+    "ratings": {},
+    "data_asof": "2026-09-23",
+    "collect_ok": true
+  },
+  {
+    "date": "2026-09-23",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md"
+    ],
+    "headline": "",
+    "ratings": {},
+    "data_asof": "2026-09-22",
+    "collect_ok": false
+  },
+  {
+    "date": "2026-09-22",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md",
+      "counterfactual.md",
+      "continuous_counterfactual.md"
+    ],
+    "headline": "闸门第七日未开、但只差 8 点",
+    "ratings": {},
+    "data_asof": "2026-09-21",
+    "collect_ok": true
+  },
+  {
+    "date": "2026-09-21",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md",
+      "counterfactual.md",
+      "continuous_counterfactual.md"
+    ],
+    "headline": "闸门关闭第六个交易日、盘前零买入",
+    "ratings": {},
+    "data_asof": "2026-09-18",
+    "collect_ok": true
+  },
+  {
+    "date": "2026-09-20",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md"
+    ],
+    "headline": "闸门关闭第五个交易日、零买入放行",
+    "ratings": {},
+    "data_asof": "2026-09-18",
+    "collect_ok": true
+  },
+  {
+    "date": "2026-09-11",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md",
+      "counterfactual.md"
+    ],
+    "headline": "闸门关闭日零买入放行",
+    "ratings": {},
+    "data_asof": "2026-09-10",
+    "collect_ok": true
+  },
+  {
+    "date": "2026-09-10",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md",
+      "counterfactual.md"
+    ],
+    "headline": "闸门关闭日零增量风险：11 笔计划全部通过、无否决无降仓——4 笔卖出端（茅台/比亚迪减持、中兴/隆基清仓）今日可执行且本身即降险动作，3 笔条件买入（平安 15%/紫金 12%/招行 10%）条款 4 冻结仅作预案，4 笔观望合规。",
+    "ratings": {},
+    "data_asof": "2026-09-09",
+    "collect_ok": true
+  },
+  {
+    "date": "2026-09-09",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md",
+      "counterfactual.md"
+    ],
+    "headline": "market_ok=false（沪深300 收 4558.74 < MA60 4714.15）触发条款4，四笔条件买入候选（招行 12%/紫金 12%/平安 8%/五粮液 6%）全部审核为「预案合规但冻结」，今日零买入放行；卖出侧美的集团（",
+    "ratings": {},
+    "data_asof": "2026-09-08",
+    "collect_ok": true
+  },
+  {
+    "date": "2026-09-08",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md",
+      "counterfactual.md"
+    ],
+    "headline": "闸门关闭（沪深300 收 4575.99 < MA60 4714.43）下零买入可执行：4 笔条件买入候选 3 笔通过、1 笔降仓（中国平安 0.08→0.05），全部 blocked 冻结至闸门恢复，当日实际新增风险敞口为 0。",
+    "ratings": {},
+    "data_asof": "2026-09-08",
+    "collect_ok": false
+  },
+  {
+    "date": "2026-09-07",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md",
+      "counterfactual.md"
+    ],
+    "headline": "闸门关闭期风险经理全面冻结买入端：六只条件买入候选仅备案（五粮液因技术数据缺失再降仓至 3%），真实放行仅隆基/中兴/比亚迪三只风险端减仓计划，组合本周期零新增风险敞口。",
+    "ratings": {},
+    "data_asof": "2026-09-07",
+    "collect_ok": false
+  },
+  {
+    "date": "2026-09-06",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md"
+    ],
+    "headline": "market_ok=false（沪深300 4548.05 < MA60 4723.07）触发条款 4，4 笔买入候选（招行 10%/平安 10%/紫金 8%/五粮液 5%）全部否决当期执行、冻结为闸门恢复后的激活预案，本期最终放行仅 7 ",
+    "ratings": {},
+    "data_asof": "2026-09-04",
+    "collect_ok": true
+  },
+  {
+    "date": "2026-09-05",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md"
+    ],
+    "headline": "闸门关闭（沪深300 4548.05 < MA60 4723.07），条款 4 冻结一切新买入：4 笔买入候选（招行 15%、平安 15%、五粮液 8%、茅台 7%，合计 45%）全部通过风控审核但仅作留档待批，下一交易日实际可执行买入为 ",
+    "ratings": {},
+    "data_asof": "2026-09-04",
+    "collect_ok": true
+  },
+  {
+    "date": "2026-09-03",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md",
+      "counterfactual.md"
+    ],
+    "headline": "闸门关闭日零买入放行：四笔买入候选（合计 0.42）全部条款4冻结仅作预案，四笔回避（隆基/宁德/比亚迪/中兴）与三笔观望（茅台/五粮液/美的）今日生效，组合新增风险敞口为 0。",
+    "ratings": {},
+    "data_asof": "2026-09-02",
+    "collect_ok": true
+  },
+  {
+    "date": "2026-09-02",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md",
+      "counterfactual.md"
+    ],
+    "headline": "market_ok=false 条款 4 全面冻结：4 笔条件买入（长电 12%/平安 12%/招行 10%/紫金 8%）全部否决转为闸门恢复预案，仅放行 7 笔观望/回避/持有计划，下一交易日风险敞口增量为零。",
+    "ratings": {},
+    "data_asof": "2026-09-02",
+    "collect_ok": true
+  },
+  {
+    "date": "2026-08-30",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md"
+    ],
+    "headline": "闸门关闭期（沪深300 close 4609.18 < MA60 4738.37）条款4冻结全部买入，3 笔候选（平安0.15/招行0.10/比亚迪0.09）合规但一律 blocked，本日最终放行清单为空、实际新增风险敞口为零。",
+    "ratings": {},
+    "data_asof": "2026-08-28",
+    "collect_ok": true
+  },
+  {
+    "date": "2026-08-25",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md",
+      "counterfactual.md"
+    ],
+    "headline": "市场闸门关闭第二日（沪深300 收 4563.13 全均线下方且 MACD 柱转负，market_ok=false）+ 盘前韩股跌超 4%、中东避险升温：今日一切新买入继续冻结（含 8-23 已批复四笔），全部标的观望/回避，四套预案价位已",
+    "ratings": {},
+    "data_asof": "2026-08-24",
+    "collect_ok": true
+  },
+  {
+    "date": "2026-08-24",
+    "reports": [
+      "01_fundamental.md",
+      "02_sentiment.md",
+      "03_news.md",
+      "04_technical.md",
+      "05_researcher.md",
+      "06_trader.md",
+      "07_risk_manager.md",
+      "counterfactual.md"
+    ],
+    "headline": "市场闸门关闭（沪深300 全均线下方，market_ok=false）：今日一切新买入冻结（含昨日已批复的平安/宁德/紫金/招行四笔），全部标的观望或回避；四套预案价位已预埋，待指数收复 MA20 4641 后激活。",
+    "ratings": {},
+    "data_asof": "2026-08-21",
+    "collect_ok": true
+  },
+  {
     "date": "2026-08-23",
     "reports": [
       "01_fundamental.md",

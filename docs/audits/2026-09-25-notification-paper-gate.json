@@ -1,0 +1,31 @@
+{
+  "schema": "notification_paper_gate_audit.v1",
+  "observed_at": "2026-09-25T00:09:29+08:00",
+  "finding": "The direct Feishu push source check verified publication, decision hashes, approval status and six remote review receipts, but did not require either Paper execution receipt/account for that version.",
+  "risk": "A caller could create a delivery intent and send a reviewed card before deterministic dual-Paper finalization, making the message look more complete than the business chain.",
+  "regression": {
+    "red": "After six accepted local review-contract steps but before Paper settlement, push reached the notification configuration reader instead of rejecting missing Paper evidence.",
+    "green": "The direct push source check reuses the existing dual-account Paper evidence verifier before reading notification credentials or creating the outbox intent.",
+    "one_account_tamper": "Changing no_gate execution_receipts.plan_hash blocks push before credential read and outbox creation, despite gate account and all reviews remaining valid.",
+    "unknown_delivery": "The isolated end-to-end notification retry fixture now first finishes the session and both Paper accounts; lost provider response still yields one send attempt and no blind retry."
+  },
+  "tests": "1270 passed, .venv/bin/python -m pytest -q -p no:cacheprovider tests",
+  "production_effects": {
+    "real_feishu_request": false,
+    "production_outbox_created": false,
+    "production_paper_settled": false,
+    "live_order": false
+  },
+  "registered_backup_boundary": "The latest registered snapshot c508038af1414b5c92fbfa163f83efae predates this change. Independent runtime-fingerprint comparison shows only trading_team/push_feishu.py changed; do not claim that snapshot contains the new gate. Verify the next scheduled registered snapshot before declaring this code recoverable from the persistent store.",
+  "entrypoint_inventory": {
+    "current_daily_research_chain": "trading_team.kimi_daily delegates to trading_team.push_feishu; direct daily push also enters trading_team.push_feishu, which now requires current dual-Paper evidence",
+    "other_repository_senders": ["execution/notifier.py for strategy execution alerts", "pipeline/push_review.py for legacy stage-review summaries", "quant-x-monitor/feishu_pusher.py for monitor messages"],
+    "scheduler_search": "No reference to the other sender entrypoints was found in this project's checked-in current chain or the local LaunchAgents/Codex automation configuration searched at observation time.",
+    "boundary": "This is not a claim that the repository has a single Feishu API caller or that manually invoked legacy scripts obey the versioned daily-report contract."
+  },
+  "limits": [
+    "This is a local behavioral gate, not a real Feishu delivery receipt or an M2 natural-session success.",
+    "The push entrypoint verifies Paper state but does not itself create a finalization run or substitute for checking the full workflow ledger and daily comparison.",
+    "Only the already authorized notification channel may be used after full current-version business evidence is independently verified."
+  ]
+}

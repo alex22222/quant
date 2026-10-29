@@ -1,0 +1,45 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-09-30T21:20:56+08:00",
+  "business_date": "2026-09-30",
+  "result": "postclose_local_safe_stop_verified",
+  "prior_failure_audit": "docs/audits/2026-09-30-m2-runtime-unavailable-safe-stop.json",
+  "remote": {
+    "issue": "SATU-65",
+    "issue_id": "01a0ef81-221e-761b-9b93-742300953e86",
+    "task_id": "01a0ef81-2234-7a9e-a061-b99e8f11a31f",
+    "task_status": "failed",
+    "task_started_at": null,
+    "review_child_count": 0
+  },
+  "market_archive": {
+    "service_status": "healthy",
+    "heartbeat": "fresh",
+    "expected_session": "2026-09-30",
+    "latest_verified_session": "2026-09-30",
+    "missing_sessions": [],
+    "invalid_sessions": [],
+    "payload_schema": "execution_bars.v2",
+    "payload_hash": "7f8be2f08470b776027d233d1c4280665d6866b2eb1a8823921fc7eb5b273795",
+    "bar_count": 12
+  },
+  "local_side_effects": {
+    "output_directory": "absent",
+    "decision_directory": "absent",
+    "approval_log_entries_for_day": 0,
+    "notification_outbox_directory": "absent",
+    "gate_paper": "checked; 100000 CNY cash; zero recorded trades; facts_hash 7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+    "no_gate_paper": "checked; 100000 CNY cash; zero recorded trades; facts_hash 7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc"
+  },
+  "acceptance": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started",
+    "reason": "The scheduled publication task never started; a complete market archive cannot retroactively create a premarket plan or review chain."
+  },
+  "limitations": [
+    "Local outbox absence does not independently prove non-delivery by every external notification path.",
+    "The Paper ledger does not independently prove absence of external Live effects.",
+    "No failed task was retried, backdated, approved, or settled."
+  ]
+}

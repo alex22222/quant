@@ -1,0 +1,29 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-10T01:17:32+08:00",
+  "result": "local_backup_capacity_may_interrupt_five_day_acceptance",
+  "policy": {
+    "snapshot_interval_seconds": 21600,
+    "max_store_bytes": 5368709120,
+    "on_capacity_failure": "Retain existing snapshots and stop adding new ones; do not delete old backups."
+  },
+  "current": {
+    "snapshot_count": 69,
+    "storage_bytes": 3057329801,
+    "host_free_bytes": 104689553408,
+    "service_status": "healthy",
+    "latest_snapshot_id": "6dc3619be1af4f8eb074fad79de393fd"
+  },
+  "sample": {
+    "recent_snapshot_sizes_kib": [71632, 71632, 71584, 64576, 64576, 64528],
+    "current_estimated_next_bytes": 142806354,
+    "method": "Six most recent snapshot directories measured with du -sk; the service capacity check uses current store bytes plus _estimated_bytes, which intentionally exceeds one snapshot's observed disk use."
+  },
+  "forecast": {
+    "remaining_to_policy_limit_bytes": 2311379319,
+    "rough_additional_snapshots_at_current_size": "about 29 before the next capacity check may reject a new snapshot",
+    "risk_window": "At a six-hour cadence, about seven days from this observation, potentially before a successful M2 followed by five trading sessions can finish. Future growth and host wakefulness make this a forecast, not a failure timestamp."
+  },
+  "action": "Asked the user whether to temporarily raise only this project's local backup cap to 8 GiB; no limit, retention policy, snapshot, or scheduler was changed in this observation.",
+  "limits": "More local capacity would defer but not solve long-term retention or offsite disaster recovery. M2/M3 are not accepted."
+}

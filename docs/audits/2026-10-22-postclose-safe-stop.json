@@ -1,0 +1,95 @@
+{
+  "observed_at": "2026-10-22T16:22:26.891741+08:00",
+  "receipt": {
+    "calendar_hash": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+    "codes": [
+      "000063",
+      "000300",
+      "000333",
+      "000858",
+      "002594",
+      "300750",
+      "600036",
+      "600519",
+      "600900",
+      "601012",
+      "601318",
+      "601899"
+    ],
+    "date": "2026-10-22",
+    "payload_hash": "0e3b219d278512cea0e40bd96516a944f723f95048ed16b88ac0890dba62bcaa",
+    "receipt_hash": "6028889a5df884f0285d0d26634d7061c5244ded76679b0b8f8db1d91bc2d2fb",
+    "schema": "market_archive.v1"
+  },
+  "independent_verify_receipt": "passed",
+  "symbols": 12,
+  "required_coverage": true,
+  "formal_output_exists": false,
+  "team_counts": {
+    "decisions": 0,
+    "plans": 0,
+    "approvals": 0,
+    "execution_log": 0
+  },
+  "research_finalize_runs": [],
+  "today_local_outbox": [],
+  "accounts": {
+    "gate": {
+      "account": [
+        "init",
+        100000,
+        100000,
+        "初始资金"
+      ],
+      "tables": {
+        "trades": 0,
+        "positions": 0,
+        "pending_orders": 0,
+        "execution_receipts": 0,
+        "order_events": 0,
+        "account_valuations": 0
+      },
+      "sha256": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c"
+    },
+    "no_gate": {
+      "account": [
+        "init",
+        100000,
+        100000,
+        "初始资金"
+      ],
+      "tables": {
+        "trades": 0,
+        "positions": 0,
+        "pending_orders": 0,
+        "execution_receipts": 0,
+        "order_events": 0,
+        "account_valuations": 0
+      },
+      "sha256": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c"
+    }
+  },
+  "backup_last_check": "2026-10-22T16:15:06.091419+08:00",
+  "backup_last_error": "insufficient backup capacity; existing snapshots retained",
+  "backup_successful_snapshots": 100,
+  "external_live_notification_absence_proven": false,
+  "schema": "quant.postclose_safe_stop.v1",
+  "business_date": "2026-10-22",
+  "goal_status": "blocked",
+  "remote_observation": {
+    "issue": "SATU-98",
+    "task": "01a160cd-4d8d-70a7-a3d0-3d8d08375fb5",
+    "task_count": 1,
+    "status": "failed",
+    "reverified": true
+  },
+  "new_runtime": {
+    "id": "68bb6092-57e9-4a0a-a318-71c8680a654c",
+    "version": "codex-cli 0.163.0",
+    "status": "online",
+    "inference_verified": false
+  },
+  "M2_passed": false,
+  "M3_started": false,
+  "retry_finalize_notification_restart_or_backup_override": false
+}

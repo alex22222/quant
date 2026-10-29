@@ -1,0 +1,42 @@
+{
+  "schema": "m2_cohort_chain_preflight.v1",
+  "observed_at": "2026-09-24T23:50:00+08:00",
+  "scope": "isolated local chain and read-only production scheduler preflight",
+  "isolated_chain": {
+    "business_day_fixture": "2026-09-21",
+    "cohort_start_fixture": "2026-09-21",
+    "steps": [
+      "publication-only generated a version bound to the active cohort configuration",
+      "six local independent-review contract steps accepted that same version",
+      "deterministic finalization wrote both new named Paper accounts",
+      "both accounts recorded one simulated fill in this fixture",
+      "same-input finalization returned reused with unchanged account bytes",
+      "legacy Paper account paths were not created"
+    ],
+    "limitations": "The fixture uses synthetic prices, local remote-role stand-ins and a historical date. It is not a production Multica run, a natural-day M2 acceptance, actual trade execution or evidence of profitability."
+  },
+  "remote_autopilot_readback": {
+    "workspace_autopilot_count": 1,
+    "autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "project_id": "a208df76-b63b-4cef-bd11-7512d7c80896",
+    "status": "active",
+    "execution_mode": "create_issue",
+    "trigger_id": "97a59a0a-ceda-4115-81f8-bc583a7c5eef",
+    "cron_expression": "30 7 * * 1-5",
+    "timezone": "Asia/Shanghai",
+    "next_run_at_utc": "2026-09-24T23:30:00Z",
+    "runbook_mode": "publish-only; no-push; no Paper or Live",
+    "last_run_status": "failed",
+    "last_run_note": "The original 2026-09-24 scheduled attempt failed; separate recovery publication is retained in its own evidence. Do not rewrite the original status."
+  },
+  "calendar_readback": {
+    "2026-09-24": true,
+    "2026-09-25": false,
+    "2026-09-26": false,
+    "2026-09-27": false,
+    "2026-09-28": true
+  },
+  "tests": "1268 passed, .venv/bin/python -m pytest -q -p no:cacheprovider tests",
+  "milestones": {"M1": "accepted", "M2": "not accepted", "M3": "not started"},
+  "next_action": "Observe the single 2026-09-25 holiday trigger without creating a second task; on 2026-09-28 recheck calendar, archive, unique task and active account bytes before real publication and sequential remote review."
+}

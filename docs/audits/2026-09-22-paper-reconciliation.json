@@ -1,0 +1,661 @@
+{
+  "schema": "paper_reconciliation_acceptance.v1",
+  "scope": "read_only_historical_review_not_forward_or_execution_certification",
+  "report": {
+    "schema": "paper_reconciliation.v1",
+    "observed_at": "2026-09-22T03:27:26.233801+08:00",
+    "model": "daily_bar_t1.v3",
+    "fee_policy": {
+      "commission_rate": 0.00025,
+      "min_commission": 5,
+      "stamp_tax_rate": 0.0005,
+      "transfer_fee_rate": 0.00002
+    },
+    "slippage_rate": 0.002,
+    "scope": "historical_account_checks_not_execution_certification",
+    "limitations": [
+      "Cash-only initial account; no external transfers or corporate actions",
+      "Price replay uses recorded quantities, not independently reconstructed target sizing",
+      "Current model and fee comparison does not prove the historical runtime policy",
+      "No certification of forward publication, free-text conditions or intraday queue fills"
+    ],
+    "portfolios": {
+      "gate": {
+        "status": "incomplete",
+        "execution_certified": false,
+        "checks": {
+          "cash": "matched",
+          "positions": "matched",
+          "order_trade": "matched",
+          "reconstructed_cash": 100000
+        },
+        "days": {
+          "2026-09-03": {
+            "orders": 3,
+            "trades": 0,
+            "price_replay": "unavailable",
+            "file_hashes": {
+              "/Users/henry/projects/quant/trading_team/outputs/2026-09-03/plan.json": "1d46d59df64a7f1a09c4e97797d6ec561e01c2164189f64b84eb18f0d2118aac",
+              "/Users/henry/projects/quant/trading_team/decisions/2026-09-03/paper_decision.json": "4af265b77e4cd24fe80c2cc2316239bb17dbf6a43ab13d373ce4777ec9c9890e",
+              "/Users/henry/projects/quant/trading_team/replay_data/2026-09-03.json": "d5478b34ae84aaeb9785984e72c0fdf34eeb4757859eac0845ffe2ce9a3df5dc"
+            },
+            "plan_hash": "a4d042d2a8aaafd1355f2227de3a6954f831320253520b51a775596bc175aaae",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-21T22:16:51",
+            "receipt": "missing"
+          },
+          "2026-09-09": {
+            "orders": 3,
+            "trades": 0,
+            "price_replay": "unavailable",
+            "file_hashes": {
+              "/Users/henry/projects/quant/trading_team/outputs/2026-09-09/plan.json": "27f21b3787c13282db24890f2ade3b830c3ea76155043dd3ca7e51561b26718a",
+              "/Users/henry/projects/quant/trading_team/decisions/2026-09-09/paper_decision.json": "81bd5c36469a0d63def211205ef4f03393fbb730b19555539cb5e125f70a99f4",
+              "/Users/henry/projects/quant/trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72"
+            },
+            "plan_hash": "629fc179d81febf82e92c4d6f38f259e06f2d1a0d80e2aa97bd7f261afe189ca",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-21T22:16:51",
+            "receipt": "missing"
+          },
+          "2026-09-10": {
+            "orders": 3,
+            "trades": 0,
+            "price_replay": "unavailable",
+            "file_hashes": {
+              "/Users/henry/projects/quant/trading_team/outputs/2026-09-10/plan.json": "b6b783ce88e933c5f06940f51df019f6c5c4e880170302be2a691c8ed8e1079e",
+              "/Users/henry/projects/quant/trading_team/decisions/2026-09-10/paper_decision.json": "fee88f88d74c731e6c1c65d670562da554b2456c0462a2514b2967a2afe58a81",
+              "/Users/henry/projects/quant/trading_team/replay_data/2026-09-10.json": "eabec27dfd77dbed91f77a0605c549917beefaa5f95462cf196b460e8a82d6d0"
+            },
+            "plan_hash": "115ba12d5408de4b129f71491b3886205bed717a485ad4c8a2694adc702d7f8f",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-21T22:16:51",
+            "receipt": "missing"
+          },
+          "2026-09-11": {
+            "orders": 3,
+            "trades": 0,
+            "price_replay": "unavailable",
+            "file_hashes": {
+              "/Users/henry/projects/quant/trading_team/outputs/2026-09-11/plan.json": "9a74039362e902ce254d07b655a3d8576672e9bee3060ba99b8bbee3c91d6e79",
+              "/Users/henry/projects/quant/trading_team/decisions/2026-09-11/paper_decision.json": "812cfbebd4cdb7043ca6dbf1377f85f751dcb07b3bba4cc1cde65f62e7d21ed4",
+              "/Users/henry/projects/quant/trading_team/replay_data/2026-09-11.json": "d84dbd90513cf58933a4245d12fb886c2caef6a2181ee6e02fd66c29a6272c68"
+            },
+            "plan_hash": "35a372e5dd3434ee177d2816a78e01cb1aad5830d4e81af14436c4f1b80f3c03",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-21T22:16:51",
+            "receipt": "missing"
+          }
+        },
+        "issues": [
+          {
+            "code": "publication_timing",
+            "severity": "missing",
+            "date": "2026-09-03",
+            "actual": "2026-09-21T22:16:51",
+            "detail": "current materialization cannot establish pre-execution publication"
+          },
+          {
+            "code": "unmodeled_condition",
+            "severity": "missing",
+            "date": "2026-09-03",
+            "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+          },
+          {
+            "code": "receipt_missing",
+            "severity": "missing",
+            "date": "2026-09-03"
+          },
+          {
+            "code": "market_evidence",
+            "severity": "missing",
+            "date": "2026-09-03",
+            "detail": "legacy replay cache requires audited replacement; schema mismatch"
+          },
+          {
+            "code": "publication_timing",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "actual": "2026-09-21T22:16:51",
+            "detail": "current materialization cannot establish pre-execution publication"
+          },
+          {
+            "code": "unmodeled_condition",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+          },
+          {
+            "code": "receipt_missing",
+            "severity": "missing",
+            "date": "2026-09-09"
+          },
+          {
+            "code": "market_evidence",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "detail": "legacy replay cache requires audited replacement; schema mismatch"
+          },
+          {
+            "code": "publication_timing",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "actual": "2026-09-21T22:16:51",
+            "detail": "current materialization cannot establish pre-execution publication"
+          },
+          {
+            "code": "unmodeled_condition",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+          },
+          {
+            "code": "receipt_missing",
+            "severity": "missing",
+            "date": "2026-09-10"
+          },
+          {
+            "code": "market_evidence",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "detail": "legacy replay cache requires audited replacement; schema mismatch"
+          },
+          {
+            "code": "publication_timing",
+            "severity": "missing",
+            "date": "2026-09-11",
+            "actual": "2026-09-21T22:16:51",
+            "detail": "current materialization cannot establish pre-execution publication"
+          },
+          {
+            "code": "unmodeled_condition",
+            "severity": "missing",
+            "date": "2026-09-11",
+            "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+          },
+          {
+            "code": "receipt_missing",
+            "severity": "missing",
+            "date": "2026-09-11"
+          },
+          {
+            "code": "market_evidence",
+            "severity": "missing",
+            "date": "2026-09-11",
+            "detail": "legacy replay cache requires audited replacement; schema mismatch"
+          }
+        ],
+        "facts_hash": "a289e19956240a19c73a84c9d8394d479805dad5c0e2a668300362eaca126a71",
+        "conflict_count": 0,
+        "missing_count": 16,
+        "recorded_trade_count": 0,
+        "forward_performance": "unverified"
+      },
+      "no_gate": {
+        "status": "conflict",
+        "execution_certified": false,
+        "checks": {
+          "cash": "matched",
+          "positions": "matched",
+          "order_trade": "matched",
+          "reconstructed_cash": 79601.66
+        },
+        "days": {
+          "2026-09-03": {
+            "orders": 3,
+            "trades": 0,
+            "price_replay": "unavailable",
+            "file_hashes": {
+              "/Users/henry/projects/quant/trading_team/outputs/2026-09-03/plan.json": "1d46d59df64a7f1a09c4e97797d6ec561e01c2164189f64b84eb18f0d2118aac",
+              "/Users/henry/projects/quant/trading_team/decisions/2026-09-03/paper_decision.json": "4af265b77e4cd24fe80c2cc2316239bb17dbf6a43ab13d373ce4777ec9c9890e",
+              "/Users/henry/projects/quant/trading_team/replay_data/2026-09-03.json": "d5478b34ae84aaeb9785984e72c0fdf34eeb4757859eac0845ffe2ce9a3df5dc"
+            },
+            "plan_hash": "a4d042d2a8aaafd1355f2227de3a6954f831320253520b51a775596bc175aaae",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-21T22:16:51",
+            "receipt": "missing"
+          },
+          "2026-09-09": {
+            "orders": 3,
+            "trades": 3,
+            "price_replay": "unavailable",
+            "file_hashes": {
+              "/Users/henry/projects/quant/trading_team/outputs/2026-09-09/plan.json": "27f21b3787c13282db24890f2ade3b830c3ea76155043dd3ca7e51561b26718a",
+              "/Users/henry/projects/quant/trading_team/decisions/2026-09-09/paper_decision.json": "81bd5c36469a0d63def211205ef4f03393fbb730b19555539cb5e125f70a99f4",
+              "/Users/henry/projects/quant/trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72"
+            },
+            "plan_hash": "629fc179d81febf82e92c4d6f38f259e06f2d1a0d80e2aa97bd7f261afe189ca",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-21T22:16:51",
+            "receipt": "missing"
+          },
+          "2026-09-10": {
+            "orders": 0,
+            "trades": 0,
+            "price_replay": "unavailable",
+            "file_hashes": {
+              "/Users/henry/projects/quant/trading_team/outputs/2026-09-10/plan.json": "b6b783ce88e933c5f06940f51df019f6c5c4e880170302be2a691c8ed8e1079e",
+              "/Users/henry/projects/quant/trading_team/decisions/2026-09-10/paper_decision.json": "fee88f88d74c731e6c1c65d670562da554b2456c0462a2514b2967a2afe58a81",
+              "/Users/henry/projects/quant/trading_team/replay_data/2026-09-10.json": "eabec27dfd77dbed91f77a0605c549917beefaa5f95462cf196b460e8a82d6d0"
+            },
+            "plan_hash": "115ba12d5408de4b129f71491b3886205bed717a485ad4c8a2694adc702d7f8f",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-21T22:16:51",
+            "receipt": "missing"
+          },
+          "2026-09-11": {
+            "orders": 0,
+            "trades": 0,
+            "price_replay": "unavailable",
+            "file_hashes": {
+              "/Users/henry/projects/quant/trading_team/outputs/2026-09-11/plan.json": "9a74039362e902ce254d07b655a3d8576672e9bee3060ba99b8bbee3c91d6e79",
+              "/Users/henry/projects/quant/trading_team/decisions/2026-09-11/paper_decision.json": "812cfbebd4cdb7043ca6dbf1377f85f751dcb07b3bba4cc1cde65f62e7d21ed4",
+              "/Users/henry/projects/quant/trading_team/replay_data/2026-09-11.json": "d84dbd90513cf58933a4245d12fb886c2caef6a2181ee6e02fd66c29a6272c68"
+            },
+            "plan_hash": "35a372e5dd3434ee177d2816a78e01cb1aad5830d4e81af14436c4f1b80f3c03",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-21T22:16:51",
+            "receipt": "missing"
+          }
+        },
+        "issues": [
+          {
+            "code": "price_tick",
+            "severity": "conflict",
+            "date": "2026-09-09",
+            "trade_id": 3,
+            "symbol": "601318",
+            "actual": 54.829,
+            "expected": "0.01 RMB tick"
+          },
+          {
+            "code": "amount_price",
+            "severity": "conflict",
+            "date": "2026-09-09",
+            "trade_id": 3,
+            "symbol": "601318",
+            "actual": 5482.94,
+            "expected": 5482.9
+          },
+          {
+            "code": "publication_timing",
+            "severity": "missing",
+            "date": "2026-09-03",
+            "actual": "2026-09-21T22:16:51",
+            "detail": "current materialization cannot establish pre-execution publication"
+          },
+          {
+            "code": "unmodeled_condition",
+            "severity": "missing",
+            "date": "2026-09-03",
+            "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+          },
+          {
+            "code": "receipt_missing",
+            "severity": "missing",
+            "date": "2026-09-03"
+          },
+          {
+            "code": "market_evidence",
+            "severity": "missing",
+            "date": "2026-09-03",
+            "detail": "legacy replay cache requires audited replacement; schema mismatch"
+          },
+          {
+            "code": "publication_timing",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "actual": "2026-09-21T22:16:51",
+            "detail": "current materialization cannot establish pre-execution publication"
+          },
+          {
+            "code": "unmodeled_condition",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+          },
+          {
+            "code": "receipt_missing",
+            "severity": "missing",
+            "date": "2026-09-09"
+          },
+          {
+            "code": "market_evidence",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "detail": "legacy replay cache requires audited replacement; schema mismatch"
+          },
+          {
+            "code": "publication_timing",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "actual": "2026-09-21T22:16:51",
+            "detail": "current materialization cannot establish pre-execution publication"
+          },
+          {
+            "code": "unmodeled_condition",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+          },
+          {
+            "code": "receipt_missing",
+            "severity": "missing",
+            "date": "2026-09-10"
+          },
+          {
+            "code": "market_evidence",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "detail": "legacy replay cache requires audited replacement; schema mismatch"
+          },
+          {
+            "code": "publication_timing",
+            "severity": "missing",
+            "date": "2026-09-11",
+            "actual": "2026-09-21T22:16:51",
+            "detail": "current materialization cannot establish pre-execution publication"
+          },
+          {
+            "code": "unmodeled_condition",
+            "severity": "missing",
+            "date": "2026-09-11",
+            "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+          },
+          {
+            "code": "receipt_missing",
+            "severity": "missing",
+            "date": "2026-09-11"
+          },
+          {
+            "code": "market_evidence",
+            "severity": "missing",
+            "date": "2026-09-11",
+            "detail": "legacy replay cache requires audited replacement; schema mismatch"
+          }
+        ],
+        "facts_hash": "722ab56879806202aa0b81640761b7e551849bd0bf555dc97ba6ced758af7fc6",
+        "conflict_count": 2,
+        "missing_count": 16,
+        "recorded_trade_count": 3,
+        "forward_performance": "unverified"
+      }
+    }
+  },
+  "account_files_before": {
+    "gate": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "no_gate": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391"
+  },
+  "account_files_after": {
+    "gate": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "no_gate": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391"
+  },
+  "production_accounts_unchanged": true,
+  "booked_facts": {
+    "gate": {
+      "account": [
+        {
+          "day": "init",
+          "cash": 100000,
+          "equity": 100000,
+          "note": "初始资金"
+        },
+        {
+          "day": "2026-09-03",
+          "cash": 100000,
+          "equity": 100000,
+          "note": "llm_gate: 0 fills/3 orders"
+        },
+        {
+          "day": "2026-09-09",
+          "cash": 100000,
+          "equity": 100000,
+          "note": "llm_gate: 0 fills/3 orders"
+        },
+        {
+          "day": "2026-09-10",
+          "cash": 100000,
+          "equity": 100000,
+          "note": "llm_gate: 0 fills/3 orders"
+        },
+        {
+          "day": "2026-09-11",
+          "cash": 100000,
+          "equity": 100000,
+          "note": "llm_gate: 0 fills/3 orders"
+        }
+      ],
+      "positions": [],
+      "trades": []
+    },
+    "no_gate": {
+      "account": [
+        {
+          "day": "init",
+          "cash": 100000,
+          "equity": 100000,
+          "note": "初始资金"
+        },
+        {
+          "day": "2026-09-03",
+          "cash": 100000,
+          "equity": 100000,
+          "note": "llm_no_gate: 0 fills/3 orders"
+        },
+        {
+          "day": "2026-09-09",
+          "cash": 79601.66,
+          "equity": 100209.66,
+          "note": "llm_no_gate: 3 fills/3 orders"
+        },
+        {
+          "day": "2026-09-10",
+          "cash": 79601.66,
+          "equity": 100289.66,
+          "note": "llm_no_gate: 0 fills/0 orders"
+        },
+        {
+          "day": "2026-09-11",
+          "cash": 79601.66,
+          "equity": 99806.66,
+          "note": "llm_no_gate: 0 fills/0 orders"
+        }
+      ],
+      "positions": [
+        {
+          "code": "600036",
+          "qty": 200,
+          "avg_cost": 40.9258,
+          "buy_day": "2026-09-09"
+        },
+        {
+          "code": "601899",
+          "qty": 200,
+          "avg_cost": 33.62565,
+          "buy_day": "2026-09-09"
+        },
+        {
+          "code": "601318",
+          "qty": 100,
+          "avg_cost": 54.88049999999999,
+          "buy_day": "2026-09-09"
+        }
+      ],
+      "trades": [
+        {
+          "id": 1,
+          "day": "2026-09-09",
+          "signal_day": "2026-09-08",
+          "code": "600036",
+          "side": "buy",
+          "qty": 200,
+          "price": 40.9,
+          "amount": 8180,
+          "fee": 5.16,
+          "signal_source": "llm_no_gate",
+          "plan_hash": "629fc179d81febf82e92c4d6f38f259e06f2d1a0d80e2aa97bd7f261afe189ca",
+          "planned_price": 40.9,
+          "price_type": "limit_daily_bar"
+        },
+        {
+          "id": 2,
+          "day": "2026-09-09",
+          "signal_day": "2026-09-08",
+          "code": "601899",
+          "side": "buy",
+          "qty": 200,
+          "price": 33.6,
+          "amount": 6720,
+          "fee": 5.13,
+          "signal_source": "llm_no_gate",
+          "plan_hash": "629fc179d81febf82e92c4d6f38f259e06f2d1a0d80e2aa97bd7f261afe189ca",
+          "planned_price": 33.6,
+          "price_type": "limit_daily_bar"
+        },
+        {
+          "id": 3,
+          "day": "2026-09-09",
+          "signal_day": "2026-09-08",
+          "code": "601318",
+          "side": "buy",
+          "qty": 100,
+          "price": 54.829,
+          "amount": 5482.94,
+          "fee": 5.11,
+          "signal_source": "llm_no_gate",
+          "plan_hash": "629fc179d81febf82e92c4d6f38f259e06f2d1a0d80e2aa97bd7f261afe189ca",
+          "planned_price": 55.4,
+          "price_type": "limit_daily_bar"
+        }
+      ]
+    }
+  },
+  "2026-09-09_raw_availability": {
+    "local_rqalpha_bundle": [],
+    "archived_context": [],
+    "remote_historical_source": "not_queried",
+    "strict_replay": "unavailable"
+  },
+  "legacy_reproduction": {
+    "evidence_kind": "UNVERIFIED_LEGACY_MODEL_REPRODUCTION",
+    "execution_certified": false,
+    "source": "tencent_qfq_kline",
+    "source_file_sha256": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "warning": "Reproducing old qfq inputs only explains recorded arithmetic; it does not verify executable historical prices or free-text conditions.",
+    "trades": [
+      {
+        "symbol": "600036",
+        "booked_trade": {
+          "id": 1,
+          "day": "2026-09-09",
+          "signal_day": "2026-09-08",
+          "code": "600036",
+          "side": "buy",
+          "qty": 200,
+          "price": 40.9,
+          "amount": 8180,
+          "fee": 5.16,
+          "signal_source": "llm_no_gate",
+          "plan_hash": "629fc179d81febf82e92c4d6f38f259e06f2d1a0d80e2aa97bd7f261afe189ca",
+          "planned_price": 40.9,
+          "price_type": "limit_daily_bar"
+        },
+        "legacy_result": {
+          "filled": true,
+          "side": "buy",
+          "qty": 200,
+          "price": 40.9,
+          "amount": 8180,
+          "fee": 5.16,
+          "reject_reason": "",
+          "price_type": "limit_daily_bar",
+          "status": "filled"
+        },
+        "planned_price": 40.9,
+        "reason": "",
+        "matches_booked_price_amount_fee": true
+      },
+      {
+        "symbol": "601899",
+        "booked_trade": {
+          "id": 2,
+          "day": "2026-09-09",
+          "signal_day": "2026-09-08",
+          "code": "601899",
+          "side": "buy",
+          "qty": 200,
+          "price": 33.6,
+          "amount": 6720,
+          "fee": 5.13,
+          "signal_source": "llm_no_gate",
+          "plan_hash": "629fc179d81febf82e92c4d6f38f259e06f2d1a0d80e2aa97bd7f261afe189ca",
+          "planned_price": 33.6,
+          "price_type": "limit_daily_bar"
+        },
+        "legacy_result": {
+          "filled": true,
+          "side": "buy",
+          "qty": 200,
+          "price": 33.6,
+          "amount": 6720,
+          "fee": 5.13,
+          "reject_reason": "",
+          "price_type": "limit_daily_bar",
+          "status": "filled"
+        },
+        "planned_price": 33.6,
+        "reason": "",
+        "matches_booked_price_amount_fee": true
+      },
+      {
+        "symbol": "601318",
+        "booked_trade": {
+          "id": 3,
+          "day": "2026-09-09",
+          "signal_day": "2026-09-08",
+          "code": "601318",
+          "side": "buy",
+          "qty": 100,
+          "price": 54.829,
+          "amount": 5482.94,
+          "fee": 5.11,
+          "signal_source": "llm_no_gate",
+          "plan_hash": "629fc179d81febf82e92c4d6f38f259e06f2d1a0d80e2aa97bd7f261afe189ca",
+          "planned_price": 55.4,
+          "price_type": "limit_daily_bar"
+        },
+        "legacy_result": {
+          "filled": true,
+          "side": "buy",
+          "qty": 100,
+          "price": 54.829,
+          "amount": 5482.94,
+          "fee": 5.11,
+          "reject_reason": "",
+          "price_type": "limit_daily_bar",
+          "status": "filled"
+        },
+        "planned_price": 55.4,
+        "reason": "",
+        "matches_booked_price_amount_fee": true
+      }
+    ]
+  },
+  "verification": {
+    "pytest_command": ".venv/bin/python -m pytest tests execution/tests -q",
+    "passed": 489,
+    "new_reconciliation_cases": 23,
+    "production_cli_exit_code": 1,
+    "console_api_observed": true,
+    "desktop_evidence_details_expanded": true,
+    "responsive_checks": [
+      {"viewport": 390, "document_scroll_width": 390, "audit_container_width": 362, "audit_scroll_width": 620},
+      {"viewport": 768, "document_scroll_width": 768, "audit_container_width": 484, "audit_scroll_width": 620}
+    ],
+    "model_calls": 0,
+    "notifications": 0,
+    "remote_multica_dispatches": 0,
+    "production_settlements": 0
+  },
+  "checker_code_sha256": "88cc4da439a51bf548c5d0e8900745092c7c53ca22d10e8b8faed791174a66b9"
+}

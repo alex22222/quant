@@ -1,62 +1,24 @@
-# ARCHITECTURE — 闭环流水线架构
+# 研究架构
 
-> v1.0 · 2026-08-22
+主线：专业数据 → 双时间轴 Parquet → DuckDB 可见性查询 → 历史横截面面板 → 因子 → IC/分层/成本诊断 → 滚动验证 → 冻结组合 → 真实前向 Paper。
 
-## 总览
+| 模块 | 职责 | 当前边界 |
+|---|---|---|
+| research/tushare.py | 分页采集与保守可见日期归一化 | 线上权限/覆盖待验 |
+| research/data.py | 追加式 Parquet、内容哈希、DuckDB as-of | 存储集成缺依赖未验 |
+| research/panel.py | 历史指数完整快照、行业/财务可见性连接 | 缺失直接拒绝，真实数据待验 |
+| pipeline/universe.py | 历史上市时长、ST、停牌、流动性池 | 已接入研究 Loop |
+| research/factors.py | 因子、MAD、中性化、IC、分层、换手、期限衰减 | 价量可运行，财务/中性化待完整 PIT 数据 |
+| research/portfolio.py | 行业/市值/贝塔暴露约束、TE/换手优化、隔离切分、IR | cvxpy 集成未验，完整滚动拟合待做 |
+| research/experiments.py | 执行前登记与真实成功/失败结果 | 新研究、旧回测/网格均接入 |
+| paper/execution_model.py | T+1、整手、涨跌停、停牌、历史税费 | 保留；新因子组合尚未接入生产 |
 
-```
-┌─────────┐   ┌───────────┐   ┌──────────┐   ┌─────────┐   ┌──────────┐
-│  data   │ → │ strategy  │ → │ backtest │ → │  paper  │ → │  review  │
-│ 数据部门 │   │ 技术分析师 │   │ 风控门禁  │   │ 交易员  │   │ 投委会   │
-└────┬────┘   └─────┬─────┘   └────┬─────┘   └────┬────┘   └────┬─────┘
-     │              │              │              │             │
-     └──────────────┴──────┬───────┴──────────────┴─────────────┘
-                           ▼
-                     status.json  ←── 单一事实源
-                           │
-                     ┌─────▼─────┐         ┌──────────┐
-                     │  console  │         │ AGENT.md │ ← loop 日志
-                     │ (Web 看板) │         └──────────┘
-                     └───────────┘
-                           │
-                     paper/paper.db (SQLite 台账)
-```
+## 事实源
 
-## 目录约定
+数据以追加式 Parquet 和哈希回执为准；试验只认 `research/experiments.jsonl` 真实事件，报告为派生输出。旧 `status.json` 仅服务历史策略注册表/控制台，旧工作流 ledger 保留历史流程证据，二者不决定新因子结论。尚未迁移遗留账户/工作流事实，不能声称所有双事实源已经合并。
 
-```
-pipeline/     五阶段代码 + 编排器
-strategies/   策略文件（注册表来源）
-paper/        paper.db（SQLite 台账）
-reviews/      每次 loop 的复盘报告
-console/      Web 控制台（静态页 + serve.py）
-status.json   各阶段最新状态（唯一事实源）
-AGENT.md      Loop Engineering 协议 + 迭代日志
-```
+## 冻结
 
-## 关键设计决策
+`config/research_policy.json` 缺失、损坏或未知能力均拒绝。入口覆盖晨会、LLM 计划/审批/执行、Multica 新建派单/资源配置/执行复核和计划日终物化；历史只读查询保留。旧测试在显式测试策略下验证历史契约，冻结专用测试使用真实配置。
 
-1. **status.json 单一事实源**：所有阶段只写 status.json 自己的段落；控制台只读它。
-   阶段间不直接调用，通过文件系统产物解耦（可单独重跑任何阶段）。
-2. **paper 与回测解耦**：paper 阶段不复用 RQAlpha 引擎，而是直接用
-   `kde_levels/levels.py` 的 BundleData 读最新数据、独立计算信号、以收盘价模拟成交。
-   原因：paper 的语义是"每日增量执行"，回测引擎是"全区间重放"，混用会导致状态错乱。
-3. **门禁在 backtest 阶段**：策略通过阈值才能 live；paper 只信任注册表里的 live 状态，
-   不自己判断。
-4. **AGENT.md 由 review 阶段追加**：人可编辑，机器只追加，冲突时以人编辑为准。
-
-## 数据流
-
-| 阶段 | 输入 | 输出 |
-|------|------|------|
-| data | ~/.rqalpha/bundle | status.data（覆盖范围、新鲜度） |
-| strategy | strategies/*.py + status.strategies | 注册表（含状态机） |
-| backtest | candidate/live 策略 | reports + 门禁结论 + status.backtest |
-| paper | live 策略 + bundle 最新数据 + paper.db | 成交记录、账户快照、净值 |
-| review | 以上全部 | reviews/*.md + AGENT.md 条目 |
-
-## 技术栈
-
-- Python 3.12 venv（已有）：rqalpha / pandas / scipy / h5py / ccxt
-- SQLite（标准库）：paper 台账
-- 控制台：零依赖静态 HTML + `python3 serve.py`（npm run dev 转发端口）
+仓库配置标记暂停，远端 Multica 服务不可达，实际定时器状态未验真；入口拦截不能证明远端已停止派发。未重启共享 daemon。Paper 账户原位保留，不重建、不清空。

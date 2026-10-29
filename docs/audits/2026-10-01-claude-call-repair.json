@@ -1,0 +1,423 @@
+{
+  "schema": "claude_call_repair.v1",
+  "checked_at": "2026-10-01T20:53:51.867428+08:00",
+  "status": "claude_calls_and_three_multica_roles_verified",
+  "root_cause": "Shell startup activated ccr and pointed Claude to stopped localhost:3456. No valid official Claude CLI login was present.",
+  "changes": [
+    {
+      "file": "/Users/henry/.zshrc",
+      "backup": "/Users/henry/.claude/repair-backup-20261001-163626/.zshrc",
+      "before_sha256": "a638f7915a4ae27348513dfdf9f908dc88c5ae3ed517a38cc46321aca9241a1d",
+      "after_sha256": "cc82db0a7b55e5a0ed08195b4acfc928fc25e170bb80639b1b8a2b65036d5514",
+      "syntax_valid": true
+    },
+    {
+      "file": "/Users/henry/.bash_profile",
+      "backup": "/Users/henry/.claude/repair-backup-20261001-163626/.bash_profile",
+      "before_sha256": "1b3ae0f8bee86b6d07cf7c7fb56f98072c547f9cde6bf2f3611803b01ab98517",
+      "after_sha256": "c094d1c8ed4b61ab6f8c721588420bc922a000237cbfaefca5b9bde4d20a6e4e",
+      "syntax_valid": true
+    }
+  ],
+  "auth": {
+    "loggedIn": true,
+    "authMethod": "claude.ai",
+    "apiProvider": "firstParty",
+    "subscriptionType": "pro"
+  },
+  "fresh_shell_auth": {
+    "zsh": {
+      "exit_code": 0,
+      "loggedIn": true,
+      "authMethod": "claude.ai",
+      "apiProvider": "firstParty",
+      "subscriptionType": "pro"
+    },
+    "bash": {
+      "exit_code": 0,
+      "loggedIn": true,
+      "authMethod": "claude.ai",
+      "apiProvider": "firstParty",
+      "subscriptionType": "pro"
+    }
+  },
+  "shell_before": {
+    "zsh": {
+      "exit_code": 0,
+      "variables": {
+        "ANTHROPIC_BASE_URL": true,
+        "ANTHROPIC_AUTH_TOKEN": true,
+        "ANTHROPIC_API_KEY": true
+      }
+    },
+    "bash": {
+      "exit_code": 0,
+      "variables": {
+        "ANTHROPIC_BASE_URL": true,
+        "ANTHROPIC_AUTH_TOKEN": true,
+        "ANTHROPIC_API_KEY": true
+      }
+    }
+  },
+  "shell_after": {
+    "zsh": {
+      "exit_code": 0,
+      "variables": {
+        "ANTHROPIC_BASE_URL": false,
+        "ANTHROPIC_AUTH_TOKEN": false,
+        "ANTHROPIC_API_KEY": false
+      },
+      "passed": true,
+      "nonlegacy_env_preserved": true
+    },
+    "bash": {
+      "exit_code": 0,
+      "variables": {
+        "ANTHROPIC_BASE_URL": false,
+        "ANTHROPIC_AUTH_TOKEN": false,
+        "ANTHROPIC_API_KEY": false
+      },
+      "passed": true,
+      "nonlegacy_env_preserved": true
+    }
+  },
+  "model_probes": [
+    {
+      "checked_at": "2026-10-01T20:43:40.450594+08:00",
+      "requested_model": "claude-sonnet-5",
+      "exit_code": 0,
+      "elapsed_seconds": 5.63,
+      "response": {
+        "duration_api_ms": 4016,
+        "stop_reason": "end_turn",
+        "session_id": "561fa000-803d-4501-b9a3-030e73a624f8",
+        "total_cost_usd": 0.015433800000000001,
+        "usage": {
+          "input_tokens": 2,
+          "cache_creation_input_tokens": 3648,
+          "cache_read_input_tokens": 3289,
+          "output_tokens": 18,
+          "output_tokens_details": {
+            "thinking_tokens": 0
+          },
+          "server_tool_use": {
+            "web_search_requests": 0,
+            "web_fetch_requests": 0
+          },
+          "service_tier": "standard",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 3648,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "inference_geo": "not_available",
+          "iterations": [],
+          "speed": "standard"
+        },
+        "modelUsage": {
+          "claude-sonnet-5": {
+            "inputTokens": 2,
+            "outputTokens": 18,
+            "cacheReadInputTokens": 3289,
+            "cacheCreationInputTokens": 3648,
+            "webSearchRequests": 0,
+            "costUSD": 0.015433800000000001,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-sonnet-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "permission_denials": [],
+        "terminal_reason": "completed",
+        "fast_mode_state": "off",
+        "fast_mode_disabled_reason": "sdk_opt_in_required",
+        "subagent_stats": {
+          "spawned": 0,
+          "requested": {
+            "background": 0,
+            "foreground": 0,
+            "unset": 0
+          },
+          "started_in_background": 0,
+          "max_depth": 0,
+          "spawned_by_subagents": 0,
+          "completed": 0,
+          "failed": 0,
+          "killed": {
+            "parent": 0,
+            "user": 0,
+            "system": 0
+          },
+          "refused": {
+            "depth_limit": 0,
+            "concurrency_limit": 0,
+            "budget": 0
+          },
+          "by_type": {}
+        },
+        "is_error": false,
+        "num_turns": 1,
+        "subtype": "success",
+        "api_error_status": null,
+        "result": "CLAUDE_SONNET_OK 45",
+        "ttft_ms": 4025,
+        "type": "result",
+        "duration_ms": 4053,
+        "uuid": "7f07a7b4-3c8f-42cf-ad6c-e9d642e8af8f",
+        "ttft_stream_ms": 1625,
+        "time_to_request_ms": 40,
+        "first_content_frame_ms": 1626,
+        "queued_turn_count": 0,
+        "result_index": 0
+      },
+      "stderr": ""
+    },
+    {
+      "checked_at": "2026-10-01T20:44:33.494283+08:00",
+      "requested_model": "claude-opus-5-5",
+      "exit_code": 0,
+      "elapsed_seconds": 5.77,
+      "response": {
+        "duration_api_ms": 2636,
+        "stop_reason": "end_turn",
+        "session_id": "d2408128-3120-42cb-9be6-20dfec9c12eb",
+        "total_cost_usd": 0.029152,
+        "usage": {
+          "input_tokens": 2,
+          "cache_creation_input_tokens": 3598,
+          "cache_read_input_tokens": 0,
+          "output_tokens": 18,
+          "output_tokens_details": {
+            "thinking_tokens": 0
+          },
+          "server_tool_use": {
+            "web_search_requests": 0,
+            "web_fetch_requests": 0
+          },
+          "service_tier": "standard",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 3598,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "inference_geo": "not_available",
+          "iterations": [],
+          "speed": "standard"
+        },
+        "modelUsage": {
+          "claude-opus-5-5": {
+            "inputTokens": 2,
+            "outputTokens": 18,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 3598,
+            "webSearchRequests": 0,
+            "costUSD": 0.029152,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-opus-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "permission_denials": [],
+        "terminal_reason": "completed",
+        "fast_mode_state": "off",
+        "fast_mode_disabled_reason": "sdk_opt_in_required",
+        "subagent_stats": {
+          "spawned": 0,
+          "requested": {
+            "background": 0,
+            "foreground": 0,
+            "unset": 0
+          },
+          "started_in_background": 0,
+          "max_depth": 0,
+          "spawned_by_subagents": 0,
+          "completed": 0,
+          "failed": 0,
+          "killed": {
+            "parent": 0,
+            "user": 0,
+            "system": 0
+          },
+          "refused": {
+            "depth_limit": 0,
+            "concurrency_limit": 0,
+            "budget": 0
+          },
+          "by_type": {}
+        },
+        "is_error": false,
+        "num_turns": 1,
+        "subtype": "success",
+        "api_error_status": null,
+        "result": "CLAUDE_OPUS_OK 45",
+        "ttft_ms": 2667,
+        "type": "result",
+        "duration_ms": 2694,
+        "uuid": "a62bfbc5-82ae-4d5c-b888-ff57aefa6522",
+        "ttft_stream_ms": 2480,
+        "time_to_request_ms": 64,
+        "first_content_frame_ms": 2480,
+        "queued_turn_count": 0,
+        "result_index": 0
+      },
+      "stderr": ""
+    }
+  ],
+  "multica_roles": [
+    {
+      "name": "Market Analysts",
+      "slug": "market-analysts",
+      "model": "claude-sonnet-5",
+      "issue_id": "01a0f531-8512-7191-b675-952dde6a57ec",
+      "identifier": "SATU-68",
+      "issue_status": "done",
+      "agent_id": "b765ae90-5a87-424f-9c26-fe3ce0644674",
+      "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+      "reported_models": [
+        "claude-sonnet-5"
+      ],
+      "model_usage_matches": true,
+      "smoke_pass": true,
+      "validation": {
+        "fixture_unchanged": true,
+        "correct_role": true,
+        "read_input": true,
+        "no_execution_authority": true,
+        "correct_verdicts": true,
+        "correct_metrics": true,
+        "explains_rejection": true
+      },
+      "artifact_path": "/Users/henry/projects/quant/tmp/multica-role-smoke-20261001/market-analysts/result.json",
+      "artifact_sha256": "7d124fcdf3afca22ef7385a67c245b66e83fb86f0fbbe60d30a52820b1be4c8b",
+      "run_id": "01a0f77f-adbf-7543-80dd-058eebe00eb5",
+      "run_status": "completed",
+      "usage": [
+        {
+          "cache_read_tokens": 420022,
+          "cache_write_tokens": 37441,
+          "input_tokens": 18,
+          "model": "claude-sonnet-5",
+          "output_tokens": 3258,
+          "provider": "claude"
+        }
+      ],
+      "duration_seconds": 61.0,
+      "historical_failed_runs_preserved": true
+    },
+    {
+      "name": "Strategy Research",
+      "slug": "strategy-research",
+      "model": "claude-opus-5-5",
+      "issue_id": "01a0f53c-b823-774e-920c-aa8d0505aebd",
+      "identifier": "SATU-71",
+      "issue_status": "done",
+      "agent_id": "5c69dae4-6ea4-48d3-8ec1-575d3f322a4e",
+      "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+      "reported_models": [
+        "claude-opus-5-5"
+      ],
+      "model_usage_matches": true,
+      "smoke_pass": true,
+      "validation": {
+        "fixture_unchanged": true,
+        "correct_role": true,
+        "read_input": true,
+        "no_execution_authority": true,
+        "correct_verdicts": true,
+        "correct_metrics": true,
+        "explains_rejection": true
+      },
+      "artifact_path": "/Users/henry/projects/quant/tmp/multica-role-smoke-20261001/strategy-research/result.json",
+      "artifact_sha256": "d3d298a5db0d6fef17eedb61227da088f9bf66f55621725ada93a840fd22c236",
+      "run_id": "01a0f781-d0a4-75ba-b64f-3d432c065f6b",
+      "run_status": "completed",
+      "usage": [
+        {
+          "cache_read_tokens": 157094,
+          "cache_write_tokens": 34847,
+          "input_tokens": 10,
+          "model": "claude-opus-5-5",
+          "output_tokens": 1994,
+          "provider": "claude"
+        }
+      ],
+      "duration_seconds": 35.0,
+      "historical_failed_runs_preserved": true
+    },
+    {
+      "name": "Risk Manager",
+      "slug": "risk-manager",
+      "model": "claude-opus-5-5",
+      "issue_id": "01a0f540-0664-75d4-80bf-d1e30afe3f03",
+      "identifier": "SATU-72",
+      "issue_status": "done",
+      "agent_id": "94249c35-4118-4eb7-8066-d5f5f1bff2fb",
+      "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+      "reported_models": [
+        "claude-opus-5-5"
+      ],
+      "model_usage_matches": true,
+      "smoke_pass": true,
+      "validation": {
+        "fixture_unchanged": true,
+        "correct_role": true,
+        "read_input": true,
+        "no_execution_authority": true,
+        "correct_verdicts": true,
+        "correct_metrics": true,
+        "explains_rejection": true
+      },
+      "artifact_path": "/Users/henry/projects/quant/tmp/multica-role-smoke-20261001/risk-manager/result.json",
+      "artifact_sha256": "8688602908ca7ac80678f6b498cad2eb0c4cd526eaccfbed2f2b4045b2b5f3e8",
+      "run_id": "01a0f783-3484-7444-bdf1-2edcb0ed455e",
+      "run_status": "completed",
+      "usage": [
+        {
+          "cache_read_tokens": 159148,
+          "cache_write_tokens": 32936,
+          "input_tokens": 10,
+          "model": "claude-opus-5-5",
+          "output_tokens": 1899,
+          "provider": "claude"
+        }
+      ],
+      "duration_seconds": 35.0,
+      "historical_failed_runs_preserved": true
+    }
+  ],
+  "daemon_statuses": [
+    {
+      "profile": "default",
+      "status": "stopped",
+      "pid": null,
+      "daemon_id": null,
+      "active_task_count": null,
+      "running_task_count": null
+    },
+    {
+      "profile": "desktop-api.multica.ai",
+      "status": "running",
+      "pid": 30634,
+      "daemon_id": "01a0c492-4f9e-797d-b6ba-653b1897dad2",
+      "active_task_count": 0,
+      "running_task_count": 0
+    }
+  ],
+  "agent_config_unchanged": true,
+  "autopilot_unchanged": true,
+  "protected_files": {
+    "count": 575,
+    "changed": []
+  },
+  "historical_evidence_preserved": true,
+  "business_workflow_verified": false,
+  "limits": [
+    "Synthetic role smoke tests do not establish investment performance or full production workflow readiness.",
+    "Kimi CLI login was repaired earlier; its two Multica roles were not retested in this Claude repair."
+  ],
+  "secrets_in_artifacts": false
+}

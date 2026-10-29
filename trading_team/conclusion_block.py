@@ -14,6 +14,11 @@ import json
 import re
 from pathlib import Path
 
+try:
+    from trading_team.state_lock import atomic_write_json, state_lock
+except ImportError:
+    from state_lock import atomic_write_json, state_lock
+
 TEAM_DIR = Path(__file__).resolve().parent
 
 RATING_ENUM = {"强烈看多", "看多", "中性偏多", "中性", "中性偏空", "看空", "强烈看空"}
@@ -95,6 +100,11 @@ def backfill_accuracy(date: str, team_dir: Path = TEAM_DIR) -> dict:
     """从研究员结论块回填 accuracy.json 当日 ratings。幂等：已 verified 不覆盖。
 
     返回 {"date":..., "updated": bool, "ratings": n, "reason": ...}"""
+    with state_lock(team_dir):
+        return _backfill_accuracy(date, team_dir)
+
+
+def _backfill_accuracy(date: str, team_dir: Path) -> dict:
     acc_path = team_dir / "loops" / "accuracy.json"
     report = team_dir / "outputs" / date / "05_researcher.md"
     if not report.exists():
@@ -112,9 +122,20 @@ def backfill_accuracy(date: str, team_dir: Path = TEAM_DIR) -> dict:
         return {"date": date, "updated": False, "ratings": 0,
                 "reason": "当日已 verified，不覆盖"}
 
-    ratings = {r["code"]: {"rating": r["rating"], "confidence": r["confidence"],
-                           "ref_price": _ref_price(date, r["code"], team_dir)}
-               for r in block["ratings"]}
+    allowed_codes = None
+    watchlist_path = team_dir / "watchlist.json"
+    if watchlist_path.exists():
+        watchlist = json.loads(watchlist_path.read_text(encoding="utf-8"))
+        allowed_codes = {str(item["code"]) for item in watchlist.get("stocks", [])}
+    ratings = {
+        r["code"]: {
+            "rating": r["rating"],
+            "confidence": r["confidence"],
+            "ref_price": _ref_price(date, r["code"], team_dir),
+        }
+        for r in block["ratings"]
+        if allowed_codes is None or r["code"] in allowed_codes
+    }
     if entry is None:
         entry = {"date": date, "verified": False, "ratings": {},
                  "result_5d": None, "score": None}
@@ -123,7 +144,7 @@ def backfill_accuracy(date: str, team_dir: Path = TEAM_DIR) -> dict:
     entry["block_source"] = "05_researcher.md 结构化结论块"
     if block.get("market"):
         entry["market_view"] = block["market"]
-    acc_path.write_text(json.dumps(acc, ensure_ascii=False, indent=2), encoding="utf-8")
+    atomic_write_json(acc_path, acc)
     return {"date": date, "updated": True, "ratings": len(ratings), "reason": "ok"}
 
 
@@ -140,6 +161,11 @@ def enrich_plan(date: str, team_dir: Path = TEAM_DIR) -> dict:
     """把当日舆情温度与情绪周期写进 plan.json（plan.json 仍为草稿，仅追加只读上下文字段）。
 
     幂等：重复执行结果一致。plan.json 不存在或结论块缺失时返回原因，不改文件。"""
+    with state_lock(team_dir):
+        return _enrich_plan(date, team_dir)
+
+
+def _enrich_plan(date: str, team_dir: Path) -> dict:
     plan_path = team_dir / "outputs" / date / "plan.json"
     if not plan_path.exists():
         return {"date": date, "updated": False, "reason": "plan.json 不存在"}
@@ -158,7 +184,7 @@ def enrich_plan(date: str, team_dir: Path = TEAM_DIR) -> dict:
         plan["news_temperature"] = temp
     if cycle is not None:
         plan["sentiment_cycle"] = cycle
-    plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2), encoding="utf-8")
+    atomic_write_json(plan_path, plan)
     return {"date": date, "updated": True,
             "news_temperature": temp, "sentiment_cycle": cycle}
 

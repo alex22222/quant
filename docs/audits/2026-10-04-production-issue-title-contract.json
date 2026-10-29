@@ -1,0 +1,61 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-04T00:48:42+08:00",
+  "result": "production_runbook_title_contract_updated_not_live_verified",
+  "trigger_evidence": {
+    "issue": "SATU-81",
+    "issue_id": "01a0f9cd-e306-7446-aedf-750b42e10383",
+    "observed_title": "A股每日研究 2026-10-02：发布入口",
+    "rename_timeline": {
+      "renamed_at": "2026-10-02T08:30:45+08:00",
+      "from": "A股每日研究 2026-10-02",
+      "to": "A股每日研究 2026-10-02：发布入口",
+      "task_completed_at": "2026-10-02T08:32:11+08:00",
+      "sequence": "renamed before holiday skip completion"
+    },
+    "platform_appended_instruction": "After starting work, rename this issue to accurately reflect what you are doing.",
+    "publication_attempt_on_holiday": false
+  },
+  "comparison": {
+    "date": "2026-09-29",
+    "issue": "SATU-62",
+    "current_title": "A股每日研究 2026-09-29",
+    "publication": "completed",
+    "interpretation": "A previous successful publication retained the exact title; it does not prove the new Runbook will override the platform hint."
+  },
+  "boundary": {
+    "expected_title_template": "A股每日研究 {{date}}",
+    "local_verifier": "trading_team/multica_adapter.py:verify_execution_context",
+    "verifier_changed": false,
+    "title_mismatch_still_fails_closed": true
+  },
+  "remote_update": {
+    "autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "project_id": "a208df76-b63b-4cef-bd11-7512d7c80896",
+    "agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+    "status": "active",
+    "trigger_id": "97a59a0a-ceda-4115-81f8-bc583a7c5eef",
+    "cron": "30 7 * * 1-5",
+    "timezone": "Asia/Shanghai",
+    "description_only": true,
+    "local_and_remote_description_sha256": "1c004bb103c196a4512a899686c039f7e3601621f54e9b5a96949f019ca2cda3",
+    "daemon_active_task_count_before_update": 0
+  },
+  "verification": {
+    "focused_before": "29 passed",
+    "new_contract_test_before": "failed as expected",
+    "focused_after": "30 passed",
+    "full_after": "1294 passed",
+    "next_required_observation": "Verify the next actual Autopilot Issue retains its exact template title before any publication command; a holiday skip cannot prove the trading-day path."
+  },
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "limitations": [
+    "The platform still appends its generic rename instruction to created Issues; Runbook precedence must be observed in a real task.",
+    "No production publication, independent review, Paper settlement, notification or Live action was triggered by this update.",
+    "Host power and wake reliability for the next trading day remain unverified."
+  ]
+}

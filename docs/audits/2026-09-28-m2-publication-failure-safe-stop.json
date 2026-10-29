@@ -1,0 +1,57 @@
+{
+  "observed_at_local": "2026-09-28 21:12 Asia/Shanghai",
+  "scope": "natural-day readback and narrow next-version guard repair; no retry of failed issue",
+  "holiday_2026_09_25": {
+    "autopilot_run_id": "01a0d5c1-4eb8-7058-a94c-8a20ca8bcab3",
+    "issue": "SATU-60",
+    "issue_id": "01a0d5c1-4ec0-7088-a062-cc16ac4bd8be",
+    "task_id": "01a0d5c1-4ed0-7850-be52-eb3161a50a3d",
+    "task_status": "failed",
+    "task_started_at": null,
+    "failure": "runtime unavailable while task was queued",
+    "holiday_skip_executed": false,
+    "production_report_or_plan": false
+  },
+  "natural_day_2026_09_28": {
+    "autopilot_run_id": "01a0e534-6274-7991-b1e5-0e803df3e8d8",
+    "trigger_id": "97a59a0a-ceda-4115-81f8-bc583a7c5eef",
+    "issue": "SATU-61",
+    "issue_id": "01a0e534-627f-7528-aaa5-0a1cdbc5f124",
+    "issue_status": "blocked",
+    "task_id": "01a0e534-628f-7705-85c6-b92b8606c655",
+    "task_status": "completed",
+    "local_run_id": "833c46a748344e149891c055220c8320",
+    "local_run_status": "failed",
+    "local_run_started_at": "2026-09-28T07:31:27+08:00",
+    "local_run_finished_at": "2026-09-28T07:42:53+08:00",
+    "failed_step": "role_05",
+    "failure": "ValueError: unverified fund flow: volume and turnover do not prove signed capital flow",
+    "rejected_response_sha256": "ee19d1a5cde4d4baa4a3599721dd06f310eb6be65a6e6663cb81c1b02f164378",
+    "formal_generation_or_plan": false,
+    "independent_reviews": 0,
+    "approval_status": "missing",
+    "decision_or_paper_materialization": false,
+    "notification_outbox_status": "missing",
+    "archive_service_status": "healthy",
+    "archive_expected_and_verified_session": "2026-09-28",
+    "m2_accepted": false,
+    "m3_started": false
+  },
+  "paper_accounts_sha256_unchanged": {
+    "active_gate": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c",
+    "active_no_gate": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c",
+    "legacy_gate": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "legacy_no_gate": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391"
+  },
+  "next_version_repair": {
+    "cause": "The exact negative phrase 未升级为资金净流入/流出 was not recognized by the lexical guard.",
+    "original_response_in_memory_check": "passes current lexical guard only; no factual review or historical certification",
+    "positive_fund_flow_assertion_still_rejected": true,
+    "focused_tests": "23 passed",
+    "project_tests": "1275 passed",
+    "new_runner_sha256": "c34e5c774febd592dbcc3e19f7983d52da58a804d744eca9df2e7395e09cb84c"
+  },
+  "historical_issue_retried": false,
+  "local_paper_accounts_unchanged": true,
+  "external_live_effects_independently_verified": false
+}

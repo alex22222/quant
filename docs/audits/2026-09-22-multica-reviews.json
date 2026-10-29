@@ -1,0 +1,252 @@
+{
+  "schema": "multica_review_acceptance.v1",
+  "loop": 49,
+  "classification": "progress",
+  "observed_at": "2026-09-22T04:11:26.966Z",
+  "goal_complete": false,
+  "evidence_directory": "/private/tmp/quant-multica-reviews.Vkq5Lw",
+  "evidence_scope": "isolated scripted models and fake Multica RPC; not real remote execution",
+  "implementation": {
+    "module": "trading_team.multica_reviews",
+    "contract": "multica_review_bundle.v1",
+    "response": "multica_review_response.v1",
+    "receipt": "multica_review_receipt.v1",
+    "roles": [
+      "data-quality",
+      "market-analysts",
+      "strategy-research",
+      "paper-trader",
+      "risk-manager",
+      "audit-verifier"
+    ],
+    "source": "verified acknowledged daily_research.v4 plus full source file hash set",
+    "role_binding": "independent configured agents, exact versioned issue title, running task, project and workspace",
+    "upstream": "latest current accepted receipt from every prior role",
+    "non_executing": true,
+    "mandatory_publication_gate": false,
+    "mandatory_paper_gate": false,
+    "dedicated_console_view": false,
+    "backup_tree": "trading_team/.runs/multica/reviews",
+    "incomplete_attempt_recovery": "same validated response, same still-valid task identity, retained attempts"
+  },
+  "verification": {
+    "baseline_related": {
+      "passed": 103,
+      "seconds": 5.85
+    },
+    "initial_missing_implementation": {
+      "failed": 1,
+      "errors": 23
+    },
+    "final_targeted": {
+      "passed": 34,
+      "seconds": 4.73
+    },
+    "full_regression": {
+      "command": ".venv/bin/python -m pytest -q tests execution/tests",
+      "passed": 1104,
+      "seconds": 30.66
+    },
+    "retained_targeted": {
+      "passed": 34,
+      "seconds": 4.82,
+      "subdirectory": "acceptance"
+    },
+    "independent_read_only": {
+      "full": {
+        "status": "accepted",
+        "roles": {
+          "data-quality": "accepted",
+          "market-analysts": "accepted",
+          "strategy-research": "accepted",
+          "paper-trader": "accepted",
+          "risk-manager": "accepted",
+          "audit-verifier": "accepted"
+        },
+        "execution_authorized": false
+      },
+      "rejected": {
+        "status": "incomplete",
+        "roles": {
+          "data-quality": "rejected",
+          "market-analysts": "blocked",
+          "strategy-research": "blocked",
+          "paper-trader": "blocked",
+          "risk-manager": "blocked",
+          "audit-verifier": "blocked"
+        },
+        "execution_authorized": false
+      },
+      "crash_recovered": {
+        "status": "incomplete",
+        "roles": {
+          "data-quality": "accepted",
+          "market-analysts": "pending",
+          "strategy-research": "blocked",
+          "paper-trader": "blocked",
+          "risk-manager": "blocked",
+          "audit-verifier": "blocked"
+        },
+        "execution_authorized": false
+      },
+      "backup_source": {
+        "status": "incomplete",
+        "roles": {
+          "data-quality": "accepted",
+          "market-analysts": "pending",
+          "strategy-research": "blocked",
+          "paper-trader": "blocked",
+          "risk-manager": "blocked",
+          "audit-verifier": "blocked"
+        },
+        "execution_authorized": false
+      },
+      "restored": {
+        "status": "incomplete",
+        "roles": {
+          "data-quality": "accepted",
+          "market-analysts": "pending",
+          "strategy-research": "blocked",
+          "paper-trader": "blocked",
+          "risk-manager": "blocked",
+          "audit-verifier": "blocked"
+        },
+        "execution_authorized": false
+      },
+      "damaged_attempt": {
+        "status": "incomplete",
+        "roles": {
+          "data-quality": "invalid",
+          "market-analysts": "blocked",
+          "strategy-research": "blocked",
+          "paper-trader": "blocked",
+          "risk-manager": "blocked",
+          "audit-verifier": "blocked"
+        },
+        "execution_authorized": false
+      },
+      "restore_status_matches": true,
+      "recovery_attempts": 2
+    },
+    "syntax_check": "passed",
+    "git_diff_check": "passed"
+  },
+  "production_observation": {
+    "command": ".venv/bin/python -m trading_team.multica_reviews status --date 2026-09-22",
+    "exit_code": 2,
+    "status": "source_unverified",
+    "execution_authorized": false,
+    "production_complete": false,
+    "prepared": false,
+    "submitted": false
+  },
+  "protected": {
+    "count": 32,
+    "changed": [],
+    "before_sha256": {
+      "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818",
+      "docs/audits/2026-09-22-continuous-counterfactual.json": "2bafa984af423bda5136229a79aa7bf46613a0912fbc5663d04604b32ca6a50c",
+      "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+      "docs/audits/2026-09-22-lot-inventory.json": "9834742c64efe66fa261a7ead8e442ccc6a01d337dff0781ed1bf9b1cde8c576",
+      "docs/audits/2026-09-22-notification-recovery.json": "b6a2ef9a07602894720c19c2de6e56cf3dddeae78a265dbb378eaeec82496a12",
+      "docs/audits/2026-09-22-paper-protection.json": "ad090cf06b500bc80e705ba8a9318300c5b6456986113ecec06346b2c34bba56",
+      "docs/audits/2026-09-22-persistent-backup.json": "917b8103e93ae1bd288c681f955f7b2a4cbcb59e262802509f904f87165fce1d",
+      "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+      "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+      "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+      "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+      "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+      "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+      "trading_team/decisions/2026-09-22/decision.json": "64533e79126b528243577f65227ab79c87d84b575f265f446196b606b37cb516",
+      "trading_team/decisions/2026-09-22/paper_decision.json": "699c1922a4e3a6f61c7ab781adfe2756b318e17240780651ed6a44d71174ed0e",
+      "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+      "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+      "trading_team/outputs/2026-09-22/01_fundamental.md": "ff50fd15686fb6de950c58c4238113a63a9be2185becc0fb39ccb89cd463f7bb",
+      "trading_team/outputs/2026-09-22/02_sentiment.md": "d0600ecf3e381a57f664b9deb592a33dcde6a5a929c497b26d50125307fc4ff6",
+      "trading_team/outputs/2026-09-22/03_news.md": "806eb8b2af9729f099b611c8c13f80b2f0ddd9d7ac24718faa519cb2570c4cf4",
+      "trading_team/outputs/2026-09-22/04_technical.md": "94fbc7265a543e2bd21754eadf75ef8a9cdedab9242d7f914514f9dbb8495dd1",
+      "trading_team/outputs/2026-09-22/05_researcher.md": "c7a5812da86091860c8b482fb39df9b6fcca36880241dd9a5b8d4f0e5a9ccb24",
+      "trading_team/outputs/2026-09-22/06_trader.md": "9f64c8e1d472828058939a2458cca036f710d7a4e756eb862e3ee32555fa7131",
+      "trading_team/outputs/2026-09-22/07_risk_manager.md": "7a8a291d4a084cc2114095221b659e3c37a1687a318648160ed0eae87a4b7556",
+      "trading_team/outputs/2026-09-22/daily_conclusion.md": "6d57ab3ce5b76a191e331342475feddc3bfc44b0ab0ae67e086dbc894ad39d62",
+      "trading_team/outputs/2026-09-22/plan.json": "ab3c293ae4cc2e7a922ec5278e216ed4c5ce7f6785a883e73c2d35c65a8174e0",
+      "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+      "trading_team/team.db": "397b37b89a02a3dc4b87ff6ef0504def4ecd3e24362e66e23b424cbc0366aeee",
+      "docs/audits/2026-09-22-research-entrypoint.json": "e582421895dfd7110fc5097eb5881acd15d9d4d2c29196e880dac5c9d1179bc5",
+      "docs/audits/2026-09-22-multica-observation.json": "1cdb1927e348d0d87ba0306edbec392e4b8abae27b6045b4dcdb8abcfe2b6010",
+      "docs/audits/2026-09-22-model-transport.json": "fe7c7959e273aaf2b21ecb680d502e6e65cae6bf301fbbc79c8ba87914a4c646",
+      "docs/audits/2026-09-22-system-acceptance.json": "c715fd01a2c9a779384c788030830b6b8f259efd3ed610d051a93056b660c150"
+    },
+    "after_sha256": {
+      "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818",
+      "docs/audits/2026-09-22-continuous-counterfactual.json": "2bafa984af423bda5136229a79aa7bf46613a0912fbc5663d04604b32ca6a50c",
+      "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+      "docs/audits/2026-09-22-lot-inventory.json": "9834742c64efe66fa261a7ead8e442ccc6a01d337dff0781ed1bf9b1cde8c576",
+      "docs/audits/2026-09-22-notification-recovery.json": "b6a2ef9a07602894720c19c2de6e56cf3dddeae78a265dbb378eaeec82496a12",
+      "docs/audits/2026-09-22-paper-protection.json": "ad090cf06b500bc80e705ba8a9318300c5b6456986113ecec06346b2c34bba56",
+      "docs/audits/2026-09-22-persistent-backup.json": "917b8103e93ae1bd288c681f955f7b2a4cbcb59e262802509f904f87165fce1d",
+      "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+      "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+      "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+      "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+      "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+      "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+      "trading_team/decisions/2026-09-22/decision.json": "64533e79126b528243577f65227ab79c87d84b575f265f446196b606b37cb516",
+      "trading_team/decisions/2026-09-22/paper_decision.json": "699c1922a4e3a6f61c7ab781adfe2756b318e17240780651ed6a44d71174ed0e",
+      "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+      "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+      "trading_team/outputs/2026-09-22/01_fundamental.md": "ff50fd15686fb6de950c58c4238113a63a9be2185becc0fb39ccb89cd463f7bb",
+      "trading_team/outputs/2026-09-22/02_sentiment.md": "d0600ecf3e381a57f664b9deb592a33dcde6a5a929c497b26d50125307fc4ff6",
+      "trading_team/outputs/2026-09-22/03_news.md": "806eb8b2af9729f099b611c8c13f80b2f0ddd9d7ac24718faa519cb2570c4cf4",
+      "trading_team/outputs/2026-09-22/04_technical.md": "94fbc7265a543e2bd21754eadf75ef8a9cdedab9242d7f914514f9dbb8495dd1",
+      "trading_team/outputs/2026-09-22/05_researcher.md": "c7a5812da86091860c8b482fb39df9b6fcca36880241dd9a5b8d4f0e5a9ccb24",
+      "trading_team/outputs/2026-09-22/06_trader.md": "9f64c8e1d472828058939a2458cca036f710d7a4e756eb862e3ee32555fa7131",
+      "trading_team/outputs/2026-09-22/07_risk_manager.md": "7a8a291d4a084cc2114095221b659e3c37a1687a318648160ed0eae87a4b7556",
+      "trading_team/outputs/2026-09-22/daily_conclusion.md": "6d57ab3ce5b76a191e331342475feddc3bfc44b0ab0ae67e086dbc894ad39d62",
+      "trading_team/outputs/2026-09-22/plan.json": "ab3c293ae4cc2e7a922ec5278e216ed4c5ce7f6785a883e73c2d35c65a8174e0",
+      "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+      "trading_team/team.db": "397b37b89a02a3dc4b87ff6ef0504def4ecd3e24362e66e23b424cbc0366aeee",
+      "docs/audits/2026-09-22-research-entrypoint.json": "e582421895dfd7110fc5097eb5881acd15d9d4d2c29196e880dac5c9d1179bc5",
+      "docs/audits/2026-09-22-multica-observation.json": "1cdb1927e348d0d87ba0306edbec392e4b8abae27b6045b4dcdb8abcfe2b6010",
+      "docs/audits/2026-09-22-model-transport.json": "fe7c7959e273aaf2b21ecb680d502e6e65cae6bf301fbbc79c8ba87914a4c646",
+      "docs/audits/2026-09-22-system-acceptance.json": "c715fd01a2c9a779384c788030830b6b8f259efd3ed610d051a93056b660c150"
+    }
+  },
+  "component_sha256": {
+    "trading_team/multica_reviews.py": "6a8ec5034500421cc4fb71d095f925a2fb4f895f73651812434760cdcc5e4181",
+    "trading_team/workflow_recovery.py": "e5ac9149ecd00f2095d07d25b0daafb76af7daa605bf92b41f5fb646413d0e5e",
+    "tests/test_multica_reviews.py": "de7bade1b9206fc5c39ab4b80bbb0942b58b4d28f5688e4af27ccf2e96b2f15f",
+    "docs/MULTICA_REVIEWS.md": "4374c2dfad1869a416a955b3e9318befa29ebf60c07d1d956d25f8f570eafc44",
+    "docs/SYSTEM_ACCEPTANCE.md": "4558234717845af631c8ade9ce37da297268d73f3daef29af36d701eb5b96dae",
+    "multica/runbooks/daily-research.md": "726c26586ce3fbe828f85e25fa311ebc7f0e3ebe9b9222c79704bb42e2f7316b",
+    "multica/README.md": "2bcdd0c2c66be194594820207e2a489a5b451cf18eb173ffe3f21302c6e1ebc7"
+  },
+  "side_effects": {
+    "real_model_calls": false,
+    "real_remote_dispatch": false,
+    "remote_runbook_sync": false,
+    "runtime_changes": false,
+    "schedule_changes": false,
+    "real_notifications": false,
+    "production_approvals": false,
+    "production_paper_settlement": false,
+    "live_orders": false,
+    "console_reload": false,
+    "global_auth_config_change": false
+  },
+  "limitations": [
+    "Post-publication advisory review, not an independent remote maker pipeline or mandatory execution gate.",
+    "A succeeded recording may contain a reject verdict; inspect status and is_latest.",
+    "Local/manual producer identity is empty, not a verified remote producer.",
+    "Review structure and evidence references do not establish semantic correctness or independent judgment.",
+    "Hashes are integrity checks, not actor signatures or OS-level authorization.",
+    "Remote identity is checked at submission; status does not certify later remote task completion.",
+    "Restored identities are historical evidence, not fresh dispatch or execution permission.",
+    "Real Multica end-to-end, fee source selection, offsite recovery and forward validation remain unresolved."
+  ],
+  "next": [
+    "Integrate explicit review barrier without circular pre-publication dependencies.",
+    "Display current role verdict, source version, stale/invalid states and recording versus acceptance.",
+    "Respect existing authorization boundary before remote runtime changes, dispatch or Runbook synchronization."
+  ]
+}

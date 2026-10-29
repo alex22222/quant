@@ -62,5 +62,67 @@
       "horizon": "回避",
       "note": "已由主事实源 decision.json 重建（原草稿见 backups/2026-08-23-phase0/plan.json.bak）"
     }
+  ],
+  "paper_proposals": [
+    {
+      "code": "601318",
+      "name": "中国平安",
+      "direction": "观望",
+      "position_pct": 0,
+      "entry": null,
+      "entry_type": null,
+      "stop": null,
+      "condition": null,
+      "horizon": "预案：中线 4-8 周",
+      "note": "已由主事实源 decision.json 重建（原草稿见 backups/2026-08-23-phase0/plan.json.bak）"
+    },
+    {
+      "code": "600036",
+      "name": "招商银行",
+      "direction": "观望",
+      "position_pct": 0,
+      "entry": null,
+      "entry_type": null,
+      "stop": null,
+      "condition": null,
+      "horizon": "预案：中线 4-8 周",
+      "note": "已由主事实源 decision.json 重建（原草稿见 backups/2026-08-23-phase0/plan.json.bak）"
+    },
+    {
+      "code": "300750",
+      "name": "宁德时代",
+      "direction": "观望",
+      "position_pct": 0,
+      "entry": null,
+      "entry_type": null,
+      "stop": null,
+      "condition": null,
+      "horizon": "预案：波段 2-4 周",
+      "note": "已由主事实源 decision.json 重建（原草稿见 backups/2026-08-23-phase0/plan.json.bak）"
+    },
+    {
+      "code": "600519",
+      "name": "贵州茅台",
+      "direction": "观望",
+      "position_pct": 0,
+      "entry": null,
+      "entry_type": null,
+      "stop": null,
+      "condition": null,
+      "horizon": "季度级观察",
+      "note": "已由主事实源 decision.json 重建（原草稿见 backups/2026-08-23-phase0/plan.json.bak）"
+    },
+    {
+      "code": "000063",
+      "name": "中兴通讯",
+      "direction": "观望（回避）",
+      "position_pct": 0,
+      "entry": null,
+      "entry_type": null,
+      "stop": null,
+      "condition": null,
+      "horizon": "回避",
+      "note": "已由主事实源 decision.json 重建（原草稿见 backups/2026-08-23-phase0/plan.json.bak）"
+    }
   ]
 }

@@ -1,0 +1,99 @@
+{
+  "verified_at": "2026-09-22T03:04:05.867403+08:00",
+  "scope": "paper_accounts_only",
+  "backup_path": "/Users/henry/projects/quant/trading_team/.runs/backups/20260922T030248",
+  "manifest_hash": "3036ad4318c62df89efa26cd9e6376c0350d3cf5814434c480b84cffb755d890",
+  "restore": {
+    "execution_authorized": false,
+    "manifest_hash": "3036ad4318c62df89efa26cd9e6376c0350d3cf5814434c480b84cffb755d890",
+    "pair_alignment": "aligned",
+    "path": "/private/var/folders/xx/1h1hmbcn1xvgs5_sft5jmpgc0000gp/T/quant-paper-recovery-9u15zzwj/restored",
+    "restored_at": "2026-09-22T03:02:48.871444+08:00",
+    "scope": "paper_accounts_only",
+    "status": "verified_isolated"
+  },
+  "tables_and_schema_equal": true,
+  "snapshot_and_valuation_equal": true,
+  "production_accounts_unchanged": true,
+  "account_sha256": {
+    "gate": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "no_gate": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391"
+  },
+  "account_summaries": {
+    "gate": {
+      "cash": 100000,
+      "execution_evidence": "not_recertified",
+      "last_account_day": "2026-09-11",
+      "position_count": 0,
+      "recorded_equity": 100000,
+      "unreceipted_days": [
+        "2026-09-03",
+        "2026-09-09",
+        "2026-09-10",
+        "2026-09-11"
+      ]
+    },
+    "no_gate": {
+      "cash": 79601.66,
+      "execution_evidence": "not_recertified",
+      "last_account_day": "2026-09-11",
+      "position_count": 3,
+      "recorded_equity": 99806.66,
+      "unreceipted_days": [
+        "2026-09-03",
+        "2026-09-09",
+        "2026-09-10",
+        "2026-09-11"
+      ]
+    }
+  },
+  "table_counts": {
+    "gate": {
+      "account": 5,
+      "account_valuations": 1,
+      "order_events": 12,
+      "pending_orders": 12,
+      "positions": 0,
+      "sqlite_sequence": 2,
+      "trades": 0
+    },
+    "no_gate": {
+      "account": 5,
+      "account_valuations": 1,
+      "order_events": 6,
+      "pending_orders": 6,
+      "positions": 3,
+      "sqlite_sequence": 3,
+      "trades": 3
+    }
+  },
+  "read_only_snapshots": {
+    "gate": {
+      "cash": 100000,
+      "valuation_equity": 100000,
+      "quote_asof": "2026-09-21",
+      "order_counts": {
+        "blocked": 12
+      },
+      "position_count": 0
+    },
+    "no_gate": {
+      "cash": 79601.66,
+      "valuation_equity": 99467.66,
+      "quote_asof": "2026-09-21",
+      "order_counts": {
+        "filled": 3,
+        "unfilled": 3
+      },
+      "position_count": 3
+    }
+  },
+  "limitations": [
+    "Historical executions remain uncertified; no missing receipts synthesized",
+    "Isolated restoration, not an authorized production replacement",
+    "Market data, approvals, plans, workflow ledger and secrets excluded",
+    "Source market data used read-only for valuation comparison, not restored",
+    "Same-disk backup, not off-site disaster recovery",
+    "No model, notification, order, settlement or remote Multica dispatch"
+  ]
+}

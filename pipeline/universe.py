@@ -53,8 +53,8 @@ class UniverseBuilder:
 
     @staticmethod
     def _load_day_set(path: Path) -> dict[str, set]:
-        f = h5py.File(path, "r")
-        return {k: set(int(x) for x in f[k][:]) for k in f.keys()}
+        with h5py.File(path, "r") as f:
+            return {k: set(int(x) for x in f[k][:]) for k in f.keys()}
 
     def _datetimes(self, code: str) -> np.ndarray | None:
         if code not in self._dt_cache:

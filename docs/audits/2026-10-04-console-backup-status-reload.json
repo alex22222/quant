@@ -1,0 +1,49 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-04T01:05:47+08:00",
+  "result": "authorized_project_console_reload_verified",
+  "authorization": "User explicitly authorized reloading only this project's 7100 console service.",
+  "before": {
+    "launchd_label": "com.hqcapital.console",
+    "pid": 1532,
+    "listener": "127.0.0.1:7100",
+    "served_backup_status": "degraded",
+    "served_runbook_snapshot_current": null,
+    "served_issues": ["runtime differs from latest snapshot"],
+    "local_readonly_runbook_snapshot_current": false,
+    "multica_active_task_count": 0,
+    "gate_db_sha256": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c",
+    "no_gate_db_sha256": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c"
+  },
+  "operation": {
+    "command_scope": "launchctl kickstart -k gui/<current-user>/com.hqcapital.console",
+    "archive_service_restarted": false,
+    "backup_service_restarted": false,
+    "multica_daemon_restarted": false
+  },
+  "after": {
+    "pid": 39039,
+    "listener": "127.0.0.1:7100",
+    "console_http_status": 200,
+    "backup_api_ok": true,
+    "backup_status": "degraded",
+    "runbook_snapshot_current": false,
+    "issues": [
+      "runtime differs from latest snapshot",
+      "production runbook differs from latest snapshot"
+    ],
+    "backup_heartbeat": "fresh",
+    "backup_scheduler_last_exit_code": 1,
+    "backup_scheduler_last_exit_interpretation": "The scheduled check completed and reported degraded, so its CLI exit code was 1; this does not prove the scheduler is stopped.",
+    "gate_db_sha256": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c",
+    "no_gate_db_sha256": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c",
+    "gate_facts_hash": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+    "no_gate_facts_hash": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc"
+  },
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "next_boundary": "Wait for the existing scheduled backup to register a current snapshot; independently verify manifest, Runbook hash and isolated recovery. Do not infer M2 or offsite recovery from console status."
+}

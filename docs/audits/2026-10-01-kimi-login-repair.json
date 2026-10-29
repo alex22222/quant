@@ -1,0 +1,71 @@
+{
+  "schema": "kimi_login_format_repair.v1",
+  "repaired_at": "2026-10-01T12:03:36.839397+08:00",
+  "credential_path": "/Users/henry/.kimi/credentials/kimi-code.json",
+  "private_backup_path": "/Users/henry/.kimi/credentials/kimi-code.json.before-format-repair-20261001T120336+0800.bak",
+  "repair": "Removed exactly one redundant trailing closing brace",
+  "before_bytes": 1002,
+  "after_bytes": 1001,
+  "before_sha256": "48d5d4ca6fa7160a6646a57663800b9f2793274f2c4eca880647024ffac1e9d4",
+  "format_repaired_sha256": "aa33a0b94a583bae108d54c6aae90fbdc3e338246ddc777db4c5d2f4b63b21a8",
+  "credential_values_preserved": true,
+  "file_mode": "0o600",
+  "backup_mode": "0o600",
+  "access_token_was_expired": true,
+  "refresh_token_present": true,
+  "status": "login_repaired_and_original_model_call_verified",
+  "refresh_failure": "The provided authorization grant is invalid",
+  "model_request_failure": "401 invalid_authentication_error",
+  "first_retest_task_id": "01a0f5a2-7bab-7665-a933-3cc77e62a423",
+  "first_retest_remote_status": "completed",
+  "first_retest_business_result": "empty_output_no_tools_no_artifact_not_passed",
+  "checked_at": "2026-10-01T12:06:51.513212+08:00",
+  "private_config_backup_path": "/Users/henry/.kimi/config.toml.before-login-recovery-20261001T120731+0800.bak",
+  "official_login_succeeded_at": "2026-10-01T16:11:36.187428+08:00",
+  "login_metadata": {
+    "valid_json": true,
+    "access_token_expired": false,
+    "refresh_token_present": true,
+    "mode": "0o600",
+    "default_model": "kimi-code/kimi-for-coding",
+    "configured_kimi_models": [
+      "kimi-code/kimi-for-coding",
+      "kimi-code/kimi-for-coding-highspeed",
+      "kimi-code/k3",
+      "kimi-code/k3-256k"
+    ]
+  },
+  "official_login_success_confirmed": true,
+  "multica_status_at_resume": {
+    "default": "stopped",
+    "desktop-api.multica.ai": "stopped"
+  },
+  "post_login_cli_probe": "blocked_by_unrelated_xiaohongshu_mcp_502",
+  "verified_at": "2026-10-01T16:16:02.377248+08:00",
+  "direct_model_probe": {
+    "checked_at": "2026-10-01T16:15:18.305003+08:00",
+    "requested_model": "kimi-code/k3-256k",
+    "mcp_scope": "--mcp-config-file explicitly replaces default MCP file for this invocation",
+    "exit_code": 0,
+    "stdout": "KIMI_LOGIN_OK 5\n",
+    "stderr": "\nTo resume this session: kimi -r 6410a54c-a004-4060-b4c6-33a5f5c1d980\n",
+    "pass": true
+  },
+  "protected_project_changed": [],
+  "remote_kimi_role_retests": "not_run_after_successful_login_because_both_multica_daemons_are_stopped",
+  "global_mcp_configuration_changed": false,
+  "role_model_allocation_changed": false,
+  "original_cli_preferences_restored": {
+    "default_model": "kimi-code/k3-256k",
+    "default_thinking": false
+  },
+  "final_verified_at": "2026-10-01T16:18:07.982458+08:00",
+  "final_login_checks": {
+    "valid_json": true,
+    "unexpired_access_token": true,
+    "credential_mode": "0o600",
+    "original_model_call_passed": true,
+    "original_cli_preferences_restored": true
+  },
+  "report": "docs/KIMI_LOGIN_REPAIR_2026-10-01.md"
+}

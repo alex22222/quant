@@ -4,15 +4,15 @@
   "stages": {
     "data": {
       "status": "ok",
-      "started_at": "2026-08-22T21:20:42+08:00",
-      "finished_at": "2026-08-22T21:24:53+08:00",
-      "elapsed_sec": 250.4,
+      "started_at": "2026-10-02T21:07:23+08:00",
+      "finished_at": "2026-10-02T21:12:38+08:00",
+      "elapsed_sec": 315.0,
       "result": {
         "bundle_path": "/Users/henry/.rqalpha/bundle",
-        "stocks": 5516,
-        "range": "20050104 ~ 20260731",
-        "latest_trading_day": "20260731",
-        "freshness_days": 22,
+        "stocks": 5525,
+        "range": "20050104 ~ 20260831",
+        "latest_trading_day": "20260831",
+        "freshness_days": 32,
         "update_triggered": true,
         "updated": true,
         "note": "月度包通常在月初更新；freshness_days > 35 时建议 --update"
@@ -20,39 +20,30 @@
     },
     "strategy": {
       "status": "ok",
-      "started_at": "2026-08-23T22:55:05+08:00",
-      "finished_at": "2026-08-23T22:55:05+08:00",
+      "started_at": "2026-10-02T21:12:38+08:00",
+      "finished_at": "2026-10-02T21:12:38+08:00",
       "elapsed_sec": 0.0,
       "result": {
-        "total": 11,
+        "total": 3,
         "by_state": {
           "research": [
             "base"
           ],
           "candidate": [
             "momentum_rotation",
-            "ma_trend_bluechip",
-            "sharpe_momentum",
-            "turtle_bluechip",
-            "week52_momentum"
+            "turtle_bluechip"
           ],
           "live": [],
-          "retired": [
-            "demo_dual_ma",
-            "momentum_stops",
-            "reversal-during-earnings-announcements",
-            "rotation_300_500",
-            "rsi2_reversal"
-          ]
+          "retired": []
         },
         "hint": "修改策略状态：编辑 status.json 的 strategy_registry 段落"
       }
     },
     "backtest": {
       "status": "ok",
-      "started_at": "2026-08-23T22:46:59+08:00",
-      "finished_at": "2026-08-23T22:49:23+08:00",
-      "elapsed_sec": 143.9,
+      "started_at": "2026-10-02T21:12:38+08:00",
+      "finished_at": "2026-10-02T21:13:38+08:00",
+      "elapsed_sec": 60.6,
       "result": {
         "gate_version": "v2",
         "gate_thresholds": {
@@ -98,6 +89,8 @@
             "best_month": 0.2925,
             "monthly_win_rate": 0.3462,
             "months": 78,
+            "skew": 1.6946,
+            "kurt": 11.4391,
             "oos": {
               "annual": 0.1148152302979384,
               "max_dd": 0.1908975779398291,
@@ -111,11 +104,13 @@
               "worst_month": -0.0594,
               "best_month": 0.1499,
               "monthly_win_rate": 0.4333,
-              "months": 30
+              "months": 30,
+              "skew": 1.4698,
+              "kurt": 5.4444
             },
             "strategy_hash": "a1200f7633e62c00",
             "params_hash": "6b3318adfae57347",
-            "gate_hash": "9857538db4853416",
+            "gate_hash": "19b51ac32beb890f",
             "stage_windows": [
               {
                 "window": "2020-01-01~2021-12-31",
@@ -146,6 +141,8 @@
               "扰动3({\"momentum_days\": 25, \"hold_num\": 2}): max_dd=42.0% 未满足 <= 36.0%",
               "扰动3({\"momentum_days\": 25, \"hold_num\": 2}): sharpe=0.28 未满足 >= 0.30"
             ],
+            "dsr": 0.9995848829505257,
+            "n_trials": 5,
             "family": {
               "family": "momentum_rotation",
               "family_representative": "momentum_rotation",
@@ -182,358 +179,6 @@
               }
             ]
           },
-          "momentum_stops": {
-            "report": "reports/momentum_stops",
-            "annual": 0.09939008362315871,
-            "max_dd": 0.2889216558293607,
-            "sharpe": 0.4395687360237755,
-            "excess_annual": 0.07986738915705671,
-            "ir": 0.5345296571769352,
-            "excess_max_dd": 0.3713074468584179,
-            "turnover_annual": 17.13046478915589,
-            "longest_dd_days": 1700.0,
-            "total_ret": 0.8209648479999996,
-            "worst_month": -0.1673,
-            "best_month": 0.2925,
-            "monthly_win_rate": 0.3462,
-            "months": 78,
-            "oos": {
-              "annual": 0.1148152302979384,
-              "max_dd": 0.1908975779398291,
-              "sharpe": 0.569648738422583,
-              "excess_annual": -0.008632866704094022,
-              "ir": 0.3902979968055403,
-              "excess_max_dd": 0.3436018041252995,
-              "turnover_annual": 15.25448408995427,
-              "longest_dd_days": 272.0,
-              "total_ret": 0.3088303430000003,
-              "worst_month": -0.0594,
-              "best_month": 0.1499,
-              "monthly_win_rate": 0.4333,
-              "months": 30
-            },
-            "strategy_hash": "7dd49d585b00577d",
-            "params_hash": "24a7f3befcdeb063",
-            "gate_hash": "9857538db4853416",
-            "stage_windows": [
-              {
-                "window": "2020-01-01~2021-12-31",
-                "annual": 0.3117269958309719,
-                "max_dd": 0.2889216558293607,
-                "sharpe": 1.037116246446912,
-                "excess_annual": 0.1903320958047474
-              },
-              {
-                "window": "2022-01-01~2023-12-31",
-                "annual": -0.06295341525145681,
-                "max_dd": 0.149631576,
-                "sharpe": -1.30251554663197,
-                "excess_annual": 0.1329087501952635
-              },
-              {
-                "window": "2024-01-01~2026-08-01",
-                "annual": 0.1148152302979384,
-                "max_dd": 0.1908975779398291,
-                "sharpe": 0.569648738422583,
-                "excess_annual": -0.008632866704094022
-              }
-            ],
-            "gate": "reject",
-            "reasons": [
-              "全样本: longest_dd_days=1700 未满足 <= 1500",
-              "验证集: excess_annual=-0.9% 未满足 >= 0.0%",
-              "策略族 momentum_rotation 已有代表 momentum_rotation，同族不重复通过"
-            ],
-            "family": {
-              "family": "momentum_rotation",
-              "family_representative": "momentum_rotation",
-              "family_dup": true
-            },
-            "perturbations": []
-          },
-          "ma_trend_bluechip": {
-            "report": "reports/ma_trend_bluechip",
-            "annual": 0.0445336189826735,
-            "max_dd": 0.2524329328844439,
-            "sharpe": 0.1782986178756175,
-            "excess_annual": 0.02598505191195155,
-            "ir": 0.3260452068737268,
-            "excess_max_dd": 0.4375470547826172,
-            "turnover_annual": 18.12554688790336,
-            "longest_dd_days": 1985.0,
-            "total_ret": 0.3173216569999999,
-            "worst_month": -0.0846,
-            "best_month": 0.1805,
-            "monthly_win_rate": 0.2949,
-            "months": 78,
-            "oos": {
-              "annual": -0.007363732931057965,
-              "max_dd": 0.1540873585612584,
-              "sharpe": -0.1858925466870426,
-              "excess_annual": -0.117282448476515,
-              "ir": -0.3344807804848711,
-              "excess_max_dd": 0.4421131660030717,
-              "turnover_annual": 15.6701151668944,
-              "longest_dd_days": 641.0,
-              "total_ret": -0.0181350170000002,
-              "worst_month": -0.0431,
-              "best_month": 0.058,
-              "monthly_win_rate": 0.3333,
-              "months": 30
-            },
-            "strategy_hash": "326c22b838470877",
-            "params_hash": "44136fa355b3678a",
-            "gate_hash": "9857538db4853416",
-            "stage_windows": [
-              {
-                "window": "2020-01-01~2021-12-31",
-                "annual": 0.2244445186166175,
-                "max_dd": 0.158390880513056,
-                "sharpe": 1.058130651725603,
-                "excess_annual": 0.1111272503149476
-              },
-              {
-                "window": "2022-01-01~2023-12-31",
-                "annual": -0.0718489676463473,
-                "max_dd": 0.1362794330348292,
-                "sharpe": -2.399491099757675,
-                "excess_annual": 0.1221538429046118
-              },
-              {
-                "window": "2024-01-01~2026-08-01",
-                "annual": -0.007363732931057965,
-                "max_dd": 0.1540873585612584,
-                "sharpe": -0.1858925466870426,
-                "excess_annual": -0.117282448476515
-              }
-            ],
-            "gate": "reject",
-            "reasons": [
-              "全样本: annual=4.5% 未满足 >= 5.0%",
-              "全样本: sharpe=0.18 未满足 >= 0.30",
-              "全样本: excess_max_dd=43.8% 未满足 <= 40.0%",
-              "全样本: longest_dd_days=1985 未满足 <= 1500",
-              "验证集: annual=-0.7% 未满足 >= 0.0%",
-              "验证集: sharpe=-0.19 未满足 >= 0.00",
-              "验证集: excess_annual=-11.7% 未满足 >= 0.0%"
-            ],
-            "family": {
-              "family": "ma_trend_bluechip",
-              "family_representative": "ma_trend_bluechip",
-              "family_dup": false
-            },
-            "perturbations": []
-          },
-          "rotation_300_500": {
-            "report": "reports/rotation_300_500",
-            "annual": 0.05676278098656473,
-            "max_dd": 0.2128022410700424,
-            "sharpe": 0.2462525191852234,
-            "excess_annual": 0.03799705151194765,
-            "ir": 0.4022489914549413,
-            "excess_max_dd": 0.2164831404828618,
-            "turnover_annual": 72.26650270996134,
-            "longest_dd_days": 1113.0,
-            "total_ret": 0.4179707095999983,
-            "worst_month": -0.1003,
-            "best_month": 0.2297,
-            "monthly_win_rate": 0.4103,
-            "months": 78,
-            "oos": {
-              "annual": 0.1065386481530779,
-              "max_dd": 0.1738668978653474,
-              "sharpe": 0.5309510686098636,
-              "excess_annual": -0.01599294870821766,
-              "ir": 0.1990383053050446,
-              "excess_max_dd": 0.2171703428618475,
-              "turnover_annual": 79.4295317365481,
-              "longest_dd_days": 290.0,
-              "total_ret": 0.2849009328000005,
-              "worst_month": -0.0832,
-              "best_month": 0.2298,
-              "monthly_win_rate": 0.4333,
-              "months": 30
-            },
-            "strategy_hash": "c6a5257787777f6c",
-            "params_hash": "44136fa355b3678a",
-            "gate_hash": "9857538db4853416",
-            "stage_windows": [
-              {
-                "window": "2020-01-01~2021-12-31",
-                "annual": 0.08855432643313743,
-                "max_dd": 0.1758126496226181,
-                "sharpe": 0.4339375072771718,
-                "excess_annual": -0.01218686746655151
-              },
-              {
-                "window": "2022-01-01~2023-12-31",
-                "annual": -0.03005401719208711,
-                "max_dd": 0.1228451908862445,
-                "sharpe": -0.4787464838332436,
-                "excess_annual": 0.1726848046030798
-              },
-              {
-                "window": "2024-01-01~2026-08-01",
-                "annual": 0.1065386481530779,
-                "max_dd": 0.1738668978653474,
-                "sharpe": 0.5309510686098636,
-                "excess_annual": -0.01599294870821766
-              }
-            ],
-            "gate": "reject",
-            "reasons": [
-              "全样本: sharpe=0.25 未满足 >= 0.30",
-              "全样本: turnover_annual=72.3 未满足 <= 25.0",
-              "验证集: excess_annual=-1.6% 未满足 >= 0.0%"
-            ],
-            "family": {
-              "family": "rotation_300_500",
-              "family_representative": "rotation_300_500",
-              "family_dup": false
-            },
-            "perturbations": []
-          },
-          "rsi2_reversal": {
-            "report": "reports/rsi2_reversal",
-            "annual": 0.06167544170457329,
-            "max_dd": 0.2066356249262219,
-            "sharpe": 0.3158464303619671,
-            "excess_annual": 0.04282247442815912,
-            "ir": 0.5240198148664351,
-            "excess_max_dd": 0.2931404043506574,
-            "turnover_annual": 161.5529202652234,
-            "longest_dd_days": 1656.0,
-            "total_ret": 0.4601862989999987,
-            "worst_month": -0.0629,
-            "best_month": 0.0898,
-            "monthly_win_rate": 0.3718,
-            "months": 78,
-            "oos": {
-              "annual": 0.05781322394824739,
-              "max_dd": 0.1125044075842234,
-              "sharpe": 0.3632392002254461,
-              "excess_annual": -0.05932280535151124,
-              "ir": 0.276331111964879,
-              "excess_max_dd": 0.3050777793085689,
-              "turnover_annual": 162.6653760175815,
-              "longest_dd_days": 527.0,
-              "total_ret": 0.1493209240000009,
-              "worst_month": -0.0401,
-              "best_month": 0.088,
-              "monthly_win_rate": 0.5,
-              "months": 30
-            },
-            "strategy_hash": "4d5fe05ad8ac5393",
-            "params_hash": "44136fa355b3678a",
-            "gate_hash": "9857538db4853416",
-            "stage_windows": [
-              {
-                "window": "2020-01-01~2021-12-31",
-                "annual": 0.1743398695653537,
-                "max_dd": 0.121205557747845,
-                "sharpe": 0.8877494457887456,
-                "excess_annual": 0.06565957898981045
-              },
-              {
-                "window": "2022-01-01~2023-12-31",
-                "annual": -0.04855495444232316,
-                "max_dd": 0.1174274761237136,
-                "sharpe": -1.246690466246141,
-                "excess_annual": 0.1503167878590348
-              },
-              {
-                "window": "2024-01-01~2026-08-01",
-                "annual": 0.05781322394824739,
-                "max_dd": 0.1125044075842234,
-                "sharpe": 0.3632392002254461,
-                "excess_annual": -0.05932280535151124
-              }
-            ],
-            "gate": "reject",
-            "reasons": [
-              "全样本: turnover_annual=161.6 未满足 <= 25.0",
-              "全样本: longest_dd_days=1656 未满足 <= 1500",
-              "验证集: excess_annual=-5.9% 未满足 >= 0.0%"
-            ],
-            "family": {
-              "family": "rsi2_reversal",
-              "family_representative": "rsi2_reversal",
-              "family_dup": false
-            },
-            "perturbations": []
-          },
-          "sharpe_momentum": {
-            "report": "reports/sharpe_momentum",
-            "annual": 0.02040280414103846,
-            "max_dd": 0.3713100117328197,
-            "sharpe": 0.03706661306090256,
-            "excess_annual": 0.002282746052150175,
-            "ir": 0.08261008605569292,
-            "excess_max_dd": 0.3671263911540782,
-            "turnover_annual": 12.51503750879117,
-            "longest_dd_days": 2013.0,
-            "total_ret": 0.1362767630000001,
-            "worst_month": -0.1619,
-            "best_month": 0.2008,
-            "monthly_win_rate": 0.3333,
-            "months": 78,
-            "oos": {
-              "annual": 0.06179958425470145,
-              "max_dd": 0.1907443161808135,
-              "sharpe": 0.3040777010534954,
-              "excess_annual": -0.05577787119391242,
-              "ir": 0.07485275290956893,
-              "excess_max_dd": 0.367937264373701,
-              "turnover_annual": 9.50846013064137,
-              "longest_dd_days": 494.0,
-              "total_ret": 0.1600756650000001,
-              "worst_month": -0.072,
-              "best_month": 0.1987,
-              "monthly_win_rate": 0.3667,
-              "months": 30
-            },
-            "strategy_hash": "3f74e64184501112",
-            "params_hash": "44136fa355b3678a",
-            "gate_hash": "9857538db4853416",
-            "stage_windows": [
-              {
-                "window": "2020-01-01~2021-12-31",
-                "annual": 0.08505696579830646,
-                "max_dd": 0.2892558824515972,
-                "sharpe": 0.3665708332548259,
-                "excess_annual": -0.01536056186140244
-              },
-              {
-                "window": "2022-01-01~2023-12-31",
-                "annual": -0.08850877876277863,
-                "max_dd": 0.2030492720000002,
-                "sharpe": -1.478698765856012,
-                "excess_annual": 0.1020117858312488
-              },
-              {
-                "window": "2024-01-01~2026-08-01",
-                "annual": 0.06179958425470145,
-                "max_dd": 0.1907443161808135,
-                "sharpe": 0.3040777010534954,
-                "excess_annual": -0.05577787119391242
-              }
-            ],
-            "gate": "reject",
-            "reasons": [
-              "全样本: annual=2.0% 未满足 >= 5.0%",
-              "全样本: max_dd=37.1% 未满足 <= 30.0%",
-              "全样本: sharpe=0.04 未满足 >= 0.30",
-              "全样本: ir=0.08 未满足 >= 0.30",
-              "全样本: longest_dd_days=2013 未满足 <= 1500",
-              "验证集: excess_annual=-5.6% 未满足 >= 0.0%"
-            ],
-            "family": {
-              "family": "sharpe_momentum",
-              "family_representative": "sharpe_momentum",
-              "family_dup": false
-            },
-            "perturbations": []
-          },
           "turtle_bluechip": {
             "report": "reports/turtle_bluechip",
             "annual": 0.1291941919930393,
@@ -549,6 +194,8 @@
             "best_month": 0.2448,
             "monthly_win_rate": 0.4487,
             "months": 78,
+            "skew": 2.146,
+            "kurt": 10.9579,
             "oos": {
               "annual": 0.1163148793811561,
               "max_dd": 0.1309487423058897,
@@ -562,11 +209,13 @@
               "worst_month": -0.0391,
               "best_month": 0.1181,
               "monthly_win_rate": 0.5333,
-              "months": 30
+              "months": 30,
+              "skew": 1.6971,
+              "kurt": 6.9458
             },
             "strategy_hash": "9ce426d8452de7dc",
             "params_hash": "c70270ef55366532",
-            "gate_hash": "9857538db4853416",
+            "gate_hash": "19b51ac32beb890f",
             "stage_windows": [
               {
                 "window": "2020-01-01~2021-12-31",
@@ -594,6 +243,8 @@
             "reasons": [
               "验证集: excess_annual=-0.7% 未满足 >= 0.0%"
             ],
+            "dsr": 0.9999999710206751,
+            "n_trials": 9,
             "family": {
               "family": "turtle",
               "family_representative": "turtle_bluechip",
@@ -657,140 +308,46 @@
                 "excess_annual": 0.09035666048773838
               }
             ]
-          },
-          "week52_momentum": {
-            "report": "reports/week52_momentum",
-            "annual": 0.02178944652242643,
-            "max_dd": 0.3485944039999997,
-            "sharpe": 0.03064142759302626,
-            "excess_annual": 0.003644764784527466,
-            "ir": 0.1106653372425822,
-            "excess_max_dd": 0.3811825113683046,
-            "turnover_annual": 13.08153566447442,
-            "longest_dd_days": 1782.0,
-            "total_ret": 0.1460792529999999,
-            "worst_month": -0.1485,
-            "best_month": 0.1777,
-            "monthly_win_rate": 0.3462,
-            "months": 78,
-            "oos": {
-              "annual": 0.1117818248960447,
-              "max_dd": 0.1585726878581258,
-              "sharpe": 0.6140059455391401,
-              "excess_annual": -0.01133037059143915,
-              "ir": 0.4893257093848946,
-              "excess_max_dd": 0.3653865966350752,
-              "turnover_annual": 10.07689737369449,
-              "longest_dd_days": 438.0,
-              "total_ret": 0.3000295410000002,
-              "worst_month": -0.0723,
-              "best_month": 0.1637,
-              "monthly_win_rate": 0.4667,
-              "months": 30
-            },
-            "strategy_hash": "dae56052a02987fa",
-            "params_hash": "44136fa355b3678a",
-            "gate_hash": "9857538db4853416",
-            "stage_windows": [
-              {
-                "window": "2020-01-01~2021-12-31",
-                "annual": 0.008488871511687757,
-                "max_dd": 0.3485944039999997,
-                "sharpe": 0.02813355191201217,
-                "excess_annual": -0.08484259618229262
-              },
-              {
-                "window": "2022-01-01~2023-12-31",
-                "annual": -0.05693333472638207,
-                "max_dd": 0.1570769975015835,
-                "sharpe": -0.993936233704195,
-                "excess_annual": 0.1401871523737066
-              },
-              {
-                "window": "2024-01-01~2026-08-01",
-                "annual": 0.1117818248960447,
-                "max_dd": 0.1585726878581258,
-                "sharpe": 0.6140059455391401,
-                "excess_annual": -0.01133037059143915
-              }
-            ],
-            "gate": "reject",
-            "reasons": [
-              "全样本: annual=2.2% 未满足 >= 5.0%",
-              "全样本: max_dd=34.9% 未满足 <= 30.0%",
-              "全样本: sharpe=0.03 未满足 >= 0.30",
-              "全样本: ir=0.11 未满足 >= 0.30",
-              "全样本: longest_dd_days=1782 未满足 <= 1500",
-              "验证集: excess_annual=-1.1% 未满足 >= 0.0%"
-            ],
-            "family": {
-              "family": "week52_momentum",
-              "family_representative": "week52_momentum",
-              "family_dup": false
-            },
-            "perturbations": []
           }
         }
       }
     },
     "paper": {
       "status": "ok",
-      "started_at": "2026-08-23T11:40:42+08:00",
-      "finished_at": "2026-08-23T11:40:43+08:00",
-      "elapsed_sec": 1.5,
+      "started_at": "2026-10-02T21:13:38+08:00",
+      "finished_at": "2026-10-02T21:13:38+08:00",
+      "elapsed_sec": 0.0,
       "result": {
-        "day": "2026-08-21",
-        "note": "调仓信号日",
-        "live_strategies": [
-          "turtle_bluechip"
-        ],
-        "strategy_family": "turtle",
-        "market_ok": false,
-        "new_orders": 0,
-        "pending_orders": [],
-        "fills": [],
-        "cash": 100000.0,
-        "equity": 100000.0,
-        "cum_return": 0.0,
-        "max_drawdown": 0.0,
-        "positions": {},
-        "momentum_top5": [],
-        "assumption": "信号日T收盘出信号，T+1开盘成交；涨跌停/停牌不可成交；整手；T+1卖出限制；佣金万2.5(最低5元)+印花税万5(卖出)+过户费万0.2"
+        "note": "没有 live 策略，paper 跳过",
+        "live": []
       }
     },
     "review": {
       "status": "ok",
-      "started_at": "2026-08-23T00:47:34+08:00",
-      "finished_at": "2026-08-23T00:47:34+08:00",
+      "started_at": "2026-10-02T21:13:38+08:00",
+      "finished_at": "2026-10-02T21:13:38+08:00",
       "elapsed_sec": 0.0,
       "result": {
-        "report": "reviews/2026-08-23.md",
-        "loop_no": 15,
+        "report": "reviews/2026-10-02.md",
+        "loop_no": 110,
         "agent_md_updated": true
       }
     },
     "audit": {
       "status": "ok",
-      "started_at": "2026-08-23T22:55:05+08:00",
-      "finished_at": "2026-08-23T22:55:05+08:00",
+      "started_at": "2026-10-02T21:13:38+08:00",
+      "finished_at": "2026-10-02T21:13:38+08:00",
       "elapsed_sec": 0.0,
       "result": {
         "checked": 0,
         "healthy": [],
         "auto_demoted": [],
-        "audited_at": "2026-08-23T22:55:05+08:00"
+        "audited_at": "2026-10-02T21:13:38+08:00"
       }
     }
   },
-  "updated_at": "2026-08-23T22:55:05+08:00",
+  "updated_at": "2026-10-02T21:13:38+08:00",
   "strategy_registry": {
-    "demo_dual_ma": {
-      "state": "retired",
-      "file": "strategies/demo_dual_ma.py",
-      "summary": "双均线示例策略：验证 RQAlpha 全链路 标的：平安银行 000001.XSHE 规则：5 日均线上穿 20 日均线买入，下穿卖出（A股 T+1 由引擎自动处理）",
-      "params": {},
-      "registered_at": "2026-08-22T18:01:13+08:00"
-    },
     "momentum_rotation": {
       "state": "candidate",
       "file": "strategies/momentum_rotation.py",
@@ -798,111 +355,6 @@
       "params": {},
       "registered_at": "2026-08-22T18:01:13+08:00",
       "origin": "自研",
-      "category": "动量轮动",
-      "pool": "蓝筹10只"
-    },
-    "momentum_stops": {
-      "state": "retired",
-      "file": "strategies/momentum_stops.py",
-      "summary": "多股票动量轮动 + 止损锚对照实验 用法（--extra-vars 注入 context.stop）： --extra-vars '{\"stop\":\"none\"}' 基线：无个股止损 --extra-vars '{\"stop\":\"atr\"}",
-      "params": {
-        "stop": "none"
-      },
-      "registered_at": "2026-08-22T18:01:13+08:00",
-      "origin": "自研（momentum_rotation 止损对照组）",
-      "category": "动量轮动",
-      "pool": "蓝筹10只",
-      "note": "2026-08-23 门禁 v2 未通过（OOS 超额 -4.2%、最长回撤 1735 天、扰动回撤 38-47%），由 live 降为 candidate；与 momentum_rotation 同族。过门禁前不得回 live。详见 reports/gate_v2/summary.md",
-      "promotion": {
-        "strategy_file": "strategies/momentum_stops.py",
-        "strategy_hash": "7dd49d585b00577d",
-        "params_hash": "24a7f3befcdeb063",
-        "gate_version": "v2",
-        "gate_hash": "9857538db4853416",
-        "data_version": "20260731",
-        "report": "reports/momentum_stops",
-        "to": "retired",
-        "reason": "与 momentum_rotation 同族，stop=none 时指标逐位相同（T+1 重跑证实），并入动量实验变体；文件保留供止损研究",
-        "approver": "老板（审查采纳）",
-        "promoted_at": "2026-08-23T22:55:05+08:00"
-      }
-    },
-    "reversal-during-earnings-announcements": {
-      "state": "retired",
-      "file": "strategies/reversal-during-earnings-announcements.py",
-      "summary": "",
-      "params": {},
-      "registered_at": "2026-08-22T18:01:13+08:00",
-      "note": "文件已删除"
-    },
-    "ma_trend_bluechip": {
-      "state": "candidate",
-      "file": "strategies/ma_trend_bluechip.py",
-      "summary": "双均线趋势跟随（蓝筹多标的版） 来源：经典 MA 金叉死叉体系（GitHub A股双均线实现的蓝筹增强版，替代已退役的 demo_dual_ma 单标的版） 股票池：10 只高流动性蓝筹（与 momentum_rotation 同池） 规则",
-      "params": {},
-      "registered_at": "2026-08-23T00:11:47+08:00",
-      "source": "github",
-      "origin": "经典双均线体系（蓝筹多标的增强）",
-      "category": "趋势跟随",
-      "pool": "蓝筹10只"
-    },
-    "rotation_300_500": {
-      "state": "retired",
-      "file": "strategies/rotation_300_500.py",
-      "summary": "二八轮动（有空仓版）· 蓝筹风格轮动 来源：GitHub wzhe06/SmartInvest（王喆《程序化交易实战》配套），A股经典风格轮动 标的：510300.XSHG 沪深300ETF（蓝筹腿）/ 510500.XSHG 中证500E",
-      "params": {},
-      "registered_at": "2026-08-23T00:11:47+08:00",
-      "source": "github",
-      "origin": "github.com/wzhe06/SmartInvest（王喆《程序化交易实战》）",
-      "category": "风格轮动",
-      "pool": "沪深300ETF/中证500ETF",
-      "note": "动量窗口扫描 n∈{10,15,20,25,30} 无过门禁组合，n=20 仍为最优",
-      "promotion": {
-        "strategy_file": "strategies/rotation_300_500.py",
-        "strategy_hash": "c6a5257787777f6c",
-        "params_hash": "44136fa355b3678a",
-        "gate_version": "v2",
-        "gate_hash": "9857538db4853416",
-        "data_version": "20260731",
-        "report": "reports/rotation_300_500",
-        "to": "retired",
-        "reason": "T+1 口径重跑：换手 72 倍、夏普 0.25、验证集超额 -1.6%，无实用价值（策略库审查 P3）",
-        "approver": "老板（审查采纳）",
-        "promoted_at": "2026-08-23T22:55:04+08:00"
-      }
-    },
-    "rsi2_reversal": {
-      "state": "retired",
-      "file": "strategies/rsi2_reversal.py",
-      "summary": "RSI-2 超跌反弹（蓝筹均值回归） 来源：Larry Connors RSI-2 经典均值回归体系（GitHub 多个 A股实现复用，如 TushareDB oversold_rebound） 逻辑：大盘股长期向上、短期超跌后回归均值，是",
-      "params": {},
-      "registered_at": "2026-08-23T00:11:47+08:00",
-      "source": "github",
-      "origin": "Connors RSI-2 体系 · github.com/tycallen/TushareDB",
-      "category": "均值回归",
-      "pool": "蓝筹10只",
-      "promotion": {
-        "strategy_file": "strategies/rsi2_reversal.py",
-        "strategy_hash": "4d5fe05ad8ac5393",
-        "params_hash": "44136fa355b3678a",
-        "gate_version": "v2",
-        "gate_hash": "9857538db4853416",
-        "data_version": "20260731",
-        "report": "reports/rsi2_reversal",
-        "to": "retired",
-        "reason": "T+1 口径重跑：换手 162 倍、验证集超额 -5.9%，明显失败（策略库审查 P3）",
-        "approver": "老板（审查采纳）",
-        "promoted_at": "2026-08-23T22:55:04+08:00"
-      }
-    },
-    "sharpe_momentum": {
-      "state": "candidate",
-      "file": "strategies/sharpe_momentum.py",
-      "summary": "夏普动量轮动（风险调整动量，蓝筹版） 来源：风险调整动量（Risk-adjusted Momentum）体系，GitHub 多因子社区常用复合因子 （动量收益 / 波动率），较纯动量在 A股蓝筹上回撤更小、胜率更高 股票池：10 只高流动性",
-      "params": {},
-      "registered_at": "2026-08-23T00:11:47+08:00",
-      "source": "github",
-      "origin": "风险调整动量因子（动量/波动率）",
       "category": "动量轮动",
       "pool": "蓝筹10只"
     },
@@ -925,18 +377,6 @@
       "promoted_at": "2026-08-23（已作废）",
       "promote_reason": "参数扫描过门禁（年化11.5%/回撤19.8%/夏普0.61），老板批准晋级（Loop #14）——后被策略库审查否决"
     },
-    "week52_momentum": {
-      "state": "candidate",
-      "file": "strategies/week52_momentum.py",
-      "summary": "52周高点动量轮动（蓝筹版） 来源：George & Hwang (2004) \"The 52-Week High and Momentum Investing\"， GitHub 量化社区广泛复现；锚定效应使「距52周高点越近」的股票后续动",
-      "params": {},
-      "registered_at": "2026-08-23T00:11:47+08:00",
-      "source": "github",
-      "origin": "George & Hwang (2004) 52周高点动量",
-      "category": "动量轮动",
-      "pool": "蓝筹10只",
-      "note": "2026-08-23 降级（live→candidate）：audit 自检发现证据失效：缺少 promotion 证据记录（疑似手工编辑晋级）"
-    },
     "base": {
       "state": "research",
       "file": "strategies/base.py",
@@ -945,5 +385,5 @@
       "registered_at": "2026-08-23T00:47:33+08:00"
     }
   },
-  "last_loop_at": "2026-08-23T22:55:05+08:00"
+  "last_loop_at": "2026-10-02T21:13:38+08:00"
 }

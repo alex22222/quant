@@ -1,0 +1,134 @@
+{
+  "schema": "continuous_counterfactual_acceptance.v1",
+  "final_tests": {
+    "command": ".venv/bin/python -m pytest tests execution/tests -q",
+    "result": "923 passed in 22.21s",
+    "console_javascript_syntax": "passed",
+    "git_diff_check": "passed",
+    "temporary_ui_server_stopped": true
+  },
+  "observed_at": "2026-09-22T07:47:16.868628+08:00",
+  "source_hashes_before": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+    "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+    "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+    "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+    "trading_team/team.db": "acad0151f77237ab2d7cf0d75e2ef2bc3b968fed95eb06ffe2437d0723c37ef0",
+    "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818",
+    "docs/audits/2026-09-22-notification-recovery.json": "b6a2ef9a07602894720c19c2de6e56cf3dddeae78a265dbb378eaeec82496a12",
+    "docs/audits/2026-09-22-persistent-backup.json": "917b8103e93ae1bd288c681f955f7b2a4cbcb59e262802509f904f87165fce1d"
+  },
+  "source_hashes_after": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+    "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+    "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+    "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+    "trading_team/team.db": "acad0151f77237ab2d7cf0d75e2ef2bc3b968fed95eb06ffe2437d0723c37ef0",
+    "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818",
+    "docs/audits/2026-09-22-notification-recovery.json": "b6a2ef9a07602894720c19c2de6e56cf3dddeae78a265dbb378eaeec82496a12",
+    "docs/audits/2026-09-22-persistent-backup.json": "917b8103e93ae1bd288c681f955f7b2a4cbcb59e262802509f904f87165fce1d"
+  },
+  "production_account_used": false,
+  "network_used": false,
+  "production": {
+    "status": "incomplete",
+    "expected_sessions": 13,
+    "covered_sessions": 0,
+    "first_gap": {
+      "date": "2026-09-03",
+      "status": "gap",
+      "portfolios": null,
+      "reason": "structured risk evidence missing; legacy proposals not recertified"
+    },
+    "summary": null,
+    "report_hash": "6fd85983446949ddb799792893ee69248accc4c944c3a0b8070abc0cfbc6e62a"
+  },
+  "controlled_series": {
+    "range": [
+      "2026-09-17",
+      "2026-09-18",
+      "2026-09-21"
+    ],
+    "summary": {
+      "gate": {
+        "equity": 100000.0,
+        "return": 0.0,
+        "max_drawdown": 0
+      },
+      "no_gate": {
+        "equity": 100754.2,
+        "return": 0.007542,
+        "max_drawdown": -5.2e-05
+      },
+      "csi300": {
+        "equity": 100000.0,
+        "return": 0.0,
+        "max_drawdown": -0.1
+      }
+    },
+    "report_hash": "05fab2d1ab6fdc2599829a7de6f1764845c414368c6a08c462d956f0f06b4572",
+    "paper_engine_day_by_day_matched": true,
+    "cash_and_inventory_carried": true,
+    "benchmark_compounding_verified": true,
+    "repeated_hash_identical": true,
+    "gap_not_filled_or_reset": true
+  },
+  "artifacts": {
+    "directory": "/private/tmp/quant-continuous-counterfactual-O8Pj2I",
+    "complete": "/private/tmp/quant-continuous-counterfactual-O8Pj2I/complete-report.json",
+    "gap": "/private/tmp/quant-continuous-counterfactual-O8Pj2I/gap-report.json",
+    "production": "/private/tmp/quant-continuous-counterfactual-O8Pj2I/production-report.json"
+  },
+  "final_verification": {
+    "observed_at": "2026-09-22T07:58:12.292900+08:00",
+    "console_api_equals_read_only_engine": true,
+    "production_report_hash_unchanged": true,
+    "protected_files_unchanged": 14,
+    "only_loopback_http_used_for_final_api_check": true,
+    "external_network_used": false,
+    "models_notifications_approvals_settlements_remote_dispatch": false,
+    "browser": {
+      "method": "in-app Playwright, responsive iframe harness, screenshots and canvas pixel checks",
+      "views": [
+        {
+          "width": 390,
+          "scroll_width": 390,
+          "fixture": "complete",
+          "nonblank_canvas_pixels": 9858
+        },
+        {
+          "width": 768,
+          "scroll_width": 768,
+          "fixture": "gap",
+          "nonblank_canvas_pixels": 11346
+        },
+        {
+          "width": 1100,
+          "scroll_width": 1100,
+          "fixture": "production_report",
+          "canvas_hidden": true
+        },
+        {
+          "width": 1280,
+          "scroll_width": 1280,
+          "fixture": "live_console",
+          "canvas_hidden": true
+        }
+      ],
+      "explicit_two_session_query_verified": true,
+      "initial_chart_point_label": "期初"
+    }
+  }
+}

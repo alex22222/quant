@@ -1,0 +1,112 @@
+{
+  "schema": "real_publication_recovery.v1",
+  "loop": 70,
+  "verified_at": "2026-09-23T02:38:52+08:00",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "team": "/private/tmp/quant-real-chain-v2.drq6k45z/trading_team",
+  "issue": {
+    "id": "01a0ca2b-9026-7053-bd97-dcc836fa1fe6",
+    "identifier": "SATU-5",
+    "status": "done",
+    "revision": 9
+  },
+  "remote_task": {
+    "id": "01a0ca58-fab5-761e-9413-85c8f7b0aead",
+    "status": "completed",
+    "started_at": "2026-09-22T18:20:25Z",
+    "completed_at": "2026-09-22T18:32:49Z",
+    "agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "publication_command_count": 1,
+    "forbidden_command_count": 0,
+    "executor_usage": {
+      "provider": "codex",
+      "model": "gpt-5.5",
+      "input_tokens": 51416,
+      "output_tokens": 7735,
+      "cache_read_tokens": 810240
+    }
+  },
+  "local_run": {
+    "run_id": "4902259232004be691f66c53205f76ed",
+    "status": "succeeded",
+    "attempt": 2,
+    "finished_at": "2026-09-23T02:30:57+08:00",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "failed",
+        "task_id": "01a0ca2b-9036-7289-bb7e-6e49c78d9c5d",
+        "error": "ValueError: 角色 04 结构化结论块缺失或非法"
+      },
+      {
+        "attempt": 2,
+        "status": "succeeded",
+        "task_id": "01a0ca58-fab5-761e-9413-85c8f7b0aead",
+        "verification": "remote_verified"
+      }
+    ],
+    "attempt_2_steps": {
+      "role_01": "skipped",
+      "role_02": "skipped",
+      "role_03": "skipped",
+      "role_04": "succeeded",
+      "role_05": "succeeded",
+      "role_06": "succeeded",
+      "role_07": "succeeded",
+      "publish_generation": "succeeded",
+      "publication_handoff": "succeeded"
+    }
+  },
+  "publication": {
+    "scope": "publication_only",
+    "business_complete": false,
+    "model": "kimi-k3",
+    "transport": "openai_chat_completions.v1",
+    "endpoint": "https://api.moonshot.cn/v1",
+    "plan_hash": "d5916f0aae111128eb4ea3605cca1d7c17b9f50b691b0c2e356e54fad7f53a93",
+    "generation_hash": "7ec3fe09b73145b316b23e4eca6a66a0bb2440537b04da8af6deab4dc3b767a1",
+    "market_ok": false,
+    "proposal_count": 11,
+    "reviews": "not_checked",
+    "finalize": "not_requested",
+    "notification": "disabled"
+  },
+  "successful_moonshot_requests": [
+    {"role": "fundamental", "request_id": "chatcmpl-6ab2bbf017dab2ea71ebbe3a", "total_tokens": 17969, "attempt": 1},
+    {"role": "sentiment", "request_id": "chatcmpl-6ab2bc587c3514c58261b04e", "total_tokens": 7353, "attempt": 1},
+    {"role": "news", "request_id": "chatcmpl-6ab2bc79bc93e8252ba616a3", "total_tokens": 7457, "attempt": 1},
+    {"role": "technical", "request_id": "chatcmpl-6ab2c79e17ee96ce6246f75e", "total_tokens": 51272, "attempt": 2},
+    {"role": "researcher", "request_id": "chatcmpl-6ab2c81c7118a193213ab8a5", "total_tokens": 17595, "attempt": 2},
+    {"role": "trader", "request_id": "chatcmpl-6ab2c8a36e24c6f44502022e", "total_tokens": 22508, "attempt": 2},
+    {"role": "risk_manager", "request_id": "chatcmpl-6ab2c8f61b579292e804ddc8", "total_tokens": 18357, "attempt": 2}
+  ],
+  "known_successful_moonshot_tokens": 142511,
+  "recovery_successful_moonshot_tokens": 109732,
+  "failed_attempt_role_04_usage": "unknown",
+  "postconditions": {
+    "frozen_input_count": 38,
+    "freeze_sha256": "adcab57b2be8deeaf93fda7cd999eb6c455b48177ce5d7eebe768c0a0238f258",
+    "protected_file_count": 17,
+    "protected_changed": [],
+    "decisions_present": false,
+    "paper_present": false,
+    "notification_sent": false,
+    "rejected_reply_present": false
+  },
+  "data_quality_bundle": {
+    "bundle_hash": "ff102dee0edffb5e17792ee1a5f41bb6bd62e3458821e3725a783d716796ef9d",
+    "file_sha256": "58f3f97b83a5c60491a06ad5413abd6321f402f59233557acc6b934b8a5466f1",
+    "files_hash": "9190ae9441dc8577f83024e59dd6c4fdb905c660dfb1a02e9b73724eb0be1d5e",
+    "file_count": 40,
+    "status": "pending",
+    "downstream_status": "blocked",
+    "assignee_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd",
+    "assignee_model": "gpt-5.5",
+    "task_description_sha256": "cd428f488ad56bfb94f4c82d3e409e9a0448e05959b0608f5a7fef053bf86832"
+  },
+  "milestone_m1_complete": false,
+  "natural_day_accepted": false,
+  "next": "After deduplication, dispatch one real Data Quality review for the sealed new bundle. Do not dispatch another remote task in Loop70."
+}

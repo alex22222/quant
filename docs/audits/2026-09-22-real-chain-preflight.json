@@ -1,0 +1,67 @@
+{
+  "schema": "real_chain_preflight.v1",
+  "loop": 51,
+  "observed_date": "2026-09-22",
+  "timezone": "Asia/Shanghai",
+  "classification": "progress",
+  "goal_complete": false,
+  "milestones": {"M1": "not_accepted", "M2": "not_started", "M3": "not_started"},
+  "plan": "docs/REAL_CHAIN_ROLLOUT.md",
+  "observations": {
+    "daemon": {
+      "id": "01a0c492-4f9e-797d-b6ba-653b1897dad2",
+      "status": "running",
+      "pid": 2403,
+      "active_task_count": 0,
+      "sandbox_probe": "stopped",
+      "sandbox_discrepancy": "Read-only probe outside sandbox confirmed running; no restart performed."
+    },
+    "bound_runtime": {
+      "id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+      "version": "codex-cli 0.145.0",
+      "local_binary_version": "codex-cli 0.145.0"
+    },
+    "candidate_runtime": {
+      "id": "c738eeeb-c936-4255-9fe2-f4c6bc97b955",
+      "version": "codex-cli 0.155.0-alpha.9.2",
+      "status": "online",
+      "compatibility_verified": false
+    },
+    "research_check": {"date": "2026-09-22", "exit_code": 1, "status": "blocked", "code": "existing_generation_unverified"},
+    "reviews_check": {"date": "2026-09-22", "exit_code": 2, "status": "source_unverified", "execution_authorized": false},
+    "cli_isolation": "kimi_daily CLI defaults to production team and has no --team argument; cwd alone is not isolation."
+  },
+  "continuation": {
+    "original_codex_goal_status": "paused",
+    "original_goal_resumed": false,
+    "heartbeat_id": "a",
+    "heartbeat_name": "A股真实闭环联调与五日验收",
+    "status": "ACTIVE",
+    "thread_id": "01a02a2a-c504-7c52-aa1d-1e4a43218aa2",
+    "schedule_local": "Weekdays 08:20 and 16:20 Asia/Shanghai; verify trading calendar on each wakeup",
+    "configuration_read_back": true,
+    "natural_wakeup_verified": false,
+    "purpose": "Advance or verify one authorized integration blocker; not a second daily research producer."
+  },
+  "pending_user_input": ["Scope of real Multica dispatch and post-acceptance cutover", "Original Kimi billing source"],
+  "side_effects": {
+    "plan_and_audit_documents": true,
+    "thread_heartbeat_created": true,
+    "real_remote_dispatch": false,
+    "runtime_or_business_schedule_change": false,
+    "real_research_model_call": false,
+    "production_approval_or_settlement": false,
+    "notification_sent": false,
+    "live_orders": false
+  },
+  "verification": {
+    "independent_plan_review": {
+      "agent_id": "01a0c7b1-3e1d-7c72-a5d4-25e960c9accf",
+      "result": "No actionable authorization, duplicate-dispatch, history-overwrite or forward-timing issue found in reviewed plan.",
+      "scope": "Plan, acceptance document and kimi_daily main; not operational acceptance."
+    },
+    "tests_rerun": false,
+    "reason": "No application code changes; inspect real runtime and current business evidence instead of repeating unit tests.",
+    "git_diff_check": "passed"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-04T02:14:20+08:00",
+  "result": "verified_multica_research_lead_is_restricted_to_publication_only",
+  "reproduction": [
+    "A verified Research Lead task could invoke the full daily run without publish_only, which reached postprocess before six independent reviews.",
+    "The same verified task could invoke force=True and regenerate an already published report."
+  ],
+  "change": "After Multica identity verification and before calendar collection or model calls, require publish_only=True, push=False and force=False for this entry. A violation creates a failed daily_research Run and publication_scope_gate step, then stops. Manual research behavior is unchanged.",
+  "verification": {
+    "red_before_fix": "Three scope regressions failed with DID NOT RAISE ValueError.",
+    "focused_after_fix": "65 daily-research recovery tests passed; 2 independent-review source tests passed after replacing their old force-based fixture with a verified first publication.",
+    "full_suite_after_fix": "1307 passed",
+    "protected_state": "active_cohort.json, both forward Paper databases and team.db retained their prior SHA-256 hashes; no production output, approval, Paper, notification or Live action was run."
+  },
+  "limits": "This closes an application-entry bypass; it is not evidence that the next scheduled production task will run on time, that six remote reviewers will accept, or that M2/M3 is complete.",
+  "milestones": {"M1": "complete", "M2": "not_accepted", "M3": "not_started"}
+}

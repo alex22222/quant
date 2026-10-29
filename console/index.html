@@ -39,7 +39,7 @@
   .nav-foot { padding: 12px 20px; border-top: 1px solid var(--border); font-size: 11px; color: var(--dim); }
 
   /* ── 主区 ── */
-  main { flex: 1; padding: 26px 32px; max-width: 980px; }
+  main { flex: 1; min-width: 0; padding: 26px 32px; max-width: 1180px; }
   .view { display: none; }
   .view.active { display: block; animation: fade .18s ease; }
   @keyframes fade { from { opacity: 0; transform: translateY(4px); } }
@@ -130,10 +130,21 @@
   .appr-btn:hover { color: var(--text); border-color: var(--dim); }
   .appr-btn.ok { color: var(--ok); border-color: var(--ok); }
   .appr-btn.no { color: var(--fail); border-color: var(--fail); }
+  .appr-btn:disabled { opacity: .45; cursor: not-allowed; }
   .pill.approved { color: var(--ok); border-color: var(--ok); }
   .pill.rejected { color: var(--fail); border-color: var(--fail); }
   .pill.reduced { color: var(--run); border-color: var(--run); }
   .appr-note { color: var(--dim); font-size: 11px; margin-top: 2px; }
+  #team-approve { container-type: inline-size; }
+  .approval-head { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-bottom: 6px; }
+  .approval-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(130px,190px); gap: 12px; }
+  .approval-row > span { min-width: 0; overflow-wrap: anywhere; }
+  .approval-result { text-align: right; }
+  @container (max-width: 440px) {
+    .approval-row { grid-template-columns: minmax(0,1fr); gap: 6px; }
+    .approval-result { text-align: left; }
+    .approval-result .appr-btn:first-child { margin-left: 0; }
+  }
 
   /* 策略库 */
   .lib-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -156,15 +167,97 @@
              border-radius: 99px; padding: 0 8px; }
   .lib-strip { display: flex; gap: 18px; flex-wrap: wrap; font-size: 12.5px; }
   .lib-strip b { font-variant-numeric: tabular-nums; }
+
+  /* 运行中心 */
+  .run-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
+  .run-stat { border-top: 2px solid var(--border); padding: 10px 2px 2px; }
+  .run-stat b { display: block; font-size: 19px; font-variant-numeric: tabular-nums; }
+  .run-row { cursor: pointer; }
+  .run-row:hover { background: rgba(88, 166, 255, .06); }
+  .run-row.active { background: rgba(88, 166, 255, .1); }
+  .hash { font: 11px ui-monospace, "SF Mono", Menlo, monospace; color: var(--dim); }
+  #run-detail, #multica-state, #multica-evidence { min-width: 0; overflow-wrap: anywhere; }
+  .attempt-line { padding: 9px 0; border-bottom: 1px solid var(--border); }
+  .review-row { display: grid; grid-template-columns: 155px 115px minmax(0,1fr); gap: 8px 14px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .review-row > * { min-width: 0; overflow-wrap: anywhere; }
+  .review-row .overview-link { text-align: left; }
+  #review-date { width: 150px; max-width: 100%; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 5px; font: inherit; }
+  #review-evidence { overflow-wrap: anywhere; }
+  @media(max-width: 600px) { .review-row { grid-template-columns: minmax(0,1fr) 100px; } .review-row > :last-child { grid-column: 1 / -1; } }
+  .attempt-line summary { cursor: pointer; font-size: 12px; }
+  .run-binding { display: grid; grid-template-columns: 90px minmax(0,1fr); gap: 3px 10px; margin-top: 7px; font-size: 12px; }
+  .run-binding dt { color: var(--dim); }
+  .step-line { display: grid; grid-template-columns: 22px 120px 100px 1fr 150px; gap: 8px;
+               align-items: start; padding: 9px 0; border-bottom: 1px solid var(--border); }
+  .step-line:last-child { border-bottom: 0; }
+  .overview-band { padding: 18px 0; border-top: 1px solid var(--border); }
+  .overview-head { display: flex; gap: 12px; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+  .overview-head h2 { font-size: 14px; font-weight: 600; }
+  .overview-link { border: 0; background: none; padding: 0; color: var(--accent); font: inherit; font-size: 12px; cursor: pointer; text-decoration: none; }
+  .overview-alert { padding: 9px 12px; border-left: 3px solid var(--run); background: var(--panel); margin-bottom: 8px; font-size: 12px; overflow-wrap: anywhere; }
+  .audit-table { min-width: 620px; }
+  .audit-table td:nth-child(1), .audit-table td:nth-child(2) { white-space: nowrap; }
+  .audit-value { display: block; min-width: 90px; max-width: 320px; overflow-wrap: anywhere; }
+  .overview-accounts { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; }
+  .overview-account { min-width: 0; }
+  .overview-account h3 { font-size: 13px; margin-bottom: 8px; }
+  .overview-account .metric { font-size: 26px; min-height: 42px; }
+  .overview-facts { display: grid; grid-template-columns: 100px minmax(0,1fr); gap: 7px 14px; font-size: 12px; overflow-wrap: anywhere; }
+  .overview-facts dt { color: var(--dim); }
+  .overview-facts dd { margin: 0; }
+  .overview-evidence { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 24px; margin-top: 16px; }
+  .overview-evidence > div { border-top: 1px solid var(--border); padding-top: 8px; font-size: 12px; min-width: 0; overflow-wrap: anywhere; }
+  .overview-evidence b { display: block; margin-top: 4px; font-weight: 500; }
+  .overview-run { display: grid; grid-template-columns: 110px minmax(0,1fr) 85px; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .overview-run > div { min-width: 0; overflow-wrap: anywhere; }
+  .series-controls { display: flex; align-items: end; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+  .series-controls label { display: grid; gap: 4px; color: var(--dim); font-size: 12px; min-width: 0; }
+  .series-controls input { width: 155px; max-width: 100%; min-width: 0; background: var(--panel); color: var(--text); border: 1px solid var(--border); padding: 7px; border-radius: 4px; font: inherit; }
+  .series-controls button { background: var(--panel); border: 1px solid var(--border); color: var(--text); border-radius: 4px; padding: 7px 16px; cursor: pointer; }
+  .series-summary { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; margin: 16px 0; }
+  .series-summary > div { min-width: 0; overflow-wrap: anywhere; }
+  .series-summary b { display: block; font-size: 20px; font-variant-numeric: tabular-nums; }
+  #series-chart { width: 100%; height: 240px; display: block; }
+  .series-table { min-width: 680px; table-layout: fixed; }
+  .series-table td { vertical-align: top; overflow-wrap: anywhere; }
+  #paper-portfolios { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  #paper-portfolios .lib-metrics .m { min-width: 0; background: none; border: 0; padding: 8px 0; }
+  @media (max-width: 1100px) {
+    #paper-portfolios { grid-template-columns: minmax(0,1fr); }
+    .step-line { grid-template-columns: 18px minmax(0,1fr); }
+    .step-line > :nth-child(n+3) { grid-column: 2; }
+  }
+  #v-overview { letter-spacing: 0; }
+  @media (max-width: 760px) {
+    body { display: block; }
+    nav { width: 100%; height: auto; position: static; padding: 10px 0 0; }
+    .brand { display: flex; align-items: center; gap: 10px; padding: 0 14px 10px; }
+    .brand img { margin: 0 !important; }
+    .menu { display: flex; gap: 6px; overflow-x: auto; padding: 8px 10px 10px; }
+    .menu-label, .nav-foot { display: none; }
+    .mi { flex: 0 0 auto; margin: 0; padding: 7px 10px; }
+    main { width: 100%; max-width: none; padding: 18px 14px; }
+    .grid2, .grid3, .lib-grid, .org-row { grid-template-columns: 1fr; }
+    .grid5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .news-wrap { flex-direction: column; }
+    .news-list { width: 100%; max-height: 220px; }
+    #paper-portfolios .kv { display: grid; grid-template-columns: 1fr; gap: 2px; }
+    .run-summary { grid-template-columns: 1fr 1fr; }
+    .overview-accounts, .overview-evidence { grid-template-columns: minmax(0,1fr); gap: 16px; }
+    .overview-account + .overview-account { padding-top: 16px; border-top: 1px solid var(--border); }
+    .overview-run { grid-template-columns: 86px minmax(0,1fr) 60px; gap: 8px; }
+    .series-summary { grid-template-columns: minmax(0,1fr); gap: 10px; }
+  }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="brand"><img src="/console/logo.svg" alt="HQCapital" height="28" style="margin-bottom:4px;display:block"><span>虚拟投资公司 · 多智能体交易团队</span></div>
+  <div class="brand"><img src="/console/logo.svg" alt="HQCapital" height="28" style="margin-bottom:4px;display:block"><span>A 股研究与 Paper</span></div>
   <div class="menu">
     <div class="menu-label">总部</div>
-    <div class="mi active" data-v="overview">📊 公司概览</div>
+    <div class="mi active" data-v="overview">运行总览</div>
+    <div class="mi" data-v="runs">运行中心 <span class="st" id="nav-runs"></span></div>
     <div class="mi" data-v="org">🏢 组织架构</div>
     <div class="mi" data-v="news">📰 量化新闻 <span class="st" id="nav-news"></span></div>
     <div class="menu-label">业务线（按流程）</div>
@@ -174,48 +267,88 @@
     <div class="mi" data-v="strategy">📈 策略库 <span class="st" id="nav-strategy"></span></div>
     <div class="mi" data-v="backtest">🛡️ 风控部 <span class="st" id="nav-backtest"></span></div>
     <div class="mi" data-v="paper">💼 交易台 <span class="st" id="nav-paper"></span></div>
+    <div class="mi" data-v="counterfactual">连续反事实</div>
     <div class="mi" data-v="review">📋 投委会 <span class="st" id="nav-review"></span></div>
   </div>
   <div class="nav-foot" id="updated">—</div>
 </nav>
 
 <main>
-  <!-- 公司概览 -->
+  <!-- 运行总览 -->
   <section class="view active" id="v-overview">
-    <div class="vhead"><h1>公司概览</h1><p>五阶段流水线实时状态 · 数据 → 投研 → 风控 → 交易 → 复盘</p></div>
-    <div class="grid5" id="stages"></div>
-    <div class="grid2" style="margin-top:12px">
-      <div class="card"><div class="sub">Paper 净值（初始 ¥100,000）</div><div class="metric" id="equity">—</div><div class="sub" id="equity-sub"></div></div>
-      <div class="card"><div class="sub">最新 Loop</div><div id="last-loop" style="font-size:13px;margin-top:6px">—</div></div>
+    <div class="vhead"><h1>A 股研究与 Paper</h1><p id="overview-asof">运行总览 · 正在读取事实源</p></div>
+    <div id="overview-alerts" role="status"></div>
+    <div class="overview-band">
+      <div class="overview-head"><h2>双 Paper 账户</h2><button class="overview-link" onclick="gotoView('paper')">查看委托与成交</button></div>
+      <div id="overview-accounts" class="overview-accounts"><span class="sub">读取中</span></div>
+      <div id="overview-account-audit" role="status" style="margin-top:12px"><span class="sub">历史账务核对中</span></div>
     </div>
-    <div class="card" style="margin-top:12px">
-      <div class="sub" style="margin-bottom:10px;font-weight:600;color:var(--text)">🏢 HQCapital 角色职责（引用 TradingAgents 多智能体框架）</div>
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;font-size:12.5px">
-        <div>
-          <div style="color:var(--accent);font-weight:600;margin-bottom:4px">📊 分析师团队（Analyst Team）</div>
-          <div style="color:var(--dim);margin-bottom:6px">四位分析师并行采集市场信息，覆盖多维度数据：</div>
-          <div style="margin-bottom:4px"><b>基本面分析师（陈致远）</b>：分析财报、收益报告、内部交易等数据，评估公司内在价值，判断股票是否被低估或高估，为长期投资提供参考。</div>
-          <div style="margin-bottom:4px"><b>情绪分析师（林晓晴）</b>：关注社交媒体、舆情打分及公司内部情绪等公众信息，预测短期投资者行为可能对股价带来的影响。</div>
-          <div style="margin-bottom:4px"><b>新闻分析师（周文轩）</b>：追踪宏观经济指标、重大新闻及公司事件，识别对市场有潜在影响的突发消息或政策变化，为把握行情拐点提供依据。</div>
-          <div style="margin-bottom:4px"><b>技术分析师（赵铭远）</b>：计算 MACD、RSI 等技术指标，分析价量关系和价格形态，判断买卖时机和趋势走势。</div>
-        </div>
-        <div>
-          <div style="color:var(--accent);font-weight:600;margin-bottom:4px">🔬 研究团队（Research Team）</div>
-          <div style="color:var(--dim);margin-bottom:6px">对分析师团队的数据进行批判性评估，以多空两个视角展开多轮辩论：</div>
-          <div style="margin-bottom:4px"><b>多头研究员（吴思远 · Bullish）</b>：强调积极面与增长空间，为看多策略提供支撑性论据。</div>
-          <div style="margin-bottom:4px"><b>空头研究员（孙若兰 · Bearish）</b>：着重揭示潜在风险与消极信号，为避免盲目入场提供「对立」观点。</div>
-          <div style="color:var(--accent);font-weight:600;margin-bottom:4px;margin-top:10px">💼 交易员代理（Trader Agent）</div>
-          <div style="color:var(--dim);margin-bottom:6px">汇总分析师及研究员的意见后，结合量化数据与情感信息等多维输入：</div>
-          <div style="margin-bottom:4px"><b>交易员（郑远航）</b>：评估分析师及研究员的建议，决定交易时机与规模，执行买卖指令，动态调整持仓。</div>
-          <div style="color:var(--accent);font-weight:600;margin-bottom:4px;margin-top:10px">🛡️ 风险管理团队（Risk Management Team）</div>
-          <div style="color:var(--dim);margin-bottom:6px">实时跟踪交易组合的风险敞口，确保交易活动符合风险参数：</div>
-          <div style="margin-bottom:4px"><b>风险经理（黄守正）</b>：评估市场波动、流动性、对手方风险等；执行风险缓释策略（止损、头寸分散）；向交易员提供风险反馈；确保整体组合与公司风险偏好匹配。</div>
-        </div>
-      </div>
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:12px;color:var(--dim)">
-        <b>工作纪律</b>：每日工作必须严格围绕上述角色职责展开——分析师只输出本维度的研究报告，研究员只组织多空辩论，交易员只将研究结论转化为可执行计划，风险经理只审核风险敞口与下达调整建议。任何角色的产出不得越权替代其他角色的职能。
-      </div>
+    <div class="overview-band">
+      <div class="overview-head"><h2>原始行情归档</h2><span class="sub">每 5 分钟检查 · 上海时间</span></div>
+      <div id="overview-archive"><span class="sub">读取中</span></div>
+      <div id="archive-alerts" role="status"></div>
     </div>
+    <div class="overview-band">
+      <div class="overview-head"><h2>最新研究与证据</h2><button class="overview-link" onclick="gotoView('team')">打开研究日报</button></div>
+      <div id="overview-research"><span class="sub">读取中</span></div>
+    </div>
+    <div class="overview-band">
+      <div class="overview-head"><h2>通知与送达证据</h2></div>
+      <div id="overview-notifications"><span class="sub">读取中</span></div>
+    </div>
+    <div class="overview-band">
+      <div class="overview-head"><h2>证据备份</h2><span class="sub">本机副本 · 异地未验证</span></div>
+      <div id="overview-backup"><span class="sub">读取中</span></div>
+      <div id="backup-alerts" role="status"></div>
+    </div>
+    <div class="overview-band">
+      <div class="overview-head"><h2>最近运行记录</h2><button class="overview-link" onclick="gotoView('runs')">运行与 Multica</button></div>
+      <div id="overview-runs"><span class="sub">读取中</span></div>
+    </div>
+  </section>
+
+  <section class="view" id="v-counterfactual">
+    <div class="vhead"><h1>连续账户反事实</h1><p>日线模型实验 · 非官方 Paper 成交 · 前向业绩未认证</p></div>
+    <form id="series-form" class="series-controls">
+      <label>起始日<input type="date" id="series-start" value="2026-09-03" required></label>
+      <label>截至日<input type="date" id="series-end"></label>
+      <button type="submit">查询</button>
+      <a class="overview-link" id="series-source" href="/api/continuous-counterfactual" target="_blank" rel="noopener">完整证据</a>
+    </form>
+    <div id="series-status" role="status">读取中</div>
+    <div id="series-summary" class="series-summary"></div>
+    <div class="overview-band">
+      <div class="overview-head"><h2>累计收益路径</h2><span class="sub">闸门 / 无闸门 / 沪深300价格指数</span></div>
+      <canvas id="series-chart" role="img" aria-label="连续反事实累计收益曲线"></canvas>
+      <div id="series-chart-state" class="sub"></div>
+    </div>
+    <div class="overview-band">
+      <div class="overview-head"><h2>逐日权益与订单</h2></div>
+      <div style="overflow:auto" tabindex="0" aria-label="反事实逐日明细"><table class="series-table"><thead><tr><th>交易日</th><th>闸门权益</th><th>无闸门权益</th><th>指数等值</th><th>证据与订单</th></tr></thead><tbody id="series-rows"></tbody></table></div>
+    </div>
+    <details class="overview-band"><summary>输入版本与模型边界</summary><div id="series-evidence" style="overflow-wrap:anywhere;margin-top:12px"></div></details>
+  </section>
+
+  <!-- 运行中心 -->
+  <section class="view" id="v-runs">
+    <div class="vhead"><h1>运行中心</h1></div>
+    <div class="overview-band">
+      <div class="overview-head"><h2>本地工作流</h2></div>
+      <div class="run-summary" id="run-summary">—</div>
+    </div>
+    <div class="overview-band">
+      <div class="overview-head"><h2>Multica 调度证据</h2><a class="overview-link" href="/api/multica-observation" target="_blank" rel="noopener">完整证据</a></div>
+      <div class="sub" id="multica-state">Multica 状态读取中</div>
+      <div id="multica-evidence" role="status" style="margin-top:14px">远端证据读取中</div>
+    </div>
+    <div class="overview-band">
+      <div class="overview-head"><h2>执行前独立审阅</h2><label class="sub" for="review-date">计划日期 <input id="review-date" type="date"></label></div>
+      <div id="review-evidence" role="status">审阅证据读取中</div>
+    </div>
+    <div class="overview-band" style="overflow:auto" tabindex="0" aria-label="本地工作流记录">
+      <table id="run-table"><thead><tr><th>日期</th><th>工作流</th><th>状态</th><th>当前步骤</th><th>尝试</th><th>数据截至</th><th>开始时间</th></tr></thead><tbody></tbody></table>
+    </div>
+    <div class="overview-band" id="run-detail"><span class="sub">尚未选择本地运行</span></div>
   </section>
 
   <!-- 组织架构 -->
@@ -249,7 +382,7 @@
       <div style="font-size:12.5px;color:var(--dim)">
         ① 角色边界不可逾越：分析师只出报告，研究员只组织辩论，交易员只转计划，风险经理只审敞口  <br>
         ② 一条命令一个 Loop：pipeline.run ③ 门禁不可绕过：只有 live 策略进交易台  <br>
-        ④ 事实源：status.json（机器写）+ AGENT.md（共同写）⑤ 凭证永不入库 ⑥ 每次 Loop 必须留日志
+        ④ 运行事实：ledger.db；账户事实：双 Paper 数据库；研究版本：generation.json + plan_hash。status.json 仅为历史策略流水线快照。⑤ 凭证永不入库 ⑥ 每次 Loop 必须留日志
       </div>
     </div>
   </section>
@@ -274,13 +407,14 @@
   <section class="view" id="v-pool">
     <div class="vhead"><h1>🎯 标的池</h1><p>trading_team/watchlist.json · 对齐 momentum_rotation 策略全池 · 行情取最近一次采集快照</p></div>
     <div class="card"><table id="pool"><thead><tr>
-      <th>代码</th><th>名称</th><th>板块</th><th>定位</th><th>收盘</th><th>涨跌幅</th><th>换手</th><th>PE(TTM)</th><th>PB</th><th>最新提案</th>
+      <th>代码</th><th>名称</th><th>板块</th><th>定位</th><th>收盘</th><th>涨跌幅</th><th>换手</th><th>PE(TTM)</th><th>PB</th><th>审阅通过提案</th>
     </tr></thead><tbody></tbody></table></div>
     <div class="card sub" id="pool-meta">—</div>
   </section>
 
   <!-- 数据部 -->
   <section class="view" id="v-data">
+    <div class="sub legacy-asof"></div>
     <div class="vhead"><h1>🗄️ 数据部</h1><p>职责：为分析师团队提供 A 股日线数据基础设施——采集、更新、新鲜度保障 · 产出：status.data · 数据来源：东财主源 + 腾讯兜底</p></div>
     <div class="grid2" id="data-summary">—</div>
     <div class="card" id="data-freshness" style="margin-top:12px">—</div>
@@ -290,14 +424,20 @@
 
   <!-- 投研部 · 策略库 -->
   <section class="view" id="v-strategy">
+    <div class="sub legacy-asof"></div>
     <div class="vhead"><h1>📈 投研部 · A股蓝筹策略库</h1><p>策略注册表与状态机 research → candidate → live → retired · 每张卡片附门禁 v2 成绩单（全样本 + 样本外 + 参数扰动）与净值曲线 · 净值图源文件 reports/&lt;策略名&gt;/equity.png</p></div>
     <div class="card"><div class="lib-strip" id="lib-strip">—</div></div>
     <div class="lib-grid" id="lib"></div>
     <div class="card sub">状态变更方式：编辑 status.json 的 strategy_registry 段落，变更须记录在 AGENT.md 的 Loop 条目「人工决策」中</div>
+    <div class="vhead"><h2>OKX 跨市场研究库</h2><p>知识目录，与上方 A 股可执行接口分开；不进入回测、Paper 或实盘。</p></div>
+    <div class="card"><div id="okx-research-summary" class="sub" role="status">正在读取研究目录…</div>
+      <p><a class="overview-link" href="/docs/OKX_STRATEGY_LIBRARY_2026-09-26.md" target="_blank" rel="noopener">完整原理与研究说明</a></p></div>
+    <div class="lib-grid" id="okx-research-library"></div>
   </section>
 
   <!-- 风控部 -->
   <section class="view" id="v-backtest">
+    <div class="sub legacy-asof"></div>
     <div class="vhead"><h1>🛡️ 风控部（风险管理团队）</h1><p>职责：风险经理角色——统一区间回测 + 门禁判定；评估市场波动、流动性、对手方风险；执行风险缓释策略（止损、头寸分散）；确保整体组合与公司风险偏好匹配 · 门禁：年化 &gt; 5% 且回撤 &lt; 30% 且夏普 &gt; 0.3</p></div>
     <div class="card"><table id="bt"><thead><tr><th>策略</th><th>总收益</th><th>年化</th><th>回撤</th><th>夏普</th><th>门禁</th></tr></thead><tbody></tbody></table></div>
     <div class="card sub" id="bt-meta">—</div>
@@ -305,19 +445,20 @@
 
   <!-- 交易台 -->
   <section class="view" id="v-paper">
-    <div class="vhead"><h1>💼 交易台（交易员代理）</h1><p>职责：交易员角色——按 live 策略执行调仓、SQLite 台账记账；基于研究员辩论结论决定交易时机与规模，动态调整持仓 · 假设：收盘价成交、免手续费、无T+1（v1简化）</p></div>
-    <div class="grid3">
-      <div class="card"><div class="sub">净值</div><div class="metric" id="p-equity">—</div></div>
-      <div class="card"><div class="sub">现金</div><div class="metric" id="p-cash">—</div></div>
-      <div class="card"><div class="sub">累计收益</div><div class="metric" id="p-ret">—</div></div>
+    <div class="vhead"><h1>💼 交易台（Paper）</h1><p>双账户模拟：闸门组合与无闸门组合 · 统一限价触发、T+1、佣金、印花税、滑点、整手、停牌和涨跌停约束 · Live 始终需要绑定当前 plan_hash 的人工审批</p></div>
+    <div class="overview-band">
+      <div class="overview-head"><h2>历史账务核对</h2><a class="overview-link" href="/api/paper-audit" target="_blank" rel="noopener">完整核对记录</a></div>
+      <div id="paper-audit" role="status"><span class="sub">读取中</span></div>
     </div>
-    <div class="card"><div class="sub" style="margin-bottom:8px">当前持仓</div><div id="p-pos">—</div></div>
-    <div class="card"><div class="sub" style="margin-bottom:8px">最近操作</div><div id="p-trades">—</div></div>
-    <div class="card"><div class="sub" style="margin-bottom:8px">动量监测 Top5</div><div id="p-mom">—</div></div>
+    <div class="grid2" id="paper-portfolios">—</div>
+    <div class="card" style="overflow:auto"><div class="sub" style="margin-bottom:8px">逐日估值记录</div><table id="paper-valuations"><thead><tr><th>账户</th><th>估值日</th><th>行情截至</th><th>权益</th><th>市值</th><th>未实现</th><th>缺失行情</th><th>来源</th></tr></thead><tbody></tbody></table></div>
+    <div class="card" style="overflow:auto"><div class="sub" style="margin-bottom:8px">最近委托结果</div><table id="paper-orders"><thead><tr><th>账户</th><th>执行日</th><th>代码</th><th>方向</th><th>数量</th><th>计划价</th><th>状态</th><th>原因</th></tr></thead><tbody></tbody></table></div>
+    <div class="card" style="overflow:auto"><div class="sub" style="margin-bottom:8px">最近成交</div><table id="paper-trades"><thead><tr><th>账户</th><th>日期</th><th>代码</th><th>方向</th><th>数量</th><th>成交价</th><th>费用</th><th>计划版本</th></tr></thead><tbody></tbody></table></div>
   </section>
 
   <!-- 投委会 -->
   <section class="view" id="v-review">
+    <div class="sub legacy-asof"></div>
     <div class="vhead"><h1>📋 投委会（复盘）</h1><p>职责：复盘报告 + AGENT.md 迭代日志 · 每次 Loop 留痕 · 老板（PM）拥有最终审批权：LLM 只出提案，不动 paper 台账</p></div>
     <div class="card"><div class="sub" style="margin-bottom:8px">最新复盘报告</div><pre id="review">—</pre></div>
     <div class="card"><div class="sub" style="margin-bottom:10px">Loop 迭代时间线（AGENT.md）</div><div id="loops">—</div></div>
@@ -332,7 +473,7 @@
     </div>
   </section>
 
-  <footer>控制台只读 · 每 30s 自动刷新 · 操作请用 CLI：.venv/bin/python -m pipeline.run</footer>
+  <footer>研究与 Paper 模拟 · 不代表实盘收益</footer>
 </main>
 
 <script>
@@ -346,63 +487,22 @@ document.querySelectorAll(".mi").forEach(el => el.onclick = () => {
   document.querySelectorAll(".view").forEach(x => x.classList.remove("active"));
   el.classList.add("active");
   $("v-" + el.dataset.v).classList.add("active");
+  if (el.dataset.v === "runs") loadMulticaEvidence();
 });
 const gotoView = v => document.querySelector(`.mi[data-v="${v}"]`).click();
-
-const stageDesc = {
-  data: r => r ? `${r.stocks} 只 · 最新 ${r.latest_trading_day} · 新鲜度 ${r.freshness_days}d` : "",
-  strategy: r => r ? `共 ${r.total} 个 · live: ${(r.by_state?.live||[]).join(",")||"无"}` : "",
-  backtest: r => r ? Object.entries(r.results||{}).map(([k,v])=>`${k}: ${v.gate||"?"}`).join(" · ") : "",
-  paper: r => r ? `${r.day||""} ${r.note||""} · 净值 ${r.equity??"—"}` : "",
-  review: r => r ? `Loop #${r.loop_no} · ${r.report}` : "",
-};
 
 async function refresh() {
   let st;
   try { st = await (await fetch("/status.json?_=" + Date.now())).json(); }
-  catch(e) { $("updated").textContent = "status.json 读取失败"; return; }
-  $("updated").textContent = "更新于 " + (st.updated_at || "—");
+  catch(e) {
+    document.querySelectorAll(".legacy-asof").forEach(el => el.textContent = "历史流水线快照不可用");
+    return;
+  }
   const stages = st.stages || {};
   const reg = st.strategy_registry || {};
-
-  /* 菜单状态灯 */
-  for (const n of ["data","strategy","backtest","paper","review"]) {
-    $("nav-"+n).innerHTML = `<span class="dot ${stages[n]?.status||"idle"}"></span>`;
-  }
-
-  /* 概览 */
-  $("stages").innerHTML = ["data","strategy","backtest","paper","review"].map(n => {
-    const s = stages[n] || {};
-    const status = s.status || "idle";
-    return `<div class="card stage-mini" style="margin:0">
-      <div class="name"><span class="dot ${status}"></span>${n}</div>
-      <div class="val">${status==="failed" ? `<span class="err">${(s.error||"").slice(0,90)}</span>` : stageDesc[n](s.result)}</div>
-      <div class="time">${(s.finished_at||"").slice(5,19)}${s.elapsed_sec!=null ? " · "+s.elapsed_sec+"s" : ""}</div>
-    </div>`;
-  }).join("");
-
-  const p = stages.paper?.result || {};
-  if (p.equity != null) {
-    const ret = p.cum_return ?? 0;
-    $("equity").textContent = fmtMoney(p.equity);
-    $("equity").className = "metric " + (ret >= 0 ? "up" : "down");
-    $("equity-sub").textContent = `累计 ${fmtPct(ret)} · 回撤 ${fmtPct(p.max_drawdown||0)} · 现金 ${fmtMoney(p.cash||0)}`;
-    $("p-equity").textContent = fmtMoney(p.equity);
-    $("p-equity").className = "metric " + (ret >= 0 ? "up" : "down");
-    $("p-cash").textContent = fmtMoney(p.cash||0);
-    $("p-ret").textContent = fmtPct(ret);
-    $("p-ret").className = "metric " + (ret >= 0 ? "up" : "down");
-    $("p-pos").innerHTML = Object.entries(p.positions||{}).length
-      ? Object.entries(p.positions).map(([c,v])=>`<div class="kv"><span>${c}</span><b>${fmtMoney(v)}</b></div>`).join("")
-      : `<span class="sub">空仓持币（${p.market_ok_120ma===false?"风控：大盘位于120日均线下方":"—"}）</span>`;
-    $("p-trades").innerHTML = (p.trades||[]).length
-      ? p.trades.map(t=>`<div class="kv"><span>${t.side==="buy"?"买入":"卖出"} ${t.code} ×${t.qty} @${t.price}</span><b>${t.reason}</b></div>`).join("")
-      : `<span class="sub">${p.day||""} ${p.note||"无操作"}</span>`;
-    $("p-mom").innerHTML = (p.momentum_top5||[]).map(m=>
-      `<div class="kv"><span>${m.code}</span><b class="${m.mom>=0?"":"down"}" style="color:${m.mom>=0?"var(--up)":"var(--down)"}">${fmtPct(m.mom)}</b></div>`).join("");
-  }
-  $("last-loop").innerHTML = stages.review?.result
-    ? `Loop #${stages.review.result.loop_no} · <a style="color:var(--accent)" href="/${stages.review.result.report}" target="_blank">${stages.review.result.report}</a>` : "—";
+  document.querySelectorAll(".legacy-asof").forEach(el => {
+    el.textContent = "历史流水线快照 · " + (st.updated_at || "日期未知");
+  });
 
   /* 组织架构（点击跳业务线） */
   const liveNow = Object.keys(reg).filter(k => reg[k].state === "live");
@@ -431,7 +531,7 @@ async function refresh() {
     ["🗄️","数据部门","A股日线数据采集、更新与新鲜度保障",`${stages.data?.result?.stocks??"—"} 只 · 最新 ${stages.data?.result?.latest_trading_day??"—"}`,"data"],
     ["📈","技术分析师（投研部）","策略注册表与状态机 research→live",`${Object.keys(reg).length} 个策略 · live: ${liveNow.join(",")||"无"}`,"strategy"],
     ["🛡️","风控委员会","统一区间回测 + 门禁判定",Object.entries(stages.backtest?.result?.results||{}).map(([k,v])=>`${k}:${v.gate||"?"}`).join(" ")||"未执行","backtest"],
-    ["💼","交易员（交易台）","paper 账户执行调仓、SQLite 台账",p.equity!=null?`净值 ${fmtMoney(p.equity)}`:"未记账","paper"],
+    ["💼","交易员（交易台）","Paper 账户执行与 SQLite 台账","双账户 · 见交易台","paper"],
     ["📋","投委会","复盘报告、AGENT.md 迭代日志",stages.review?.result?`Loop #${stages.review.result.loop_no}`:"未执行","review"],
   ];
   $("org").innerHTML = ORG.map(([icon,role,duty,holder,v]) =>
@@ -597,6 +697,591 @@ setInterval(refresh, 30000);
 /* ── 量化新闻 ── */
 let newsDate = null;
 const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const escAny = value => esc(String(value == null ? "" : value));
+const runDot = status => ({succeeded:"ok", running:"running", failed:"failed", queued:"idle", cancelled:"idle"}[status] || "idle");
+const evidenceLabel = status => ({verified:"内容已校验", recovery_required:"发布待恢复", missing:"缺少凭据", invalid:"校验失败", mismatch:"版本不一致", bound:"版本绑定一致"}[status] || "未知");
+const freshnessLabel = status => ({current:"已到最新收盘", stale:"行情滞后", future:"日期超前", unknown:"日期待确认"}[status] || "未知");
+
+async function loadOverview() {
+  try {
+    const response = await fetch("/api/operational-snapshot?_=" + Date.now());
+    const data = await response.json();
+    if (!response.ok || !data.ok) throw new Error(data.error || "事实源不可用");
+    const research = data.research;
+    const expected = data.calendar.expected_session;
+    const warnings = [];
+    if (data.notifications?.counts?.unknown) warnings.push(`通知送达结果待核验 ${data.notifications.counts.unknown} 项，已阻止自动重发。`);
+    if (data.notifications?.counts?.invalid) warnings.push(`通知记录冲突 ${data.notifications.counts.invalid} 项。`);
+    renderNotifications(data.notifications);
+    if (data.calendar.status !== "available") warnings.push("交易日历不可用，行情新鲜度无法确认。");
+    if (data.data.status !== "available") warnings.push("最新采集未通过校验：" + (data.data.error || "缺少 manifest"));
+    else if (data.data.freshness !== "current") warnings.push(`采集行情截至 ${data.data.data_asof}，应到 ${expected || '待确认'}。`);
+    if (research.status !== "available") warnings.push("最新计划不可用：" + (research.error || "暂无计划"));
+    if (research.generation.status !== "verified") warnings.push(`日报生成证据：${evidenceLabel(research.generation.status)}。`);
+    const riskReview = research.risk_review || {status:'missing'};
+    const riskLabels = {validated_contract:'结构化审核与派生计划一致', legacy_missing:'历史风控缺证，禁止自动 Paper', invalid:'风控契约冲突，禁止自动 Paper', missing:'风控证据未知'};
+    if (riskReview.status !== 'validated_contract') warnings.push(riskLabels[riskReview.status] || '风控证据未知');
+    const approvalAudit = research.approval_audit || {status:'missing'};
+    if (['pending','invalid'].includes(approvalAudit.status)) warnings.push('人工审批同步未完成或证据冲突，执行保持关闭。');
+    if (data.ledger_status !== "available") warnings.push("运行账本不可用，不能判断任务执行情况。");
+    $("overview-asof").textContent = `快照 ${data.generated_at.replace('T', ' ')} · 最近已完成交易日 ${expected || '未知'}`;
+    $("updated").textContent = "事实快照 " + data.generated_at.slice(11,19);
+    $("overview-accounts").innerHTML = Object.entries(data.portfolios).map(([name, account]) => {
+      const available = account.status === "available";
+      const label = name === "gate" ? "闸门组合" : "无闸门组合";
+      if (!available) warnings.push(`${label}：${account.error || '账户尚未建立'}。`);
+      if (account.valuation_error) warnings.push(`${label}行情证据：${account.valuation_error}。`);
+      if (account.missing_marks.length) warnings.push(`${label}缺少收盘价：${account.missing_marks.join(', ')}。`);
+      const counts = available ? (Object.entries(account.order_counts).map(([k,v]) => `${k} ${v}`).join(' · ') || '无委托记录') : '委托记录未知';
+      return `<div class="overview-account"><h3>${label}</h3>
+        <div class="sub">Paper 估值权益</div><div class="metric">${account.valuation_equity == null ? '未知' : fmtMoney(account.valuation_equity)}</div>
+        <div class="sub">现金 ${account.cash == null ? '未知' : fmtMoney(account.cash)} · 持仓 ${account.position_count == null ? '未知' : account.position_count + ' 只'}</div>
+        <div class="sub">记账 ${escAny(account.account_asof || '未知')} · 行情 ${escAny(account.quote_asof || '未知')}</div>
+        <div class="sub" style="color:${account.freshness === 'current' ? 'var(--dim)' : 'var(--run)'}">${freshnessLabel(account.freshness)}</div>
+        <div class="sub">${escAny(counts)}</div></div>`;
+    }).join("");
+    $("overview-research").innerHTML = `<dl class="overview-facts">
+      <dt>计划日期</dt><dd>${escAny(research.date || '未知')}</dd>
+      <dt>研究数据截至</dt><dd>${escAny(research.data_asof || '未知')}</dd>
+      <dt>计划市场闸门</dt><dd>${research.market_ok === true ? '开放' : research.market_ok === false ? '关闭' : '未知'}</dd>
+      <dt>plan_hash</dt><dd class="hash">${escAny(research.plan_hash || '未知')}</dd>
+    </dl><div class="overview-evidence">
+      <div><span class="sub">最新采集 manifest · ${escAny(data.data.date || '未知')}</span><b>${data.data.manifest_ok === true ? '采集声明通过' : '未通过或缺失'} · ${freshnessLabel(data.data.freshness)}</b></div>
+      <div><span class="sub">生成凭据与内容哈希</span><b>${evidenceLabel(research.generation.status)}</b>${research.generation.error ? `<div class="err">${escAny(research.generation.error)}</div>` : ''}</div>
+      <div><span class="sub">人工审批版本</span><b>${evidenceLabel(research.decision.status)} · ${research.decision.approved_count ?? 0} 项已批准</b></div>
+      <div><span class="sub">审批事件与同步</span><b>${({complete:'同步已核验',pending:'审批已记录，待恢复同步',invalid:'审批证据冲突',legacy_untracked:'无版本化审批事件',missing:'暂无记录'})[approvalAudit.status] || '未知'} · ${approvalAudit.event_count ?? '未知'} 条事件</b></div>
+      <div><span class="sub">Paper 决策版本</span><b>${evidenceLabel(research.paper_decision.status)}</b></div>
+      <div><span class="sub">风控审核证据</span><b>${riskLabels[riskReview.status] || '未知'}</b>${riskReview.status === 'validated_contract' ? `<div class="sub">审核 ${riskReview.reviewed_count} 项 · 通过 ${riskReview.passed_count} · 降仓 ${riskReview.reduced_count} · 仅闸门否决 ${riskReview.gate_only_count} · 其他风险否决 ${riskReview.risk_rejected_count}</div>` : ''}${riskReview.error ? `<div class="err">${escAny(riskReview.error)}</div>` : ''}</div>
+    </div>`;
+    const names = {daily_research:'每日研究', data_collect:'数据采集', closing_archive:'原始收盘行情归档', daily_finalize:'决策与 Paper 收尾', multica_integration_audit:'Multica 集成审计'};
+    const states = {succeeded:'成功', failed:'失败', running:'运行中', queued:'排队', cancelled:'已取消'};
+    $("overview-runs").innerHTML = data.runs.map(run => `<div class="overview-run">
+      <div>${escAny(run.business_date)}<div class="sub">${escAny(run.started_at.slice(11,19))}</div></div>
+      <div><button class="overview-link" data-run-id="${escAny(run.run_id).replace(/"/g, '&quot;')}">${escAny(names[run.workflow] || run.workflow)}</button><div class="sub">触发 ${escAny(run.trigger_source)} · 尝试 ${run.attempt}</div>${run.error ? `<div class="err">${escAny(run.error)}</div>` : ''}</div>
+      <div><span class="dot ${runDot(run.status)}"></span> ${escAny(states[run.status] || run.status)}</div>
+    </div>`).join('') || '<div class="sub">暂无可读取的运行记录</div>';
+    $("overview-runs").querySelectorAll("[data-run-id]").forEach(button => {
+      button.addEventListener("click", () => { gotoView('runs'); showRun(button.dataset.runId); });
+    });
+    $("overview-alerts").innerHTML = warnings.map(w => `<div class="overview-alert">${escAny(w)}</div>`).join('');
+    $("nav-data").innerHTML = `<span class="dot ${data.data.status === 'available' && data.data.freshness === 'current' ? 'ok' : 'idle'}"></span>`;
+  } catch(e) {
+    $("overview-asof").textContent = "快照读取失败";
+    $("updated").textContent = "事实快照不可用";
+    $("overview-alerts").innerHTML = `<div class="overview-alert">${escAny(e.message || e)}</div>`;
+    for (const id of ['overview-accounts','overview-research','overview-runs','overview-notifications']) $(id).innerHTML = '<span class="sub">当前状态未知</span>';
+  }
+}
+function renderNotifications(data) {
+  const box = $('overview-notifications');
+  if (!data) {
+    box.innerHTML = '<span class="sub">通知状态未知</span>';
+    return;
+  }
+  if (data.status === 'missing') {
+    box.innerHTML = '<span class="sub">暂无通知回执 · 不代表历史未发送</span>';
+    return;
+  }
+  const labels = {sent:'发送已确认',legacy_sent:'旧回执，未重新认证',unknown:'送达结果待核验',retryable:'确认未发送，可重试',invalid:'记录冲突'};
+  const evidence = {manual_attestation:'人工核验声明',provider_acknowledged:'服务端消息回执',sender_acknowledged:'仅本地发送器确认',legacy_unverified:'旧记录，缺少新版凭据',unconfirmed:'未确认'};
+  const counts = data.counts || {};
+  const issues = data.issues || [];
+  const recent = (data.items || []).filter(item => !['unknown','retryable','invalid'].includes(item.status)).slice(-8).reverse();
+  box.innerHTML = `<div class="sub">已确认 ${counts.sent ?? '未知'} · 待核验 ${counts.unknown ?? '未知'} · 可重试 ${counts.retryable ?? '未知'} · 旧回执 ${counts.legacy_sent ?? '未知'} · 冲突 ${counts.invalid ?? '未知'}</div>` +
+    [...issues,...recent].map(item => `<details style="padding:10px 0;border-bottom:1px solid var(--border);overflow-wrap:anywhere" ${['unknown','invalid'].includes(item.status) ? 'open' : ''}>
+      <summary>${escAny(item.date || item.path || '日期未知')} · ${escAny(item.channel || '渠道未知')} · ${labels[item.status] || '未知'}</summary>
+      <dl class="overview-facts" style="margin-top:8px"><dt>证据类型</dt><dd>${evidence[item.evidence] || '待核验'}</dd>
+      <dt>计划版本</dt><dd>${escAny(item.plan_hash || '未知')}</dd><dt>发送尝试</dt><dd>${item.attempt_count ?? '未知'} 次 · ${escAny(item.attempt_id || '无编号')}</dd>
+      <dt>消息编号</dt><dd>${escAny(item.message_id || '未取得')}</dd><dt>记录哈希</dt><dd>${escAny(item.record_hash || '不可核验')}</dd></dl>
+      ${item.error ? `<div class="err">${escAny(item.error)}</div>` : ''}
+      ${(item.attempts || []).map(attempt => `<div class="appr-note" style="margin-top:8px">${escAny(attempt.started_at)} · ${escAny(attempt.attempt_id)} · ${({sending:'请求已留痕，结果待核验',unknown:'结果待核验',retryable:'明确未发送',sent:'收到发送确认'})[attempt.status] || '未知'}${attempt.resolution ? `<br>${escAny(attempt.resolution.operator)} · ${attempt.resolution.outcome === 'delivered' ? '人工确认已送达' : '人工确认未送达'} · ${escAny(attempt.resolution.evidence)}` : ''}</div>`).join('')}
+    </details>`).join('');
+}
+loadOverview();
+setInterval(loadOverview, 30000);
+
+async function loadArchiveStatus() {
+  const schedulerLabels = {waiting:'已加载，等待触发', running:'检查进程运行中', not_loaded:'未加载',
+    not_installed:'未安装', disabled:'已禁用', failed:'上次进程失败', configuration_mismatch:'配置不一致',
+    unknown:'无法确认', unsupported:'当前平台不支持'};
+  const archiveLabels = {healthy:'归档核验通过', degraded:'存在缺口', uninitialized:'尚无检查记录',
+    invalid:'状态文件损坏', failed:'检查失败'};
+  const heartbeatLabels = {fresh:'检查记录新鲜', stale:'检查记录超时', future:'检查时间异常', missing:'无完成记录'};
+  const formatter = new Intl.DateTimeFormat('zh-CN', {timeZone:'Asia/Shanghai', year:'numeric', month:'2-digit',
+    day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false});
+  const timeLabel = value => value && Number.isFinite(new Date(value).getTime()) ? formatter.format(new Date(value)) : '未知';
+  try {
+    const data = await (await fetch('/api/archive-service?_=' + Date.now())).json();
+    if (!data.ok) throw new Error(data.error || '归档状态不可用');
+    const scheduler = data.scheduler || {};
+    const schedulerText = schedulerLabels[scheduler.status] || '未知';
+    const alerts = [];
+    if (!['waiting','running'].includes(scheduler.status)) alerts.push(`归档调度：${schedulerText}。`);
+    if (data.heartbeat !== 'fresh') alerts.push(`归档检查：${heartbeatLabels[data.heartbeat] || '未知'}。`);
+    if (data.error) alerts.push(data.error);
+    if (scheduler.error) alerts.push(scheduler.error);
+    if (data.missing_sessions?.length) alerts.push(`缺失交易日：${data.missing_sessions.join(', ')}。`);
+    if (data.invalid_sessions?.length) alerts.push(`核验失败日期：${data.invalid_sessions.join(', ')}。`);
+    for (const [day, error] of Object.entries(data.errors || {})) {
+      alerts.push(`${day}：${error.error || '归档失败'}${error.next_retry_at ? '；下次重试 ' + timeLabel(error.next_retry_at) : ''}`);
+    }
+    $('overview-archive').innerHTML = `<dl class="overview-facts">
+      <dt>调度状态</dt><dd>${escAny(schedulerText)}</dd>
+      <dt>最近检查</dt><dd>${escAny(timeLabel(data.last_tick_at))} · ${escAny(heartbeatLabels[data.heartbeat] || '未知')}</dd>
+      <dt>计划检查</dt><dd>${escAny(timeLabel(scheduler.next_scheduled_at))}</dd>
+      <dt>应归档会话</dt><dd>${escAny(data.expected_session || '未知')}</dd>
+      <dt>最新已核验</dt><dd>${escAny(data.latest_verified_session || '未知')} · ${escAny(archiveLabels[data.status] || '未知')}</dd>
+      <dt>追踪起点</dt><dd>${escAny(data.tracking_start || '未知')} · 已核验 ${escAny(data.verified_count ?? 0)} 个交易日</dd>
+    </dl>`;
+    $('archive-alerts').innerHTML = alerts.map(alert => `<div class="overview-alert">${escAny(alert)}</div>`).join('');
+  } catch(e) {
+    $('overview-archive').innerHTML = '<div class="sub">归档调度与完整性状态未知</div>';
+    $('archive-alerts').innerHTML = `<div class="overview-alert">${escAny(e.message || e)}</div>`;
+  }
+}
+loadArchiveStatus();
+setInterval(loadArchiveStatus, 30000);
+
+async function loadBackupStatus() {
+  const states = {healthy:'最新快照校验通过',degraded:'需要处理',invalid:'目录账不可用',uninitialized:'尚未配置'};
+  const schedulers = {waiting:'已加载，等待触发',running:'检查中',not_loaded:'未加载',not_installed:'未安装',
+    disabled:'已禁用',failed:'上次检查失败',configuration_mismatch:'配置不一致',unknown:'无法确认',unsupported:'平台不支持'};
+  const heartbeats = {fresh:'检查记录新鲜',stale:'检查记录超时',missing:'无检查记录',future:'时间异常'};
+  try {
+    const response = await fetch('/api/backup-service?_=' + Date.now());
+    const data = await response.json();
+    if (!response.ok || !data.ok) throw new Error(data.error || '备份事实源不可用');
+    const scheduler = data.scheduler || {};
+    const latest = data.latest || {};
+    $('overview-backup').innerHTML = `<dl class="overview-facts">
+      <dt>备份状态</dt><dd>${states[data.status] || '未知'} · ${heartbeats[data.heartbeat] || '未知'}</dd>
+      <dt>调度状态</dt><dd>${schedulers[scheduler.status] || '未知'} · ${escAny(scheduler.runs ?? '未知')} 次</dd>
+      <dt>最近检查</dt><dd>${escAny(data.last_check_at || '未知')}</dd>
+      <dt>计划检查</dt><dd>${escAny(scheduler.next_scheduled_at || '未知')}</dd>
+      <dt>最近快照</dt><dd>${escAny(latest.started_at || '暂无')} · ${latest.verified === true ? '内容已核验' : '未核验'}</dd>
+      <dt>已登记 / 未登记</dt><dd>${escAny(data.snapshot_count ?? '未知')} / ${escAny(data.unregistered_count ?? '未知')}</dd>
+      <dt>目录占用</dt><dd>${data.storage_bytes == null ? '未知' : (data.storage_bytes / 1048576).toFixed(1) + ' MiB'} / ${data.max_store_bytes == null ? '未知' : (data.max_store_bytes / 1073741824).toFixed(0) + ' GiB'}</dd>
+      <dt>固定清单哈希</dt><dd class="hash">${escAny(latest.manifest_hash || '暂无')}</dd>
+      <dt>存储位置</dt><dd>${escAny(data.store_root || '未配置')}</dd>
+      <dt>执行授权</dt><dd>未授权 · 恢复后须人工审阅</dd>
+    </dl>`;
+    const issues = [...(data.issues || [])];
+    if (!['waiting','running'].includes(scheduler.status)) issues.push('备份调度：' + (schedulers[scheduler.status] || '未知'));
+    if (scheduler.error) issues.push(scheduler.error);
+    $('backup-alerts').innerHTML = issues.map(item => `<div class="overview-alert">${escAny(item)}</div>`).join('');
+  } catch(e) {
+    $('overview-backup').innerHTML = '<span class="sub">备份与调度状态未知</span>';
+    $('backup-alerts').innerHTML = `<div class="overview-alert">${escAny(e.message || e)}</div>`;
+  }
+}
+loadBackupStatus();
+setInterval(loadBackupStatus, 30000);
+
+let continuousData = null, continuousRequest = 0, seriesEndPinned = false;
+const seriesNames = {gate:'闸门组合',no_gate:'无闸门组合',csi300:'沪深300价格指数'};
+const seriesColors = {gate:'#34d399',no_gate:'#f59e0b',csi300:'#38bdf8'};
+const seriesPercent = value => value == null ? '未知' : (value * 100).toFixed(2) + '%';
+function drawContinuousChart() {
+  const canvas = $('series-chart');
+  const rows = (continuousData?.rows || []).filter(row => row.status === 'evaluated');
+  canvas.hidden = !rows.length;
+  canvas.style.display = rows.length ? 'block' : 'none';
+  if (!rows.length || !canvas.clientWidth) return;
+  const width = canvas.clientWidth, height = 240, ratio = window.devicePixelRatio || 1;
+  canvas.width = width * ratio; canvas.height = height * ratio;
+  const ctx = canvas.getContext('2d'); ctx.scale(ratio, ratio);
+  const values = [0,...rows.flatMap(row => Object.values(row.portfolios).map(p => p.cumulative_return))];
+  const low = Math.min(...values), high = Math.max(...values), spread = Math.max(high-low,.01);
+  const bottom = low-spread*.12, top = high+spread*.12;
+  const left = 58, right = width-14, chartTop = 18, chartBottom = 204;
+  const x = index => left + (right-left)*index/rows.length;
+  const y = value => chartBottom-(value-bottom)/(top-bottom)*(chartBottom-chartTop);
+  ctx.font = '11px system-ui'; ctx.strokeStyle = '#30363d'; ctx.fillStyle = '#8b949e';
+  for(let i=0;i<4;i++) { const v=bottom+(top-bottom)*i/3, py=y(v); ctx.beginPath(); ctx.moveTo(left,py); ctx.lineTo(right,py); ctx.stroke(); ctx.fillText(seriesPercent(v),0,py+4); }
+  for(const name of Object.keys(seriesNames)) {
+    ctx.beginPath(); ctx.strokeStyle=seriesColors[name]; ctx.lineWidth=2; ctx.moveTo(x(0),y(0));
+    rows.forEach((row,index)=>ctx.lineTo(x(index+1),y(row.portfolios[name].cumulative_return))); ctx.stroke();
+  }
+  ctx.fillStyle='#8b949e'; ctx.fillText('期初',left,229);
+  ctx.textAlign='right'; ctx.fillText(rows[rows.length-1].date,right,229);
+}
+async function loadContinuousSeries() {
+  const request = ++continuousRequest;
+  const query = new URLSearchParams();
+  if ($('series-start').value) query.set('start',$('series-start').value);
+  if (seriesEndPinned && $('series-end').value) query.set('end',$('series-end').value);
+  const url = '/api/continuous-counterfactual?' + query;
+  $('series-source').href = url;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    if (request !== continuousRequest) return;
+    if (!response.ok || !data.ok) throw new Error(data.error || '连续反事实不可用');
+    continuousData=data;
+    if (!seriesEndPinned) $('series-end').value=data.end;
+    const gap = data.rows.find(row=>row.status === 'gap');
+    $('series-status').innerHTML = `<div class="${data.status === 'complete' ? 'sub' : 'overview-alert'}">${data.start} 至 ${data.end} · 覆盖 ${data.covered_sessions}/${data.expected_sessions} 个交易日${gap ? `<br>${escAny(gap.date)}：${escAny(gap.reason)}<br>全区间收益未知，后续日期未评估。` : ' · 连续回放完成'}</div>`;
+    $('series-summary').innerHTML = Object.entries(seriesNames).map(([name,label])=>`<div><span style="color:${seriesColors[name]}">${label}</span><b>${seriesPercent(data.summary?.[name]?.return)}</b><div class="sub">最大回撤 ${seriesPercent(data.summary?.[name]?.max_drawdown)} · ${name === 'csi300' ? '价格指数，非可交易组合' : '累计模型收益，已计成交费用'}</div></div>`).join('');
+    $('series-chart-state').textContent = data.covered_sessions ? `有效路径截至 ${data.verified_through}；初始现金 ${fmtMoney(data.initial_cash)}` : '没有可连续核验的收益路径';
+    $('series-rows').innerHTML=data.rows.map(row=>{
+      const orders = row.portfolios ? ['gate','no_gate'].flatMap(name=>row.portfolios[name].orders.map(order=>({name,...order}))) : [];
+      return `<tr><td>${escAny(row.date)}</td>${['gate','no_gate','csi300'].map(name=>`<td>${row.portfolios ? fmtMoney(row.portfolios[name].equity) : '未知'}</td>`).join('')}<td>${row.status === 'evaluated' ? `<details><summary>${orders.length} 条委托</summary>${orders.map(order=>`<div class="sub">${seriesNames[order.name]} · ${escAny(order.code)} · ${escAny(order.side)} · ${order.qty}股 · ${escAny(order.status)}<br>${order.fill_price == null ? '' : '成交 '+order.fill_price+' · 费用 '+order.fee}${escAny(order.reason || '')}</div>`).join('')}<div class="sub">计划 ${escAny(row.plan_hash)}</div></details>` : escAny(row.reason)}</td></tr>`;
+    }).join('');
+    $('series-evidence').innerHTML=`<dl class="overview-facts"><dt>输入哈希</dt><dd>${escAny(data.input_hash)}</dd><dt>报告哈希</dt><dd>${escAny(data.report_hash)}</dd><dt>证据类型</dt><dd>${escAny(data.evidence_kind)}</dd></dl>` + data.limitations.map(value=>`<div class="sub">${escAny(value)}</div>`).join('');
+    drawContinuousChart();
+  } catch(e) {
+    if (request !== continuousRequest) return;
+    continuousData=null; drawContinuousChart();
+    $('series-status').innerHTML=`<div class="overview-alert">${escAny(e.message || e)}</div>`;
+    $('series-summary').innerHTML=''; $('series-rows').innerHTML=''; $('series-evidence').innerHTML='';
+    $('series-chart-state').textContent='收益路径未知';
+  }
+}
+$('series-end').addEventListener('change',()=>{seriesEndPinned=!!$('series-end').value;});
+$('series-form').addEventListener('submit',event=>{event.preventDefault();loadContinuousSeries();});
+new ResizeObserver(drawContinuousChart).observe($('series-chart'));
+loadContinuousSeries();
+setInterval(loadContinuousSeries,30000);
+
+let activeRunId = null;
+let renderedRunId = null;
+let runsLoading = false;
+let multicaLoading = false;
+let multicaReadAt = 0;
+const reviewRoles = {'data-quality':'数据质量', 'market-analysts':'市场分析', 'strategy-research':'策略研究', 'paper-trader':'Paper 提案', 'risk-manager':'风险管理', 'audit-verifier':'审计核验'};
+const reviewLabels = {accepted:'通过', rejected:'拒绝', pending:'待审阅', blocked:'上游阻断', incomplete:'审阅未完成', stale:'版本已失效', invalid:'证据损坏', source_unverified:'研究来源未核验', unavailable:'读取失败'};
+let reviewReadSequence = 0;
+
+async function readReviewStatus(date) {
+  const response = await fetch(`/api/multica-reviews?date=${encodeURIComponent(date)}`, {signal:AbortSignal.timeout(10000)});
+  const data = await response.json();
+  if (!response.ok || !data.ok || data.review?.date !== date) throw new Error('审阅证据不可用');
+  return data.review;
+}
+
+async function loadReviewGate() {
+  const date = $('review-date').value;
+  const sequence = ++reviewReadSequence;
+  $('review-evidence').textContent = `${date || '未选日期'} · 审阅证据读取中`;
+  let review;
+  try { review = await readReviewStatus(date); }
+  catch(e) { review = {status:'unavailable', roles:{}}; }
+  if (sequence !== reviewReadSequence) return;
+  const accepted = review.status === 'accepted';
+  const count = Object.values(review.roles || {}).filter(row=>row.status === 'accepted').length;
+  $('review-evidence').innerHTML = `<div class="overview-alert" style="border-color:${accepted ? 'var(--ok)' : 'var(--run)'}">
+    <b>${accepted ? '审阅前置条件通过' : '新增批准与 Paper 执行已阻断'}</b> · ${count}/6
+    <div>${reviewLabels[review.status] || '状态未知'} · ${accepted ? '尚非审批、成交或远端任务完成凭据' : '旧批准不能绕过当前审阅'}</div></div>
+    <dl class="overview-facts"><dt>计划版本</dt><dd class="hash">${escAny(review.source?.plan_hash || '未核验')}</dd>
+      <dt>研究生成版本</dt><dd class="hash">${escAny(review.source?.generation_hash || '未核验')}</dd>
+      <dt>数据截至</dt><dd>${escAny(review.source?.data_asof || '未知')}</dd></dl>
+    ${Object.entries(reviewRoles).map(([role,label])=> {
+      const row = review.roles?.[role] || {status:review.status === 'source_unverified' ? 'source_unverified' : 'unavailable'};
+      const recorded = review.recorded?.[role];
+      return `<div class="review-row"><b>${label}</b><span style="color:${row.status === 'accepted' ? 'var(--ok)' : 'var(--run)'}">${reviewLabels[row.status] || '未知'}</span>
+        <div>${row.run_id ? `<button class="overview-link" data-review-run="${encodeURIComponent(row.run_id)}">运行 ${escAny(row.run_id)}</button>` : '<span class="sub">无当前有效回执</span>'}
+        ${row.receipt_hash ? `<div class="hash">回执 ${escAny(row.receipt_hash)}</div>` : ''}
+        ${recorded ? `<div class="sub">历史版本：${reviewLabels[recorded.status] || '未知'}（不适用当前版本）</div>
+          <button class="overview-link" data-review-run="${encodeURIComponent(recorded.run_id)}">历史运行 ${escAny(recorded.run_id)}</button>
+          ${recorded.receipt_hash ? `<div class="hash">历史回执 ${escAny(recorded.receipt_hash)}</div>` : ''}` : ''}</div></div>`;
+    }).join('')}`;
+  $('review-evidence').querySelectorAll('[data-review-run]').forEach(button=>button.addEventListener('click',()=>showRun(decodeURIComponent(button.dataset.reviewRun))));
+}
+
+$('review-date').value = new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+$('review-date').addEventListener('change', loadReviewGate);
+loadReviewGate();
+setInterval(()=> { if ($('v-runs').classList.contains('active')) loadReviewGate(); }, 30000);
+let localRunHealth = 'idle';
+let remoteRunHealth = 'idle';
+
+function updateRunBadge() {
+  const states = [localRunHealth, remoteRunHealth];
+  const state = states.includes('failed') ? 'failed' : states.includes('running') ? 'running'
+    : states.includes('idle') ? 'idle' : 'ok';
+  $('nav-runs').innerHTML = `<span class="dot ${state}"></span>`;
+}
+
+function renderMulticaEvidence(connection, evidence) {
+  const labels = {matched:'已匹配', drift:'配置漂移', mismatch:'绑定不一致', missing:'未记录',
+    unavailable:'证据不可用', unconfigured:'未配置', linked:'已关联', empty:'尚无远端运行',
+    failed:'失败', succeeded:'成功', running:'运行中', queued:'排队中', cancelled:'已取消'};
+  const label = value => labels[value] || value || '未知';
+  const when = value => value ? escAny(new Date(value).toString() === 'Invalid Date' ? value
+    : new Date(value).toLocaleString('zh-CN', {timeZone:'Asia/Shanghai', hour12:false})) : '未记录';
+  const connected = connection.ok && connection.authenticated && connection.daemon_running;
+  $('multica-state').textContent = !connection.ok ? '连接状态未知'
+    : !connection.installed ? 'CLI 未安装' : !connection.authenticated ? '认证不可用'
+    : !connection.daemon_running ? '已认证 · daemon 未运行' : '已认证 · daemon 在线';
+  const config = evidence.configuration || {};
+  const runtime = evidence.runtime || {};
+  const history = evidence.history || {};
+  const latest = history.latest;
+  const local = evidence.local_attempt || {};
+  const differences = {runbook:'Runbook 内容', issue_title_template:'Issue 日期模板',
+    autopilot_inactive:'Autopilot 未启用', trigger:'触发器数量、启用状态或计划'};
+  const title = latest ? `最近远端运行：${label(latest.status)}`
+    : evidence.status === 'unconfigured' ? 'Multica 尚未配置' : `远端运行：${label(history.status)}`;
+  const failed = latest && ['failed','cancelled'].includes(latest.status);
+  remoteRunHealth = failed || evidence.status === 'mismatch' ? 'failed' : 'idle';
+  $('multica-evidence').innerHTML = `
+    <div class="overview-head"><b style="color:${failed ? 'var(--fail)' : 'var(--run)'}">${escAny(title)}</b>
+      <span class="sub">核验 ${when(evidence.observed_at)} · 上海时间</span></div>
+    ${!connected ? '<div class="overview-alert">连接未就绪，不能据此确认执行能力。</div>' : ''}
+    ${latest?.failure_reason ? `<div class="overview-alert err">${escAny(latest.failure_reason)}</div>` : ''}
+    ${evidence.status === 'mismatch' ? '<div class="overview-alert err">远端项目或负责人不匹配，已停止进一步查询。</div>' : ''}
+    <dl class="overview-facts">
+      <dt>Run</dt><dd class="hash">${escAny(latest?.id || '未记录')}</dd>
+      <dt>触发 / 结束</dt><dd>${when(latest?.triggered_at)} / ${when(latest?.completed_at)}</dd>
+      <dt>Issue / Task</dt><dd class="hash">${escAny(latest?.issue_id || '未记录')} / ${escAny(latest?.task_id || '未记录')}</dd>
+      <dt>本地研究关联</dt><dd>${escAny(label(local.status))}${local.status === 'linked'
+        ? ` · 尝试 ${escAny(label(local.attempt_status))} · 工作流 ${escAny(label(local.run_status))} · <a class="overview-link" href="#run-detail" data-linked-run="${escAny(local.run_id)}">查看本地运行</a>` : ''}</dd>
+      <dt>完成认证</dt><dd>未认证</dd>
+      <dt>远端配置</dt><dd>${escAny(label(config.status))}${config.differences?.length
+        ? ` · ${config.differences.map(v=>escAny(differences[v] || v)).join('、')}` : ''}</dd>
+      <dt>绑定 runtime</dt><dd>${escAny(label(runtime.status))} · ${escAny(runtime.version || '版本未知')} · ${escAny(runtime.remote_status || '状态未知')}</dd>
+      <dt>模型设置</dt><dd>${escAny(runtime.model || '运行时默认，具体模型未核验')}</dd>
+      <dt>Runtime 心跳</dt><dd>${when(runtime.last_seen_at)}</dd>
+    </dl>
+    ${(config.triggers || []).map(t=>`<div class="attempt-line"><b>${t.enabled === true ? '定时已启用' : '定时未启用'}</b>
+      <span class="sub"> · ${escAny(t.cron_expression || '计划未知')} · ${escAny(t.timezone || '时区未知')}</span>
+      <div class="sub">上次触发 ${when(t.last_fired_at)} · 下次计划 ${when(t.next_run_at)}</div></div>`).join('')}
+    ${[config, history, runtime, local].filter(item=>item.error).map(item=>`<div class="err">${escAny(item.error)}</div>`).join('')}
+    ${history.items?.length ? `<details class="attempt-line"><summary>最近 ${history.items.length} 条远端记录 · 共 ${escAny(history.total)} 条</summary>
+      ${history.items.map(run=>`<div class="attempt-line"><b>${escAny(label(run.status))}</b> · ${when(run.triggered_at)}
+        <div class="hash">${escAny(run.id)}</div>${run.failure_reason ? `<div class="err">${escAny(run.failure_reason)}</div>` : ''}</div>`).join('')}</details>` : ''}`;
+  $('multica-evidence').querySelectorAll('[data-linked-run]').forEach(link=>link.addEventListener('click', ()=>showRun(link.dataset.linkedRun)));
+  updateRunBadge();
+}
+
+async function loadMulticaEvidence() {
+  if (multicaLoading || Date.now() - multicaReadAt < 60000) return;
+  multicaLoading = true;
+  multicaReadAt = Date.now();
+  try {
+    const results = await Promise.allSettled(['/api/multica-status', '/api/multica-observation'].map(async url=> {
+      const response = await fetch(url + '?_=' + Date.now());
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      const payload = await response.json();
+      if (!payload.ok) throw new Error('evidence unavailable');
+      return payload;
+    }));
+    const value = index => results[index].status === 'fulfilled' ? results[index].value : {};
+    renderMulticaEvidence(value(0), value(1));
+  } finally {
+    multicaLoading = false;
+  }
+}
+
+async function showRun(runId) {
+  activeRunId = runId;
+  document.querySelectorAll(".run-row").forEach(row => row.classList.toggle("active", row.dataset.id === runId));
+  try {
+    const payload = await (await fetch(`/api/runs/${encodeURIComponent(runId)}?_=` + Date.now())).json();
+    if (!payload.ok || !payload.run) throw new Error(payload.error || "run not found");
+    if (activeRunId !== runId) return;
+    const run = payload.run;
+    const steps = run.steps || [];
+    const attempts = run.attempts || [];
+    const currentSteps = steps.filter(step => step.workflow_attempt === run.attempt);
+    const transport = run.metadata?.transport || currentSteps.filter(step=>step.metadata?.transport).at(-1)?.metadata.transport;
+    const reportedModels = currentSteps.filter(step=>step.metadata?.reported_model)
+      .map(step=>`${step.role || step.step_name}: ${step.metadata.reported_model}`);
+    const reviewResponse = run.metadata?.receipt?.response;
+    const openAttempts = renderedRunId === runId
+      ? new Set(Array.from(document.querySelectorAll(".attempt-line[open]"), row => row.dataset.attempt)) : null;
+    $("run-detail").innerHTML = `
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px">
+        <div><b>${escAny(run.workflow)}</b> · ${escAny(run.business_date)} · 第 ${run.attempt} 次工作流尝试</div>
+        <span class="hash">${escAny(run.run_id)}</span>
+      </div>
+      <div class="sub" style="margin-bottom:8px">触发 ${escAny(run.trigger_source)} · 模型 ${escAny(run.model || "—")} · plan_hash ${escAny(run.plan_hash || "—")}</div>
+      ${run.workflow === 'daily_research' ? `<dl class="run-binding model-source">
+        <dt>请求适配器</dt><dd>${escAny(transport?.adapter || '未记录')}</dd>
+        <dt>服务地址</dt><dd>${escAny(transport?.endpoint || '未记录')}</dd>
+        <dt>请求模型</dt><dd>${escAny(transport?.model || '未记录')}</dd>
+        <dt>请求参数</dt><dd>${transport?.parameters ? escAny(JSON.stringify(transport.parameters)) : '未记录'}</dd>
+        <dt>本次响应模型</dt><dd>${escAny(reportedModels.join('；') || '未记录')}</dd>
+      </dl>` : ''}
+      ${run.workflow.startsWith('multica_review.') ? `<div class="overview-band"><b>记录时结论：${reviewResponse ? (reviewResponse.verdict === 'accept' ? '通过' : '拒绝') : '未形成回执'}</b>
+        <div class="sub">当前有效性以执行前审阅状态为准</div>
+        ${reviewResponse ? `<div style="margin:8px 0">${escAny(reviewResponse.summary)}</div>
+          ${(reviewResponse.checks || []).map(check=>`<div class="attempt-line"><b>${escAny(check.name)}</b> · ${escAny(check.result)}<div>${escAny(check.reason)}</div><div class="hash">${escAny((check.evidence || []).join(' · '))}</div></div>`).join('')}` : ''}</div>` : ''}
+      ${run.error ? `<div class="err" style="margin-bottom:8px">${escAny(run.error)}</div>` : ""}
+      <div class="run-attempts">${attempts.map(attempt => {
+        const context = attempt.external_context || {};
+        const linked = context.provider === "multica" && context.verification === "remote_verified";
+        const expanded = openAttempts ? openAttempts.has(String(attempt.attempt)) : attempt.attempt === run.attempt;
+        return `<details class="attempt-line" data-attempt="${attempt.attempt}"${expanded ? " open" : ""}>
+          <summary>尝试 #${attempt.attempt} · ${escAny(attempt.status)} · ${linked ? escAny(context.role) : escAny(attempt.trigger_source)}</summary>
+          <dl class="run-binding"><dt>开始</dt><dd>${escAny(attempt.started_at)}</dd><dt>结束</dt><dd>${escAny(attempt.finished_at || "未结束")}</dd>
+          ${linked ? `<dt>Issue</dt><dd>${escAny(context.issue_identifier || context.issue_id)} · ${escAny(context.issue_title)}</dd>
+          <dt>远端 Run</dt><dd class="hash">${escAny(context.task_id)}</dd>
+          <dt>Agent</dt><dd class="hash">${escAny(context.agent_id)}</dd>
+          <dt>Project</dt><dd class="hash">${escAny(context.project_id)}</dd>
+          <dt>身份核验</dt><dd>${escAny(context.observed_at)} · 当时 ${escAny(context.observed_status)}</dd>`
+          : `<dt>远端关联</dt><dd>无已核验证据</dd>`}</dl>
+          ${attempt.error ? `<div class="err">${escAny(attempt.error)}</div>` : ""}</details>`;
+      }).join("") || '<div class="sub">历史运行无逐次触发记录</div>'}</div>
+      <div>${steps.map(step => `<div class="step-line">
+        <span class="dot ${runDot(step.status)}"></span>
+        <b>${escAny(step.step_name)}</b>
+        <span>${escAny(step.role || "system")} · #${step.attempt}<br><span class="sub">工作流 ${step.workflow_attempt == null ? "未记录" : "#" + step.workflow_attempt}</span></span>
+        <span>${step.error ? `<span class="err">${escAny(step.error)}</span>` : `<span class="hash">in ${escAny((step.input_hash || "—").slice(0,12))} · out ${escAny((step.output_hash || "—").slice(0,12))}</span>`}</span>
+        <span class="sub">${escAny((step.finished_at || step.started_at || "").slice(0,19).replace("T", " "))}</span>
+      </div>`).join("") || '<span class="sub">尚无步骤记录</span>'}</div>`;
+    renderedRunId = runId;
+  } catch(e) {
+    if (activeRunId !== runId) return;
+    $("run-detail").innerHTML = `<span class="err">${escAny(e.message || e)}</span>`;
+  }
+}
+
+async function loadRuns() {
+  if (runsLoading) return;
+  runsLoading = true;
+  try {
+    const runPayload = await (await fetch('/api/runs?_=' + Date.now())).json();
+    if (!runPayload.ok) throw new Error(runPayload.error || 'run ledger unavailable');
+    const runs = runPayload.runs || [];
+    const counts = runs.reduce((acc, run) => (acc[run.status] = (acc[run.status] || 0) + 1, acc), {});
+    $("run-summary").innerHTML = [
+      ["最近运行", runs.length], ["成功", counts.succeeded || 0], ["运行中", counts.running || 0], ["失败", counts.failed || 0]
+    ].map(([label, value]) => `<div class="run-stat"><span class="sub">${label}</span><b>${value}</b></div>`).join("");
+    localRunHealth = runs.some(r => r.status === 'failed') ? 'failed' : runs.some(r => r.status === 'running') ? 'running' : runs.length ? 'ok' : 'idle';
+    updateRunBadge();
+    $("run-table").querySelector("tbody").innerHTML = runs.map(run => `<tr class="run-row${run.run_id === activeRunId ? ' active' : ''}" data-id="${escAny(run.run_id)}" onclick="showRun('${escAny(run.run_id)}')">
+      <td>${escAny(run.business_date)}</td><td>${escAny(run.workflow)}</td>
+      <td><span class="dot ${runDot(run.status)}"></span> ${run.workflow.startsWith('multica_review.') && run.status === 'succeeded' ? '回执已记录' : escAny(run.status)}</td>
+      <td>${escAny(run.current_step || "—")}</td><td>${run.attempt}</td><td>${escAny(run.data_asof || "—")}</td>
+      <td class="sub">${escAny((run.started_at || "").slice(0,19).replace("T", " "))}</td></tr>`).join("") || '<tr><td colspan="7" class="sub">尚无账本运行记录</td></tr>';
+    if (runs.length) showRun(runs.some(run => run.run_id === activeRunId) ? activeRunId : runs[0].run_id);
+  } catch(e) {
+    $("run-summary").innerHTML = `<span class="err">运行账本读取失败：${escAny(e.message || e)}</span>`;
+    localRunHealth = 'failed';
+    updateRunBadge();
+  } finally {
+    runsLoading = false;
+  }
+}
+loadRuns();
+loadMulticaEvidence();
+setInterval(loadRuns, 30000);
+setInterval(()=> { if ($('v-runs').classList.contains('active')) loadMulticaEvidence(); }, 60000);
+
+async function loadPaperState() {
+  try {
+    const payload = await (await fetch("/api/paper-state?_=" + Date.now())).json();
+    if (!payload.ok) throw new Error(payload.error || "paper state unavailable");
+    const portfolios = payload.portfolios || {};
+    const expandedLots = new Set(Array.from(document.querySelectorAll('#paper-portfolios details[open]')).map(el=>el.dataset.lot));
+    $("paper-portfolios").innerHTML = ["gate", "no_gate"].map(name => {
+      const item = portfolios[name] || {};
+      const account = item.account || item;
+      const orderModel = item.orders || {counts:item.order_counts || {},recent:item.recent_orders || [],events:[]};
+      const valuedEquity = account.valuation_equity;
+      const ret = valuedEquity == null ? null : valuedEquity / 100000 - 1;
+      const positions = item.positions || [];
+      const counts = Object.entries(orderModel.counts || {}).map(([k,v]) => `${k} ${v}`).join(" · ") || "无委托";
+      const sectors = (item.sector_exposure || []).map(row => `${row.sector} ${fmtMoney(row.market_value)}`).join(" · ");
+      const missing = item.missing_marks || [];
+      const protection = item.protection || {};
+      const guards = Object.values(protection.active || {});
+      const guardEvents = (protection.events || []).slice(-5).reverse();
+      const protectionError = protection.error === 'no such table: execution_receipts' ? '历史账户缺少跨日保护回执' : protection.error;
+      const guardStatus = {created:'已建立',replaced:'已替换',cancelled:'已撤销',expired:'已到期',stale_version:'版本不符，操作未生效',no_position:'无持仓，未建立',invalid_validity:'有效期不合法',not_authorized:'未授权',evaluated:'当日评估'};
+      return `<div class="card" style="margin:0">
+        <div style="display:flex;justify-content:space-between;gap:10px"><b>${name === 'gate' ? '闸门组合' : '无闸门组合'}</b><span class="sub">记账 ${escAny(account.as_of || '—')} · 估值 ${escAny(account.quote_asof || '—')}</span></div>
+        ${item.error || !item.exists || !account.as_of ? `<div class="err" style="margin-top:8px">${escAny(item.error || '账户尚未建立或缺少余额记录')}</div>` : `
+        <div class="lib-metrics" style="grid-template-columns:repeat(3,1fr)">
+          <div class="m"><b>${valuedEquity == null ? '—' : fmtMoney(valuedEquity)}</b><span>估值权益</span></div>
+          <div class="m"><b>${account.cash == null ? '—' : fmtMoney(account.cash)}</b><span>现金</span></div>
+          <div class="m"><b style="color:${ret == null ? 'var(--dim)' : ret >= 0 ? 'var(--up)' : 'var(--down)'}">${ret == null ? '—' : fmtPct(ret)}</b><span>账面变动</span></div>
+        </div>
+        <div class="sub" style="margin-top:8px">市值敞口 ${item.market_exposure == null ? '未知' : fmtMoney(item.market_exposure)} · 成本 ${fmtMoney(item.cost_exposure || 0)} · 未实现 ${item.unrealized_pnl == null ? '未知' : fmtMoney(item.unrealized_pnl)} · 冻结 ${item.frozen_qty == null ? '未知' : item.frozen_qty + ' 股'}</div>
+        <div class="sub" style="margin-top:4px">${escAny(sectors || (positions.length ? '行业市值未知' : '无行业敞口'))} · ${escAny(counts)}</div>
+        ${missing.length ? `<div class="err" style="margin-top:6px">缺少可靠收盘价：${escAny(missing.join(', '))}</div>` : ''}
+        ${item.valuation_error ? `<div class="err" style="margin-top:6px;overflow-wrap:anywhere">估值证据：${escAny(item.valuation_error)}</div>` : ''}
+        <div class="${item.inventory?.status === 'matched_trade_ledger' ? 'sub' : 'err'}" style="margin-top:6px;overflow-wrap:anywhere">${item.inventory?.status === 'matched_trade_ledger' ? '批次数量与成交账本相符 · 非成交认证' : '库存证据未核验：' + escAny(item.inventory?.error || '缺少批次证据')}</div>
+        <section data-protection="${name}" style="border-block:1px solid var(--border);padding:10px 0;margin-top:10px;overflow-wrap:anywhere">
+          <b>跨日保护</b><span class="sub"> · 结算截至 ${escAny(protection.as_of || '未知')}</span>
+          <div class="sub">回执投影 · 原计划授权见审计</div>
+          ${protection.status !== 'matched_receipts' ? `<div class="err">状态未知：${escAny(protectionError || '缺少回执')}</div>` : guards.length ? guards.map(g=>`<div style="margin-top:8px"><b>${escAny(g.code)} · ${g.qty} 股 · 止损 ${Number(g.price).toFixed(2)}</b><div class="sub">${escAny(g.created_day)} 至 ${escAny(g.valid_until)}${g.valid_until < protection.observed_day ? ' · 已过有效期，待结算登记' : ''}</div><div class="hash" style="white-space:normal">订单 ${escAny(g.order_hash)}</div><div class="sub">原计划 ${escAny(g.plan_hash)}</div></div>`).join('') : `<div class="sub">${protection.as_of ? '无已登记的活跃保护单' : '无跨日保护回执'}</div>`}
+          ${guardEvents.map(e=>`<div class="sub" style="margin-top:6px">${escAny(e.date)} · ${escAny(e.code)} · ${escAny(guardStatus[e.status] || e.status)}${e.fill ? ' / '+escAny(e.fill.status)+' · '+escAny(e.fill.reject_reason || '') : ''}</div>`).join('')}
+        </section>
+        <div style="margin-top:8px">${positions.length ? positions.map(p => `<details data-lot="${escAny(name+':'+p.code)}" ${expandedLots.has(name+':'+p.code) ? 'open' : ''} style="border-bottom:1px solid var(--border);padding:8px 0;overflow-wrap:anywhere"><summary>${escAny(p.code)} · ${escAny(p.sector || '未分类')} · ${p.qty} 股<br><span class="sub">可卖 ${p.available_qty == null ? '未知' : p.available_qty} · 冻结 ${p.frozen_qty == null ? '未知' : p.frozen_qty}</span></summary><div class="sub" style="margin:6px 0">${p.mark_price == null ? `成本 ${Number(p.avg_cost).toFixed(2)}` : `标记 ${Number(p.mark_price).toFixed(2)} · 市值 ${fmtMoney(p.market_value)} · 浮盈亏 ${fmtMoney(p.unrealized_pnl)}`}</div>${(p.lots || []).map(lot=>`<div class="kv"><span>${escAny(lot.buy_day)} · 成交 #${lot.trade_id}</span><b>${lot.qty} 股</b></div>`).join('') || '<div class="sub">无可核验批次</div>'}</details>`).join('') : '<span class="sub">当前空仓</span>'}</div>`}
+      </div>`;
+    }).join("");
+
+    const orders = [];
+    const trades = [];
+    const valuations = [];
+    for (const [name, item] of Object.entries(portfolios)) {
+      const orderModel = item.orders || {recent:item.recent_orders || []};
+      (orderModel.recent || []).forEach(row => orders.push({...row, portfolio: name}));
+      (item.recent_trades || []).forEach(row => trades.push({...row, portfolio: name}));
+      (item.valuation_history || []).forEach(row => valuations.push({...row, portfolio: name}));
+    }
+    valuations.sort((a,b) => String(b.quote_asof || '').localeCompare(String(a.quote_asof || '')) || String(a.portfolio).localeCompare(String(b.portfolio)));
+    $("paper-valuations").querySelector("tbody").innerHTML = valuations.map(row => `<tr>
+      <td>${escAny(row.portfolio)}</td><td>${escAny(row.valuation_day || '—')}</td><td>${escAny(row.quote_asof || '—')}</td>
+      <td>${row.equity == null ? '未知' : fmtMoney(row.equity)}</td><td>${row.market_value == null ? '未知' : fmtMoney(row.market_value)}</td><td>${row.unrealized_pnl == null ? '未知' : fmtMoney(row.unrealized_pnl)}</td>
+      <td>${escAny((row.missing_marks || []).join(', ') || '无')}</td><td>${escAny(row.source || '—')}${['execution_close.v3','validated_unadjusted_close.v1'].includes(row.source) ? '' : '<div class="sub">旧口径，未通过新版核验</div>'}</td></tr>`).join("") || '<tr><td colspan="8" class="sub">从本轮开始记录，不伪造历史估值</td></tr>';
+    $("paper-orders").querySelector("tbody").innerHTML = orders.map(row => `<tr>
+      <td>${escAny(row.portfolio)}</td><td>${escAny(row.execution_day || '—')}</td><td>${escAny(row.code)}</td><td>${escAny(row.side)}</td><td>${row.qty}</td><td>${row.planned_price == null ? '—' : Number(row.planned_price).toFixed(2)}</td>
+      <td><span class="pill ${row.status === 'filled' ? 'pass' : row.status === 'blocked' || row.status === 'rejected' ? 'reject' : 'candidate'}">${escAny(row.status)}</span></td><td>${escAny(row.reason || '')}</td></tr>`).join("") || '<tr><td colspan="8" class="sub">暂无委托记录</td></tr>';
+    $("paper-trades").querySelector("tbody").innerHTML = trades.map(row => `<tr>
+      <td>${escAny(row.portfolio)}</td><td>${escAny(row.day)}</td><td>${escAny(row.code)}</td><td>${escAny(row.side)}</td><td>${row.qty}</td><td>${escAny(row.price ?? '未知')}</td><td>${Number(row.fee).toFixed(2)}</td><td class="hash">${escAny((row.plan_hash || '').slice(0,12))}</td></tr>`).join("") || '<tr><td colspan="8" class="sub">暂无成交记录</td></tr>';
+  } catch(e) {
+    $("paper-portfolios").innerHTML = `<div class="card err">Paper 数据读取失败：${escAny(e.message || e)}</div>`;
+  }
+}
+loadPaperState();
+setInterval(loadPaperState, 30000);
+
+async function loadPaperAudit() {
+  const labels = {checked:'核对项一致，执行未认证', incomplete:'执行证据不完整', conflict:'存在核对冲突', invalid:'账务无法核对', missing:'账户缺失'};
+  const codes = {price_tick:'成交价格精度', amount_price:'价格 × 数量与金额不符', fee_policy:'当前费率比较',
+    signal_causality:'信号日期', buy_lot:'买入整手', sell_inventory_t1:'持仓与 T+1', cash_ledger:'现金守恒',
+    positions_ledger:'持仓守恒', order_trade:'委托与成交对应', order_event:'订单事件不一致', events_missing:'订单事件缺失', account_ownership:'账户归属不符',
+    plan_binding:'计划版本绑定', publication_timing:'盘前发布时间缺证', unmodeled_condition:'文字条件未验证',
+    receipt_missing:'执行凭据缺失', receipt_evidence:'执行凭据未验证', receipt_conflict:'执行凭据冲突',
+    execution_policy_changed:'历史撮合规则与当前版本不同',
+    decision_selection_changed:'历史决策未纳入显式退出候选',
+    risk_review_evidence:'结构化风控审核缺证', risk_review_conflict:'风控审核与派生计划冲突',
+    decision_policy_changed:'历史可执行状态不符合当前订单契约', decision_policy_conflict:'可执行状态与记录的订单契约冲突',
+    exit_intent_missing:'显式退出指令缺失', exit_inventory_evidence:'退出持仓证据缺失', exit_inventory_conflict:'退出持仓与账本冲突',
+    inventory_basis_conflict:'期初批次证据冲突', inventory_closing_conflict:'期末批次证据冲突', inventory_basis_evidence:'历史批次凭据缺失',
+    protection_evidence:'跨日保护授权或回执冲突',
+    fill_replay:'当前模型价格重放不一致', market_evidence:'严格行情证据缺失'};
+  try {
+    const response = await fetch('/api/paper-audit?_=' + Date.now());
+    const data = await response.json();
+    if (!response.ok || !data.ok) throw new Error(data.error || '核对状态未知');
+    const entries = Object.entries(data.portfolios || {});
+    const summaries = entries.map(([name,item]) => {
+      const account = name === 'gate' ? '闸门组合' : '无闸门组合';
+      const arithmetic = item.checks?.cash === 'matched' && item.checks?.positions === 'matched' ? '账面现金与持仓守恒' : '现金或持仓待核对';
+      return `<div class="overview-alert"><b>${account} · ${labels[item.status] || '未知'}</b><div>${arithmetic} · ${item.conflict_count ?? '未知'} 项冲突 · ${item.missing_count ?? '未知'} 项缺证 · 前向业绩未认证</div>${item.error ? `<div class="err">${escAny(item.error)}</div>` : ''}</div>`;
+    }).join('');
+    $('overview-account-audit').innerHTML = summaries;
+    const conflicts = entries.flatMap(([name,item]) => (item.issues || []).filter(row => row.severity === 'conflict').map(row => ({...row,portfolio:name})));
+    const missing = entries.flatMap(([name,item]) => (item.issues || []).filter(row => row.severity !== 'conflict').map(row => ({...row,portfolio:name})));
+    const unchecked = entries.length !== 2 || entries.some(([,item]) => ['invalid','missing'].includes(item.status));
+    const value = input => input == null ? '未知' : input === '0.01 RMB tick' ? '0.01 元价格单位' : typeof input === 'object' ? JSON.stringify(input) : String(input);
+    const expanded = $('paper-audit').querySelector('details')?.open;
+    $('paper-audit').innerHTML = summaries + `<div style="overflow:auto" tabindex="0" aria-label="账务冲突明细"><table class="audit-table"><thead><tr><th>账户</th><th>日期 / 标的</th><th>冲突</th><th>记录值</th><th>核对值</th></tr></thead><tbody>${conflicts.map(row => `<tr>
+      <td>${escAny(row.portfolio)}</td><td>${escAny(row.date || '')}<div class="sub">${escAny(row.symbol || '')}</div></td>
+      <td>${escAny(codes[row.code] || row.code)}</td><td><span class="audit-value">${escAny(value(row.actual))}</span></td><td><span class="audit-value">${escAny(value(row.expected))}</span></td></tr>`).join('') || `<tr><td colspan="5" class="sub">${unchecked ? '部分账户无法核对' : '未发现已检查项冲突'}</td></tr>`}</tbody></table></div>
+      <details${expanded ? ' open' : ''} style="margin:12px 0"><summary>证据缺口 ${missing.length} 项</summary>${missing.map(row => `<div class="sub" style="padding:5px 0;overflow-wrap:anywhere">${escAny(row.portfolio)} · ${escAny(row.date || '')} · ${escAny(codes[row.code] || row.code)}</div>`).join('')}</details>
+      <div class="sub" style="overflow-wrap:anywhere">核对时间 ${escAny(data.observed_at.slice(0,19).replace('T',' '))} · ${escAny(data.model)} · ${escAny(data.entry_contract || '入场契约未记录')} · ${escAny(data.exit_contract || '退出契约未记录')} · ${escAny(data.portfolio_policy || '组合规则未记录')} · ${escAny(data.risk_contract || '风控契约未记录')} · 价格重放使用账面数量，不认证仓位决策</div>`;
+  } catch(e) {
+    for (const id of ['overview-account-audit','paper-audit']) $(id).innerHTML = `<div class="overview-alert">历史账务核对状态未知：${escAny(e.message || e)}</div>`;
+  }
+}
+loadPaperAudit();
+setInterval(loadPaperAudit, 30000);
+
 function md2html(md) {
   const lines = md.split("\n");
   const out = [];
@@ -664,6 +1349,8 @@ const TEAM_ROLES = [
   ["05_researcher.md", "研究员辩论"],
   ["06_trader.md", "交易员"],
   ["07_risk_manager.md", "风控经理"],
+  ["counterfactual.md", "单日诊断"],
+  ["continuous_counterfactual.md", "连续反事实"],
 ];
 let teamDate = null, teamTab = "daily_conclusion.md", teamDays = [];
 async function showTeam(date, tab) {
@@ -673,6 +1360,13 @@ async function showTeam(date, tab) {
   const day = teamDays.find(d => d.date === date);
   $("team-headline").innerHTML = day ? `<div class="team-hl">${esc(day.headline || "（无结论摘要）")}
     <div class="meta">数据截至 <b>${day.data_asof || "—"}</b> · 采集 ${day.collect_ok === false ? '<span style="color:var(--fail)">部分源异常</span>' : '<span style="color:var(--ok)">正常</span>'}${day.ratings_line ? " · 评级：" + esc(day.ratings_line) : ""}</div></div>` : "—";
+  let review;
+  try { review = await readReviewStatus(date); }
+  catch(e) { review = {status:'unavailable'}; }
+  if (teamDate !== date) return;
+  const reviewText = review.status === 'accepted' ? '六级审阅通过；审批与 Paper 仍须独立核验'
+    : `${reviewLabels[review.status] || '状态未知'}；此稿不是已批准交易建议`;
+  $("team-headline").insertAdjacentHTML('beforeend', `<div class="overview-alert" role="status">${esc(reviewText)}</div>`);
   const available = new Set((day?.reports || []).concat(day ? ["daily_conclusion.md"] : []));
   $("team-tabs").innerHTML = TEAM_ROLES.map(([f, label]) =>
     available.has(f)
@@ -687,16 +1381,25 @@ async function showTeam(date, tab) {
 
 /* ── 老板审批面板（集成 team.db）── */
 const DEC_LABEL = {approved: "✅ 已批准", rejected: "❌ 已否决", reduced: "降仓批准"};
+const approvalRequests = new Map();
 async function renderApprove(date) {
   const box = $("team-approve");
-  let plan = null, decisions = [], teamDb = null;
-  try { plan = await (await fetch(`/trading_team/outputs/${date}/plan.json?_=` + Date.now())).json(); } catch(e) {}
-  try { decisions = (await (await fetch("/trading_team/loops/approvals.json?_=" + Date.now())).json()).decisions || []; } catch(e) {}
+  let plan = null, teamDb = null, audit = null, review = null;
+  try { plan = await (await fetch(`/trading_team/decisions/${date}/decision.json?_=` + Date.now())).json(); } catch(e) {}
   try { teamDb = await (await fetch("/api/team-db?_=" + Date.now())).json(); } catch(e) {}
-  if (!plan || !plan.proposals) { box.innerHTML = ""; return; }
-  const decidedOf = code => { for (let i = decisions.length - 1; i >= 0; i--)
-    if (decisions[i].date === date && decisions[i].code === code) return decisions[i]; return null; };
-  const pendCount = plan.proposals.filter(p => !decidedOf(p.code)).length;
+  try { const response = await (await fetch(`/api/approvals?date=${encodeURIComponent(date)}`)).json(); if (response.ok) audit = response.approval; } catch(e) {}
+  try { review = await readReviewStatus(date); } catch(e) {}
+  if (teamDate && teamDate !== date) return;
+  if (!plan || !plan.plans || !plan.plan_hash) { box.innerHTML = ""; return; }
+  const canReject = audit && ['complete','legacy_untracked'].includes(audit.status) && audit.plan_hash === plan.plan_hash;
+  const reviewAccepted = review?.status === 'accepted' && review.source?.plan_hash === plan.plan_hash;
+  const canApprove = canReject && reviewAccepted;
+  const auditLabels = {complete:'审批同步已核验',pending:'审批已记录，待恢复同步；执行已阻止',invalid:'审批证据冲突；执行已阻止',legacy_untracked:'无版本化审批事件',missing:'暂无审批事件'};
+  const auditHtml = `<div role="status" class="appr-note" style="margin:8px 0;overflow-wrap:anywhere">${auditLabels[audit?.status] || '审批同步状态不可用'}
+    <div style="color:${reviewAccepted ? 'var(--ok)' : 'var(--run)'}">独立审阅：${reviewAccepted ? '当前计划六级通过' : (reviewLabels[review?.status] || '状态未知') + '，新增批准与执行已阻断'}</div>
+    ${audit?.status === 'pending' ? '<button class="appr-btn" data-recover>恢复同步</button>' : ''}
+    ${(audit?.reasons || []).map(reason => `<div>${escAny(reason)}</div>`).join('')}</div>`;
+  const pendCount = plan.plans.filter(p => (p.approval || "pending") === "pending").length;
 
   // team.db 状态
   const dbDec = teamDb?.ok ? teamDb.decisions.find(d => d.date === date) : null;
@@ -705,7 +1408,7 @@ async function renderApprove(date) {
   if (dbDec) {
     const execStatus = dbDec.executed_at
       ? `<span style="color:var(--ok)">✅ 已执行</span> @ ${dbDec.executed_at.slice(0,19).replace("T"," ")}`
-      : (dbDec.pm_status === "approved" ? `<span style="color:var(--run)">⏳ 待执行（Automation 每5分钟轮询）</span>` : `<span style="color:var(--dim)">未 approved</span>`);
+      : (!canApprove ? `<span style="color:var(--fail)">审批或审阅前置条件未通过</span>` : dbDec.pm_status === "approved" ? `<span style="color:var(--run)">已批复，尚无执行回执</span>` : `<span style="color:var(--dim)">未 approved</span>`);
     dbHtml = `<div style="margin:10px 0;padding:10px;background:var(--bg);border-radius:8px;font-size:12px">
       <b>📦 team.db 状态</b> · 决策 ${dbDec.date} · ${dbDec.pm_status} · ${execStatus}
       ${dbDec.execution_result ? `<br><span style="color:var(--dim)">结果: ${esc(dbDec.execution_result)}</span>` : ""}
@@ -713,28 +1416,56 @@ async function renderApprove(date) {
     </div>`;
   }
 
-  const rows = plan.proposals.map(p => {
-    const d = decidedOf(p.code);
+  const rows = plan.plans.map((p, index) => {
+    const d = (p.approval || "pending") === "pending" ? null : p;
     const right = d
-      ? `<span class="pill ${d.decision}">${DEC_LABEL[d.decision] || d.decision}</span>
-         <div class="appr-note">${esc(d.decided_at || "")} · ${esc(d.source || "")}${d.note ? " · " + esc(d.note) : ""}</div>`
-      : `<span style="white-space:nowrap"><button class="appr-btn ok" onclick="approve('${date}','${p.code}','${p.name}','approved')">批准</button><button class="appr-btn no" onclick="approve('${date}','${p.code}','${p.name}','rejected')">否决</button></span>`;
-    return `<div class="kv"><span>${p.name} ${p.code} · <b>${p.direction}</b> ${p.position_pct || ""}
-      <span style="color:var(--dim);font-size:11.5px">入场 ${p.entry} · 止损 ${p.stop ?? "—"}</span></span>
-      <span style="text-align:right">${right}</span></div>`;
+      ? `<span class="pill ${d.approval}">${DEC_LABEL[d.approval] || d.approval}</span>
+         <div class="appr-note">${esc(d.approved_at || "")}${d.approval_note ? " · " + esc(d.approval_note) : ""}</div>`
+      : `<span style="white-space:nowrap"><button class="appr-btn ok" data-index="${index}" data-approval="approved" ${canApprove ? '' : 'disabled'}>批准</button><button class="appr-btn no" data-index="${index}" data-approval="rejected" ${canReject ? '' : 'disabled'}>否决</button></span>`;
+    return `<div class="kv approval-row"><span>${escAny(p.name)} ${escAny(p.code)} · <b>${escAny(p.direction)}</b> ${escAny(p.position_pct || "")}
+      <span style="color:var(--dim);font-size:11.5px">入场 ${escAny(p.entry)} · 止损 ${escAny(p.stop ?? "—")}</span></span>
+      <span class="approval-result">${right}</span></div>`;
   }).join("");
-  box.innerHTML = `<div class="card"><div class="sub" style="margin-bottom:6px">🖐 老板审批 · ${date}
-    ${pendCount ? `<span style="color:var(--run)">${pendCount} 项待批复</span>` : `<span style="color:var(--ok)">全部已批复</span>`}
-    <span style="float:right">批复也可在 Kimi 对话中直接说</span></div>${rows}${dbHtml}</div>`;
+  box.innerHTML = `<div class="card"><div class="sub approval-head"><span>老板审批 · ${date}</span>
+    ${pendCount ? `<span style="color:var(--run)">${pendCount} 项待批复</span>` : `<span>批复已记录</span>`}
+    <span>版本 ${escAny(plan.plan_hash.slice(0,12))}</span></div>${auditHtml}${rows}${dbHtml}
+    <details style="margin-top:10px"><summary>审批事件（${audit?.event_count ?? '未知'}）</summary>
+      ${(audit?.events || []).map(event => `<div class="appr-note" style="padding:6px 0;overflow-wrap:anywhere">${escAny(event.decided_at)} · ${escAny(event.code)} · ${DEC_LABEL[event.decision] || escAny(event.decision)}<br>版本 ${escAny(event.plan_hash.slice(0,12))} · 请求 ${escAny(event.event_id)}${event.note ? '<br>' + escAny(event.note) : ''}</div>`).join('') || '<div class="sub">无版本化审批事件</div>'}
+    </details></div>`;
+  box.querySelectorAll('[data-approval]').forEach(button => button.addEventListener('click', () => {
+    const p = plan.plans[Number(button.dataset.index)];
+    approve(date, p.code, p.name, button.dataset.approval, plan.plan_hash);
+  }));
+  box.querySelector('[data-recover]')?.addEventListener('click', () => recoverApproval(date));
 }
-async function approve(date, code, name, decision) {
+async function approve(date, code, name, decision, plan_hash) {
+  const key = JSON.stringify([date,code,name,decision,plan_hash]);
+  let request = approvalRequests.get(key);
+  if (request?.inflight) return;
+  if (!request) { request = {id:crypto.randomUUID(),inflight:false}; approvalRequests.set(key,request); }
+  request.inflight = true;
   try {
     const r = await fetch("/api/approve", {method: "POST", headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({date, code, name, decision})});
+      body: JSON.stringify({date, code, name, decision, plan_hash, request_id:request.id})});
     const j = await r.json();
-    if (!j.ok) { alert("批复失败: " + (j.error || "")); return; }
-  } catch(e) { alert("批复请求失败"); return; }
-  renderApprove(date);
+    if (!j.ok) {
+      alert(j.code === "state_busy" ? "系统正在写入，本次批复未提交。请稍后刷新计划，再重试。"
+        : j.code === "approval_projection_pending" ? "审批事件已记录，同步尚未完成。请恢复同步，不要重复批复。"
+        : j.code === "approval_state_unknown" ? "批复结果尚未确认，请先查看审批事件与同步状态。" : "批复未完成: " + (j.error || ""));
+      return;
+    }
+    approvalRequests.delete(key);
+    if (j.entry?.superseded) alert('此请求已记录，但已被后续批复或新计划替代；未重新应用。');
+  } catch(e) { alert("批复结果尚未确认，请先查看审批事件。同一页面重试将沿用原请求编号。"); }
+  finally { request.inflight = false; await renderApprove(date); }
+}
+async function recoverApproval(date) {
+  try {
+    const response = await fetch('/api/approvals/recover', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date})});
+    const result = await response.json();
+    if (!result.ok) alert('同步未完成: ' + (result.error || '状态未知'));
+  } catch(e) { alert('同步结果尚未确认，请刷新查看。'); }
+  await renderApprove(date);
 }
 async function loadTeam() {
   try { teamDays = await (await fetch("/trading_team/outputs/index.json?_=" + Date.now())).json(); }
@@ -762,8 +1493,11 @@ async function loadPool() {
   if (day) {
     try { snap = await (await fetch(`/trading_team/context/${day}/snapshot.json?_=` + Date.now())).json(); } catch(e) {}
     try {
-      const plan = await (await fetch(`/trading_team/outputs/${day}/plan.json?_=` + Date.now())).json();
-      (plan.proposals || []).forEach(p => planMap[p.code] = p);
+      const review = await readReviewStatus(day);
+      if (review.status === 'accepted') {
+        const plan = await (await fetch(`/trading_team/outputs/${day}/plan.json?_=` + Date.now())).json();
+        (plan.proposals || []).forEach(p => planMap[p.code] = p);
+      }
     } catch(e) {}
   }
   const pctCls = v => v == null ? "" : (v >= 0 ? "color:var(--up)" : "color:var(--down)");
@@ -789,5 +1523,6 @@ async function loadPool() {
 loadPool();
 setInterval(loadPool, 30000);
 </script>
+<script src="/console/research-library.js"></script>
 </body>
 </html>

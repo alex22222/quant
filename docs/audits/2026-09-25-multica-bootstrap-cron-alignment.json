@@ -1,0 +1,25 @@
+{
+  "observed_at_local": "2026-09-25 00:26 Asia/Shanghai",
+  "finding": "The declarative workspace cron was 2 8 * * 1-5 while the sole active remote trigger was 30 7 * * 1-5. bootstrap_workspace matches the exact cron and would have added a second schedule if invoked.",
+  "local_change": {
+    "multica/workspace.json": "cron aligned to 30 7 * * 1-5",
+    "multica/runbooks/daily-research.md": "scheduled-trigger text aligned to 07:30",
+    "tests/test_multica_adapter.py": "asserts bootstrap creates the intended 07:30 trigger and remains idempotent"
+  },
+  "regression": {
+    "before": "focused test failed: actual 2 8 * * 1-5, expected 30 7 * * 1-5",
+    "after": "tests/test_multica_adapter.py 13 passed; tests/ 1270 passed"
+  },
+  "remote_readback": {
+    "autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "status": "active",
+    "enabled_trigger_count": 1,
+    "trigger_id": "97a59a0a-ceda-4115-81f8-bc583a7c5eef",
+    "cron": "30 7 * * 1-5",
+    "timezone": "Asia/Shanghai",
+    "next_run_at_utc": "2026-09-24T23:30:00Z"
+  },
+  "real_bootstrap_invoked": false,
+  "scheduled_holiday_skip_observed": false,
+  "m2_accepted": false
+}

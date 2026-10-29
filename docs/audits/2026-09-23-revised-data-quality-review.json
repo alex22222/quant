@@ -1,0 +1,84 @@
+{
+  "schema": "real_data_quality_review_acceptance.v3",
+  "loop": 76,
+  "verified_at": "2026-09-23T04:52:28+08:00",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "isolated_team": "/private/tmp/quant-real-chain-v3.aq1jzul6/trading_team",
+  "source": {
+    "run_id": "b1718e4180ef4cb8bb5b0d73ebda928b",
+    "plan_hash": "c1dae741e4610476f5a83cf185bc65a53ae586be99b9007e4fb0b3f3a57fd42c",
+    "generation_hash": "c3708c2a8bc07c08988609e3ebeff5bca494086847a0a6f25aae381c3fe321ab",
+    "producer_task_id": "01a0cab7-b887-780a-9a11-b011cf037da8"
+  },
+  "review": {
+    "bundle_hash": "0c0303da780ce232e2ac409563b4174192605f51d4be573270fd3b262b839e2f",
+    "bundle_file_sha256": "58051b1f21dc535c71fd5e9600077a057c102b97065778de6c25cef727da5503",
+    "sealed_file_count": 40,
+    "run_id": "ed32e277706c41b3bd871c1370654a93",
+    "recording_status": "succeeded",
+    "receipt_hash": "efc9d8bcb3b2f929183419ae6a0608cd973fe2bc3fca924d25efe24afffdcfec",
+    "response_sha256": "2b637449c4ae92e9676dfea687f868a3f18937a8f7e3ad8b6a60652043c48097",
+    "verdict": "accept",
+    "checks": {
+      "completed_session": "pass",
+      "source_integrity": "pass",
+      "coverage": "pass"
+    },
+    "limitations": [
+      "optional forex collection failed and global_macro.ok is false",
+      "Asia quote session date is unknown",
+      "US and commodity values are snapshots, not certified closes",
+      "retrospective M1 sample only; not an on-time M2 or M3 trading-day cohort"
+    ],
+    "execution_authorized": false
+  },
+  "remote": {
+    "issue_id": "01a0cace-ea2b-7e31-b8e3-15671d2a8071",
+    "identifier": "SATU-9",
+    "task_id": "01a0cace-ea3b-7c7d-9975-75f5a607d666",
+    "task_status": "completed",
+    "task_started_at": "2026-09-22T20:29:14Z",
+    "task_completed_at": "2026-09-22T20:38:49Z",
+    "agent_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "executor_provider": "codex",
+    "executor_model": "gpt-5.5",
+    "result_comment_id": "01a0cad7-4b49-7b17-bf0c-1f5b32e806df",
+    "status_after_agent": "in_review",
+    "status_after_operator_reconciliation": "done",
+    "status_revision": 5,
+    "status_change_used_no_start": true,
+    "active_run_count_after": 0,
+    "new_task_started_during_reconciliation": false
+  },
+  "verification": {
+    "sealed_bundle_hash_matches": true,
+    "embedded_file_or_disk_mismatches": [],
+    "review_status": "data-quality accepted; market-analysts pending; four later roles blocked",
+    "protected_formal_file_count": 17,
+    "protected_formal_file_changes": [],
+    "isolated_decisions_present": false,
+    "isolated_paper_db_present": false,
+    "isolated_notification_present": false,
+    "full_remote_command_audit_this_loop": false,
+    "application_code_changed": false,
+    "tests_rerun": false
+  },
+  "handoff": {
+    "role": "market-analysts",
+    "status": "pending",
+    "bundle_hash": "bee7ea9b1531644a21b1a0a5a1c23b4f78bb807ca50e79001697e485b00d7d0b",
+    "file_sha256": "3253e764ab0c84704bc1994250eb8d916c3f8e93f4e754bb917be9fd83992ff4",
+    "file_size": 7278500,
+    "file_count": 52,
+    "embedded_file_or_disk_mismatches": [],
+    "upstream_receipt_hash": "efc9d8bcb3b2f929183419ae6a0608cd973fe2bc3fca924d25efe24afffdcfec",
+    "assignee_id": "b765ae90-5a87-424f-9c26-fe3ce0644674",
+    "dispatched": false
+  },
+  "review_chain_complete": false,
+  "milestone_m1_complete": false,
+  "natural_day_accepted": false,
+  "next": "Recheck current goal, SATU-9 done/no active run, Market Analysts agent binding and exact bundle/title dedupe. Dispatch only one bounded Market Analysts review. Preserve the prior SATU-7 rejection and require an independent receipt readback before later roles."
+}

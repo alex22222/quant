@@ -4,15 +4,21 @@
 """
 from __future__ import annotations
 
+import argparse
 import json
 import re
 from pathlib import Path
+
+try:
+    from trading_team.state_lock import atomic_write_json, state_lock
+except ImportError:
+    from state_lock import atomic_write_json, state_lock
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "outputs"
 
 
-def summarize(day_dir: Path) -> dict:
+def summarize(day_dir: Path, team: Path = ROOT) -> dict:
     date = day_dir.name
     item = {"date": date, "reports": [], "headline": "", "ratings": {}, "data_asof": None}
 
@@ -26,6 +32,10 @@ def summarize(day_dir: Path) -> dict:
 
     for f in sorted(day_dir.glob("0*.md")):
         item["reports"].append(f.name)
+    if (day_dir / "counterfactual.md").exists():
+        item["reports"].append("counterfactual.md")
+    if (day_dir / "continuous_counterfactual.md").exists():
+        item["reports"].append("continuous_counterfactual.md")
 
     # 研究员评级表：| 代码/名称 ... | 多空 ｜信心 |
     rfile = day_dir / "05_researcher.md"
@@ -35,7 +45,7 @@ def summarize(day_dir: Path) -> dict:
         if m:
             item["ratings_line"] = m.group(1).strip()[:200]
 
-    manifest = ROOT / "context" / date / "manifest.json"
+    manifest = team / "context" / date / "manifest.json"
     if manifest.exists():
         mj = json.loads(manifest.read_text(encoding="utf-8"))
         item["data_asof"] = mj.get("latest_trade_date")
@@ -43,13 +53,36 @@ def summarize(day_dir: Path) -> dict:
     return item
 
 
-def main() -> None:
-    days = sorted([d for d in OUT.iterdir() if d.is_dir() and re.fullmatch(r"\d{4}-\d{2}-\d{2}", d.name)],
+def build_index(team: Path = ROOT) -> list[dict]:
+    with state_lock(team):
+        return _build_index(team)
+
+
+def _build_index(team: Path) -> list[dict]:
+    out = team / "outputs"
+    out.mkdir(parents=True, exist_ok=True)
+    days = sorted([d for d in out.iterdir() if d.is_dir() and re.fullmatch(r"\d{4}-\d{2}-\d{2}", d.name)],
                   key=lambda d: d.name, reverse=True)
-    items = [summarize(d) for d in days]
-    idx_path = OUT / "index.json"
-    idx_path.write_text(json.dumps(items, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"index.json -> {len(items)} 天")
+    items = [summarize(d, team) for d in days]
+    idx_path = out / "index.json"
+    atomic_write_json(idx_path, items)
+    return items
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--finalize-available",
+        action="store_true",
+        help="Explicitly run deterministic finalization before rebuilding the index",
+    )
+    args = parser.parse_args()
+    if args.finalize_available:
+        from trading_team.daily_finalize import finalize_available_tracked
+        finalized = finalize_available_tracked()
+        print(f"daily_finalize -> {len(finalized)} days")
+    items = build_index()
+    print(f"index.json -> {len(items)} days")
 
 
 if __name__ == "__main__":

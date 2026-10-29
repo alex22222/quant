@@ -1,0 +1,44 @@
+{
+  "schema": "quant.natural_publication_model_rejection.v1",
+  "business_date": "2026-10-15",
+  "observed_at": "2026-10-15T07:45+08:00 onward",
+  "goal_status": "blocked",
+  "issue": {"id": "01a13cc0-9c14-783c-beda-78a2fb2a92f8", "identifier": "SATU-93", "title": "A股每日研究 2026-10-15", "created_at": "2026-10-14T23:30:18Z", "status": "blocked", "status_changed_at": "2026-10-14T23:46:30Z", "status_change_no_start": true},
+  "unique_task": {
+    "id": "01a13cc0-9c2d-71b7-9738-0bc04304554f",
+    "agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "started_at": "2026-10-14T23:30:21Z",
+    "completed_at": "2026-10-14T23:30:45Z",
+    "status": "failed",
+    "failure_reason": "api_invalid_request",
+    "error": "{\"type\":\"error\",\"status\":400,\"error\":{\"type\":\"invalid_request_error\",\"message\":\"The 'gpt-5.5' model is not supported when using Codex with a ChatGPT account.\"}}",
+    "task_count_after_status_change": 1
+  },
+  "local_readonly_facts": {
+    "daily_research_runs": [],
+    "formal_output_directory_exists": false,
+    "decision_file_exists": false,
+    "today_local_outbox": [],
+    "dual_paper_each_cash_equity": [100000, 100000],
+    "dual_paper_each_trades": 0,
+    "external_live_notification_absence_proven": false
+  },
+  "model_catalog_observation": {
+    "source": "/Users/henry/.codex/models_cache.json",
+    "fetched_at": "2026-10-14T23:45:53.280479Z",
+    "gpt_5_5_listed": false,
+    "gpt_6_1_sol_listed": true,
+    "gpt_6_1_sol_xhigh_listed": true,
+    "cache_does_not_prove_actual_inference_access": true,
+    "official_guidance": "https://developers.openai.com/siwc/token-sharing-open-source/models-and-inference",
+    "root_cause_of_change_since_yesterday": "not_established"
+  },
+  "pending_user_decision": "Only switch Research Lead and Audit Verifier to gpt-6.1-sol with existing xhigh; no global change or retry today. No authorization response received in this round.",
+  "model_config_changed_this_round": false,
+  "production_retry": false,
+  "probe_dispatched": false,
+  "M2_passed": false,
+  "M3_started": false,
+  "next": "Preserve original failure; postclose readonly safety check. Any authorized model change applies only to future original natural publication and requires actual runtime evidence."
+}

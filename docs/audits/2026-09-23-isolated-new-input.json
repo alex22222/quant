@@ -1,0 +1,192 @@
+{
+  "schema": "isolated_full_input_acceptance.v1",
+  "loop": 65,
+  "verified_at": "2026-09-23T01:14:17.208621+08:00",
+  "capture": {
+    "schema": "isolated_input_capture.v1",
+    "loop": 65,
+    "business_date": "2026-09-23",
+    "expected_completed_session": "2026-09-22",
+    "team": "/private/tmp/quant-real-chain-v2.drq6k45z/trading_team",
+    "started_at": "2026-09-23T01:08:49.415009+08:00",
+    "status": "captured",
+    "model_called": false,
+    "paper_executed": false,
+    "notification_sent": false,
+    "manifest_ok": true,
+    "collector_run_id": "6f14cd8f088240c5a3e5efb07f553c0c",
+    "latest_trade_date": "2026-09-22",
+    "manifest_sha256": "f2ee44be59216e3e4da0dd032be4e6a7566765b8540b1568c0a430f43e3fb3c7",
+    "finished_at": "2026-09-23T01:10:56.540856+08:00",
+    "protected_changed": []
+  },
+  "core": {
+    "manifest_ok": true,
+    "source_count": 30,
+    "collector_status": "succeeded",
+    "collector_steps": 31,
+    "all_step_artifact_hashes_verified": true,
+    "codes": [
+      "000063",
+      "000300",
+      "000333",
+      "000858",
+      "002594",
+      "300750",
+      "600036",
+      "600519",
+      "600900",
+      "601012",
+      "601318",
+      "601899"
+    ],
+    "snapshot_archive_technical_close_mismatches": 0,
+    "financial_reports": {
+      "000333": 4,
+      "000063": 4,
+      "300750": 4,
+      "000858": 4,
+      "600900": 4,
+      "601012": 4,
+      "601899": 4,
+      "002594": 4,
+      "600519": 4,
+      "601318": 4,
+      "600036": 4
+    },
+    "breadth_total": 5221,
+    "counts": {
+      "up": 2284,
+      "down": 2781,
+      "flat": 156,
+      "up_gt5": 224,
+      "down_gt5": 43
+    },
+    "breadth_percent_recompute_mismatches": 0,
+    "raw_quote_hashes_verified": true
+  },
+  "macro": {
+    "ok": false,
+    "sections": {
+      "overnight_us": {
+        "ok": true,
+        "source": "腾讯行情",
+        "asof": "2026-09-22 13:11:20",
+        "error": null
+      },
+      "vix": {
+        "ok": true,
+        "source": "CBOE 官方",
+        "asof": "09/21/2026",
+        "error": null
+      },
+      "asia": {
+        "ok": true,
+        "source": "新浪/东财",
+        "asof": "2026-09-23",
+        "error": null
+      },
+      "commodities": {
+        "ok": true,
+        "source": "新浪国际期货",
+        "asof": "2026-09-23",
+        "error": null
+      },
+      "forex": {
+        "ok": false,
+        "source": null,
+        "asof": null,
+        "error": "ConnectionError(ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))"
+      },
+      "monetary_policy": {
+        "ok": true,
+        "source": "Federal Reserve 官方 RSS",
+        "asof": "Wed, 16 Sep 2026 18:00:00 GMT",
+        "error": null
+      },
+      "a_share_hotspots": {
+        "ok": true,
+        "source": "涨停池题材聚类（回退）",
+        "asof": "2026-09-22",
+        "error": null
+      },
+      "global_news": {
+        "ok": true,
+        "source": "新浪 7×24",
+        "asof": "2026-09-23 01:12:01",
+        "error": null
+      }
+    },
+    "findings": [
+      "forex source failed; missing is explicit and optional by the existing collector contract, not alone a publication blocker",
+      "Asia asof is date.today(), not a provider market timestamp; source session must be marked unknown instead of pretending it is the capture date",
+      "US quotes have provider time 2026-09-22 13:11:20 but no session state or timezone; overnight_us/close fields must not imply verified closing prices"
+    ]
+  },
+  "file_hashes": {
+    "context/2026-09-23/execution_archive.json": "cbe94c7522537ec8a4771726e89ca7806670caedc210b253e239570e47c99e00",
+    "context/2026-09-23/fundamental_000063.json": "0de0ed083473edeee10afb5ae356156a9db210a9676939069a624fe43e6f9fc2",
+    "context/2026-09-23/fundamental_000333.json": "cdeb7bd01e144d2b5f21d0c6ab76b36b35385a2712c89a3f84c97a8ba2aa1e75",
+    "context/2026-09-23/fundamental_000858.json": "469d9acb09c3ccb2f4656d99c3b3f1572720e81217185d84186d289d7154de0a",
+    "context/2026-09-23/fundamental_002594.json": "8adc35e0e179b4dc7b7924bfd12e647f2d7d0edc7eb75ef8879b8339a48905fc",
+    "context/2026-09-23/fundamental_300750.json": "445cc111de8e1d582c2a497e176fd51bb4bfe6ad41de832bbdf2952d6554a374",
+    "context/2026-09-23/fundamental_600036.json": "c4155ba2bdf0ed3d39739853c6421b579bc68fab5b21509767bf58b2e16f6cc9",
+    "context/2026-09-23/fundamental_600519.json": "7d69549abf4e795a5987992bd3e3eb9f517c3054ecec89b702de247b60180ba2",
+    "context/2026-09-23/fundamental_600900.json": "3d197397246d6736b32a37a1b2efd64d7aa38a2c6e7d2312f832b898cdc0f707",
+    "context/2026-09-23/fundamental_601012.json": "379d536c8375f39a5b1a8ae6ef5af59351c7cd12fa7481f39d20c2407fd4b3f4",
+    "context/2026-09-23/fundamental_601318.json": "92883212cb0925da691c8cec8dfe96b91999e1af00721c862dcf297ae882e0bc",
+    "context/2026-09-23/fundamental_601899.json": "dd9afa674589d372c42cfbac35708aff7fec4ff764c59836851a8b0d093b0fd3",
+    "context/2026-09-23/global_macro.json": "ae400d0090bde6a33e7302d11158c46b8237b96ca0f881d08ff249a2792cbc0d",
+    "context/2026-09-23/manifest.json": "f2ee44be59216e3e4da0dd032be4e6a7566765b8540b1568c0a430f43e3fb3c7",
+    "context/2026-09-23/market_breadth.json": "69f09981fac259058ba51a66e7c2956bcea44df509624d67d689b3b74193c209",
+    "context/2026-09-23/news.json": "26fb12065bf317c5987181ca1a5be1038135c731d0218d629d29698def0c72c6",
+    "context/2026-09-23/sentiment.json": "2b51f94b74b38e748ecbe2784ac523817a94b33a68b64b186325e5589d74ae71",
+    "context/2026-09-23/snapshot.json": "838b65fc95cd95d42d2b55945764ff1cd70b86a0f7aa95d00521217948b700e1",
+    "context/2026-09-23/technical_000063.json": "c3d7464fe6a36961cf5d30e62b75e8f0c9a3cb0645c7e259cb1346b6e1e27a16",
+    "context/2026-09-23/technical_000300.json": "b20109fde2e747accf185726942050534557513547daf411ebf8b4350aed1984",
+    "context/2026-09-23/technical_000333.json": "c0263cec9f16d2d963fd07a450cc916603f28de776a7861d7d3833554322ace0",
+    "context/2026-09-23/technical_000858.json": "04a0bce199e1c791cdc185c7d5c1246f56d3dc1efc53ed0b8d700def60433c8f",
+    "context/2026-09-23/technical_002594.json": "f2c4abed43617d4c6e927fb39dc4fd66703ee2d71eeed4201ac9357101075c84",
+    "context/2026-09-23/technical_300750.json": "d75bf3323fcb4d80074a606e54c2965e6e002a137fdd24c528b11e20a5f092b9",
+    "context/2026-09-23/technical_600036.json": "66af37bc41edc547e0bd4bd20ac7aced4db4f2b8c33b06bd635e190d4f7641c9",
+    "context/2026-09-23/technical_600519.json": "1d842888b45cef0b35a1dfb6b08fed409c3fe39a764b677381a14521cd134d19",
+    "context/2026-09-23/technical_600900.json": "8a6df7dba0fcc2b60e8be2ab2f972d3028960f16c4dd924669a645500c69bc8f",
+    "context/2026-09-23/technical_601012.json": "2061eec47d14f00a23e6a342d9ac4b8d22fcec704b00f9e47091cc0e2065fef9",
+    "context/2026-09-23/technical_601318.json": "e89122ecade2d353d7a2d7527b8c797f3f758c5aa0480687c7d26b778568283f",
+    "context/2026-09-23/technical_601899.json": "9058fe5d97c0425818dee78e33ac560912ca695f71a97db26876be856e2302cf"
+  },
+  "protected_file_count": 17,
+  "protected_changed": [],
+  "old_review_status": {
+    "data-quality": {
+      "status": "rejected",
+      "run_id": "ca87e47c994648fd98e16202252ec7ed",
+      "receipt_hash": "d7c4494da2cc0f087efacfbc63aa9dd2b14532f2e5cda7e0e4c9c30c1e670c76"
+    },
+    "market-analysts": {
+      "status": "blocked"
+    },
+    "strategy-research": {
+      "status": "blocked"
+    },
+    "paper-trader": {
+      "status": "blocked"
+    },
+    "risk-manager": {
+      "status": "blocked"
+    },
+    "audit-verifier": {
+      "status": "blocked"
+    }
+  },
+  "publish_ready": false,
+  "application_code_changed": false,
+  "tests_rerun": false,
+  "new_multica_task": false,
+  "model_called": false,
+  "paper_executed": false,
+  "notification_sent": false,
+  "milestone_m1_complete": false,
+  "natural_day_accepted": false,
+  "next": "Correct macro observation-date and quote/session semantics with a focused regression; retain this actual capture and explicit optional gaps. Refresh only affected input through real code, then freeze the new pack and dispatch the authorized Multica publication after deduplication."
+}

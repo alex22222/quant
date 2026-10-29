@@ -6,63 +6,2057 @@
       "date": "2026-08-22",
       "trade_date_ref": "2026-08-21",
       "verify_after": "2026-08-28",
-      "verified": false,
+      "verified": true,
       "ratings": {
-        "601318": {"rating": "看多", "confidence": 4, "ref_price": 53.35},
-        "300750": {"rating": "中性偏多", "confidence": 3, "ref_price": 391.15},
-        "600036": {"rating": "中性", "confidence": 3, "ref_price": 38.90},
-        "600519": {"rating": "看空", "confidence": 3, "ref_price": 1272.83},
-        "000063": {"rating": "看空", "confidence": 4, "ref_price": 33.78}
+        "601318": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 53.35,
+          "ret_5d_pct": 4.77,
+          "hit": 1
+        },
+        "300750": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 391.15,
+          "ret_5d_pct": -5.79,
+          "hit": 0
+        },
+        "600036": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 38.9,
+          "ret_5d_pct": 1.16,
+          "hit": 1
+        },
+        "600519": {
+          "rating": "看空",
+          "confidence": 3,
+          "ref_price": 1272.83,
+          "ret_5d_pct": 1.93,
+          "hit": 0
+        },
+        "000063": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 33.78,
+          "ret_5d_pct": -0.44,
+          "hit": 1
+        }
       },
       "trader_plan": {
-        "601318": {"action": "买入15%(风控降仓后)", "entry": "53.5/52.2", "stop": 50.60},
-        "300750": {"action": "条件买入15%", "entry": "突破408.6回踩", "stop": 388.00},
-        "600036": {"action": "观望"},
-        "600519": {"action": "回避"},
-        "000063": {"action": "回避"}
+        "601318": {
+          "action": "买入15%(风控降仓后)",
+          "entry": "53.5/52.2",
+          "stop": 50.6
+        },
+        "300750": {
+          "action": "条件买入15%",
+          "entry": "突破408.6回踩",
+          "stop": 388.0
+        },
+        "600036": {
+          "action": "观望"
+        },
+        "600519": {
+          "action": "回避"
+        },
+        "000063": {
+          "action": "回避"
+        }
       },
-      "result_5d": null,
-      "score": null
+      "result_5d": {
+        "601318": 4.77,
+        "300750": -5.79,
+        "600036": 1.16,
+        "600519": 1.93,
+        "000063": -0.44
+      },
+      "score": 0.6,
+      "scored_at": "2026-09-20"
     },
     {
       "date": "2026-08-23",
       "trade_date_ref": "2026-08-21",
       "verify_after": "2026-08-28",
-      "verified": false,
+      "verified": true,
       "note": "非交易日复盘版；观察池扩至 11 只",
       "ratings": {
-        "601318": {"rating": "看多", "confidence": 4, "ref_price": 53.35},
-        "601899": {"rating": "看多", "confidence": 4, "ref_price": 34.74},
-        "300750": {"rating": "中性偏多", "confidence": 3, "ref_price": 391.15},
-        "600036": {"rating": "中性偏多", "confidence": 3, "ref_price": 38.90},
-        "000333": {"rating": "中性", "confidence": 2, "ref_price": 84.30},
-        "600900": {"rating": "中性", "confidence": 2, "ref_price": 27.96},
-        "000858": {"rating": "中性", "confidence": 2, "ref_price": 71.19},
-        "002594": {"rating": "中性偏空", "confidence": 2, "ref_price": 90.47},
-        "600519": {"rating": "看空", "confidence": 3, "ref_price": 1272.83},
-        "601012": {"rating": "看空", "confidence": 3, "ref_price": 12.42},
-        "000063": {"rating": "看空", "confidence": 4, "ref_price": 33.78}
+        "601318": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 53.35,
+          "ret_5d_pct": 4.77,
+          "hit": 1
+        },
+        "601899": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 34.74,
+          "ret_5d_pct": -0.26,
+          "hit": 0
+        },
+        "300750": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 391.15,
+          "ret_5d_pct": -5.79,
+          "hit": 0
+        },
+        "600036": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 38.9,
+          "ret_5d_pct": 1.16,
+          "hit": 1
+        },
+        "000333": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 84.3,
+          "ret_5d_pct": 2.29,
+          "hit": 0
+        },
+        "600900": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 27.96,
+          "ret_5d_pct": 0.32,
+          "hit": 1
+        },
+        "000858": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 71.19,
+          "ret_5d_pct": 0.45,
+          "hit": 1
+        },
+        "002594": {
+          "rating": "中性偏空",
+          "confidence": 2,
+          "ref_price": 90.47,
+          "ret_5d_pct": 2.04,
+          "hit": 0
+        },
+        "600519": {
+          "rating": "看空",
+          "confidence": 3,
+          "ref_price": 1272.83,
+          "ret_5d_pct": 1.93,
+          "hit": 0
+        },
+        "601012": {
+          "rating": "看空",
+          "confidence": 3,
+          "ref_price": 12.42,
+          "ret_5d_pct": 0.08,
+          "hit": 0
+        },
+        "000063": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 33.78,
+          "ret_5d_pct": -0.44,
+          "hit": 1
+        }
       },
       "trader_plan": {
-        "601318": {"action": "买入15%", "entry": "53.0/52.2", "stop": 50.60},
-        "300750": {"action": "条件买入10%", "entry": "突破408.6", "stop": 388.00},
-        "601899": {"action": "条件买入8%(风控降仓)", "entry": "33.8/33.4", "stop": 32.20},
-        "600036": {"action": "条件买入5%", "entry": "38.5/38.0", "stop": 37.30},
-        "000858": {"action": "观望"},
-        "000333": {"action": "观望"},
-        "600900": {"action": "观望"},
-        "600519": {"action": "回避"},
-        "601012": {"action": "回避"},
-        "000063": {"action": "回避"},
-        "002594": {"action": "回避"}
+        "601318": {
+          "action": "买入15%",
+          "entry": "53.0/52.2",
+          "stop": 50.6
+        },
+        "300750": {
+          "action": "条件买入10%",
+          "entry": "突破408.6",
+          "stop": 388.0
+        },
+        "601899": {
+          "action": "条件买入8%(风控降仓)",
+          "entry": "33.8/33.4",
+          "stop": 32.2
+        },
+        "600036": {
+          "action": "条件买入5%",
+          "entry": "38.5/38.0",
+          "stop": 37.3
+        },
+        "000858": {
+          "action": "观望"
+        },
+        "000333": {
+          "action": "观望"
+        },
+        "600900": {
+          "action": "观望"
+        },
+        "600519": {
+          "action": "回避"
+        },
+        "601012": {
+          "action": "回避"
+        },
+        "000063": {
+          "action": "回避"
+        },
+        "002594": {
+          "action": "回避"
+        }
+      },
+      "result_5d": {
+        "601318": 4.77,
+        "601899": -0.26,
+        "300750": -5.79,
+        "600036": 1.16,
+        "000333": 2.29,
+        "600900": 0.32,
+        "000858": 0.45,
+        "002594": 2.04,
+        "600519": 1.93,
+        "601012": 0.08,
+        "000063": -0.44
+      },
+      "score": 0.455,
+      "scored_at": "2026-09-20"
+    },
+    {
+      "date": "2026-08-24",
+      "verified": true,
+      "ratings": {
+        "601318": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 53.35,
+          "ret_5d_pct": 4.77,
+          "hit": 1
+        },
+        "601899": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 34.74,
+          "ret_5d_pct": -0.26,
+          "hit": 0
+        },
+        "300750": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 391.15,
+          "ret_5d_pct": -5.79,
+          "hit": 0
+        },
+        "600036": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 38.9,
+          "ret_5d_pct": 1.16,
+          "hit": 1
+        },
+        "000333": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 84.3,
+          "ret_5d_pct": 2.29,
+          "hit": 0
+        },
+        "600900": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 27.96,
+          "ret_5d_pct": 0.32,
+          "hit": 1
+        },
+        "000858": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 71.19,
+          "ret_5d_pct": 0.45,
+          "hit": 1
+        },
+        "002594": {
+          "rating": "中性偏空",
+          "confidence": 2,
+          "ref_price": 90.47,
+          "ret_5d_pct": 2.04,
+          "hit": 0
+        },
+        "600519": {
+          "rating": "看空",
+          "confidence": 3,
+          "ref_price": 1272.83,
+          "ret_5d_pct": 1.93,
+          "hit": 0
+        },
+        "601012": {
+          "rating": "看空",
+          "confidence": 3,
+          "ref_price": 12.42,
+          "ret_5d_pct": 0.08,
+          "hit": 0
+        },
+        "000063": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 33.78,
+          "ret_5d_pct": -0.44,
+          "hit": 1
+        }
+      },
+      "result_5d": {
+        "601318": 4.77,
+        "601899": -0.26,
+        "300750": -5.79,
+        "600036": 1.16,
+        "000333": 2.29,
+        "600900": 0.32,
+        "000858": 0.45,
+        "002594": 2.04,
+        "600519": 1.93,
+        "601012": 0.08,
+        "000063": -0.44
+      },
+      "score": 0.455,
+      "block_source": "05_researcher.md 结构化结论块",
+      "market_view": {
+        "view": "平衡",
+        "confidence": 3
+      },
+      "trade_date_ref": "2026-08-21",
+      "verify_after": "2026-08-28",
+      "note": "market_ok=false 闸门日：零买入，四笔昨日已批买入被条款4冻结",
+      "trader_plan": {
+        "601318": {
+          "action": "观望(预案53.0/52.2 止损50.60)",
+          "gate": "条款4冻结"
+        },
+        "601899": {
+          "action": "观望(预案33.4-33.8 止损32.20)",
+          "gate": "条款4冻结"
+        },
+        "300750": {
+          "action": "观望(预案破408.6 止损388.00)",
+          "gate": "条款4冻结"
+        },
+        "600036": {
+          "action": "观望(预案38.0-38.5 止损37.30)",
+          "gate": "条款4冻结"
+        },
+        "000858": {
+          "action": "观望"
+        },
+        "000333": {
+          "action": "观望"
+        },
+        "600900": {
+          "action": "观望"
+        },
+        "600519": {
+          "action": "回避"
+        },
+        "601012": {
+          "action": "回避"
+        },
+        "000063": {
+          "action": "回避"
+        },
+        "002594": {
+          "action": "回避"
+        }
+      },
+      "scored_at": "2026-09-20"
+    },
+    {
+      "date": "2026-08-25",
+      "verified": true,
+      "ratings": {
+        "601318": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 54.92,
+          "ret_5d_pct": 1.67,
+          "hit": 1
+        },
+        "601899": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 34.54,
+          "ret_5d_pct": -2.52,
+          "hit": 0
+        },
+        "600036": {
+          "rating": "看多",
+          "confidence": 3,
+          "ref_price": 39.58,
+          "ret_5d_pct": 1.36,
+          "hit": 1
+        },
+        "300750": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 387.89,
+          "ret_5d_pct": -6.27,
+          "hit": 0
+        },
+        "000333": {
+          "rating": "中性偏多",
+          "confidence": 2,
+          "ref_price": 85.99,
+          "ret_5d_pct": 2.02,
+          "hit": 1
+        },
+        "600900": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 28.15,
+          "ret_5d_pct": -0.21,
+          "hit": 1
+        },
+        "000858": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 71.48,
+          "ret_5d_pct": -0.29,
+          "hit": 1
+        },
+        "002594": {
+          "rating": "中性偏空",
+          "confidence": 2,
+          "ref_price": 90.66,
+          "ret_5d_pct": -2.71,
+          "hit": 1
+        },
+        "600519": {
+          "rating": "看空",
+          "confidence": 3,
+          "ref_price": 1304.66,
+          "ret_5d_pct": -0.39,
+          "hit": 1
+        },
+        "601012": {
+          "rating": "看空",
+          "confidence": 3,
+          "ref_price": 12.15,
+          "ret_5d_pct": -0.66,
+          "hit": 1
+        },
+        "000063": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 33.13,
+          "ret_5d_pct": 3.17,
+          "hit": 0
+        }
+      },
+      "result_5d": {
+        "601318": 1.67,
+        "601899": -2.52,
+        "600036": 1.36,
+        "300750": -6.27,
+        "000333": 2.02,
+        "600900": -0.21,
+        "000858": -0.29,
+        "002594": -2.71,
+        "600519": -0.39,
+        "601012": -0.66,
+        "000063": 3.17
+      },
+      "score": 0.727,
+      "block_source": "05_researcher.md 结构化结论块",
+      "market_view": {
+        "view": "偏空",
+        "confidence": 3
+      },
+      "trade_date_ref": "2026-08-24",
+      "verify_after": "2026-08-31",
+      "note": "正常日报模式；market_ok=false第二日+韩股-4%盘前冲击，全观望/回避；招行/美的评级上调、宁德下调",
+      "trader_plan": {
+        "601318": {
+          "action": "观望(预案53.4-53.6 止损51.90)",
+          "gate": "条款4冻结"
+        },
+        "601899": {
+          "action": "观望(预案33.0-33.3 止损32.00)",
+          "gate": "条款4冻结"
+        },
+        "600036": {
+          "action": "观望(预案39.1-39.2 止损37.90)",
+          "gate": "条款4冻结"
+        },
+        "300750": {
+          "action": "观望(预案破408.6 止损388.00)",
+          "gate": "条款4冻结"
+        },
+        "000333": {
+          "action": "观望"
+        },
+        "000858": {
+          "action": "观望"
+        },
+        "600900": {
+          "action": "观望"
+        },
+        "600519": {
+          "action": "回避"
+        },
+        "601012": {
+          "action": "回避"
+        },
+        "000063": {
+          "action": "回避"
+        },
+        "002594": {
+          "action": "回避"
+        }
+      },
+      "scored_at": "2026-09-20"
+    },
+    {
+      "date": "2026-08-30",
+      "verified": true,
+      "ratings": {
+        "601318": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 55.85,
+          "ret_5d_pct": 4.36,
+          "hit": 1
+        },
+        "600036": {
+          "rating": "中性偏多",
+          "confidence": 4,
+          "ref_price": 39.35,
+          "ret_5d_pct": 5.95,
+          "hit": 1
+        },
+        "600900": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 28.05,
+          "ret_5d_pct": 1.32,
+          "hit": 1
+        },
+        "601899": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 34.65,
+          "ret_5d_pct": -3.75,
+          "hit": 0
+        },
+        "002594": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 92.32,
+          "ret_5d_pct": -5.33,
+          "hit": 0
+        },
+        "600519": {
+          "rating": "中性",
+          "confidence": 4,
+          "ref_price": 1297.4,
+          "ret_5d_pct": 2.51,
+          "hit": 0
+        },
+        "300750": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 368.5,
+          "ret_5d_pct": -4.75,
+          "hit": 0
+        },
+        "000333": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 86.23,
+          "ret_5d_pct": 1.55,
+          "hit": 1
+        },
+        "000858": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 71.51,
+          "ret_5d_pct": 0.66,
+          "hit": 1
+        },
+        "000063": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 33.63,
+          "ret_5d_pct": -1.67,
+          "hit": 1
+        },
+        "601012": {
+          "rating": "中性偏空",
+          "confidence": 4,
+          "ref_price": 12.43,
+          "ret_5d_pct": -5.31,
+          "hit": 1
+        }
+      },
+      "result_5d": {
+        "601318": 4.36,
+        "600036": 5.95,
+        "600900": 1.32,
+        "601899": -3.75,
+        "002594": -5.33,
+        "600519": 2.51,
+        "300750": -4.75,
+        "000333": 1.55,
+        "000858": 0.66,
+        "000063": -1.67,
+        "601012": -5.31
+      },
+      "score": 0.636,
+      "block_source": "05_researcher.md 结构化结论块",
+      "market_view": {
+        "view": "平衡",
+        "confidence": 3
+      },
+      "trade_date_ref": "2026-08-28",
+      "verify_after": "2026-09-04",
+      "scored_at": "2026-09-20"
+    },
+    {
+      "date": "2026-09-02",
+      "verified": true,
+      "ratings": {
+        "600519": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 1297.5,
+          "ret_5d_pct": -0.51,
+          "hit": 1
+        },
+        "000858": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 70.82,
+          "ret_5d_pct": 0.48,
+          "hit": 0
+        },
+        "600036": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 40.87,
+          "ret_5d_pct": 0.32,
+          "hit": 1
+        },
+        "601318": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 56.63,
+          "ret_5d_pct": -0.66,
+          "hit": 0
+        },
+        "300750": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 348.29,
+          "ret_5d_pct": -3.29,
+          "hit": 1
+        },
+        "002594": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 86.8,
+          "ret_5d_pct": -1.06,
+          "hit": 1
+        },
+        "601899": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 32.95,
+          "ret_5d_pct": 4.4,
+          "hit": 1
+        },
+        "000333": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 86.98,
+          "ret_5d_pct": -1.1,
+          "hit": 1
+        },
+        "600900": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 28.72,
+          "ret_5d_pct": -2.33,
+          "hit": 0
+        },
+        "601012": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 11.75,
+          "ret_5d_pct": 0.68,
+          "hit": 0
+        },
+        "000063": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 33.49,
+          "ret_5d_pct": -1.19,
+          "hit": 1
+        }
+      },
+      "result_5d": {
+        "600519": -0.51,
+        "000858": 0.48,
+        "600036": 0.32,
+        "601318": -0.66,
+        "300750": -3.29,
+        "002594": -1.06,
+        "601899": 4.4,
+        "000333": -1.1,
+        "600900": -2.33,
+        "601012": 0.68,
+        "000063": -1.19
+      },
+      "score": 0.636,
+      "block_source": "05_researcher.md 结构化结论块",
+      "market_view": {
+        "view": "平衡偏空",
+        "confidence": 3
+      },
+      "trade_date_ref": "2026-09-02",
+      "verify_after": "2026-09-09",
+      "scored_at": "2026-09-20"
+    },
+    {
+      "date": "2026-09-03",
+      "verified": true,
+      "ratings": {
+        "600519": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 1297.5,
+          "ret_5d_pct": -0.51,
+          "hit": 1
+        },
+        "000858": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 70.82,
+          "ret_5d_pct": 0.48,
+          "hit": 1
+        },
+        "600036": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 40.87,
+          "ret_5d_pct": 0.32,
+          "hit": 1
+        },
+        "601318": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 56.63,
+          "ret_5d_pct": -0.66,
+          "hit": 0
+        },
+        "300750": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 348.29,
+          "ret_5d_pct": -3.29,
+          "hit": 1
+        },
+        "002594": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 86.8,
+          "ret_5d_pct": -1.06,
+          "hit": 1
+        },
+        "601899": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 32.95,
+          "ret_5d_pct": 4.4,
+          "hit": 1
+        },
+        "000333": {
+          "rating": "中性偏多",
+          "confidence": 2,
+          "ref_price": 86.98,
+          "ret_5d_pct": -1.1,
+          "hit": 0
+        },
+        "600900": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 28.72,
+          "ret_5d_pct": -2.33,
+          "hit": 0
+        },
+        "601012": {
+          "rating": "看空",
+          "confidence": 5,
+          "ref_price": 11.75,
+          "ret_5d_pct": 0.68,
+          "hit": 0
+        },
+        "000063": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 33.49,
+          "ret_5d_pct": -1.19,
+          "hit": 1
+        }
+      },
+      "result_5d": {
+        "600519": -0.51,
+        "000858": 0.48,
+        "600036": 0.32,
+        "601318": -0.66,
+        "300750": -3.29,
+        "002594": -1.06,
+        "601899": 4.4,
+        "000333": -1.1,
+        "600900": -2.33,
+        "601012": 0.68,
+        "000063": -1.19
+      },
+      "score": 0.636,
+      "block_source": "05_researcher.md 结构化结论块",
+      "market_view": {
+        "view": "平衡",
+        "confidence": 3
+      },
+      "trade_date_ref": "2026-09-02",
+      "verify_after": "2026-09-09",
+      "scored_at": "2026-09-20"
+    },
+    {
+      "date": "2026-09-05",
+      "verified": true,
+      "ratings": {
+        "600519": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 1330.0,
+          "ret_5d_pct": -4.12,
+          "hit": 0
+        },
+        "000858": {
+          "rating": "看多",
+          "confidence": 3,
+          "ref_price": 71.98,
+          "ret_5d_pct": -3.1,
+          "hit": 0
+        },
+        "600036": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 41.69,
+          "ret_5d_pct": -0.82,
+          "hit": 0
+        },
+        "601318": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 58.24,
+          "ret_5d_pct": -4.24,
+          "hit": 0
+        },
+        "300750": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 351.0,
+          "ret_5d_pct": -5.84,
+          "hit": 0
+        },
+        "002594": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 87.4,
+          "ret_5d_pct": -3.89,
+          "hit": 1
+        },
+        "601899": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 33.35,
+          "ret_5d_pct": -3.27,
+          "hit": 0
+        },
+        "000333": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 87.57,
+          "ret_5d_pct": -1.5,
+          "hit": 1
+        },
+        "600900": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 28.42,
+          "ret_5d_pct": 0.11,
+          "hit": 1
+        },
+        "601012": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 11.77,
+          "ret_5d_pct": -3.82,
+          "hit": 1
+        },
+        "000063": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 33.07,
+          "ret_5d_pct": -2.72,
+          "hit": 1
+        }
+      },
+      "result_5d": {
+        "600519": -4.12,
+        "000858": -3.1,
+        "600036": -0.82,
+        "601318": -4.24,
+        "300750": -5.84,
+        "002594": -3.89,
+        "601899": -3.27,
+        "000333": -1.5,
+        "600900": 0.11,
+        "601012": -3.82,
+        "000063": -2.72
+      },
+      "score": 0.455,
+      "block_source": "05_researcher.md 结构化结论块",
+      "market_view": {
+        "view": "平衡",
+        "confidence": 3
+      },
+      "trade_date_ref": "2026-09-04",
+      "verify_after": "2026-09-11",
+      "scored_at": "2026-09-20"
+    },
+    {
+      "date": "2026-09-06",
+      "verified": true,
+      "ratings": {
+        "600519": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 1330.0,
+          "ret_5d_pct": -4.12,
+          "hit": 0
+        },
+        "000858": {
+          "rating": "看多",
+          "confidence": 3,
+          "ref_price": 71.98,
+          "ret_5d_pct": -3.1,
+          "hit": 0
+        },
+        "600036": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 41.69,
+          "ret_5d_pct": -0.82,
+          "hit": 0
+        },
+        "601318": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 58.24,
+          "ret_5d_pct": -4.24,
+          "hit": 0
+        },
+        "300750": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 351.0,
+          "ret_5d_pct": -5.84,
+          "hit": 0
+        },
+        "002594": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 87.4,
+          "ret_5d_pct": -3.89,
+          "hit": 1
+        },
+        "601899": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 33.35,
+          "ret_5d_pct": -3.27,
+          "hit": 0
+        },
+        "000333": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 87.57,
+          "ret_5d_pct": -1.5,
+          "hit": 0
+        },
+        "600900": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 28.42,
+          "ret_5d_pct": 0.11,
+          "hit": 1
+        },
+        "601012": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 11.77,
+          "ret_5d_pct": -3.82,
+          "hit": 1
+        },
+        "000063": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 33.07,
+          "ret_5d_pct": -2.72,
+          "hit": 1
+        }
+      },
+      "result_5d": {
+        "600519": -4.12,
+        "000858": -3.1,
+        "600036": -0.82,
+        "601318": -4.24,
+        "300750": -5.84,
+        "002594": -3.89,
+        "601899": -3.27,
+        "000333": -1.5,
+        "600900": 0.11,
+        "601012": -3.82,
+        "000063": -2.72
+      },
+      "score": 0.364,
+      "block_source": "05_researcher.md 结构化结论块",
+      "market_view": {
+        "view": "平衡",
+        "confidence": 3
+      },
+      "trade_date_ref": "2026-09-04",
+      "verify_after": "2026-09-11",
+      "scored_at": "2026-09-20"
+    },
+    {
+      "date": "2026-09-07",
+      "verified": true,
+      "ratings": {
+        "600519": {
+          "rating": "中性",
+          "confidence": 1,
+          "ref_price": null,
+          "ret_5d_pct": -2.89,
+          "hit": 0
+        },
+        "000858": {
+          "rating": "看多",
+          "confidence": 3,
+          "ref_price": null,
+          "ret_5d_pct": -2.25,
+          "hit": 0
+        },
+        "600036": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 41.52,
+          "ret_5d_pct": 1.85,
+          "hit": 1
+        },
+        "601318": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 58.28,
+          "ret_5d_pct": -1.17,
+          "hit": 0
+        },
+        "300750": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 348.6,
+          "ret_5d_pct": -3.18,
+          "hit": 0
+        },
+        "002594": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 87.21,
+          "ret_5d_pct": -1.25,
+          "hit": 1
+        },
+        "601899": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 33.04,
+          "ret_5d_pct": -1.89,
+          "hit": 0
+        },
+        "000333": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 87.6,
+          "ret_5d_pct": 0.61,
+          "hit": 1
+        },
+        "600900": {
+          "rating": "中性偏多",
+          "confidence": 4,
+          "ref_price": 28.4,
+          "ret_5d_pct": 2.8,
+          "hit": 1
+        },
+        "601012": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 11.79,
+          "ret_5d_pct": -4.63,
+          "hit": 1
+        },
+        "000063": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 33.09,
+          "ret_5d_pct": -4.0,
+          "hit": 1
+        }
+      },
+      "result_5d": {
+        "600519": -2.89,
+        "000858": -2.25,
+        "600036": 1.85,
+        "601318": -1.17,
+        "300750": -3.18,
+        "002594": -1.25,
+        "601899": -1.89,
+        "000333": 0.61,
+        "600900": 2.8,
+        "601012": -4.63,
+        "000063": -4.0
+      },
+      "score": 0.545,
+      "block_source": "05_researcher.md 结构化结论块",
+      "market_view": {
+        "view": "平衡",
+        "confidence": 3
+      },
+      "trade_date_ref": "2026-09-07",
+      "verify_after": "2026-09-14",
+      "scored_at": "2026-09-20"
+    },
+    {
+      "date": "2026-09-08",
+      "verified": true,
+      "ratings": {
+        "601899": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 33.44,
+          "ret_5d_pct": -6.44,
+          "hit": 0
+        },
+        "600036": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 41.01,
+          "ret_5d_pct": 0.49,
+          "hit": 1
+        },
+        "600519": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 1318.0,
+          "ret_5d_pct": -2.79,
+          "hit": 0
+        },
+        "601318": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 56.0,
+          "ret_5d_pct": -1.5,
+          "hit": 0
+        },
+        "000858": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 71.43,
+          "ret_5d_pct": -2.72,
+          "hit": 0
+        },
+        "300750": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 345.67,
+          "ret_5d_pct": -5.7,
+          "hit": 0
+        },
+        "600900": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 27.84,
+          "ret_5d_pct": 2.26,
+          "hit": 0
+        },
+        "002594": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 86.39,
+          "ret_5d_pct": -2.62,
+          "hit": 1
+        },
+        "000333": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 85.88,
+          "ret_5d_pct": 2.44,
+          "hit": 0
+        },
+        "000063": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 33.36,
+          "ret_5d_pct": -3.61,
+          "hit": 1
+        },
+        "601012": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 11.86,
+          "ret_5d_pct": -6.73,
+          "hit": 1
+        }
+      },
+      "result_5d": {
+        "601899": -6.44,
+        "600036": 0.49,
+        "600519": -2.79,
+        "601318": -1.5,
+        "000858": -2.72,
+        "300750": -5.7,
+        "600900": 2.26,
+        "002594": -2.62,
+        "000333": 2.44,
+        "000063": -3.61,
+        "601012": -6.73
+      },
+      "score": 0.364,
+      "block_source": "05_researcher.md 结构化结论块",
+      "market_view": {
+        "view": "平衡",
+        "confidence": 3
+      },
+      "trade_date_ref": "2026-09-08",
+      "verify_after": "2026-09-15",
+      "scored_at": "2026-09-20"
+    },
+    {
+      "date": "2026-09-09",
+      "verified": true,
+      "ratings": {
+        "600519": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 1309.3,
+          "ret_5d_pct": -2.79,
+          "hit": 0
+        },
+        "000858": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 71.65,
+          "ret_5d_pct": -2.72,
+          "hit": 0
+        },
+        "600036": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 40.9,
+          "ret_5d_pct": 0.49,
+          "hit": 1
+        },
+        "601318": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 55.7,
+          "ret_5d_pct": -1.5,
+          "hit": 0
+        },
+        "300750": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 335.49,
+          "ret_5d_pct": -5.7,
+          "hit": 0
+        },
+        "002594": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 86.57,
+          "ret_5d_pct": -2.62,
+          "hit": 1
+        },
+        "601899": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 33.86,
+          "ret_5d_pct": -6.44,
+          "hit": 0
+        },
+        "000333": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 85.15,
+          "ret_5d_pct": 2.44,
+          "hit": 0
+        },
+        "600900": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 27.87,
+          "ret_5d_pct": 2.26,
+          "hit": 0
+        },
+        "601012": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 11.88,
+          "ret_5d_pct": -6.73,
+          "hit": 1
+        },
+        "000063": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 33.21,
+          "ret_5d_pct": -3.61,
+          "hit": 1
+        }
+      },
+      "result_5d": {
+        "600519": -2.79,
+        "000858": -2.72,
+        "600036": 0.49,
+        "601318": -1.5,
+        "300750": -5.7,
+        "002594": -2.62,
+        "601899": -6.44,
+        "000333": 2.44,
+        "600900": 2.26,
+        "601012": -6.73,
+        "000063": -3.61
+      },
+      "score": 0.364,
+      "block_source": "05_researcher.md 结构化结论块",
+      "market_view": {
+        "view": "平衡",
+        "confidence": 3
+      },
+      "trade_date_ref": "2026-09-08",
+      "verify_after": "2026-09-15",
+      "scored_at": "2026-09-20"
+    },
+    {
+      "date": "2026-09-10",
+      "verified": true,
+      "ratings": {
+        "601318": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 55.28,
+          "ret_5d_pct": -3.2,
+          "hit": 0
+        },
+        "601899": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 34.4,
+          "ret_5d_pct": -6.48,
+          "hit": 0
+        },
+        "600036": {
+          "rating": "看多",
+          "confidence": 4,
+          "ref_price": 41.0,
+          "ret_5d_pct": -0.2,
+          "hit": 0
+        },
+        "600900": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 28.05,
+          "ret_5d_pct": 1.46,
+          "hit": 1
+        },
+        "300750": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 336.84,
+          "ret_5d_pct": -9.31,
+          "hit": 0
+        },
+        "000858": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 71.16,
+          "ret_5d_pct": -2.67,
+          "hit": 0
+        },
+        "000333": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 86.02,
+          "ret_5d_pct": -1.19,
+          "hit": 1
+        },
+        "600519": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 1290.88,
+          "ret_5d_pct": -2.55,
+          "hit": 1
+        },
+        "002594": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 85.88,
+          "ret_5d_pct": -2.24,
+          "hit": 1
+        },
+        "000063": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 33.09,
+          "ret_5d_pct": -2.18,
+          "hit": 1
+        },
+        "601012": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 11.83,
+          "ret_5d_pct": -7.02,
+          "hit": 1
+        }
+      },
+      "result_5d": {
+        "601318": -3.2,
+        "601899": -6.48,
+        "600036": -0.2,
+        "600900": 1.46,
+        "300750": -9.31,
+        "000858": -2.67,
+        "000333": -1.19,
+        "600519": -2.55,
+        "002594": -2.24,
+        "000063": -2.18,
+        "601012": -7.02
+      },
+      "score": 0.545,
+      "block_source": "05_researcher.md 结构化结论块",
+      "market_view": {
+        "view": "平衡",
+        "confidence": 3
+      },
+      "trade_date_ref": "2026-09-09",
+      "verify_after": "2026-09-16",
+      "scored_at": "2026-09-20"
+    },
+    {
+      "date": "2026-09-11",
+      "verified": true,
+      "ratings": {
+        "600519": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 1285.13,
+          "ret_5d_pct": -1.41,
+          "hit": 1
+        },
+        "000858": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 70.48,
+          "ret_5d_pct": -1.92,
+          "hit": 1
+        },
+        "600036": {
+          "rating": "看多",
+          "confidence": 3,
+          "ref_price": 41.57,
+          "ret_5d_pct": -2.33,
+          "hit": 0
+        },
+        "601318": {
+          "rating": "看多",
+          "confidence": 3,
+          "ref_price": 55.52,
+          "ret_5d_pct": -3.91,
+          "hit": 0
+        },
+        "300750": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 338.06,
+          "ret_5d_pct": -9.99,
+          "hit": 0
+        },
+        "002594": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 83.52,
+          "ret_5d_pct": 1.74,
+          "hit": 0
+        },
+        "601899": {
+          "rating": "看多",
+          "confidence": 3,
+          "ref_price": 34.11,
+          "ret_5d_pct": -9.41,
+          "hit": 0
+        },
+        "000333": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 86.2,
+          "ret_5d_pct": -1.35,
+          "hit": 1
+        },
+        "600900": {
+          "rating": "看多",
+          "confidence": 3,
+          "ref_price": 28.09,
+          "ret_5d_pct": 1.32,
+          "hit": 1
+        },
+        "601012": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 11.7,
+          "ret_5d_pct": -6.07,
+          "hit": 1
+        },
+        "000063": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 32.45,
+          "ret_5d_pct": -1.79,
+          "hit": 1
+        }
+      },
+      "result_5d": {
+        "600519": -1.41,
+        "000858": -1.92,
+        "600036": -2.33,
+        "601318": -3.91,
+        "300750": -9.99,
+        "002594": 1.74,
+        "601899": -9.41,
+        "000333": -1.35,
+        "600900": 1.32,
+        "601012": -6.07,
+        "000063": -1.79
+      },
+      "score": 0.545,
+      "block_source": "05_researcher.md 结构化结论块",
+      "market_view": {
+        "view": "偏空",
+        "confidence": 3
+      },
+      "trade_date_ref": "2026-09-10",
+      "verify_after": "2026-09-17",
+      "scored_at": "2026-09-20"
+    },
+    {
+      "date": "2026-09-20",
+      "verified": false,
+      "ratings": {
+        "600519": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 1257.12
+        },
+        "000858": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 70.0
+        },
+        "600036": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 40.59
+        },
+        "601318": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 53.37
+        },
+        "300750": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 301.95
+        },
+        "002594": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 84.3
+        },
+        "601899": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 31.41
+        },
+        "000333": {
+          "rating": "中性偏空",
+          "confidence": 2,
+          "ref_price": 84.4
+        },
+        "600900": {
+          "rating": "看多",
+          "confidence": 3,
+          "ref_price": 28.27
+        },
+        "601012": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 11.23
+        },
+        "000063": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 32.44
+        }
       },
       "result_5d": null,
-      "score": null
+      "score": null,
+      "block_source": "05_researcher.md 结构化结论块",
+      "market_view": {
+        "view": "偏空",
+        "confidence": 2
+      },
+      "trade_date_ref": "2026-09-18",
+      "verify_after": "2026-09-25",
+      "note": "非交易日复盘版（周日，基于9-18收盘）；闸门连续第五日关闭，5笔条件买入预案全部blocked；冻结整周躲过平安-3.9%/紫金-7.9%/宁德-10.7%",
+      "trader_plan": {
+        "600036": {
+          "action": "条件买入(预案[40.2, 39.9] 止损38.8)",
+          "gate": "条款4冻结"
+        },
+        "601318": {
+          "action": "条件买入(预案[52.5, 52.2] 止损51.2)",
+          "gate": "条款4冻结"
+        },
+        "601899": {
+          "action": "条件买入(预案[31.3, 30.7] 止损29.9)",
+          "gate": "条款4冻结"
+        },
+        "600900": {
+          "action": "条件买入(预案[27.8, 27.65] 止损27.3)",
+          "gate": "条款4冻结"
+        },
+        "300750": {
+          "action": "条件买入(预案[313.5, 316.0] 止损297.0)",
+          "gate": "条款4冻结"
+        },
+        "600519": {
+          "action": "观望",
+          "gate": "-"
+        },
+        "000858": {
+          "action": "观望",
+          "gate": "-"
+        },
+        "002594": {
+          "action": "观望",
+          "gate": "-"
+        },
+        "000333": {
+          "action": "观望",
+          "gate": "-"
+        },
+        "000063": {
+          "action": "观望",
+          "gate": "-"
+        },
+        "601012": {
+          "action": "回避",
+          "gate": "-"
+        }
+      }
+    },
+    {
+      "date": "2026-09-21",
+      "verified": false,
+      "ratings": {
+        "600519": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 1257.12
+        },
+        "000858": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 70.0
+        },
+        "600036": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 40.59
+        },
+        "601318": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 53.37
+        },
+        "300750": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 301.95
+        },
+        "002594": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 84.3
+        },
+        "601899": {
+          "rating": "中性偏多",
+          "confidence": 3,
+          "ref_price": 31.41
+        },
+        "000333": {
+          "rating": "中性偏空",
+          "confidence": 2,
+          "ref_price": 84.4
+        },
+        "600900": {
+          "rating": "看多",
+          "confidence": 3,
+          "ref_price": 28.27
+        },
+        "601012": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 11.23
+        },
+        "000063": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 32.44
+        }
+      },
+      "result_5d": null,
+      "score": null,
+      "block_source": "05_researcher.md 结构化结论块",
+      "market_view": {
+        "view": "偏空",
+        "confidence": 2
+      },
+      "trade_date_ref": "2026-09-18",
+      "verify_after": "2026-09-25",
+      "note": "正常日报（周一盘前，数据基准9-18收盘）；闸门第六日关闭；周末宏观五重增量四项偏多（加息落地标题级/中东缓和/券商转暖/华为算力）",
+      "trader_plan": {
+        "600036": {
+          "action": "条件买入(预案[40.2, 39.9] 止损38.8)",
+          "gate": "条款4冻结"
+        },
+        "601318": {
+          "action": "条件买入(预案[52.5, 52.2] 止损51.2)",
+          "gate": "条款4冻结"
+        },
+        "601899": {
+          "action": "条件买入(预案[31.3, 30.7] 止损29.9)",
+          "gate": "条款4冻结"
+        },
+        "600900": {
+          "action": "条件买入(预案[27.8, 27.65] 止损27.3)",
+          "gate": "条款4冻结"
+        },
+        "300750": {
+          "action": "条件买入(预案[313.5, 316.0] 止损297.0)",
+          "gate": "条款4冻结"
+        },
+        "600519": {
+          "action": "观望",
+          "gate": "-"
+        },
+        "000858": {
+          "action": "观望",
+          "gate": "-"
+        },
+        "002594": {
+          "action": "观望",
+          "gate": "-"
+        },
+        "000333": {
+          "action": "观望",
+          "gate": "-"
+        },
+        "000063": {
+          "action": "观望",
+          "gate": "-"
+        },
+        "601012": {
+          "action": "回避",
+          "gate": "-"
+        }
+      }
+    },
+    {
+      "date": "2026-09-22",
+      "verified": false,
+      "ratings": {
+        "600519": {
+          "rating": "中性偏空",
+          "confidence": 3,
+          "ref_price": 1252.57
+        },
+        "000858": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 70.27
+        },
+        "600036": {
+          "rating": "看多",
+          "confidence": 3,
+          "ref_price": 41.04
+        },
+        "601318": {
+          "rating": "看多",
+          "confidence": 3,
+          "ref_price": 53.98
+        },
+        "300750": {
+          "rating": "中性偏空",
+          "confidence": 2,
+          "ref_price": 297.1
+        },
+        "002594": {
+          "rating": "中性偏空",
+          "confidence": 2,
+          "ref_price": 85.22
+        },
+        "601899": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 31.3
+        },
+        "000333": {
+          "rating": "看空",
+          "confidence": 2,
+          "ref_price": 80.9
+        },
+        "600900": {
+          "rating": "中性偏多",
+          "confidence": 2,
+          "ref_price": 28.1
+        },
+        "601012": {
+          "rating": "看空",
+          "confidence": 4,
+          "ref_price": 11.36
+        },
+        "000063": {
+          "rating": "中性",
+          "confidence": 3,
+          "ref_price": 33.15
+        }
+      },
+      "result_5d": null,
+      "score": null,
+      "block_source": "05_researcher.md 结构化结论块",
+      "market_view": {
+        "view": "平衡",
+        "confidence": 2
+      },
+      "trade_date_ref": "2026-09-21",
+      "verify_after": "2026-09-28",
+      "note": "正常日报（周二盘前，数据基准9-21收盘）；闸门第七日未开(距MA20仅8点)；宁德破299预案作废、中兴收复MA20新增候选、美的放巨阴转回避",
+      "trader_plan": {
+        "600036": {
+          "action": "条件买入(预案[40.2, 39.9] 止损38.8)",
+          "gate": "条款4冻结"
+        },
+        "601318": {
+          "action": "条件买入(预案[52.5, 52.2] 止损51.2)",
+          "gate": "条款4冻结"
+        },
+        "601899": {
+          "action": "条件买入(预案[31.3, 30.7] 止损29.9)",
+          "gate": "条款4冻结"
+        },
+        "600900": {
+          "action": "条件买入(预案[27.8, 27.65] 止损27.3)",
+          "gate": "条款4冻结"
+        },
+        "000063": {
+          "action": "条件买入(预案[32.5, 32.2] 止损31.6)",
+          "gate": "条款4冻结"
+        },
+        "300750": {
+          "action": "观望",
+          "gate": "-"
+        },
+        "600519": {
+          "action": "观望",
+          "gate": "-"
+        },
+        "000858": {
+          "action": "观望",
+          "gate": "-"
+        },
+        "002594": {
+          "action": "观望",
+          "gate": "-"
+        },
+        "000333": {
+          "action": "回避",
+          "gate": "-"
+        },
+        "601012": {
+          "action": "回避",
+          "gate": "-"
+        }
+      }
+    },
+    {
+      "date": "2026-09-23",
+      "verified": false,
+      "ratings": {
+        "600519": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 1253.8
+        },
+        "000858": {
+          "rating": "中性偏多",
+          "confidence": 2,
+          "ref_price": 70.54
+        },
+        "600036": {
+          "rating": "看多",
+          "confidence": 3,
+          "ref_price": 40.82
+        },
+        "601318": {
+          "rating": "看多",
+          "confidence": 3,
+          "ref_price": 54.46
+        },
+        "300750": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 304.63
+        },
+        "002594": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 86.58
+        },
+        "601899": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 31.41
+        },
+        "000333": {
+          "rating": "看空",
+          "confidence": 2,
+          "ref_price": 82.54
+        },
+        "600900": {
+          "rating": "中性偏多",
+          "confidence": 2,
+          "ref_price": 28.02
+        },
+        "601012": {
+          "rating": "看空",
+          "confidence": 3,
+          "ref_price": 11.38
+        },
+        "000063": {
+          "rating": "中性",
+          "confidence": 2,
+          "ref_price": 32.91
+        }
+      },
+      "result_5d": null,
+      "score": null,
+      "block_source": "05_researcher.md 结构化结论块",
+      "market_view": {
+        "view": "平衡",
+        "confidence": 2
+      },
+      "trade_date_ref": "2026-09-22",
+      "verify_after": "2026-09-30",
+      "note": "闸门第八日未开（距MA20仅2.53点）；中兴预案失效作废；4笔买入候选全blocked",
+      "trader_plan": {
+        "buy_candidates": [
+          "600036@0.10",
+          "601318@0.08",
+          "601899@0.05",
+          "600900@0.08"
+        ],
+        "all_blocked": true,
+        "worst_case_counterfactual_pct": -0.79
+      }
     }
   ],
   "role_accuracy": {
     "说明": "按角色聚合的 20 期滚动准确率，由 verify 脚本维护",
-    "fundamental": [], "sentiment": [], "news": [], "technical": [],
-    "researcher": [], "trader": [], "risk_manager": []
+    "fundamental": [],
+    "sentiment": [],
+    "news": [],
+    "technical": [],
+    "researcher": [
+      {
+        "date": "2026-08-22",
+        "score": 0.6
+      },
+      {
+        "date": "2026-08-23",
+        "score": 0.455
+      },
+      {
+        "date": "2026-08-24",
+        "score": 0.455
+      },
+      {
+        "date": "2026-08-25",
+        "score": 0.727
+      },
+      {
+        "date": "2026-08-30",
+        "score": 0.636
+      },
+      {
+        "date": "2026-09-02",
+        "score": 0.636
+      },
+      {
+        "date": "2026-09-03",
+        "score": 0.636
+      },
+      {
+        "date": "2026-09-05",
+        "score": 0.455
+      },
+      {
+        "date": "2026-09-06",
+        "score": 0.364
+      },
+      {
+        "date": "2026-09-07",
+        "score": 0.545
+      },
+      {
+        "date": "2026-09-08",
+        "score": 0.364
+      },
+      {
+        "date": "2026-09-09",
+        "score": 0.364
+      },
+      {
+        "date": "2026-09-10",
+        "score": 0.545
+      },
+      {
+        "date": "2026-09-11",
+        "score": 0.545
+      }
+    ],
+    "trader": [],
+    "risk_manager": []
   }
 }

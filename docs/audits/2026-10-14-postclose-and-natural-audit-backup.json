@@ -1,0 +1,58 @@
+{
+  "schema": "quant.postclose_natural_backup.v1",
+  "business_date": "2026-10-14",
+  "observed_window": "2026-10-14T16:20:39+08:00 onward",
+  "goal_status": "blocked",
+  "backup": {
+    "id": "945e035b5e754cdaa81b887cee6914bd",
+    "created_at": "2026-10-14T10:30:05.288359+08:00",
+    "trigger_source": "launchd",
+    "manifest_hash": "f6cef1628958158c437b89b9fa347aa07d8899a5580edf511bea437df27ff463",
+    "independent_verify_workflow_backup": "passed",
+    "files": 1208,
+    "databases": 6,
+    "snapshot_count": 85,
+    "storage_bytes": 4195862704,
+    "max_store_bytes": 5368709120,
+    "runtime_prompts_runbook_cohort_current": true,
+    "audit_artifacts": {
+      "2026-10-14-maker80-result-reconstructed.json": "4b0d43ea5fefe95129e5cca411f81f29d61fe5aa7e1990130bbd3b4377f2e7db",
+      "2026-10-14-maker80-reconstruction.json": "9bd57ae65422ef7cf0faf88c05f406721dee4532361c246cd89d57611454b27e",
+      "2026-10-14-maker80-independent-review.json": "3095df035f8a45033309b31c18736fa40d47d30609f8545e7f92b5fa6eed8b0f"
+    },
+    "all_three_manifest_snapshot_current_hashes_match": true,
+    "isolated_restore_this_round": false,
+    "runnable_code_recovery_accepted": false,
+    "offsite_verified": false
+  },
+  "archive": {
+    "date": "2026-10-14",
+    "receipt_hash": "ffcbd472a71d6115a429c2cae43a931d2d8443e18e787c693fc089040bc8b7d4",
+    "payload_hash": "73bda234b3c1e0b9fcc07952958cbe224595dd7928c4451f743331308cf2151b",
+    "calendar_hash": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+    "independent_verify_receipt": "passed",
+    "symbol_count": 12,
+    "required_symbol_coverage": true
+  },
+  "readonly_local_safe_stop": {
+    "formal_output_directory_exists": false,
+    "decision_file_exists": false,
+    "team_database_today_decisions_plans_approvals_execution_log": [0, 0, 0, 0],
+    "local_today_outbox_files": [],
+    "active_paper_each_cash_equity": [100000, 100000],
+    "active_paper_each_positions_orders_trades_receipts_events_valuations": [0, 0, 0, 0, 0, 0],
+    "sqlite_access": "mode=ro",
+    "external_live_or_notification_absence_proven": false
+  },
+  "observation_gaps": {
+    "original_issue_id": "01a1379a-69c2-73ea-9885-8978db17d248",
+    "multica_host_readonly_query": "Could not reach the Multica server. Check your network connection.",
+    "console_7100_sandbox_and_host_readonly": "curl (56) Recv failure: Connection reset by peer",
+    "current_remote_task_terminal_reverified": false,
+    "root_cause_of_connectivity": "not_diagnosed_not_assumed"
+  },
+  "actions_not_taken": ["force_backup", "delete_snapshot", "raise_capacity", "production_retry", "dispatch", "finalize", "approval", "notification", "Live", "service_restart"],
+  "M2_passed": false,
+  "M3_started": false,
+  "next": "At the next original preopen checkpoint reverify calendar, host/runtime and unique original entrance. Preserve today's failure. No backdated publication or review."
+}

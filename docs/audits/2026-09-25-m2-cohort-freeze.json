@@ -1,0 +1,61 @@
+{
+  "schema": "m2_cohort_freeze.v1",
+  "observed_at": "2026-09-25T00:03:00+08:00",
+  "scope": "prospective engineering acceptance baseline; not trade authorization or natural-day result",
+  "cohort": {
+    "id": "2026-09-28-forward",
+    "first_candidate_day": "2026-09-28",
+    "configuration": "paper/active_cohort.json",
+    "configuration_sha256": "35a952b2192a01364f13145c161b30a42f37c014fe01cfc8b28bcd19070b4c3c",
+    "initial_cash_per_account": 100000,
+    "accounts": {
+      "gate": {
+        "path": "paper/cohort_2026-09-28/llm_gate.db",
+        "initial_sha256": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c"
+      },
+      "no_gate": {
+        "path": "paper/cohort_2026-09-28/llm_no_gate.db",
+        "initial_sha256": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c"
+      }
+    },
+    "initial_state": "Each database contains only account(init, cash=100000, equity=100000); zero positions, orders and trades."
+  },
+  "calendar": {
+    "source": "/Users/henry/.rqalpha/bundle/trading_dates.npy",
+    "sha256": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+    "project_calendar_sessions": {
+      "2026-09-25": false,
+      "2026-09-26": false,
+      "2026-09-27": false,
+      "2026-09-28": true
+    },
+    "verification_boundary": "Local calendar observation only; independently reconfirm the actual exchange session and data archive on the candidate day."
+  },
+  "schedule_and_cutoff": {
+    "single_publication_autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "single_trigger_id": "97a59a0a-ceda-4115-81f8-bc583a7c5eef",
+    "trigger_time": "07:30 Asia/Shanghai weekdays; holiday must skip",
+    "latest_preopen_freeze": "09:15 Asia/Shanghai; actual timestamps only"
+  },
+  "deterministic_execution_policy": {
+    "model": "daily_bar_t1.v4",
+    "entry_contract": "a_share_entry.v1",
+    "exit_contract": "a_share_exit.v1",
+    "portfolio_policy": "explicit_intent.v1",
+    "risk_policy": "structured_risk.v1",
+    "inventory_policy": "fifo_acquisition.v1",
+    "protection_policy": "existing_position_stop.v1",
+    "commission_rate": 0.00025,
+    "min_commission": 5.0,
+    "stamp_tax_rate": 0.0005,
+    "transfer_fee_rate": 0.00002,
+    "slippage_rate": 0.002
+  },
+  "counting_rules": [
+    "The candidate day counts toward M2 only after real on-time publication, current six-role remote review evidence, deterministic decision/Paper settlement, comparison and authorized notification receipt are independently verified.",
+    "M3 five-session counting begins only after M2 acceptance; a failure or late version is retained and restarts the passing streak without rewriting this cohort start.",
+    "A justified no-trade day may test operational continuity; simulated or historical fills do not prove alpha or Live readiness.",
+    "A policy or calendar change is recorded as a new version, not silently merged into one performance series."
+  ],
+  "status": "frozen_baseline_pending_natural_session"
+}

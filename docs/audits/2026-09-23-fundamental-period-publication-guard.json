@@ -1,0 +1,41 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 83,
+  "verified_at": "2026-09-23T07:10:24+08:00",
+  "classification_of_previous_goal_turn": "no_progress_status_answer",
+  "direct_blocker": "SATU-13 fundamental report directly compares 2026H1 with 2025 full-year metrics to infer improvement or weakening despite the prompt rule",
+  "source_publication": {
+    "issue": "SATU-13",
+    "isolated_team": "/private/tmp/quant-real-chain-v6.ozdfie8k/trading_team",
+    "fundamental_report_sha256": "e2071032ecff1fb84f8d423bf9501d299853417f39637b2015403da79e6e522d",
+    "freeze_sha256": "5f18bafcbb6319cf115e213d05d8445bfac492065e31aac904f62487d8037e93",
+    "data_quality_bundle_sha256": "2752586c3183d5d62625040df0b8df67e9285296bcdc36849d897040a2adca66",
+    "data_quality_review": "pending_not_dispatched",
+    "formal_market_analysts_verdict": "not_obtained"
+  },
+  "change": {
+    "runner": "trading_team/kimi_daily.py",
+    "runner_sha256": "ee4cdc1d7f79f5a667df129490b0a69de689d121e417c0b110b70dc249734722",
+    "behavior": "Reject a sentence that directly compares full-year and H1/quarter metrics; apply before role-01 output is cached or published and during independent generation inspection",
+    "failed_model_reply": "retained by existing rejected-artifact path",
+    "test_file": "tests/test_model_identity.py",
+    "test_sha256": "745019762401d00a03d55a69301f4745295356b551a6bf3732225f9afc694c73"
+  },
+  "verification": {
+    "related_baseline": "90 passed",
+    "new_failing_regression": "3 real-claim examples and 1 rehashed-publication inspection failed before change",
+    "new_positive_regression": "separate-period facts and unverified hypothesis allowed",
+    "related_after": "95 passed",
+    "full_after": "1193 passed",
+    "real_satu13_report": "new bounded validator rejects the archived report",
+    "git_diff_check": "passed",
+    "isolated_decision_or_paper_files": "none found"
+  },
+  "limits": [
+    "The guard recognizes explicit comparison wording only; it is not a complete semantic fact checker.",
+    "SATU-13 publication and its old sealed review bundle remain unchanged; no old rejection or approval is rewritten.",
+    "No new version was published and no new real Multica review, decision, notification, Paper or Live execution occurred.",
+    "M1 remains incomplete; M2 and M3 have not begun."
+  ],
+  "next": "Build a new isolated version from v6 frozen market data and current code, invalidating any failed fundamental cache; verify input and runtime identities, then run one bounded publication task only if safe. Inspect output content before real sequential independent reviews."
+}

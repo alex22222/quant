@@ -1,0 +1,384 @@
+{
+  "schema": "isolated_publication_recovery_acceptance.v1",
+  "loop": 60,
+  "observed_at": "2026-09-23T00:09:13.514917+08:00",
+  "isolated_team": "/private/tmp/quant-real-chain.twKaRH/trading_team",
+  "business_date": "2026-09-22",
+  "run_id": "b9ab3538f7994f829dae6a0a14512bff",
+  "status": "succeeded",
+  "attempt": 2,
+  "finished_at": "2026-09-23T00:06:36+08:00",
+  "publication": {
+    "business_complete": false,
+    "data_asof": "2026-09-21",
+    "date": "2026-09-22",
+    "finalize": {
+      "status": "not_requested"
+    },
+    "market_ok": false,
+    "model": "kimi-k3",
+    "notification": {
+      "status": "disabled"
+    },
+    "plan_hash": "e72835c8136efce3a121c482001887c02ca0df7bd2da4ba0535b6720861ee4bb",
+    "proposals": 11,
+    "reviews": {
+      "status": "not_checked"
+    },
+    "run_id": "b9ab3538f7994f829dae6a0a14512bff",
+    "scope": "publication_only",
+    "status": "succeeded",
+    "transport": {
+      "adapter": "openai_chat_completions.v1",
+      "endpoint": "https://api.moonshot.cn/v1",
+      "model": "kimi-k3",
+      "parameters": {
+        "max_tokens": 8192,
+        "response_format": "json_object",
+        "temperature": 0.6,
+        "thinking": "disabled"
+      },
+      "schema": "model_transport.v1"
+    }
+  },
+  "source": {
+    "plan_hash": "e72835c8136efce3a121c482001887c02ca0df7bd2da4ba0535b6720861ee4bb",
+    "generation_hash": "2f05b0fb037772ef12437579597bebdcc487b070585b6c02b9ef3ba0fc69bb78",
+    "publisher_status": "succeeded",
+    "publisher_hash_matches": true
+  },
+  "attempts": [
+    {
+      "number": 1,
+      "status": "failed",
+      "task_id": "01a0c919-1be1-7c98-b098-0be1854c64e7",
+      "verification": "remote_verified"
+    },
+    {
+      "number": 2,
+      "status": "succeeded",
+      "task_id": "01a0c9d5-88e5-714c-a086-4ad2e02c0c1e",
+      "verification": "remote_verified"
+    }
+  ],
+  "steps": [
+    {
+      "name": "role_01",
+      "attempt": 1,
+      "status": "succeeded"
+    },
+    {
+      "name": "role_02",
+      "attempt": 1,
+      "status": "succeeded"
+    },
+    {
+      "name": "role_03",
+      "attempt": 1,
+      "status": "failed"
+    },
+    {
+      "name": "role_01",
+      "attempt": 2,
+      "status": "skipped"
+    },
+    {
+      "name": "role_02",
+      "attempt": 2,
+      "status": "skipped"
+    },
+    {
+      "name": "role_03",
+      "attempt": 2,
+      "status": "succeeded"
+    },
+    {
+      "name": "role_04",
+      "attempt": 2,
+      "status": "succeeded"
+    },
+    {
+      "name": "role_05",
+      "attempt": 2,
+      "status": "succeeded"
+    },
+    {
+      "name": "role_06",
+      "attempt": 2,
+      "status": "succeeded"
+    },
+    {
+      "name": "role_07",
+      "attempt": 2,
+      "status": "succeeded"
+    },
+    {
+      "name": "publish_generation",
+      "attempt": 2,
+      "status": "succeeded"
+    },
+    {
+      "name": "publication_handoff",
+      "attempt": 2,
+      "status": "succeeded"
+    }
+  ],
+  "requests": [
+    {
+      "file": "01_fundamental.run.json",
+      "request": {
+        "transport": {
+          "schema": "model_transport.v1",
+          "adapter": "openai_chat_completions.v1",
+          "endpoint": "https://api.moonshot.cn/v1",
+          "model": "kimi-k3",
+          "parameters": {
+            "response_format": "json_object",
+            "thinking": "disabled",
+            "temperature": 0.6,
+            "max_tokens": 8192
+          }
+        },
+        "reported_model": "kimi-k3",
+        "request_id": "chatcmpl-6ab275a8eec601b38609193d",
+        "usage": {
+          "prompt_tokens": 13890,
+          "completion_tokens": 4280,
+          "total_tokens": 18170,
+          "prompt_tokens_details": {
+            "cache_write_tokens": 13824
+          }
+        },
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "file": "02_sentiment.run.json",
+      "request": {
+        "transport": {
+          "schema": "model_transport.v1",
+          "adapter": "openai_chat_completions.v1",
+          "endpoint": "https://api.moonshot.cn/v1",
+          "model": "kimi-k3",
+          "parameters": {
+            "response_format": "json_object",
+            "thinking": "disabled",
+            "temperature": 0.6,
+            "max_tokens": 8192
+          }
+        },
+        "reported_model": "kimi-k3",
+        "request_id": "chatcmpl-6ab2761d5a3525eccbfed2b1",
+        "usage": {
+          "prompt_tokens": 6722,
+          "completion_tokens": 1426,
+          "total_tokens": 8148,
+          "prompt_tokens_details": {
+            "cache_write_tokens": 6656
+          }
+        },
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "file": "03_news.run.json",
+      "request": {
+        "transport": {
+          "schema": "model_transport.v1",
+          "adapter": "openai_chat_completions.v1",
+          "endpoint": "https://api.moonshot.cn/v1",
+          "model": "kimi-k3",
+          "parameters": {
+            "response_format": "json_object",
+            "thinking": "disabled",
+            "temperature": 0.6,
+            "max_tokens": 8192
+          }
+        },
+        "reported_model": "kimi-k3",
+        "request_id": "chatcmpl-6ab2a582ab7844d9da6e11ba",
+        "usage": {
+          "prompt_tokens": 6313,
+          "completion_tokens": 2712,
+          "total_tokens": 9025,
+          "prompt_tokens_details": {
+            "cache_write_tokens": 6144
+          }
+        },
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "file": "04_technical.run.json",
+      "request": {
+        "transport": {
+          "schema": "model_transport.v1",
+          "adapter": "openai_chat_completions.v1",
+          "endpoint": "https://api.moonshot.cn/v1",
+          "model": "kimi-k3",
+          "parameters": {
+            "response_format": "json_object",
+            "thinking": "disabled",
+            "temperature": 0.6,
+            "max_tokens": 8192
+          }
+        },
+        "reported_model": "kimi-k3",
+        "request_id": "chatcmpl-6ab2a5cf00c9ff758df887b8",
+        "usage": {
+          "prompt_tokens": 45844,
+          "completion_tokens": 4677,
+          "total_tokens": 50521,
+          "prompt_tokens_details": {
+            "cache_write_tokens": 45824
+          }
+        },
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "file": "05_researcher.run.json",
+      "request": {
+        "transport": {
+          "schema": "model_transport.v1",
+          "adapter": "openai_chat_completions.v1",
+          "endpoint": "https://api.moonshot.cn/v1",
+          "model": "kimi-k3",
+          "parameters": {
+            "response_format": "json_object",
+            "thinking": "disabled",
+            "temperature": 0.6,
+            "max_tokens": 8192
+          }
+        },
+        "reported_model": "kimi-k3",
+        "request_id": "chatcmpl-6ab2a65895331b82047c0041",
+        "usage": {
+          "prompt_tokens": 13538,
+          "completion_tokens": 4278,
+          "total_tokens": 17816,
+          "prompt_tokens_details": {
+            "cache_write_tokens": 13312
+          }
+        },
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "file": "06_trader.run.json",
+      "request": {
+        "transport": {
+          "schema": "model_transport.v1",
+          "adapter": "openai_chat_completions.v1",
+          "endpoint": "https://api.moonshot.cn/v1",
+          "model": "kimi-k3",
+          "parameters": {
+            "response_format": "json_object",
+            "thinking": "disabled",
+            "temperature": 0.6,
+            "max_tokens": 8192
+          }
+        },
+        "reported_model": "kimi-k3",
+        "request_id": "chatcmpl-6ab2a6cefeed7b4ceecd0ca7",
+        "usage": {
+          "prompt_tokens": 19695,
+          "completion_tokens": 3214,
+          "total_tokens": 22909,
+          "prompt_tokens_details": {
+            "cache_write_tokens": 19456
+          }
+        },
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "file": "07_risk_manager.run.json",
+      "request": {
+        "transport": {
+          "schema": "model_transport.v1",
+          "adapter": "openai_chat_completions.v1",
+          "endpoint": "https://api.moonshot.cn/v1",
+          "model": "kimi-k3",
+          "parameters": {
+            "response_format": "json_object",
+            "thinking": "disabled",
+            "temperature": 0.6,
+            "max_tokens": 8192
+          }
+        },
+        "reported_model": "kimi-k3",
+        "request_id": "chatcmpl-6ab2a729dde631fd20eca1d6",
+        "usage": {
+          "prompt_tokens": 15588,
+          "completion_tokens": 3162,
+          "total_tokens": 18750,
+          "prompt_tokens_details": {
+            "cache_write_tokens": 15360
+          }
+        },
+        "finish_reason": "stop"
+      }
+    }
+  ],
+  "successful_request_tokens": 145339,
+  "aborted_request_cost": "unknown",
+  "reviews": {
+    "schema": "multica_review_status.v1",
+    "date": "2026-09-22",
+    "execution_authorized": false,
+    "production_complete": false,
+    "roles": {
+      "data-quality": {
+        "status": "pending",
+        "bundle_hash": "db6711193f8984866da92ea809863b388d2f3f022f67a5a6ff770272e4d1dbb6"
+      },
+      "market-analysts": {
+        "status": "blocked"
+      },
+      "strategy-research": {
+        "status": "blocked"
+      },
+      "paper-trader": {
+        "status": "blocked"
+      },
+      "risk-manager": {
+        "status": "blocked"
+      },
+      "audit-verifier": {
+        "status": "blocked"
+      }
+    },
+    "source": {
+      "run_id": "b9ab3538f7994f829dae6a0a14512bff",
+      "generation_hash": "2f05b0fb037772ef12437579597bebdcc487b070585b6c02b9ef3ba0fc69bb78",
+      "producer": {
+        "provider": "multica",
+        "verification": "remote_verified",
+        "role": "Research Lead",
+        "agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+        "task_id": "01a0c9d5-88e5-714c-a086-4ad2e02c0c1e",
+        "project_id": "a208df76-b63b-4cef-bd11-7512d7c80896",
+        "workspace_id": "cfcca519-15f5-4666-b1d8-2b67241d8f7b"
+      },
+      "files_hash": "059329249d7ff3bb49f697dd53565778c44479a772345cc072d2eaa35e82c11f",
+      "plan_hash": "e72835c8136efce3a121c482001887c02ca0df7bd2da4ba0535b6720861ee4bb",
+      "data_asof": "2026-09-21"
+    },
+    "status": "incomplete"
+  },
+  "protected_file_count": 17,
+  "protected_changed": [],
+  "paper_exists": false,
+  "decisions_exists": false,
+  "natural_day_accepted": false,
+  "remote": {
+    "issue_id": "01a0c919-1bcc-7cda-aa6d-2a4a29a23d40",
+    "task_id": "01a0c9d5-88e5-714c-a086-4ad2e02c0c1e",
+    "status": "completed",
+    "completed_at": "2026-09-22T16:07:31Z",
+    "error": null,
+    "issue_status": "done",
+    "command_exit_code": 0
+  }
+}

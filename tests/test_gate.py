@@ -58,6 +58,16 @@ class TestGate:
 
 
 class TestDeflatedSharpe:
+    def test_real_monthly_trials_can_pass_but_annual_sharpe_cannot_replace_monthly(self):
+        m = _metrics(sharpe=3.0)
+        m.update(months=80, sr_monthly=.5, skew=0.0, kurt=3.0)
+        passed = evaluate(m, _metrics(), [_metrics()], {}, n_trials=2, trial_sharpes=[.1, .2])
+        assert passed["gate"] == "pass", passed["reasons"]
+        m["sr_monthly"] = .01
+        failed = evaluate(m, _metrics(), [_metrics()], {}, n_trials=2, trial_sharpes=[.1, .2])
+        assert failed["gate"] == "reject"
+        assert any("DSR=" in reason for reason in failed["reasons"])
+
     def test_many_trials_weak_sharpe_rejects(self):
         """试验次数多、夏普仅略高于门槛 → DSR 不足拒绝"""
         from pipeline.gate import evaluate

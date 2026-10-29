@@ -1,0 +1,91 @@
+{
+  "verified_at": "2026-09-22T02:22:06.209385+08:00",
+  "scope": "market_data_only",
+  "receipt": {
+    "calendar_hash": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+    "codes": [
+      "000063",
+      "000300",
+      "000333",
+      "000858",
+      "002594",
+      "300750",
+      "600036",
+      "600519",
+      "600900",
+      "601012",
+      "601318",
+      "601899"
+    ],
+    "date": "2026-09-21",
+    "payload_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183",
+    "receipt_hash": "440a5d3e03f248306cc8d33ba2c90e26a6e8d73fb9659af588d238b13f22ce42",
+    "schema": "market_archive.v1"
+  },
+  "restored_to": "/var/folders/xx/1h1hmbcn1xvgs5_sft5jmpgc0000gp/T/quant-market-restore-57ua5267/trading_team",
+  "restore": {
+    "status": "verified",
+    "scope": "market_data_only",
+    "receipt_hash": "440a5d3e03f248306cc8d33ba2c90e26a6e8d73fb9659af588d238b13f22ce42",
+    "date": "2026-09-21",
+    "payload_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+  },
+  "offline": true,
+  "equalities": {
+    "source_objects": true,
+    "execution_bars": true,
+    "closing_marks": true,
+    "counterfactual": true,
+    "current_account_valuation": true
+  },
+  "production_accounts_unchanged": true,
+  "account_sha256": {
+    "gate": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "no_gate": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391"
+  },
+  "account_snapshots_read_only": {
+    "gate": {
+      "cash": 100000.0,
+      "valuation_equity": 100000.0,
+      "quote_asof": "2026-09-21",
+      "position_count": 0,
+      "missing_marks": []
+    },
+    "no_gate": {
+      "cash": 79601.66,
+      "valuation_equity": 99467.66,
+      "quote_asof": "2026-09-21",
+      "position_count": 3,
+      "missing_marks": []
+    }
+  },
+  "replay": {
+    "evidence_kind": "DAILY_BAR_PROXY",
+    "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+    "result_hash": "2b69a0a9056218d33828a35098784a38329ed3b0ac0f65c221213b8448c1672e",
+    "portfolios": {
+      "gate": {
+        "return": 0.0,
+        "orders": {
+          "blocked": 3
+        }
+      },
+      "no_gate": {
+        "return": -5.1e-05,
+        "orders": {
+          "unfilled": 2,
+          "filled": 1
+        }
+      },
+      "csi300": {
+        "return": 0.007139,
+        "orders": {}
+      }
+    }
+  },
+  "limitations": [
+    "Not account restoration or off-site backup",
+    "Historical fills remain uncertified",
+    "No model call, notification, Live order, or Paper settlement"
+  ]
+}

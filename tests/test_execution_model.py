@@ -2,7 +2,7 @@
 """paper/execution_model.py：A 股撮合约束与费用"""
 from paper.execution_model import (
     Bar, FeeConfig, is_limit_down, is_limit_up, round_lot, simulate_fill,
-    total_fee,
+    simulate_limit_fill, total_fee,
 )
 
 CFG = FeeConfig()
@@ -64,3 +64,23 @@ class TestLimits:
     def test_gem_20pct_limit(self):
         bar = Bar(open=11.5, close=11.5, prev_close=10.0, limit_pct=0.20)
         assert not is_limit_up(bar)  # 创业板 +15% 未涨停
+
+    def test_untouched_buy_limit_is_unfilled(self):
+        bar = Bar(open=10.5, high=10.8, low=10.2, close=10.6, prev_close=10.0)
+        f = simulate_limit_fill("buy", 100, 10.0, bar, CFG, slippage_rate=0.002)
+        assert not f.filled
+        assert f.status == "unfilled"
+        assert "未触发" in f.reject_reason
+
+    def test_touched_buy_limit_applies_adverse_slippage_but_not_above_limit(self):
+        bar = Bar(open=9.90, high=10.2, low=9.80, close=10.1, prev_close=10.0)
+        f = simulate_limit_fill("buy", 100, 10.0, bar, CFG, slippage_rate=0.002)
+        assert f.filled
+        assert f.status == "filled"
+        assert f.price == 9.92
+        assert f.fee > 0
+
+    def test_gap_above_limit_still_unfilled(self):
+        bar = Bar(open=10.2, high=10.4, low=10.1, close=10.3, prev_close=10.0)
+        f = simulate_limit_fill("buy", 100, 10.0, bar, CFG)
+        assert f.status == "unfilled"

@@ -1,0 +1,45 @@
+{
+  "schema": "quant.registered_audit_isolated_restore.v1",
+  "restored_at": "2026-10-15T21:01:59.053899+08:00",
+  "goal_status": "active",
+  "snapshot": "b551c288bd354741acaf91f049803d4c",
+  "snapshot_created_at": "2026-10-15T20:09:11.286501+08:00",
+  "manifest_hash": "fbb3022abb55ac1f67dc29846529b62e30b69011af2ed67c84f77002943d32a4",
+  "target": "/private/tmp/quant-audit-restore-20261015-tsmpqcj8/restored",
+  "status": "verified_isolated",
+  "files": 1217,
+  "databases": 6,
+  "independent_post_restore_checks": {
+    "every_payload_sha_matches_manifest": true,
+    "six_database_bytes_equal_registered_snapshot": true,
+    "six_sqlite_quick_check": "ok",
+    "restored_active_paper_each_cash_equity": [100000, 100000],
+    "restored_active_paper_each_trades": 0,
+    "maker_audits": {
+      "2026-10-14-maker80-result-reconstructed.json": "4b0d43ea5fefe95129e5cca411f81f29d61fe5aa7e1990130bbd3b4377f2e7db",
+      "2026-10-14-maker80-reconstruction.json": "9bd57ae65422ef7cf0faf88c05f406721dee4532361c246cd89d57611454b27e",
+      "2026-10-14-maker80-independent-review.json": "3095df035f8a45033309b31c18736fa40d47d30609f8545e7f92b5fa6eed8b0f"
+    }
+  },
+  "protected_production_sha_before_equal_after": {
+    "paper/active_cohort.json": "35a952b2192a01364f13145c161b30a42f37c014fe01cfc8b28bcd19070b4c3c",
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "paper/cohort_2026-09-28/llm_gate.db": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c",
+    "paper/cohort_2026-09-28/llm_no_gate.db": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c",
+    "trading_team/team.db": "b5d0172db165f1df06e85bb766bbf2afae3dea9c2781708fb01bfe0c40b90eb9"
+  },
+  "scope": "local_workflow_evidence_restore_only",
+  "execution_authorized": false,
+  "activation": "manual_review_required_no_runtime_or_scheduler_installed",
+  "runtime_code_restored": false,
+  "environment_restored": false,
+  "offsite_verified": false,
+  "M2_passed": false,
+  "M3_started": false,
+  "independent_remote_maker_pipeline_accepted": false,
+  "backup_forced": false,
+  "production_retried": false,
+  "model_switch_authorization": "still_pending",
+  "next": "Preserve full scope. Await explicit model migration reply; next qualified natural publication must use original entrance and real cutoff."
+}

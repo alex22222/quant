@@ -1,0 +1,75 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 92,
+  "verified_at": "2026-09-23T12:19:32+08:00",
+  "classification_of_previous_goal_turn": "progress_guard_repair_and_full_tests",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "isolated_team": "/private/tmp/quant-real-chain-v9.ieK63a/trading_team",
+  "freeze": {
+    "sha256": "ec0717b6a325494573a70f9a0ff4482c33f2c487d5464e46ac9005e5b2bb718d",
+    "source_v8_sha256": "780deb744657afc54124530565c96c89df528d3f1589298837cfc8e35a8a4094",
+    "input_count": 38,
+    "changed_inputs": ["prompts/02_sentiment.md", "prompts/05_researcher.md"],
+    "seeded_roles": ["fundamental", "news", "technical"],
+    "seeded_role_fingerprints_verified": true,
+    "manifest_verified": true,
+    "raw_input_hashes_verified": true
+  },
+  "remote_publication": {
+    "issue": "SATU-20",
+    "issue_id": "01a0cc73-89ec-7daf-8d79-d48ffa8f7be9",
+    "issue_status": "blocked",
+    "task_id": "01a0cc73-89fd-7293-9161-b40ac67da0c6",
+    "task_status": "completed",
+    "task_count": 1,
+    "local_run_id": "b3ccd1fe1a954a7abeb37ca01be5ff25",
+    "local_run_status": "failed",
+    "local_attempt": 1,
+    "failed_step": "role_02",
+    "role_01_cache_hit": true,
+    "fresh_role_02_request_id": "chatcmpl-6ab351668510b1cb70d7ef76",
+    "fresh_role_02_known_tokens": 7727,
+    "remote_message_count": 74,
+    "remote_tool_use_count": 25,
+    "publication_command_count": 1,
+    "force_command_count": 0,
+    "remote_patch_scope": "isolated result comment only",
+    "result_comment_matches_local_failure": true
+  },
+  "real_failure": {
+    "error": "ValueError: unverified fund flow: volume and turnover do not prove signed capital flow",
+    "rejected_reply_sha256": "e07986363deb0aab68058f5c70778f0cc8aaecf9543b8549b174071d5b8fab29",
+    "offending_sentence": "量比仅证明活跃度，不构成资金净流入证据。",
+    "root_cause": "The lexical guard recognized 资金净流入 but did not recognize the immediately negating 不构成...证据 construction.",
+    "published": false,
+    "plan_hash": null,
+    "isolated_outputs_decisions_or_paper_present": false
+  },
+  "repair": {
+    "runner": "trading_team/kimi_daily.py",
+    "runner_sha256_after": "2782711d5ba5a390767984f5a921e98ca5284fb7bd22f3ce378e646fa4ab7c17",
+    "test_file": "tests/test_model_identity.py",
+    "test_sha256_after": "e65cde7aa3c3ca355acc53ebd71d186b6662235a79b54813d5c22f2f36cccfd2",
+    "new_real_sentence_regression_before": "1 failed, 3 passed",
+    "negative_and_positive_focused_after": "12 passed",
+    "full_after": "1209 passed in 37.95s",
+    "archived_satu20_reply_after": "passes corrected bounded wording check without editing the archived reply",
+    "contradictory_same_clause_fact_claim": "still rejected"
+  },
+  "protection": {
+    "old_v8_strategy_review_bundle_sha256": "2e68ef9fafbc0b93ca500150e42e2576e689ee3513c4979698ebc84207142b28",
+    "v9_freeze_and_rejected_reply_unchanged": true,
+    "old_issue_retried_or_relabelled_success": false,
+    "production_autopilot_changed": false,
+    "approval_paper_notification_or_live_action": false
+  },
+  "limits": [
+    "SATU-20 remote task completion is not publication success; this M1 retrospective sample remains unpublished.",
+    "The repaired guard is bounded lexical logic, not complete semantic or signed-flow source verification.",
+    "The v9 freeze binds the prior runner hash; a later attempt with changed code requires a new isolated version, not a retry of SATU-20.",
+    "The legacy production Multica Autopilot remains active with an unscoped Runbook and a 2026-09-24 08:43 Asia/Shanghai trigger; its modification still needs separate authorization.",
+    "M1 is incomplete; M2 and M3 have not begun."
+  ],
+  "next": "Build a new isolated version from the same verified source input with the corrected runner hash, seed only matching independent role caches, verify freeze and remote dedup, then perform at most one new bounded Research Lead publication. Do not copy the SATU-20 rejected role-02 reply as accepted output or rewrite its blocked Issue."
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "quant.codex_runtime_readonly_diagnosis.v1",
+  "business_date": "2026-10-19",
+  "goal_status": "active",
+  "failed_natural_task": "01a15159-fffa-7dbb-9cbd-ae6a52834830",
+  "observed_cli": {
+    "path": "/Users/henry/.local/bin/codex",
+    "symlink_target": "/Users/henry/.codex/packages/standalone/current/bin/codex",
+    "actual_version": "codex-cli 0.145.0",
+    "path_alias_permission_warning": true,
+    "version_matches_multica_runtime_metadata": true,
+    "old_cli_proven_root_cause": false
+  },
+  "multica_cli_help_verified": {
+    "custom_runtime_profile_create": true,
+    "per_machine_profile_executable_override": true,
+    "shared_daemon_restart_requirement": "not_established"
+  },
+  "official_guidance": {
+    "source": "https://developers.openai.com/siwc/token-sharing-open-source/models-and-inference",
+    "app_server_catalog_may_be_bundled_or_cached": true,
+    "account_catalog_does_not_replace_completed_inference": true
+  },
+  "scope": "readonly_binary_resolution_and_documented_runtime_mechanisms",
+  "no_auth_file_read_or_credential_copy_for_diagnosis": true,
+  "global_cli_changed": false,
+  "profile_created_or_agents_migrated": false,
+  "production_retry_or_inference_probe": false,
+  "pending_new_authorization": "Project-specific official Codex CLI plus independent runtime profile; migrate only two authorized agents, preserve model and xhigh, stop if shared daemon restart required",
+  "M2_passed": false,
+  "M3_started": false,
+  "next": "Await scoped runtime migration authorization; do not treat existing model-name switch authorization as permission to replace shared runtime or restart daemon."
+}

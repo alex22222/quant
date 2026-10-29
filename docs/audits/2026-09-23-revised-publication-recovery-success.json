@@ -1,0 +1,89 @@
+{
+  "schema": "revised_publication_recovery_acceptance.v1",
+  "loop": 75,
+  "verified_at": "2026-09-23T04:22:22+08:00",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "isolated_team": "/private/tmp/quant-real-chain-v3.aq1jzul6/trading_team",
+  "input_freeze_sha256": "b6c2cdf4e88f2db45e5601e2ac138027c2e5048343b4a2ea6339df2902d494ba",
+  "issue": {
+    "id": "01a0caaa-00bf-7f3e-a129-fbaa630b3ec5",
+    "identifier": "SATU-8",
+    "status": "done",
+    "revision": 8,
+    "title": "A-share daily research 2026-09-23",
+    "first_failed_task_id": "01a0caaa-00cf-7846-b8cc-72fbe8dfd7c4"
+  },
+  "recovery_task": {
+    "id": "01a0cab7-b887-780a-9a11-b011cf037da8",
+    "status": "completed",
+    "started_at": "2026-09-22T20:03:54Z",
+    "completed_at": "2026-09-22T20:16:13Z",
+    "agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "message_count": 144,
+    "tool_use_count": 44,
+    "publication_command_count": 1,
+    "forbidden_business_command_count": 0,
+    "scratch_scope_deviation": "The remote executor briefly wrote .multica/satu8-final-result.md in the repository rather than the isolated root, then removed it after posting the issue comment. No scratch file remains."
+  },
+  "local_run": {
+    "id": "b1718e4180ef4cb8bb5b0d73ebda928b",
+    "status": "succeeded",
+    "attempts": [
+      {"attempt": 1, "status": "failed", "error": "Multica issue business date/title mismatch"},
+      {"attempt": 2, "status": "succeeded", "producer_verification": "remote_verified", "task_id": "01a0cab7-b887-780a-9a11-b011cf037da8"}
+    ],
+    "new_model_roles": ["01", "05", "06", "07"],
+    "cache_hit_roles": ["02", "03", "04"],
+    "model": "kimi-k3",
+    "known_new_moonshot_tokens": 76292,
+    "all_new_requests_have_request_id": true,
+    "transport_endpoint": "https://api.moonshot.cn/v1",
+    "plan_hash": "c1dae741e4610476f5a83cf185bc65a53ae586be99b9007e4fb0b3f3a57fd42c",
+    "generation_hash": "c3708c2a8bc07c08988609e3ebeff5bca494086847a0a6f25aae381c3fe321ab",
+    "files_hash": "b957f4a446d80d98d336af7a40d4479fb4c82443207d1a47f4eb47be2c357797",
+    "independent_inspection": "passed",
+    "market_ok": false,
+    "proposal_count": 11,
+    "scope": "publication_only",
+    "business_complete": false
+  },
+  "next_review": {
+    "role": "data-quality",
+    "status": "pending",
+    "bundle_hash": "0c0303da780ce232e2ac409563b4174192605f51d4be573270fd3b262b839e2f",
+    "bundle_file_sha256": "58051b1f21dc535c71fd5e9600077a057c102b97065778de6c25cef727da5503",
+    "file_count": 40,
+    "hash_or_disk_mismatches": [],
+    "double_prepare_same_hash": true,
+    "issue_title": "A-share review data-quality 0c0303da780ce232e2ac409563b4174192605f51d4be573270fd3b262b839e2f 2026-09-23",
+    "assignee_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd",
+    "assignee_model": "gpt-5.5",
+    "matching_issue_count": 0,
+    "dispatched": false
+  },
+  "postconditions": {
+    "old_market_analysts_review": "rejected",
+    "new_execution_authorized": false,
+    "decisions_present": false,
+    "paper_present": false,
+    "notification_sent": false,
+    "protected_file_count": 17,
+    "protected_files_changed": [],
+    "repo_comment_scratch_present": false,
+    "application_code_changed": false,
+    "tests_rerun": false,
+    "m1_complete": false,
+    "m2_complete": false,
+    "m3_complete": false
+  },
+  "limitations": [
+    "Optional forex failed and global_macro.ok remains false",
+    "Asia snapshot source session date is unknown",
+    "US and commodity quotes are snapshots rather than certified closes",
+    "This is retrospective M1 integration, not an on-time M2/M3 day",
+    "Independent review has not accepted the new reports or proposals"
+  ],
+  "next": "Recheck the sealed Data Quality bundle, producer identity, daemon and exact-title/hash dedupe, then dispatch only one bounded Data Quality review in the next loop. Require comment scratch under the isolated root with --allow-external-file."
+}

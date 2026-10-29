@@ -1,0 +1,132 @@
+{
+  "schema": "workflow_recovery_acceptance.v1",
+  "observed_at": "2026-09-22T05:33:39.213791+08:00",
+  "scope": "isolated_evidence_restore_not_production_activation",
+  "network_disabled": true,
+  "execution_certified": false,
+  "forward_performance": false,
+  "source_hashes_before": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723"
+  },
+  "isolated_root": "/private/tmp/quant-workflow-recovery-CG62ZQ",
+  "cases": {
+    "production_evidence": {
+      "backup": {
+        "status": "verified",
+        "scope": "research_paper_workflow_evidence",
+        "path": "/private/tmp/quant-workflow-recovery-CG62ZQ/production-snapshot",
+        "manifest_hash": "7313d3f701b080831f7a444d253dc1777fe39b21b6714ae4ec6a98ae8bb43d44",
+        "file_count": 694,
+        "database_count": 4,
+        "execution_authorized": false
+      },
+      "restore": {
+        "status": "verified_isolated",
+        "scope": "research_paper_workflow_evidence",
+        "path": "/private/tmp/quant-workflow-recovery-CG62ZQ/production-restored",
+        "manifest_hash": "7313d3f701b080831f7a444d253dc1777fe39b21b6714ae4ec6a98ae8bb43d44",
+        "restored_at": "2026-09-22T05:33:40.998485+08:00",
+        "execution_authorized": false,
+        "execution_evidence": "not_recertified",
+        "activation": "manual_review_required_no_runtime_or_scheduler_installed"
+      },
+      "workflow_run_count": 20,
+      "all_run_attempts_and_steps_equal": true,
+      "research_evidence_equal": true,
+      "archive_receipt_hash": "440a5d3e03f248306cc8d33ba2c90e26a6e8d73fb9659af588d238b13f22ce42",
+      "archive_payload_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183",
+      "account_facts": {
+        "gate": {
+          "status": "incomplete",
+          "checks": {
+            "cash": "matched",
+            "positions": "matched",
+            "order_trade": "matched",
+            "reconstructed_cash": 100000.0
+          },
+          "facts_hash": "a289e19956240a19c73a84c9d8394d479805dad5c0e2a668300362eaca126a71",
+          "conflict_count": 0,
+          "missing_count": 22,
+          "recorded_trade_count": 0,
+          "execution_certified": false
+        },
+        "no_gate": {
+          "status": "conflict",
+          "checks": {
+            "cash": "matched",
+            "positions": "matched",
+            "order_trade": "matched",
+            "reconstructed_cash": 79601.66
+          },
+          "facts_hash": "722ab56879806202aa0b81640761b7e551849bd0bf555dc97ba6ced758af7fc6",
+          "conflict_count": 2,
+          "missing_count": 26,
+          "recorded_trade_count": 3,
+          "execution_certified": false
+        }
+      },
+      "cli_verification": "passed",
+      "runtime_fingerprint_count": 40,
+      "missing_databases": [],
+      "excluded": [
+        "credentials and environment files",
+        "runtime code and dependencies",
+        "host schedulers",
+        "remote Multica resources",
+        "existing backups",
+        "logs and lock files",
+        "legacy strategy accounts"
+      ]
+    },
+    "synthetic_settlement": {
+      "source_fixture": "/private/tmp/quant-risk-verified-BXFVKn/typed/trading_team",
+      "backup": {
+        "status": "verified",
+        "scope": "research_paper_workflow_evidence",
+        "path": "/private/tmp/quant-workflow-recovery-CG62ZQ/synthetic-snapshot",
+        "manifest_hash": "b31a0c48f62cb8b57beae239f86aabd24ce7df7262520b1f51843d9bb8070c4b",
+        "file_count": 9,
+        "database_count": 3,
+        "execution_authorized": false
+      },
+      "repeat_result": {
+        "date": "2026-09-21",
+        "status": "reused",
+        "run_id": "9fb383726e9d4fccb541ece4e3adde00",
+        "plan_hash": "1757d388864162ba3b6bfdba36ba45eacf7f7d61473b04bbae4f4a7d4822c2c3"
+      },
+      "restored_accounts_unchanged": true,
+      "source_accounts_unchanged": true,
+      "account_file_hashes": {
+        "gate": "b2957ebc2d45e41cba3701d7948822c146f2b7930593e9bf5bf592566095cab3",
+        "no_gate": "8682c6cf0c51b0d0c8d9102abddefb061945c7401de05a20dae844b5b93febc0"
+      },
+      "forward_performance": false
+    }
+  },
+  "source_hashes_after": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723"
+  },
+  "production_sources_unchanged": true,
+  "model_calls": 0,
+  "notifications": 0,
+  "production_settlements": 0,
+  "remote_multica_dispatches": 0,
+  "limitations": [
+    "This preserves historical evidence including conflicts; it does not recertify execution or repair history.",
+    "No code, dependencies, credentials, host schedules, or remote Multica resources are installed by restore.",
+    "Sources must be stable through the snapshot window; detected concurrent writes fail instead of publishing success.",
+    "Local isolated acceptance is not scheduled backup, off-site disaster recovery, or production activation.",
+    "Restored running ledger rows are historical statuses, not evidence of a currently live process."
+  ]
+}

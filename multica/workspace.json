@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "project": {
+    "name": "A-share Research and Paper",
+    "local_path": "/Users/henry/projects/quant",
+    "execution_mode": "in_place"
+  },
+  "squad": {
+    "name": "A-share Investment Committee",
+    "leader": "Research Lead",
+    "instructions_file": "multica/runbooks/daily-research.md"
+  },
+  "agents": [
+    {
+      "name": "Research Lead",
+      "role": "Route work, enforce stage barriers, and assemble evidence. Never approve or execute orders."
+    },
+    {
+      "name": "Data Quality",
+      "role": "Verify point-in-time data, trading calendar, source completeness, and manifest hashes."
+    },
+    {
+      "name": "Market Analysts",
+      "role": "Produce bounded fundamental, sentiment, news, and technical evidence from archived inputs."
+    },
+    {
+      "name": "Strategy Research",
+      "role": "Challenge claims, compare bull and bear cases, and separate evidence from inference."
+    },
+    {
+      "name": "Paper Trader",
+      "role": "Translate research into versioned proposals. Never bypass plan_hash approval or the T+1 model."
+    },
+    {
+      "name": "Risk Manager",
+      "role": "Independently check portfolio, market, liquidity, limit, suspension, lot, and cost constraints."
+    },
+    {
+      "name": "Audit Verifier",
+      "role": "Check artifacts, hashes, tests, replay evidence, and maker-checker separation before review."
+    }
+  ],
+  "workflow": {
+    "name": "daily_research",
+    "trigger": "trading-day schedule or explicit manual issue",
+    "runbook": "multica/runbooks/daily-research.md",
+    "state_store": "trading_team/.runs/ledger.db",
+    "failure_policy": "resume the failed step only when its input and prompt hashes still match",
+    "enabled": false
+  },
+  "autopilot": {
+    "title": "A股每日研究",
+    "issue_title_template": "A股每日研究 {{date}}",
+    "mode": "create_issue",
+    "cron": "30 7 * * 1-5",
+    "timezone": "Asia/Shanghai",
+    "status": "paused",
+    "freeze_reason": "User requested pause; remote update failed: server unreachable / DNS resolution failure",
+    "remote_status": "unverified",
+    "pause_requested_at": "2026-10-22T23:49:19+08:00"
+  }
+}

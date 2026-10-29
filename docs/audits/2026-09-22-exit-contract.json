@@ -1,0 +1,2033 @@
+{
+  "schema": "exit_contract_acceptance.v1",
+  "exit_contract": "a_share_exit.v1",
+  "portfolio_policy": "explicit_intent.v1",
+  "scope": "isolated_retrospective_engineering_acceptance",
+  "network_disabled": true,
+  "forward_performance": false,
+  "execution_certified": false,
+  "observed_at": "2026-09-22T04:41:11.119941+08:00",
+  "isolated_root": "/private/tmp/quant-exit-v1-vOxHa9",
+  "archive_receipt_hash": "440a5d3e03f248306cc8d33ba2c90e26a6e8d73fb9659af588d238b13f22ce42",
+  "source_hashes_before": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-execution-precision.json": "c5bbaa2b353015fa78d4ee26e291dc1b5e5effc4b0a328bed466a2f55e666c3c",
+    "docs/audits/2026-09-22-entry-contract.json": "5018b581f82f1348e537377bf5650d473d5335ead94f3a9a70cc9fcc37c05bd3"
+  },
+  "cases": {
+    "retain_absent": {
+      "plan_hash": "62f26367094988e95e6eb0e3b8900b723ceae9963d419f4a2cfef929b08f6fc7",
+      "first_run": {
+        "date": "2026-09-21",
+        "status": "succeeded",
+        "run_id": "43a50a2b51d0465b9ba5869b3103b068",
+        "plan_hash": "62f26367094988e95e6eb0e3b8900b723ceae9963d419f4a2cfef929b08f6fc7",
+        "session": {
+          "date": "2026-09-21",
+          "is_session": true,
+          "completed": true,
+          "calendar_hash": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+          "reason": "completed"
+        },
+        "materialize": {
+          "date": "2026-09-21",
+          "plan_hash": "62f26367094988e95e6eb0e3b8900b723ceae9963d419f4a2cfef929b08f6fc7",
+          "decision": "ok",
+          "paper_decision": "paper_auto"
+        },
+        "counterfactual": {
+          "plan_date": "2026-09-21",
+          "data_asof": "2026-09-18",
+          "sample_type": "forward_eligible",
+          "plan_hash": "62f26367094988e95e6eb0e3b8900b723ceae9963d419f4a2cfef929b08f6fc7",
+          "evidence_kind": "DAILY_BAR_PROXY",
+          "opening_state": {
+            "cash": 100000,
+            "positions": {},
+            "scope": "daily_cash_reset"
+          },
+          "execution_model": {
+            "version": "daily_bar_t1.v4",
+            "entry_contract": "a_share_entry.v1",
+            "exit_contract": "a_share_exit.v1",
+            "portfolio_policy": "explicit_intent.v1",
+            "sale_proceeds_reuse": "next_session",
+            "signal_to_fill": "T+1",
+            "slippage_rate": 0.002,
+            "board_lot": 100,
+            "limit_touch": "daily_ohlc_strict",
+            "fees": "commission+stamp_tax+transfer_fee"
+          },
+          "portfolios": {
+            "gate": {
+              "initial_cash": 100000,
+              "initial_equity": 100000,
+              "positions": {},
+              "cash": 100000,
+              "equity": 100000,
+              "return": 0.0,
+              "orders": []
+            },
+            "no_gate": {
+              "initial_cash": 100000,
+              "initial_equity": 100000,
+              "positions": {},
+              "cash": 100000,
+              "equity": 100000,
+              "return": 0.0,
+              "orders": []
+            },
+            "csi300": {
+              "return": 0.007139
+            }
+          },
+          "bars": {
+            "000300": {
+              "open": 4524.34,
+              "high": 4540.55,
+              "low": 4512.15,
+              "close": 4539.57,
+              "prev_close": 4507.39,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": null,
+              "limit_down": null,
+              "volume": 18636154200.0
+            }
+          },
+          "market_data_schema": "execution_bars.v2",
+          "market_data_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+        },
+        "paper": {
+          "gate": {
+            "status": "succeeded",
+            "orders": 0,
+            "fills": 0
+          },
+          "no_gate": {
+            "status": "succeeded",
+            "orders": 0,
+            "fills": 0
+          }
+        }
+      },
+      "second_run": {
+        "date": "2026-09-21",
+        "status": "reused",
+        "run_id": "43a50a2b51d0465b9ba5869b3103b068",
+        "plan_hash": "62f26367094988e95e6eb0e3b8900b723ceae9963d419f4a2cfef929b08f6fc7"
+      },
+      "repeat_accounts_unchanged": true,
+      "accounts": {
+        "gate": {
+          "orders": [],
+          "trades": [],
+          "balance": {
+            "day": "2026-09-21",
+            "cash": 91994.84,
+            "equity": 100202.84,
+            "note": "llm_gate: 0 fills/0 orders"
+          },
+          "remaining_position": {
+            "qty": 200,
+            "avg_cost": 40.0258,
+            "buy_day": "2026-09-18"
+          },
+          "execution_inputs_hash": "fda22bfe5445724679c680a3c3b5962e7357bace3ade384668338f047869d54e",
+          "file_hash": "c9a86c62bf3da1d21c6ec04cb9b1070a806e46e2606fa3f3ad6bec45877a2e08"
+        },
+        "no_gate": {
+          "orders": [],
+          "trades": [],
+          "balance": {
+            "day": "2026-09-21",
+            "cash": 91994.84,
+            "equity": 100202.84,
+            "note": "llm_no_gate: 0 fills/0 orders"
+          },
+          "remaining_position": {
+            "qty": 200,
+            "avg_cost": 40.0258,
+            "buy_day": "2026-09-18"
+          },
+          "execution_inputs_hash": "fda22bfe5445724679c680a3c3b5962e7357bace3ade384668338f047869d54e",
+          "file_hash": "a9c1bd76c0247486742064d4f01a8afa03c19c9126ca8a094b9053125a030327"
+        }
+      },
+      "seeded_counterfactual": {
+        "plan_date": "2026-09-21",
+        "data_asof": "2026-09-18",
+        "sample_type": "forward_eligible",
+        "plan_hash": "62f26367094988e95e6eb0e3b8900b723ceae9963d419f4a2cfef929b08f6fc7",
+        "evidence_kind": "DAILY_BAR_PROXY",
+        "opening_state": {
+          "cash": 91994.84,
+          "positions": {
+            "600036": {
+              "qty": 200,
+              "buy_day": "2026-09-18"
+            }
+          },
+          "scope": "explicit_seed"
+        },
+        "execution_model": {
+          "version": "daily_bar_t1.v4",
+          "entry_contract": "a_share_entry.v1",
+          "exit_contract": "a_share_exit.v1",
+          "portfolio_policy": "explicit_intent.v1",
+          "sale_proceeds_reuse": "next_session",
+          "signal_to_fill": "T+1",
+          "slippage_rate": 0.002,
+          "board_lot": 100,
+          "limit_touch": "daily_ohlc_strict",
+          "fees": "commission+stamp_tax+transfer_fee"
+        },
+        "portfolios": {
+          "gate": {
+            "initial_cash": 91994.84,
+            "initial_equity": 100112.84,
+            "positions": {
+              "600036": {
+                "qty": 200,
+                "buy_day": "2026-09-18"
+              }
+            },
+            "cash": 91994.84,
+            "equity": 100202.84,
+            "return": 0.000899,
+            "orders": []
+          },
+          "no_gate": {
+            "initial_cash": 91994.84,
+            "initial_equity": 100112.84,
+            "positions": {
+              "600036": {
+                "qty": 200,
+                "buy_day": "2026-09-18"
+              }
+            },
+            "cash": 91994.84,
+            "equity": 100202.84,
+            "return": 0.000899,
+            "orders": []
+          },
+          "csi300": {
+            "return": 0.007139
+          }
+        },
+        "bars": {
+          "000063": {
+            "open": 32.46,
+            "high": 33.69,
+            "low": 32.46,
+            "close": 33.15,
+            "prev_close": 32.44,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 35.68,
+            "limit_down": 29.2,
+            "volume": 94455800.0
+          },
+          "000300": {
+            "open": 4524.34,
+            "high": 4540.55,
+            "low": 4512.15,
+            "close": 4539.57,
+            "prev_close": 4507.39,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": null,
+            "limit_down": null,
+            "volume": 18636154200.0
+          },
+          "000333": {
+            "open": 84.08,
+            "high": 84.18,
+            "low": 80.68,
+            "close": 80.9,
+            "prev_close": 84.4,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 92.84,
+            "limit_down": 75.96,
+            "volume": 61690800.0
+          },
+          "000858": {
+            "open": 69.96,
+            "high": 70.36,
+            "low": 69.8,
+            "close": 70.27,
+            "prev_close": 70.0,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 77.0,
+            "limit_down": 63.0,
+            "volume": 16949500.0
+          },
+          "002594": {
+            "open": 84.27,
+            "high": 85.29,
+            "low": 84.11,
+            "close": 85.22,
+            "prev_close": 84.3,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 92.73,
+            "limit_down": 75.87,
+            "volume": 24832200.0
+          },
+          "300750": {
+            "open": 303.04,
+            "high": 303.6,
+            "low": 295.5,
+            "close": 297.1,
+            "prev_close": 301.95,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 362.34,
+            "limit_down": 241.56,
+            "volume": 49488300.0
+          },
+          "600036": {
+            "open": 40.65,
+            "high": 41.12,
+            "low": 40.36,
+            "close": 41.04,
+            "prev_close": 40.59,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 44.65,
+            "limit_down": 36.53,
+            "volume": 54037400.0
+          },
+          "600519": {
+            "open": 1259.0,
+            "high": 1259.95,
+            "low": 1250.8,
+            "close": 1252.57,
+            "prev_close": 1257.12,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 1382.83,
+            "limit_down": 1131.41,
+            "volume": 2501700.0
+          },
+          "600900": {
+            "open": 28.16,
+            "high": 28.19,
+            "low": 28.02,
+            "close": 28.1,
+            "prev_close": 28.27,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 31.1,
+            "limit_down": 25.44,
+            "volume": 66670000.0
+          },
+          "601012": {
+            "open": 11.2,
+            "high": 11.4,
+            "low": 11.18,
+            "close": 11.36,
+            "prev_close": 11.23,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 12.35,
+            "limit_down": 10.11,
+            "volume": 63296700.0
+          },
+          "601318": {
+            "open": 53.3,
+            "high": 54.0,
+            "low": 52.88,
+            "close": 53.98,
+            "prev_close": 53.37,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 58.71,
+            "limit_down": 48.03,
+            "volume": 59078600.0
+          },
+          "601899": {
+            "open": 31.48,
+            "high": 31.7,
+            "low": 31.07,
+            "close": 31.3,
+            "prev_close": 31.41,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 34.55,
+            "limit_down": 28.27,
+            "volume": 113246600.0
+          }
+        }
+      },
+      "daily_counterfactual_scope": {
+        "cash": 100000,
+        "positions": {},
+        "scope": "daily_cash_reset"
+      },
+      "audit_summary": {
+        "gate": {
+          "conflicts": 0,
+          "missing": 3,
+          "exit_day_checks": {
+            "orders": 0,
+            "trades": 0,
+            "price_replay": "matched_recorded_quantity",
+            "file_hashes": {
+              "/private/tmp/quant-exit-v1-vOxHa9/retain_absent/trading_team/outputs/2026-09-21/plan.json": "bd4d3ca5ceee09cc6830ba65dba88334a7067257417c244f032a58c8b9b00de2",
+              "/private/tmp/quant-exit-v1-vOxHa9/retain_absent/trading_team/decisions/2026-09-21/paper_decision.json": "ebf599b9230a7ceda563e81c72964d7d9bbd570f4cd62c818dfb3ed4053fa790",
+              "/private/tmp/quant-exit-v1-vOxHa9/retain_absent/trading_team/replay_data/2026-09-21.json": "389ebef7cb36615bfee87d65fbd05fd08a5340e54981f9202376c3d1370fbf5f"
+            },
+            "plan_hash": "62f26367094988e95e6eb0e3b8900b723ceae9963d419f4a2cfef929b08f6fc7",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-22T04:41:11",
+            "recorded_model": "daily_bar_t1.v4",
+            "recorded_entry_contract": "a_share_entry.v1",
+            "recorded_exit_contract": "a_share_exit.v1",
+            "recorded_portfolio_policy": "explicit_intent.v1",
+            "receipt": "internally_matched",
+            "receipt_created_at": "2026-09-22T04:41:11+08:00",
+            "market_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+          }
+        },
+        "no_gate": {
+          "conflicts": 0,
+          "missing": 3,
+          "exit_day_checks": {
+            "orders": 0,
+            "trades": 0,
+            "price_replay": "matched_recorded_quantity",
+            "file_hashes": {
+              "/private/tmp/quant-exit-v1-vOxHa9/retain_absent/trading_team/outputs/2026-09-21/plan.json": "bd4d3ca5ceee09cc6830ba65dba88334a7067257417c244f032a58c8b9b00de2",
+              "/private/tmp/quant-exit-v1-vOxHa9/retain_absent/trading_team/decisions/2026-09-21/paper_decision.json": "ebf599b9230a7ceda563e81c72964d7d9bbd570f4cd62c818dfb3ed4053fa790",
+              "/private/tmp/quant-exit-v1-vOxHa9/retain_absent/trading_team/replay_data/2026-09-21.json": "389ebef7cb36615bfee87d65fbd05fd08a5340e54981f9202376c3d1370fbf5f"
+            },
+            "plan_hash": "62f26367094988e95e6eb0e3b8900b723ceae9963d419f4a2cfef929b08f6fc7",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-22T04:41:11",
+            "recorded_model": "daily_bar_t1.v4",
+            "recorded_entry_contract": "a_share_entry.v1",
+            "recorded_exit_contract": "a_share_exit.v1",
+            "recorded_portfolio_policy": "explicit_intent.v1",
+            "receipt": "internally_matched",
+            "receipt_created_at": "2026-09-22T04:41:11+08:00",
+            "market_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+          }
+        }
+      }
+    },
+    "limit_unfilled": {
+      "plan_hash": "09f70ddd91529d203a81575fa238c3e09b30692f81dc5669841ea5fef9130bc5",
+      "first_run": {
+        "date": "2026-09-21",
+        "status": "succeeded",
+        "run_id": "525f41a98cc347d9945a5929fadce81a",
+        "plan_hash": "09f70ddd91529d203a81575fa238c3e09b30692f81dc5669841ea5fef9130bc5",
+        "session": {
+          "date": "2026-09-21",
+          "is_session": true,
+          "completed": true,
+          "calendar_hash": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+          "reason": "completed"
+        },
+        "materialize": {
+          "date": "2026-09-21",
+          "plan_hash": "09f70ddd91529d203a81575fa238c3e09b30692f81dc5669841ea5fef9130bc5",
+          "decision": "ok",
+          "paper_decision": "paper_auto"
+        },
+        "counterfactual": {
+          "plan_date": "2026-09-21",
+          "data_asof": "2026-09-18",
+          "sample_type": "forward_eligible",
+          "plan_hash": "09f70ddd91529d203a81575fa238c3e09b30692f81dc5669841ea5fef9130bc5",
+          "evidence_kind": "DAILY_BAR_PROXY",
+          "opening_state": {
+            "cash": 100000,
+            "positions": {},
+            "scope": "daily_cash_reset"
+          },
+          "execution_model": {
+            "version": "daily_bar_t1.v4",
+            "entry_contract": "a_share_entry.v1",
+            "exit_contract": "a_share_exit.v1",
+            "portfolio_policy": "explicit_intent.v1",
+            "sale_proceeds_reuse": "next_session",
+            "signal_to_fill": "T+1",
+            "slippage_rate": 0.002,
+            "board_lot": 100,
+            "limit_touch": "daily_ohlc_strict",
+            "fees": "commission+stamp_tax+transfer_fee"
+          },
+          "portfolios": {
+            "gate": {
+              "initial_cash": 100000,
+              "initial_equity": 100000,
+              "positions": {},
+              "cash": 100000,
+              "equity": 100000,
+              "return": 0.0,
+              "orders": [
+                {
+                  "code": "600036",
+                  "name": "",
+                  "direction": "卖出",
+                  "status": "rejected",
+                  "reason": "no verified position to sell",
+                  "qty": 0,
+                  "fill_price": 0.0,
+                  "amount": 0.0,
+                  "fee": 0.0,
+                  "price_type": ""
+                }
+              ]
+            },
+            "no_gate": {
+              "initial_cash": 100000,
+              "initial_equity": 100000,
+              "positions": {},
+              "cash": 100000,
+              "equity": 100000,
+              "return": 0.0,
+              "orders": [
+                {
+                  "code": "600036",
+                  "name": "",
+                  "direction": "卖出",
+                  "status": "rejected",
+                  "reason": "no verified position to sell",
+                  "qty": 0,
+                  "fill_price": 0.0,
+                  "amount": 0.0,
+                  "fee": 0.0,
+                  "price_type": ""
+                }
+              ]
+            },
+            "csi300": {
+              "return": 0.007139
+            }
+          },
+          "bars": {
+            "000300": {
+              "open": 4524.34,
+              "high": 4540.55,
+              "low": 4512.15,
+              "close": 4539.57,
+              "prev_close": 4507.39,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": null,
+              "limit_down": null,
+              "volume": 18636154200.0
+            },
+            "600036": {
+              "open": 40.65,
+              "high": 41.12,
+              "low": 40.36,
+              "close": 41.04,
+              "prev_close": 40.59,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": 44.65,
+              "limit_down": 36.53,
+              "volume": 54037400.0
+            }
+          },
+          "market_data_schema": "execution_bars.v2",
+          "market_data_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+        },
+        "paper": {
+          "gate": {
+            "status": "succeeded",
+            "orders": 1,
+            "fills": 0
+          },
+          "no_gate": {
+            "status": "succeeded",
+            "orders": 1,
+            "fills": 0
+          }
+        }
+      },
+      "second_run": {
+        "date": "2026-09-21",
+        "status": "reused",
+        "run_id": "525f41a98cc347d9945a5929fadce81a",
+        "plan_hash": "09f70ddd91529d203a81575fa238c3e09b30692f81dc5669841ea5fef9130bc5"
+      },
+      "repeat_accounts_unchanged": true,
+      "accounts": {
+        "gate": {
+          "orders": [
+            {
+              "id": 2,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "600036",
+              "side": "sell",
+              "qty": 200,
+              "planned_price": 42.0,
+              "signal_source": "llm_gate",
+              "status": "unfilled",
+              "reason": "限价未触发",
+              "plan_hash": "09f70ddd91529d203a81575fa238c3e09b30692f81dc5669841ea5fef9130bc5",
+              "fee": 0.0,
+              "fill_price": null
+            }
+          ],
+          "trades": [],
+          "balance": {
+            "day": "2026-09-21",
+            "cash": 91994.84,
+            "equity": 100202.84,
+            "note": "llm_gate: 0 fills/1 orders"
+          },
+          "remaining_position": {
+            "qty": 200,
+            "avg_cost": 40.0258,
+            "buy_day": "2026-09-18"
+          },
+          "execution_inputs_hash": "fda22bfe5445724679c680a3c3b5962e7357bace3ade384668338f047869d54e",
+          "file_hash": "1270e4452975a0a7bfd0d86fc2523b48e49d8a66d63e15b446f81ab872c2e2d9"
+        },
+        "no_gate": {
+          "orders": [
+            {
+              "id": 2,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "600036",
+              "side": "sell",
+              "qty": 200,
+              "planned_price": 42.0,
+              "signal_source": "llm_no_gate",
+              "status": "unfilled",
+              "reason": "限价未触发",
+              "plan_hash": "09f70ddd91529d203a81575fa238c3e09b30692f81dc5669841ea5fef9130bc5",
+              "fee": 0.0,
+              "fill_price": null
+            }
+          ],
+          "trades": [],
+          "balance": {
+            "day": "2026-09-21",
+            "cash": 91994.84,
+            "equity": 100202.84,
+            "note": "llm_no_gate: 0 fills/1 orders"
+          },
+          "remaining_position": {
+            "qty": 200,
+            "avg_cost": 40.0258,
+            "buy_day": "2026-09-18"
+          },
+          "execution_inputs_hash": "fda22bfe5445724679c680a3c3b5962e7357bace3ade384668338f047869d54e",
+          "file_hash": "aa0ac194554a86d4b6d504bb1aaabc5a6667b2008d91335154199ba37400bac1"
+        }
+      },
+      "seeded_counterfactual": {
+        "plan_date": "2026-09-21",
+        "data_asof": "2026-09-18",
+        "sample_type": "forward_eligible",
+        "plan_hash": "09f70ddd91529d203a81575fa238c3e09b30692f81dc5669841ea5fef9130bc5",
+        "evidence_kind": "DAILY_BAR_PROXY",
+        "opening_state": {
+          "cash": 91994.84,
+          "positions": {
+            "600036": {
+              "qty": 200,
+              "buy_day": "2026-09-18"
+            }
+          },
+          "scope": "explicit_seed"
+        },
+        "execution_model": {
+          "version": "daily_bar_t1.v4",
+          "entry_contract": "a_share_entry.v1",
+          "exit_contract": "a_share_exit.v1",
+          "portfolio_policy": "explicit_intent.v1",
+          "sale_proceeds_reuse": "next_session",
+          "signal_to_fill": "T+1",
+          "slippage_rate": 0.002,
+          "board_lot": 100,
+          "limit_touch": "daily_ohlc_strict",
+          "fees": "commission+stamp_tax+transfer_fee"
+        },
+        "portfolios": {
+          "gate": {
+            "initial_cash": 91994.84,
+            "initial_equity": 100112.84,
+            "positions": {
+              "600036": {
+                "qty": 200,
+                "buy_day": "2026-09-18"
+              }
+            },
+            "cash": 91994.84,
+            "equity": 100202.84,
+            "return": 0.000899,
+            "orders": [
+              {
+                "code": "600036",
+                "name": "",
+                "direction": "卖出",
+                "status": "unfilled",
+                "reason": "限价未触发",
+                "qty": 200,
+                "fill_price": 0.0,
+                "amount": 0.0,
+                "fee": 0.0,
+                "price_type": ""
+              }
+            ]
+          },
+          "no_gate": {
+            "initial_cash": 91994.84,
+            "initial_equity": 100112.84,
+            "positions": {
+              "600036": {
+                "qty": 200,
+                "buy_day": "2026-09-18"
+              }
+            },
+            "cash": 91994.84,
+            "equity": 100202.84,
+            "return": 0.000899,
+            "orders": [
+              {
+                "code": "600036",
+                "name": "",
+                "direction": "卖出",
+                "status": "unfilled",
+                "reason": "限价未触发",
+                "qty": 200,
+                "fill_price": 0.0,
+                "amount": 0.0,
+                "fee": 0.0,
+                "price_type": ""
+              }
+            ]
+          },
+          "csi300": {
+            "return": 0.007139
+          }
+        },
+        "bars": {
+          "000063": {
+            "open": 32.46,
+            "high": 33.69,
+            "low": 32.46,
+            "close": 33.15,
+            "prev_close": 32.44,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 35.68,
+            "limit_down": 29.2,
+            "volume": 94455800.0
+          },
+          "000300": {
+            "open": 4524.34,
+            "high": 4540.55,
+            "low": 4512.15,
+            "close": 4539.57,
+            "prev_close": 4507.39,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": null,
+            "limit_down": null,
+            "volume": 18636154200.0
+          },
+          "000333": {
+            "open": 84.08,
+            "high": 84.18,
+            "low": 80.68,
+            "close": 80.9,
+            "prev_close": 84.4,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 92.84,
+            "limit_down": 75.96,
+            "volume": 61690800.0
+          },
+          "000858": {
+            "open": 69.96,
+            "high": 70.36,
+            "low": 69.8,
+            "close": 70.27,
+            "prev_close": 70.0,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 77.0,
+            "limit_down": 63.0,
+            "volume": 16949500.0
+          },
+          "002594": {
+            "open": 84.27,
+            "high": 85.29,
+            "low": 84.11,
+            "close": 85.22,
+            "prev_close": 84.3,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 92.73,
+            "limit_down": 75.87,
+            "volume": 24832200.0
+          },
+          "300750": {
+            "open": 303.04,
+            "high": 303.6,
+            "low": 295.5,
+            "close": 297.1,
+            "prev_close": 301.95,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 362.34,
+            "limit_down": 241.56,
+            "volume": 49488300.0
+          },
+          "600036": {
+            "open": 40.65,
+            "high": 41.12,
+            "low": 40.36,
+            "close": 41.04,
+            "prev_close": 40.59,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 44.65,
+            "limit_down": 36.53,
+            "volume": 54037400.0
+          },
+          "600519": {
+            "open": 1259.0,
+            "high": 1259.95,
+            "low": 1250.8,
+            "close": 1252.57,
+            "prev_close": 1257.12,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 1382.83,
+            "limit_down": 1131.41,
+            "volume": 2501700.0
+          },
+          "600900": {
+            "open": 28.16,
+            "high": 28.19,
+            "low": 28.02,
+            "close": 28.1,
+            "prev_close": 28.27,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 31.1,
+            "limit_down": 25.44,
+            "volume": 66670000.0
+          },
+          "601012": {
+            "open": 11.2,
+            "high": 11.4,
+            "low": 11.18,
+            "close": 11.36,
+            "prev_close": 11.23,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 12.35,
+            "limit_down": 10.11,
+            "volume": 63296700.0
+          },
+          "601318": {
+            "open": 53.3,
+            "high": 54.0,
+            "low": 52.88,
+            "close": 53.98,
+            "prev_close": 53.37,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 58.71,
+            "limit_down": 48.03,
+            "volume": 59078600.0
+          },
+          "601899": {
+            "open": 31.48,
+            "high": 31.7,
+            "low": 31.07,
+            "close": 31.3,
+            "prev_close": 31.41,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 34.55,
+            "limit_down": 28.27,
+            "volume": 113246600.0
+          }
+        }
+      },
+      "daily_counterfactual_scope": {
+        "cash": 100000,
+        "positions": {},
+        "scope": "daily_cash_reset"
+      },
+      "audit_summary": {
+        "gate": {
+          "conflicts": 0,
+          "missing": 3,
+          "exit_day_checks": {
+            "orders": 1,
+            "trades": 0,
+            "price_replay": "matched_recorded_quantity",
+            "file_hashes": {
+              "/private/tmp/quant-exit-v1-vOxHa9/limit_unfilled/trading_team/outputs/2026-09-21/plan.json": "50834e2f094e2b366fd4caa379eba4accb57dc25ae60a6cadd8899891c4f4bf9",
+              "/private/tmp/quant-exit-v1-vOxHa9/limit_unfilled/trading_team/decisions/2026-09-21/paper_decision.json": "d9e2e6d6ce5b441fdda33051e2675407194296a15172d50bb59f8813af2adecc",
+              "/private/tmp/quant-exit-v1-vOxHa9/limit_unfilled/trading_team/replay_data/2026-09-21.json": "389ebef7cb36615bfee87d65fbd05fd08a5340e54981f9202376c3d1370fbf5f"
+            },
+            "plan_hash": "09f70ddd91529d203a81575fa238c3e09b30692f81dc5669841ea5fef9130bc5",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-22T04:41:11",
+            "recorded_model": "daily_bar_t1.v4",
+            "recorded_entry_contract": "a_share_entry.v1",
+            "recorded_exit_contract": "a_share_exit.v1",
+            "recorded_portfolio_policy": "explicit_intent.v1",
+            "receipt": "internally_matched",
+            "receipt_created_at": "2026-09-22T04:41:11+08:00",
+            "market_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183",
+            "exit_inventory": "matched_ledger"
+          }
+        },
+        "no_gate": {
+          "conflicts": 0,
+          "missing": 3,
+          "exit_day_checks": {
+            "orders": 1,
+            "trades": 0,
+            "price_replay": "matched_recorded_quantity",
+            "file_hashes": {
+              "/private/tmp/quant-exit-v1-vOxHa9/limit_unfilled/trading_team/outputs/2026-09-21/plan.json": "50834e2f094e2b366fd4caa379eba4accb57dc25ae60a6cadd8899891c4f4bf9",
+              "/private/tmp/quant-exit-v1-vOxHa9/limit_unfilled/trading_team/decisions/2026-09-21/paper_decision.json": "d9e2e6d6ce5b441fdda33051e2675407194296a15172d50bb59f8813af2adecc",
+              "/private/tmp/quant-exit-v1-vOxHa9/limit_unfilled/trading_team/replay_data/2026-09-21.json": "389ebef7cb36615bfee87d65fbd05fd08a5340e54981f9202376c3d1370fbf5f"
+            },
+            "plan_hash": "09f70ddd91529d203a81575fa238c3e09b30692f81dc5669841ea5fef9130bc5",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-22T04:41:11",
+            "recorded_model": "daily_bar_t1.v4",
+            "recorded_entry_contract": "a_share_entry.v1",
+            "recorded_exit_contract": "a_share_exit.v1",
+            "recorded_portfolio_policy": "explicit_intent.v1",
+            "receipt": "internally_matched",
+            "receipt_created_at": "2026-09-22T04:41:11+08:00",
+            "market_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183",
+            "exit_inventory": "matched_ledger"
+          }
+        }
+      }
+    },
+    "reduce_market": {
+      "plan_hash": "afeebdced57f6f12793cb48ace709cdbf1617cd7b9025b5219f270d473421476",
+      "first_run": {
+        "date": "2026-09-21",
+        "status": "succeeded",
+        "run_id": "b38caf2601f74d899057f5b88efd6956",
+        "plan_hash": "afeebdced57f6f12793cb48ace709cdbf1617cd7b9025b5219f270d473421476",
+        "session": {
+          "date": "2026-09-21",
+          "is_session": true,
+          "completed": true,
+          "calendar_hash": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+          "reason": "completed"
+        },
+        "materialize": {
+          "date": "2026-09-21",
+          "plan_hash": "afeebdced57f6f12793cb48ace709cdbf1617cd7b9025b5219f270d473421476",
+          "decision": "ok",
+          "paper_decision": "paper_auto"
+        },
+        "counterfactual": {
+          "plan_date": "2026-09-21",
+          "data_asof": "2026-09-18",
+          "sample_type": "forward_eligible",
+          "plan_hash": "afeebdced57f6f12793cb48ace709cdbf1617cd7b9025b5219f270d473421476",
+          "evidence_kind": "DAILY_BAR_PROXY",
+          "opening_state": {
+            "cash": 100000,
+            "positions": {},
+            "scope": "daily_cash_reset"
+          },
+          "execution_model": {
+            "version": "daily_bar_t1.v4",
+            "entry_contract": "a_share_entry.v1",
+            "exit_contract": "a_share_exit.v1",
+            "portfolio_policy": "explicit_intent.v1",
+            "sale_proceeds_reuse": "next_session",
+            "signal_to_fill": "T+1",
+            "slippage_rate": 0.002,
+            "board_lot": 100,
+            "limit_touch": "daily_ohlc_strict",
+            "fees": "commission+stamp_tax+transfer_fee"
+          },
+          "portfolios": {
+            "gate": {
+              "initial_cash": 100000,
+              "initial_equity": 100000,
+              "positions": {},
+              "cash": 100000,
+              "equity": 100000,
+              "return": 0.0,
+              "orders": [
+                {
+                  "code": "600036",
+                  "name": "",
+                  "direction": "减持",
+                  "status": "rejected",
+                  "reason": "no verified position to sell",
+                  "qty": 0,
+                  "fill_price": 0.0,
+                  "amount": 0.0,
+                  "fee": 0.0,
+                  "price_type": ""
+                }
+              ]
+            },
+            "no_gate": {
+              "initial_cash": 100000,
+              "initial_equity": 100000,
+              "positions": {},
+              "cash": 100000,
+              "equity": 100000,
+              "return": 0.0,
+              "orders": [
+                {
+                  "code": "600036",
+                  "name": "",
+                  "direction": "减持",
+                  "status": "rejected",
+                  "reason": "no verified position to sell",
+                  "qty": 0,
+                  "fill_price": 0.0,
+                  "amount": 0.0,
+                  "fee": 0.0,
+                  "price_type": ""
+                }
+              ]
+            },
+            "csi300": {
+              "return": 0.007139
+            }
+          },
+          "bars": {
+            "000300": {
+              "open": 4524.34,
+              "high": 4540.55,
+              "low": 4512.15,
+              "close": 4539.57,
+              "prev_close": 4507.39,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": null,
+              "limit_down": null,
+              "volume": 18636154200.0
+            },
+            "600036": {
+              "open": 40.65,
+              "high": 41.12,
+              "low": 40.36,
+              "close": 41.04,
+              "prev_close": 40.59,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": 44.65,
+              "limit_down": 36.53,
+              "volume": 54037400.0
+            }
+          },
+          "market_data_schema": "execution_bars.v2",
+          "market_data_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+        },
+        "paper": {
+          "gate": {
+            "status": "succeeded",
+            "orders": 1,
+            "fills": 1
+          },
+          "no_gate": {
+            "status": "succeeded",
+            "orders": 1,
+            "fills": 1
+          }
+        }
+      },
+      "second_run": {
+        "date": "2026-09-21",
+        "status": "reused",
+        "run_id": "b38caf2601f74d899057f5b88efd6956",
+        "plan_hash": "afeebdced57f6f12793cb48ace709cdbf1617cd7b9025b5219f270d473421476"
+      },
+      "repeat_accounts_unchanged": true,
+      "accounts": {
+        "gate": {
+          "orders": [
+            {
+              "id": 2,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "600036",
+              "side": "sell",
+              "qty": 100,
+              "planned_price": null,
+              "signal_source": "llm_gate",
+              "status": "filled",
+              "reason": "",
+              "plan_hash": "afeebdced57f6f12793cb48ace709cdbf1617cd7b9025b5219f270d473421476",
+              "fee": 7.11,
+              "fill_price": 40.56
+            }
+          ],
+          "trades": [
+            {
+              "id": 2,
+              "day": "2026-09-21",
+              "signal_day": "2026-09-18",
+              "code": "600036",
+              "side": "sell",
+              "qty": 100,
+              "price": 40.56,
+              "amount": 4056.0,
+              "fee": 7.11,
+              "signal_source": "llm_gate",
+              "plan_hash": "afeebdced57f6f12793cb48ace709cdbf1617cd7b9025b5219f270d473421476",
+              "planned_price": null,
+              "price_type": "next_open"
+            }
+          ],
+          "balance": {
+            "day": "2026-09-21",
+            "cash": 96043.73,
+            "equity": 100147.73,
+            "note": "llm_gate: 1 fills/1 orders"
+          },
+          "remaining_position": {
+            "qty": 100,
+            "avg_cost": 40.0258,
+            "buy_day": "2026-09-18"
+          },
+          "execution_inputs_hash": "fda22bfe5445724679c680a3c3b5962e7357bace3ade384668338f047869d54e",
+          "file_hash": "51dbb13d138328ff44f374ad095309b61682f7e91d57ca2bf5f903495f972a80"
+        },
+        "no_gate": {
+          "orders": [
+            {
+              "id": 2,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "600036",
+              "side": "sell",
+              "qty": 100,
+              "planned_price": null,
+              "signal_source": "llm_no_gate",
+              "status": "filled",
+              "reason": "",
+              "plan_hash": "afeebdced57f6f12793cb48ace709cdbf1617cd7b9025b5219f270d473421476",
+              "fee": 7.11,
+              "fill_price": 40.56
+            }
+          ],
+          "trades": [
+            {
+              "id": 2,
+              "day": "2026-09-21",
+              "signal_day": "2026-09-18",
+              "code": "600036",
+              "side": "sell",
+              "qty": 100,
+              "price": 40.56,
+              "amount": 4056.0,
+              "fee": 7.11,
+              "signal_source": "llm_no_gate",
+              "plan_hash": "afeebdced57f6f12793cb48ace709cdbf1617cd7b9025b5219f270d473421476",
+              "planned_price": null,
+              "price_type": "next_open"
+            }
+          ],
+          "balance": {
+            "day": "2026-09-21",
+            "cash": 96043.73,
+            "equity": 100147.73,
+            "note": "llm_no_gate: 1 fills/1 orders"
+          },
+          "remaining_position": {
+            "qty": 100,
+            "avg_cost": 40.0258,
+            "buy_day": "2026-09-18"
+          },
+          "execution_inputs_hash": "fda22bfe5445724679c680a3c3b5962e7357bace3ade384668338f047869d54e",
+          "file_hash": "95dad4fab90385ef01fe59a71d6c362f35982b20e4cd88d314ebb183a944d765"
+        }
+      },
+      "seeded_counterfactual": {
+        "plan_date": "2026-09-21",
+        "data_asof": "2026-09-18",
+        "sample_type": "forward_eligible",
+        "plan_hash": "afeebdced57f6f12793cb48ace709cdbf1617cd7b9025b5219f270d473421476",
+        "evidence_kind": "DAILY_BAR_PROXY",
+        "opening_state": {
+          "cash": 91994.84,
+          "positions": {
+            "600036": {
+              "qty": 200,
+              "buy_day": "2026-09-18"
+            }
+          },
+          "scope": "explicit_seed"
+        },
+        "execution_model": {
+          "version": "daily_bar_t1.v4",
+          "entry_contract": "a_share_entry.v1",
+          "exit_contract": "a_share_exit.v1",
+          "portfolio_policy": "explicit_intent.v1",
+          "sale_proceeds_reuse": "next_session",
+          "signal_to_fill": "T+1",
+          "slippage_rate": 0.002,
+          "board_lot": 100,
+          "limit_touch": "daily_ohlc_strict",
+          "fees": "commission+stamp_tax+transfer_fee"
+        },
+        "portfolios": {
+          "gate": {
+            "initial_cash": 91994.84,
+            "initial_equity": 100112.84,
+            "positions": {
+              "600036": {
+                "qty": 100,
+                "buy_day": "2026-09-18"
+              }
+            },
+            "cash": 96043.73,
+            "equity": 100147.73,
+            "return": 0.000349,
+            "orders": [
+              {
+                "code": "600036",
+                "name": "",
+                "direction": "减持",
+                "status": "filled",
+                "reason": "",
+                "qty": 100,
+                "fill_price": 40.56,
+                "amount": 4056.0,
+                "fee": 7.11,
+                "price_type": "next_open"
+              }
+            ]
+          },
+          "no_gate": {
+            "initial_cash": 91994.84,
+            "initial_equity": 100112.84,
+            "positions": {
+              "600036": {
+                "qty": 100,
+                "buy_day": "2026-09-18"
+              }
+            },
+            "cash": 96043.73,
+            "equity": 100147.73,
+            "return": 0.000349,
+            "orders": [
+              {
+                "code": "600036",
+                "name": "",
+                "direction": "减持",
+                "status": "filled",
+                "reason": "",
+                "qty": 100,
+                "fill_price": 40.56,
+                "amount": 4056.0,
+                "fee": 7.11,
+                "price_type": "next_open"
+              }
+            ]
+          },
+          "csi300": {
+            "return": 0.007139
+          }
+        },
+        "bars": {
+          "000063": {
+            "open": 32.46,
+            "high": 33.69,
+            "low": 32.46,
+            "close": 33.15,
+            "prev_close": 32.44,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 35.68,
+            "limit_down": 29.2,
+            "volume": 94455800.0
+          },
+          "000300": {
+            "open": 4524.34,
+            "high": 4540.55,
+            "low": 4512.15,
+            "close": 4539.57,
+            "prev_close": 4507.39,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": null,
+            "limit_down": null,
+            "volume": 18636154200.0
+          },
+          "000333": {
+            "open": 84.08,
+            "high": 84.18,
+            "low": 80.68,
+            "close": 80.9,
+            "prev_close": 84.4,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 92.84,
+            "limit_down": 75.96,
+            "volume": 61690800.0
+          },
+          "000858": {
+            "open": 69.96,
+            "high": 70.36,
+            "low": 69.8,
+            "close": 70.27,
+            "prev_close": 70.0,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 77.0,
+            "limit_down": 63.0,
+            "volume": 16949500.0
+          },
+          "002594": {
+            "open": 84.27,
+            "high": 85.29,
+            "low": 84.11,
+            "close": 85.22,
+            "prev_close": 84.3,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 92.73,
+            "limit_down": 75.87,
+            "volume": 24832200.0
+          },
+          "300750": {
+            "open": 303.04,
+            "high": 303.6,
+            "low": 295.5,
+            "close": 297.1,
+            "prev_close": 301.95,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 362.34,
+            "limit_down": 241.56,
+            "volume": 49488300.0
+          },
+          "600036": {
+            "open": 40.65,
+            "high": 41.12,
+            "low": 40.36,
+            "close": 41.04,
+            "prev_close": 40.59,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 44.65,
+            "limit_down": 36.53,
+            "volume": 54037400.0
+          },
+          "600519": {
+            "open": 1259.0,
+            "high": 1259.95,
+            "low": 1250.8,
+            "close": 1252.57,
+            "prev_close": 1257.12,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 1382.83,
+            "limit_down": 1131.41,
+            "volume": 2501700.0
+          },
+          "600900": {
+            "open": 28.16,
+            "high": 28.19,
+            "low": 28.02,
+            "close": 28.1,
+            "prev_close": 28.27,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 31.1,
+            "limit_down": 25.44,
+            "volume": 66670000.0
+          },
+          "601012": {
+            "open": 11.2,
+            "high": 11.4,
+            "low": 11.18,
+            "close": 11.36,
+            "prev_close": 11.23,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 12.35,
+            "limit_down": 10.11,
+            "volume": 63296700.0
+          },
+          "601318": {
+            "open": 53.3,
+            "high": 54.0,
+            "low": 52.88,
+            "close": 53.98,
+            "prev_close": 53.37,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 58.71,
+            "limit_down": 48.03,
+            "volume": 59078600.0
+          },
+          "601899": {
+            "open": 31.48,
+            "high": 31.7,
+            "low": 31.07,
+            "close": 31.3,
+            "prev_close": 31.41,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 34.55,
+            "limit_down": 28.27,
+            "volume": 113246600.0
+          }
+        }
+      },
+      "daily_counterfactual_scope": {
+        "cash": 100000,
+        "positions": {},
+        "scope": "daily_cash_reset"
+      },
+      "audit_summary": {
+        "gate": {
+          "conflicts": 0,
+          "missing": 3,
+          "exit_day_checks": {
+            "orders": 1,
+            "trades": 1,
+            "price_replay": "matched_recorded_quantity",
+            "file_hashes": {
+              "/private/tmp/quant-exit-v1-vOxHa9/reduce_market/trading_team/outputs/2026-09-21/plan.json": "5364be0662820af01c9ca7e7954355236c770466598dfb011022e515fe4e80e8",
+              "/private/tmp/quant-exit-v1-vOxHa9/reduce_market/trading_team/decisions/2026-09-21/paper_decision.json": "09dfa5d5db3e3310666342f1b23ea67ff3544829fbfd98ae84bffa1311edd77f",
+              "/private/tmp/quant-exit-v1-vOxHa9/reduce_market/trading_team/replay_data/2026-09-21.json": "389ebef7cb36615bfee87d65fbd05fd08a5340e54981f9202376c3d1370fbf5f"
+            },
+            "plan_hash": "afeebdced57f6f12793cb48ace709cdbf1617cd7b9025b5219f270d473421476",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-22T04:41:11",
+            "recorded_model": "daily_bar_t1.v4",
+            "recorded_entry_contract": "a_share_entry.v1",
+            "recorded_exit_contract": "a_share_exit.v1",
+            "recorded_portfolio_policy": "explicit_intent.v1",
+            "receipt": "internally_matched",
+            "receipt_created_at": "2026-09-22T04:41:11+08:00",
+            "market_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183",
+            "exit_inventory": "matched_ledger"
+          }
+        },
+        "no_gate": {
+          "conflicts": 0,
+          "missing": 3,
+          "exit_day_checks": {
+            "orders": 1,
+            "trades": 1,
+            "price_replay": "matched_recorded_quantity",
+            "file_hashes": {
+              "/private/tmp/quant-exit-v1-vOxHa9/reduce_market/trading_team/outputs/2026-09-21/plan.json": "5364be0662820af01c9ca7e7954355236c770466598dfb011022e515fe4e80e8",
+              "/private/tmp/quant-exit-v1-vOxHa9/reduce_market/trading_team/decisions/2026-09-21/paper_decision.json": "09dfa5d5db3e3310666342f1b23ea67ff3544829fbfd98ae84bffa1311edd77f",
+              "/private/tmp/quant-exit-v1-vOxHa9/reduce_market/trading_team/replay_data/2026-09-21.json": "389ebef7cb36615bfee87d65fbd05fd08a5340e54981f9202376c3d1370fbf5f"
+            },
+            "plan_hash": "afeebdced57f6f12793cb48ace709cdbf1617cd7b9025b5219f270d473421476",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-22T04:41:11",
+            "recorded_model": "daily_bar_t1.v4",
+            "recorded_entry_contract": "a_share_entry.v1",
+            "recorded_exit_contract": "a_share_exit.v1",
+            "recorded_portfolio_policy": "explicit_intent.v1",
+            "receipt": "internally_matched",
+            "receipt_created_at": "2026-09-22T04:41:11+08:00",
+            "market_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183",
+            "exit_inventory": "matched_ledger"
+          }
+        }
+      }
+    },
+    "stop_all": {
+      "plan_hash": "b903db4001cb53a99ac62f511e7dd1af9e27b1425bfc25ab5cb476b04d0737e6",
+      "first_run": {
+        "date": "2026-09-21",
+        "status": "succeeded",
+        "run_id": "95ad998993e64493ae830ffa60f015e3",
+        "plan_hash": "b903db4001cb53a99ac62f511e7dd1af9e27b1425bfc25ab5cb476b04d0737e6",
+        "session": {
+          "date": "2026-09-21",
+          "is_session": true,
+          "completed": true,
+          "calendar_hash": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+          "reason": "completed"
+        },
+        "materialize": {
+          "date": "2026-09-21",
+          "plan_hash": "b903db4001cb53a99ac62f511e7dd1af9e27b1425bfc25ab5cb476b04d0737e6",
+          "decision": "ok",
+          "paper_decision": "paper_auto"
+        },
+        "counterfactual": {
+          "plan_date": "2026-09-21",
+          "data_asof": "2026-09-18",
+          "sample_type": "forward_eligible",
+          "plan_hash": "b903db4001cb53a99ac62f511e7dd1af9e27b1425bfc25ab5cb476b04d0737e6",
+          "evidence_kind": "DAILY_BAR_PROXY",
+          "opening_state": {
+            "cash": 100000,
+            "positions": {},
+            "scope": "daily_cash_reset"
+          },
+          "execution_model": {
+            "version": "daily_bar_t1.v4",
+            "entry_contract": "a_share_entry.v1",
+            "exit_contract": "a_share_exit.v1",
+            "portfolio_policy": "explicit_intent.v1",
+            "sale_proceeds_reuse": "next_session",
+            "signal_to_fill": "T+1",
+            "slippage_rate": 0.002,
+            "board_lot": 100,
+            "limit_touch": "daily_ohlc_strict",
+            "fees": "commission+stamp_tax+transfer_fee"
+          },
+          "portfolios": {
+            "gate": {
+              "initial_cash": 100000,
+              "initial_equity": 100000,
+              "positions": {},
+              "cash": 100000,
+              "equity": 100000,
+              "return": 0.0,
+              "orders": [
+                {
+                  "code": "600036",
+                  "name": "",
+                  "direction": "卖出",
+                  "status": "rejected",
+                  "reason": "no verified position to sell",
+                  "qty": 0,
+                  "fill_price": 0.0,
+                  "amount": 0.0,
+                  "fee": 0.0,
+                  "price_type": ""
+                }
+              ]
+            },
+            "no_gate": {
+              "initial_cash": 100000,
+              "initial_equity": 100000,
+              "positions": {},
+              "cash": 100000,
+              "equity": 100000,
+              "return": 0.0,
+              "orders": [
+                {
+                  "code": "600036",
+                  "name": "",
+                  "direction": "卖出",
+                  "status": "rejected",
+                  "reason": "no verified position to sell",
+                  "qty": 0,
+                  "fill_price": 0.0,
+                  "amount": 0.0,
+                  "fee": 0.0,
+                  "price_type": ""
+                }
+              ]
+            },
+            "csi300": {
+              "return": 0.007139
+            }
+          },
+          "bars": {
+            "000300": {
+              "open": 4524.34,
+              "high": 4540.55,
+              "low": 4512.15,
+              "close": 4539.57,
+              "prev_close": 4507.39,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": null,
+              "limit_down": null,
+              "volume": 18636154200.0
+            },
+            "600036": {
+              "open": 40.65,
+              "high": 41.12,
+              "low": 40.36,
+              "close": 41.04,
+              "prev_close": 40.59,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": 44.65,
+              "limit_down": 36.53,
+              "volume": 54037400.0
+            }
+          },
+          "market_data_schema": "execution_bars.v2",
+          "market_data_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+        },
+        "paper": {
+          "gate": {
+            "status": "succeeded",
+            "orders": 1,
+            "fills": 1
+          },
+          "no_gate": {
+            "status": "succeeded",
+            "orders": 1,
+            "fills": 1
+          }
+        }
+      },
+      "second_run": {
+        "date": "2026-09-21",
+        "status": "reused",
+        "run_id": "95ad998993e64493ae830ffa60f015e3",
+        "plan_hash": "b903db4001cb53a99ac62f511e7dd1af9e27b1425bfc25ab5cb476b04d0737e6"
+      },
+      "repeat_accounts_unchanged": true,
+      "accounts": {
+        "gate": {
+          "orders": [
+            {
+              "id": 2,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "600036",
+              "side": "sell",
+              "qty": 200,
+              "planned_price": 40.5,
+              "signal_source": "llm_gate",
+              "status": "filled",
+              "reason": "",
+              "plan_hash": "b903db4001cb53a99ac62f511e7dd1af9e27b1425bfc25ab5cb476b04d0737e6",
+              "fee": 9.2,
+              "fill_price": 40.41
+            }
+          ],
+          "trades": [
+            {
+              "id": 2,
+              "day": "2026-09-21",
+              "signal_day": "2026-09-18",
+              "code": "600036",
+              "side": "sell",
+              "qty": 200,
+              "price": 40.41,
+              "amount": 8082.0,
+              "fee": 9.2,
+              "signal_source": "llm_gate",
+              "plan_hash": "b903db4001cb53a99ac62f511e7dd1af9e27b1425bfc25ab5cb476b04d0737e6",
+              "planned_price": 40.5,
+              "price_type": "stop_daily_bar"
+            }
+          ],
+          "balance": {
+            "day": "2026-09-21",
+            "cash": 100067.64,
+            "equity": 100067.64,
+            "note": "llm_gate: 1 fills/1 orders"
+          },
+          "remaining_position": null,
+          "execution_inputs_hash": "fda22bfe5445724679c680a3c3b5962e7357bace3ade384668338f047869d54e",
+          "file_hash": "fff36694e18ed37434c6ace3c9387d94650b57e706a837bf8ef9bd3b196903dc"
+        },
+        "no_gate": {
+          "orders": [
+            {
+              "id": 2,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "600036",
+              "side": "sell",
+              "qty": 200,
+              "planned_price": 40.5,
+              "signal_source": "llm_no_gate",
+              "status": "filled",
+              "reason": "",
+              "plan_hash": "b903db4001cb53a99ac62f511e7dd1af9e27b1425bfc25ab5cb476b04d0737e6",
+              "fee": 9.2,
+              "fill_price": 40.41
+            }
+          ],
+          "trades": [
+            {
+              "id": 2,
+              "day": "2026-09-21",
+              "signal_day": "2026-09-18",
+              "code": "600036",
+              "side": "sell",
+              "qty": 200,
+              "price": 40.41,
+              "amount": 8082.0,
+              "fee": 9.2,
+              "signal_source": "llm_no_gate",
+              "plan_hash": "b903db4001cb53a99ac62f511e7dd1af9e27b1425bfc25ab5cb476b04d0737e6",
+              "planned_price": 40.5,
+              "price_type": "stop_daily_bar"
+            }
+          ],
+          "balance": {
+            "day": "2026-09-21",
+            "cash": 100067.64,
+            "equity": 100067.64,
+            "note": "llm_no_gate: 1 fills/1 orders"
+          },
+          "remaining_position": null,
+          "execution_inputs_hash": "fda22bfe5445724679c680a3c3b5962e7357bace3ade384668338f047869d54e",
+          "file_hash": "85812d545fef72e69cbb9ece0bcedd78a18a36d65314513cd3d6413d3d7b0886"
+        }
+      },
+      "seeded_counterfactual": {
+        "plan_date": "2026-09-21",
+        "data_asof": "2026-09-18",
+        "sample_type": "forward_eligible",
+        "plan_hash": "b903db4001cb53a99ac62f511e7dd1af9e27b1425bfc25ab5cb476b04d0737e6",
+        "evidence_kind": "DAILY_BAR_PROXY",
+        "opening_state": {
+          "cash": 91994.84,
+          "positions": {
+            "600036": {
+              "qty": 200,
+              "buy_day": "2026-09-18"
+            }
+          },
+          "scope": "explicit_seed"
+        },
+        "execution_model": {
+          "version": "daily_bar_t1.v4",
+          "entry_contract": "a_share_entry.v1",
+          "exit_contract": "a_share_exit.v1",
+          "portfolio_policy": "explicit_intent.v1",
+          "sale_proceeds_reuse": "next_session",
+          "signal_to_fill": "T+1",
+          "slippage_rate": 0.002,
+          "board_lot": 100,
+          "limit_touch": "daily_ohlc_strict",
+          "fees": "commission+stamp_tax+transfer_fee"
+        },
+        "portfolios": {
+          "gate": {
+            "initial_cash": 91994.84,
+            "initial_equity": 100112.84,
+            "positions": {},
+            "cash": 100067.64,
+            "equity": 100067.64,
+            "return": -0.000451,
+            "orders": [
+              {
+                "code": "600036",
+                "name": "",
+                "direction": "卖出",
+                "status": "filled",
+                "reason": "",
+                "qty": 200,
+                "fill_price": 40.41,
+                "amount": 8082.0,
+                "fee": 9.2,
+                "price_type": "stop_daily_bar"
+              }
+            ]
+          },
+          "no_gate": {
+            "initial_cash": 91994.84,
+            "initial_equity": 100112.84,
+            "positions": {},
+            "cash": 100067.64,
+            "equity": 100067.64,
+            "return": -0.000451,
+            "orders": [
+              {
+                "code": "600036",
+                "name": "",
+                "direction": "卖出",
+                "status": "filled",
+                "reason": "",
+                "qty": 200,
+                "fill_price": 40.41,
+                "amount": 8082.0,
+                "fee": 9.2,
+                "price_type": "stop_daily_bar"
+              }
+            ]
+          },
+          "csi300": {
+            "return": 0.007139
+          }
+        },
+        "bars": {
+          "000063": {
+            "open": 32.46,
+            "high": 33.69,
+            "low": 32.46,
+            "close": 33.15,
+            "prev_close": 32.44,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 35.68,
+            "limit_down": 29.2,
+            "volume": 94455800.0
+          },
+          "000300": {
+            "open": 4524.34,
+            "high": 4540.55,
+            "low": 4512.15,
+            "close": 4539.57,
+            "prev_close": 4507.39,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": null,
+            "limit_down": null,
+            "volume": 18636154200.0
+          },
+          "000333": {
+            "open": 84.08,
+            "high": 84.18,
+            "low": 80.68,
+            "close": 80.9,
+            "prev_close": 84.4,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 92.84,
+            "limit_down": 75.96,
+            "volume": 61690800.0
+          },
+          "000858": {
+            "open": 69.96,
+            "high": 70.36,
+            "low": 69.8,
+            "close": 70.27,
+            "prev_close": 70.0,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 77.0,
+            "limit_down": 63.0,
+            "volume": 16949500.0
+          },
+          "002594": {
+            "open": 84.27,
+            "high": 85.29,
+            "low": 84.11,
+            "close": 85.22,
+            "prev_close": 84.3,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 92.73,
+            "limit_down": 75.87,
+            "volume": 24832200.0
+          },
+          "300750": {
+            "open": 303.04,
+            "high": 303.6,
+            "low": 295.5,
+            "close": 297.1,
+            "prev_close": 301.95,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 362.34,
+            "limit_down": 241.56,
+            "volume": 49488300.0
+          },
+          "600036": {
+            "open": 40.65,
+            "high": 41.12,
+            "low": 40.36,
+            "close": 41.04,
+            "prev_close": 40.59,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 44.65,
+            "limit_down": 36.53,
+            "volume": 54037400.0
+          },
+          "600519": {
+            "open": 1259.0,
+            "high": 1259.95,
+            "low": 1250.8,
+            "close": 1252.57,
+            "prev_close": 1257.12,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 1382.83,
+            "limit_down": 1131.41,
+            "volume": 2501700.0
+          },
+          "600900": {
+            "open": 28.16,
+            "high": 28.19,
+            "low": 28.02,
+            "close": 28.1,
+            "prev_close": 28.27,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 31.1,
+            "limit_down": 25.44,
+            "volume": 66670000.0
+          },
+          "601012": {
+            "open": 11.2,
+            "high": 11.4,
+            "low": 11.18,
+            "close": 11.36,
+            "prev_close": 11.23,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 12.35,
+            "limit_down": 10.11,
+            "volume": 63296700.0
+          },
+          "601318": {
+            "open": 53.3,
+            "high": 54.0,
+            "low": 52.88,
+            "close": 53.98,
+            "prev_close": 53.37,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 58.71,
+            "limit_down": 48.03,
+            "volume": 59078600.0
+          },
+          "601899": {
+            "open": 31.48,
+            "high": 31.7,
+            "low": 31.07,
+            "close": 31.3,
+            "prev_close": 31.41,
+            "suspended": false,
+            "limit_pct": 0.1,
+            "limit_up": 34.55,
+            "limit_down": 28.27,
+            "volume": 113246600.0
+          }
+        }
+      },
+      "daily_counterfactual_scope": {
+        "cash": 100000,
+        "positions": {},
+        "scope": "daily_cash_reset"
+      },
+      "audit_summary": {
+        "gate": {
+          "conflicts": 0,
+          "missing": 3,
+          "exit_day_checks": {
+            "orders": 1,
+            "trades": 1,
+            "price_replay": "matched_recorded_quantity",
+            "file_hashes": {
+              "/private/tmp/quant-exit-v1-vOxHa9/stop_all/trading_team/outputs/2026-09-21/plan.json": "b8d1087f83138773fbde1b538616fa9960b698ecf79005aa4b129b36b7d70c37",
+              "/private/tmp/quant-exit-v1-vOxHa9/stop_all/trading_team/decisions/2026-09-21/paper_decision.json": "a1e6bce45a9af21da41593a28c0e3f0d7fe134a453227fcd764142870df040ae",
+              "/private/tmp/quant-exit-v1-vOxHa9/stop_all/trading_team/replay_data/2026-09-21.json": "389ebef7cb36615bfee87d65fbd05fd08a5340e54981f9202376c3d1370fbf5f"
+            },
+            "plan_hash": "b903db4001cb53a99ac62f511e7dd1af9e27b1425bfc25ab5cb476b04d0737e6",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-22T04:41:11",
+            "recorded_model": "daily_bar_t1.v4",
+            "recorded_entry_contract": "a_share_entry.v1",
+            "recorded_exit_contract": "a_share_exit.v1",
+            "recorded_portfolio_policy": "explicit_intent.v1",
+            "receipt": "internally_matched",
+            "receipt_created_at": "2026-09-22T04:41:11+08:00",
+            "market_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183",
+            "exit_inventory": "matched_ledger"
+          }
+        },
+        "no_gate": {
+          "conflicts": 0,
+          "missing": 3,
+          "exit_day_checks": {
+            "orders": 1,
+            "trades": 1,
+            "price_replay": "matched_recorded_quantity",
+            "file_hashes": {
+              "/private/tmp/quant-exit-v1-vOxHa9/stop_all/trading_team/outputs/2026-09-21/plan.json": "b8d1087f83138773fbde1b538616fa9960b698ecf79005aa4b129b36b7d70c37",
+              "/private/tmp/quant-exit-v1-vOxHa9/stop_all/trading_team/decisions/2026-09-21/paper_decision.json": "a1e6bce45a9af21da41593a28c0e3f0d7fe134a453227fcd764142870df040ae",
+              "/private/tmp/quant-exit-v1-vOxHa9/stop_all/trading_team/replay_data/2026-09-21.json": "389ebef7cb36615bfee87d65fbd05fd08a5340e54981f9202376c3d1370fbf5f"
+            },
+            "plan_hash": "b903db4001cb53a99ac62f511e7dd1af9e27b1425bfc25ab5cb476b04d0737e6",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-22T04:41:11",
+            "recorded_model": "daily_bar_t1.v4",
+            "recorded_entry_contract": "a_share_entry.v1",
+            "recorded_exit_contract": "a_share_exit.v1",
+            "recorded_portfolio_policy": "explicit_intent.v1",
+            "receipt": "internally_matched",
+            "receipt_created_at": "2026-09-22T04:41:11+08:00",
+            "market_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183",
+            "exit_inventory": "matched_ledger"
+          }
+        }
+      }
+    }
+  },
+  "production_audit": {
+    "gate": {
+      "conflicts": 2,
+      "missing": 12,
+      "checks": {
+        "cash": "matched",
+        "positions": "matched",
+        "order_trade": "matched",
+        "reconstructed_cash": 100000.0
+      },
+      "issue_codes": [
+        "market_evidence",
+        "plan_binding",
+        "publication_timing",
+        "receipt_missing",
+        "unmodeled_condition"
+      ]
+    },
+    "no_gate": {
+      "conflicts": 4,
+      "missing": 14,
+      "checks": {
+        "cash": "matched",
+        "positions": "matched",
+        "order_trade": "matched",
+        "reconstructed_cash": 79601.66
+      },
+      "issue_codes": [
+        "amount_price",
+        "decision_policy_changed",
+        "market_evidence",
+        "plan_binding",
+        "price_tick",
+        "publication_timing",
+        "receipt_missing",
+        "unmodeled_condition"
+      ]
+    }
+  },
+  "source_hashes_after": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-execution-precision.json": "c5bbaa2b353015fa78d4ee26e291dc1b5e5effc4b0a328bed466a2f55e666c3c",
+    "docs/audits/2026-09-22-entry-contract.json": "5018b581f82f1348e537377bf5650d473d5335ead94f3a9a70cc9fcc37c05bd3"
+  },
+  "production_sources_unchanged": true,
+  "model_calls": 0,
+  "notifications": 0,
+  "remote_multica_dispatches": 0,
+  "production_settlements": 0,
+  "limitations": [
+    "Opening inventory is synthetic ledger setup, not a verified historical acquisition.",
+    "Exit fixtures are new retrospective intent, not original research recommendations.",
+    "Daily cash-reset report differs from a seeded or continuous-account comparison.",
+    "No persistent protective stops or per-lot inventory.",
+    "Remote Multica role execution and forward performance remain unverified."
+  ]
+}

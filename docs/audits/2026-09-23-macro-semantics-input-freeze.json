@@ -1,0 +1,54 @@
+{
+  "schema": "macro_semantics_and_input_freeze_acceptance.v1",
+  "loop": 66,
+  "verified_at": "2026-09-23T01:21:03.592427+08:00",
+  "refresh": {
+    "schema": "macro_semantics_refresh.v1",
+    "loop": 66,
+    "team": "/private/tmp/quant-real-chain-v2.drq6k45z/trading_team",
+    "business_date": "2026-09-23",
+    "started_at": "2026-09-23T01:18:00.835638+08:00",
+    "finished_at": "2026-09-23T01:18:10.646551+08:00",
+    "refreshed_sections": [
+      "overnight_us",
+      "asia",
+      "commodities"
+    ],
+    "before_sha256": "ae400d0090bde6a33e7302d11158c46b8237b96ca0f881d08ff249a2792cbc0d",
+    "after_sha256": "f2c7fc74876b0d3f10344481ed1137b7af099bbe19f3c6339a06321a4f0baca8",
+    "failed_sections": [
+      "forex"
+    ]
+  },
+  "freeze_path": "/private/tmp/quant-real-chain-v2.drq6k45z/trading_team/.runs/input-freeze-2026-09-23.json",
+  "freeze_sha256": "adcab57b2be8deeaf93fda7cd999eb6c455b48177ce5d7eebe768c0a0238f258",
+  "input_count": 38,
+  "unchanged_core_file_count": 29,
+  "known_limitations": [
+    "Optional forex unavailable; do not invent a value",
+    "Asia snapshot session date unknown; no freshness or closing claim",
+    "US and commodity prices are snapshots, not certified overnight closes"
+  ],
+  "publish_preflight_ready": true,
+  "tests": {
+    "baseline_research": "78 passed in 3.20s",
+    "regression_before": "4 failed in 0.12s",
+    "focused_after": "82 passed in 5.90s",
+    "full": "1175 passed in 36.37s",
+    "diff_check": "passed"
+  },
+  "code_hashes": {
+    "trading_team/collect_global.py": "3fb3fff4176b7b0b5d538bbab49445acdc26a952bf575a18399bde68fa2872f2",
+    "tests/test_collect_global.py": "5ab63511e936d104dc2d0cfc65d83eebdbf3c727c3d5c5812cfa169900c941fc"
+  },
+  "protected_file_count": 17,
+  "protected_changed": [],
+  "old_review": "rejected",
+  "new_multica_task": false,
+  "model_called": false,
+  "paper_executed": false,
+  "notification_sent": false,
+  "milestone_m1_complete": false,
+  "natural_day_accepted": false,
+  "next": "Verify frozen hashes and live runtime, deduplicate issues/tasks, then dispatch one bounded authorized Multica Research Lead publication for this new isolated date/version using original Moonshot credentials. Disclose optional gaps; independent reviewers decide acceptance."
+}

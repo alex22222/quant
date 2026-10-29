@@ -16,6 +16,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+from pipeline.stage_backtest import _run
 RQALPHA = ROOT / ".venv" / "bin" / "rqalpha"
 GATE = {"annual_min": 0.05, "maxdd_max": 0.30, "sharpe_min": 0.30}
 BT_START, BT_END, CASH = "2020-01-01", "2026-08-01", "100000"
@@ -48,20 +50,12 @@ def main():
         tag = "_".join(f"{k}{v}" for k, v in combo.items()).replace(".", "p")
         out_dir = out_root / f"{name}__{tag}"
         out_dir.mkdir(parents=True, exist_ok=True)
-        cmd = [str(RQALPHA), "run", "-f", strat, "-s", BT_START, "-e", BT_END,
-               "-bm", BENCH, "--account", "stock", CASH,
-               "--report", str(out_dir), "--plot-save", str(out_dir / "equity.png"),
-               "--extra-vars", json.dumps(combo)]
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=600, cwd=ROOT)
-        xlsx = out_dir / "summary.xlsx"
-        if r.returncode != 0 or not xlsx.exists():
+        metrics, error = _run({"file": strat}, BT_START, BT_END, combo, out_dir, tag)
+        if error:
             rows.append({"params": combo, "gate": "error",
-                         "stderr": (r.stderr or "")[-200:]})
+                         "stderr": error[-200:]})
             continue
-        import pandas as pd
-        d = dict(zip(*(pd.read_excel(xlsx, header=None)[i] for i in (0, 1))))
-        m = {"total_ret": float(d["收益率"]), "annual": float(d["年化收益率"]),
-             "max_dd": float(d["最大回撤"]), "sharpe": float(d["夏普比率"])}
+        m = {key: metrics[key] for key in ("total_ret", "annual", "max_dd", "sharpe")}
         g, reasons = gate(m)
         rows.append({"params": combo, **m, "gate": g, "reasons": reasons,
                      "report": f"reports/sweep/{name}__{tag}"})

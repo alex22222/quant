@@ -1,0 +1,187 @@
+{
+  "schema": "model_transport_acceptance.v1",
+  "loop": 47,
+  "date": "2026-09-22",
+  "timezone": "Asia/Shanghai",
+  "classification": "progress",
+  "goal_complete": false,
+  "contract": {
+    "generation": "daily_research.v4",
+    "transport": "model_transport.v1",
+    "nonsecret_fields": [
+      "adapter",
+      "endpoint",
+      "model",
+      "parameters"
+    ],
+    "actual_request_bound": true,
+    "role_publication_consistency_checked": true,
+    "request_intent_persisted_before_call": true,
+    "key_rotation_changes_identity": false,
+    "old_receipts_upgraded": false,
+    "reported_model_is_server_assertion": true,
+    "http_redirects_followed": false,
+    "observation_timestamp_excluded_from_account_inputs": true
+  },
+  "protected": {
+    "count": 30,
+    "changed": [],
+    "before_sha256": {
+      "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818",
+      "docs/audits/2026-09-22-continuous-counterfactual.json": "2bafa984af423bda5136229a79aa7bf46613a0912fbc5663d04604b32ca6a50c",
+      "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+      "docs/audits/2026-09-22-lot-inventory.json": "9834742c64efe66fa261a7ead8e442ccc6a01d337dff0781ed1bf9b1cde8c576",
+      "docs/audits/2026-09-22-notification-recovery.json": "b6a2ef9a07602894720c19c2de6e56cf3dddeae78a265dbb378eaeec82496a12",
+      "docs/audits/2026-09-22-paper-protection.json": "ad090cf06b500bc80e705ba8a9318300c5b6456986113ecec06346b2c34bba56",
+      "docs/audits/2026-09-22-persistent-backup.json": "917b8103e93ae1bd288c681f955f7b2a4cbcb59e262802509f904f87165fce1d",
+      "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+      "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+      "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+      "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+      "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+      "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+      "trading_team/decisions/2026-09-22/decision.json": "64533e79126b528243577f65227ab79c87d84b575f265f446196b606b37cb516",
+      "trading_team/decisions/2026-09-22/paper_decision.json": "699c1922a4e3a6f61c7ab781adfe2756b318e17240780651ed6a44d71174ed0e",
+      "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+      "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+      "trading_team/outputs/2026-09-22/01_fundamental.md": "ff50fd15686fb6de950c58c4238113a63a9be2185becc0fb39ccb89cd463f7bb",
+      "trading_team/outputs/2026-09-22/02_sentiment.md": "d0600ecf3e381a57f664b9deb592a33dcde6a5a929c497b26d50125307fc4ff6",
+      "trading_team/outputs/2026-09-22/03_news.md": "806eb8b2af9729f099b611c8c13f80b2f0ddd9d7ac24718faa519cb2570c4cf4",
+      "trading_team/outputs/2026-09-22/04_technical.md": "94fbc7265a543e2bd21754eadf75ef8a9cdedab9242d7f914514f9dbb8495dd1",
+      "trading_team/outputs/2026-09-22/05_researcher.md": "c7a5812da86091860c8b482fb39df9b6fcca36880241dd9a5b8d4f0e5a9ccb24",
+      "trading_team/outputs/2026-09-22/06_trader.md": "9f64c8e1d472828058939a2458cca036f710d7a4e756eb862e3ee32555fa7131",
+      "trading_team/outputs/2026-09-22/07_risk_manager.md": "7a8a291d4a084cc2114095221b659e3c37a1687a318648160ed0eae87a4b7556",
+      "trading_team/outputs/2026-09-22/daily_conclusion.md": "6d57ab3ce5b76a191e331342475feddc3bfc44b0ab0ae67e086dbc894ad39d62",
+      "trading_team/outputs/2026-09-22/plan.json": "ab3c293ae4cc2e7a922ec5278e216ed4c5ce7f6785a883e73c2d35c65a8174e0",
+      "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+      "trading_team/team.db": "397b37b89a02a3dc4b87ff6ef0504def4ecd3e24362e66e23b424cbc0366aeee",
+      "docs/audits/2026-09-22-research-entrypoint.json": "e582421895dfd7110fc5097eb5881acd15d9d4d2c29196e880dac5c9d1179bc5",
+      "docs/audits/2026-09-22-multica-observation.json": "1cdb1927e348d0d87ba0306edbec392e4b8abae27b6045b4dcdb8abcfe2b6010"
+    }
+  },
+  "verification": {
+    "baseline_related_tests": 105,
+    "new_behavior_tests": 27,
+    "initial_new_tests_failed": 15,
+    "test_command": ".venv/bin/python -m pytest -q tests execution/tests",
+    "tests_passed": 1060,
+    "test_duration_seconds": 24.61,
+    "prior_full_pass_duration_seconds": 25.03,
+    "isolated_acceptance_tests": 6,
+    "isolated_acceptance_duration_seconds": 0.79,
+    "independent_readonly_checks": [
+      {
+        "directory": "/private/tmp/quant-model-identity-8l3v0y/acceptance/test_receipt_role_and_actual_r0/trading_team",
+        "plan_hash": "7fb23610b5d654d4829da375251e0cd29006c2484e26d997864a69198a8f5fcd",
+        "transport": {
+          "schema": "model_transport.v1",
+          "adapter": "offline_fixture.v1",
+          "endpoint": "https://fixture.invalid/v1",
+          "model": "offline-test",
+          "parameters": {
+            "temperature": 0.6,
+            "max_tokens": 8192,
+            "thinking": "disabled",
+            "response_format": "json_object"
+          }
+        },
+        "publisher_status": "succeeded"
+      },
+      {
+        "directory": "/private/tmp/quant-model-identity-8l3v0y/acceptance/test_restored_research_verifie0-restored/trading_team",
+        "plan_hash": "7fb23610b5d654d4829da375251e0cd29006c2484e26d997864a69198a8f5fcd",
+        "transport": {
+          "schema": "model_transport.v1",
+          "adapter": "offline_fixture.v1",
+          "endpoint": "https://fixture.invalid/v1",
+          "model": "offline-test",
+          "parameters": {
+            "temperature": 0.6,
+            "max_tokens": 8192,
+            "thinking": "disabled",
+            "response_format": "json_object"
+          }
+        },
+        "publisher_status": "succeeded"
+      },
+      {
+        "directory": "/private/tmp/quant-model-identity-8l3v0y/acceptance/test_restored_research_verifie1-restored/trading_team",
+        "plan_hash": "7fb23610b5d654d4829da375251e0cd29006c2484e26d997864a69198a8f5fcd",
+        "transport": {
+          "schema": "model_transport.v1",
+          "adapter": "offline_fixture.v1",
+          "endpoint": "https://fixture.invalid/v1",
+          "model": "offline-test",
+          "parameters": {
+            "temperature": 0.6,
+            "max_tokens": 8192,
+            "thinking": "disabled",
+            "response_format": "json_object"
+          }
+        },
+        "publisher_status": "succeeded"
+      }
+    ],
+    "browser_widths": [
+      390,
+      768,
+      1100,
+      1280
+    ],
+    "formal_browser_width": 1910,
+    "horizontal_page_overflow": false,
+    "legacy_profile": "five fields show not recorded",
+    "hostile_endpoint": "escaped literal text; zero injected img elements",
+    "tablet_step_layout": "two-column stacked layout at widths up to 1100",
+    "javascript_syntax": "passed",
+    "git_diff_check": "passed",
+    "temporary_server": "stopped",
+    "test_fixture_issue": {
+      "symptom": "existing workflow backup byte-equality assertion intermittently failed",
+      "isolated_without_backup_call": true,
+      "main_file_changed": true,
+      "logical_rows_changed": false,
+      "cause": "fixture writer connection garbage collection checkpointed committed WAL",
+      "fix": "collect fixture connections before recording test byte baseline",
+      "production_backup_code_changed": false
+    }
+  },
+  "formal": {
+    "observed_at": "2026-09-22T11:26:38+08:00",
+    "legacy_research_run_id": "bede6f9c9db14154911097cca6bce22b",
+    "legacy_transport_fields": "not recorded",
+    "current_business_date": "2026-09-22",
+    "generation_evidence": "missing",
+    "risk_contract": "missing",
+    "latest_multica_run_id": "01a0c691-0e7a-7b98-b915-52955a79f325",
+    "latest_multica_status": "failed",
+    "failure_reason": "The 'gpt-6-astra' model requires a newer version of Codex. Please upgrade to the latest app or CLI and try again.",
+    "bound_runtime_version": "codex-cli 0.145.0",
+    "configuration": "runbook drift",
+    "local_research_link": "missing",
+    "completion_verified": false
+  },
+  "side_effects": {
+    "models_called": false,
+    "messages_sent": false,
+    "approvals_changed": false,
+    "production_paper_settled": false,
+    "remote_tasks_dispatched": false,
+    "remote_configuration_changed": false,
+    "scheduler_changed": false,
+    "credentials_copied": false,
+    "billing_route_changed": false,
+    "console_reloaded": true,
+    "local_runbook_changed": true
+  },
+  "limitations": [
+    "Transport consistency is not independent model identity, judgment quality, billing attribution, or forward profitability certification.",
+    "Kimi CLI tool/plugin/MCP/Hook and authentication isolation has not been accepted; no CLI model adapter was enabled.",
+    "Original API key versus desktop/Code membership quota remains to be clarified.",
+    "Existing remote-dispatch authorization remains unresolved; do not use natural scheduled triggers to bypass it.",
+    "Actual Multica runtime compatibility and the unified research publishing entrypoint remain unverified.",
+    "Legacy Kimi direct-writing schedule remains unchanged; today's missing evidence was preserved, not reconstructed.",
+    "Offsite backup destination and independent forward validation remain incomplete."
+  ],
+  "evidence_directory": "/private/tmp/quant-model-identity-8l3v0y"
+}

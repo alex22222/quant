@@ -1,0 +1,22 @@
+{
+  "schema": "next_session_calendar_preflight.v1",
+  "observed_at": "2026-09-28T21:21:08+08:00",
+  "scope": "read-only next-session eligibility preflight, not M2 acceptance",
+  "exchange_sources": {
+    "sse": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20260915_10832273.shtml",
+    "szse": "https://investor.szse.cn/disclosure/notice/general/t20251222_618087.html",
+    "published_schedule": "September 25-27 closed; September 28 opens; October 1-7 closed and October 8 reopens. September 29-30 are inferred ordinary sessions, subject to day-of confirmation."
+  },
+  "local_calendar": {
+    "source": "/Users/henry/.rqalpha/bundle/trading_dates.npy",
+    "sha256": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+    "sessions": {
+      "2026-09-29": true,
+      "2026-09-30": true,
+      "2026-10-01": false
+    }
+  },
+  "next_candidate": "2026-09-29",
+  "required_day_of_checks": "Confirm exchange session, verified prior-session archive, sole scheduled publication task, current generation version and active Paper cohort before any M2 counting.",
+  "status": "candidate_only_m2_pending_m3_not_started"
+}

@@ -1,0 +1,1026 @@
+{
+  "schema": "entry_contract_acceptance.v1",
+  "entry_contract": "a_share_entry.v1",
+  "scope": "isolated_retrospective_engineering_acceptance",
+  "network_disabled": true,
+  "forward_performance": false,
+  "execution_certified": false,
+  "observed_at": "2026-09-22T04:12:11.858575+08:00",
+  "isolated_root": "/private/tmp/quant-entry-v1-JLhLkv",
+  "archive_receipt_hash": "440a5d3e03f248306cc8d33ba2c90e26a6e8d73fb9659af588d238b13f22ce42",
+  "source_hashes_before": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-execution-precision.json": "c5bbaa2b353015fa78d4ee26e291dc1b5e5effc4b0a328bed466a2f55e666c3c"
+  },
+  "cases": {
+    "legacy": {
+      "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+      "plan_file_hash": "bfadde5612c2e67b61b3d2d8d0ebdedfe3d1d1c72fc8b7e7ec035da18c4915ae",
+      "original_plan_version_preserved": true,
+      "first_run": {
+        "date": "2026-09-21",
+        "status": "succeeded",
+        "run_id": "0410b194b3fb472db21ded0e5b8739e0",
+        "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+        "session": {
+          "date": "2026-09-21",
+          "is_session": true,
+          "completed": true,
+          "calendar_hash": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+          "reason": "completed"
+        },
+        "materialize": {
+          "date": "2026-09-21",
+          "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+          "decision": "ok",
+          "paper_decision": "paper_auto"
+        },
+        "counterfactual": {
+          "plan_date": "2026-09-21",
+          "data_asof": "2026-09-18",
+          "sample_type": "forward_eligible",
+          "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+          "evidence_kind": "DAILY_BAR_PROXY",
+          "execution_model": {
+            "version": "daily_bar_t1.v4",
+            "entry_contract": "a_share_entry.v1",
+            "signal_to_fill": "T+1",
+            "slippage_rate": 0.002,
+            "board_lot": 100,
+            "limit_touch": "daily_ohlc_strict",
+            "fees": "commission+stamp_tax+transfer_fee"
+          },
+          "portfolios": {
+            "gate": {
+              "initial_cash": 100000,
+              "cash": 100000,
+              "equity": 100000,
+              "return": 0,
+              "orders": [
+                {
+                  "code": "600036",
+                  "name": "招商银行",
+                  "direction": "条件买入",
+                  "status": "blocked",
+                  "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only"
+                },
+                {
+                  "code": "601318",
+                  "name": "中国平安",
+                  "direction": "条件买入",
+                  "status": "blocked",
+                  "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only"
+                },
+                {
+                  "code": "601899",
+                  "name": "紫金矿业",
+                  "direction": "条件买入",
+                  "status": "blocked",
+                  "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only"
+                }
+              ]
+            },
+            "no_gate": {
+              "initial_cash": 100000,
+              "cash": 100000,
+              "equity": 100000,
+              "return": 0,
+              "orders": [
+                {
+                  "code": "600036",
+                  "name": "招商银行",
+                  "direction": "条件买入",
+                  "status": "blocked",
+                  "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only"
+                },
+                {
+                  "code": "601318",
+                  "name": "中国平安",
+                  "direction": "条件买入",
+                  "status": "blocked",
+                  "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only"
+                },
+                {
+                  "code": "601899",
+                  "name": "紫金矿业",
+                  "direction": "条件买入",
+                  "status": "blocked",
+                  "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only"
+                }
+              ]
+            },
+            "csi300": {
+              "return": 0.007139
+            }
+          },
+          "bars": {
+            "600036": {
+              "open": 40.65,
+              "high": 41.12,
+              "low": 40.36,
+              "close": 41.04,
+              "prev_close": 40.59,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": 44.65,
+              "limit_down": 36.53,
+              "volume": 54037400
+            },
+            "601318": {
+              "open": 53.3,
+              "high": 54,
+              "low": 52.88,
+              "close": 53.98,
+              "prev_close": 53.37,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": 58.71,
+              "limit_down": 48.03,
+              "volume": 59078600
+            },
+            "601899": {
+              "open": 31.48,
+              "high": 31.7,
+              "low": 31.07,
+              "close": 31.3,
+              "prev_close": 31.41,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": 34.55,
+              "limit_down": 28.27,
+              "volume": 113246600
+            },
+            "000300": {
+              "open": 4524.34,
+              "high": 4540.55,
+              "low": 4512.15,
+              "close": 4539.57,
+              "prev_close": 4507.39,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": null,
+              "limit_down": null,
+              "volume": 18636154200
+            }
+          },
+          "market_data_schema": "execution_bars.v2",
+          "market_data_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+        },
+        "paper": {
+          "gate": {
+            "status": "succeeded",
+            "orders": 3,
+            "fills": 0
+          },
+          "no_gate": {
+            "status": "succeeded",
+            "orders": 3,
+            "fills": 0
+          }
+        }
+      },
+      "second_run": {
+        "date": "2026-09-21",
+        "status": "reused",
+        "run_id": "0410b194b3fb472db21ded0e5b8739e0",
+        "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9"
+      },
+      "repeat_accounts_unchanged": true,
+      "accounts": {
+        "gate": {
+          "orders": [
+            {
+              "id": 1,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "600036",
+              "side": "buy",
+              "qty": 0,
+              "planned_price": null,
+              "signal_source": "llm_gate",
+              "status": "blocked",
+              "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only",
+              "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+              "fee": 0,
+              "fill_price": null
+            },
+            {
+              "id": 2,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "601318",
+              "side": "buy",
+              "qty": 0,
+              "planned_price": null,
+              "signal_source": "llm_gate",
+              "status": "blocked",
+              "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only",
+              "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+              "fee": 0,
+              "fill_price": null
+            },
+            {
+              "id": 3,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "601899",
+              "side": "buy",
+              "qty": 0,
+              "planned_price": null,
+              "signal_source": "llm_gate",
+              "status": "blocked",
+              "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only",
+              "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+              "fee": 0,
+              "fill_price": null
+            }
+          ],
+          "trades": [],
+          "execution_inputs": {
+            "bars": {
+              "600036": {
+                "close": 41.04,
+                "high": 41.12,
+                "limit_down": 36.53,
+                "limit_pct": 0.1,
+                "limit_up": 44.65,
+                "low": 40.36,
+                "open": 40.65,
+                "prev_close": 40.59,
+                "suspended": false,
+                "volume": 54037400
+              },
+              "601318": {
+                "close": 53.98,
+                "high": 54,
+                "limit_down": 48.03,
+                "limit_pct": 0.1,
+                "limit_up": 58.71,
+                "low": 52.88,
+                "open": 53.3,
+                "prev_close": 53.37,
+                "suspended": false,
+                "volume": 59078600
+              },
+              "601899": {
+                "close": 31.3,
+                "high": 31.7,
+                "limit_down": 28.27,
+                "limit_pct": 0.1,
+                "limit_up": 34.55,
+                "low": 31.07,
+                "open": 31.48,
+                "prev_close": 31.41,
+                "suspended": false,
+                "volume": 113246600
+              },
+              "000300": {
+                "close": 4539.57,
+                "high": 4540.55,
+                "limit_down": null,
+                "limit_pct": 0.1,
+                "limit_up": null,
+                "low": 4512.15,
+                "open": 4524.34,
+                "prev_close": 4507.39,
+                "suspended": false,
+                "volume": 18636154200
+              }
+            },
+            "entry_contract": "a_share_entry.v1",
+            "fees": {
+              "commission_rate": 0.00025,
+              "min_commission": 5,
+              "stamp_tax_rate": 0.0005,
+              "transfer_fee_rate": 0.00002
+            },
+            "model": "daily_bar_t1.v4",
+            "slippage_rate": 0.002
+          },
+          "execution_inputs_hash": "b219b4d141c0c480cd8bfefc9d03e73e7210a91e4152bb312a2f1f7f655a5cb5",
+          "file_hash": "135c14ef2bcfc1da13af67541358b433c056e815a0861cd6b61c09615cbab88a"
+        },
+        "no_gate": {
+          "orders": [
+            {
+              "id": 1,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "600036",
+              "side": "buy",
+              "qty": 0,
+              "planned_price": null,
+              "signal_source": "llm_no_gate",
+              "status": "blocked",
+              "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only",
+              "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+              "fee": 0,
+              "fill_price": null
+            },
+            {
+              "id": 2,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "601318",
+              "side": "buy",
+              "qty": 0,
+              "planned_price": null,
+              "signal_source": "llm_no_gate",
+              "status": "blocked",
+              "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only",
+              "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+              "fee": 0,
+              "fill_price": null
+            },
+            {
+              "id": 3,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "601899",
+              "side": "buy",
+              "qty": 0,
+              "planned_price": null,
+              "signal_source": "llm_no_gate",
+              "status": "blocked",
+              "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only",
+              "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+              "fee": 0,
+              "fill_price": null
+            }
+          ],
+          "trades": [],
+          "execution_inputs": {
+            "bars": {
+              "600036": {
+                "close": 41.04,
+                "high": 41.12,
+                "limit_down": 36.53,
+                "limit_pct": 0.1,
+                "limit_up": 44.65,
+                "low": 40.36,
+                "open": 40.65,
+                "prev_close": 40.59,
+                "suspended": false,
+                "volume": 54037400
+              },
+              "601318": {
+                "close": 53.98,
+                "high": 54,
+                "limit_down": 48.03,
+                "limit_pct": 0.1,
+                "limit_up": 58.71,
+                "low": 52.88,
+                "open": 53.3,
+                "prev_close": 53.37,
+                "suspended": false,
+                "volume": 59078600
+              },
+              "601899": {
+                "close": 31.3,
+                "high": 31.7,
+                "limit_down": 28.27,
+                "limit_pct": 0.1,
+                "limit_up": 34.55,
+                "low": 31.07,
+                "open": 31.48,
+                "prev_close": 31.41,
+                "suspended": false,
+                "volume": 113246600
+              },
+              "000300": {
+                "close": 4539.57,
+                "high": 4540.55,
+                "limit_down": null,
+                "limit_pct": 0.1,
+                "limit_up": null,
+                "low": 4512.15,
+                "open": 4524.34,
+                "prev_close": 4507.39,
+                "suspended": false,
+                "volume": 18636154200
+              }
+            },
+            "entry_contract": "a_share_entry.v1",
+            "fees": {
+              "commission_rate": 0.00025,
+              "min_commission": 5,
+              "stamp_tax_rate": 0.0005,
+              "transfer_fee_rate": 0.00002
+            },
+            "model": "daily_bar_t1.v4",
+            "slippage_rate": 0.002
+          },
+          "execution_inputs_hash": "b219b4d141c0c480cd8bfefc9d03e73e7210a91e4152bb312a2f1f7f655a5cb5",
+          "file_hash": "aaf06c0117844889c9f4ce8c4d2607024e74b2962792758ea0c6db5187891466"
+        }
+      },
+      "audit_summary": {
+        "gate": {
+          "conflicts": 0,
+          "missing": 2,
+          "price_replay": "matched_recorded_quantity"
+        },
+        "no_gate": {
+          "conflicts": 0,
+          "missing": 2,
+          "price_replay": "matched_recorded_quantity"
+        }
+      }
+    },
+    "explicit": {
+      "plan_hash": "9c51cbc096163b5b2d82da478ac3cc72091747227722c5202c9c5a41fc135727",
+      "plan_file_hash": "5191c0cf8b04d33669a4622a3b6ba72027617b9d9c97c09b43903ad499f6a4fc",
+      "original_plan_version_preserved": false,
+      "first_run": {
+        "date": "2026-09-21",
+        "status": "succeeded",
+        "run_id": "e6fadf84a8f048728af6ad6c4e35cd5a",
+        "plan_hash": "9c51cbc096163b5b2d82da478ac3cc72091747227722c5202c9c5a41fc135727",
+        "session": {
+          "date": "2026-09-21",
+          "is_session": true,
+          "completed": true,
+          "calendar_hash": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+          "reason": "completed"
+        },
+        "materialize": {
+          "date": "2026-09-21",
+          "plan_hash": "9c51cbc096163b5b2d82da478ac3cc72091747227722c5202c9c5a41fc135727",
+          "decision": "ok",
+          "paper_decision": "paper_auto"
+        },
+        "counterfactual": {
+          "plan_date": "2026-09-21",
+          "data_asof": "2026-09-18",
+          "sample_type": "forward_eligible",
+          "plan_hash": "9c51cbc096163b5b2d82da478ac3cc72091747227722c5202c9c5a41fc135727",
+          "evidence_kind": "DAILY_BAR_PROXY",
+          "execution_model": {
+            "version": "daily_bar_t1.v4",
+            "entry_contract": "a_share_entry.v1",
+            "signal_to_fill": "T+1",
+            "slippage_rate": 0.002,
+            "board_lot": 100,
+            "limit_touch": "daily_ohlc_strict",
+            "fees": "commission+stamp_tax+transfer_fee"
+          },
+          "portfolios": {
+            "gate": {
+              "initial_cash": 100000,
+              "cash": 85177.7,
+              "equity": 99965.7,
+              "return": -0.000343,
+              "orders": [
+                {
+                  "code": "600036",
+                  "name": "招商银行",
+                  "direction": "条件买入",
+                  "status": "unfilled",
+                  "reason": "execution condition unmet: open_gap_pct lte 0"
+                },
+                {
+                  "code": "601318",
+                  "name": "中国平安",
+                  "direction": "条件买入",
+                  "status": "filled",
+                  "reason": "",
+                  "qty": 100,
+                  "fill_price": 53.41,
+                  "amount": 5341,
+                  "fee": 5.11,
+                  "price_type": "limit_daily_bar"
+                },
+                {
+                  "code": "601899",
+                  "name": "紫金矿业",
+                  "direction": "条件买入",
+                  "status": "filled",
+                  "reason": "",
+                  "qty": 300,
+                  "fill_price": 31.57,
+                  "amount": 9471,
+                  "fee": 5.19,
+                  "price_type": "next_open"
+                }
+              ]
+            },
+            "no_gate": {
+              "initial_cash": 100000,
+              "cash": 85177.7,
+              "equity": 99965.7,
+              "return": -0.000343,
+              "orders": [
+                {
+                  "code": "600036",
+                  "name": "招商银行",
+                  "direction": "条件买入",
+                  "status": "unfilled",
+                  "reason": "execution condition unmet: open_gap_pct lte 0"
+                },
+                {
+                  "code": "601318",
+                  "name": "中国平安",
+                  "direction": "条件买入",
+                  "status": "filled",
+                  "reason": "",
+                  "qty": 100,
+                  "fill_price": 53.41,
+                  "amount": 5341,
+                  "fee": 5.11,
+                  "price_type": "limit_daily_bar"
+                },
+                {
+                  "code": "601899",
+                  "name": "紫金矿业",
+                  "direction": "条件买入",
+                  "status": "filled",
+                  "reason": "",
+                  "qty": 300,
+                  "fill_price": 31.57,
+                  "amount": 9471,
+                  "fee": 5.19,
+                  "price_type": "next_open"
+                }
+              ]
+            },
+            "csi300": {
+              "return": 0.007139
+            }
+          },
+          "bars": {
+            "600036": {
+              "open": 40.65,
+              "high": 41.12,
+              "low": 40.36,
+              "close": 41.04,
+              "prev_close": 40.59,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": 44.65,
+              "limit_down": 36.53,
+              "volume": 54037400
+            },
+            "601318": {
+              "open": 53.3,
+              "high": 54,
+              "low": 52.88,
+              "close": 53.98,
+              "prev_close": 53.37,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": 58.71,
+              "limit_down": 48.03,
+              "volume": 59078600
+            },
+            "601899": {
+              "open": 31.48,
+              "high": 31.7,
+              "low": 31.07,
+              "close": 31.3,
+              "prev_close": 31.41,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": 34.55,
+              "limit_down": 28.27,
+              "volume": 113246600
+            },
+            "000300": {
+              "open": 4524.34,
+              "high": 4540.55,
+              "low": 4512.15,
+              "close": 4539.57,
+              "prev_close": 4507.39,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": null,
+              "limit_down": null,
+              "volume": 18636154200
+            }
+          },
+          "market_data_schema": "execution_bars.v2",
+          "market_data_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+        },
+        "paper": {
+          "gate": {
+            "status": "succeeded",
+            "orders": 3,
+            "fills": 2
+          },
+          "no_gate": {
+            "status": "succeeded",
+            "orders": 3,
+            "fills": 2
+          }
+        }
+      },
+      "second_run": {
+        "date": "2026-09-21",
+        "status": "reused",
+        "run_id": "e6fadf84a8f048728af6ad6c4e35cd5a",
+        "plan_hash": "9c51cbc096163b5b2d82da478ac3cc72091747227722c5202c9c5a41fc135727"
+      },
+      "repeat_accounts_unchanged": true,
+      "accounts": {
+        "gate": {
+          "orders": [
+            {
+              "id": 1,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "600036",
+              "side": "buy",
+              "qty": 200,
+              "planned_price": 41,
+              "signal_source": "llm_gate",
+              "status": "unfilled",
+              "reason": "execution condition unmet: open_gap_pct lte 0",
+              "plan_hash": "9c51cbc096163b5b2d82da478ac3cc72091747227722c5202c9c5a41fc135727",
+              "fee": 0,
+              "fill_price": null
+            },
+            {
+              "id": 2,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "601318",
+              "side": "buy",
+              "qty": 100,
+              "planned_price": 54,
+              "signal_source": "llm_gate",
+              "status": "filled",
+              "reason": "",
+              "plan_hash": "9c51cbc096163b5b2d82da478ac3cc72091747227722c5202c9c5a41fc135727",
+              "fee": 5.11,
+              "fill_price": 53.41
+            },
+            {
+              "id": 3,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "601899",
+              "side": "buy",
+              "qty": 300,
+              "planned_price": 31.5,
+              "signal_source": "llm_gate",
+              "status": "filled",
+              "reason": "",
+              "plan_hash": "9c51cbc096163b5b2d82da478ac3cc72091747227722c5202c9c5a41fc135727",
+              "fee": 5.19,
+              "fill_price": 31.57
+            }
+          ],
+          "trades": [
+            {
+              "id": 1,
+              "day": "2026-09-21",
+              "signal_day": "2026-09-18",
+              "code": "601318",
+              "side": "buy",
+              "qty": 100,
+              "price": 53.41,
+              "amount": 5341,
+              "fee": 5.11,
+              "signal_source": "llm_gate",
+              "plan_hash": "9c51cbc096163b5b2d82da478ac3cc72091747227722c5202c9c5a41fc135727",
+              "planned_price": 54,
+              "price_type": "limit_daily_bar"
+            },
+            {
+              "id": 2,
+              "day": "2026-09-21",
+              "signal_day": "2026-09-18",
+              "code": "601899",
+              "side": "buy",
+              "qty": 300,
+              "price": 31.57,
+              "amount": 9471,
+              "fee": 5.19,
+              "signal_source": "llm_gate",
+              "plan_hash": "9c51cbc096163b5b2d82da478ac3cc72091747227722c5202c9c5a41fc135727",
+              "planned_price": 31.5,
+              "price_type": "next_open"
+            }
+          ],
+          "execution_inputs": {
+            "bars": {
+              "600036": {
+                "close": 41.04,
+                "high": 41.12,
+                "limit_down": 36.53,
+                "limit_pct": 0.1,
+                "limit_up": 44.65,
+                "low": 40.36,
+                "open": 40.65,
+                "prev_close": 40.59,
+                "suspended": false,
+                "volume": 54037400
+              },
+              "601318": {
+                "close": 53.98,
+                "high": 54,
+                "limit_down": 48.03,
+                "limit_pct": 0.1,
+                "limit_up": 58.71,
+                "low": 52.88,
+                "open": 53.3,
+                "prev_close": 53.37,
+                "suspended": false,
+                "volume": 59078600
+              },
+              "601899": {
+                "close": 31.3,
+                "high": 31.7,
+                "limit_down": 28.27,
+                "limit_pct": 0.1,
+                "limit_up": 34.55,
+                "low": 31.07,
+                "open": 31.48,
+                "prev_close": 31.41,
+                "suspended": false,
+                "volume": 113246600
+              },
+              "000300": {
+                "close": 4539.57,
+                "high": 4540.55,
+                "limit_down": null,
+                "limit_pct": 0.1,
+                "limit_up": null,
+                "low": 4512.15,
+                "open": 4524.34,
+                "prev_close": 4507.39,
+                "suspended": false,
+                "volume": 18636154200
+              }
+            },
+            "entry_contract": "a_share_entry.v1",
+            "fees": {
+              "commission_rate": 0.00025,
+              "min_commission": 5,
+              "stamp_tax_rate": 0.0005,
+              "transfer_fee_rate": 0.00002
+            },
+            "model": "daily_bar_t1.v4",
+            "slippage_rate": 0.002
+          },
+          "execution_inputs_hash": "b219b4d141c0c480cd8bfefc9d03e73e7210a91e4152bb312a2f1f7f655a5cb5",
+          "file_hash": "ba558fe40bb146be7ffe75fca934bcabd0b310f419be1676f8fb3ede9d25bd52"
+        },
+        "no_gate": {
+          "orders": [
+            {
+              "id": 1,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "600036",
+              "side": "buy",
+              "qty": 200,
+              "planned_price": 41,
+              "signal_source": "llm_no_gate",
+              "status": "unfilled",
+              "reason": "execution condition unmet: open_gap_pct lte 0",
+              "plan_hash": "9c51cbc096163b5b2d82da478ac3cc72091747227722c5202c9c5a41fc135727",
+              "fee": 0,
+              "fill_price": null
+            },
+            {
+              "id": 2,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "601318",
+              "side": "buy",
+              "qty": 100,
+              "planned_price": 54,
+              "signal_source": "llm_no_gate",
+              "status": "filled",
+              "reason": "",
+              "plan_hash": "9c51cbc096163b5b2d82da478ac3cc72091747227722c5202c9c5a41fc135727",
+              "fee": 5.11,
+              "fill_price": 53.41
+            },
+            {
+              "id": 3,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "601899",
+              "side": "buy",
+              "qty": 300,
+              "planned_price": 31.5,
+              "signal_source": "llm_no_gate",
+              "status": "filled",
+              "reason": "",
+              "plan_hash": "9c51cbc096163b5b2d82da478ac3cc72091747227722c5202c9c5a41fc135727",
+              "fee": 5.19,
+              "fill_price": 31.57
+            }
+          ],
+          "trades": [
+            {
+              "id": 1,
+              "day": "2026-09-21",
+              "signal_day": "2026-09-18",
+              "code": "601318",
+              "side": "buy",
+              "qty": 100,
+              "price": 53.41,
+              "amount": 5341,
+              "fee": 5.11,
+              "signal_source": "llm_no_gate",
+              "plan_hash": "9c51cbc096163b5b2d82da478ac3cc72091747227722c5202c9c5a41fc135727",
+              "planned_price": 54,
+              "price_type": "limit_daily_bar"
+            },
+            {
+              "id": 2,
+              "day": "2026-09-21",
+              "signal_day": "2026-09-18",
+              "code": "601899",
+              "side": "buy",
+              "qty": 300,
+              "price": 31.57,
+              "amount": 9471,
+              "fee": 5.19,
+              "signal_source": "llm_no_gate",
+              "plan_hash": "9c51cbc096163b5b2d82da478ac3cc72091747227722c5202c9c5a41fc135727",
+              "planned_price": 31.5,
+              "price_type": "next_open"
+            }
+          ],
+          "execution_inputs": {
+            "bars": {
+              "600036": {
+                "close": 41.04,
+                "high": 41.12,
+                "limit_down": 36.53,
+                "limit_pct": 0.1,
+                "limit_up": 44.65,
+                "low": 40.36,
+                "open": 40.65,
+                "prev_close": 40.59,
+                "suspended": false,
+                "volume": 54037400
+              },
+              "601318": {
+                "close": 53.98,
+                "high": 54,
+                "limit_down": 48.03,
+                "limit_pct": 0.1,
+                "limit_up": 58.71,
+                "low": 52.88,
+                "open": 53.3,
+                "prev_close": 53.37,
+                "suspended": false,
+                "volume": 59078600
+              },
+              "601899": {
+                "close": 31.3,
+                "high": 31.7,
+                "limit_down": 28.27,
+                "limit_pct": 0.1,
+                "limit_up": 34.55,
+                "low": 31.07,
+                "open": 31.48,
+                "prev_close": 31.41,
+                "suspended": false,
+                "volume": 113246600
+              },
+              "000300": {
+                "close": 4539.57,
+                "high": 4540.55,
+                "limit_down": null,
+                "limit_pct": 0.1,
+                "limit_up": null,
+                "low": 4512.15,
+                "open": 4524.34,
+                "prev_close": 4507.39,
+                "suspended": false,
+                "volume": 18636154200
+              }
+            },
+            "entry_contract": "a_share_entry.v1",
+            "fees": {
+              "commission_rate": 0.00025,
+              "min_commission": 5,
+              "stamp_tax_rate": 0.0005,
+              "transfer_fee_rate": 0.00002
+            },
+            "model": "daily_bar_t1.v4",
+            "slippage_rate": 0.002
+          },
+          "execution_inputs_hash": "b219b4d141c0c480cd8bfefc9d03e73e7210a91e4152bb312a2f1f7f655a5cb5",
+          "file_hash": "487ba9be9dcc9ea2fd8fee9726645d25000cb34f66cf02d5ce209062173b2d46"
+        }
+      },
+      "audit_summary": {
+        "gate": {
+          "conflicts": 0,
+          "missing": 1,
+          "price_replay": "matched_recorded_quantity"
+        },
+        "no_gate": {
+          "conflicts": 0,
+          "missing": 1,
+          "price_replay": "matched_recorded_quantity"
+        }
+      }
+    }
+  },
+  "production_audit": {
+    "gate": {
+      "conflicts": 0,
+      "missing": 16,
+      "checks": {
+        "cash": "matched",
+        "positions": "matched",
+        "order_trade": "matched",
+        "reconstructed_cash": 100000
+      },
+      "issue_codes": [
+        "market_evidence",
+        "publication_timing",
+        "receipt_missing",
+        "unmodeled_condition"
+      ]
+    },
+    "no_gate": {
+      "conflicts": 2,
+      "missing": 20,
+      "checks": {
+        "cash": "matched",
+        "positions": "matched",
+        "order_trade": "matched",
+        "reconstructed_cash": 79601.66
+      },
+      "issue_codes": [
+        "amount_price",
+        "decision_policy_changed",
+        "market_evidence",
+        "price_tick",
+        "publication_timing",
+        "receipt_missing",
+        "unmodeled_condition"
+      ]
+    }
+  },
+  "source_hashes_after": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-execution-precision.json": "c5bbaa2b353015fa78d4ee26e291dc1b5e5effc4b0a328bed466a2f55e666c3c"
+  },
+  "production_sources_unchanged": true,
+  "model_calls": 0,
+  "notifications": 0,
+  "remote_multica_dispatches": 0,
+  "production_settlements": 0,
+  "limitations": [
+    "Explicit fixture is new intent, not a translation or approval of the original plan.",
+    "No automatic stop-loss or full explicit sell contract is implemented.",
+    "Holdings absent from the selected buy candidates still use the legacy exit path.",
+    "Real remote Multica role execution and forward performance remain unverified."
+  ],
+  "verification": {
+    "related_baseline_passed": 113,
+    "initial_contract_failures": 36,
+    "initial_contract_passed": 2,
+    "entry_contract_tests": 41,
+    "full_suite_passed": 596,
+    "full_test_command": ".venv/bin/python -m pytest tests execution/tests -q",
+    "direct_consistency_cli_passed": true,
+    "desktop": {
+      "width": 1910,
+      "scrollWidth": 1910,
+      "contractVisible": true,
+      "legacyPolicyDriftVisible": true
+    },
+    "responsive": [
+      {
+        "width": 390,
+        "scrollWidth": 390,
+        "footerWidth": 362,
+        "footerScrollWidth": 362
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "footerWidth": 484,
+        "footerScrollWidth": 484
+      }
+    ],
+    "temporary_preview_removed": true,
+    "console_only_reload": true
+  },
+  "code_sha256": {
+    "trading_team/entry_contract.py": "066862dfb8e3ec2781e6840ffae29afde22da5425cddab400a2f5ee5e0ea922a",
+    "trading_team/schemas.py": "62515f70ad86be1ce66af19e1777ac9d9ad88db6b1f105388bd0e3ce6f1b058e",
+    "trading_team/execute.py": "1a916cd118b4cc35bc7d5bf98679f326346c91027174b5c708ad1b4ee23080d6",
+    "trading_team/counterfactual.py": "ea30bc29ddac5bd8241226b78aab6de76a8e6fdb86e0733c7284a0c5202a63d6",
+    "trading_team/paper_pipeline.py": "75b41e2033e68a1f0cbfcebd3adc0e90c2605a5dff622cea8db27d56e0332a36",
+    "trading_team/paper_reconcile.py": "fbde8a21226dc71d98c51d5961729887c9863a76530b1cd6acd0f136217d9c38",
+    "trading_team/consistency_check.py": "98c1837168a3eeb3d78848813ceba322eac135bf657dfb0f424c845158226569",
+    "tests/test_entry_contract.py": "f1a8103fa99a6f8df53722b62ff927fc06f9bbe0874f3bac3d6987ad2aa47c8c"
+  }
+}

@@ -5,8 +5,9 @@
 - 信号日与成交日分离：T 日收盘生成信号 → 挂单；T+1 按开盘价成交（无开盘价时用收盘价并标注）；
 - T+1 卖出限制：当日买入的数量次日才能卖；
 - 整手：买入数量向下取整到 100 股；
-- 涨跌停不可成交：T+1 开盘涨停则买单失败、跌停则卖单失败（±10%，主板口径，可配置）；
+- 涨跌停不可成交：优先使用当日实际上下限；旧研究调用才按比例和最小价格单位推算；
 - 停牌不可成交（该日无行情行视为停牌）；
+- 滑点使用十进制计算；成交价按 0.01 元向不利方向取整，成交金额由最终成交价计算；
 - 费用：佣金（默认万 2.5，最低 5 元）、印花税（卖出收，默认万 5）、过户费（默认万 0.2，双向）。
   费率全部走 FeeConfig，禁止散落在各模块。
 
@@ -15,6 +16,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from decimal import Decimal, ROUND_CEILING, ROUND_FLOOR, ROUND_HALF_UP
+import math
 
 
 @dataclass(frozen=True)
@@ -26,16 +29,35 @@ class FeeConfig:
 
 
 DEFAULT_FEES = FeeConfig()
+EXECUTION_MODEL_VERSION = "daily_bar_t1.v4"
+PRICE_TICK = Decimal("0.01")
 
 
 @dataclass
 class Bar:
     """单日行情快照（撮合所需最小字段）"""
     open: float | None = None
+    high: float | None = None
+    low: float | None = None
     close: float | None = None
     prev_close: float | None = None
     suspended: bool = False
     limit_pct: float = 0.10            # 主板 ±10%；创业板/科创板 ±20% 由调用方覆盖
+    limit_up: float | None = None
+    limit_down: float | None = None
+    volume: float | None = None
+
+
+def portfolio_value(cash: float, positions: dict, bars: dict[str, Bar],
+                    *, price_field: str = "close") -> float:
+    total = cash
+    for code, position in positions.items():
+        price = getattr(bars.get(code), price_field, None)
+        if price is None or not math.isfinite(price) or price <= 0:
+            label = "pre-trade reference" if price_field == "prev_close" else "closing"
+            raise ValueError(f"{code}: valid {label} price missing")
+        total += position["qty"] * price
+    return total
 
 
 @dataclass
@@ -48,6 +70,11 @@ class FillResult:
     fee: float = 0.0          # 总费用
     reject_reason: str = ""
     price_type: str = ""      # next_open / fallback_close
+    status: str = ""          # filled / unfilled / rejected
+
+    def __post_init__(self):
+        if not self.status:
+            self.status = "filled" if self.filled else "rejected"
 
 
 def commission(amount: float, cfg: FeeConfig = DEFAULT_FEES) -> float:
@@ -61,14 +88,29 @@ def total_fee(side: str, amount: float, cfg: FeeConfig = DEFAULT_FEES) -> float:
     return round(fee, 2)
 
 
+def _limit_price(bar: Bar, up: bool) -> float | None:
+    actual = bar.limit_up if up else bar.limit_down
+    if actual is not None:
+        return actual
+    if not bar.prev_close:
+        return None
+    reference = Decimal(str(bar.prev_close))
+    tick = Decimal("0.01")
+    change = Decimal(str(bar.limit_pct)) * (1 if up else -1)
+    price = (reference * (1 + change)).quantize(tick, rounding=ROUND_HALF_UP)
+    if abs(price - reference) < tick:
+        price = reference + (tick if up else -tick)
+    return float(price)
+
+
 def is_limit_up(bar: Bar) -> bool:
-    return (bar.open is not None and bar.prev_close
-            and bar.open >= bar.prev_close * (1 + bar.limit_pct) - 1e-9)
+    limit = _limit_price(bar, True)
+    return bar.open is not None and limit is not None and bar.open >= limit - 1e-9
 
 
 def is_limit_down(bar: Bar) -> bool:
-    return (bar.open is not None and bar.prev_close
-            and bar.open <= bar.prev_close * (1 - bar.limit_pct) + 1e-9)
+    limit = _limit_price(bar, False)
+    return bar.open is not None and limit is not None and bar.open <= limit + 1e-9
 
 
 def round_lot(qty: float) -> int:
@@ -76,8 +118,41 @@ def round_lot(qty: float) -> int:
     return max(int(qty // 100) * 100, 0)
 
 
+def _outside_explicit_limits(price: float, bar: Bar) -> bool:
+    return ((bar.limit_up is not None and price > bar.limit_up + 1e-9)
+            or (bar.limit_down is not None and price < bar.limit_down - 1e-9))
+
+
+def _outside_daily_range(price: Decimal, bar: Bar) -> bool:
+    return ((bar.high is not None and price > Decimal(str(bar.high)))
+            or (bar.low is not None and price < Decimal(str(bar.low))))
+
+
+def _valid_price(price: float | None) -> bool:
+    return price is not None and math.isfinite(price) and price > 0
+
+
+def _price_input_error(side: str, bar: Bar, slippage_rate: float) -> str:
+    if side not in ("buy", "sell"):
+        return "无效交易方向"
+    if not math.isfinite(slippage_rate) or not 0 <= slippage_rate < 1:
+        return "滑点必须为 [0, 1) 内的有限值"
+    prices = (bar.open, bar.high, bar.low, bar.close, bar.prev_close, bar.limit_up, bar.limit_down)
+    if any(price is not None and not _valid_price(price) for price in prices):
+        return "行情价格必须为有限正数"
+    return ""
+
+
+def _execution_price(price: float, side: str, slippage_rate: float) -> Decimal:
+    change = Decimal(str(slippage_rate)) * (1 if side == "buy" else -1)
+    return (Decimal(str(price)) * (1 + change)).quantize(
+        PRICE_TICK, rounding=ROUND_CEILING if side == "buy" else ROUND_FLOOR,
+    )
+
+
 def simulate_fill(side: str, qty: int, exec_bar: Bar,
-                  cfg: FeeConfig = DEFAULT_FEES) -> FillResult:
+                  cfg: FeeConfig = DEFAULT_FEES,
+                  slippage_rate: float = 0.0) -> FillResult:
     """在 exec_bar（T+1 日）模拟成交。
 
     - 停牌 → 拒绝；买遇开盘涨停 / 卖遇开盘跌停 → 拒绝；
@@ -85,8 +160,11 @@ def simulate_fill(side: str, qty: int, exec_bar: Bar,
     """
     if qty <= 0:
         return FillResult(False, side, reject_reason="qty<=0")
-    if exec_bar.suspended or (exec_bar.open is None and exec_bar.close is None):
+    if exec_bar.suspended or exec_bar.volume == 0 or (exec_bar.open is None and exec_bar.close is None):
         return FillResult(False, side, reject_reason="停牌/无行情")
+    error = _price_input_error(side, exec_bar, slippage_rate)
+    if error:
+        return FillResult(False, side, reject_reason=error)
     if side == "buy" and is_limit_up(exec_bar):
         return FillResult(False, side, reject_reason="开盘涨停无法买入")
     if side == "sell" and is_limit_down(exec_bar):
@@ -100,10 +178,66 @@ def simulate_fill(side: str, qty: int, exec_bar: Bar,
     qty = round_lot(qty) if side == "buy" else int(qty)
     if qty <= 0:
         return FillResult(False, side, reject_reason="整手后为 0")
-    amount = round(qty * price, 2)
+    price = _execution_price(price, side, slippage_rate)
+    if price <= 0:
+        return FillResult(False, side, reject_reason="价格单位取整后非正数")
+    if _outside_explicit_limits(float(price), exec_bar):
+        return FillResult(False, side, reject_reason="滑点后价格超出当日涨跌停价")
+    if _outside_daily_range(price, exec_bar):
+        return FillResult(False, side, reject_reason="滑点后价格超出日内高低价范围")
+    amount = float(qty * price)
     fee = total_fee(side, amount, cfg)
-    return FillResult(True, side, qty=qty, price=round(price, 3),
+    return FillResult(True, side, qty=qty, price=float(price),
                       amount=amount, fee=fee, price_type=ptype)
+
+
+def simulate_limit_fill(side: str, qty: int, limit_price: float, exec_bar: Bar,
+                        cfg: FeeConfig = DEFAULT_FEES,
+                        slippage_rate: float = 0.0) -> FillResult:
+    """Strict daily-bar limit fill: untouched limits remain unfilled."""
+    if qty <= 0:
+        return FillResult(False, side, reject_reason="qty<=0")
+    if exec_bar.suspended or exec_bar.volume == 0 or (exec_bar.open is None and exec_bar.close is None):
+        return FillResult(False, side, reject_reason="停牌/无行情")
+    error = _price_input_error(side, exec_bar, slippage_rate)
+    if error:
+        return FillResult(False, side, reject_reason=error)
+    if not _valid_price(limit_price):
+        return FillResult(False, side, reject_reason="申报价必须为有限正数")
+    if _outside_explicit_limits(limit_price, exec_bar):
+        return FillResult(False, side, reject_reason="申报价超出当日涨跌停价")
+    if Decimal(str(limit_price)) % PRICE_TICK:
+        return FillResult(False, side, reject_reason="A 股申报价必须为 0.01 元整数倍")
+    if side == "buy" and is_limit_up(exec_bar):
+        return FillResult(False, side, reject_reason="开盘涨停无法买入")
+    if side == "sell" and is_limit_down(exec_bar):
+        return FillResult(False, side, reject_reason="开盘跌停无法卖出")
+
+    touched = ((exec_bar.low is not None and exec_bar.low <= limit_price)
+               if side == "buy"
+               else (exec_bar.high is not None and exec_bar.high >= limit_price))
+    if not touched:
+        return FillResult(False, side, reject_reason="限价未触发", status="unfilled")
+
+    open_price = exec_bar.open if exec_bar.open is not None else limit_price
+    if side == "buy":
+        base = min(open_price, limit_price)
+        price = min(_execution_price(base, side, slippage_rate), Decimal(str(limit_price)))
+    else:
+        base = max(open_price, limit_price)
+        price = max(_execution_price(base, side, slippage_rate), Decimal(str(limit_price)))
+    qty = round_lot(qty) if side == "buy" else int(qty)
+    if qty <= 0:
+        return FillResult(False, side, reject_reason="整手后为 0")
+    if _outside_explicit_limits(float(price), exec_bar):
+        return FillResult(False, side, reject_reason="滑点后价格超出当日涨跌停价")
+    if _outside_daily_range(price, exec_bar):
+        return FillResult(False, side, reject_reason="滑点后价格超出日内高低价范围")
+    amount = float(qty * price)
+    return FillResult(
+        True, side, qty=qty, price=float(price), amount=amount,
+        fee=total_fee(side, amount, cfg), price_type="limit_daily_bar",
+    )
 
 
 # ─────────────────────────────────────────────────────────────
@@ -171,5 +305,7 @@ def bar_from_bundle(bd, code: str, day: str, index_latest: str | None = None) ->
     close = float(rows["close"].iloc[0])
     # 创业板(30xxxx)/科创板(688xxx) ±20%
     limit = 0.20 if code.startswith(("30", "688")) else 0.10
-    return Bar(open=open_, close=close, prev_close=prev_close,
+    high = float(rows["high"].iloc[0]) if "high" in rows.columns else None
+    low = float(rows["low"].iloc[0]) if "low" in rows.columns else None
+    return Bar(open=open_, high=high, low=low, close=close, prev_close=prev_close,
                suspended=False, limit_pct=limit)

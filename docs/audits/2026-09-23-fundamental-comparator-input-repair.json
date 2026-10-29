@@ -1,0 +1,63 @@
+{
+  "schema": "fundamental_evidence_repair.v1",
+  "loop": 78,
+  "verified_at": "2026-09-23T05:23:59+08:00",
+  "trigger": {
+    "issue": "SATU-10",
+    "receipt_hash": "51f38bd8cc76ab708f9d947c1cb0b1ce9b9ca5f6bae84359a6b7a7880e02c5f0",
+    "verdict": "reject",
+    "failed_check": "facts_supported",
+    "finding": "The sealed report inferred Wuliangye 2024H1 comparison from 2025 annual YoY without an archived 2024H1 comparator."
+  },
+  "diagnosis": {
+    "role_input_selection": "Role 01 used manifest.json and fundamental_*.json only, omitting the already archived context/snapshot.json with current PE/PB/market-cap values.",
+    "charter_mismatch": "The old charter described PE/PB and market cap as fields of fundamental_<code>.json, although they are in snapshot.json.",
+    "period_rule_gap": "The old charter required archived causal support but did not explicitly prohibit deriving a half-year same-period comparison from a full-year YoY change.",
+    "snapshot_is_current_only": true,
+    "snapshot_does_not_prove_historical_valuation_percentile": true
+  },
+  "change": {
+    "role_01_input": "Include existing context/<date>/snapshot.json alongside manifest and per-symbol fundamental files when present.",
+    "charter": "Describe the two actual input sources; require both corresponding report-period values for cross-year same-period claims and forbid full-year YoY substitution for half-year or quarterly comparisons.",
+    "application_files": [
+      "trading_team/kimi_daily.py",
+      "trading_team/prompts/01_fundamental.md"
+    ],
+    "application_sha256_after": {
+      "trading_team/kimi_daily.py": "eff7e0973b5aefa954b6a2c4c34f9b43703b49cbeb75b065b639e5f03ec1e9e8",
+      "trading_team/prompts/01_fundamental.md": "e19092bdc4a5c6d7f59eff1476cb3056a82c37a1f09279a6ccf1139cab9e3284"
+    },
+    "new_dependency": false,
+    "new_role_or_page": false,
+    "old_sealed_artifact_edited": false
+  },
+  "verification": {
+    "baseline_related_tests": "86 passed",
+    "new_regressions_before_fix": "2 failed: same-period charter rule and snapshot in actual role input",
+    "new_regressions_after_fix": "2 passed",
+    "related_tests_after_fix": "146 passed in 8.65s",
+    "full_tests_after_fix": "1182 passed in 33.64s",
+    "git_diff_check": "passed",
+    "real_isolated_input_before_sha256": "741c6d39491be5ec6b3fa7b6e9c18c916b4144ae17c88d4ed2bd950e438a07be",
+    "real_isolated_input_reassembled_sha256": "19a22b3e415212c9c6e8f54af19414bb611451486fbd691b243820f1dd144911",
+    "reassembled_input_has_snapshot_pe_pb_marketcap": true,
+    "reassembled_input_fundamental_file_count": 11,
+    "protected_formal_file_count": 17,
+    "protected_formal_files_changed": [],
+    "old_sat7_rejection_response_sha256": "f87d755835965fc38f8f643028df476e356b66d231c3d9766e296552114fcd7c",
+    "old_sat10_rejection_response_sha256": "20c3aba1efbd4f779c8853786851a7163d78d2fa27e900c19e565b1c300499e7",
+    "v2_review_status": "data-quality accepted; market-analysts rejected; later roles blocked",
+    "v3_review_status": "data-quality accepted; market-analysts rejected; later roles blocked",
+    "isolated_decisions_present": false,
+    "isolated_paper_database_present": false,
+    "new_remote_task": false,
+    "new_model_request": false
+  },
+  "limits": [
+    "Tests prove input delivery and charter wording, not model compliance or factual quality of a future report.",
+    "The current snapshot supports reported contemporaneous PE/PB values, not a historical valuation conclusion by itself.",
+    "SATU-10 rejection remains valid for the old sealed output; no historical receipt was changed."
+  ],
+  "milestone_m1_complete": false,
+  "next": "Freeze a new isolated input version with the updated charter and existing archived sources. Reuse only independent cached roles with matching full fingerprints, verify no duplicate real task, then dispatch one bounded Research Lead publication-only task. Independently inspect its report and re-run role reviews on the new immutable bundle; do not patch or re-review SATU-10 output."
+}

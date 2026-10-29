@@ -1,0 +1,37 @@
+{
+  "schema": "natural_current_version_backup.v1",
+  "observed_at": "2026-09-29T02:31:00+08:00",
+  "scope": "natural local backup tick and isolated non-activating recovery; not M2/M3 acceptance",
+  "catalog": {
+    "status": "healthy",
+    "trigger_source": "launchd",
+    "last_check_at": "2026-09-29T02:30:06.221810+08:00",
+    "snapshot_count": 28,
+    "attempt_count": 28,
+    "unregistered_count": 0,
+    "latest_id": "fdc1b3ab433d43bb99d4c0196c47ec0a",
+    "latest_manifest_hash": "210eaa21a083a4ab6850170fb32f206277ac15d773b1bf4196a815d5a8e6c83c",
+    "latest_verified": true,
+    "cohort_snapshot_current": true,
+    "runtime_snapshot_current": true,
+    "prompts_snapshot_current": true,
+    "offsite_verified": false
+  },
+  "isolated_restore": {
+    "target": "/private/tmp/quant-recovery-1cfc8aff-6130-42dd-8b86-c18adaa8ce1c",
+    "status": "verified_isolated",
+    "execution_authorized": false,
+    "readiness_status": "blocked",
+    "runtime_status": "matched",
+    "prompts_status": "matched",
+    "remaining_blockers": [
+      "research data invalid, stale or unknown",
+      "research publication evidence incomplete"
+    ],
+    "dependency_manifest_recorded": false,
+    "external_gap_reconciled": false
+  },
+  "next_action": "Observe the original 9/29 07:30 production Autopilot and current-version publication/reviews; do not activate this recovery target or count it as M3 interruption/idempotency or offsite acceptance.",
+  "m2_accepted": false,
+  "m3_started": false
+}

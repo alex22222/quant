@@ -1,0 +1,202 @@
+{
+  "schema": "quant.runtime_effort_safe_stop_audit.v1",
+  "observed_at": "2026-10-14T07:48:01.928072+08:00",
+  "business_date": "2026-10-14",
+  "goal_status": "active",
+  "milestones": {
+    "M1": "completed_with_existing_evidence",
+    "M2": "not_passed",
+    "M3": "not_started",
+    "independent_remote_maker": "not_accepted",
+    "offsite_recovery": "deferred_by_user",
+    "forward_effect": "not_accepted"
+  },
+  "production": {
+    "issue_identifier": "SATU-89",
+    "issue_id": "01a1379a-69c2-73ea-9885-8978db17d248",
+    "title": "A股每日研究 2026-10-14",
+    "issue_status_at_0745": "blocked",
+    "issue_status_changed_at": "2026-10-13T23:45:54Z",
+    "status_change_options": [
+      "--no-start"
+    ],
+    "tasks": [
+      {
+        "id": "01a1379a-69dc-7d89-bf00-9b3f050fd6df",
+        "issue_id": "01a1379a-69c2-73ea-9885-8978db17d248",
+        "agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+        "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "status": "failed",
+        "started_at": "2026-10-13T23:30:31Z",
+        "completed_at": "2026-10-13T23:30:53Z",
+        "failure_reason": "api_invalid_request",
+        "error": "{\n  \"type\": \"error\",\n  \"error\": {\n    \"type\": \"invalid_request_error\",\n    \"code\": \"unsupported_value\",\n    \"message\": \"Unsupported value: 'max' is not supported with the 'gpt-5.5' model. Supported values are: 'none', 'low', 'medium', 'high', and 'xhigh'.\",\n    \"param\": \"reasoning.effort\"\n  },\n  \"status\": 400\n}"
+      }
+    ],
+    "local_run_count": 0,
+    "formal_output_exists": false,
+    "decision_exists": false,
+    "retried": false,
+    "eligible_for_M2": false
+  },
+  "runtime_repair": {
+    "agents": [
+      {
+        "id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+        "name": "Research Lead",
+        "model": "gpt-5.5",
+        "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "thinking_level": "xhigh",
+        "custom_args": [
+          "-c",
+          "model_reasoning_effort=\"xhigh\""
+        ],
+        "status": "idle",
+        "instructions": "Work only inside the bound project. Treat Python artifacts, ledger, approvals, and Paper databases as authoritative. Never submit Live orders.\n\nRoute work, enforce stage barriers, and assemble evidence. Never approve or execute orders.",
+        "permission_mode": "private",
+        "max_concurrent_tasks": 1
+      },
+      {
+        "id": "91bfb847-5d2c-4d10-bb41-e2a514a30fe4",
+        "name": "Audit Verifier",
+        "model": "gpt-5.5",
+        "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "thinking_level": "xhigh",
+        "custom_args": [
+          "-c",
+          "model_reasoning_effort=\"xhigh\""
+        ],
+        "status": "idle",
+        "instructions": "Work only inside the bound project. Treat Python artifacts, ledger, approvals, and Paper databases as authoritative. Never submit Live orders.\n\nCheck artifacts, hashes, tests, replay evidence, and maker-checker separation before review.",
+        "permission_mode": "private",
+        "max_concurrent_tasks": 1
+      }
+    ],
+    "agent_level_xhigh_alone": "insufficient_for_original_task",
+    "process_override": [
+      "-c",
+      "model_reasoning_effort=\"xhigh\""
+    ],
+    "behavioral_result": "isolated_task_completed_with_gpt_5_5_usage_and_no_model_error",
+    "wire_request_effort": "not_independently_observed",
+    "dispatch_precedence_root_cause": "not_fully_traced",
+    "audit_verifier_real_task_validation": "pending",
+    "global_cli_changed_by_this_work": false,
+    "daemon_observed_version": "0.6.2",
+    "codex_runtime_observed_version": "0.145.0"
+  },
+  "isolated_probe": {
+    "issue_identifier": "SATU-90",
+    "tasks": [
+      {
+        "id": "01a1379f-0f38-721b-9056-0983ed0c055c",
+        "issue_id": "01a1379f-0f22-7793-8c50-0dcd15a53049",
+        "agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+        "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "status": "completed",
+        "started_at": "2026-10-13T23:35:35Z",
+        "completed_at": "2026-10-13T23:36:55Z",
+        "error": null,
+        "usage": [
+          {
+            "cache_read_tokens": 172032,
+            "cache_write_tokens": 0,
+            "input_tokens": 27992,
+            "model": "gpt-5.5",
+            "output_tokens": 2349,
+            "provider": "codex"
+          }
+        ],
+        "result": {
+          "output": "Completed SATU-90. I posted the smoke response with visible model/tier `Codex (based on GPT-5) / xhigh`, and moved the issue to `in_review`.",
+          "pr_url": "",
+          "session_id": "01a1379f-28a1-7241-84fe-97daabdfb934",
+          "work_dir": "/Users/henry/projects/quant"
+        }
+      }
+    ],
+    "production_publication": false,
+    "M2_evidence": false,
+    "instruction_violation": {
+      "kind": "temporary_project_file_write_despite_prohibition",
+      "path": "reply.md",
+      "write_message_seq": 9,
+      "write_result_seq": 10,
+      "delete_command_seq": 11,
+      "delete_result_seq": 12,
+      "residual_file_exists": false
+    },
+    "cancel_observation": "cancel request returned already completed; cancellation not confirmed or claimed"
+  },
+  "local_safety": {
+    "archive": {
+      "expected_session": "2026-10-13",
+      "heartbeat": "fresh",
+      "invalid_sessions": [],
+      "latest_verified_session": "2026-10-13",
+      "missing_sessions": [],
+      "observed_at": "2026-10-14T07:48:01.928072+08:00",
+      "status": "healthy"
+    },
+    "backup": {
+      "heartbeat": "fresh",
+      "latest": {
+        "cohort_config_hash": "35a952b2192a01364f13145c161b30a42f37c014fe01cfc8b28bcd19070b4c3c",
+        "finished_at": "2026-10-14T04:15:06.146153+08:00",
+        "id": "615d4b74200c48e7b8e6572ac09f3aac",
+        "manifest_hash": "a495ee72aff5b11cf718a1048df5c5879406f2c3fc4d469feaa38ce28b5a3b54",
+        "path": "/Users/henry/Library/Application Support/HQCapital/workflow-backups/snapshots/615d4b74200c48e7b8e6572ac09f3aac",
+        "prompts_snapshot_current": true,
+        "runbook_snapshot_current": true,
+        "runtime_snapshot_current": true,
+        "started_at": "2026-10-14T04:15:06.146153+08:00",
+        "status": "succeeded",
+        "verified": true
+      },
+      "max_store_bytes": 5368709120,
+      "offsite_verified": false,
+      "snapshot_count": 84,
+      "status": "healthy",
+      "storage_bytes": 4123535438
+    },
+    "decisions_oct14": false,
+    "outputs_oct14": false,
+    "paper": {
+      "gate": {
+        "conflict_count": 0,
+        "facts_hash": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+        "missing_count": 0,
+        "recorded_trade_count": 0,
+        "status": "checked"
+      },
+      "no_gate": {
+        "conflict_count": 0,
+        "facts_hash": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+        "missing_count": 0,
+        "recorded_trade_count": 0,
+        "status": "checked"
+      }
+    },
+    "probe_temp_file_exists": false,
+    "runs_oct14": []
+  },
+  "backup_unit_correction": {
+    "storage_bytes": 4123535438,
+    "storage_GiB": 3.840341640636325,
+    "max_store_bytes": 5368709120,
+    "max_store_GiB": 5,
+    "policy": "keep_5_GiB_stop_new_snapshots_at_capacity_preserve_old_snapshots"
+  },
+  "limits": [
+    "Local absence of outputs and unchanged Paper facts does not independently certify absence of external Live or notification effects.",
+    "Successful runtime smoke does not certify production publication, six independent reviews, Paper settlement, or notification delivery.",
+    "Temporary-file deletion does not erase the recorded instruction violation.",
+    "No isolated replay or post-failure publication may be counted as today's natural M2."
+  ],
+  "next_actions": [
+    "At postclose verify actual complete 2026-10-14 archive and local safe-stop boundaries without finalize.",
+    "On next eligible natural trading day revalidate calendar, power, runtime, exact process args, unique original 07:30 trigger and prior complete archive.",
+    "Only a fresh original publication may enter six sequential independent reviews before real 09:15 deadline; then deterministic postclose settlement and authorized delivery.",
+    "M3 starts only after M2 genuinely passes; retain independent maker, offsite, forward-effect and console acceptance scope."
+  ]
+}

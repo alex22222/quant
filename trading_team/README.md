@@ -37,7 +37,9 @@
     ↓
 PM 审批（老板终审，pm_status=pending → approved/rejected）
     ↓
-执行（如审批通过，手动录入 paper 台账）
+Live 保持待批；双 Paper 按 plan_hash 自动物化并使用统一 T+1 撮合
+    ↓
+订单事件 / 可靠收盘估值 / 反事实 / 准确率 / 运行账本 / 通知 outbox
 ```
 
 ---
@@ -53,7 +55,9 @@ trading_team/
 ├── loops/             # 准确率追踪（accuracy.json，T+5 对照计分）
 ├── collect.py         # 确定性数据采集器
 ├── briefing.py        # 晨会数据包生成器（LLM 唯一数据源）
-├── build_index.py     # 输出索引重建
+├── run_ledger.py      # 工作流与步骤运行事实源（SQLite）
+├── daily_finalize.py  # 版本化决策、Paper、反事实可恢复工作流
+├── build_index.py     # 只重建输出索引，不承载交易副作用
 ├── patch_bundle_from_context.py  # 数据包修复工具
 └── watchlist.json     # 观察池配置
 ```
@@ -62,7 +66,7 @@ trading_team/
 
 ## 数据入口纪律
 
-LLM 角色的**唯一数据源**是 `briefing.py` 生成的晨会数据包。禁止 LLM 直接访问外部 API 或实时网络，所有数据必须经过确定性代码层采集、校验、归档后方可进入晨会流程。
+LLM 角色的**唯一数据源**是 `context/YYYY-MM-DD/` 中通过 manifest 闸门的归档输入。禁止 LLM 直接访问外部 API 或实时网络，所有数据必须经过确定性代码层采集、校验、归档后方可进入晨会流程。采集器在运行账本中逐步记录交易日历、快照、逐标的技术/基本面、新闻、会话校验和情绪数据；只有 RQAlpha A 股交易日历可用、观察池与基准全覆盖、技术数据日期一致且会话已经收盘，manifest 才能通过。风险经理额外读取 gate/no-gate Paper 数据库的现金、持仓、订单、事件、成交和可靠收盘估值。
 
 ---
 
@@ -76,8 +80,8 @@ LLM 角色的**唯一数据源**是 `briefing.py` 生成的晨会数据包。禁
 4. **准确率 <50% 降权**：`loops/accuracy.json` T+5 对照计分，角色评级准确率低于 50% 时在后续研究整合中自动降权。
 5. **结构化结论块是唯一机器可读事实源**：各角色日报末尾的 ```json 结论块缺失或不合法时，该报告视为未完成（fail closed），自动化环节（accuracy 回填 / plan 富化）跳过而非猜测。
 6. **先有假设再看结果（防 HARKing）**：禁止根据已见的回测/实盘结果倒推结论写进日报；策略侧由 `pipeline.promote --differentiation` 门禁与样本外验证强制执行，LLM 侧靠本纪律约束。
-7. **LLM 输出是研究辅助，不是交易指令**：所有 LLM 产出（日报、辩论、计划）执行前**必须**经风控环节（07 风险经理 + 5 条不可协商条款）与**人工批复**（老板，批复台账 `loops/approvals.json`）；未经批复的提案永远停留在 `pm_status=pending`，任何自动化不得越级执行。
+7. **LLM 输出是研究辅助，不是 Live 交易指令**：所有 LLM 产出必须经风险经理审核。Live 计划必须由老板按当前 `plan_hash` 人工批复；计划变化后旧批复自动失效。独立双 Paper 实验可以自动审批，但仍不得绕过结构化校验、仓位、价格触发、费用和 A 股交易规则。
 
 ---
 
-*最后更新：2026-08-23 — 新增「团队纪律」一节（quant-wiki 建议 7），汇总 LLM 局限性护栏成文。*
+*最后更新：2026-09-21 — 接入逐源可恢复采集、运行账本、paper_account.v1 和 Multica。*

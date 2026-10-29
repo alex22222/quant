@@ -1,0 +1,57 @@
+{
+  "schema": "paper_cohort_boundary.v1",
+  "observed_at": "2026-09-24T23:21:00+08:00",
+  "reason": "Existing production Paper accounts do not pass independent reconciliation; preserve them and start a separately named forward validation pair.",
+  "legacy_accounts": {
+    "gate": {
+      "path": "paper/llm_gate.db",
+      "sha256": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+      "facts_hash": "a289e19956240a19c73a84c9d8394d479805dad5c0e2a668300362eaca126a71",
+      "reconciliation": "incomplete",
+      "conflicts": 0,
+      "missing": 20,
+      "trades": 0
+    },
+    "no_gate": {
+      "path": "paper/llm_no_gate.db",
+      "sha256": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+      "facts_hash": "722ab56879806202aa0b81640761b7e551849bd0bf555dc97ba6ced758af7fc6",
+      "reconciliation": "conflict",
+      "conflicts": 2,
+      "missing": 20,
+      "trades": 3,
+      "conflict_detail": "2026-09-09 trade 3, 601318: 54.829 violates 0.01 RMB tick; recorded amount 5482.94 differs from 54.829 * 100 = 5482.90"
+    }
+  },
+  "new_cohort": {
+    "id": "2026-09-28-forward",
+    "first_eligible_day": "2026-09-28",
+    "initial_cash_per_account": 100000,
+    "configuration": "paper/active_cohort.json",
+    "gate": "paper/cohort_2026-09-28/llm_gate.db",
+    "no_gate": "paper/cohort_2026-09-28/llm_no_gate.db",
+    "configuration_sha256": "35a952b2192a01364f13145c161b30a42f37c014fe01cfc8b28bcd19070b4c3c",
+    "account_sha256_each_at_init": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c",
+    "reconciliation": "checked for both; zero conflicts, missing evidence and trades"
+  },
+  "verification": {
+    "tests": "1267 passed, .venv/bin/python -m pytest -q -p no:cacheprovider tests",
+    "generation_binding": "paper/active_cohort.json content hash is included in generation_inputs; config changes invalidate the published generation and current review chain",
+    "review_packaging": "Red test reproduced the wrong trading_team/paper path; one whitelisted project-root config source now packages through all six local review handoffs; changing it invalidates source",
+    "isolated_workflow_backup": "/private/tmp/quant-paper-cohort-review-contract-20260924",
+    "manifest_hash": "94be240cc76d63a2e0531986f72ec4d52f94f840d6499ddf085a03fdd8229902",
+    "database_count": 6,
+    "file_count": 854,
+    "isolated_restore": "/private/tmp/quant-paper-cohort-review-contract-restored-20260924",
+    "restore_status": "verified_isolated; execution_authorized=false",
+    "readiness": "blocked: research data invalid/stale/unknown and publication evidence incomplete; runtime matched and both active accounts checked",
+    "console_reload": "Only com.hqcapital.console was kickstarted; first prior PID 47043/new PID 42331, after review packaging change current PID 43821; /api/paper-audit showed both active accounts checked with zero conflicts/missing/trades; /api/paper-state showed cash 100000, empty positions and zero trades for each; /api/multica-reviews for 2026-09-24 remained source_unverified and execution_authorized=false",
+    "legacy_hashes_unchanged_after_activation": true
+  },
+  "limits": [
+    "The old accounts remain historical evidence, not a certified forward performance series.",
+    "The new accounts are a prospective engineering validation cohort, not evidence of profitability or trading authorization.",
+    "No 2026-09-24 rejected plan may be settled or backdated into this cohort.",
+    "M2 and M3 remain unaccepted until real future-day publication, independent reviews, deterministic Paper settlement and recovery evidence are verified."
+  ]
+}

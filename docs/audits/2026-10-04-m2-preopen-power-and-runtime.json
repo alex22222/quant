@@ -1,0 +1,44 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-04T01:19:52+08:00",
+  "result": "current_host_power_connected_and_m2_inputs_readable_not_forward_accepted",
+  "production_entry": {
+    "active_autopilot_count": 1,
+    "autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "issue_title_template": "A股每日研究 {{date}}",
+    "next_run_at_utc": "2026-10-04T23:30:00Z",
+    "research_lead_agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+    "research_lead_agent_status": "idle",
+    "research_lead_runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "research_lead_runtime_status": "online",
+    "daemon_status": "running",
+    "daemon_active_task_count": 0
+  },
+  "archive": {
+    "status": "healthy",
+    "heartbeat": "fresh",
+    "expected_session": "2026-09-30",
+    "latest_verified_session": "2026-09-30",
+    "missing_sessions": [],
+    "invalid_sessions": []
+  },
+  "paper": {
+    "active_cohort": "2026-09-28-forward",
+    "gate_status": "checked",
+    "no_gate_status": "checked",
+    "gate_facts_hash": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+    "no_gate_facts_hash": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc"
+  },
+  "host_power": {
+    "first_observation": "ExternalConnected=Yes; IsCharging=Yes; CurrentCapacity=72%",
+    "second_observation_about_30_seconds_later": "ExternalConnected=Yes; IsCharging=Yes; CurrentCapacity=73%",
+    "pmset": "AC Power; charging",
+    "october_8_premarket_power_guaranteed": false
+  },
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "next_boundary": "On the next actual trading day, recheck exchange and local calendar, physical power and wake state, the original unique 07:30 Issue/task and exact title, current runtime and prior complete session before any publication or review. No manual replacement Issue or backdated cutoff."
+}

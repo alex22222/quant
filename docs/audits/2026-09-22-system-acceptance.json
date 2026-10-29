@@ -1,0 +1,375 @@
+{
+  "schema": "system_acceptance_audit.v1",
+  "loop": 48,
+  "date": "2026-09-22",
+  "timezone": "Asia/Shanghai",
+  "classification": "progress",
+  "previous_turn_classification": "progress",
+  "goal_complete": false,
+  "goal_status": "active",
+  "purpose": "Enforce single publication ownership and audit the full system objective without substituting local tests for real Multica execution.",
+  "completed": [
+    "Only remotely verified Research Lead may enter full daily publication.",
+    "Other team roles and absent role fail before models/staging/publication, including force.",
+    "Partial daemon identity cannot fall back to manual publication.",
+    "Rejected remotely verified identity is retained in the ledger.",
+    "Local Issue template and Runbook distinguish local LLM role steps from remote tasks.",
+    "Stale per-lot and cash-reset-only statements corrected; complete acceptance matrix added."
+  ],
+  "tests": {
+    "baseline_related_passed": 87,
+    "first_failure_count": 8,
+    "partial_identity_failure_count": 2,
+    "new_behavior_tests": 10,
+    "existing_contract_assertion_updated": true,
+    "related_passed": 97,
+    "full_command": ".venv/bin/python -m pytest -q tests execution/tests",
+    "full_passed": 1070,
+    "duration_seconds": 24.68,
+    "isolated_acceptance_passed": 14,
+    "isolated_acceptance_duration_seconds": 0.47,
+    "independent_readonly_checks": [
+      {
+        "fixture": "test_only_research_lead_can_st0",
+        "status": "failed",
+        "role": "Data Quality",
+        "model_steps": 0,
+        "published": false
+      },
+      {
+        "fixture": "test_only_research_lead_can_st1",
+        "status": "failed",
+        "role": "Market Analysts",
+        "model_steps": 0,
+        "published": false
+      },
+      {
+        "fixture": "test_only_research_lead_can_st2",
+        "status": "failed",
+        "role": "Strategy Research",
+        "model_steps": 0,
+        "published": false
+      },
+      {
+        "fixture": "test_only_research_lead_can_st3",
+        "status": "failed",
+        "role": "Paper Trader",
+        "model_steps": 0,
+        "published": false
+      },
+      {
+        "fixture": "test_only_research_lead_can_st4",
+        "status": "failed",
+        "role": "Risk Manager",
+        "model_steps": 0,
+        "published": false
+      },
+      {
+        "fixture": "test_only_research_lead_can_st5",
+        "status": "failed",
+        "role": "Audit Verifier",
+        "model_steps": 0,
+        "published": false
+      },
+      {
+        "fixture": "test_only_research_lead_can_st6",
+        "status": "failed",
+        "role": null,
+        "model_steps": 0,
+        "published": false
+      },
+      {
+        "fixture": "test_partial_multica_identity_0",
+        "status": "failed",
+        "role": null,
+        "model_steps": 0,
+        "published": false
+      },
+      {
+        "fixture": "test_partial_multica_identity_1",
+        "status": "failed",
+        "role": null,
+        "model_steps": 0,
+        "published": false
+      },
+      {
+        "fixture": "test_partial_multica_identity_2",
+        "status": "failed",
+        "role": null,
+        "model_steps": 0,
+        "published": false
+      }
+    ],
+    "independent_checker_correction": "First assertion counted the fixture closing_archive as a daily research run. Read-only inspection located the extra workflow; the corrected check filters daily_research. No ledger was changed.",
+    "git_diff_check": "passed"
+  },
+  "production_readonly_checks": {
+    "observed_at": "2026-09-22T11:36:22+08:00",
+    "research": {
+      "date": "2026-09-22",
+      "status": "available",
+      "plan_hash": "eea77c2b61976fa04ea015db80732bb6b751f49140ea0ffff0f91c0b1589c830",
+      "risk_review": {
+        "status": "legacy_missing",
+        "contract": null,
+        "reviewed_count": null,
+        "passed_count": null,
+        "reduced_count": null,
+        "gate_only_count": null,
+        "risk_rejected_count": null,
+        "reviews": []
+      },
+      "generation": {
+        "status": "missing"
+      },
+      "decision": {
+        "status": "bound",
+        "approved_count": 0
+      },
+      "approval_audit": {
+        "date": "2026-09-22",
+        "plan_hash": "eea77c2b61976fa04ea015db80732bb6b751f49140ea0ffff0f91c0b1589c830",
+        "status": "legacy_untracked",
+        "event_count": 0,
+        "reasons": []
+      },
+      "paper_decision": {
+        "status": "bound",
+        "approved_count": 0
+      },
+      "data_asof": "2026-09-21",
+      "market_ok": false
+    },
+    "notifications": {
+      "status": "missing",
+      "counts": {
+        "sent": 0,
+        "legacy_sent": 0,
+        "unknown": 0,
+        "retryable": 0,
+        "invalid": 0
+      },
+      "issues": [],
+      "items": []
+    },
+    "portfolios": {
+      "gate": {
+        "status": "available",
+        "cash": 100000,
+        "valuation_equity": 100000,
+        "position_count": 0,
+        "order_counts": {
+          "blocked": 12
+        },
+        "account_asof": "2026-09-11",
+        "quote_asof": "2026-09-21",
+        "freshness": "current",
+        "missing_marks": [],
+        "valuation_error": null,
+        "valuation_source": "validated_unadjusted_close.v1",
+        "valuation_price_basis": "unadjusted"
+      },
+      "no_gate": {
+        "status": "available",
+        "cash": 79601.66,
+        "valuation_equity": 99467.66,
+        "position_count": 3,
+        "order_counts": {
+          "filled": 3,
+          "unfilled": 3
+        },
+        "account_asof": "2026-09-11",
+        "quote_asof": "2026-09-21",
+        "freshness": "current",
+        "missing_marks": [],
+        "valuation_error": null,
+        "valuation_source": "validated_unadjusted_close.v1",
+        "valuation_price_basis": "unadjusted"
+      }
+    },
+    "fallback": {
+      "exit_code": 1,
+      "status": "blocked",
+      "code": "existing_generation_unverified"
+    },
+    "paper_reconcile": {
+      "exit_code": 1,
+      "gate": {
+        "status": "incomplete",
+        "conflicts": 0,
+        "missing": 22,
+        "recorded_trades": 0
+      },
+      "no_gate": {
+        "status": "conflict",
+        "conflicts": 2,
+        "missing": 26,
+        "recorded_trades": 3
+      },
+      "execution_certified": false
+    },
+    "continuous_counterfactual": {
+      "exit_code": 2,
+      "start": "2026-09-03",
+      "end": "2026-09-21",
+      "status": "incomplete",
+      "covered_sessions": 0,
+      "expected_sessions": 13,
+      "summary": null,
+      "first_gap": "structured risk evidence missing; legacy proposals not recertified"
+    },
+    "archive": {
+      "observed_at": "2026-09-22T11:36:23.038091+08:00",
+      "status": "healthy",
+      "expected_session": "2026-09-21",
+      "latest_verified_session": "2026-09-21",
+      "tracking_start": "2026-09-21"
+    },
+    "backup": {
+      "status": "healthy",
+      "latest_started_at": "2026-09-22T07:19:11.099760+08:00",
+      "manifest_hash": "2142708a145dffd4be36432288b2b87e84684c6128f5c13434826d5b8f29880c",
+      "latest_verified": true,
+      "offsite_verified": false,
+      "execution_authorized": false
+    },
+    "multica_before_local_runbook_edit": {
+      "ok": true,
+      "schema": "multica_observation.v1",
+      "observed_at": "2026-09-22T11:33:29.188504+08:00",
+      "status": "attention",
+      "completion_verified": false,
+      "configuration": {
+        "status": "drift",
+        "differences": [
+          "runbook"
+        ],
+        "autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+        "project_id": "a208df76-b63b-4cef-bd11-7512d7c80896",
+        "agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+        "remote_status": "active",
+        "local_runbook_hash": "1f39557a38cf043cbd8de9ece4deecaf5af2204b40fe4de6065157358c55bc4f",
+        "remote_runbook_hash": "d021e6d5d923bf2768fa9b763a242fafd168af2e0153c29d9b717e92464e8a72",
+        "triggers": [
+          {
+            "id": "97a59a0a-ceda-4115-81f8-bc583a7c5eef",
+            "kind": "schedule",
+            "enabled": true,
+            "cron_expression": "43 8 * * 1-5",
+            "timezone": "Asia/Shanghai",
+            "last_fired_at": "2026-09-22T00:43:10Z",
+            "next_run_at": "2026-09-23T00:43:00Z"
+          }
+        ]
+      },
+      "history": {
+        "status": "available",
+        "total": 1,
+        "limit": 5,
+        "items": [
+          {
+            "id": "01a0c691-0e7a-7b98-b915-52955a79f325",
+            "status": "failed",
+            "source": "schedule",
+            "triggered_at": "2026-09-22T00:43:10Z",
+            "completed_at": "2026-09-22T00:45:09Z",
+            "issue_id": "01a0c691-0e84-7cb3-a9cd-7a3fdb640938",
+            "task_id": null,
+            "failure_reason": "The 'gpt-6-astra' model requires a newer version of Codex. Please upgrade to the latest app or CLI and try again."
+          }
+        ],
+        "latest": {
+          "id": "01a0c691-0e7a-7b98-b915-52955a79f325",
+          "status": "failed",
+          "source": "schedule",
+          "triggered_at": "2026-09-22T00:43:10Z",
+          "completed_at": "2026-09-22T00:45:09Z",
+          "issue_id": "01a0c691-0e84-7cb3-a9cd-7a3fdb640938",
+          "task_id": null,
+          "failure_reason": "The 'gpt-6-astra' model requires a newer version of Codex. Please upgrade to the latest app or CLI and try again."
+        }
+      },
+      "runtime": {
+        "status": "matched",
+        "id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "daemon_id": "01a0c492-4f9e-797d-b6ba-653b1897dad2",
+        "remote_status": "online",
+        "provider": "codex",
+        "version": "codex-cli 0.145.0",
+        "model": null,
+        "last_seen_at": "2026-09-22T03:33:28Z"
+      },
+      "local_attempt": {
+        "status": "missing"
+      }
+    }
+  },
+  "protected": {
+    "count": 31,
+    "changed": [],
+    "before_sha256": {
+      "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818",
+      "docs/audits/2026-09-22-continuous-counterfactual.json": "2bafa984af423bda5136229a79aa7bf46613a0912fbc5663d04604b32ca6a50c",
+      "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+      "docs/audits/2026-09-22-lot-inventory.json": "9834742c64efe66fa261a7ead8e442ccc6a01d337dff0781ed1bf9b1cde8c576",
+      "docs/audits/2026-09-22-notification-recovery.json": "b6a2ef9a07602894720c19c2de6e56cf3dddeae78a265dbb378eaeec82496a12",
+      "docs/audits/2026-09-22-paper-protection.json": "ad090cf06b500bc80e705ba8a9318300c5b6456986113ecec06346b2c34bba56",
+      "docs/audits/2026-09-22-persistent-backup.json": "917b8103e93ae1bd288c681f955f7b2a4cbcb59e262802509f904f87165fce1d",
+      "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+      "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+      "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+      "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+      "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+      "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+      "trading_team/decisions/2026-09-22/decision.json": "64533e79126b528243577f65227ab79c87d84b575f265f446196b606b37cb516",
+      "trading_team/decisions/2026-09-22/paper_decision.json": "699c1922a4e3a6f61c7ab781adfe2756b318e17240780651ed6a44d71174ed0e",
+      "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+      "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+      "trading_team/outputs/2026-09-22/01_fundamental.md": "ff50fd15686fb6de950c58c4238113a63a9be2185becc0fb39ccb89cd463f7bb",
+      "trading_team/outputs/2026-09-22/02_sentiment.md": "d0600ecf3e381a57f664b9deb592a33dcde6a5a929c497b26d50125307fc4ff6",
+      "trading_team/outputs/2026-09-22/03_news.md": "806eb8b2af9729f099b611c8c13f80b2f0ddd9d7ac24718faa519cb2570c4cf4",
+      "trading_team/outputs/2026-09-22/04_technical.md": "94fbc7265a543e2bd21754eadf75ef8a9cdedab9242d7f914514f9dbb8495dd1",
+      "trading_team/outputs/2026-09-22/05_researcher.md": "c7a5812da86091860c8b482fb39df9b6fcca36880241dd9a5b8d4f0e5a9ccb24",
+      "trading_team/outputs/2026-09-22/06_trader.md": "9f64c8e1d472828058939a2458cca036f710d7a4e756eb862e3ee32555fa7131",
+      "trading_team/outputs/2026-09-22/07_risk_manager.md": "7a8a291d4a084cc2114095221b659e3c37a1687a318648160ed0eae87a4b7556",
+      "trading_team/outputs/2026-09-22/daily_conclusion.md": "6d57ab3ce5b76a191e331342475feddc3bfc44b0ab0ae67e086dbc894ad39d62",
+      "trading_team/outputs/2026-09-22/plan.json": "ab3c293ae4cc2e7a922ec5278e216ed4c5ce7f6785a883e73c2d35c65a8174e0",
+      "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+      "trading_team/team.db": "397b37b89a02a3dc4b87ff6ef0504def4ecd3e24362e66e23b424cbc0366aeee",
+      "docs/audits/2026-09-22-research-entrypoint.json": "e582421895dfd7110fc5097eb5881acd15d9d4d2c29196e880dac5c9d1179bc5",
+      "docs/audits/2026-09-22-multica-observation.json": "1cdb1927e348d0d87ba0306edbec392e4b8abae27b6045b4dcdb8abcfe2b6010",
+      "docs/audits/2026-09-22-model-transport.json": "fe7c7959e273aaf2b21ecb680d502e6e65cae6bf301fbbc79c8ba87914a4c646"
+    }
+  },
+  "changed_component_sha256": {
+    "trading_team/kimi_daily.py": "17d7ab99f3526d77af6aefbf38832b84d58a0f19b192657b487a366d9227b815",
+    "trading_team/multica_adapter.py": "66fd0b706c5a203c42c54ef63aac94d6b9e4fc5300dea72fcdac81d8822aa5b4",
+    "tests/test_daily_research_recovery.py": "059f4b2a948e1f175115aa42b39237d525b6f6ed386113cae38b59cdda6da9e3",
+    "tests/test_multica_adapter.py": "bf754c3e5e71013cb5871e2460d8825b901a4da4c4a0dcb5dd71247ca8189476",
+    "multica/runbooks/daily-research.md": "a90b6c7c4e6283ad2164d645c7e92cc8b05300cd050a2319e8a2884cb75530e5",
+    "multica/README.md": "e78df383f234a21dc18425ead3d0e31c2712073a61efdc5a2b08f02f8909296e",
+    "docs/SYSTEM_ACCEPTANCE.md": "f812181907091c7bd2600a701f346d8c43a55ef1867ba4de1783f034d54eba77"
+  },
+  "side_effects": {
+    "models_called": false,
+    "messages_sent": false,
+    "production_approvals_changed": false,
+    "production_paper_settled": false,
+    "remote_tasks_dispatched": false,
+    "remote_configuration_changed": false,
+    "scheduler_changed": false,
+    "console_reloaded": false,
+    "frontend_changed": false
+  },
+  "incomplete": [
+    "Bounded role-specific task input/output and independent remote review handoff remain incomplete; local seven-step generation is not seven remote executions.",
+    "Original API key versus desktop/Code quota choice remains unanswered; billing route is unchanged.",
+    "Actual runtime compatibility, real remote dispatch acceptance and unique production research entrypoint remain incomplete.",
+    "The prior remote-dispatch authorization boundary must be respected; natural triggers are not a workaround.",
+    "Old Kimi direct writer remains active and today's missing evidence has not been reconstructed.",
+    "Offsite destination, independent environment recovery/activation, real notification evidence and forward validation remain incomplete.",
+    "Application role checks do not enforce OS-level filesystem or credential isolation."
+  ],
+  "next_safe_work": "Implement and verify bounded role-review contracts and version-bound handoff evidence locally; retain all actual remote acceptance requirements.",
+  "evidence_directory": "/private/tmp/quant-role-boundary.33rkGV"
+}

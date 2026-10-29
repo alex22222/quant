@@ -1,0 +1,168 @@
+{
+  "audited_at": "2026-09-22",
+  "scope": "isolated current-policy daily-bar replay; no production account writes",
+  "policy": {
+    "max_daily_buys": 3,
+    "max_position_pct": 0.1,
+    "initial_cash": 100000
+  },
+  "source": "read-only local RQAlpha unadjusted bundle",
+  "evidence_kind": "DAILY_BAR_PROXY",
+  "production_database_sha256": {
+    "gate": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "no_gate": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391"
+  },
+  "temporary_evidence": "/var/folders/xx/1h1hmbcn1xvgs5_sft5jmpgc0000gp/T/quant-raw-replay-btc287yg/acceptance.json",
+  "results": [
+    {
+      "date": "2026-08-24",
+      "plan_hash": "0f3e5e43606350d2b14850d830f7e8553b64092c27338b54d64b5897865d86e5",
+      "evidence_kind": "DAILY_BAR_PROXY",
+      "payload_hash": "9b26238687ed03cfc367843e0c783ccde3116cda276049b357bb60c31d5b1c82",
+      "sources": {
+        "300750": "rqalpha_bundle",
+        "601318": "rqalpha_bundle",
+        "601899": "rqalpha_bundle",
+        "000300": "rqalpha_bundle"
+      },
+      "portfolios": {
+        "gate": {
+          "initial_cash": 100000,
+          "cash": 100000,
+          "equity": 100000,
+          "return": 0,
+          "orders": [
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "direction": "条件买入",
+              "status": "blocked",
+              "reason": "market_ok=false"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "direction": "条件买入",
+              "status": "blocked",
+              "reason": "market_ok=false"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "direction": "条件买入",
+              "status": "blocked",
+              "reason": "market_ok=false"
+            }
+          ]
+        },
+        "no_gate": {
+          "initial_cash": 100000,
+          "cash": 100000,
+          "equity": 100000,
+          "return": 0,
+          "orders": [
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "direction": "条件买入",
+              "status": "unfilled",
+              "reason": "限价未触发"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "direction": "条件买入",
+              "status": "unfilled",
+              "reason": "限价未触发"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "direction": "条件买入",
+              "status": "unfilled",
+              "reason": "突破价未触发"
+            }
+          ]
+        },
+        "csi300": {
+          "return": -0.012074
+        }
+      }
+    },
+    {
+      "date": "2026-08-25",
+      "plan_hash": "20620c062b0d285b6c1c36aa4ab35f9fafe5a144fafad7c927b936dec4018715",
+      "evidence_kind": "DAILY_BAR_PROXY",
+      "payload_hash": "8aeae81623c386ada45632e4cee45200cb82535e6a872380e0d8c97fd93a1822",
+      "sources": {
+        "600036": "rqalpha_bundle",
+        "601318": "rqalpha_bundle",
+        "601899": "rqalpha_bundle",
+        "000300": "rqalpha_bundle"
+      },
+      "portfolios": {
+        "gate": {
+          "initial_cash": 100000,
+          "cash": 100000,
+          "equity": 100000,
+          "return": 0,
+          "orders": [
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "direction": "条件买入",
+              "status": "blocked",
+              "reason": "market_ok=false"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "direction": "条件买入",
+              "status": "blocked",
+              "reason": "market_ok=false"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "direction": "条件买入",
+              "status": "blocked",
+              "reason": "market_ok=false"
+            }
+          ]
+        },
+        "no_gate": {
+          "initial_cash": 100000,
+          "cash": 100000,
+          "equity": 100000,
+          "return": 0,
+          "orders": [
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "direction": "条件买入",
+              "status": "unfilled",
+              "reason": "限价未触发"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "direction": "条件买入",
+              "status": "unfilled",
+              "reason": "限价未触发"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "direction": "条件买入",
+              "status": "unfilled",
+              "reason": "限价未触发"
+            }
+          ]
+        },
+        "csi300": {
+          "return": -0.002431
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "holiday_archive_check.v1",
+  "observed_at": "2026-09-25T00:15:31+08:00",
+  "service": "com.hqcapital.market-archive",
+  "trigger_source": "launchd",
+  "natural_check": {
+    "runs_before": 735,
+    "runs_after": 736,
+    "last_exit_code": 0,
+    "last_tick_at": "2026-09-25T00:15:03.690291+08:00",
+    "next_scheduled_at": "2026-09-25T00:20:00+08:00"
+  },
+  "business_state": {
+    "status": "healthy",
+    "heartbeat": "fresh",
+    "expected_session": "2026-09-24",
+    "latest_verified_session": "2026-09-24",
+    "missing_sessions": [],
+    "invalid_sessions": [],
+    "archive_directory_for_2026_09_25_exists": false
+  },
+  "boundary": "This is the market archive service's natural holiday check only. It does not prove the separate 07:30 Multica Autopilot skips, and it is not an M2 or M3 accepted session."
+}

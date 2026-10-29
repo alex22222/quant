@@ -29,12 +29,15 @@ class TestClassify:
         assert classify_item(_item("今天天气不错")) is None
         assert classify_item(_item("")) is None
 
+    def test_generic_quant_claim_is_not_a_strategy(self):
+        assert classify_item(_item("量化策略分享")) is None
+
     def test_template_pick(self):
         assert pick_template(_item("RSI 超卖反弹"))[0] == "mean_reversion"
         assert pick_template(_item("通道突破进场"))[0] == "breakout"
         assert pick_template(_item("均线金叉死叉"))[0] == "ma_cross"
         assert pick_template(_item("动量因子"))[0] == "momentum"
-        assert pick_template(_item("量化策略"))[0] == "momentum"  # 兜底
+        assert pick_template(_item("量化策略"))[0] is None
 
 
 @pytest.fixture

@@ -1,0 +1,379 @@
+{
+  "schema": "quant.independent_runtime_verifier.v1",
+  "business_date": "2026-10-14",
+  "issue": {
+    "assignee_id": "91bfb847-5d2c-4d10-bb41-e2a514a30fe4",
+    "assignee_type": "agent",
+    "created_at": "2026-10-13T23:53:50Z",
+    "creator_id": "d45517fb-9bf4-4a9f-a43b-bb5a41d97702",
+    "creator_type": "member",
+    "description": "这是受限、隔离的独立审计任务，不是生产日报、自然日M2或正式六级审阅回执。仅只读核对以下证据：\n1. docs/audits/2026-10-14-runtime-effort-and-safe-stop.json，SHA256 9e7ff0af32c4c60e0012e3ff5d5967eeb67b425717c9b489d56a7b283442f7de。\n2. docs/audits/2026-10-14-console-failed-day-readback.json，SHA256 a2888a9371e47d1dd8c1f462479d0745b4c320346833c37c092cca4f22f2736e。\n3. 只读查生产SATU-89原任务01a1379a-69dc-7d89-bf00-9b3f050fd6df终态与任务总数，确认仍唯一失败；隔离SATU-90任务已完成但不能算生产成功。\n4. 如需本地核对，仅用python -B和SQLite mode=ro；双活跃Paper应零成交，facts_hash为7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc。\n\n禁止创建、修改或删除任何本地文件，包括reply.md及临时文件。禁止日报命令、collect、tick、finalize、审批、Paper写入、通知发送、Live、读取凭据或环境变量、配置修改、创建其他Issue、重派旧任务。不得将代理自述推理档位当wire请求证据。SATU-90临时写文件违反禁写指令，即便已删除也要在审计中指出。\n\n结果直接通过multica issue comment add CURRENT_ISSUE_ID --content 单一参数提交，绝不使用--content-file或先写文件。可读CLI帮助。用紧凑JSON陈述audit_hashes、original_failure_preserved、paper_baseline、probe_limitations、findings及M2/M3未完成；随后结束。不要触发其他代理任务或作正式交易审批。",
+    "due_date": null,
+    "duplicate_of": null,
+    "id": "01a137af-cac1-7808-b717-5a5ed98bc3e3",
+    "identifier": "SATU-91",
+    "labels": [],
+    "last_activity_at": "2026-10-13T23:53:50.012722Z",
+    "metadata": {},
+    "number": 91,
+    "parent_issue_id": null,
+    "position": -6,
+    "priority": "none",
+    "project_id": "a208df76-b63b-4cef-bd11-7512d7c80896",
+    "properties": {},
+    "revision": 1,
+    "stage": null,
+    "start_date": null,
+    "status": "todo",
+    "status_category": "todo",
+    "status_name": "",
+    "title": "隔离审计核验 运行时修复 2026-10-14",
+    "updated_at": "2026-10-13T23:53:50Z",
+    "workspace_id": "cfcca519-15f5-4666-b1d8-2b67241d8f7b"
+  },
+  "runs": [
+    {
+      "id": "01a137af-cad7-7563-99c2-c35aab6458f6",
+      "status": "completed",
+      "error": null,
+      "agent_id": "91bfb847-5d2c-4d10-bb41-e2a514a30fe4",
+      "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+      "started_at": "2026-10-13T23:53:51Z",
+      "completed_at": "2026-10-13T23:56:32Z",
+      "usage": [
+        {
+          "cache_read_tokens": 1021568,
+          "cache_write_tokens": 0,
+          "input_tokens": 78728,
+          "model": "gpt-5.5",
+          "output_tokens": 8591,
+          "provider": "codex"
+        }
+      ],
+      "result": {
+        "output": "Posted the single compact audit JSON comment to SATU-91 and moved the issue to `in_review`.\n\nKey result: both audit hashes matched, SATU-89 remains the single preserved production failure, SATU-90 is only an isolated completed probe with the temp-file violation noted, dual Paper remains zero-trade with the expected facts hash, and M2/M3 remain incomplete.",
+        "pr_url": "",
+        "session_id": "01a137af-e9dc-7c83-a54e-60c575598115",
+        "work_dir": "/Users/henry/projects/quant"
+      }
+    }
+  ],
+  "comments": [
+    {
+      "attachments": [],
+      "author_id": "91bfb847-5d2c-4d10-bb41-e2a514a30fe4",
+      "author_type": "agent",
+      "content": "{\"audit_hashes\":{\"docs/audits/2026-10-14-runtime-effort-and-safe-stop.json\":{\"expected\":\"9e7ff0af32c4c60e0012e3ff5d5967eeb67b425717c9b489d56a7b283442f7de\",\"observed\":\"9e7ff0af32c4c60e0012e3ff5d5967eeb67b425717c9b489d56a7b283442f7de\",\"match\":true},\"docs/audits/2026-10-14-console-failed-day-readback.json\":{\"expected\":\"a2888a9371e47d1dd8c1f462479d0745b4c320346833c37c092cca4f22f2736e\",\"observed\":\"a2888a9371e47d1dd8c1f462479d0745b4c320346833c37c092cca4f22f2736e\",\"match\":true}},\"original_failure_preserved\":{\"production_issue\":\"SATU-89\",\"issue_id\":\"01a1379a-69c2-73ea-9885-8978db17d248\",\"issue_status\":\"blocked\",\"run_count\":1,\"only_run_id\":\"01a1379a-69dc-7d89-bf00-9b3f050fd6df\",\"only_run_status\":\"failed\",\"failure_reason\":\"api_invalid_request\",\"unique_failure\":true},\"isolated_probe\":{\"issue\":\"SATU-90\",\"issue_status\":\"in_review\",\"run_count\":1,\"run_status\":\"completed\",\"production_success\":false,\"counts_for_M2\":false,\"instruction_violation\":\"temporary project reply.md was created then deleted in seq 9-12; no residual file, but violation stands\"},\"paper_baseline\":{\"method\":\"python -B with sqlite3 file URI mode=ro\",\"expected_facts_hash\":\"7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc\",\"gate\":{\"facts_hash\":\"7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc\",\"trades\":0,\"positions\":0,\"pending_orders\":0,\"cash\":100000.0,\"equity\":100000.0},\"no_gate\":{\"facts_hash\":\"7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc\",\"trades\":0,\"positions\":0,\"pending_orders\":0,\"cash\":100000.0,\"equity\":100000.0}},\"probe_limitations\":[\"wire request reasoning effort was not independently observed\",\"SATU-90 only proves isolated startup and cannot repair SATU-89\",\"local zero-trade evidence does not independently prove absence of external Live or notification effects\",\"full reconciliation helper could not run here because h5py is not installed; direct SQLite mode=ro facts/hash check succeeded\"],\"findings\":[\"hashes verified\",\"SATU-89 original production failure remains preserved and unique\",\"SATU-90 completed but is not production success\",\"M2 not completed\",\"M3 not started\",\"no 2026-10-14 outputs, decisions, local run file, or residual reply.md observed\"]}",
+      "created_at": "2026-10-13T23:56:20Z",
+      "id": "01a137b2-1548-7b74-a21b-dcc48789d0ef",
+      "issue_id": "01a137af-cac1-7808-b717-5a5ed98bc3e3",
+      "last_activity_at": "2026-10-13T23:56:20Z",
+      "parent_id": null,
+      "reactions": [],
+      "reply_count": 0,
+      "resolved_at": null,
+      "resolved_by_id": null,
+      "resolved_by_type": null,
+      "revision": 1,
+      "source_task_id": "01a137af-cad7-7563-99c2-c35aab6458f6",
+      "type": "comment",
+      "updated_at": "2026-10-13T23:56:20Z"
+    }
+  ],
+  "review_report": {
+    "audit_hashes": {
+      "docs/audits/2026-10-14-runtime-effort-and-safe-stop.json": {
+        "expected": "9e7ff0af32c4c60e0012e3ff5d5967eeb67b425717c9b489d56a7b283442f7de",
+        "observed": "9e7ff0af32c4c60e0012e3ff5d5967eeb67b425717c9b489d56a7b283442f7de",
+        "match": true
+      },
+      "docs/audits/2026-10-14-console-failed-day-readback.json": {
+        "expected": "a2888a9371e47d1dd8c1f462479d0745b4c320346833c37c092cca4f22f2736e",
+        "observed": "a2888a9371e47d1dd8c1f462479d0745b4c320346833c37c092cca4f22f2736e",
+        "match": true
+      }
+    },
+    "original_failure_preserved": {
+      "production_issue": "SATU-89",
+      "issue_id": "01a1379a-69c2-73ea-9885-8978db17d248",
+      "issue_status": "blocked",
+      "run_count": 1,
+      "only_run_id": "01a1379a-69dc-7d89-bf00-9b3f050fd6df",
+      "only_run_status": "failed",
+      "failure_reason": "api_invalid_request",
+      "unique_failure": true
+    },
+    "isolated_probe": {
+      "issue": "SATU-90",
+      "issue_status": "in_review",
+      "run_count": 1,
+      "run_status": "completed",
+      "production_success": false,
+      "counts_for_M2": false,
+      "instruction_violation": "temporary project reply.md was created then deleted in seq 9-12; no residual file, but violation stands"
+    },
+    "paper_baseline": {
+      "method": "python -B with sqlite3 file URI mode=ro",
+      "expected_facts_hash": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+      "gate": {
+        "facts_hash": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+        "trades": 0,
+        "positions": 0,
+        "pending_orders": 0,
+        "cash": 100000,
+        "equity": 100000
+      },
+      "no_gate": {
+        "facts_hash": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+        "trades": 0,
+        "positions": 0,
+        "pending_orders": 0,
+        "cash": 100000,
+        "equity": 100000
+      }
+    },
+    "probe_limitations": [
+      "wire request reasoning effort was not independently observed",
+      "SATU-90 only proves isolated startup and cannot repair SATU-89",
+      "local zero-trade evidence does not independently prove absence of external Live or notification effects",
+      "full reconciliation helper could not run here because h5py is not installed; direct SQLite mode=ro facts/hash check succeeded"
+    ],
+    "findings": [
+      "hashes verified",
+      "SATU-89 original production failure remains preserved and unique",
+      "SATU-90 completed but is not production success",
+      "M2 not completed",
+      "M3 not started",
+      "no 2026-10-14 outputs, decisions, local run file, or residual reply.md observed"
+    ]
+  },
+  "tool_calls": [
+    {
+      "seq": 3,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'multica issue get 01a137af-cac1-7808-b717-5a5ed98bc3e3 --output json'"
+      }
+    },
+    {
+      "seq": 5,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'multica issue comment list 01a137af-cac1-7808-b717-5a5ed98bc3e3 --roots-only --summary --compact --output json'"
+      }
+    },
+    {
+      "seq": 9,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'multica issue status 01a137af-cac1-7808-b717-5a5ed98bc3e3 in_progress'"
+      }
+    },
+    {
+      "seq": 11,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'git status --short'"
+      }
+    },
+    {
+      "seq": 13,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'rg --files docs/audits'"
+      }
+    },
+    {
+      "seq": 15,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc \"find . -maxdepth 3 -name '*.db' -o -name '*.sqlite' -o -name '*.sqlite3'\""
+      }
+    },
+    {
+      "seq": 19,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'wc -c docs/audits/2026-10-14-runtime-effort-and-safe-stop.json docs/audits/2026-10-14-console-failed-day-readback.json'"
+      }
+    },
+    {
+      "seq": 21,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'shasum -a 256 docs/audits/2026-10-14-runtime-effort-and-safe-stop.json docs/audits/2026-10-14-console-failed-day-readback.json'"
+      }
+    },
+    {
+      "seq": 23,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'python -B -m json.tool docs/audits/2026-10-14-console-failed-day-readback.json'"
+      }
+    },
+    {
+      "seq": 24,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'python -B -m json.tool docs/audits/2026-10-14-runtime-effort-and-safe-stop.json'"
+      }
+    },
+    {
+      "seq": 27,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'multica --help'"
+      }
+    },
+    {
+      "seq": 29,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'multica issue --help'"
+      }
+    },
+    {
+      "seq": 31,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'multica issue runs --help'"
+      }
+    },
+    {
+      "seq": 33,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'multica issue runs 01a1379a-69c2-73ea-9885-8978db17d248 --output json'"
+      }
+    },
+    {
+      "seq": 34,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'multica issue get 01a1379a-69c2-73ea-9885-8978db17d248 --output json'"
+      }
+    },
+    {
+      "seq": 35,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'multica issue get 01a1379f-0f22-7793-8c50-0dcd15a53049 --output json'"
+      }
+    },
+    {
+      "seq": 36,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'multica issue runs 01a1379f-0f22-7793-8c50-0dcd15a53049 --output json'"
+      }
+    },
+    {
+      "seq": 41,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'multica issue run-messages --help'"
+      }
+    },
+    {
+      "seq": 45,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'multica issue run-messages 01a1379f-0f38-721b-9056-0983ed0c055c --output json'"
+      }
+    },
+    {
+      "seq": 47,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'rg \"facts_hash|paper-audit|recorded_trade_count|paper_reconciliation\" -n'"
+      }
+    },
+    {
+      "seq": 49,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc \"sed -n '360,470p' trading_team/paper_reconcile.py\""
+      }
+    },
+    {
+      "seq": 51,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc \"python -B - <<'PY'\nimport json\nfrom trading_team.paper_reconcile import reconcile_accounts\nresult = reconcile_accounts()\nsummary = {}\nfor name, portfolio in result['portfolios'].items():\n    summary[name] = {\n        'status': portfolio.get('status'),\n        'cash_check': portfolio.get('checks', {}).get('cash'),\n        'positions_check': portfolio.get('checks', {}).get('positions'),\n        'order_trade_check': portfolio.get('checks', {}).get('order_trade'),\n        'reconstructed_cash': portfolio.get('checks', {}).get('reconstructed_cash'),\n        'recorded_trade_count': portfolio.get('recorded_trade_count'),\n        'conflict_count': portfolio.get('conflict_count'),\n        'missing_count': portfolio.get('missing_count'),\n        'facts_hash': portfolio.get('facts_hash'),\n        'execution_certified': portfolio.get('execution_certified'),\n    }\nprint(json.dumps(summary, ensure_ascii=False, sort_keys=True))\nPY\""
+      }
+    },
+    {
+      "seq": 55,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc \"sed -n '1,160p' trading_team/paper_reconcile.py\""
+      }
+    },
+    {
+      "seq": 57,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc \"sed -n '1,180p' trading_team/paper_pipeline.py\""
+      }
+    },
+    {
+      "seq": 59,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc \"python -B - <<'PY'\nimport json, pathlib\np=pathlib.Path('paper/active_cohort.json')\nprint(p.read_text(encoding='utf-8') if p.exists() else 'missing')\nPY\""
+      }
+    },
+    {
+      "seq": 61,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc \"python -B - <<'PY'\nimport hashlib, json, pathlib, sqlite3\naccounts = {\n    'gate': pathlib.Path('paper/cohort_2026-09-28/llm_gate.db'),\n    'no_gate': pathlib.Path('paper/cohort_2026-09-28/llm_no_gate.db'),\n}\n\ndef read_facts(conn):\n    tables = {row[0] for row in conn.execute(\\\"SELECT name FROM sqlite_master WHERE type='table'\\\")}\n    facts = {}\n    for table in ('account', 'positions', 'pending_orders', 'trades', 'order_events', 'execution_receipts'):\n        if table in tables:\n            cur = conn.execute(f'SELECT * FROM {table} ORDER BY rowid')\n            cols = [col[0] for col in cur.description]\n            facts[table] = [dict(zip(cols, row)) for row in cur]\n        else:\n            facts[table] = []\n    return facts\n\nout = {}\nfor name, path in accounts.items():\n    conn = sqlite3.connect(path.resolve().as_uri() + '?mode=ro', uri=True)\n    try:\n        conn.execute('BEGIN')\n        facts = read_facts(conn)\n    finally:\n        conn.close()\n    facts_hash = hashlib.sha256(json.dumps(facts, sort_keys=True, ensure_ascii=False, allow_nan=False).encode()).hexdigest()\n    out[name] = {\n        'path': str(path),\n        'facts_hash': facts_hash,\n        'account_rows': len(facts['account']),\n        'positions': len(facts['positions']),\n        'pending_orders': len(facts['pending_orders']),\n        'trades': len(facts['trades']),\n        'order_events': len(facts['order_events']),\n        'execution_receipts': len(facts['execution_receipts']),\n        'last_account': facts['account'][-1] if facts['account'] else None,\n    }\nprint(json.dumps(out, ensure_ascii=False, sort_keys=True))\nPY\""
+      }
+    },
+    {
+      "seq": 63,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc \"python -B - <<'PY'\nimport json, pathlib\npaths = ['trading_team/outputs/2026-10-14', 'trading_team/decisions/2026-10-14', 'trading_team/.runs/2026-10-14.jsonl', 'reply.md']\nprint(json.dumps({p: pathlib.Path(p).exists() for p in paths}, sort_keys=True))\nPY\""
+      }
+    },
+    {
+      "seq": 67,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc \"multica issue comment add 01a137af-cac1-7808-b717-5a5ed98bc3e3 --content '{\\\"audit_hashes\\\":{\\\"docs/audits/2026-10-14-runtime-effort-and-safe-stop.json\\\":{\\\"expected\\\":\\\"9e7ff0af32c4c60e0012e3ff5d5967eeb67b425717c9b489d56a7b283442f7de\\\",\\\"observed\\\":\\\"9e7ff0af32c4c60e0012e3ff5d5967eeb67b425717c9b489d56a7b283442f7de\\\",\\\"match\\\":true},\\\"docs/audits/2026-10-14-console-failed-day-readback.json\\\":{\\\"expected\\\":\\\"a2888a9371e47d1dd8c1f462479d0745b4c320346833c37c092cca4f22f2736e\\\",\\\"observed\\\":\\\"a2888a9371e47d1dd8c1f462479d0745b4c320346833c37c092cca4f22f2736e\\\",\\\"match\\\":true}},\\\"original_failure_preserved\\\":{\\\"production_issue\\\":\\\"SATU-89\\\",\\\"issue_id\\\":\\\"01a1379a-69c2-73ea-9885-8978db17d248\\\",\\\"issue_status\\\":\\\"blocked\\\",\\\"run_count\\\":1,\\\"only_run_id\\\":\\\"01a1379a-69dc-7d89-bf00-9b3f050fd6df\\\",\\\"only_run_status\\\":\\\"failed\\\",\\\"failure_reason\\\":\\\"api_invalid_request\\\",\\\"unique_failure\\\":true},\\\"isolated_probe\\\":{\\\"issue\\\":\\\"SATU-90\\\",\\\"issue_status\\\":\\\"in_review\\\",\\\"run_count\\\":1,\\\"run_status\\\":\\\"completed\\\",\\\"production_success\\\":false,\\\"counts_for_M2\\\":false,\\\"instruction_violation\\\":\\\"temporary project reply.md was created then deleted in seq 9-12; no residual file, but violation stands\\\"},\\\"paper_baseline\\\":{\\\"method\\\":\\\"python -B with sqlite3 file URI mode=ro\\\",\\\"expected_facts_hash\\\":\\\"7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc\\\",\\\"gate\\\":{\\\"facts_hash\\\":\\\"7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc\\\",\\\"trades\\\":0,\\\"positions\\\":0,\\\"pending_orders\\\":0,\\\"cash\\\":100000.0,\\\"equity\\\":100000.0},\\\"no_gate\\\":{\\\"facts_hash\\\":\\\"7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc\\\",\\\"trades\\\":0,\\\"positions\\\":0,\\\"pending_orders\\\":0,\\\"cash\\\":100000.0,\\\"equity\\\":100000.0}},\\\"probe_limitations\\\":[\\\"wire request reasoning effort was not independently observed\\\",\\\"SATU-90 only proves isolated startup and cannot repair SATU-89\\\",\\\"local zero-trade evidence does not independently prove absence of external Live or notification effects\\\",\\\"full reconciliation helper could not run here because h5py is not installed; direct SQLite mode=ro facts/hash check succeeded\\\"],\\\"findings\\\":[\\\"hashes verified\\\",\\\"SATU-89 original production failure remains preserved and unique\\\",\\\"SATU-90 completed but is not production success\\\",\\\"M2 not completed\\\",\\\"M3 not started\\\",\\\"no 2026-10-14 outputs, decisions, local run file, or residual reply.md observed\\\"]}' --output table\""
+      }
+    },
+    {
+      "seq": 69,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'multica issue status 01a137af-cac1-7808-b717-5a5ed98bc3e3 in_review'"
+      }
+    },
+    {
+      "seq": 71,
+      "tool": "exec_command",
+      "input": {
+        "command": "/bin/zsh -lc 'multica issue get 01a137af-cac1-7808-b717-5a5ed98bc3e3 --output json'"
+      }
+    }
+  ],
+  "verification": {
+    "task_count": 1,
+    "agent_identity_matches": true,
+    "model_from_usage": "gpt-5.5",
+    "terminal": "completed",
+    "saved_comment_source_task_matches": true,
+    "local_write_tool_observed": false,
+    "production_trading_approval": false,
+    "counts_for_M2": false,
+    "counts_for_M3": false
+  },
+  "limitations": [
+    "System Python lacked h5py; reviewer used independent SQLite mode=ro instead of full reconciliation helper.",
+    "No wire-level reasoning effort capture.",
+    "Agent private invocation permission does not establish OS-level read-only isolation.",
+    "No natural production publication or six-role review package exists for this day."
+  ]
+}

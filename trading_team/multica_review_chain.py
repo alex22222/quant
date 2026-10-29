@@ -70,6 +70,9 @@ def _blocked(state: dict, path: Path, reason: str) -> dict:
 
 def run_chain(day: str, *, team: Path = TEAM, cli: MulticaCLI | None = None,
               execute: bool = False, timeout: float = 600, poll_seconds: float = 5) -> dict:
+    if execute:
+        from pipeline.policy import require
+        require("multica_review")
     date.fromisoformat(day)
     team = team.resolve()
     status = review_status(day, team=team)

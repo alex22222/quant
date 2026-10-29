@@ -1,0 +1,68 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 90,
+  "verified_at": "2026-09-23T11:39:52+08:00",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "isolated_team": "/private/tmp/quant-real-chain-v8.thl5kgk2/trading_team",
+  "source": {
+    "publisher_issue": "SATU-15",
+    "data_quality_receipt_hash": "9a6c4b41bc865ad558fff04d7f0b06f100b34d269cb41077f9b3e59dc2044a69",
+    "market_analysts_receipt_hash": "8bcbbfe44e4dde767df2f82ba6bf68c707d977ee37249f8121295465e3cbeaf8",
+    "strategy_bundle_hash": "71201559d1d6c713c65bb728371807ebee74edadbff59d94f04ad842eaeeaddf",
+    "strategy_bundle_file_sha256": "2e68ef9fafbc0b93ca500150e42e2576e689ee3513c4979698ebc84207142b28",
+    "file_count": 55,
+    "embedded_and_disk_hash_mismatches": []
+  },
+  "review": {
+    "issue": "SATU-19",
+    "issue_id": "01a0cc4f-f98b-7a66-8d9d-0d582afe3391",
+    "issue_status": "done",
+    "issue_revision": 4,
+    "task_id": "01a0cc4f-f99c-796d-9e07-b10b63147b05",
+    "task_status": "completed",
+    "task_completed_at": "2026-09-23T03:35:19Z",
+    "agent_id": "5c69dae4-6ea4-48d3-8ec1-575d3f322a4e",
+    "model": "gpt-5.5",
+    "model_was_bound_explicitly_before_dispatch": true,
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "run_id": "006f8a7f51a644a6a3c1127e966a8269",
+    "run_status": "succeeded",
+    "workflow_attempt": 1,
+    "receipt_hash": "f91c0147555ce605b499acccd3e52fe5f0878e356aa29f76feb23a580f74c106",
+    "response_file_sha256": "6f8d0b4ec0232285f5c8c625cc8cf40a54a861292d6b39cbc283ef1047ab07a0",
+    "verdict": "reject",
+    "checks": {"counterevidence": "pass", "claims_vs_evidence": "fail"},
+    "remote_comment_id": "01a0cc54-cda5-7684-889d-b9176c37c3ae",
+    "comment_bound_to_task_run_and_receipt": true,
+    "execution_authorized": false
+  },
+  "independent_failure_check": {
+    "researcher_claim": "For BYD, report 05 calls true fund inflow a fact.",
+    "upstream_language": "Sentiment report prose says volume ratio 1.43, turnover 0.97 percent, plus signs of incremental participation; its structured one-line also says incremental capital entered without a measured flow series.",
+    "archived_snapshot_fields": ["volume", "amount", "turnover_rate", "volume_ratio", "pct_chg"],
+    "net_flow_series_present": false,
+    "interpretation": "Trading volume and price may indicate participation, but do not establish signed net capital inflow. The researcher promoted a proxy to certified fact.",
+    "other_limit": "LONGi loss widening depends on a reported yoy field; 2025-06-30 raw same-period values are not sealed, so its magnitude cannot be independently reconstructed."
+  },
+  "independent_checks": {
+    "remote_run_count": 1,
+    "remote_message_count": 52,
+    "remote_tool_use_count": 16,
+    "review_submit_command_count": 1,
+    "force_command_count": 0,
+    "patch_paths": [
+      "/private/tmp/quant-real-chain-v8.thl5kgk2/trading_team/.runs/multica/reviews/2026-09-23/strategy-research-response.json",
+      "/private/tmp/quant-real-chain-v8.thl5kgk2/trading_team/.runs/multica/reviews/2026-09-23/strategy-research-result-comment.md"
+    ],
+    "temporary_comment_file_removed": true,
+    "bundle_file_sha256_unchanged": true,
+    "isolated_decisions_present": false,
+    "isolated_paper_present": false,
+    "review_status": "Data Quality and Market Analysts accepted; Strategy Research rejected; Paper Trader, Risk Manager, Audit Verifier blocked"
+  },
+  "production_entrypoint": "The old Multica Autopilot was still active with next trigger 2026-09-24T08:43:00+08:00 at preflight. No schedule or remote runbook change was made.",
+  "tests": "No application code changed. Real remote task, response, review ledger, source texts, comment, command trace and deterministic status were checked; last full suite in Loop85: 1197 passed.",
+  "milestones": {"m1": "incomplete", "m2": "not_started", "m3": "not_started"},
+  "next": "Preserve SATU-19 rejection and v8 sealed files. Diagnose the sentiment and researcher volume-to-net-flow overclaim, add a focused failing behavior regression and minimal bounded repair, then publish a new isolated version and repeat the real staged reviews; never re-review the same bundle to manufacture acceptance."
+}

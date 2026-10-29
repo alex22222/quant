@@ -1,0 +1,31 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-10T01:15:47+08:00",
+  "result": "natural_local_backup_registered_and_runtime_fingerprint_current",
+  "trigger": "Existing com.hqcapital.workflow-backup LaunchAgent, not a manual or forced backup",
+  "snapshot_id": "6dc3619be1af4f8eb074fad79de393fd",
+  "snapshot_started_at": "2026-10-10T01:15:04.863043+08:00",
+  "catalog_status": "succeeded and verified",
+  "manifest_sha256": "3218654bae43988028ebf556e02361738cce28cb1f61529cc48dbad055d328d3",
+  "independent_verification": {
+    "manifest_hash_recomputed": true,
+    "verify_workflow_backup": "passed against the registered immutable manifest hash",
+    "file_count": 1053,
+    "database_count": 6,
+    "runtime_fingerprints_match_current": true,
+    "execution_authorized": false
+  },
+  "service_after_tick": {
+    "status": "healthy",
+    "heartbeat": "fresh",
+    "attempt_count": 69,
+    "snapshot_count": 69,
+    "unregistered_count": 0,
+    "runtime_snapshot_current": true,
+    "prompts_snapshot_current": true,
+    "runbook_snapshot_current": true,
+    "cohort_snapshot_current": true,
+    "offsite_verified": false
+  },
+  "limits": "Snapshot contains workflow evidence and databases plus code fingerprints, not runnable source code or dependencies. Only the latest local snapshot was verified; no isolated restore, offsite recovery, production activation or M2/M3 business acceptance is claimed."
+}

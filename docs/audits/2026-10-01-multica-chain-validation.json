@@ -1,0 +1,805 @@
+{
+  "schema": "multica_chain_validation.v1",
+  "checked_at": "2026-10-01T21:40:21.710254+08:00",
+  "scope": {
+    "synthetic_only": true,
+    "purpose": "Real six-agent orchestration acceptance on synthetic inputs",
+    "publication_generator": "offline_fixture.v1",
+    "real_market_data": false,
+    "real_account_evidence": false,
+    "execution_authorized": false,
+    "archive_note": "rqalpha_bundle denotes the parser format of test records, not actual RQAlpha data.",
+    "calendar_note": "Deterministic test calendar; not a claim about a real trading session."
+  },
+  "execution_authorized": false,
+  "production_schedule_connected": false,
+  "natural_day_acceptance": false,
+  "kimi_role_retests": [
+    {
+      "role": {
+        "name": "Data Quality",
+        "slug": "data-quality",
+        "agent_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd",
+        "provider": "kimi",
+        "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+        "model": "kimi-code/k3-256k",
+        "input_sha256": "8b9f736151bcc2859314c33a02166df0993550d1248cfa044e91928e3ec24419",
+        "nonce": "82e0b127315a1919c48271fb",
+        "expected_metric": {
+          "bad_actual_coverage": 0.7
+        },
+        "expected_verdicts": {
+          "clean": "accept",
+          "bad": "reject"
+        },
+        "title": "role-smoke-20261001 Data Quality",
+        "status": "completed",
+        "issue_id": "01a0f530-52ab-789e-ae49-d9021fb5ef52",
+        "identifier": "SATU-67",
+        "dispatched_at": "2026-10-01T09:59:40.083275+08:00",
+        "runs": [
+          {
+            "id": "01a0f78e-e28e-74a6-bc00-9ca11831f40f",
+            "status": "completed",
+            "error": null,
+            "usage": null,
+            "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+            "agent_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd"
+          },
+          {
+            "id": "01a0f5a2-7bab-7665-a933-3cc77e62a423",
+            "status": "completed",
+            "error": null,
+            "usage": null,
+            "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+            "agent_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd"
+          },
+          {
+            "id": "01a0f530-52c0-7c33-b7d3-d146f78c3723",
+            "status": "failed",
+            "error": "kimi session/new failed: session/new: Authentication required (code=-32000, data={\"authMethods\":[{\"id\":\"login\",\"name\":\"Login with Kimi account\",\"description\":\"Run `kimi login` command in the terminal, then follow the instructions to finish login.\",\"type\":\"terminal\",\"args\":[\"login\"],\"env\":{}}]})",
+            "usage": null,
+            "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+            "agent_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd"
+          }
+        ],
+        "validation": {
+          "fixture_unchanged": true,
+          "correct_role": true,
+          "read_input": true,
+          "no_execution_authority": true,
+          "correct_verdicts": true,
+          "correct_metrics": true,
+          "explains_rejection": true
+        },
+        "smoke_pass": true,
+        "checked_at": "2026-10-01T21:04:06.797926+08:00",
+        "issue_status": "done",
+        "reported_models": [],
+        "model_usage_matches": null,
+        "classification": "passed_basic_smoke",
+        "artifact_path": "/Users/henry/projects/quant/tmp/multica-role-smoke-20261001/data-quality/result.json",
+        "artifact_sha256": "9f5ebf4660d87de5cfb21e518077d48a307139932d77bb35b991af34dca072fd",
+        "model_evidence": "configured_runtime_only"
+      },
+      "artifact": {
+        "role": "Data Quality",
+        "input_sha256": "8b9f736151bcc2859314c33a02166df0993550d1248cfa044e91928e3ec24419",
+        "nonce": "82e0b127315a1919c48271fb",
+        "execution_authorized": false,
+        "results": [
+          {
+            "case_id": "clean",
+            "verdict": "accept",
+            "findings": [
+              "Point-in-time ordering OK: latest_observation 2026-09-30T15:00:00+08:00 <= data_asof 2026-09-30T15:00:00+08:00",
+              "Payload SHA256 de5ec5e5ecd2da4d03b11591a5557c9d45108d3603b0ff58e8f382ae44ba3c73 matches manifest_sha256",
+              "Row coverage complete: observed_rows/expected_rows = 10/10 = 1.0 matches declared_coverage 1.0",
+              "Acceptance is limited to the narrow fixture checks only; no trading authorization or business completion attested"
+            ]
+          },
+          {
+            "case_id": "bad",
+            "verdict": "reject",
+            "findings": [
+              "Point-in-time violation: latest_observation 2026-10-01T15:00:00+08:00 is after data_asof 2026-09-30T15:00:00+08:00",
+              "Payload SHA256 de5ec5e5ecd2da4d03b11591a5557c9d45108d3603b0ff58e8f382ae44ba3c73 does not match manifest_sha256 0000000000000000000000000000000000000000000000000000000000000000",
+              "Incomplete coverage: observed_rows/expected_rows = 7/10 = 0.7 but declared_coverage is 1.0"
+            ]
+          }
+        ],
+        "metrics": {
+          "bad_actual_coverage": 0.7
+        }
+      }
+    },
+    {
+      "role": {
+        "name": "Paper Trader",
+        "slug": "paper-trader",
+        "agent_id": "303a9540-46f1-4809-b3f7-0ce4de0e24ac",
+        "provider": "kimi",
+        "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+        "model": "kimi-code/k3-256k",
+        "input_sha256": "55c5cb6814cb5ca252ce64020444fcdc6bff2c688a762da191db8d92595986ba",
+        "nonce": "ff6cfb2abf892dd79c3b7341",
+        "expected_metric": {
+          "bad_sell_excess": 100
+        },
+        "expected_verdicts": {
+          "clean": "accept",
+          "bad": "reject"
+        },
+        "title": "role-smoke-20261001 Paper Trader",
+        "status": "completed",
+        "issue_id": "01a0f53c-1a67-733f-b17d-2d4cd3f793a3",
+        "identifier": "SATU-70",
+        "checked_at": "2026-10-01T21:09:55.484517+08:00",
+        "runs": [
+          {
+            "id": "01a0f791-3120-759c-b3a0-4e98bfd140f9",
+            "status": "completed",
+            "error": null,
+            "usage": null,
+            "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+            "agent_id": "303a9540-46f1-4809-b3f7-0ce4de0e24ac"
+          },
+          {
+            "id": "01a0f53c-1a78-7a5a-9e6d-8ded007e1c6d",
+            "status": "failed",
+            "error": "kimi session/new failed: session/new: Authentication required (code=-32000, data={\"authMethods\":[{\"id\":\"login\",\"name\":\"Login with Kimi account\",\"description\":\"Run `kimi login` command in the terminal, then follow the instructions to finish login.\",\"type\":\"terminal\",\"args\":[\"login\"],\"env\":{}}]})",
+            "usage": null,
+            "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+            "agent_id": "303a9540-46f1-4809-b3f7-0ce4de0e24ac"
+          }
+        ],
+        "validation": {
+          "fixture_unchanged": true,
+          "correct_role": true,
+          "read_input": true,
+          "no_execution_authority": true,
+          "correct_verdicts": true,
+          "correct_metrics": true,
+          "explains_rejection": true
+        },
+        "smoke_pass": true,
+        "issue_status": "done",
+        "reported_models": [],
+        "model_usage_matches": null,
+        "classification": "passed_basic_smoke",
+        "artifact_path": "/Users/henry/projects/quant/tmp/multica-role-smoke-20261001/paper-trader/result.json",
+        "artifact_sha256": "8bc51ce1a02547e93e04bdd73e5212b7ede89d5e2be21931336ba9da2d63b91e",
+        "model_evidence": "configured_runtime_only"
+      },
+      "artifact": {
+        "role": "Paper Trader",
+        "input_sha256": "55c5cb6814cb5ca252ce64020444fcdc6bff2c688a762da191db8d92595986ba",
+        "nonce": "ff6cfb2abf892dd79c3b7341",
+        "execution_authorized": false,
+        "results": [
+          {
+            "case_id": "clean",
+            "verdict": "accept",
+            "findings": [
+              "BUY quantity 100 is a multiple of 100",
+              "SELL quantity 100 <= settled_quantity 100 (T+1 satisfied)",
+              "approval_hash plan-v2 equals plan_hash plan-v2",
+              "Synthetic evaluation only; no trading authorized"
+            ]
+          },
+          {
+            "case_id": "bad",
+            "verdict": "reject",
+            "findings": [
+              "BUY quantity 150 is not a multiple of 100",
+              "SELL quantity 100 > settled_quantity 0 (violates T+1)",
+              "approval_hash plan-v1 does not equal plan_hash plan-v2"
+            ]
+          }
+        ],
+        "metrics": {
+          "bad_sell_excess": 100
+        }
+      }
+    }
+  ],
+  "kimi_model_configuration": {
+    "default_model": "kimi-code/k3-256k",
+    "k3_config": {
+      "provider": "managed:kimi-code",
+      "model": "k3-256k",
+      "max_context_size": 262144
+    },
+    "scope": "Local configuration; ACP run usage unavailable, not server-reported model proof"
+  },
+  "chain": {
+    "schema": "multica_review_chain.v1",
+    "date": "2026-09-21",
+    "team": "/private/tmp/quant-multimodel-chain-l94kumxc/trading_team",
+    "status": "accepted",
+    "execution_authorized": false,
+    "production_complete": false,
+    "roles": {
+      "data-quality": {
+        "bundle_hash": "71280931da67e192f86288a54ecb592d430934e0c860f5ef572c80fa2a1b1b87",
+        "agent": {
+          "id": "d1657994-f3fb-441f-b8bf-c8b7181765cd",
+          "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+          "model": "kimi-code/k3-256k"
+        },
+        "issue_id": "01a0f798-5d4a-7458-9d01-b7d3126c743d",
+        "identifier": "SATU-74",
+        "task_id": "01a0f798-5d5c-7bac-afce-4a34fd1d0d63",
+        "remote_status": "completed",
+        "reported_models": [],
+        "model_evidence": "configured_runtime_only",
+        "local_status": "accepted",
+        "verdict": "accept",
+        "summary": "在包内声明的合成验收范围（synthetic_only=true，非真实行情）内，三项检查全部通过。completed_session：数据基准日 data_asof=2026-09-18 与 manifest.latest_trade_date 一致，该日为冻结日历（calendar_hash 校验通过）内的已完成交易日，execution_archive 与行情载荷日期均为 2026-09-18。source_integrity：包内全部 19 个文件的 sha256 与内容逐一相符；bundle_hash 按规范重算一致；generation.json 的 inputs 哈希（_sha256 加盐规则）与包内文件全部对应，source.generation_hash 校验通过；execution_archive 回执 receipt_hash 重算有效，verify_receipt 对磁盘归档对象完整校验通过，payload_hash/calendar_hash 与归档一致；包内文件与团队目录磁盘内容逐字节一致。coverage：必需标的（watchlist 601318 加基准 000300，required_symbols 计算为 [000300, 601318]）与归档 codes 完全一致，两个标的的技术上下文齐全，watchlist 标的有基本面文件。仅认证合成范围内的一致性，不构成真实行情或投资结论。",
+        "checks": [
+          {
+            "evidence": [
+              "context/2026-09-21/manifest.json",
+              "context/2026-09-21/execution_archive.json",
+              "market_archive/2026-09-18/eee6dd46c1c060dc177a074c5cbf8b376e5df3742a3ae56d52674633ef49ecdf.json",
+              "context/2026-09-21/acceptance_scope.json"
+            ],
+            "name": "completed_session",
+            "reason": "数据基准日 2026-09-18 是冻结日历中的已完成交易日：calendar_hash=36e12304… 的日历文件存在且 sha256 校验通过，2026-09-18 在日历内；manifest.latest_trade_date=2026-09-18 与 source.data_asof、execution_archive.date、行情载荷 bars 日期全部一致；manifest.ok=true 且 technical/execution_archive 两个来源均 ok。按 acceptance_scope 声明，该日历为确定性测试日历，此处仅认证其合成范围内的一致性。",
+            "result": "pass"
+          },
+          {
+            "evidence": [
+              "outputs/2026-09-21/generation.json",
+              "context/2026-09-21/execution_archive.json",
+              "market_archive/2026-09-18/eee6dd46c1c060dc177a074c5cbf8b376e5df3742a3ae56d52674633ef49ecdf.json",
+              "context/2026-09-21/manifest.json",
+              "watchlist.json"
+            ],
+            "name": "source_integrity",
+            "reason": "包内 19 个文件的 sha256 与文本内容逐一重算相符；bundle_hash 按 multica_review_bundle.v1 规范（去 bundle_hash 后规范序列化取 sha256）重算等于 71280931…；generation.json 中 inputs 各项哈希按 _sha256（内容+NUL）规则与包内对应文件全部一致，source.generation_hash 与 generation.json 文本的 _sha256 一致，source.run_id 与 generation.run_id 一致；execution_archive 回执 receipt_hash 重算有效，且对团队目录磁盘归档对象执行 verify_receipt 完整通过（回执对象、日历哈希、载荷哈希、标的覆盖均一致）；包内文件与磁盘文件逐字节一致，未发现篡改。",
+            "result": "pass"
+          },
+          {
+            "evidence": [
+              "watchlist.json",
+              "context/2026-09-21/execution_archive.json",
+              "market_archive/2026-09-18/eee6dd46c1c060dc177a074c5cbf8b376e5df3742a3ae56d52674633ef49ecdf.json",
+              "context/2026-09-21/technical_000300.json",
+              "context/2026-09-21/technical_601318.json",
+              "context/2026-09-21/fundamental_601318.json"
+            ],
+            "name": "coverage",
+            "reason": "必需标的覆盖完整：watchlist 含 601318，加上基准 000300 后 required_symbols 计算结果为 [000300, 601318]，与 execution_archive.codes 及行情载荷 bars 的标的集合完全一致；context 下 technical_000300 与 technical_601318 均存在且日期为 2026-09-18，watchlist 标的 601318 有 fundamental 文件；两个标的均未停牌（suspended=false），开高低收量字段齐全。",
+            "result": "pass"
+          }
+        ],
+        "receipt_hash": "08738b98d0b94443cdf4dcfc67d1ee566992c95ad21c4b8f094c2d33a5d99db5",
+        "status": "accepted"
+      },
+      "market-analysts": {
+        "bundle_hash": "12f4967533746e0da7f15efc5b1e36d10ffe37f1518cb91302f5c87a08a6ae42",
+        "agent": {
+          "id": "b765ae90-5a87-424f-9c26-fe3ce0644674",
+          "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+          "model": "claude-sonnet-5"
+        },
+        "issue_id": "01a0f79f-0013-7789-8d05-bb401baacf4d",
+        "identifier": "SATU-75",
+        "task_id": "01a0f79f-0025-76cc-9aa4-64f23fd257c3",
+        "remote_status": "completed",
+        "reported_models": [
+          "claude-sonnet-5"
+        ],
+        "model_evidence": "usage",
+        "local_status": "accepted",
+        "verdict": "accept",
+        "summary": "在包内声明的合成验收范围内（context/2026-09-21/acceptance_scope.json: synthetic_only=true, real_market_data=false, real_account_evidence=false, execution_authorized=false），两项必需检查均通过。facts_supported：四份角色产出（01_fundamental.md、02_sentiment.md、03_news.md、04_technical.md）中的事实性表述均可在对应输入文件中逐一核实——'基准与样例股票归档收盘均为54，样例基准MA60输入也是54，close>MA60不成立'与 context/2026-09-21/technical_000300.json、context/2026-09-21/technical_601318.json（close:54, ma60:54）及 market_archive 原始归档行情（000300、601318 的 close 均为54）逐字一致，54>54 不成立的判断正确；'没有真实账户证据，因此只观望，不提出买卖/保护单/仓位调整' 与 acceptance_scope.json 的 real_account_evidence=false、execution_authorized=false 一致；03_news.md 的 JSON 结论 items:[] 、temperature:0 与 news.json 原始内容为空对象 {} 精确对应，未虚构任何新闻条目。四份文件的 sha256 经重新计算与包内声明值全部一致，未发现篡改。missing_data_disclosed：四个角色对应的 outputs/*.input.txt 显示其收到的 sentiment.json、news.json、global_macro.json 均为空对象 {}，fundamental_601318.json 仅含孤立的 pe:10（无报告期、无同业或历史对照），四份输出文本均以中文明确披露'缺少真实财报、新闻、情绪、估值参照和独立样本，不作盈利或方向结论'，评级一律为'中性'且 confidence 取最低值1，未给出任何方向性或可执行结论，披露与底层数据缺口完全吻合。两项检查均 pass，故 verdict=accept；此结论仅认证合成范围内的一致性，不构成对真实行情或投资结论的认证。",
+        "checks": [
+          {
+            "evidence": [
+              "outputs/2026-09-21/01_fundamental.md",
+              "outputs/2026-09-21/02_sentiment.md",
+              "outputs/2026-09-21/03_news.md",
+              "outputs/2026-09-21/04_technical.md",
+              "context/2026-09-21/technical_000300.json",
+              "context/2026-09-21/technical_601318.json",
+              "market_archive/2026-09-18/eee6dd46c1c060dc177a074c5cbf8b376e5df3742a3ae56d52674633ef49ecdf.json",
+              "context/2026-09-21/acceptance_scope.json"
+            ],
+            "name": "facts_supported",
+            "reason": "四份角色产出文本中的全部事实性断言均能在本包文件中逐条核实，且不超出其对应 *.input.txt 所列的输入范围：(1) '基准与样例股票归档收盘均为54，样例基准MA60输入也是54，close>MA60不成立，市场门禁关闭' 与 context/2026-09-21/technical_000300.json、context/2026-09-21/technical_601318.json 中 close=54、ma60=54 的数值一致，且与 market_archive/2026-09-18/....json 中 000300、601318 两个标的的原始 close=54 互相印证，54>54 为假的判断在数学上正确；(2) '没有真实账户证据，因此只观望，不提出买卖、保护单或仓位调整' 与 context/2026-09-21/acceptance_scope.json 中 real_account_evidence=false、execution_authorized=false 一致，四份输出均未给出买卖方向、仓位或止损建议，评级均为'中性'；(3) 03_news.md 的结构化结论 items:[]、temperature:0 精确反映 context/2026-09-21/news.json 的空对象内容，未添加任何未经输入支持的新闻事实；(4) 经独立重算，被引用文件的 sha256 与包内声明值全部一致，证据未被篡改。未发现任何角色产出中存在输入未覆盖的事实断言。",
+            "result": "pass"
+          },
+          {
+            "evidence": [
+              "context/2026-09-21/sentiment.json",
+              "context/2026-09-21/news.json",
+              "context/2026-09-21/global_macro.json",
+              "context/2026-09-21/fundamental_601318.json",
+              "outputs/2026-09-21/01_fundamental.md",
+              "outputs/2026-09-21/02_sentiment.md",
+              "outputs/2026-09-21/03_news.md",
+              "outputs/2026-09-21/04_technical.md",
+              "context/2026-09-21/acceptance_scope.json"
+            ],
+            "name": "missing_data_disclosed",
+            "reason": "本包内喂给情绪、新闻、宏观三个维度的原始输入均为空对象 {}（context/2026-09-21/sentiment.json、context/2026-09-21/news.json、context/2026-09-21/global_macro.json，三者 sha256 相同且均等于 空对象 {} 的哈希），基本面输入 context/2026-09-21/fundamental_601318.json 仅含孤立的 pe:10（对应input.txt 中 报告期覆盖索引.archived_report_dates 为空列表，无历史报告期可比），不构成可用的估值参照。四份角色产出 outputs/2026-09-21/01_fundamental.md、02_sentiment.md、03_news.md、04_technical.md 均以相同的中文段落明确披露该缺口：'缺少真实财报、新闻、情绪、估值参照和独立样本，不作盈利或方向结论'，并一致给出'中性'评级、confidence=1（量表最低值），不提出任何买卖、保护单或仓位调整建议，与 acceptance_scope.json 中 real_market_data=false 的声明范围相符。未发现任何角色在数据缺失的情况下仍给出未披露依据的结论。",
+            "result": "pass"
+          }
+        ],
+        "receipt_hash": "fd52dd4f7c46b6c2b190ef221603d01ee51a1cf700e08320c9c3e8f729d693c7",
+        "status": "accepted"
+      },
+      "strategy-research": {
+        "bundle_hash": "ca12190d6faa968033c7e1079524f4e22f6acbaa60fe66679328c21f91d0ceaa",
+        "agent": {
+          "id": "5c69dae4-6ea4-48d3-8ec1-575d3f322a4e",
+          "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+          "model": "claude-opus-5-5"
+        },
+        "issue_id": "01a0f7a1-c9f6-77f8-9522-872f0e5f0fab",
+        "identifier": "SATU-76",
+        "task_id": "01a0f7a1-ca08-7f04-9853-28a8e3272536",
+        "remote_status": "completed",
+        "reported_models": [
+          "claude-opus-5-5"
+        ],
+        "model_evidence": "usage",
+        "local_status": "accepted",
+        "verdict": "accept",
+        "summary": "在包内声明的合成验收范围（acceptance_scope: synthetic_only=true、real_market_data=false、real_account_evidence=false、execution_authorized=false）内，两项检查均通过。先做完整性复核：bundle_hash 按规范重算一致；34 个文件 sha256 与内容及团队目录磁盘字节逐一一致；generation.json 的 inputs/outputs 哈希（_sha256 内容+NUL）、source.generation_hash/run_id/plan_hash、01–05 各 run.json 的 input_hash/output_hash/prompt_hash（daily_research.v4+章程+extra）全部重算相符；05_researcher.input.txt 完整包含 01–04 四份报告原文；上游 data-quality 与 market-analysts 均为 accept 且各项 pass。counterevidence：研究员结论显式列出反证（全部维度缺乏真实样本、close>MA60 不成立导致市场门禁关闭），且未被正面论据压过，中性评级与最低置信度 1（1–5 量表）与反证强度相称。claims_vs_evidence：每条事实断言（收盘 54、MA60 54、54>54 为假、新闻/情绪/宏观为空、无财报报告期、无真实账户证据）均可在包内文件核实，无超出输入的推断，也未给出买卖、仓位或止损建议。仅认证合成范围内的一致性，不构成真实行情认证或投资结论。",
+        "checks": [
+          {
+            "evidence": [
+              "outputs/2026-09-21/05_researcher.md",
+              "outputs/2026-09-21/05_researcher.input.txt",
+              "outputs/2026-09-21/01_fundamental.md",
+              "outputs/2026-09-21/04_technical.md",
+              "context/2026-09-21/technical_000300.json",
+              "context/2026-09-21/technical_601318.json",
+              "context/2026-09-21/fundamental_601318.json",
+              "market_archive/2026-09-18/eee6dd46c1c060dc177a074c5cbf8b376e5df3742a3ae56d52674633ef49ecdf.json",
+              "context/2026-09-21/acceptance_scope.json"
+            ],
+            "name": "counterevidence",
+            "reason": "05_researcher.md 明确写出反证：'当前全部研究维度缺乏真实样本，不能形成交易建议'，并以 close>MA60 不成立（technical_000300/601318 中 close=54、ma60=54，54>54 为假）关闭市场门禁；支持条件仅限'获得合格证据'，未虚构多头论据。上游 01–04 四份报告均为中性、置信度 1，研究员输入（05_researcher.input.txt 完整包含四份原文）中不存在被忽略的相反信号，故无需调和冲突。可能的反向信号逐项核对：fundamental_601318 仅 pe=10，无估值参照、archived_report_dates 为空，不构成可用的看多证据，报告以'缺少估值参照'如实处理；行情载荷 high=55/low=53、prev_close=54 为平盘，无趋势信号。中性评级与最低置信度 1（schemas 约定 1–5）同反证强度相称，未出现过度自信。",
+            "result": "pass"
+          },
+          {
+            "evidence": [
+              "outputs/2026-09-21/05_researcher.md",
+              "outputs/2026-09-21/05_researcher.run.json",
+              "outputs/2026-09-21/01_fundamental.input.txt",
+              "outputs/2026-09-21/generation.json",
+              "market_archive/2026-09-18/eee6dd46c1c060dc177a074c5cbf8b376e5df3742a3ae56d52674633ef49ecdf.json",
+              "context/2026-09-21/technical_000300.json",
+              "context/2026-09-21/news.json",
+              "context/2026-09-21/sentiment.json",
+              "context/2026-09-21/global_macro.json",
+              "context/2026-09-21/acceptance_scope.json",
+              "watchlist.json"
+            ],
+            "name": "claims_vs_evidence",
+            "reason": "逐条核对 05_researcher.md 断言：(1)'基准与样例股票归档收盘均为54'——行情载荷 bars 中 000300、601318 close=54，sources.record 一致；(2)'MA60 输入也是54，close>MA60 不成立'——technical_000300.json ma60=54，计算 54>54 为假；(3)'缺少真实财报、新闻、情绪、估值参照'——news/sentiment/global_macro 均为 {}，01_fundamental.input.txt 报告期索引 archived_report_dates=[]，fundamental 仅 pe=10；(4)'没有真实账户证据'与'合成材料'——acceptance_scope real_account_evidence=false、synthetic_only=true、real_market_data=false。结构化块 ratings 仅 601318 中性/1，与 watchlist 覆盖一致，未提出买卖、保护单或仓位。产出可溯源：run.json 的 input_hash/output_hash/prompt_hash 与 generation.json 记录及包内文件重算一致，模型为 offline_fixture 合成生成，已如实声明。未发现超出证据的断言。",
+            "result": "pass"
+          }
+        ],
+        "receipt_hash": "b660526a4886f8bab1825d94a5d5fa4dabc2f912fbf7f300edc1ea41d8c08430",
+        "status": "accepted"
+      },
+      "paper-trader": {
+        "bundle_hash": "df01acb4cc15cf31f1ec60b958446a14738ac7ab86e657eda4558b8d7a6489ea",
+        "agent": {
+          "id": "303a9540-46f1-4809-b3f7-0ce4de0e24ac",
+          "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+          "model": "kimi-code/k3-256k"
+        },
+        "issue_id": "01a0f7a5-edae-752e-b66b-2ba0bed99347",
+        "identifier": "SATU-77",
+        "task_id": "01a0f7a5-edbf-7c5b-a29c-9512ddc8c0c9",
+        "remote_status": "completed",
+        "reported_models": [],
+        "model_evidence": "configured_runtime_only",
+        "local_status": "accepted",
+        "verdict": "accept",
+        "summary": "在包内声明的合成验收范围（acceptance_scope: synthetic_only=true、real_market_data=false、real_account_evidence=false、execution_authorized=false）内，两项必需检查均通过。先完成完整性复核：bundle_hash 按 multica_review_bundle.v1 规范（去 bundle_hash 后规范序列化取 sha256）重算一致；包内 39 个文件 sha256 与文本逐一相符，并与团队目录磁盘字节一致；source.files_hash 对磁盘全量 42 个源文件重算一致；source.generation_hash 等于 generation.json 文本的 _sha256；source.plan_hash 等于 plan.json 的 canonical_plan_hash；06_trader run.json 的 input_hash/output_hash 与 generation.json outputs 记录全部重算相符；上游 data-quality、market-analysts、strategy-research 三个角色均为 accept 且 execution_authorized=false。intent_constraints：plan.json 中 trader_proposals/proposals/paper_proposals 一致且仅含 watchlist 白名单标的 601318（基准 000300 未进入提案），方向=观望、position_pct=0.0、entry/stop/condition=null、horizon=无交易，与 market_ok=false 的市场门禁（close=54 不大于 MA60=54）及 execution_authorized=false 完全相容；validate_risk_document 与 validate_plan(strict) 均通过，compute_executable 在 market_ok=false 下返回不可执行（approval=pending），无任何买卖、保护单或仓位调整意图。account_context：06_trader.input.txt 的 Paper 账户快照显示 gate/no_gate 两个组合 exists=false、现金=权益=100000、无持仓无订单无成交，估值基准日 2026-09-18 与 data_asof 一致，与 acceptance_scope 的 real_account_evidence=false 相符；提案未假设任何持仓、未猜测保护单版本，遵守了输入中“不得猜测持仓或保护单版本”的约束。仅认证合成范围内的一致性，不构成真实行情认证或投资结论。",
+        "checks": [
+          {
+            "evidence": [
+              "outputs/2026-09-21/plan.json",
+              "outputs/2026-09-21/06_trader.run.json",
+              "outputs/2026-09-21/06_trader.md",
+              "outputs/2026-09-21/06_trader.input.txt",
+              "context/2026-09-21/technical_000300.json",
+              "context/2026-09-21/technical_601318.json",
+              "market_archive/2026-09-18/eee6dd46c1c060dc177a074c5cbf8b376e5df3742a3ae56d52674633ef49ecdf.json",
+              "context/2026-09-21/acceptance_scope.json",
+              "watchlist.json"
+            ],
+            "name": "intent_constraints",
+            "reason": "plan.json 的 trader_proposals、proposals、paper_proposals 三组一致，仅含白名单标的 601318（06_trader.input.txt 明确 000300 仅用于市场闸门、严禁放入 proposals，plan 中确无 000300）；唯一提案 direction=观望、position_pct=0.0、entry=null、stop=null、condition=null、horizon=无交易、confidence=1，不表达任何买卖、保护单或仓位调整意图。该意图与市场门禁一致：technical_000300.json 与 market_archive 载荷中 close=54、ma60=54，54>54 为假，plan.market_ok=false 与 06_trader.run.json response.market_ok=false 相符。交易员的原始 response 中 entry=[] 经 schemas.parse_entry 的既定规则（空列表 or None）规范化为 null，非篡改；validate_risk_document(plan) 通过，validate_plan(strict=True) 无问题，compute_executable 在 market_ok=false 下返回 (False, approval=pending)，即零仓位观望提案在门禁关闭与 execution_authorized=false 下不可执行也不寻求执行。plan.risk_reviews 对 601318 决策为通过、reason_codes 为空，与零风险敞口的观望提案相称。全部内容处于 acceptance_scope.json 声明的合成验收范围内，未把合成数据认证为真实行情或投资结论。",
+            "result": "pass"
+          },
+          {
+            "evidence": [
+              "outputs/2026-09-21/06_trader.input.txt",
+              "outputs/2026-09-21/06_trader.md",
+              "outputs/2026-09-21/06_trader.run.json",
+              "outputs/2026-09-21/plan.json",
+              "context/2026-09-21/acceptance_scope.json",
+              "context/2026-09-21/manifest.json"
+            ],
+            "name": "account_context",
+            "reason": "06_trader.input.txt 中的 Paper 账户、批次与跨日保护版本快照显示：gate 与 no_gate 两个组合 schema_version=paper_account.v1、exists=false，cash=equity=valuation_equity=100000.0，positions/order_counts/recent_orders/recent_trades/valuation_history 全部为空，cost_exposure 与 market_exposure 为 0，frozen_qty=0，missing_marks 为空；估值来源 validated_unadjusted_close.v1，source_date 与 quote_asof 均为 2026-09-18，与 source.data_asof 及 manifest.latest_trade_date 一致。该账户上下文与 acceptance_scope.json 的 real_account_evidence=false、synthetic_only=true 相符，即不存在真实账户证据。交易员产出（06_trader.md 与 run.json response）未假设任何持仓、未引用任何批次或保护单版本，遵守了输入中“不得猜测持仓或保护单版本；回执投影不等于原计划授权认证”的明确约束，仅给出观望提案。账户快照的空状态与 plan.json 零仓位、无 entry/stop 的提案互相一致，未发现账户上下文与提案意图之间的矛盾。",
+            "result": "pass"
+          }
+        ],
+        "receipt_hash": "9f3c76ae74a09889d4ef5b3f9d20a82ba82fe72829a8c92d23c3bd42c7eed17d",
+        "status": "accepted"
+      },
+      "risk-manager": {
+        "bundle_hash": "9c0c3df88b0a1464f87c4328bb181fcbe52683b5d865c87cec2a054528a2f058",
+        "agent": {
+          "id": "94249c35-4118-4eb7-8066-d5f5f1bff2fb",
+          "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+          "model": "claude-opus-5-5"
+        },
+        "issue_id": "01a0f7ab-1903-71d4-8d4f-a668139675a4",
+        "identifier": "SATU-78",
+        "task_id": "01a0f7ab-1914-7b6d-b916-527152fc2e4c",
+        "remote_status": "completed",
+        "reported_models": [
+          "claude-opus-5-5"
+        ],
+        "model_evidence": "usage",
+        "local_status": "accepted",
+        "verdict": "accept",
+        "summary": "在 acceptance_scope 声明的合成范围内，风控推导与组合约束一致：确定性闸门 close=54 不大于 MA60=54，market_ok=false；交易员唯一候选 601318 为零仓位观望，风控“通过”且无原因码，经 risk_contract.validate_risk_document 重算 proposals/paper_proposals 完全一致；Paper 账户为空仓 10 万现金，无订单、无冻结。本结论仅认证合成数据一致性，不代表真实行情或投资结论，不授权任何 Paper/Live 执行。",
+        "checks": [
+          {
+            "evidence": [
+              "outputs/2026-09-21/plan.json",
+              "outputs/2026-09-21/07_risk_manager.md",
+              "outputs/2026-09-21/07_risk_manager.input.txt",
+              "outputs/2026-09-21/06_trader.run.json",
+              "outputs/2026-09-21/generation.json",
+              "context/2026-09-21/technical_000300.json",
+              "prompts/07_risk_manager.md",
+              "context/2026-09-21/acceptance_scope.json"
+            ],
+            "name": "risk_derivation",
+            "reason": "包内 42 个文件 sha256 逐一重算一致，bundle_hash 重算等于 9c0c3df8…；generation.json 各输入/输出 _sha256 与包内文件一致，plan.json 的 canonical_plan_hash 与 source.plan_hash 及 generation.plan_hash 均为 a421c9dd…。technical_000300 close=54、ma60=54，按 _market_gate 得 market_ok=false，与 06_trader.run.json 响应及 plan.market_ok 一致。交易员原始响应（entry=[]）经 _normalize_proposals 规范化后与 plan.trader_proposals 完全相等（entry=null，position_pct=0.0，方向观望），覆盖观察池唯一标的 601318。07_risk_manager.md 内 JSON reviews 与 plan.risk_reviews 完全相等：decision=通过、reason_codes=[]，符合“通过须无不利原因码”；非买入提案不得使用 market_gate 原因码，亦未使用。以 a_share_risk.v1 的 validate_risk_document 用 trader_proposals+risk_reviews+market_ok 重新推导，proposals 与 paper_proposals 与文件完全一致（validated_contract）。风控未改写闸门阈值，文字明确“通过不批准交易”。",
+            "result": "pass"
+          },
+          {
+            "evidence": [
+              "outputs/2026-09-21/07_risk_manager.input.txt",
+              "outputs/2026-09-21/plan.json",
+              "market_archive/2026-09-18/eee6dd46c1c060dc177a074c5cbf8b376e5df3742a3ae56d52674633ef49ecdf.json",
+              "context/2026-09-21/execution_archive.json",
+              "context/2026-09-21/technical_601318.json",
+              "context/2026-09-21/acceptance_scope.json",
+              "watchlist.json"
+            ],
+            "name": "portfolio_constraints",
+            "reason": "07_risk_manager.input.txt 中 Paper 账户事实：gate 与 no_gate 组合均 exists=false、cash=equity=100000.0、positions=[]、无订单/成交、frozen_qty=0、market_exposure=0、missing_marks=[]，估值基于 2026-09-18 未复权收盘。唯一最终提案与 paper_proposals 为 601318 观望、position_pct=0.0、无 entry/stop，因此不产生新增敞口、行业集中、仓位上限或成本暴露。行情归档 601318 suspended=false、volume=1000000、limit_up=59.4/limit_down=48.6（即 prev_close 54 的 ±10%），零仓位不涉及涨跌停成交、手数（100 股整数倍）或流动性约束；市场闸门关闭时亦未提出任何买入，符合闸门约束。数据与账户均为合成验收数据（real_market_data=false, real_account_evidence=false, execution_authorized=false），仅在该合成范围内判定一致。",
+            "result": "pass"
+          }
+        ],
+        "receipt_hash": "7685e80238e49bf5aca7b624598a2b1a624d5525ff755b47790c6ed0d666357b",
+        "status": "accepted"
+      },
+      "audit-verifier": {
+        "bundle_hash": "0a1f836d503431d29821d45dd6beeb1c0c4b510e7fb9ded72982e62187b7da86",
+        "agent": {
+          "id": "91bfb847-5d2c-4d10-bb41-e2a514a30fe4",
+          "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+          "model": "gpt-5.5"
+        },
+        "issue_id": "01a0f7ad-0aea-7b10-8a1c-7a79fa33eca7",
+        "identifier": "SATU-79",
+        "task_id": "01a0f7ad-0afc-7d51-9976-0fd31d1a02a0",
+        "remote_status": "completed",
+        "reported_models": [
+          "gpt-5.5"
+        ],
+        "model_evidence": "usage",
+        "local_status": "accepted",
+        "verdict": "accept",
+        "summary": "在包内明确声明的合成验收范围内，版本链与审阅交接均通过。独立复算确认 audit-verifier 包 canonical bundle_hash 等于 0a1f836d503431d29821d45dd6beeb1c0c4b510e7fb9ded72982e62187b7da86，42 个内嵌文件 sha256、source.files_hash、generation_hash、canonical plan_hash、各 run 的 input/output 哈希与磁盘文本一致；plan 为 601318 零仓位观望，market_ok=false，execution_authorized=false。上游 data-quality、market-analysts、strategy-research、paper-trader、risk-manager 五个回执均为 accept，检查项全 pass，receipt 绑定独立 Multica agent/task、同一 project/workspace，execution_authorized 均为 false，且当前审阅包由这些最新上游回执重构得到同一 bundle_hash。结论只认证合成范围内的一致性，不认证真实行情、真实账户或投资结论，也不授权 Paper/Live 执行。",
+        "checks": [
+          {
+            "evidence": [
+              "context/2026-09-21/acceptance_scope.json",
+              "outputs/2026-09-21/generation.json",
+              "outputs/2026-09-21/plan.json",
+              "outputs/2026-09-21/01_fundamental.run.json",
+              "outputs/2026-09-21/02_sentiment.run.json",
+              "outputs/2026-09-21/03_news.run.json",
+              "outputs/2026-09-21/04_technical.run.json",
+              "outputs/2026-09-21/05_researcher.run.json",
+              "outputs/2026-09-21/06_trader.run.json",
+              "outputs/2026-09-21/07_risk_manager.run.json",
+              "outputs/2026-09-21/daily_conclusion.md"
+            ],
+            "name": "version_chain",
+            "reason": "按 multica_review_bundle.v1 去除 bundle_hash 后规范序列化重算得到 0a1f836d503431d29821d45dd6beeb1c0c4b510e7fb9ded72982e62187b7da86，与包声明一致；42 个 files 条目的 UTF-8 文本 sha256 与声明值及团队目录磁盘文本逐项一致，source.files_hash 重算为 bfa0c811a3c8ec6ad3b055fefb56ebb92c45853c6a02101060546d6a5d25d67e。generation.json 文本 _sha256 为 965824d983bb52abcbbeb620610dcc79f2b033a2e50eb570991afb3bd181f022，与 source.generation_hash 一致；plan.json canonical_plan_hash 为 a421c9ddad4e1ee4638e7197588bba109a4f3405cde90a1356fc89ed33aa5298，与 source.plan_hash 和 generation.plan_hash 一致；01-07 各 run.json 的 input_hash/output_hash 对应 input.txt/md 均重算一致。risk_contract.validate_risk_document(plan) 通过，唯一提案为 601318 观望、position_pct=0.0，compute_executable 在 market_ok=false 下为不可执行 approval=pending。acceptance_scope 声明 synthetic_only=true、real_market_data=false、real_account_evidence=false、execution_authorized=false，未发现版本漂移或越界执行证据。",
+            "result": "pass"
+          },
+          {
+            "evidence": [
+              "outputs/2026-09-21/01_fundamental.md",
+              "outputs/2026-09-21/02_sentiment.md",
+              "outputs/2026-09-21/03_news.md",
+              "outputs/2026-09-21/04_technical.md",
+              "outputs/2026-09-21/05_researcher.md",
+              "outputs/2026-09-21/06_trader.md",
+              "outputs/2026-09-21/07_risk_manager.md",
+              "outputs/2026-09-21/06_trader.input.txt",
+              "outputs/2026-09-21/07_risk_manager.input.txt",
+              "outputs/2026-09-21/plan.json",
+              "context/2026-09-21/manifest.json",
+              "context/2026-09-21/acceptance_scope.json"
+            ],
+            "name": "review_handoffs",
+            "reason": "用仓库只读审阅状态与 _recorded 校验重放，上游五个角色 data-quality、market-analysts、strategy-research、paper-trader、risk-manager 均为 latest succeeded/accepted；对应 receipt_hash 分别为 08738b98d0b94443cdf4dcfc67d1ee566992c95ad21c4b8f094c2d33a5d99db5、fd52dd4f7c46b6c2b190ef221603d01ee51a1cf700e08320c9c3e8f729d693c7、b660526a4886f8bab1825d94a5d5fa4dabc2f912fbf7f300edc1ea41d8c08430、9f3c76ae74a09889d4ef5b3f9d20a82ba82fe72829a8c92d23c3bd42c7eed17d、7685e80238e49bf5aca7b624598a2b1a624d5525ff755b47790c6ed0d666357b。五个上游 response 的 verdict 均为 accept 且全部检查项 pass；external_context 均 provider=multica、verification=remote_verified、observed_status=running，agent_id 分别绑定 Data Quality、Market Analysts、Strategy Research、Paper Trader、Risk Manager 五个不同 agent，task_id 五个不同且均不同于生产 source task，project/workspace 一致，execution_authorized 全为 false。以这些上游回执和同一 source 重构 audit-verifier 包，得到的 expected bundle_hash 仍为 0a1f836d503431d29821d45dd6beeb1c0c4b510e7fb9ded72982e62187b7da86，说明 maker-checker 交接完整且当前有效。",
+            "result": "pass"
+          }
+        ],
+        "receipt_hash": "48a7fa4eaa1a9a4d95968e054133f7f24a8228717e3538df3a40d9066cc627e2",
+        "status": "accepted"
+      }
+    },
+    "source": {
+      "run_id": "8795c662665f4e6b938db8ff83f93921",
+      "generation_hash": "965824d983bb52abcbbeb620610dcc79f2b033a2e50eb570991afb3bd181f022",
+      "producer": {},
+      "files_hash": "bfa0c811a3c8ec6ad3b055fefb56ebb92c45853c6a02101060546d6a5d25d67e",
+      "plan_hash": "a421c9ddad4e1ee4638e7197588bba109a4f3405cde90a1356fc89ed33aa5298",
+      "data_asof": "2026-09-18"
+    },
+    "completed_at": "2026-10-01T21:39:48.572101+08:00"
+  },
+  "remote_runs": {
+    "data-quality": {
+      "id": "01a0f798-5d5c-7bac-afce-4a34fd1d0d63",
+      "agent_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd",
+      "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+      "status": "completed",
+      "created_at": "2026-10-01T13:12:32Z",
+      "started_at": "2026-10-01T13:12:34Z",
+      "completed_at": "2026-10-01T13:19:31Z",
+      "error": null,
+      "usage": null
+    },
+    "market-analysts": {
+      "id": "01a0f79f-0025-76cc-9aa4-64f23fd257c3",
+      "agent_id": "b765ae90-5a87-424f-9c26-fe3ce0644674",
+      "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+      "status": "completed",
+      "created_at": "2026-10-01T13:19:47Z",
+      "started_at": "2026-10-01T13:19:49Z",
+      "completed_at": "2026-10-01T13:22:31Z",
+      "error": null,
+      "usage": [
+        {
+          "cache_read_tokens": 1398719,
+          "cache_write_tokens": 73993,
+          "input_tokens": 40,
+          "model": "claude-sonnet-5",
+          "output_tokens": 13844,
+          "provider": "claude"
+        }
+      ]
+    },
+    "strategy-research": {
+      "id": "01a0f7a1-ca08-7f04-9853-28a8e3272536",
+      "agent_id": "5c69dae4-6ea4-48d3-8ec1-575d3f322a4e",
+      "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+      "status": "completed",
+      "created_at": "2026-10-01T13:22:50Z",
+      "started_at": "2026-10-01T13:22:51Z",
+      "completed_at": "2026-10-01T13:25:07Z",
+      "error": null,
+      "usage": [
+        {
+          "cache_read_tokens": 874144,
+          "cache_write_tokens": 68548,
+          "input_tokens": 32,
+          "model": "claude-opus-5-5",
+          "output_tokens": 8882,
+          "provider": "claude"
+        }
+      ]
+    },
+    "paper-trader": {
+      "id": "01a0f7a5-edbf-7c5b-a29c-9512ddc8c0c9",
+      "agent_id": "303a9540-46f1-4809-b3f7-0ce4de0e24ac",
+      "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+      "status": "completed",
+      "created_at": "2026-10-01T13:27:21Z",
+      "started_at": "2026-10-01T13:27:23Z",
+      "completed_at": "2026-10-01T13:32:41Z",
+      "error": null,
+      "usage": null
+    },
+    "risk-manager": {
+      "id": "01a0f7ab-1914-7b6d-b916-527152fc2e4c",
+      "agent_id": "94249c35-4118-4eb7-8066-d5f5f1bff2fb",
+      "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+      "status": "completed",
+      "created_at": "2026-10-01T13:33:00Z",
+      "started_at": "2026-10-01T13:33:02Z",
+      "completed_at": "2026-10-01T13:34:52Z",
+      "error": null,
+      "usage": [
+        {
+          "cache_read_tokens": 845342,
+          "cache_write_tokens": 63848,
+          "input_tokens": 32,
+          "model": "claude-opus-5-5",
+          "output_tokens": 8514,
+          "provider": "claude"
+        }
+      ]
+    },
+    "audit-verifier": {
+      "id": "01a0f7ad-0afc-7d51-9976-0fd31d1a02a0",
+      "agent_id": "91bfb847-5d2c-4d10-bb41-e2a514a30fe4",
+      "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+      "status": "completed",
+      "created_at": "2026-10-01T13:35:08Z",
+      "started_at": "2026-10-01T13:35:09Z",
+      "completed_at": "2026-10-01T13:38:45Z",
+      "error": null,
+      "usage": [
+        {
+          "cache_read_tokens": 787072,
+          "cache_write_tokens": 0,
+          "input_tokens": 83451,
+          "model": "gpt-5.5",
+          "output_tokens": 8794,
+          "provider": "codex"
+        }
+      ]
+    }
+  },
+  "local_review_status": {
+    "schema": "multica_review_status.v1",
+    "date": "2026-09-21",
+    "execution_authorized": false,
+    "production_complete": false,
+    "roles": {
+      "data-quality": {
+        "status": "accepted",
+        "run_id": "67bcb13d96644dccac6c08932f0ba783",
+        "receipt_hash": "08738b98d0b94443cdf4dcfc67d1ee566992c95ad21c4b8f094c2d33a5d99db5"
+      },
+      "market-analysts": {
+        "status": "accepted",
+        "run_id": "c25c46b265534471beb48a1b65c65c03",
+        "receipt_hash": "fd52dd4f7c46b6c2b190ef221603d01ee51a1cf700e08320c9c3e8f729d693c7"
+      },
+      "strategy-research": {
+        "status": "accepted",
+        "run_id": "2d5fee955a9540d8b42dfb75315f7405",
+        "receipt_hash": "b660526a4886f8bab1825d94a5d5fa4dabc2f912fbf7f300edc1ea41d8c08430"
+      },
+      "paper-trader": {
+        "status": "accepted",
+        "run_id": "07253ad052824dbab87ade50bc1419f9",
+        "receipt_hash": "9f3c76ae74a09889d4ef5b3f9d20a82ba82fe72829a8c92d23c3bd42c7eed17d"
+      },
+      "risk-manager": {
+        "status": "accepted",
+        "run_id": "9b4c0182e44e4bd3ad020e8f0a832154",
+        "receipt_hash": "7685e80238e49bf5aca7b624598a2b1a624d5525ff755b47790c6ed0d666357b"
+      },
+      "audit-verifier": {
+        "status": "accepted",
+        "run_id": "af06546c76cd4bba997b24b2ae875f32",
+        "receipt_hash": "48a7fa4eaa1a9a4d95968e054133f7f24a8228717e3538df3a40d9066cc627e2"
+      }
+    },
+    "source": {
+      "run_id": "8795c662665f4e6b938db8ff83f93921",
+      "generation_hash": "965824d983bb52abcbbeb620610dcc79f2b033a2e50eb570991afb3bd181f022",
+      "producer": {},
+      "files_hash": "bfa0c811a3c8ec6ad3b055fefb56ebb92c45853c6a02101060546d6a5d25d67e",
+      "plan_hash": "a421c9ddad4e1ee4638e7197588bba109a4f3405cde90a1356fc89ed33aa5298",
+      "data_asof": "2026-09-18"
+    },
+    "status": "accepted"
+  },
+  "serial_remote_execution_verified": true,
+  "resume_same_issue_task_receipt_verified": true,
+  "idempotent_rerun_verified": true,
+  "coordinator_interruption": {
+    "recorded_at": "2026-10-01T21:26:58.732168+08:00",
+    "exit_code": 1,
+    "phase": "strategy-research polling",
+    "error": "Multica CLI TLS handshake timed out while reading issue runs",
+    "remote_task_id": "01a0f7a1-ca08-7f04-9853-28a8e3272536",
+    "remote_task_readback": "completed",
+    "recovery": "resume same durable chain; do not repeat remote creation"
+  },
+  "tests": {
+    "baseline": "68 passed in 6.77s",
+    "new_initial": "6 failed: missing coordinator module",
+    "targeted": "106 passed in 18.43s",
+    "full": "1291 passed in 48.32s",
+    "network_regression_before": "2 failed: TLS status read interrupts coordinator; no bounded retry",
+    "network_targeted": "81 passed in 13.37s",
+    "full_after_network_fix": "1293 passed in 52.86s"
+  },
+  "source_rejection_check": {
+    "schema": "multica_review_chain.v1",
+    "date": "2026-09-29",
+    "team": "/Users/henry/projects/quant/trading_team",
+    "status": "blocked",
+    "execution_authorized": false,
+    "production_complete": false,
+    "roles": {},
+    "source": null,
+    "error": "source_unverified"
+  },
+  "agent_configuration_unchanged": true,
+  "autopilot_unchanged": true,
+  "protected_path_count": 575,
+  "protected_changes": [],
+  "daemons_after": [
+    {
+      "profile": "",
+      "pid": 35426,
+      "daemon_id": "01a0c492-4f9e-797d-b6ba-653b1897dad2",
+      "cli_version": "0.6.1",
+      "status": "running",
+      "active_task_count": 0,
+      "running_task_count": 0
+    },
+    {
+      "profile": "desktop-api.multica.ai",
+      "pid": 41292,
+      "daemon_id": "01a0c492-4f9e-797d-b6ba-653b1897dad2",
+      "cli_version": "0.6.1",
+      "status": "running",
+      "active_task_count": 0,
+      "running_task_count": 0
+    }
+  ],
+  "publication_generator": {
+    "date": "2026-09-21",
+    "run_id": "8795c662665f4e6b938db8ff83f93921",
+    "status": "succeeded",
+    "model": "offline-test",
+    "transport": {
+      "schema": "model_transport.v1",
+      "adapter": "offline_fixture.v1",
+      "endpoint": "https://fixture.invalid/v1",
+      "model": "offline-test",
+      "parameters": {
+        "temperature": 0.6,
+        "max_tokens": 8192,
+        "thinking": "disabled",
+        "response_format": "json_object"
+      }
+    },
+    "data_asof": "2026-09-18",
+    "market_ok": false,
+    "proposals": 1,
+    "scope": "publication_only",
+    "business_complete": false,
+    "plan_hash": "a421c9ddad4e1ee4638e7197588bba109a4f3405cde90a1356fc89ed33aa5298",
+    "reviews": {
+      "status": "not_checked"
+    },
+    "finalize": {
+      "status": "not_requested"
+    },
+    "notification": {
+      "status": "disabled"
+    }
+  },
+  "elapsed_remote_chain_seconds": 1571.0
+}

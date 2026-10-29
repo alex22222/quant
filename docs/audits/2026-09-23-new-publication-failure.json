@@ -1,0 +1,151 @@
+{
+  "schema": "real_publication_failure_recovery_readiness.v1",
+  "loops": [
+    67,
+    68
+  ],
+  "verified_at": "2026-09-23T01:46:04.175901+08:00",
+  "business_date": "2026-09-23",
+  "team": "/private/tmp/quant-real-chain-v2.drq6k45z/trading_team",
+  "issue_id": "01a0ca2b-9026-7053-bd97-dcc836fa1fe6",
+  "identifier": "SATU-5",
+  "issue_status_observed": "blocked",
+  "remote_terminal": {
+    "id": "01a0ca2b-9036-7289-bb7e-6e49c78d9c5d",
+    "status": "completed",
+    "started_at": "2026-09-22T17:30:48Z",
+    "completed_at": "2026-09-22T17:40:32Z",
+    "error": null,
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27"
+  },
+  "local_run": {
+    "run_id": "4902259232004be691f66c53205f76ed",
+    "status": "failed",
+    "attempt": 1,
+    "started_at": "2026-09-23T01:33:34+08:00",
+    "finished_at": "2026-09-23T01:38:28+08:00",
+    "error": "ValueError: 角色 04 结构化结论块缺失或非法"
+  },
+  "external_context": {
+    "agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+    "evidence_hash": "6d6ea67ebcb56bc2d1c2773bd463e7081ccaef8114e513ccdb20ce552330f312",
+    "issue_id": "01a0ca2b-9026-7053-bd97-dcc836fa1fe6",
+    "issue_identifier": "SATU-5",
+    "issue_title": "A-share daily research 2026-09-23",
+    "observed_at": "2026-09-23T01:33:34+08:00",
+    "observed_status": "running",
+    "project_id": "a208df76-b63b-4cef-bd11-7512d7c80896",
+    "provider": "multica",
+    "role": "Research Lead",
+    "squad_id": "e3593963-4e1d-4c7a-ae27-20b08e7ee110",
+    "task_id": "01a0ca2b-9036-7289-bb7e-6e49c78d9c5d",
+    "verification": "remote_verified",
+    "workspace_id": "cfcca519-15f5-4666-b1d8-2b67241d8f7b"
+  },
+  "failed_step": {
+    "id": 36,
+    "step_name": "role_04",
+    "status": "failed",
+    "error": "ValueError: 角色 04 结构化结论块缺失或非法",
+    "artifact_path": null
+  },
+  "verified_cached_requests": [
+    {
+      "role": "fundamental",
+      "request_id": "chatcmpl-6ab2bbf017dab2ea71ebbe3a",
+      "model": "kimi-k3",
+      "usage": {
+        "prompt_tokens": 13940,
+        "completion_tokens": 4029,
+        "total_tokens": 17969,
+        "prompt_tokens_details": {
+          "cache_write_tokens": 13824
+        }
+      },
+      "input_hash": "49146510ddd489f333e4d5b160ecdbc52e70e3426ffd21cb66ee08cf9981e659",
+      "output_hash": "3d7e29b541bdb3d091f446dd78453787a0b96f7420c843fe50032df0ad1ec50a",
+      "cache_verified": true
+    },
+    {
+      "role": "sentiment",
+      "request_id": "chatcmpl-6ab2bc587c3514c58261b04e",
+      "model": "kimi-k3",
+      "usage": {
+        "prompt_tokens": 6220,
+        "completion_tokens": 1133,
+        "total_tokens": 7353,
+        "prompt_tokens_details": {
+          "cache_write_tokens": 6144
+        }
+      },
+      "input_hash": "37cf48fc27566a6acc3d1da27f9ef883013ebf6af043dea5c9edb38966622c6b",
+      "output_hash": "6b5758a220d139a7e3e7747e6c87d926e531b97b5e0fd1c89721d94f1621a18b",
+      "cache_verified": true
+    },
+    {
+      "role": "news",
+      "request_id": "chatcmpl-6ab2bc79bc93e8252ba616a3",
+      "model": "kimi-k3",
+      "usage": {
+        "prompt_tokens": 5459,
+        "completion_tokens": 1998,
+        "total_tokens": 7457,
+        "prompt_tokens_details": {
+          "cache_write_tokens": 5376
+        }
+      },
+      "input_hash": "daaccc98371a0b3c24214c976362993b0cb781390ddddb6b8544aa6bbc84813d",
+      "output_hash": "0dc965082c4b38feb7c0c96da657e4bae1de99ba9d992e59d1af49d9f4b2444c",
+      "cache_verified": true
+    }
+  ],
+  "known_successful_request_tokens": 32779,
+  "failed_role_request_id_and_usage": "unknown: original code discarded response and request metadata before recording failure",
+  "failed_role_exact_invalid_content": "unavailable; no reconstruction or invented explanation",
+  "repair": {
+    "scope": "Retain decoded but invalid replies, request metadata, input and hashes before logging rejection",
+    "validation_unchanged": true,
+    "old_failed_artifact_backfilled": false,
+    "next_real_retry_performed": false
+  },
+  "repair_verification": {
+    "baseline": "82 passed in 4.98s",
+    "regression_before": "3 failed, 54 deselected in 0.61s; artifact_path was null",
+    "focused_after": "85 passed in 7.00s",
+    "full": "1178 passed in 38.38s",
+    "diff_check": "passed",
+    "independent_fixture_failure_bundles_verified": 3,
+    "fixture_root": "/private/var/folders/xx/1h1hmbcn1xvgs5_sft5jmpgc0000gp/T/pytest-of-henry/pytest-388",
+    "real_invalid_reply_retention_verified": false,
+    "code_hashes": {
+      "trading_team/kimi_daily.py": "46e13dcf158dfed3978a7ac2d4bf57ac7025d1ac35c73a3e0ffeae2ab19475cd",
+      "tests/test_daily_research_recovery.py": "d8d0d2bd034fb880331be5aeeb060c3e7cabc9174b02e9b171a0be4551e42910"
+    }
+  },
+  "frozen_input_count": 38,
+  "inputs_unchanged": true,
+  "stage_hashes": {
+    "01_fundamental.input.txt": "741c6d39491be5ec6b3fa7b6e9c18c916b4144ae17c88d4ed2bd950e438a07be",
+    "01_fundamental.md": "c959e560e314f783e4456391d57857c9b2b743f4a97cdc122be53558cf467801",
+    "01_fundamental.run.json": "42b5f44e9a34729ae5c8f9b405895559505fb72c5a49f8ae127fad298ff42634",
+    "02_sentiment.input.txt": "7589e66ea70bbda078b1908b395f7cd8e0f6b89c8ea065f86d0b85a0b832da29",
+    "02_sentiment.md": "3d3574a13a8be292543dc324677ab386c406d4860a2bd1d4d2bec5f691c7e766",
+    "02_sentiment.run.json": "2b6ff5c95c8f675442de29bd2711840ecce2eebdbd4cebcaca75593ff4c10fcc",
+    "03_news.input.txt": "ca589f927289748e3092b270ca36a2475366a466329bd9458add4c2399dad8f5",
+    "03_news.md": "ab38c3bf3a404faf7905bc78c41aadc3e64ccfc11932c8150dbebcec3a5dc347",
+    "03_news.run.json": "3e6809eede7c44d8c7f395a8d48fdd0c9f8f65dce891e4ec56bb0d4ae1d8cfae"
+  },
+  "protected_file_count": 17,
+  "protected_changed": [],
+  "old_review": {
+    "status": "rejected",
+    "run_id": "ca87e47c994648fd98e16202252ec7ed",
+    "receipt_hash": "d7c4494da2cc0f087efacfbc63aa9dd2b14532f2e5cda7e0e4c9c30c1e670c76"
+  },
+  "published": false,
+  "paper_executed": false,
+  "notification_sent": false,
+  "milestone_m1_complete": false,
+  "next": "After tests and fresh remote deduplication, resume this same issue once without force, preserving the failure and reusing verified roles 01-03. Capture any new invalid response; do not edit reports or relax validators."
+}

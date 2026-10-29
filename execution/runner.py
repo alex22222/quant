@@ -1,14 +1,8 @@
 # -*- coding: utf-8 -*-
-"""runner：每日实盘执行主循环
+"""Historical MockBroker dry-run runner. Live execution is retired.
 
-用法：
-  演练（默认，MockBroker 模拟成交）：
-    .venv/bin/python -m execution.runner --mode dry-run
-  实盘（Windows + 同花顺客户端 + config.json 中 live_enabled=true）：
-    python -m execution.runner --mode live
-
-幂等：同一交易日同一 mode 只执行一次，--force 覆盖。
-流程：信号 → 行情 → 订单计划 → 风控门禁 → 下单 → 委托对账 → 台账 → 飞书。
+Use: .venv/bin/python -m execution.runner --mode dry-run --no-push
+Legacy live flags are accepted only to give an explicit rejection before any I/O.
 """
 import argparse
 import json
@@ -52,10 +46,7 @@ def load_config(path: Path) -> dict:
 
 def make_broker(mode: str, cfg: dict):
     if mode == "live":
-        if not cfg.get("live_enabled"):
-            raise RuntimeError("live 模式需 config.json 中 live_enabled=true")
-        from .broker_easytrader import EasyTraderBroker
-        return EasyTraderBroker(cfg.get("xiadan_path") or None)
+        raise RuntimeError("Live execution retired; research/Paper only. QMT/PTrade requires a separate project review.")
     return MockBroker(HERE / "mock_broker.db")
 
 
@@ -69,6 +60,9 @@ def main(argv=None):
     ap.add_argument("--force", action="store_true", help="忽略幂等/交易时段检查")
     ap.add_argument("--no-push", action="store_true", help="不推飞书")
     args = ap.parse_args(argv)
+
+    if args.mode == "live":
+        raise RuntimeError("Live execution retired; --force and live_enabled cannot override it")
 
     cfg = load_config(args.config)
     day = args.date or _now().date().isoformat()

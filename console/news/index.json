@@ -1,5 +1,30 @@
 [
  {
+  "date": "2026-09-25",
+  "count": 8,
+  "headline": "Can Weakening Morning Order Flow Predict SPY Reversals?（Quantpedia）：用一分钟 SPY 数据构建散户活动指标，检验早盘订单流走弱对日内反转的预测力。"
+ },
+ {
+  "date": "2026-09-24",
+  "count": 9,
+  "headline": "Which Conformal Method Works for Which Alpha Signal?（Quantocracy 分享，Delphic Alpha）：比较共形预测方法对各类 alpha 信号的适用性，为信号不确定性量化提供实操指引。"
+ },
+ {
+  "date": "2026-09-21",
+  "count": 6,
+  "headline": "量化波动率交易社区悼念 Vance 离世（Quantocracy）：知名波动率交易者 Vance（@6_Figure_Invest）去世，被普遍认为是量化 vol 交易圈的重要声音。"
+ },
+ {
+  "date": "2026-09-19",
+  "count": 6,
+  "headline": "SG Trend 复制论文（Corey Hoffstein 推荐）：用自下而上与自上而下模型复制 SG 趋势指数的简短独立论文，趋势跟踪复制方向的新参考。"
+ },
+ {
+  "date": "2026-08-26",
+  "count": 7,
+  "headline": "FX Edge Lives in Other Markets（Quantocracy 分享）：跨资产系列研究，外汇策略的边缘优势往往来自其他资产市场的信号。"
+ },
+ {
   "date": "2026-08-23",
   "count": 5,
   "headline": "Regime-Based Sector Rotation Beats the Index at Full Deployment（Quantocracy 分享）：基于市场状态的行业轮动策略即使在满仓部署下也能跑赢基准指数。"

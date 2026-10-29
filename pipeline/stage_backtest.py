@@ -21,6 +21,7 @@ from pathlib import Path
 from .common import ROOT, load_status, now
 from .gate import DATA_PARTITION, GATE_V2, PERTURB_RULES, evaluate, extract_metrics
 from .promote import GATE_FILE, _params_hash, _sha256
+from research.experiments import ExperimentLedger
 
 RQALPHA = ROOT / ".venv" / "bin" / "rqalpha"
 BT_START, BT_END, CASH = "2020-01-01", "2026-08-01", "100000"
@@ -57,6 +58,7 @@ def _monthly_stats(portfolio_csv: Path) -> dict:
             "months": int(len(monthly)),
             "skew": round(float(monthly.skew()), 4),
             "kurt": round(float(monthly.kurt() + 3), 4),  # pandas 为超额峰度，转回峰度
+            "sr_monthly": float(monthly.mean() / monthly.std(ddof=1)) if monthly.std(ddof=1) > 0 else None,
         }
     except Exception:
         return {}
@@ -87,6 +89,25 @@ def _ledger_trials(name: str, params_hash: str) -> int:
 
 
 def _run(info, start, end, extra_vars, out_dir, tag):
+    """Register every attempt before starting the subprocess, even failed attempts."""
+    import hashlib
+    strategy = Path(info["file"]).stem
+    source = ROOT / info["file"]
+    spec = {"window": [start, end], "params": {**(info.get("params") or {}), **(extra_vars or {})},
+            "code_hash": hashlib.sha256(source.read_bytes()).hexdigest(),
+            "benchmark": BENCH, "slippage": SLIPPAGE, "cash": CASH}
+    ledger = ExperimentLedger()
+    trial = ledger.begin(strategy, spec)
+    try:
+        metrics, error = _run_untracked(info, start, end, extra_vars, out_dir, tag)
+    except Exception as exc:
+        ledger.finish(trial, error=f"{type(exc).__name__}: {exc}")
+        raise
+    ledger.finish(trial, metrics, error)
+    return metrics, error
+
+
+def _run_untracked(info, start, end, extra_vars, out_dir, tag):
     """跑一次 rqalpha 回测，返回 (metrics dict | None, error str | None)"""
     out_dir.mkdir(parents=True, exist_ok=True)
     cmd = [str(RQALPHA), "run", "-f", info["file"],
@@ -197,8 +218,16 @@ def main(only=None):
                                     "max_dd": sm["max_dd"], "sharpe": sm["sharpe"],
                                     "excess_annual": sm.get("excess_annual")})
 
-        n_trials = _ledger_trials(name, _params_hash(name, info.get("params"))) + len(perturbs)
-        verdict = evaluate(full, oos, perturbs, family_rep[name], n_trials=n_trials)
+        evidence = ExperimentLedger().evidence(name, [BT_START, BT_END])
+        # E1-E18 plus the documented 12-grid search are a LOWER bound, not invented results.
+        # Historical results are incomplete; do not pretend new runs repair that evidence.
+        historical_floor = 30 if name == "turtle_bluechip" else _ledger_trials(name, _params_hash(name, info.get("params")))
+        n_trials = max(historical_floor, evidence["n_trials"])
+        verdict = evaluate(full, oos, perturbs, family_rep[name], n_trials=n_trials,
+                           trial_sharpes=evidence["monthly_sharpes"])
+        if name == "turtle_bluechip" or evidence["missing_results"]:
+            verdict["gate"] = "reject"
+            verdict["reasons"].append("多重试验: 历史/失败试验结果不完整，DSR 证据不足；禁止用扰动方差补齐")
         results[name] = {**entry, **full, "oos": oos,
                          "strategy_hash": _sha256(ROOT / info["file"]),
                          "params_hash": _params_hash(name, info.get("params")),
@@ -207,6 +236,7 @@ def main(only=None):
                          "gate": verdict["gate"], "reasons": verdict["reasons"],
                          "dsr": verdict["detail"].get("dsr"),
                          "n_trials": verdict["detail"].get("n_trials"),
+                         "trial_evidence": evidence,
                          "family": family_rep[name],
                          "perturbations": [
                              {"variant": p.pop("variant"),

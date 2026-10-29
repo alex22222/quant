@@ -1,0 +1,221 @@
+{
+  "schema": "persistent_backup_acceptance.v1",
+  "observed_at": "2026-09-22T07:22:42.146349+08:00",
+  "source_hashes_before": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+    "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+    "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+    "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+    "trading_team/team.db": "acad0151f77237ab2d7cf0d75e2ef2bc3b968fed95eb06ffe2437d0723c37ef0",
+    "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818",
+    "docs/audits/2026-09-22-notification-recovery.json": "b6a2ef9a07602894720c19c2de6e56cf3dddeae78a265dbb378eaeec82496a12"
+  },
+  "cases": {
+    "production_snapshot": {
+      "service": {
+        "schema_version": "workflow_backup_catalog.v1",
+        "status": "healthy",
+        "store_root": "/Users/henry/Library/Application Support/HQCapital/workflow-backups",
+        "source_root": "/Users/henry/projects/quant",
+        "latest": {
+          "id": "4eacbd0e593b47fd96b0af37c9d25b64",
+          "started_at": "2026-09-22T07:19:11.099760+08:00",
+          "status": "succeeded",
+          "path": "/Users/henry/Library/Application Support/HQCapital/workflow-backups/snapshots/4eacbd0e593b47fd96b0af37c9d25b64",
+          "manifest_hash": "2142708a145dffd4be36432288b2b87e84684c6128f5c13434826d5b8f29880c",
+          "finished_at": "2026-09-22T07:19:11.099760+08:00",
+          "verified": true
+        },
+        "snapshot_count": 1,
+        "attempt_count": 1,
+        "unregistered_count": 0,
+        "issues": [],
+        "heartbeat": "fresh",
+        "last_check_at": "2026-09-22T07:19:11.099760+08:00",
+        "trigger_source": "launchd",
+        "verification_scope": "latest_snapshot_only",
+        "storage_bytes": 5018094,
+        "free_bytes": 133939200000,
+        "max_store_bytes": 5368709120,
+        "snapshot_interval_seconds": 21600,
+        "offsite_verified": false,
+        "execution_authorized": false
+      },
+      "scheduler_at_install": {
+        "label": "com.hqcapital.workflow-backup",
+        "status": "waiting",
+        "installed": true,
+        "loaded": true,
+        "disabled": false,
+        "config_matches": true,
+        "runs": 1,
+        "last_exit_code": 0,
+        "process_state": "not running",
+        "next_scheduled_at": "2026-09-22T07:30:00+08:00"
+      },
+      "restore": {
+        "status": "verified_isolated",
+        "scope": "research_paper_workflow_evidence",
+        "path": "/private/tmp/quant-persistent-backup-verified-ucscaE/restored",
+        "manifest_hash": "2142708a145dffd4be36432288b2b87e84684c6128f5c13434826d5b8f29880c",
+        "restored_at": "2026-09-22T07:22:43.313102+08:00",
+        "execution_authorized": false,
+        "execution_evidence": "not_recertified",
+        "activation": "manual_review_required_no_runtime_or_scheduler_installed"
+      },
+      "file_count": 694,
+      "database_count": 4,
+      "readiness": {
+        "status": "blocked",
+        "blockers": [
+          "runtime fingerprint mismatch or incomplete baseline",
+          "research data invalid, stale or unknown",
+          "research publication evidence incomplete",
+          "risk contract unavailable or invalid",
+          "gate account: incomplete",
+          "no_gate account: conflict"
+        ],
+        "snapshot": {
+          "verified": true,
+          "source_root": "/Users/henry/projects/quant"
+        },
+        "runtime": {
+          "status": "mismatch",
+          "root": "/Users/henry/projects/quant",
+          "changed": [
+            "trading_team/recovery_readiness.py"
+          ],
+          "missing": [],
+          "added": [],
+          "dependency_manifest_recorded": false,
+          "fingerprint_scope": "recorded_files_only_not_dependencies"
+        },
+        "dependencies_verified": false,
+        "external_gap_reconciled": false,
+        "execution_authorized": false
+      },
+      "account_checks": {
+        "gate": {
+          "status": "incomplete",
+          "facts_hash": "a289e19956240a19c73a84c9d8394d479805dad5c0e2a668300362eaca126a71",
+          "conflict_count": 0,
+          "missing_count": 22
+        },
+        "no_gate": {
+          "status": "conflict",
+          "facts_hash": "722ab56879806202aa0b81640761b7e551849bd0bf555dc97ba6ced758af7fc6",
+          "conflict_count": 2,
+          "missing_count": 26
+        }
+      },
+      "readiness_did_not_mutate_restore": true
+    },
+    "crash_and_corruption": {
+      "process_exit": 94,
+      "clock_simulated_for_retry_only": true,
+      "unacknowledged_snapshot_not_adopted": true,
+      "corrupt_snapshot_retained": true,
+      "unregistered_count": 1,
+      "snapshot_count": 2,
+      "issues": [
+        "retained integrity failure: 43252573729d4ef8aa38415242da980e: workflow file hash mismatch",
+        "1 unregistered or partial snapshots retained"
+      ]
+    }
+  },
+  "network_used": false,
+  "production_execution_authorized": false,
+  "offsite_verified": false,
+  "prior_failed_acceptance_retained": "/private/tmp/quant-persistent-backup-hYTXoD",
+  "runtime_drift": "snapshot precedes readiness checker fix; pin retained, not recertified",
+  "source_hashes_after": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+    "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+    "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+    "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+    "trading_team/team.db": "acad0151f77237ab2d7cf0d75e2ef2bc3b968fed95eb06ffe2437d0723c37ef0",
+    "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818",
+    "docs/audits/2026-09-22-notification-recovery.json": "b6a2ef9a07602894720c19c2de6e56cf3dddeae78a265dbb378eaeec82496a12"
+  },
+  "protected_files_unchanged": true,
+  "natural_scheduled_check": {
+    "observed_at": "2026-09-22T07:30:36.485253+08:00",
+    "service": {
+      "schema_version": "workflow_backup_catalog.v1",
+      "status": "healthy",
+      "store_root": "/Users/henry/Library/Application Support/HQCapital/workflow-backups",
+      "source_root": "/Users/henry/projects/quant",
+      "latest": {
+        "id": "4eacbd0e593b47fd96b0af37c9d25b64",
+        "started_at": "2026-09-22T07:19:11.099760+08:00",
+        "status": "succeeded",
+        "path": "/Users/henry/Library/Application Support/HQCapital/workflow-backups/snapshots/4eacbd0e593b47fd96b0af37c9d25b64",
+        "manifest_hash": "2142708a145dffd4be36432288b2b87e84684c6128f5c13434826d5b8f29880c",
+        "finished_at": "2026-09-22T07:19:11.099760+08:00",
+        "verified": true
+      },
+      "snapshot_count": 1,
+      "attempt_count": 1,
+      "unregistered_count": 0,
+      "issues": [],
+      "heartbeat": "fresh",
+      "last_check_at": "2026-09-22T07:30:05.393160+08:00",
+      "trigger_source": "launchd",
+      "verification_scope": "latest_snapshot_only",
+      "storage_bytes": 5018094,
+      "free_bytes": 134121553920,
+      "max_store_bytes": 5368709120,
+      "snapshot_interval_seconds": 21600,
+      "offsite_verified": false,
+      "execution_authorized": false
+    },
+    "scheduler": {
+      "label": "com.hqcapital.workflow-backup",
+      "status": "waiting",
+      "installed": true,
+      "loaded": true,
+      "disabled": false,
+      "config_matches": true,
+      "runs": 2,
+      "last_exit_code": 0,
+      "process_state": "not running",
+      "next_scheduled_at": "2026-09-22T07:45:00+08:00"
+    },
+    "api_matches_cli": true,
+    "new_snapshot_created": false
+  },
+  "ui_acceptance": {
+    "isolated_widths_no_overflow": [
+      390,
+      768,
+      1100
+    ],
+    "formal_width_no_overflow": 1280,
+    "states": [
+      "degraded",
+      "healthy",
+      "uninitialized"
+    ],
+    "method": "Browser DOM measurements and screenshot inspection; write APIs disabled in fixture",
+    "fixture_directory": "/private/tmp/quant-persistent-backup-verified-ucscaE"
+  },
+  "verification": {
+    "targeted_tests": 40,
+    "full_suite_passed": 897,
+    "javascript_syntax": "passed",
+    "protected_files": 13,
+    "protected_hashes_unchanged": true
+  }
+}

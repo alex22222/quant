@@ -1,0 +1,82 @@
+{
+  "schema": "real_market_analysts_review_acceptance.v2",
+  "loop": 77,
+  "verified_at": "2026-09-23T05:15:04+08:00",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "isolated_team": "/private/tmp/quant-real-chain-v3.aq1jzul6/trading_team",
+  "source": {
+    "run_id": "b1718e4180ef4cb8bb5b0d73ebda928b",
+    "plan_hash": "c1dae741e4610476f5a83cf185bc65a53ae586be99b9007e4fb0b3f3a57fd42c",
+    "generation_hash": "c3708c2a8bc07c08988609e3ebeff5bca494086847a0a6f25aae381c3fe321ab",
+    "producer_task_id": "01a0cab7-b887-780a-9a11-b011cf037da8",
+    "upstream_data_quality_receipt": "efc9d8bcb3b2f929183419ae6a0608cd973fe2bc3fca924d25efe24afffdcfec"
+  },
+  "bundle": {
+    "bundle_hash": "bee7ea9b1531644a21b1a0a5a1c23b4f78bb807ca50e79001697e485b00d7d0b",
+    "file_sha256": "3253e764ab0c84704bc1994250eb8d916c3f8e93f4e754bb917be9fd83992ff4",
+    "file_count": 52,
+    "canonical_hash_matches": true,
+    "embedded_or_disk_mismatches": []
+  },
+  "issue": {
+    "id": "01a0caee-3882-7070-ae4a-d3de123fbde6",
+    "identifier": "SATU-10",
+    "status": "done",
+    "revision": 4,
+    "comment_id": "01a0caf4-9425-77a4-96c5-4d744f0306b7",
+    "active_run_count_after": 0
+  },
+  "remote_task": {
+    "id": "01a0caee-3896-7552-be19-98d51bc3c61f",
+    "status": "completed",
+    "started_at": "2026-09-22T21:03:25Z",
+    "completed_at": "2026-09-22T21:10:43Z",
+    "agent_id": "b765ae90-5a87-424f-9c26-fe3ce0644674",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "executor_model": "gpt-5.5",
+    "tool_use_count": 23,
+    "submit_command_count": 1,
+    "comment_add_count": 1,
+    "forbidden_business_command_matches": 0,
+    "task_description_sha256": "7b14e3afbf85ebfb6eaab2b6f4d157d318005f1fd67c70b39d80cfd5722ebae3"
+  },
+  "review": {
+    "run_id": "f35d144e148e444bb80d48de041a0baf",
+    "recording_status": "succeeded",
+    "attempt": 1,
+    "receipt_hash": "51f38bd8cc76ab708f9d947c1cb0b1ce9b9ca5f6bae84359a6b7a7880e02c5f0",
+    "response_sha256": "20c3aba1efbd4f779c8853786851a7163d78d2fa27e900c19e565b1c300499e7",
+    "verdict": "reject",
+    "checks": {
+      "facts_supported": "fail",
+      "missing_data_disclosed": "pass"
+    },
+    "independent_finding": "The sealed fundamental report asserts that Wuliangye 2026H1 net profit of 87.53 yi had not returned to the 2024 same-period level, citing the 2025 annual YoY decline. Its archived fundamental source only has 2026H1, 2026Q1, 2025 annual and 2025Q3 records. The 2024H1 comparator is absent, and 2025 full-year YoY does not establish 2024H1. The assertion is unsupported, not independently proved false.",
+    "secondary_input_gap": "The sealed context snapshot contains PE/PB/market-cap fields, but 01_fundamental.input.txt includes only manifest and fundamental per-symbol files, not snapshot values. The report's statement that the archive lacks all valuation snapshots is literally overbroad; the role input lacked them. This was not needed to validate the reject verdict and remains a separate input-selection issue.",
+    "execution_authorized": false
+  },
+  "postconditions": {
+    "review_gate_message": "Multica review gate blocked: market-analysts:rejected",
+    "protected_formal_file_count": 17,
+    "protected_files_changed": [],
+    "old_rejected_response_sha256_unchanged": "f87d755835965fc38f8f643028df476e356b66d231c3d9766e296552114fcd7c",
+    "isolated_decisions_present": false,
+    "isolated_paper_databases_present": false,
+    "isolated_result_comment_scratch_present": false,
+    "application_code_changed": false,
+    "tests_rerun": false
+  },
+  "chain": {
+    "data_quality": "accepted",
+    "market_analysts": "rejected",
+    "strategy_research": "blocked",
+    "paper_trader": "blocked",
+    "risk_manager": "blocked",
+    "audit_verifier": "blocked",
+    "m1_complete": false,
+    "m2_complete": false,
+    "m3_complete": false
+  },
+  "next": "Preserve SATU-10 and both rejected versions. Investigate the fundamental role input and period-comparison evidence as the direct blocker; make a minimal versioned change with a failing regression, then generate and review a new sealed version. Do not patch the old report, approve, settle Paper, or dispatch downstream roles on this rejected bundle."
+}

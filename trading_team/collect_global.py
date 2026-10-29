@@ -78,7 +78,7 @@ def _tx_quote(symbols: list[str]) -> dict:
                 return float(f[i])
             except (ValueError, IndexError):
                 return None
-        out[m.group(1)] = {"name": f[1], "close": num(3), "change": num(31),
+        out[m.group(1)] = {"name": f[1], "last": num(3), "change": num(31),
                            "pct_chg": num(32), "time": f[30] if len(f) > 30 else None}
     return out
 
@@ -91,7 +91,10 @@ def fetch_overnight_us() -> dict:
     if not data:
         raise RuntimeError("美股指数为空")
     asof = max((v.get("time") or "" for v in data.values()))
-    return {"ok": True, "source": "腾讯行情", "asof": asof, "data": data}
+    return {"ok": True, "source": "腾讯行情", "asof": asof, "data": data,
+            "observed_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+            "quote_type": "snapshot", "session_status": "unverified",
+            "note": "报价时间保留供应商原值，时区及收盘状态未认证；last为快照，不得当作隔夜收盘价。"}
 
 
 # ---------- 2. VIX（CBOE 官方） ----------
@@ -115,7 +118,7 @@ def fetch_asia() -> dict:
         for m in re.finditer(r'hq_str_(\w+)="([^"]*)"', text):
             f = m.group(2).split(",")
             if len(f) >= 4 and f[1]:
-                data[f[0]] = {"close": float(f[1]), "change": float(f[2]), "pct_chg": float(f[3])}
+                data[f[0]] = {"last": float(f[1]), "change": float(f[2]), "pct_chg": float(f[3])}
     except Exception:
         pass
     # KOSPI：东财（允许失败）
@@ -124,13 +127,16 @@ def fetch_asia() -> dict:
                    {"secids": "100.KS11", "fields": "f2,f3,f14", "fltt": 2, "invt": 2}, H_EM)
         diff = (json.loads(raw).get("data") or {}).get("diff") or []
         if diff:
-            data["韩国KOSPI"] = {"close": diff[0].get("f2"), "pct_chg": diff[0].get("f3")}
+            data["韩国KOSPI"] = {"last": diff[0].get("f2"), "pct_chg": diff[0].get("f3")}
     except Exception:
         data.setdefault("韩国KOSPI", None)
     if not data:
         raise RuntimeError("亚太指数全部不可用")
-    return {"ok": True, "source": "新浪/东财", "asof": date.today().isoformat(),
-            "data": data, "note": "KOSPI 数据源不稳定，允许缺失"}
+    data.setdefault("韩国KOSPI", None)
+    return {"ok": True, "source": "新浪/东财", "asof": None,
+            "observed_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+            "quote_type": "snapshot", "session_status": "unverified",
+            "data": data, "note": "接口未提供行情日期，时效未知；采集时间不代表行情时间。KOSPI允许缺失。"}
 
 
 # ---------- 4. 大宗商品 ----------
@@ -140,11 +146,14 @@ def fetch_commodities() -> dict:
     for m in re.finditer(r'hq_str_(\w+)="([^"]*)"', text):
         f = m.group(2).split(",")
         if len(f) >= 14 and f[0]:
-            out[f[13]] = {"close": float(f[0]), "prev_settle": float(f[7]) if f[7] else None,
+            out[f[13]] = {"last": float(f[0]), "prev_settle": float(f[7]) if f[7] else None,
                           "date": f[12]}
     if not out:
         raise RuntimeError("商品行情为空")
-    return {"ok": True, "source": "新浪国际期货", "asof": date.today().isoformat(), "data": out}
+    return {"ok": True, "source": "新浪国际期货", "asof": max(v["date"] for v in out.values()) or None,
+            "observed_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+            "quote_type": "snapshot", "session_status": "unverified", "data": out,
+            "note": "保留各品种供应商日期，last为快照，非结算价或已认证收盘价。"}
 
 
 # ---------- 5. 离岸人民币 ----------
@@ -154,8 +163,11 @@ def fetch_forex() -> dict:
     diff = (json.loads(raw).get("data") or {}).get("diff") or []
     if not diff:
         raise RuntimeError("外汇行情为空")
-    return {"ok": True, "source": "东财", "asof": date.today().isoformat(),
-            "data": {"USDCNH": {"close": diff[0].get("f2"), "pct_chg": diff[0].get("f3")}}}
+    return {"ok": True, "source": "东财", "asof": None,
+            "observed_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+            "quote_type": "snapshot", "session_status": "unverified",
+            "note": "接口未提供行情日期，时效未知；last为快照，不是收盘价。",
+            "data": {"USDCNH": {"last": diff[0].get("f2"), "pct_chg": diff[0].get("f3")}}}
 
 
 # ---------- 6. 美联储货币政策（官方 RSS） ----------
@@ -199,7 +211,10 @@ def fetch_hotspots(day_dir: Path) -> dict:
                     for d in ((json.loads(raw).get("data") or {}).get("diff") or [])]
         up, down = board(1), board(0)
         if up:
-            return {"ok": True, "source": "东财行业板块榜", "asof": date.today().isoformat(),
+            return {"ok": True, "source": "东财行业板块榜", "asof": None,
+                    "observed_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+                    "quote_type": "snapshot", "session_status": "unverified",
+                    "note": "接口未提供行情日期，时效未知；采集时间不代表行情时间。",
                     "data": {"top_up": up, "top_down": down}}
     except Exception:
         pass

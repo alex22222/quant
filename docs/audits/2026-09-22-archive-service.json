@@ -1,0 +1,111 @@
+{
+  "verified_at": "2026-09-22T02:51:36.177690+08:00",
+  "scope": "local_model_free_archive_schedule",
+  "scheduler": {
+    "label": "com.hqcapital.market-archive",
+    "status": "waiting",
+    "installed": true,
+    "loaded": true,
+    "disabled": false,
+    "config_matches": true,
+    "runs": 3,
+    "last_exit_code": 0,
+    "process_state": "not running",
+    "next_scheduled_at": "2026-09-22T02:55:00+08:00"
+  },
+  "archive_status": {
+    "schema": "archive_service.v1",
+    "status": "healthy",
+    "observed_at": "2026-09-22T02:51:36.100018+08:00",
+    "heartbeat": "fresh",
+    "expected_session": "2026-09-21",
+    "latest_verified_session": "2026-09-21",
+    "tracking_start": "2026-09-21",
+    "last_tick_at": "2026-09-22T02:50:06.448017+08:00",
+    "missing_sessions": [],
+    "invalid_sessions": [],
+    "errors": {},
+    "verified_count": 1,
+    "error": null,
+    "trigger_source": "launchd"
+  },
+  "first_load": {
+    "schema": "archive_service.v1",
+    "status": "healthy",
+    "observed_at": "2026-09-22T02:42:14.326794+08:00",
+    "heartbeat": "fresh",
+    "expected_session": "2026-09-21",
+    "latest_verified_session": "2026-09-21",
+    "tracking_start": "2026-09-21",
+    "last_tick_at": "2026-09-22T02:42:14.325451+08:00",
+    "missing_sessions": [],
+    "invalid_sessions": [],
+    "errors": {},
+    "verified_count": 1,
+    "error": null,
+    "trigger_source": "launchd",
+    "captured": [
+      "2026-09-21"
+    ]
+  },
+  "first_calendar_tick": {
+    "schema": "archive_service.v1",
+    "status": "healthy",
+    "observed_at": "2026-09-22T02:45:06.670669+08:00",
+    "heartbeat": "fresh",
+    "expected_session": "2026-09-21",
+    "latest_verified_session": "2026-09-21",
+    "tracking_start": "2026-09-21",
+    "last_tick_at": "2026-09-22T02:45:06.669326+08:00",
+    "missing_sessions": [],
+    "invalid_sessions": [],
+    "errors": {},
+    "verified_count": 1,
+    "error": null,
+    "trigger_source": "launchd",
+    "captured": []
+  },
+  "receipt": {
+    "calendar_hash": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+    "codes": [
+      "000063",
+      "000300",
+      "000333",
+      "000858",
+      "002594",
+      "300750",
+      "600036",
+      "600519",
+      "600900",
+      "601012",
+      "601318",
+      "601899"
+    ],
+    "date": "2026-09-21",
+    "payload_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183",
+    "receipt_hash": "440a5d3e03f248306cc8d33ba2c90e26a6e8d73fb9659af588d238b13f22ce42",
+    "schema": "market_archive.v1"
+  },
+  "verified_symbol_count": 12,
+  "protected_files_unchanged": true,
+  "protected_sha256": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "/Users/henry/Library/LaunchAgents/com.hqcapital.kimi-daily.plist": "f4e8157d517d3cf93158d32d212d21cd5d9805eb5866d1afb9b53490cc4de561",
+    "/Users/henry/Library/LaunchAgents/com.hqcapital.console.plist": "4044bd280a74b7510e1d2c1d8638725dd7cd9ac8cccdde7901c20ff3f2c0b77a"
+  },
+  "api": {
+    "url": "http://127.0.0.1:7100/api/archive-service",
+    "ok": true,
+    "status": "healthy",
+    "scheduler_status": "waiting"
+  },
+  "limitations": [
+    "Calendar invocation observed at 02:45:06, not an exact-start SLA",
+    "Tracks sessions since installation only",
+    "Local logged-in macOS user required; not always-on or off-site storage",
+    "Failure reporting is local console, logs and nonzero exit only",
+    "No model call, notification, Paper settlement or remote Multica dispatch",
+    "Historical fills and account restoration remain unverified"
+  ]
+}

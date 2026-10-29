@@ -1,0 +1,90 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 87,
+  "verified_at": "2026-09-23T08:39:30+08:00",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "isolated_team": "/private/tmp/quant-real-chain-v8.thl5kgk2/trading_team",
+  "source": {
+    "publisher_issue": "SATU-15",
+    "publisher_issue_id": "01a0cb8c-f0d1-7aaa-89f8-e9a831278261",
+    "publisher_task_id": "01a0cb8c-f0e3-7121-9b03-afd22c6845b4",
+    "publisher_task_status": "completed",
+    "publisher_issue_status": "done",
+    "freeze_sha256": "780deb744657afc54124530565c96c89df528d3f1589298837cfc8e35a8a4094",
+    "data_quality_bundle_hash": "5544701b1c8231596943a8ef6d871a721669dc6f771525efe429e9e57673181a",
+    "data_quality_bundle_file_sha256": "8b528b949644622417a01f18a3068726cd7d31827d9665cdafd026eeb0539ccb",
+    "data_quality_bundle_file_count": 40,
+    "full_source_file_count": 63,
+    "embedded_and_disk_hash_mismatches": []
+  },
+  "review": {
+    "issue": "SATU-16",
+    "issue_id": "01a0cba5-d84a-7081-93bd-5de664391902",
+    "issue_status": "done",
+    "task_id": "01a0cba5-d885-7151-873b-8270ea1aac6e",
+    "task_status": "completed",
+    "task_started_at": "2026-09-23T00:24:00Z",
+    "task_completed_at": "2026-09-23T00:35:05Z",
+    "run_id": "d66af30807de4e5ab51eec7ab357e1a4",
+    "run_status": "succeeded",
+    "workflow_attempt": 1,
+    "receipt_hash": "9a6c4b41bc865ad558fff04d7f0b06f100b34d269cb41077f9b3e59dc2044a69",
+    "verdict": "accept",
+    "checks": {
+      "completed_session": "pass",
+      "source_integrity": "pass",
+      "coverage": "pass"
+    },
+    "agent_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "identity_verification": "remote_verified",
+    "comment_id": "01a0cbaf-c628-7834-b342-2b34badaf791",
+    "comment_bound_to_task_and_receipt": true,
+    "execution_authorized": false
+  },
+  "independent_checks": {
+    "remote_message_count": 190,
+    "remote_tool_use_count": 57,
+    "review_submit_command_count": 1,
+    "force_command_count": 0,
+    "patch_paths": [
+      "/private/tmp/quant-real-chain-v8.thl5kgk2/trading_team/.runs/multica/reviews/2026-09-23/data-quality-response.json",
+      "/private/tmp/quant-real-chain-v8.thl5kgk2/trading_team/.runs/multica/reviews/2026-09-23/data-quality-result-comment.md"
+    ],
+    "temporary_comment_file_removed": true,
+    "market_breadth": {
+      "total_sh_sz": 5221,
+      "up": 2284,
+      "down": 2782,
+      "flat": 155,
+      "excluded_beijing": 345,
+      "universe_total": 5566,
+      "negative_zero_price_edge": "sz301626 close 331.99 vs previous close 332.00 was counted down"
+    },
+    "old_v7_freeze_and_rejected_response_unchanged": true,
+    "isolated_decisions_present": false,
+    "isolated_paper_present": false,
+    "isolated_notifications_present": false
+  },
+  "limitations": [
+    "This is an M1 retrospective integration sample, not a timely M2/M3 natural trading-day cohort.",
+    "Optional forex failed, global_macro.ok is false, Asia date is unknown, and US/commodity values are not certified closes.",
+    "Data Quality acceptance does not certify factual analyst claims, plan approval, Paper execution, or profitability."
+  ],
+  "sealed_next_review": {
+    "role": "market-analysts",
+    "bundle_hash": "20981f0aed31d757134b522eeb7794dbb186bf8194dd0dcce29ddc3a8863fb5a",
+    "bundle_file_sha256": "ef9673d29736587b01a4e1cf84feb149f427607a3829705224b60fbaac4b495b",
+    "file_count": 52,
+    "repeat_prepare_same_hash": true,
+    "embedded_and_disk_hash_mismatches": [],
+    "upstream_receipt_hash": "9a6c4b41bc865ad558fff04d7f0b06f100b34d269cb41077f9b3e59dc2044a69",
+    "status": "pending",
+    "exact_hash_remote_issue_count": 0,
+    "dispatched_this_loop": false
+  },
+  "tests": "No application code changed in Loop87; last full suite in Loop85: 1197 passed. Loop87 checked the real remote task, receipt, source hashes and sealed next bundle.",
+  "milestones": {"m1": "incomplete", "m2": "not_started", "m3": "not_started"},
+  "next": "Verify the Market Analysts sealed bundle, SATU-16 final remote/local receipt, independent Market Analysts agent/runtime, and exact bundle/title dedup. Dispatch at most one bounded real Market Analysts review. It must independently test all company and financial claims against archived evidence; do not infer facts_supported from Data Quality acceptance. Preserve older rejections, no approval/Paper/Live."
+}

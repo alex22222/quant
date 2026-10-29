@@ -1,0 +1,22 @@
+{
+  "schema": "quant.authorized_model_switch.v1",
+  "observed_at": "2026-10-16T10:41:50.300069+08:00",
+  "authorization": "User explicitly authorized Research Lead and Audit Verifier to gpt-6.1-sol, retain xhigh, continue full goal, do not rerun previous failed tasks",
+  "agents": [
+    {"id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27", "name": "Research Lead", "before_model": "gpt-5.5", "after_model": "gpt-6.1-sol", "thinking_level": "xhigh", "custom_args": ["-c", "model_reasoning_effort=\"xhigh\""], "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7", "status": "idle", "independent_get_matched": true},
+    {"id": "91bfb847-5d2c-4d10-bb41-e2a514a30fe4", "name": "Audit Verifier", "before_model": "gpt-5.5", "after_model": "gpt-6.1-sol", "thinking_level": "xhigh", "custom_args": ["-c", "model_reasoning_effort=\"xhigh\""], "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7", "status": "idle", "independent_get_matched": true}
+  ],
+  "configuration_only_not_inference_acceptance": true,
+  "historical_SATU94_task_after_change": {"id": "01a141e6-f86d-7451-9b9c-3fb08e4368d4", "status": "failed", "task_count": 1},
+  "probe_or_production_retry": false,
+  "dual_paper_each_cash_equity": [100000, 100000],
+  "dual_paper_each_trades": 0,
+  "other_agents_global_cli_moonshot_autopilot_modified": false,
+  "heartbeat": {"id": "a", "status": "ACTIVE", "schedule_unchanged": true, "prompt_sha256": "6d47855a7daf935f7576206f0de0bf6a1351fb66b2a9daea5e7386b1e71cbd0e", "authorization_and_readback_synced": true},
+  "goal_card": {"requested": "resume", "actual_get_goal": "blocked", "resume_tool_available": false, "codex_ui_access": "denied for safety; no alternative access attempted", "user_action_needed": "Resume existing goal card; do not create or replace full goal"},
+  "next_local_calendar_candidate": "2026-10-19",
+  "candidate_requires_day_of_verification": true,
+  "M2_passed": false,
+  "M3_started": false,
+  "next": "10-16 failed day postclose readonly safety checks; next eligible day use original unique 07:30 publication then six independent reviews and real cutoff, no backdated rescue."
+}

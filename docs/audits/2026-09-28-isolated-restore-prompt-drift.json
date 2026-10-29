@@ -1,0 +1,37 @@
+{
+  "schema": "isolated_restore_prompt_drift.v1",
+  "observed_at": "2026-09-28T21:37:58+08:00",
+  "scope": "read-only readiness review of a registered local snapshot restored under /private/tmp; no activation",
+  "snapshot": {
+    "id": "f8b359d90c1940bf9759e0c06857780f",
+    "manifest_hash": "647bf884d1825d817b41dd23fa0af627949e9f88a573025125279a29aa22f56b",
+    "restore_target": "/private/tmp/quant-recovery-7e0a853d-58db-4492-9d03-ba247b315803",
+    "restore_status": "verified_isolated",
+    "snapshot_verified": true,
+    "execution_authorized": false
+  },
+  "readiness": {
+    "status": "blocked",
+    "runtime_status": "mismatch",
+    "runtime_changed": [
+      "trading_team/backup_service.py",
+      "trading_team/kimi_daily.py",
+      "trading_team/recovery_readiness.py"
+    ],
+    "prompts_status": "mismatch",
+    "prompts_changed": ["trading_team/prompts/04_technical.md"],
+    "blockers": [
+      "runtime fingerprint mismatch or incomplete baseline",
+      "research prompt mismatch",
+      "research data invalid, stale or unknown",
+      "research publication evidence incomplete"
+    ],
+    "external_gap_reconciled": false,
+    "offsite_verified": false
+  },
+  "change": "Recovery readiness now compares versioned research prompts as well as recorded runtime fingerprints before any manual activation decision.",
+  "verification": "Prompt-drift regression failed before repair and passed afterward; project tests and execution/tests: 1278 passed.",
+  "remaining": "Verify the next naturally registered snapshot against current runtime and prompts, then separately perform M3 interruption/retry idempotency and offsite recovery acceptance.",
+  "m2_accepted": false,
+  "m3_started": false
+}

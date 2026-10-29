@@ -1,0 +1,61 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 88,
+  "verified_at": "2026-09-23T09:10:26+08:00",
+  "business_date": "2026-09-23",
+  "multica_scheduled_task": {
+    "autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "last_observed_status": "active",
+    "last_observed_next_trigger": "2026-09-24T08:43:00+08:00",
+    "issue": "SATU-17",
+    "issue_id": "01a0cbb7-6b4a-7852-8640-e2a69aeef80b",
+    "task_id": "01a0cbb7-6b5a-769d-a777-8bb6698d8f43",
+    "issue_status": "blocked",
+    "daily_research_run_id": "8357aebeebf84ea493aaf7a0052f1f1b",
+    "daily_research_status": "failed",
+    "workflow_attempts": [
+      "verify_multica_context failed: agent changed the exact business-date issue title",
+      "collect failed: market breadth primary connection aborted and fallback universe page incomplete",
+      "collect failed again: market breadth and dependent sentiment unavailable"
+    ],
+    "data_collect_run_id": "8e31aa020cf2495387005ff6a3572333",
+    "data_collect_status": "failed",
+    "manifest_ok": false,
+    "remote_runbook": "Old unscoped daily command still present in Autopilot description",
+    "paused_this_loop": false
+  },
+  "kimi_legacy_writer": {
+    "automation_id": "automation_7a27faee-d643-4f35-a89b-daa3798b2452",
+    "run_id": "run_1fe0315e-c94b-44c5-ac50-91fee81b5b35",
+    "dispatcher_status": "succeeded",
+    "scheduled_task_paused_after_user_authorization": true,
+    "ui_verification": "Task toggle off and card displayed paused; today's run and artifacts were retained",
+    "production_artifacts": [
+      "trading_team/outputs/2026-09-23/01_fundamental.md through 07_risk_manager.md",
+      "trading_team/outputs/2026-09-23/daily_conclusion.md",
+      "trading_team/outputs/2026-09-23/plan.json",
+      "trading_team/decisions/2026-09-23/decision.json",
+      "trading_team/decisions/2026-09-23/paper_decision.json"
+    ],
+    "generation_receipt_present": false,
+    "plan_hash": "556c7f9e1c0e70c5ac707b3939a7e4b9531994438635c1d8c6e67c10c9003cef",
+    "fallback_check": "blocked/existing_generation_unverified; exit 1; no API fallback invoked",
+    "approval_rows_for_date": 0,
+    "execution_log_rows_for_date": 0,
+    "paper_gate_trade_count": 0,
+    "paper_no_gate_last_trade_date": "2026-09-09",
+    "paper_portfolios": "gate=pending, no_gate=pending"
+  },
+  "isolated_m1": {
+    "team": "/private/tmp/quant-real-chain-v8.thl5kgk2/trading_team",
+    "market_analysts_bundle_hash": "20981f0aed31d757134b522eeb7794dbb186bf8194dd0dcce29ddc3a8863fb5a",
+    "market_analysts_bundle_file_sha256": "ef9673d29736587b01a4e1cf84feb149f427607a3829705224b60fbaac4b495b",
+    "market_analysts_status": "pending",
+    "market_analysts_dispatched_this_loop": false,
+    "reason_not_dispatched": "SATU-17 was already the new remote task for this loop and a production writer was active"
+  },
+  "boundary": "Neither Kimi dispatcher success nor Multica task completion establishes a verified generation, approved plan, Paper fill or M2 natural-day acceptance. Preserve failures and artifacts; do not backfill signatures, approve, notify or manufacture fills.",
+  "tests": "No application code changed. Read-only ledger, manifest, decision, approval, Paper and fallback checks performed; last full suite in Loop85: 1197 passed.",
+  "milestones": {"m1": "incomplete", "m2": "not_started", "m3": "not_started"},
+  "next": "Await separate authorization to pause the still-active legacy Multica Autopilot. Then resume isolated v8 Market Analysts review, complete M1 reviews and deterministic finalization, synchronize remote publication-only runbook, and validate a natural trading day."
+}

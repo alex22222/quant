@@ -1,0 +1,59 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-04T01:16:31+08:00",
+  "result": "scheduled_current_runbook_snapshot_and_isolated_restore_verified",
+  "change": {
+    "trigger": "Existing 15-minute backup tick when present production Runbook differs from latest snapshot",
+    "new_scheduler_created": false,
+    "manual_backup_triggered": false,
+    "missing_runbook_repeated_snapshot_guard": true
+  },
+  "tests": {
+    "focused_before": "1 passed",
+    "new_behavior_before_fix": "1 failed as expected; missing-source guard passed",
+    "focused_after": "74 passed",
+    "full_after": "1297 passed"
+  },
+  "registered_snapshot": {
+    "id": "6800de8a63b741ee9bf3ae11d464daad",
+    "started_at": "2026-10-04T01:15:01.868097+08:00",
+    "manifest_hash": "c90e25d5f8f8c0fec862b08917deb5b09cf03a4514fe51c2268c6a33a1f341d9",
+    "verified": true,
+    "file_count": 967,
+    "production_runbook_sha256": "1c004bb103c196a4512a899686c039f7e3601621f54e9b5a96949f019ca2cda3",
+    "current_runbook_sha256": "1c004bb103c196a4512a899686c039f7e3601621f54e9b5a96949f019ca2cda3",
+    "execution_authorized": false
+  },
+  "isolated_restore": {
+    "target": "/private/tmp/quant-restore-20261004-runbook-current",
+    "status": "verified_isolated",
+    "execution_authorized": false,
+    "activation": "manual_review_required_no_runtime_or_scheduler_installed",
+    "readiness_status": "blocked",
+    "runbook_status": "matched",
+    "runtime_status": "matched",
+    "prompts_status": "matched",
+    "remaining_blockers": [
+      "research data invalid, stale or unknown",
+      "research publication evidence incomplete"
+    ]
+  },
+  "served_readback": {
+    "console_backup_status": "healthy",
+    "runbook_snapshot_current": true,
+    "runtime_snapshot_current": true,
+    "backup_heartbeat": "fresh",
+    "backup_scheduler_status": "waiting",
+    "backup_scheduler_last_exit_code": 0
+  },
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "limitations": [
+    "The isolated restore is of a local pre-M2 snapshot; it does not satisfy the five-day M3 recovery/idempotency acceptance.",
+    "Recovery readiness remains blocked by research freshness and publication evidence; no writer, approval, Paper settlement or notification was activated.",
+    "Offsite disaster recovery remains deferred and unverified."
+  ]
+}

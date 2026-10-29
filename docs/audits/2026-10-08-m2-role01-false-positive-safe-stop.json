@@ -1,0 +1,78 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-08T07:41:00+08:00",
+  "business_date": "2026-10-08",
+  "result": "publication_failed_role01_false_positive_safe_stop",
+  "calendar_and_preopen": {
+    "trading_day": true,
+    "previous_completed_session": "2026-09-30",
+    "host_power": "AC connected, battery 100% at 07:09",
+    "archive": "healthy at 07:09; expected and latest verified session both 2026-09-30",
+    "active_paper_cohort": "gate and no_gate each checked, CNY 100000 cash, zero recorded trades"
+  },
+  "production_entry": {
+    "autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "issue": "SATU-85",
+    "issue_id": "01a118b4-0b16-7b76-96dd-67c1ee323019",
+    "title": "A股每日研究 2026-10-08",
+    "issue_status": "blocked",
+    "unique_task_id": "01a118b4-0b2f-7189-9b42-fd57534a5a29",
+    "task_status": "completed",
+    "task_started_at": "2026-10-08T07:30:16+08:00",
+    "research_lead_model": "gpt-5.5",
+    "research_lead_runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7"
+  },
+  "local_run": {
+    "run_id": "f6a98f4cf2ad47ec8fed720735b0e39a",
+    "status": "failed",
+    "started_at": "2026-10-08T07:32:19+08:00",
+    "finished_at": "2026-10-08T07:37:32+08:00",
+    "model": "kimi-k3",
+    "transport": "Moonshot API",
+    "steps": ["collect:succeeded", "role_01:failed"],
+    "error": "ValueError: fundamental period comparison: mixed reporting periods cannot support a directional claim",
+    "rejected_artifact": "trading_team/.runs/rejected/f6a98f4cf2ad47ec8fed720735b0e39a/364.json",
+    "rejected_artifact_sha256": "b11adef012aacef9c6c463cb166a5addeadec90bc4903900f3859bfa13327c0b",
+    "manifest_data_asof": "2026-09-30",
+    "archive_receipt_hash": "e2439767125f6659bc801602b57c0080cdbbb39c19e7d4ab2309991543218cfe"
+  },
+  "independent_diagnosis": "The annual-period regex matched 年报 inside 半年报. Two single-period conclusions containing 半年报 plus 走弱 or 恶化 were falsely classified as mixed-period comparisons. The task's own calendar check correctly recognized 2026-10-08 as a trading day. No independent substantive review of the full rejected report is implied.",
+  "bounded_fix": {
+    "source": "trading_team/kimi_daily.py",
+    "change": "Match 年报 only when not preceded by 半; keep 全年 matching and all existing mixed-period rejection rules.",
+    "original_sentences_regression": "two new cases failed before the fix and passed after it",
+    "existing_focused_tests_before": "95 passed",
+    "focused_tests_after": "97 passed",
+    "full_tests_after": "1309 passed in 49.11s",
+    "original_rejected_reply": "passes only the corrected period gate in memory; not republished or certified",
+    "source_sha256_after": "83fbe336b2433ec24177c8af9aaa971722e50615838a5475568f5fc56d720518"
+  },
+  "safe_stop": {
+    "generation_receipt": "absent",
+    "plan_hash": null,
+    "formal_output_and_decision": "absent",
+    "independent_reviews": "not started",
+    "paper_gate_and_no_gate": "each zero pending orders, execution receipts and trades at 07:41",
+    "paper_database_sha256_each": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c",
+    "notification_outbox_for_day": "not observed",
+    "external_live_or_notification_side_effects": "not independently certified by local absence checks"
+  },
+  "backup_after_code_fix": {
+    "status": "degraded with fresh heartbeat; Runbook current, runtime stale",
+    "latest_snapshot": "26108a4d4e4b48078b78c5dc87b1fa7b succeeded at 06:00",
+    "natural_0745_tick": "created=false, attempt_count unchanged at 62, no new backup attempt failure",
+    "scheduler_exit_1": "Expected CLI policy when report status is degraded; not evidence of a crash or a new failed snapshot.",
+    "next_action": "Wait for the existing six-hour snapshot interval; do not force a backup or claim current-code recovery."
+  },
+  "post_0745_duplicate_check": {
+    "remote": "SATU-85 remains the only 2026-10-08 production Issue and is blocked",
+    "local": "exactly one failed daily_research Run for 2026-10-08; no second publication attempt",
+    "paper": "both active accounts remain checked with zero trades and unchanged facts_hash 7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc"
+  },
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "next_boundary": "Do not rerun or re-review SATU-85 or use --force. The next qualified natural trading day needs a new original-entry publication under the corrected code, six fresh independent reviews before the real 09:15 cutoff, and only then post-close deterministic Paper settlement."
+}

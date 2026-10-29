@@ -1,0 +1,19 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-04T02:07:40+08:00",
+  "result": "existing_multica_publication_reuse_requires_fresh_archive_and_original_verified_publisher",
+  "reproduction": [
+    "An existing report with a complete but stale 2026-09-17 archive was accepted as the 2026-09-21 Multica publication; the previous session was 2026-09-18.",
+    "A manually published report with a fresh archive was accepted as a Multica publication despite having no verified Multica publisher."
+  ],
+  "change": "Before reuse, inspect the existing generation without repairing its ledger, require the project-calendar previous session, and bind the publish_generation step's workflow attempt to an original remote-verified Multica Research Lead task with issue and task IDs. Reject mismatches without changing the existing report.",
+  "verification": {
+    "two_regressions_before_fix": "Both failed with DID NOT RAISE ValueError.",
+    "two_regressions_after_fix": "Both passed; published generation bytes and model-call counts unchanged on rejection.",
+    "valid_reuse": "A separately verified Research Lead publication was reused by a second verified task without another model call.",
+    "full_suite": "1304 passed",
+    "production_format_check": "Read-only 2026-09-29 publish_generation step was succeeded, workflow_attempt=1 matched its ledger attempt, and that attempt recorded provider=multica, verification=remote_verified, role=Research Lead, issue_id and task_id present."
+  },
+  "limitations": "The historical 2026-09-29 generation currently has changed prompt inputs and is not re-certified here. This local fix is not a future-day publication, independent six-role review, Paper settlement, notification acknowledgement or M2 acceptance.",
+  "milestones": {"M1": "complete", "M2": "not_accepted", "M3": "not_started"}
+}

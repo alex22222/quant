@@ -1,0 +1,82 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 89,
+  "verified_at": "2026-09-23T11:20:53+08:00",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "isolated_team": "/private/tmp/quant-real-chain-v8.thl5kgk2/trading_team",
+  "source": {
+    "publisher_issue": "SATU-15",
+    "publisher_task_id": "01a0cb8c-f0e3-7121-9b03-afd22c6845b4",
+    "data_quality_issue": "SATU-16",
+    "data_quality_issue_status": "done",
+    "data_quality_receipt_hash": "9a6c4b41bc865ad558fff04d7f0b06f100b34d269cb41077f9b3e59dc2044a69",
+    "market_analysts_bundle_hash": "20981f0aed31d757134b522eeb7794dbb186bf8194dd0dcce29ddc3a8863fb5a",
+    "market_analysts_bundle_file_sha256": "ef9673d29736587b01a4e1cf84feb149f427607a3829705224b60fbaac4b495b",
+    "file_count": 52,
+    "embedded_and_disk_hash_mismatches": []
+  },
+  "review": {
+    "issue": "SATU-18",
+    "issue_id": "01a0cbd9-0e24-73df-9c65-d4ebebe22eda",
+    "issue_status": "done",
+    "issue_revision": 5,
+    "task_id": "01a0cbd9-0e33-7a52-bc7a-e4ffff338a7f",
+    "task_status": "completed",
+    "task_started_at": "2026-09-23T01:19:56Z",
+    "task_completed_at": "2026-09-23T01:28:45Z",
+    "agent_id": "b765ae90-5a87-424f-9c26-fe3ce0644674",
+    "model": "gpt-5.5",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "run_id": "c3c5cd011fbb4e9aa51b72343050b95b",
+    "run_status": "succeeded",
+    "workflow_attempt": 1,
+    "receipt_hash": "8bcbbfe44e4dde767df2f82ba6bf68c707d977ee37249f8121295465e3cbeaf8",
+    "response_file_sha256": "90d25c7abf3439308282fbf63ff3cbcd7569cb0288dc6574bf97fefdae8e650a",
+    "verdict": "accept",
+    "checks": {"facts_supported": "pass", "missing_data_disclosed": "pass"},
+    "remote_comment_id": "01a0cbe0-abf4-7417-94a2-53799df32169",
+    "comment_bound_to_task_run_and_receipt": true,
+    "execution_authorized": false
+  },
+  "independent_checks": {
+    "remote_run_count_after_closure": 1,
+    "remote_message_count": 164,
+    "remote_tool_use_count": 56,
+    "review_submit_command_count": 1,
+    "force_command_count": 0,
+    "patch_paths": [
+      "/private/tmp/quant-real-chain-v8.thl5kgk2/trading_team/.runs/multica/reviews/2026-09-23/market-analysts-response.json",
+      "/private/tmp/quant-real-chain-v8.thl5kgk2/trading_team/.runs/multica/reviews/2026-09-23/market-analysts-result-comment.md"
+    ],
+    "temporary_comment_file_removed": true,
+    "bundle_file_sha256_unchanged": true,
+    "isolated_decisions_present": false,
+    "isolated_paper_present": false,
+    "review_status": "Data Quality accepted, Market Analysts accepted, Strategy Research pending, later roles blocked"
+  },
+  "limitations": [
+    "This is an M1 retrospective review using the completed 2026-09-22 session, not a timely M2/M3 trading-day cohort.",
+    "The fundamental archive contains a net-profit yoy field for 601012 but not the 2025-06-30 raw comparison value; the loss-expansion wording was not independently recomputed from two same-period raw values. Treat it as a reported-yoy interpretation, not proof of a fully reconstructed historical series.",
+    "A Market Analysts accept receipt is bounded review evidence, not a guarantee that every natural-language assertion is correct, nor approval, Paper execution, Live authorization or profitability."
+  ],
+  "sealed_next_review": {
+    "role": "strategy-research",
+    "bundle_hash": "71201559d1d6c713c65bb728371807ebee74edadbff59d94f04ad842eaeeaddf",
+    "bundle_file_sha256": "2e68ef9fafbc0b93ca500150e42e2576e689ee3513c4979698ebc84207142b28",
+    "file_count": 55,
+    "repeat_prepare_same_hash": true,
+    "embedded_and_disk_hash_mismatches": [],
+    "upstream_receipts": {
+      "data-quality": "9a6c4b41bc865ad558fff04d7f0b06f100b34d269cb41077f9b3e59dc2044a69",
+      "market-analysts": "8bcbbfe44e4dde767df2f82ba6bf68c707d977ee37249f8121295465e3cbeaf8"
+    },
+    "status": "pending",
+    "exact_hash_remote_issue_count": 0,
+    "dispatched_this_loop": false
+  },
+  "production_entrypoint": "Legacy Multica Autopilot remained active with an unsynchronized unscoped command at the start of this loop; no schedule or remote runbook change was made.",
+  "tests": "No application code changed. Real remote task, sealed files, review ledger, remote comment, command trace and deterministic status/prepare were checked; last full suite in Loop85: 1197 passed.",
+  "milestones": {"m1": "incomplete", "m2": "not_started", "m3": "not_started"},
+  "next": "Verify the Strategy Research sealed bundle, accepted upstream receipts, agent/runtime, and exact remote dedup before one bounded independent challenge task. Do not dispatch a second remote task in Loop89, and do not treat the legacy production report as a verified natural-day run."
+}

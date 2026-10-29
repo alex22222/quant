@@ -1,0 +1,119 @@
+{
+  "schema": "real_data_quality_review_acceptance.v2",
+  "loop": 71,
+  "verified_at": "2026-09-23T03:05:12+08:00",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "isolated_team": "/private/tmp/quant-real-chain-v2.drq6k45z/trading_team",
+  "source": {
+    "run_id": "4902259232004be691f66c53205f76ed",
+    "plan_hash": "d5916f0aae111128eb4ea3605cca1d7c17b9f50b691b0c2e356e54fad7f53a93",
+    "generation_hash": "7ec3fe09b73145b316b23e4eca6a66a0bb2440537b04da8af6deab4dc3b767a1",
+    "files_hash": "9190ae9441dc8577f83024e59dd6c4fdb905c660dfb1a02e9b73724eb0be1d5e",
+    "producer_task_id": "01a0ca58-fab5-761e-9413-85c8f7b0aead"
+  },
+  "bundle": {
+    "bundle_hash": "ff102dee0edffb5e17792ee1a5f41bb6bd62e3458821e3725a783d716796ef9d",
+    "file_sha256": "58f3f97b83a5c60491a06ad5413abd6321f402f59233557acc6b934b8a5466f1",
+    "file_count": 40,
+    "computed_hash_matches": true,
+    "bundled_hash_mismatches": [],
+    "disk_text_mismatches": []
+  },
+  "issue": {
+    "id": "01a0ca72-87b3-7816-8675-3832e19ff0d8",
+    "identifier": "SATU-6",
+    "status": "done",
+    "revision": 4,
+    "assignee_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd",
+    "comment_id": "01a0ca79-dd3e-7cd7-a6db-904b308c954a",
+    "active_run_count_after": 0
+  },
+  "remote_task": {
+    "id": "01a0ca72-87c3-73d2-ba48-50442be7c9d8",
+    "status": "completed",
+    "started_at": "2026-09-22T18:48:19Z",
+    "completed_at": "2026-09-22T18:56:38Z",
+    "agent_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "executor": {
+      "provider": "codex",
+      "model": "gpt-5.5",
+      "input_tokens": 145371,
+      "output_tokens": 21309,
+      "cache_read_tokens": 1887232
+    },
+    "message_count": 174,
+    "tool_use_count": 67,
+    "exec_count": 65,
+    "submit_command_count": 1,
+    "forbidden_side_effect_command_count": 0,
+    "writes": [
+      "isolated data-quality-response.json",
+      "temporary issue comment file, removed after posting",
+      "isolated review ledger receipt",
+      "SATU-6 status and final comment"
+    ]
+  },
+  "review": {
+    "run_id": "6b64985930014589b2d32a307d8e4046",
+    "recording_status": "succeeded",
+    "attempt": 1,
+    "receipt_hash": "4936d9f9f1b97e195f55ae755b19aee46235c6e9f75ccf42d18afab6d9a7142d",
+    "response_sha256": "0d118836e2ec09c31dc557eb65dc970d02eba073d959d36a5b6061f0b3e149a9",
+    "response_size": 4800,
+    "verdict": "accept",
+    "checks": {
+      "completed_session": "pass",
+      "source_integrity": "pass",
+      "coverage": "pass"
+    },
+    "execution_authorized": false,
+    "identity": {
+      "verification": "remote_verified",
+      "issue_id": "01a0ca72-87b3-7816-8675-3832e19ff0d8",
+      "task_id": "01a0ca72-87c3-73d2-ba48-50442be7c9d8",
+      "agent_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd",
+      "role": "Data Quality",
+      "project_id": "a208df76-b63b-4cef-bd11-7512d7c80896",
+      "workspace_id": "cfcca519-15f5-4666-b1d8-2b67241d8f7b",
+      "squad_id": "e3593963-4e1d-4c7a-ae27-20b08e7ee110"
+    },
+    "limitations": [
+      "forex collection failed and global_macro.ok is false",
+      "Asia snapshot session date is unknown",
+      "US and commodity values are snapshots, not certified closes",
+      "retrospective M1 evidence only, not an on-time M2 or M3 plan",
+      "no profitability, approval, Paper execution, or full-chain claim"
+    ]
+  },
+  "postconditions": {
+    "sealed_source_files_unchanged": 40,
+    "application_code_changed": false,
+    "decisions_present": false,
+    "paper_present": false,
+    "notification_sent": false,
+    "daemon_task_marker_present_after": false,
+    "git_diff_check": "passed",
+    "tests_rerun": false
+  },
+  "handoff": {
+    "role": "market-analysts",
+    "status": "pending",
+    "bundle_hash": "894250397c40e50647c1461799acb74e19781626ffac5705274de3e70a190171",
+    "file_sha256": "849dcd1e505ed9cb45c7242c4a812a52b61eb6511745d6aa72cc9ad208e099dd",
+    "file_size": 7274038,
+    "file_count": 52,
+    "issue_title": "A-share review market-analysts 894250397c40e50647c1461799acb74e19781626ffac5705274de3e70a190171 2026-09-23",
+    "assignee_id": "b765ae90-5a87-424f-9c26-fe3ce0644674",
+    "assignee_model": "",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "assignee_status": "idle",
+    "matching_issue_count": 0,
+    "dispatched": false
+  },
+  "review_chain_complete": false,
+  "milestone_m1_complete": false,
+  "natural_day_accepted": false,
+  "next": "Before dispatch, explicitly bind the idle Market Analysts agent to the verified gpt-5.5 executor, revalidate the sealed bundle and exact-title/hash dedupe, then create exactly one bounded review issue. Do not dispatch a second role in that loop."
+}

@@ -1,0 +1,75 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "date": "2026-09-24",
+  "loop": 108,
+  "scope": "retrospective M1 isolated publication and independent review",
+  "old_production_autopilot": {
+    "id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "authorized_action": "pause",
+    "readback_status": "paused",
+    "replacement_enabled": false
+  },
+  "v15": {
+    "team": "/private/tmp/quant-real-chain-v15.8BUH5h/trading_team",
+    "data_quality_recording_failure": "SATU-33 blocked, no receipt",
+    "data_quality_recovery": {
+      "issue": "SATU-34",
+      "run_id": "f293e84d5444428186b62cb32014463a",
+      "verdict": "accept",
+      "receipt_hash": "bcf6846f2cc3e7810f6398d5582df83cbddb2acb152464ce27140ab6867795df"
+    },
+    "market_analysts": {
+      "issue": "SATU-35",
+      "run_id": "14de4eae9b084598823f4330dac59bbb",
+      "verdict": "reject",
+      "reason": "OHLCV-derived chips, fund-support and buying-intent assertions lacked archived evidence"
+    }
+  },
+  "v16": {
+    "team": "/private/tmp/quant-real-chain-v16.Ih7Lzw/trading_team",
+    "freeze_sha256": "eb16c2f4a8dcd00566a0ded5904899216caa139dda32a6c627b969a4e6a92df7",
+    "issue": "SATU-36",
+    "status": "blocked",
+    "failure": "role05 negated fund-flow sentence rejected by lexical guard",
+    "rejected_reply_sha256": "8ebc84b8ff243d3b81312451759fdad1d401000b1bd94966d8019d63e0b37d1f",
+    "repair": "exact negative phrasing regression red then green; actual positive assertion remains blocked",
+    "tests": "1235 passed"
+  },
+  "v17": {
+    "team": "/private/tmp/quant-real-chain-v17.7jSoCD/trading_team",
+    "freeze_sha256": "b7df792134393a0c84576309480f9a3f8d2843957f536aef993acdd48050093b",
+    "runner_sha256": "8f55d783869bd2dc471ec4051f189a267d93a0c4da827dca9f19adb5ef6b52f1",
+    "publication": {
+      "issue": "SATU-37",
+      "run_id": "6ccb9851bd1c4f55a64ff123f1e9b1ae",
+      "status": "succeeded",
+      "scope": "publication_only",
+      "data_asof": "2026-09-22",
+      "plan_hash": "5c7f7f5de3159576c3244cc6e9dba02682cea9e8da19d20b332d24e8ce7c294a"
+    },
+    "data_quality": {
+      "issue": "SATU-38",
+      "run_id": "0b07d1f146b0472b8889451175caab47",
+      "verdict": "accept",
+      "receipt_hash": "c10274b09a852ce6c22981a577fa81907d4aacc5f044e4661b607050cb8e02fd"
+    },
+    "market_analysts": {
+      "issue": "SATU-39",
+      "task_id": "01a0cf03-09a8-7e49-a9ec-ae597a9e4feb",
+      "task_status": "completed",
+      "run_id": "00e55f4edd0040508772aef889183520",
+      "verdict": "reject",
+      "receipt_hash": "5d62444c1101faa12177c5bf3f253340686db7f8bf088726a86d14d4da5e8ed2",
+      "reason": "technical report inferred selling-pressure decline from shrinking OHLCV without corresponding archived source"
+    },
+    "execution_authorized": false
+  },
+  "current_change": "technical prompt now requires observable volume/price/indicator statements only; no v17 artifact edited",
+  "next": "fresh isolation and freeze, reuse only unchanged 01-03 caches, one bounded publication then independent sequential reviews",
+  "milestones": {
+    "M1": "incomplete",
+    "M2": "not_started",
+    "M3": "not_started"
+  },
+  "goal_metadata": "blocked; unchanged in this loop"
+}

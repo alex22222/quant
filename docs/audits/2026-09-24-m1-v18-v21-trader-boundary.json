@@ -1,0 +1,187 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "date": "2026-09-24",
+  "scope": "retrospective isolated M1 research, independent reviews and v21 proposal-boundary repair",
+  "v18": {
+    "team": "/private/tmp/quant-real-chain-v18.HMbdoD/trading_team",
+    "freeze_sha256": "60bdecd7d18633d874f69d2b2b34169f364750beb2c5eba9f5e059ca9e3da9e2",
+    "publication": {
+      "issue": "SATU-40",
+      "run_id": "613187d431b342a1b51e64010a37ee1b",
+      "status": "succeeded",
+      "plan_hash": "12c254c818eb550a3ff2ee499bcbf396bdf02761b383a04c9a931e26258b3798"
+    },
+    "data_quality": {
+      "issue": "SATU-41",
+      "verdict": "accept",
+      "receipt_hash": "87561f90c5554af7bc5c848cf5052b1e177ac4ca09fcf60a731f0c270e62c589"
+    },
+    "market_analysts": {
+      "issue": "SATU-42",
+      "verdict": "reject",
+      "receipt_hash": "f607adcbc8619ebe261b3c35e22f78c768dd4bce5f17150e67972804e484f7d3",
+      "reason": "Technical report said 8 of 11 watchlist names were below MA60; archived per-name indicators show 9."
+    }
+  },
+  "v19": {
+    "team": "/private/tmp/quant-real-chain-v19.EsD2jz/trading_team",
+    "freeze_sha256": "41f2bf51bb507fb71bd7bfbea15a0f35140484fe93a04e748b4219779234c455",
+    "publication": {
+      "issue": "SATU-43",
+      "run_id": "bc9c2dc68852446592f071b2fd70c946",
+      "status": "failed_at_role_05",
+      "reason": "Explicit negations of fund flow and volume causality were rejected by lexical guard; historical failure retained."
+    }
+  },
+  "v20": {
+    "team": "/private/tmp/quant-real-chain-v20.Fa9BRM/trading_team",
+    "freeze_sha256": "960839ca5a8730cde7a8dffaadda3e82f135d1c0055ad1a9ddbba4626a813724",
+    "runner_sha256": "e0f498effcd28f60e39938479a4b0e37435b1f60c1fb39e478d8e437a58415df",
+    "publication": {
+      "issue": "SATU-44",
+      "run_id": "4e74961611df4921a65345c72d2a6d57",
+      "status": "succeeded",
+      "receipt_hash": "62604530c99fec558e5f28ef1a9a4a8652f95a0bdf077cb94ed928ad01082ea1",
+      "plan_hash": "383aac6184834bf3296e600d6fe532456cd63b77f32cbc780a66faea44b29430",
+      "scope": "publication_only",
+      "data_asof": "2026-09-22"
+    },
+    "data_quality": {
+      "issue": "SATU-45",
+      "verdict": "accept",
+      "receipt_hash": "94b717e8aa1dcbc6c38d45ef11bf2fa4f31aa3a7eaeabcd76ca599b8060aa122"
+    },
+    "market_analysts": {
+      "issue": "SATU-46",
+      "verdict": "accept",
+      "receipt_hash": "0d0ec67932fcb2b9fbc33531a3b329217ac170aaf817b89cb955a12b91d42255"
+    },
+    "strategy_research": {
+      "issue": "SATU-47",
+      "verdict": "accept",
+      "receipt_hash": "24965c8fe5ad3df6e235cdb74cfa617bb4c3e4b2d7e8fd06df0107abcd24ef55"
+    },
+    "paper_trader": {
+      "issue": "SATU-48",
+      "task_id": "01a0cf8d-73e2-71ca-b586-330b94ca42c2",
+      "run_id": "3e319dec3eea40728904097b413b1f23",
+      "verdict": "reject",
+      "receipt_hash": "3e3c844c6565d6e0b3f2247fac4935d63ed245c0997c787d0a3baa49cec9e94f",
+      "account_context": "pass",
+      "intent_constraints": "unknown",
+      "reason": "The trader proposal did not explicitly bind candidates to lot, cost, suspension/limit and untouched-limit unfilled semantics."
+    },
+    "execution_authorized": false
+  },
+  "v21": {
+    "team": "/private/tmp/quant-real-chain-v21.6uVgoY/trading_team",
+    "freeze_sha256": "e05f5fec6e3cf7524fdd5815b759dc306ea39e80ca9f76810f160291ca4b5520",
+    "changed_inputs": ["prompts/06_trader.md"],
+    "verified_generation_inputs": 38,
+    "verified_cache_files_01_to_05": 15,
+    "publication_issue_id": "01a0cf9e-0269-7ec3-9dbd-d4e9d8030569",
+    "publication_task_id": "01a0cf9e-027c-7417-a062-03f673db4511",
+    "publication": {
+      "status": "succeeded",
+      "issue_status": "done",
+      "run_id": "9471f3d6252f404993009e614c5074ae",
+      "generation_receipt_hash": "7061ab7035d518b4188e99f304af3ce2acff1902c1344bed1c4e9d609f3e8290",
+      "plan_hash": "3f9b560bad4f7f7c521879348e6c00afeea7f290fb861443c48ba7c801151a83",
+      "new_moonshot_kimi_k3_tokens_known": 41761,
+      "cache_hits": ["01", "02", "03", "04", "05"],
+      "new_generation": ["06", "07"],
+      "scope": "publication_only"
+    },
+    "data_quality": {
+      "issue": "SATU-50",
+      "issue_id": "01a0cfa9-089e-74d6-bedd-bb382e56fba3",
+      "task_id": "01a0cfa9-08af-70c0-b858-9a6f1d5e62ec",
+      "status": "accepted",
+      "run_id": "13c38ad097bf41d2883b361291a39750",
+      "receipt_hash": "82fbec46776fd0f7d9a9497cf8673ce8dd1c0ac0dce3831b044de00687978ca1"
+    },
+    "market_analysts": {
+      "bundle_hash": "87c0a9c21d00262de0f4e56a9e22a7edf0b533dfa06246a424670900c5d14ec6",
+      "bundle_file_sha256": "6fe1c05316c96612a61264bb4953fbf863941aa4bab9354bef1b96283be3c6ac",
+      "verified_files": 52,
+      "issue": "SATU-51",
+      "issue_id": "01a0cfb2-0d52-7c71-9a57-43a79ea06cbe",
+      "task_id": "01a0cfb2-0d62-7653-a75b-a3953c3dd182",
+      "status": "accepted",
+      "run_id": "8e788f44a29a4ae797deeefd5b586086",
+      "receipt_hash": "e802935625a1770879493ea780d01ae0886d18d4d5fec8a4e6fd281e2486f0bb"
+    },
+    "strategy_research": {
+      "issue": "SATU-52",
+      "task_id": "01a0cfb9-39d8-70da-ab8f-5a7eb99b1770",
+      "status": "accepted",
+      "run_id": "3f783c43ea44414cb9be85850f6f4035",
+      "receipt_hash": "78d028fcce46cc468538cd4e8ff28202def9f668c720878cee011509f305228f"
+    },
+    "paper_trader": {
+      "issue": "SATU-53",
+      "task_id": "01a0cfc1-0335-706c-8030-21d0587cb890",
+      "status": "accepted",
+      "run_id": "296b5a6d09c441d89b41b30884dabad7",
+      "receipt_hash": "c4566444212e13abfce98136a95311561c913d3725081107381c4b5700976b99",
+      "intent_constraints": "pass",
+      "account_context": "pass"
+    },
+    "risk_manager": {
+      "issue": "SATU-54",
+      "task_id": "01a0cfc7-f2ab-77c1-97f1-58fdd27d7593",
+      "status": "accepted",
+      "run_id": "b0fa24f69d0a4264a485a8d349ca0e6a",
+      "receipt_hash": "7a1b8fd1648f3f36a16751719676ad16797885685c1c6bf49ea71bce6eb824c6"
+    },
+    "audit_verifier": {
+      "issue": "SATU-55",
+      "task_id": "01a0cfcf-7df5-7de6-a200-1cd3d7b406ac",
+      "status": "accepted",
+      "run_id": "b1e34fc3dae1400cb286a68388059701",
+      "receipt_hash": "946ad82f6e32636022267836d4fd5165e58ffe7eb307e59749c1f85c3b4d56ef"
+    },
+    "review_status": "accepted",
+    "isolated_finalization": {
+      "run_id": "6db6422565584628b8bd1333e2cfb825",
+      "status": "succeeded",
+      "execution_day_market_cache_sha256": "f38fbe35846bcdeb09ae78c7afd44cbd905300177902ae9e97092acc3dc509bf",
+      "execution_day_market_payload_hash": "23e7cb754f4e8488fc733fe3c347df7014438b6b5d0a9253b6294e4c041c0898",
+      "gate": {"orders": 3, "blocked": 3, "fills": 0, "equity": 100000},
+      "no_gate": {"orders": 3, "fills": 1, "unfilled": 2, "fill_code": "601318", "fill_qty": 100, "fill_price": 54.0, "fill_fee": 5.11, "equity": 99981.89},
+      "csi300_daily_return": -0.006009,
+      "no_gate_daily_return": -0.000181,
+      "continuous_series": "incomplete: 2026-09-03 plan missing in isolated root; not zero performance",
+      "idempotency_second_call": "reused same run; unchanged receipt/order/trade/event/account row counts",
+      "evidence_kind": "retrospective isolated Paper simulation, not forward M2 or production trading"
+    }
+  },
+  "verification": {
+    "full_tests": "1239 passed",
+    "git_diff_check": "passed",
+    "paper_matching_code": "shared entry_contract, daily_bar_t1.v4, 100-share buy lot, configured fees, 0.002 slippage, suspension/price limits, untouched limit -> unfilled",
+    "production_approval_or_paper_changed": false,
+    "isolated_paper_only": true
+  },
+  "production_entry": {
+    "autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "project_id": "a208df76-b63b-4cef-bd11-7512d7c80896",
+    "assignee_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+    "status_readback": "active",
+    "runbook_local_path": "docs/MULTICA_PRODUCTION_RUNBOOK.md",
+    "runbook_sha256": "bad0181023d83c3fb1c91b38e19e20cece7a07e71bd721779e5a90c0604719eb",
+    "runbook_remote_hash_match": true,
+    "scope": "publication_only_no_push; independent reviews and deterministic finalization remain separate",
+    "trigger_id": "97a59a0a-ceda-4115-81f8-bc583a7c5eef",
+    "cron_expression": "2 8 * * 1-5",
+    "timezone": "Asia/Shanghai",
+    "next_run_at_utc": "2026-09-24T00:02:00Z",
+    "old_local_fallback": "com.hqcapital.kimi-daily disabled and booted out; plist preserved",
+    "first_scheduled_business_run": "not_yet_observed"
+  },
+  "milestones": {
+    "M1": "accepted: isolated real publication, six remote reviews, historical Paper/idempotency and unique-entry configuration; first schedule execution belongs to M2",
+    "M2": "not_started",
+    "M3": "not_started"
+  }
+}

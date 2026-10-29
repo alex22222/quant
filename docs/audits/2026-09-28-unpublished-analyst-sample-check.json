@@ -1,0 +1,25 @@
+{
+  "observed_at_local": "2026-09-28 21:21 Asia/Shanghai",
+  "scope": "read-only sample of unpublished 02/03/04 staging reports; not an independent Multica review",
+  "business_date": "2026-09-28",
+  "published_generation": false,
+  "staging_sha256": {
+    "02_sentiment.md": "0e55fcfc948af0e155ace6d54633e252dcde0d5d6a65234cf0216703badaa776",
+    "03_news.md": "ba69e093c39433b144ab57936a7ea59507ca915d44cb567affc46d808b57d541",
+    "04_technical.md": "595020a5dec2b7701bec8fa28dcac2e15c83f0687ba04dcc428b8a707246a9bb"
+  },
+  "prior_rejection_categories_sampled": {
+    "02_participant_behavior_from_volume": "No matching assertion found in sampled text; explicit direction-unknown language present.",
+    "03_new_gold_high_from_single_snapshot": "No new-high assertion found; current and prior-settlement quote labeled unverified.",
+    "04_ret60d_as_distance_from_ma60": "No matching conflation found in sampled 600036 section."
+  },
+  "new_review_focus": {
+    "claim": "04 team conclusion calls 600036 the sole financial stock sustaining a medium-term trend above MA60.",
+    "same_report_counterexample": "04 also states 601318 closed above MA60 and describes it as an uptrend pullback.",
+    "source_600036": {"as_of": "2026-09-24", "close": 40.69, "ma60": 39.33},
+    "source_601318": {"as_of": "2026-09-24", "close": 53.25, "ma60": 52.71},
+    "assessment": "The exclusivity wording lacks support and may contradict the report's own peer assessment; requires independent review in a new published version."
+  },
+  "historical_artifacts_modified": false,
+  "m2_accepted": false
+}

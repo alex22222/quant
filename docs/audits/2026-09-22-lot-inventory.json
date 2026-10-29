@@ -1,0 +1,170 @@
+{
+  "schema": "lot_inventory_acceptance.v1",
+  "temporary_ui_server_stopped": true,
+  "observed_at": "2026-09-22T08:25:14.218470+08:00",
+  "source_hashes_before": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+    "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+    "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+    "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+    "trading_team/team.db": "acad0151f77237ab2d7cf0d75e2ef2bc3b968fed95eb06ffe2437d0723c37ef0",
+    "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818",
+    "docs/audits/2026-09-22-notification-recovery.json": "b6a2ef9a07602894720c19c2de6e56cf3dddeae78a265dbb378eaeec82496a12",
+    "docs/audits/2026-09-22-persistent-backup.json": "917b8103e93ae1bd288c681f955f7b2a4cbcb59e262802509f904f87165fce1d",
+    "docs/audits/2026-09-22-continuous-counterfactual.json": "2bafa984af423bda5136229a79aa7bf46613a0912fbc5663d04604b32ca6a50c"
+  },
+  "source_hashes_after": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+    "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+    "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+    "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+    "trading_team/team.db": "acad0151f77237ab2d7cf0d75e2ef2bc3b968fed95eb06ffe2437d0723c37ef0",
+    "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818",
+    "docs/audits/2026-09-22-notification-recovery.json": "b6a2ef9a07602894720c19c2de6e56cf3dddeae78a265dbb378eaeec82496a12",
+    "docs/audits/2026-09-22-persistent-backup.json": "917b8103e93ae1bd288c681f955f7b2a4cbcb59e262802509f904f87165fce1d",
+    "docs/audits/2026-09-22-continuous-counterfactual.json": "2bafa984af423bda5136229a79aa7bf46613a0912fbc5663d04604b32ca6a50c"
+  },
+  "network_used_by_verifier": false,
+  "production_writes": false,
+  "inventory_policy": "fifo_acquisition.v1",
+  "controlled_series": {
+    "days": [
+      "2026-09-16",
+      "2026-09-17",
+      "2026-09-18",
+      "2026-09-21"
+    ],
+    "buy_add_reduce_exit_quantities": [
+      500,
+      400,
+      300,
+      600
+    ],
+    "add_day": {
+      "total": 900,
+      "available": 500,
+      "frozen": 400
+    },
+    "reduce_residual_lots": [
+      200,
+      400
+    ],
+    "continuous_paper_matched": true,
+    "stable_report_hash": "524240a510544d1f2e35fd39faa2410310004a376430c5687581e969b6e612ec",
+    "restore_snapshot_equal": true,
+    "retry_byte_identical": true,
+    "restored_exit_exactly_once": true,
+    "corrupt_inventory_rejected_without_mutation": true,
+    "audit_conflicts": {
+      "gate": 0,
+      "no_gate": 0
+    }
+  },
+  "production": {
+    "gate": {
+      "inventory_status": "matched_trade_ledger",
+      "execution_certified": false,
+      "positions": []
+    },
+    "no_gate": {
+      "inventory_status": "matched_trade_ledger",
+      "execution_certified": false,
+      "positions": [
+        {
+          "code": "600036",
+          "qty": 200,
+          "available_qty": 200,
+          "frozen_qty": 0,
+          "lots": [
+            {
+              "trade_id": 1,
+              "buy_day": "2026-09-09",
+              "qty": 200
+            }
+          ]
+        },
+        {
+          "code": "601318",
+          "qty": 100,
+          "available_qty": 100,
+          "frozen_qty": 0,
+          "lots": [
+            {
+              "trade_id": 3,
+              "buy_day": "2026-09-09",
+              "qty": 100
+            }
+          ]
+        },
+        {
+          "code": "601899",
+          "qty": 200,
+          "available_qty": 200,
+          "frozen_qty": 0,
+          "lots": [
+            {
+              "trade_id": 2,
+              "buy_day": "2026-09-09",
+              "qty": 200
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "artifacts": {
+    "directory": "/private/tmp/quant-lot-inventory-final-xqiRSz",
+    "backup_manifest_hash": "d39e5c0a47430906092a0d0b36ff5645a57a2b46ba455963c92847b4570622c8",
+    "continuous_report": "/private/tmp/quant-lot-inventory-final-xqiRSz/continuous-report.json",
+    "reconciliation": "/private/tmp/quant-lot-inventory-final-xqiRSz/reconciliation.json"
+  },
+  "final_verification": {
+    "observed_at": "2026-09-22T08:26:23.723665+08:00",
+    "formal_api_inventory_matches_readonly_source": true,
+    "production_execution_certified": false,
+    "production_audit_counts": {
+      "gate": {
+        "conflict_count": 0,
+        "missing_count": 22
+      },
+      "no_gate": {
+        "conflict_count": 2,
+        "missing_count": 26
+      }
+    },
+    "continuous_history_coverage": "0/13",
+    "tests": {
+      "command": ".venv/bin/python -m pytest tests execution/tests -q",
+      "result": "959 passed in 23.14s"
+    },
+    "missing_frozen_mark_returns_unknown": true,
+    "javascript_syntax": "passed",
+    "git_diff_check": "passed",
+    "browser": {
+      "method": "in-app Playwright and screenshots",
+      "initial_tablet_overflow_pixels": 27,
+      "fixed_viewports": [
+        390,
+        768,
+        1100,
+        1280
+      ],
+      "mixed_inventory": "500 available / 400 frozen",
+      "unverified_inventory": "unknown, not zero"
+    },
+    "network_for_final_api_check": "loopback only",
+    "protected_files_unchanged": 15
+  }
+}

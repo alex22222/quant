@@ -1,0 +1,48 @@
+{
+  "schema": "quant.postclose_safe_stop.v1",
+  "business_date": "2026-10-15",
+  "heartbeat_scheduled_at": "2026-10-15T16:20:24.819+08:00",
+  "observed_at": "2026-10-15T20:34:44.298258+08:00",
+  "observation_is_late": true,
+  "goal_status": "blocked",
+  "original_issue": "SATU-93",
+  "original_issue_id": "01a13cc0-9c14-783c-beda-78a2fb2a92f8",
+  "unique_task": "01a13cc0-9c2d-71b7-9738-0bc04304554f",
+  "task_count": 1,
+  "task_status": "failed",
+  "failure_unchanged": "ChatGPT account does not support gpt-5.5",
+  "archive": {
+    "date": "2026-10-15",
+    "receipt_hash": "cdfb9ba7de0cc013c73b0d93b8e712f85a25bcf75987d8cd4d7af18def074817",
+    "payload_hash": "146357974d814a0afadcd00617d6bfc78453d3e551f1f7e8c8cb795eb3999d40",
+    "calendar_hash": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+    "independent_verify_receipt": "passed",
+    "symbols": 12,
+    "required_coverage": true
+  },
+  "local_readonly": {
+    "formal_output_directory_exists": false,
+    "decision_file_exists": false,
+    "today_decisions_plans_approvals_execution_log": [0, 0, 0, 0],
+    "today_outbox": [],
+    "dual_active_paper_each_cash_equity": [100000, 100000],
+    "dual_active_paper_each_trades_positions_pending_receipts_events_valuations": [0, 0, 0, 0, 0, 0],
+    "sqlite_mode": "ro",
+    "external_notification_or_live_absence_proven": false
+  },
+  "backup_service_readback": {
+    "status": "healthy",
+    "snapshots": 90,
+    "storage_bytes": 4557792780,
+    "cap_bytes": 5368709120,
+    "runtime_current": true,
+    "latest_manifest_independent_verification_this_round": false
+  },
+  "model_switch_authorization": "pending; not repeated or inferred from heartbeat",
+  "mutations": ["append_audit_and_loop_only"],
+  "finalize_called": false,
+  "production_retry_or_dispatch": false,
+  "M2_passed": false,
+  "M3_started": false,
+  "next": "Keep original failure; no backdating. Observe future original entrance under existing authorization. Model migration remains pending explicit reply."
+}

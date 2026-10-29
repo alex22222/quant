@@ -1,0 +1,38 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-01T09:59:20+08:00",
+  "result": "served_console_safe_stop_verified",
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "service": {
+    "launch_agent": "gui/502/com.hqcapital.console running; pid 49436; project console/serve.py bound to 127.0.0.1:7100",
+    "console_url": "http://127.0.0.1:7100/console/",
+    "http_status": 200,
+    "content_type": "text/html",
+    "observation_boundary": "Sandboxed localhost curl failed, while the same read-only request from the host succeeded; no restart was performed."
+  },
+  "review_api_2026_09_29": {
+    "status": "source_unverified",
+    "execution_authorized": false,
+    "recorded_data_quality": "accepted; receipt b059e4189662f6775b64f3f92fe5db78cb41f81460d86b99304f7a1cdd2ad764",
+    "recorded_market_analysts": "rejected; receipt 69549325eb9bad7d69b4439b8d9fe198a217fea561469f48ca6887db2fffa5c4"
+  },
+  "paper_audit_api": {
+    "schema": "paper_reconciliation.v1",
+    "scope": "historical_account_checks_not_execution_certification",
+    "gate": "checked; reconstructed cash CNY 100000; zero recorded trades; zero conflicts; zero missing evidence; execution_certified=false; forward_performance=unverified",
+    "no_gate": "checked; reconstructed cash CNY 100000; zero recorded trades; zero conflicts; zero missing evidence; execution_certified=false; forward_performance=unverified",
+    "both_facts_hash": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc"
+  },
+  "actions": [
+    "Read-only host requests only; no service restart, review retry, approval, Paper settlement, notification, or Live action."
+  ],
+  "limitations": [
+    "HTTP and API reads verify served state at one observation time, not browser rendering or continuous availability.",
+    "A recorded historical accept or reject is not current-version authorization.",
+    "Zero local Paper trades does not establish a complete natural trading-day M2 chain or independently exclude external effects."
+  ]
+}

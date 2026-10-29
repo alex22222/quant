@@ -1,0 +1,52 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-10T00:06:25+08:00",
+  "observation_limit": "This is a post-midnight read-only check, not a claimed 2026-10-09 preopen or 16:20 observation.",
+  "result": "oct09_publication_failed_at_role05_and_safe_stopped",
+  "production": {
+    "issue": "SATU-86",
+    "issue_id": "01a11dda-690c-754c-aac0-be0cb1797c50",
+    "title": "A股每日研究 2026-10-09",
+    "issue_status": "blocked",
+    "task_id": "01a11dda-6921-7ba8-8a57-b7761a1384f2",
+    "task_count": 1,
+    "task_agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+    "task_runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "task_status": "completed",
+    "daily_research_run": "4486d1102ff848e195709f0400d14e16",
+    "run_attempt": 1,
+    "run_started_at": "2026-10-09T07:31:09+08:00",
+    "run_finished_at": "2026-10-09T07:40:25+08:00",
+    "run_status": "failed",
+    "failed_step": "role_05",
+    "original_error": "ValueError: unverified volume causality: volume and turnover do not prove a price driver",
+    "rejected_response_sha256": "6647c24b75eec0737908056da339f9c95a2b71e9393e59b8a67bf83ec15d40e1",
+    "formal_generation_or_plan_hash": false,
+    "independent_reviews": 0
+  },
+  "direct_cause_and_change": {
+    "original_negative_claim": "未升级为「放量推动上涨」的确定性因果",
+    "cause": "The volume-causality lexical guard recognized 不得升级为 but omitted 未升级为, rejecting an explicit denial.",
+    "scope": "Only add 未升级为 to the existing bounded-causality expression; do not relax the positive causality rejection.",
+    "regression": "Original negative sentence failed before the edit and passed after; a later positive claim in the same clause remains rejected.",
+    "original_response_check": "The preserved role_05 response passed the corrected lexical guard in memory only; this is not a factual review or republication.",
+    "tests": "1311 passed in tests/ and execution/tests/"
+  },
+  "postclose": {
+    "archive_receipt_hash": "6efbea7e158969d1ce4db96e84555fa2d9288af9626c5d25132f6076203d9784",
+    "archive_payload_hash": "0c061c301ef46afde950ab5067bb5e788049a491a302f1f0459d9228d48f6d9b",
+    "archive_verification": "verify_receipt independently checked the frozen calendar, payload and 12 symbols for 2026-10-09",
+    "formal_output_or_decision": "No dated 2026-10-09 formal output or decision file observed; failed staging artifacts remain separate.",
+    "notification_outbox": "Local outbox directory absent; external delivery was not independently checked.",
+    "active_paper_gate": "checked; CNY 100000 initial cash; zero trades; zero issues",
+    "active_paper_no_gate": "checked; CNY 100000 initial cash; zero trades; zero issues",
+    "paper_facts_hash_each": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+    "limit": "Local account and artifact absence does not independently prove no external Live or notification side effects."
+  },
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "next_boundary": "Preserve SATU-86 and its failed Run; do not retry or backdate. Recheck the next candidate's real exchange calendar, host power, unique 07:30 trigger, runtime, previous complete archive, active cohort and true 09:15 timestamps. Only a fresh publication version may start six independent reviews."
+}

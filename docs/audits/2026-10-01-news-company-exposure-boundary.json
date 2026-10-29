@@ -1,0 +1,42 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_date": "2026-10-01",
+  "result": "news_charter_company_exposure_boundary_updated",
+  "trigger": {
+    "business_date": "2026-09-29",
+    "issue": "SATU-64",
+    "verdict": "reject",
+    "receipt_hash": "69549325eb9bad7d69b4439b8d9fe198a217fea561469f48ca6887db2fffa5c4",
+    "failure": "Industry-level news was promoted to unsupported company-specific export, KUKA and wealth-management revenue conclusions."
+  },
+  "change": {
+    "files": [
+      "trading_team/prompts/03_news.md",
+      "tests/test_model_identity.py"
+    ],
+    "prompt_sha256": "9c4c476ba90b17d2a93e0959f88177093d2e1526e960e7f123455d81c02c14cd",
+    "rule": "Company-specific directional conclusions require archived company exposure evidence; otherwise disclose the gap and keep the event at industry scope in the report and JSON items/ratings."
+  },
+  "verification": {
+    "baseline_tests": "1278 passed",
+    "new_contract_test_before_change": "failed on missing company-exposure rule",
+    "focused_tests_after_change": "2 passed",
+    "full_tests_after_change": "1279 passed",
+    "runtime_path": "trading_team.kimi_daily reads the role charter as the model system input and includes its contents in the role fingerprint",
+    "old_report_sha256": "76cec73d8092828b0129c9c105d2b36a7e6fcaa8b1bee0d276d6fe4f3d866066",
+    "old_generation_file_sha256": "12559a6d25957860df97da36f8168d124a5d426c2090086a25939fc0436bbd6e",
+    "old_review_status": "source_unverified with original Data Quality accept and Market Analysts reject recorded; execution_authorized=false",
+    "backup_status": "degraded: prompts differ from latest verified snapshot; no forced snapshot",
+    "backup_offsite_verified": false
+  },
+  "limitations": [
+    "A prompt contract and offline tests do not establish that a future model response follows the rule.",
+    "The 2026-09-29 generation, reject receipt and account ledger were not edited, re-reviewed or backdated.",
+    "A new natural trading-day publication must use the changed prompt version and begin six-role independent review from Data Quality."
+  ],
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  }
+}

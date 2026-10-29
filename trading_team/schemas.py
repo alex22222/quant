@@ -3,7 +3,7 @@
 
 改进计划 Phase 0：
 - position_pct 必须是数字（0-1），禁止 "15%（8%+7% 分批）" 这类自由文本；
-- entry 必须是数字数组（限价/回踩价列表），条件说明放 condition 字段；
+- 可执行买入 entry 只能有一个价位，附加约束使用 execution_conditions；
 - 所有读写 decision.json / plan.json 的模块统一从这里校验与解析。
 
 plan 字段（decision.json 的 plans[] 与 plan.json 的 proposals[] 共用）：
@@ -13,11 +13,12 @@ plan 字段（decision.json 的 plans[] 与 plan.json 的 proposals[] 共用）�
       "name": "中国平安",
       "direction": "买入",            # 买入/条件买入/卖出/减持/持有/观望/回避
       "position_pct": 0.15,          # 数字 0-1；观望/回避为 0
-      "entry": [53.5, 52.2],         # 数字数组，可为 null
-      "entry_type": "limit_or_pullback",  # market/limit/pullback/limit_or_pullback，可为 null
-      "stop": 50.6,                  # 数字或 null
-      "condition": "高开超过3%不追",   # 自由文本条件只准放这里
-      "invalid_if": "...",           # 失效条件（decision.json 用）
+      "entry": [53.5],               # 单一数字价位，观望时为 null
+      "entry_type": "limit",         # limit / breakout
+      "stop": 50.6,                  # 风险参考，不是自动止损指令
+      "condition": null,             # 非空自由文字会阻断执行
+      "invalid_if": null,
+      "execution_conditions": [{"field": "open_gap_pct", "op": "lte", "value": 0.03}],
       "horizon": "2-4 周",
       "confidence": 3,               # 1-5
       # —— 审批写回字段（由 approvals.record 维护，LLM 不得生成）——
@@ -30,12 +31,17 @@ plan 字段（decision.json 的 plans[] 与 plan.json 的 proposals[] 共用）�
 """
 from __future__ import annotations
 
+import math
 import re
 
+from trading_team.entry_contract import entry_contract_errors
+from trading_team.exit_contract import exit_contract_errors
+from trading_team.protection_contract import protection_contract_errors
+
 BUY_WORDS = ("买入", "加仓")
-SELL_WORDS = ("卖出", "减持", "回避")
+SELL_WORDS = ("卖出", "减持")
 HOLD_WORDS = ("持有",)
-WATCH_WORDS = ("观望",)
+WATCH_WORDS = ("观望", "回避")
 
 
 class SchemaError(ValueError):
@@ -80,13 +86,24 @@ def parse_entry(value):
     """entry 解析为 float 列表；null/"—"/"" → None。字符串数字列表逗号分隔可解析。"""
     if value is None:
         return None
+    def price(item):
+        if isinstance(item, bool):
+            raise SchemaError("entry 不能是布尔值")
+        try:
+            number = float(item)
+        except (TypeError, ValueError):
+            raise SchemaError(f"entry 含非数字项: {item!r}")
+        if not math.isfinite(number) or number <= 0:
+            raise SchemaError(f"entry 必须是有限正数: {item!r}")
+        return number
+
     if isinstance(value, (int, float)):
-        return [float(value)]
+        return [price(value)]
     if isinstance(value, list):
         out = []
         for x in value:
             try:
-                out.append(float(x))
+                out.append(price(x))
             except (TypeError, ValueError):
                 raise SchemaError(f"entry 含非数字项: {x!r}")
         return out or None
@@ -100,7 +117,7 @@ def parse_entry(value):
             if not p:
                 continue
             try:
-                nums.append(float(p))
+                nums.append(price(p))
             except ValueError:
                 raise SchemaError(
                     f"entry 含非数字内容: {value!r}；入场条件说明请放 condition 字段"
@@ -118,7 +135,7 @@ def is_buy(direction: str, position_pct: float = 0.0) -> bool:
 
 
 def is_sell(direction: str) -> bool:
-    return any(w in direction for w in SELL_WORDS)
+    return direction in SELL_WORDS
 
 
 def validate_plan(plan: dict, strict: bool = False) -> list[str]:
@@ -142,32 +159,56 @@ def validate_plan(plan: dict, strict: bool = False) -> list[str]:
     except SchemaError as e:
         problems.append(str(e))
     if strict:
+        problems.extend(protection_contract_errors(plan))
         if not isinstance(plan.get("position_pct"), (int, float)):
             problems.append("strict 模式: position_pct 必须是数字类型")
         entry = plan.get("entry")
         if entry is not None and not isinstance(entry, list):
             problems.append("strict 模式: entry 必须是数组或 null")
+        if pct is not None and pct > 0 and is_buy(direction, pct):
+            problems.extend("entry contract: " + error for error in entry_contract_errors(plan))
+        if is_sell(direction) or plan.get("exit") is not None:
+            problems.extend("exit contract: " + error for error in exit_contract_errors(plan))
     return problems
 
 
-def compute_executable(plan: dict, market_ok: bool) -> tuple[bool, str]:
+def compute_executable(plan: dict, market_ok: bool,
+                       plan_hash: str | None = None) -> tuple[bool, str]:
     """确定性计算一条 plan 是否可执行。返回 (executable, blocked_reason)。
 
     规则（fail closed）：
     - approval 必须是 approved（reduced 由执行器减半处理，视为可执行）
     - market_ok=false 时禁止任何买入类计划可执行
     - position_pct 解析失败一律不可执行
+    - 买入执行契约不明确或包含未建模文字条件，一律不可执行
     """
     approval = plan.get("approval", "pending")
     if approval not in ("approved", "reduced"):
         return False, f"approval={approval}"
+    if plan_hash is not None and plan.get("approved_plan_hash") != plan_hash:
+        return False, "approved_plan_hash 与当前 plan_hash 不匹配"
+    if "protection" in plan:
+        errors = protection_contract_errors(plan)
+        if errors:
+            return False, "protection contract: " + "; ".join(errors)
+        if approval != "approved" or plan.get("approval_source") != "paper_auto":
+            return False, "standing protection requires versioned Paper approval"
     direction = str(plan.get("direction", ""))
     try:
         pct = parse_pct(plan.get("position_pct"))
     except SchemaError as e:
         return False, str(e)
-    if is_buy(direction, pct) and pct > 0 and not market_ok:
-        return False, "market_ok=false 禁止买入"
+    if is_sell(direction) or plan.get("exit") is not None:
+        if approval != "approved":
+            return False, "exit contract: exits require explicit approved quantity; reduced is buy-only"
+        errors = exit_contract_errors(plan)
+        return (False, "exit contract: " + "; ".join(errors)) if errors else (True, "")
+    if is_buy(direction, pct) and pct > 0:
+        errors = entry_contract_errors(plan)
+        if errors:
+            return False, "entry contract: " + "; ".join(errors)
+        if not market_ok:
+            return False, "market_ok=false 禁止买入"
     return True, ""
 
 

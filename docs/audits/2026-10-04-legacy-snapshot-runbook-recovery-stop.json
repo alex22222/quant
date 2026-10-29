@@ -1,0 +1,42 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-04T01:08:40+08:00",
+  "result": "legacy_snapshot_restored_in_isolation_and_blocked_for_current_activation",
+  "source": {
+    "registered_snapshot_id": "7a747a0fcbe14a68a776e7523aeae5d0",
+    "manifest_hash": "ce93e46caaed4a5277013f27d9b6c4fb2985b3f14a92d285469331fa09e2694b",
+    "production_runbook_in_manifest": false
+  },
+  "restore": {
+    "target": "/private/tmp/quant-restore-20261004-legacy-runbook",
+    "status": "verified_isolated",
+    "execution_authorized": false,
+    "activation": "manual_review_required_no_runtime_or_scheduler_installed",
+    "production_runbook_present": false
+  },
+  "readiness": {
+    "status": "blocked",
+    "exit_code": 1,
+    "snapshot_verified": true,
+    "runbook_status": "mismatch",
+    "runtime_status": "mismatch",
+    "blockers": [
+      "runtime fingerprint mismatch or incomplete baseline",
+      "production runbook mismatch",
+      "research data invalid, stale or unknown",
+      "research publication evidence incomplete"
+    ],
+    "execution_authorized": false
+  },
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "next_boundary": "After the existing schedule creates a new registered snapshot, independently verify the current production Runbook hash in its manifest and repeat isolated restore/readiness. A blocked legacy snapshot does not count as M3 idempotent recovery acceptance.",
+  "limitations": [
+    "The check used an old local snapshot, not a newly registered snapshot after the Runbook change.",
+    "No production state was restored, activated, approved, settled or notified.",
+    "Offsite disaster recovery remains deferred and unverified."
+  ]
+}

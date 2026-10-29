@@ -1,0 +1,100 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 82,
+  "verified_at": "2026-09-23T07:00:31+08:00",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "isolated_team": "/private/tmp/quant-real-chain-v6.ozdfie8k/trading_team",
+  "repair": {
+    "prompt": "trading_team/prompts/01_fundamental.md",
+    "prompt_sha256": "8cea0946a093e870369108187713f4de36fee50cc6c718d87f1f6f0fec2848ac",
+    "runner": "trading_team/kimi_daily.py",
+    "runner_sha256": "a09e6d3f992219139196211cef4deba12a2f2b1bf76a82d57e8ed1d93aa52167",
+    "change": "Add a date-only per-stock report-period coverage index to role 01 input and prohibit linking full-year versus H1/quarter YoY into a single trend or low-base claim.",
+    "baseline_related_tests": "31 passed",
+    "new_regressions_before": "2 failed",
+    "new_regressions_after": "2 passed",
+    "related_tests_after": "148 passed",
+    "full_suite_after": "1188 passed"
+  },
+  "freeze": {
+    "source_v5_team": "/private/tmp/quant-real-chain-v5.9lt8yes2/trading_team",
+    "source_v5_freeze_sha256": "37de173360a1a8c269dbc9142790d2b13b52e011f69b9e07a2488f4b8a10717b",
+    "v6_freeze_sha256": "5f18bafcbb6319cf115e213d05d8445bfac492065e31aac904f62487d8037e93",
+    "breadth_derivation_receipt_sha256": "c0dc55b8a80c8446898f5503fdbed47a101c251b5cc9ab17f8e7b87c821c837b",
+    "input_count": 38,
+    "changed_inputs_relative_to_v5": ["prompts/01_fundamental.md"],
+    "role01_input_raw_sha256": "7c1d913ff0b9de745842d305ed8efd25eba997e5ae8297bbbcce1fff99855c75",
+    "role01_period_index_stock_count": 11,
+    "wuliangye_archived_dates": ["2026-06-30", "2026-03-31", "2025-12-31", "2025-09-30"],
+    "wuliangye_missing_prior_same_period": ["2025-06-30", "2025-03-31", "2024-12-31", "2024-09-30"],
+    "fingerprint_valid_seeded_roles": ["news", "technical"],
+    "source_inputs_and_raw_hashes_unchanged_after_publication": true
+  },
+  "publication": {
+    "issue": "SATU-13",
+    "issue_id": "01a0cb49-91e2-7ab1-9b2a-d3e837b5314a",
+    "issue_status": "done",
+    "task_id": "01a0cb49-91f4-75af-8f80-a765e8defbae",
+    "task_status": "completed",
+    "task_completed_at": "2026-09-22T22:57:13Z",
+    "run_id": "5637d898902a4e5caeda9d23cedfff42",
+    "run_status": "succeeded",
+    "scope": "publication_only",
+    "business_complete": false,
+    "market_ok": false,
+    "plan_hash": "ad3fb6f1a2d4c8ece52f52bac06fb94af7c64f4167e72737fdc10a676a8d6e2c",
+    "generation_hash": "9461170ebc12081512a6273ca4b56027029f5a6079fbf5fd03e0de9bdc44b9a3",
+    "inspect_generation": "passed",
+    "transport": "https://api.moonshot.cn/v1 / kimi-k3 / openai_chat_completions.v1",
+    "fresh_roles": ["fundamental", "sentiment", "researcher", "trader", "risk_manager"],
+    "fingerprint_cache_hits": ["news", "technical"],
+    "fresh_successful_request_count": 5,
+    "fresh_known_total_tokens": 92492,
+    "proposal_count": 11,
+    "remote_message_count": 106,
+    "remote_tool_call_count": 24,
+    "publication_command_count": 1,
+    "out_of_scope_business_command_matches": 0
+  },
+  "content_precheck": {
+    "status": "failed",
+    "improvement": "The Wuliangye section now labels the low-base rebound as an unverified hypothesis and excludes it from scoring instead of asserting a 2025H1 decline from the 2025 annual YoY.",
+    "remaining_unsupported_claims": [
+      {
+        "file": "outputs/2026-09-23/01_fundamental.md",
+        "line": 30,
+        "finding": "China Merchants Bank: compares 2026H1 YoY with near-zero 2025 full-year YoY and infers slight improvement, despite the explicit separate-period rule."
+      },
+      {
+        "file": "outputs/2026-09-23/01_fundamental.md",
+        "line": 80,
+        "finding": "Midea: compares 2026H1 deducted-profit YoY with 2025 full-year YoY to infer a marked weakening."
+      }
+    ],
+    "formal_market_analysts_verdict": "not_obtained",
+    "execution_authorized": false
+  },
+  "sealed_next_review": {
+    "role": "data-quality",
+    "bundle_hash": "aebbbc59349a252a9278f109dcdcef74e774008cf3dbed1aec1331c4c4f693bc",
+    "bundle_file_sha256": "2752586c3183d5d62625040df0b8df67e9285296bcdc36849d897040a2adca66",
+    "file_count": 40,
+    "repeat_prepare_same_hash": true,
+    "embedded_and_disk_hash_mismatches": [],
+    "status": "pending",
+    "dispatch_this_loop": false,
+    "reason_for_hold": "A direct research-content defect is already observed; do not spend a review task to pass an upstream version known to violate its own period-evidence rule."
+  },
+  "protection": {
+    "formal_file_count": 17,
+    "formal_files_changed": [],
+    "older_v4_rejection_or_v5_freeze_changed": [],
+    "isolated_decisions_present": false,
+    "isolated_paper_present": false,
+    "isolated_notifications_present": false,
+    "git_diff_check": "passed"
+  },
+  "milestones": {"m1": "incomplete", "m2": "not_started", "m3": "not_started"},
+  "next": "Preserve SATU-13 publication and its sealed bundle. Diagnose why role 01 still turns full-year and H1 YoY into a trend despite the prompt/index; choose a bounded upstream semantic check or stronger evidence representation with a failing behavioral regression, not another string-only prompt test. Reuse v6 corrected breadth but invalidate affected role fingerprints in a new version. Only after independent content precheck passes should the next version enter real Data Quality and Market Analysts reviews. No approval, Paper or Live."
+}

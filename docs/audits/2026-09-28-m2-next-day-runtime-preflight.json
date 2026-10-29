@@ -1,0 +1,42 @@
+{
+  "schema": "m2_next_day_runtime_preflight.v1",
+  "observed_at": "2026-09-28T21:28:00+08:00",
+  "scope": "read-only live scheduler, archive and registered backup check; not a production task dispatch",
+  "candidate_day": "2026-09-29",
+  "multica": {
+    "workspace_autopilot_count": 1,
+    "autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "status": "active",
+    "execution_mode": "create_issue",
+    "issue_title_template": "A股每日研究 {{date}}",
+    "trigger_id": "97a59a0a-ceda-4115-81f8-bc583a7c5eef",
+    "cron": "30 7 * * 1-5",
+    "timezone": "Asia/Shanghai",
+    "next_run_at": "2026-09-28T23:30:00Z",
+    "runbook_boundary": "publication only; no Paper settlement, notification or Live; six independent reviews remain separate"
+  },
+  "archive_service": {
+    "status": "healthy",
+    "observed_at": "2026-09-28T21:27:39.929691+08:00",
+    "expected_session": "2026-09-28",
+    "latest_verified_session": "2026-09-28",
+    "missing_sessions": [],
+    "invalid_sessions": []
+  },
+  "backup_boundary": {
+    "catalog_status": "healthy",
+    "latest_id": "f8b359d90c1940bf9759e0c06857780f",
+    "latest_started_at": "2026-09-28T20:20:38.321229+08:00",
+    "latest_verified": true,
+    "cohort_snapshot_current": true,
+    "snapshot_runner_sha256": "5808201f0f958967dc9da01feb49327d26ed56173da619fd6c42cee92f3b88a4",
+    "current_runner_sha256": "c34e5c774febd592dbcc3e19f7983d52da58a804d744eca9df2e7395e09cb84c",
+    "snapshot_technical_charter_sha256": "350e4a74a448132ea088d7c87db376802e5b2bcf9778c70d1a26218f50f92a0d",
+    "current_technical_charter_sha256": "a2bee6c6e23dca1b16ef561751c2f9e03a65890c2b9f10d53dec649e39b5129f",
+    "offsite_verified": false,
+    "assessment": "The registered snapshot is internally valid but predates current runtime and prompt changes; healthy catalog status is not current-version recovery readiness."
+  },
+  "next_action": "At the natural 9/29 preopen check, verify the sole trigger's actual task, the latest registered snapshot against current sources and the new publication version; do not create a duplicate task or count this preflight as M2.",
+  "m2_accepted": false,
+  "m3_started": false
+}

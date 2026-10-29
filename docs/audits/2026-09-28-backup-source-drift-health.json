@@ -1,0 +1,28 @@
+{
+  "schema": "backup_source_drift_health.v1",
+  "observed_at": "2026-09-28T21:33:36+08:00",
+  "issue": "Registered backup catalog reported healthy after current runtime and technical prompt changed, although isolated recovery would see a runtime mismatch.",
+  "scope": "backup status visibility and this project's console process only; no snapshot, Paper or trading task created",
+  "before": {
+    "latest_snapshot_id": "f8b359d90c1940bf9759e0c06857780f",
+    "latest_snapshot_verified": true,
+    "snapshot_count": 27,
+    "cli_status": "healthy",
+    "console_status": "healthy"
+  },
+  "change": "Compare current runtime fingerprints and prompt file hashes against the verified latest manifest; report each drift as degraded. Keep the existing six-hour snapshot cadence and prior catalog history.",
+  "verification": {
+    "regression": "New test failed against old status behavior, then passed after the change; drift did not create a snapshot before the six-hour interval and cleared after the next normal snapshot in the isolated fixture.",
+    "focused_tests": "25 passed in tests/test_backup_service.py and tests/test_backup_service_api.py",
+    "full_tests": "1277 passed in tests and execution/tests",
+    "production_cli_status": "degraded",
+    "production_console_status_after_project_only_reload": "degraded",
+    "issues": ["runtime differs from latest snapshot", "prompts differ from latest snapshot"],
+    "latest_snapshot_verified": true,
+    "snapshot_count": 27,
+    "offsite_verified": false
+  },
+  "remaining": "Check the next naturally registered snapshot and current-version recovery readiness; a healthy catalog or this status repair alone is not offsite recovery or M2/M3 acceptance.",
+  "m2_accepted": false,
+  "m3_started": false
+}

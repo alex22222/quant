@@ -1,0 +1,67 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 81,
+  "verified_at": "2026-09-23T06:28:40+08:00",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "trigger": {
+    "issue": "SATU-12",
+    "verdict": "reject",
+    "receipt_hash": "e4299fd849dbe7b99c05fb8554829580fb620245e951d8156f9b3b11f941dbe6",
+    "failing_check": "source_integrity",
+    "observed_error": "sz301626 close 331.99 below previous 332.00 was counted flat because the reported percent rounded to -0.00"
+  },
+  "code_change": {
+    "file": "trading_team/collect.py",
+    "scope": "Sina-universe/Tencent-quote breadth fallback only",
+    "behavior": "Continue validating the reported two-decimal percent against rounded close/previous ratio, but classify up/down/flat and greater-than-5-percent counts with the unrounded Decimal ratio.",
+    "collector_code_sha256": "4a3030e9bd548ab0bd8bfd30b276be0dc2a431faa149d59e1ac0a38808e11e76",
+    "session_identity_hash_and_quote_coverage_checks_changed": false
+  },
+  "tests": {
+    "existing_market_breadth_before": "32 passed",
+    "new_boundary_cases_before": "4 failed",
+    "new_boundary_cases": ["negative zero", "positive zero", "just above positive 5 percent", "just below negative 5 percent"],
+    "market_breadth_after": "36 passed",
+    "collector_and_breadth_after": "44 passed",
+    "full_suite_after": "1186 passed",
+    "git_diff_check": "passed"
+  },
+  "isolated_derivation": {
+    "source_team": "/private/tmp/quant-real-chain-v4.f50b529v/trading_team",
+    "new_team": "/private/tmp/quant-real-chain-v5.9lt8yes2/trading_team",
+    "source_freeze_sha256": "435d5c8b9945eebe7aea936a83fbd9bf3cac8d5f98d71b5ace919c14de5ee0be",
+    "new_freeze_sha256": "37de173360a1a8c269dbc9142790d2b13b52e011f69b9e07a2488f4b8a10717b",
+    "derivation_script_sha256": "d1d6153a8731d60317a5800d0fac4c8cb98e7564dac542563bf206d6bc65f07b",
+    "derivation_receipt_sha256": "c0dc55b8a80c8446898f5503fdbed47a101c251b5cc9ab17f8e7b87c821c837b",
+    "source_breadth_sha256": "69f09981fac259058ba51a66e7c2956bcea44df509624d67d689b3b74193c209",
+    "new_breadth_sha256": "1ec9f32a3325ed20c2d6de34fa468e267386c0db849b7dbcb467e62a75fa5479",
+    "new_sentiment_sha256": "6821339e7a5f6caa09bf679649b4bf74560381e19cdfbbbac397c922da010b41",
+    "input_count": 38,
+    "changed_inputs": ["context/2026-09-23/market_breadth.json", "context/2026-09-23/sentiment.json"],
+    "source_raw_pages_equal_new_raw_pages": true,
+    "sentiment_source_hash_matches_new_breadth": true,
+    "manifest_and_market_archive_validate": true,
+    "counts_before": {"up": 2284, "down": 2781, "flat": 156, "up_gt5": 224, "down_gt5": 43},
+    "counts_after": {"up": 2284, "down": 2782, "flat": 155, "up_gt5": 224, "down_gt5": 43},
+    "universe_total": 5566,
+    "excluded_beijing": 345,
+    "shanghai_shenzhen_quote_count": 5221,
+    "tencent_quote_batches": 66,
+    "fingerprint_valid_seeded_roles": ["fundamental", "news", "technical"],
+    "sentiment_cache_reused": false,
+    "new_outputs_present": false,
+    "new_decisions_present": false,
+    "new_paper_present": false
+  },
+  "protection": {
+    "formal_file_count": 17,
+    "formal_files_changed": [],
+    "v4_frozen_breadth_sentiment_or_rejection_changed": [],
+    "new_remote_task": false,
+    "new_model_request": false
+  },
+  "remaining_blocker": "The v4 fundamental report still uses 2025 full-year YoY decline to assert a same-period H1 low-base narrative. Because the v5 fundamental prompt/input is unchanged, a publication would cache this known unsupported report. Do not publish v5 as-is; first address that direct content-evidence blocker in a new frozen version or other independently verifiable gate, while preserving prior reports and receipts.",
+  "milestones": {"m1": "incomplete", "m2": "not_started", "m3": "not_started"},
+  "next": "Diagnose the fundamental role's unsupported period-comparison narrative from the actual prompt, source values and generated text. Add a focused failing regression for a bounded evidence constraint, make the minimal versioned repair, then prepare a new isolated version from v5 corrected breadth and current prompt. Reuse only roles with matching fingerprints, independently verify freeze/market data/remote identity before one publication-only task. Do not overwrite v4/SATU-12 or certify a Paper trade."
+}

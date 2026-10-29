@@ -1,0 +1,204 @@
+{
+  "temporary_ui_server_stopped": true,
+  "schema": "paper_protection_acceptance.v1",
+  "observed_at": "2026-09-22T08:57:46.855424+08:00",
+  "source_hashes_before": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+    "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+    "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+    "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+    "trading_team/team.db": "acad0151f77237ab2d7cf0d75e2ef2bc3b968fed95eb06ffe2437d0723c37ef0",
+    "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818",
+    "docs/audits/2026-09-22-notification-recovery.json": "b6a2ef9a07602894720c19c2de6e56cf3dddeae78a265dbb378eaeec82496a12",
+    "docs/audits/2026-09-22-persistent-backup.json": "917b8103e93ae1bd288c681f955f7b2a4cbcb59e262802509f904f87165fce1d",
+    "docs/audits/2026-09-22-continuous-counterfactual.json": "2bafa984af423bda5136229a79aa7bf46613a0912fbc5663d04604b32ca6a50c",
+    "docs/audits/2026-09-22-lot-inventory.json": "9834742c64efe66fa261a7ead8e442ccc6a01d337dff0781ed1bf9b1cde8c576"
+  },
+  "source_hashes_after": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+    "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+    "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+    "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+    "trading_team/team.db": "acad0151f77237ab2d7cf0d75e2ef2bc3b968fed95eb06ffe2437d0723c37ef0",
+    "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818",
+    "docs/audits/2026-09-22-notification-recovery.json": "b6a2ef9a07602894720c19c2de6e56cf3dddeae78a265dbb378eaeec82496a12",
+    "docs/audits/2026-09-22-persistent-backup.json": "917b8103e93ae1bd288c681f955f7b2a4cbcb59e262802509f904f87165fce1d",
+    "docs/audits/2026-09-22-continuous-counterfactual.json": "2bafa984af423bda5136229a79aa7bf46613a0912fbc5663d04604b32ca6a50c",
+    "docs/audits/2026-09-22-lot-inventory.json": "9834742c64efe66fa261a7ead8e442ccc6a01d337dff0781ed1bf9b1cde8c576"
+  },
+  "network_used_by_verifier": false,
+  "production_writes": false,
+  "protection_policy": "existing_position_stop.v1",
+  "controlled_series": {
+    "days": [
+      "2026-09-15",
+      "2026-09-16",
+      "2026-09-17",
+      "2026-09-18",
+      "2026-09-21"
+    ],
+    "actions": [
+      "buy",
+      "create",
+      "replace",
+      "stale_cancel",
+      "gap_stop_fill"
+    ],
+    "fill_price": 9.08,
+    "order_statuses": [
+      "filled",
+      "unfilled",
+      "unfilled",
+      "unfilled",
+      "filled"
+    ],
+    "continuous_paper_matched": true,
+    "stable_report_hash": "cbae760941769dc1c748a2f02c6e10bd0f382304c3db313b9064a8cdc3759be8",
+    "workflow_restore_snapshot_equal": true,
+    "retry_byte_identical": true,
+    "restored_exit_exactly_once": true,
+    "deleted_receipt_reported_unknown_without_mutation": true,
+    "audit_conflicts": {
+      "gate": 0,
+      "no_gate": 0
+    }
+  },
+  "production": {
+    "gate": {
+      "protection": {
+        "status": "unverified",
+        "execution_certified": false,
+        "active": null,
+        "error": "no such table: execution_receipts"
+      },
+      "execution_certified": false
+    },
+    "no_gate": {
+      "protection": {
+        "status": "unverified",
+        "execution_certified": false,
+        "active": null,
+        "error": "no such table: execution_receipts"
+      },
+      "execution_certified": false
+    }
+  },
+  "artifacts": {
+    "directory": "/private/tmp/quant-paper-protection-final-Vm5ESr",
+    "backup_manifest_hash": "0ed3a33610b5b4f1ef246166b04372c0c036d64d7667d56b5b463f468f5f9a32"
+  },
+  "limitations": [
+    "Controlled fixtures, not historical strategy returns or forward certification",
+    "No buy-attached guards, intraday queue model, Live action or corporate-action accounting",
+    "Local Runbook only; remote Multica Run and offsite recovery not verified"
+  ],
+  "final_source_hashes": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+    "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+    "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+    "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+    "trading_team/team.db": "397b37b89a02a3dc4b87ff6ef0504def4ecd3e24362e66e23b424cbc0366aeee",
+    "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818",
+    "docs/audits/2026-09-22-notification-recovery.json": "b6a2ef9a07602894720c19c2de6e56cf3dddeae78a265dbb378eaeec82496a12",
+    "docs/audits/2026-09-22-persistent-backup.json": "917b8103e93ae1bd288c681f955f7b2a4cbcb59e262802509f904f87165fce1d",
+    "docs/audits/2026-09-22-continuous-counterfactual.json": "2bafa984af423bda5136229a79aa7bf46613a0912fbc5663d04604b32ca6a50c",
+    "docs/audits/2026-09-22-lot-inventory.json": "9834742c64efe66fa261a7ead8e442ccc6a01d337dff0781ed1bf9b1cde8c576"
+  },
+  "concurrent_business_change": {
+    "file": "trading_team/team.db",
+    "mtime": "2026-09-22 09:00:26 Asia/Shanghai",
+    "before_hash": "acad0151f77237ab2d7cf0d75e2ef2bc3b968fed95eb06ffe2437d0723c37ef0",
+    "after_hash": "397b37b89a02a3dc4b87ff6ef0504def4ecd3e24362e66e23b424cbc0366aeee",
+    "comparison_baseline": "/private/tmp/quant-persistent-backup-verified-ucscaE/restored/trading_team/team.db",
+    "business_delta": {
+      "decisions": {
+        "added": 1,
+        "removed": 0
+      },
+      "plans": {
+        "added": 11,
+        "removed": 0
+      },
+      "execution_log": {
+        "added": 0,
+        "removed": 0
+      },
+      "accuracy": {
+        "added": 0,
+        "removed": 0
+      },
+      "approvals": {
+        "added": 0,
+        "removed": 0
+      }
+    },
+    "sqlite_sequence": "plans increased to 1789",
+    "writer_process": "not yet identified; no production materialization command issued by this loop",
+    "latest_plan_risk_contract": "missing",
+    "paper_pm_status": "pending",
+    "daily_research_ledger_run_count": 0,
+    "file_preserved": true,
+    "followup": "Trace generation entrypoint; do not backfill or approve the legacy plan"
+  },
+  "final_verification": {
+    "observed_at": "2026-09-22T09:06:29.100090+08:00",
+    "tests": {
+      "command": ".venv/bin/python -m pytest tests execution/tests -q",
+      "result": "996 passed"
+    },
+    "formal_api_matches_readonly_source": true,
+    "formal_protection": "unknown: legacy receipt table absent",
+    "production_audit_counts": {
+      "gate": {
+        "conflict_count": 0,
+        "missing_count": 22
+      },
+      "no_gate": {
+        "conflict_count": 2,
+        "missing_count": 26
+      }
+    },
+    "continuous_history_coverage": "0/13",
+    "production_execution_certified": false,
+    "browser": {
+      "method": "in-app Playwright and screenshots",
+      "viewports": [
+        390,
+        768,
+        1100,
+        1280
+      ],
+      "horizontal_overflow": false,
+      "states": [
+        "active",
+        "closed",
+        "corrupt_unknown",
+        "legacy_unknown"
+      ]
+    },
+    "javascript_syntax": "passed",
+    "python_compile": "passed",
+    "git_diff_check": "passed",
+    "network_for_api_check": "loopback only",
+    "protected_files_unchanged": 15,
+    "concurrent_business_files_preserved": 1
+  }
+}

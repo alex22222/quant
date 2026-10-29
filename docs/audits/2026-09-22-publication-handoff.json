@@ -1,0 +1,52 @@
+{
+  "schema": "publication_handoff_acceptance.v1",
+  "loop": 53,
+  "classification": "progress",
+  "goal_status_observed": "active",
+  "goal_complete": false,
+  "scope": "Local publication, review and Paper handoff; model and remote task identity are fixtures",
+  "verification": {
+    "baseline_related_passed": 119,
+    "initial_regressions_failed": 6,
+    "related_passed": 144,
+    "new_handoff_integration_passed": 1,
+    "full_command": ".venv/bin/python -m pytest -q tests execution/tests",
+    "full_passed": 1138,
+    "full_seconds": 36.55,
+    "retained_cases_passed": 5,
+    "retained_directory": "/private/tmp/quant-publication-handoff.EMpPQp/cases",
+    "independent_readback": {
+      "research_scope": "publication_only",
+      "business_complete": false,
+      "review_status": "accepted",
+      "gate_trade_count": 1,
+      "no_gate_trade_count": 1,
+      "same_review_proof": true
+    },
+    "test_correction": "Compared pre-run ledger snapshot rather than an empty ledger: fixture already contains closing_archive.",
+    "readback_correction": "Initial account probe selected the parent directory; corrected to the fixture workspace, without modifying accounts.",
+    "git_diff_check": "passed"
+  },
+  "behavior": [
+    "Explicit publication-only mode requires notification disabled",
+    "Acknowledged publication hands off without decisions, settlement or delivery",
+    "Receipt-backed retry reuses roles and preserves failed attempts",
+    "Paper still requires current independent reviews",
+    "Local Multica Issue and Runbook select publication-only mode"
+  ],
+  "side_effects": {
+    "production_research_or_account_writes": false,
+    "real_model_calls": false,
+    "real_remote_dispatch": false,
+    "remote_runbook_sync": false,
+    "real_notification": false,
+    "thread_heartbeat_prompt_updated": true
+  },
+  "remaining": [
+    "Confirm real dispatch and cutover scope",
+    "Confirm original model billing source",
+    "Validate actual runtime and independent remote role tasks",
+    "Accept natural-session chain and continuous operation",
+    "Retain full independent-maker, offsite-recovery and forward-evaluation requirements"
+  ]
+}

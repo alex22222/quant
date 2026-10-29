@@ -13,8 +13,8 @@
 6. 策略族去重：同族（FAMILY 相同）只允许一个代表通过门禁；
 7. 多重试验修正（2026-08-23 审查新增）：尝试越多参数组合，偶然通过概率越高。
    采用简化版 Deflated Sharpe Ratio（Bailey & López de Prado, 2014）：
-   以扰动变体的夏普方差估计"试验簇"的夏普离散度，n_trials 取
-   实验台账中该策略的不同参数组合数 + 本次扰动数；DSR < 0.95 拒绝。
+   只使用实际同窗口试验的月度夏普离散度；历史缺失或样本不足直接拒绝。
+   扰动结果不再充当试验历史的替代品；DSR < 0.95 拒绝。
 
 指标来源：rqalpha report summary.xlsx（含基准对照指标）。
 
@@ -71,10 +71,12 @@ def deflated_sharpe(sr: float, n_trials: int, sr_var: float, T: int,
                     skew: float = 0.0, kurt: float = 3.0) -> float | None:
     """简化 Deflated Sharpe Ratio（Bailey & López de Prado）。
 
-    sr: 全样本夏普；n_trials: 试验次数；sr_var: 试验簇夏普方差；
+    sr: 月收益夏普（非年化）；n_trials: 试验次数；sr_var: 同窗口月度试验夏普方差；
     T: 收益观测数（月）；skew/kurt: 月收益偏度/峰度。
     返回 0~1 的置信度；输入不足返回 None（不参与判定）。"""
-    if n_trials < 2 or sr_var <= 0 or T < 12 or sr is None:
+    from math import isfinite
+    if (sr is None or not all(isfinite(x) for x in (sr, sr_var, skew, kurt))
+            or n_trials < 2 or sr_var <= 0 or T < 12):
         return None
     from math import exp, log, pi, sqrt
 
@@ -144,7 +146,7 @@ def _check(m: dict, gate: dict, label: str) -> list[str]:
 def evaluate(full_metrics: dict, oos_metrics: dict | None,
              perturb_metrics: list[dict] | None,
              family_status: dict | None,
-             n_trials: int = 1) -> dict:
+             n_trials: int = 1, trial_sharpes: list[float] | None = None) -> dict:
     """综合判定。返回 {"gate": pass/reject, "reasons": [...], "detail": {...}}"""
     reasons = []
 
@@ -170,21 +172,25 @@ def evaluate(full_metrics: dict, oos_metrics: dict | None,
         sub = _check(pm, base_gate, f"扰动{i+1}({pm.get('variant', '?')})")
         reasons += sub
 
-    # 4) 多重试验修正：简化 DSR（试验簇夏普方差由扰动变体估计）
-    perts = perturb_metrics or []
-    sharpes = [p["sharpe"] for p in perts if p.get("sharpe") is not None]
-    sharpes = [full_metrics.get("sharpe")] + sharpes if full_metrics.get("sharpe") is not None else sharpes
+    # 4) Only actual comparable trial results, all in MONTHLY units.
+    # Perturbations still test robustness but cannot stand in for missing experiments.
+    import math
+    sharpes = [s for s in (trial_sharpes or []) if s is not None and math.isfinite(s)]
     dsr = None
-    if len(sharpes) >= 2:
+    if n_trials > 1 and (len(sharpes) < n_trials or full_metrics.get("sr_monthly") is None):
+        reasons.append(f"多重试验: 缺少真实同窗口月度夏普结果（{len(sharpes)}/{n_trials}），拒绝评估DSR")
+    elif n_trials > 1:
         import statistics
         sr_var = statistics.pvariance(sharpes)
-        dsr = deflated_sharpe(full_metrics.get("sharpe"),
-                              n_trials=max(n_trials, len(sharpes)),
+        dsr = deflated_sharpe(full_metrics.get("sr_monthly"),
+                              n_trials=n_trials,
                               sr_var=sr_var,
                               T=int(full_metrics.get("months") or 0),
                               skew=full_metrics.get("skew") or 0.0,
                               kurt=full_metrics.get("kurt") or 3.0)
-        if dsr is not None and dsr < DSR_MIN:
+        if dsr is None:
+            reasons.append("多重试验: 样本/方差不足，DSR不可估计")
+        elif dsr < DSR_MIN:
             reasons.append(f"多重试验: DSR={dsr:.2f} 未满足 >= {DSR_MIN:.2f}"
                            f"（n_trials={max(n_trials, len(sharpes))}，试验越多门槛越高）")
 

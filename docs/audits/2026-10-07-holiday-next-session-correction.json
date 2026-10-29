@@ -1,0 +1,59 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-07T23:41:31+08:00",
+  "result": "holiday_skip_verified_next_session_claim_corrected",
+  "business_date": "2026-10-07",
+  "holiday_task": {
+    "issue": "SATU-84",
+    "issue_id": "01a1138d-ae8d-7849-964f-6cfd071d34e3",
+    "task_id": "01a1138d-aea4-798c-a20c-9f406c0edc86",
+    "task_status": "completed",
+    "issue_status": "in_review",
+    "title": "A股每日研究 2026-10-07",
+    "observed_skip": "Task reported no publication command; no dated context, output or decision file was present, and both active Paper accounts still recorded zero trades.",
+    "retained_error": "The original issue comment says the next trading session is 2026-10-09. Its command checked 2026-10-07, 2026-10-06, 2026-10-05 and 2026-10-09, but omitted 2026-10-08. The comment was not edited."
+  },
+  "independent_calendar_check": {
+    "source": "trading_team.collect.load_trading_days() using ~/.rqalpha/bundle/trading_dates.npy",
+    "2026-10-07_member": false,
+    "previous_session": "2026-09-30",
+    "next_session": "2026-10-08",
+    "2026-10-08_member": true,
+    "exchange_sources": [
+      "https://www.sse.com.cn/disclosure/announcement/general/c/c_20260915_10832273.shtml",
+      "https://www.szse.cn/www/disclosure/notice/general/t20260917_622911.html"
+    ]
+  },
+  "bounded_correction": {
+    "scope": "Production Autopilot description only; no schedule, agent, issue title, model, account or risk-gate change.",
+    "autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "runbook_sha256_before": "1c004bb103c196a4512a899686c039f7e3601621f54e9b5a96949f019ca2cda3",
+    "runbook_sha256_after_local_and_remote": "be2861c475d4a5ccdd07b243f70c4c5402b9661a55e9d4a67ac993857c8a4d31",
+    "verified_remote_status": "active",
+    "verified_next_run_at_utc": "2026-10-07T23:30:00Z",
+    "verified_issue_title_template": "A股每日研究 {{date}}"
+  },
+  "preopen_snapshot": {
+    "research_lead": "idle; bound runtime b8f30287-d5e3-4a63-aaea-eb6dcad15fb7 online",
+    "daemon": "running; zero active tasks",
+    "host_power": "AC externally connected at 82%; not charging at observation; this does not prove next-morning wakefulness",
+    "archive": "healthy; expected and latest verified session both 2026-09-30",
+    "paper_gate_and_no_gate": "checked; CNY 100000 cash and zero recorded trades in each active cohort account",
+    "backup_after_runbook_update": "degraded with fresh heartbeat, runbook_snapshot_current=false, runtime_snapshot_current=true and offsite_verified=false; await the existing backup scheduler's natural tick"
+  },
+  "natural_backup_followup": {
+    "verified_at": "2026-10-07T23:46:34+08:00",
+    "scheduler": "existing com.hqcapital.workflow-backup 23:45 tick; no manual backup invocation",
+    "snapshot_id": "a6fc9bff2e594b3582bbbf1fec7d0a59",
+    "manifest_sha256_registered_and_independently_recomputed": "5143bba4081320661100914263b5da563e4cf1aa778a342934fec6ff1ef6fc25",
+    "snapshot_runbook_sha256": "be2861c475d4a5ccdd07b243f70c4c5402b9661a55e9d4a67ac993857c8a4d31",
+    "served_status": "healthy; current Runbook, runtime, prompts and cohort configuration matched; offsite_verified=false",
+    "scope_limit": "Latest local snapshot only; no isolated restore or M3 acceptance in this follow-up."
+  },
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "next_boundary": "On 2026-10-08 recheck the actual exchange calendar, exact original Issue title, unique task, host power, runtime and archive before 09:15. Publication, six real reviews and post-close deterministic Paper settlement remain unproven."
+}

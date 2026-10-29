@@ -5,21 +5,37 @@ import json
 import pytest
 
 from trading_team import approvals
+from trading_team.decision_pipeline import canonical_plan_hash
+
+PLAN = {
+    "date": "2026-08-23", "market_ok": False,
+    "proposals": [
+        {"code": "601318", "name": "中国平安", "direction": "买入",
+         "position_pct": 0.15, "entry": [53.5], "entry_type": "limit", "stop": 50.6},
+        {"code": "600036", "name": "招商银行", "direction": "观望",
+         "position_pct": 0, "entry": None, "stop": None},
+    ],
+}
+PLAN_HASH = canonical_plan_hash(PLAN)
 
 
 @pytest.fixture
-def env(tmp_path, monkeypatch):
+def env(tmp_path, monkeypatch, stub_research_reviews):
     """隔离的 TEAM 目录环境：decisions/ + loops/approvals.json。"""
     team = tmp_path / "trading_team"
     (team / "loops").mkdir(parents=True)
     (team / "outputs").mkdir()
+    output = team / "outputs" / "2026-08-23"
+    output.mkdir()
+    (output / "plan.json").write_text(json.dumps(PLAN, ensure_ascii=False), encoding="utf-8")
     dec_dir = team / "decisions" / "2026-08-23"
     dec_dir.mkdir(parents=True)
     decision = {
         "date": "2026-08-23", "market_ok": False, "pm_status": "pending",
+        "plan_hash": PLAN_HASH,
         "plans": [
             {"code": "601318", "name": "中国平安", "direction": "买入",
-             "position_pct": 0.15, "entry": [53.5], "stop": 50.6},
+             "position_pct": 0.15, "entry": [53.5], "entry_type": "limit", "stop": 50.6},
             {"code": "600036", "name": "招商银行", "direction": "观望",
              "position_pct": 0, "entry": None, "stop": None},
         ],
@@ -41,21 +57,29 @@ def _read_decision(team):
 
 class TestWriteBack:
     def test_approval_synced_to_master(self, env):
-        approvals.record("2026-08-23", "600036", "招商银行", "approved")
+        approvals.record("2026-08-23", "600036", "招商银行", "approved", PLAN_HASH)
         dec = _read_decision(env)
         plan = [p for p in dec["plans"] if p["code"] == "600036"][0]
         assert plan["approval"] == "approved"
+        assert plan["approved_plan_hash"] == PLAN_HASH
         assert plan["approved_at"]
 
     def test_pm_status_partial_then_approved(self, env):
-        approvals.record("2026-08-23", "601318", "中国平安", "approved")
+        approvals.record("2026-08-23", "601318", "中国平安", "approved", PLAN_HASH)
         assert _read_decision(env)["pm_status"] == "partial"
-        approvals.record("2026-08-23", "600036", "招商银行", "rejected")
+        approvals.record("2026-08-23", "600036", "招商银行", "rejected", PLAN_HASH)
         assert _read_decision(env)["pm_status"] == "approved"
 
+    def test_pm_status_all_rejected_is_not_approved(self, env):
+        approvals.record("2026-08-23", "601318", "中国平安", "rejected", PLAN_HASH)
+        approvals.record("2026-08-23", "600036", "招商银行", "rejected", PLAN_HASH)
+        decision = _read_decision(env)
+        assert decision["pm_status"] == "rejected"
+        assert all(not plan["executable"] for plan in decision["plans"])
+
     def test_same_day_overwrite(self, env):
-        approvals.record("2026-08-23", "601318", "中国平安", "approved")
-        approvals.record("2026-08-23", "601318", "中国平安", "rejected", note="太贵")
+        approvals.record("2026-08-23", "601318", "中国平安", "approved", PLAN_HASH)
+        approvals.record("2026-08-23", "601318", "中国平安", "rejected", PLAN_HASH, note="太贵")
         data = approvals.load()
         entries = [d for d in data["decisions"]
                    if d["date"] == "2026-08-23" and d["code"] == "601318"]
@@ -65,7 +89,7 @@ class TestWriteBack:
 
     def test_market_not_ok_blocks_buy_executable(self, env):
         """market_ok=false 时买入计划批复 approved 也不得 executable"""
-        entry = approvals.record("2026-08-23", "601318", "中国平安", "approved")
+        entry = approvals.record("2026-08-23", "601318", "中国平安", "approved", PLAN_HASH)
         plan = [p for p in _read_decision(env)["plans"] if p["code"] == "601318"][0]
         assert plan["approval"] == "approved"
         assert plan["executable"] is False
@@ -73,14 +97,20 @@ class TestWriteBack:
         assert entry["master_synced"] is True
 
     def test_zero_pct_plan_executable_when_approved(self, env):
-        approvals.record("2026-08-23", "600036", "招商银行", "approved")
+        approvals.record("2026-08-23", "600036", "招商银行", "approved", PLAN_HASH)
         plan = [p for p in _read_decision(env)["plans"] if p["code"] == "600036"][0]
         assert plan["executable"] is True  # 观望 0%：无买入动作，不受 market_ok 限制
 
-    def test_missing_master_marks_unsynced(self, env):
-        entry = approvals.record("2026-08-23", "999999", "不存在", "approved")
-        assert entry["master_synced"] is False
+    def test_missing_master_rejected_before_log_write(self, env):
+        with pytest.raises(ValueError, match="不存在"):
+            approvals.record("2026-08-23", "999999", "不存在", "approved", PLAN_HASH)
+        assert approvals.load()["decisions"] == []
+
+    def test_wrong_hash_rejected_before_log_write(self, env):
+        with pytest.raises(ValueError, match="plan_hash"):
+            approvals.record("2026-08-23", "601318", "中国平安", "approved", "b" * 64)
+        assert approvals.load()["decisions"] == []
 
     def test_invalid_decision_rejected(self, env):
         with pytest.raises(ValueError):
-            approvals.record("2026-08-23", "601318", "中国平安", "maybe")
+            approvals.record("2026-08-23", "601318", "中国平安", "maybe", PLAN_HASH)

@@ -1,0 +1,15 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-04T01:49:50+08:00",
+  "result": "october_8_premarket_uses_september_30_close_and_refuses_october_8_paper_execution_before_close",
+  "method": "Read-only in-memory calls to the current trading calendar, market_archive.completed_day and execution_bars.load_execution_bars with an explicit simulated 2026-10-08 07:30 Asia/Shanghai clock; no archived bar fetch or account write.",
+  "observations": {
+    "first_calendar_session_after_2026_09_30": "2026-10-08",
+    "completed_day_at_2026_10_08_0730": "2026-09-30",
+    "same_day_execution_bar_result": "ValueError: 2026-10-08: execution session not completed",
+    "paper_decision_policy": "A plan dated 2026-10-08 with data_asof=2026-09-30 is eligible for 2026-10-08, but actual Paper execution still requires the completed execution session and evidence."
+  },
+  "limits": "This confirms deterministic date and preclose guards, not that the October 8 market feed, archive, six reviews, orders, fills or notification will succeed. The local calendar and exchange session must be rechecked on the actual day.",
+  "next_boundary": "Before 09:15 only accept actual same-version publication and six independent reviews. After the true October 8 close and complete archive, independently finalize plan_hash-bound decisions, both Paper accounts, three-way comparison and authorized notification; never backdate or manufacture a preclose fill.",
+  "milestones": {"M1": "complete", "M2": "not_accepted", "M3": "not_started"}
+}

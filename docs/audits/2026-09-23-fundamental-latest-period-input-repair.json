@@ -1,0 +1,45 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 85,
+  "verified_at": "2026-09-23T07:45:50+08:00",
+  "previous_goal_turn": "progress: SATU-14 real task completed with a preserved role-01 rejection that changed the direct blocker",
+  "direct_blocker": "Role 01 received several non-comparable historical financial periods and used annual or nine-month growth rates to infer a directional H1 trend; the first guard recognized only the literal word for full-year",
+  "source_failure": {
+    "issue": "SATU-14",
+    "issue_status": "blocked",
+    "run_id": "35012155225d4158ad16fe3bb3778237",
+    "run_status": "failed",
+    "rejected_response_sha256": "c54c8de0501abaff43d50cc510dab1b610b2885889c687eb570e2d4affa009bd",
+    "v7_freeze_sha256": "7c81d73d6801eb490a7710184e04badab6813fd7f69f873362184b239b953d24"
+  },
+  "repair": {
+    "runner": "trading_team/kimi_daily.py",
+    "runner_sha256": "42881fc61b18caf980da7e5d60410d9a797e75c3a938da15d4e8a959dc41544f",
+    "charter": "trading_team/prompts/01_fundamental.md",
+    "charter_sha256": "2f3647a673151b695c6c65ddea6ea8a6a6d62c4fa8b4c96bf0ae2c93ca12f185",
+    "test_file": "tests/test_model_identity.py",
+    "test_sha256": "119179af0f8edd3f28d5206ad8bd089b95a4e588d7f9a2f62d4fdb6d138933de",
+    "input_scope": "Role 01 receives one latest financial report per stock, current valuation snapshot and announcements; all multi-period raw financial files remain in immutable generation inputs for independent review, while the date-only coverage index discloses their existence and missing comparators",
+    "guard_scope": "Recognizes annual-report and nine-month aliases, not only the literal full-year word, when mixed reporting periods support a directional claim",
+    "charter_scope": "Latest-period YoY is not acceleration or continuation; unsupported cross-period trend is unknown"
+  },
+  "verification": {
+    "related_baseline": "119 passed",
+    "new_regressions_before_change": "6 failed and 3 passed in the focused selection",
+    "related_after": "123 passed",
+    "full_suite_after": "1197 passed",
+    "real_v7_archived_stock_count": 11,
+    "real_v7_one_latest_report_each": true,
+    "real_v7_annual_numeric_excluded_from_role_input": true,
+    "real_rejected_report_guarded_line_numbers": [31, 51, 71, 81, 91, 101, 111],
+    "old_rejected_response_and_freeze_hashes_unchanged": true,
+    "git_diff_check": "passed",
+    "new_remote_task_or_model_call_this_loop": false
+  },
+  "limits": [
+    "This is a temporary research-input restriction, not deletion of annual financial evidence. Restoring multi-period analysis requires period-aligned comparable data and independent acceptance.",
+    "The bounded text guard cannot establish full factual correctness; real independent Market Analysts review remains mandatory.",
+    "Tests and reconstructed input do not prove a new model response will comply. M1 remains incomplete and M2/M3 have not begun."
+  ],
+  "next": "Build a new isolated version from the verified v7 raw archive with the changed charter and runner hashes, invalidate role 01 and downstream caches, and reuse only independently fingerprint-matching roles. After exact runtime, input, protection and duplicate checks, dispatch at most one bounded Research Lead publication. Inspect the real report before sequential independent reviews; do not rerun SATU-14."
+}

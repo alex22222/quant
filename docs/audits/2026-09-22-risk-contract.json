@@ -1,0 +1,2222 @@
+{
+  "schema": "risk_contract_acceptance.v1",
+  "risk_contract": "a_share_risk.v1",
+  "risk_policy": "structured_risk.v1",
+  "generation_schema": "daily_research.v3",
+  "scope": "isolated_retrospective_engineering_acceptance",
+  "network_disabled": true,
+  "forward_performance": false,
+  "execution_certified": false,
+  "observed_at": "2026-09-22T05:16:02.580909+08:00",
+  "isolated_root": "/private/tmp/quant-risk-verified-BXFVKn",
+  "archive_receipt_hash": "440a5d3e03f248306cc8d33ba2c90e26a6e8d73fb9659af588d238b13f22ce42",
+  "source_hashes_before": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-entry-contract.json": "5018b581f82f1348e537377bf5650d473d5335ead94f3a9a70cc9fcc37c05bd3",
+    "docs/audits/2026-09-22-execution-precision.json": "c5bbaa2b353015fa78d4ee26e291dc1b5e5effc4b0a328bed466a2f55e666c3c"
+  },
+  "cases": {
+    "typed": {
+      "first_run": {
+        "date": "2026-09-21",
+        "status": "succeeded",
+        "run_id": "9fb383726e9d4fccb541ece4e3adde00",
+        "plan_hash": "1757d388864162ba3b6bfdba36ba45eacf7f7d61473b04bbae4f4a7d4822c2c3",
+        "session": {
+          "date": "2026-09-21",
+          "is_session": true,
+          "completed": true,
+          "calendar_hash": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+          "reason": "completed"
+        },
+        "materialize": {
+          "date": "2026-09-21",
+          "plan_hash": "1757d388864162ba3b6bfdba36ba45eacf7f7d61473b04bbae4f4a7d4822c2c3",
+          "decision": "ok",
+          "paper_decision": "paper_auto"
+        },
+        "counterfactual": {
+          "plan_date": "2026-09-21",
+          "data_asof": "2026-09-18",
+          "sample_type": "forward_eligible",
+          "plan_hash": "1757d388864162ba3b6bfdba36ba45eacf7f7d61473b04bbae4f4a7d4822c2c3",
+          "risk_review": {
+            "status": "validated_contract",
+            "contract": "a_share_risk.v1",
+            "reviewed_count": 4,
+            "passed_count": 0,
+            "reduced_count": 1,
+            "gate_only_count": 1,
+            "risk_rejected_count": 2,
+            "reviews": [
+              {
+                "code": "600036",
+                "decision": "否决",
+                "reason_codes": [
+                  "market_gate"
+                ],
+                "reason": "synthetic gate-only fixture"
+              },
+              {
+                "code": "601318",
+                "decision": "否决",
+                "reason_codes": [
+                  "market_gate",
+                  "liquidity"
+                ],
+                "reason": "synthetic mixed-risk fixture",
+                "clause": "条款4"
+              },
+              {
+                "code": "601899",
+                "decision": "降仓通过",
+                "reason_codes": [
+                  "position_limit"
+                ],
+                "position_pct": 0.05,
+                "reason": "synthetic reduction fixture; market_ok=false"
+              },
+              {
+                "code": "600900",
+                "decision": "否决",
+                "reason_codes": [
+                  "data_quality"
+                ],
+                "reason": "synthetic non-gate fixture",
+                "clause": "条款4"
+              }
+            ]
+          },
+          "risk_scope": "validated_decisions",
+          "evidence_kind": "DAILY_BAR_PROXY",
+          "opening_state": {
+            "cash": 100000,
+            "positions": {},
+            "scope": "daily_cash_reset"
+          },
+          "execution_model": {
+            "version": "daily_bar_t1.v4",
+            "entry_contract": "a_share_entry.v1",
+            "exit_contract": "a_share_exit.v1",
+            "portfolio_policy": "explicit_intent.v1",
+            "sale_proceeds_reuse": "next_session",
+            "signal_to_fill": "T+1",
+            "slippage_rate": 0.002,
+            "board_lot": 100,
+            "limit_touch": "daily_ohlc_strict",
+            "fees": "commission+stamp_tax+transfer_fee"
+          },
+          "portfolios": {
+            "gate": {
+              "initial_cash": 100000,
+              "initial_equity": 100000,
+              "positions": {},
+              "cash": 100000,
+              "equity": 100000,
+              "return": 0.0,
+              "orders": [
+                {
+                  "code": "600036",
+                  "name": "",
+                  "direction": "条件买入",
+                  "status": "blocked",
+                  "reason": "market_ok=false"
+                },
+                {
+                  "code": "601899",
+                  "name": "",
+                  "direction": "条件买入",
+                  "status": "blocked",
+                  "reason": "market_ok=false"
+                }
+              ]
+            },
+            "no_gate": {
+              "initial_cash": 100000,
+              "initial_equity": 100000,
+              "positions": {
+                "600036": {
+                  "qty": 200,
+                  "buy_day": "2026-09-21"
+                },
+                "601899": {
+                  "qty": 100,
+                  "buy_day": "2026-09-21"
+                }
+              },
+              "cash": 88686.78,
+              "equity": 100024.78,
+              "return": 0.000248,
+              "orders": [
+                {
+                  "code": "600036",
+                  "name": "",
+                  "direction": "条件买入",
+                  "status": "filled",
+                  "reason": "",
+                  "qty": 200,
+                  "fill_price": 40.74,
+                  "amount": 8148.0,
+                  "fee": 5.16,
+                  "price_type": "limit_daily_bar"
+                },
+                {
+                  "code": "601899",
+                  "name": "",
+                  "direction": "条件买入",
+                  "status": "filled",
+                  "reason": "",
+                  "qty": 100,
+                  "fill_price": 31.55,
+                  "amount": 3155.0,
+                  "fee": 5.06,
+                  "price_type": "limit_daily_bar"
+                }
+              ]
+            },
+            "csi300": {
+              "return": 0.007139
+            }
+          },
+          "bars": {
+            "000300": {
+              "open": 4524.34,
+              "high": 4540.55,
+              "low": 4512.15,
+              "close": 4539.57,
+              "prev_close": 4507.39,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": null,
+              "limit_down": null,
+              "volume": 18636154200.0
+            },
+            "600036": {
+              "open": 40.65,
+              "high": 41.12,
+              "low": 40.36,
+              "close": 41.04,
+              "prev_close": 40.59,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": 44.65,
+              "limit_down": 36.53,
+              "volume": 54037400.0
+            },
+            "601899": {
+              "open": 31.48,
+              "high": 31.7,
+              "low": 31.07,
+              "close": 31.3,
+              "prev_close": 31.41,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": 34.55,
+              "limit_down": 28.27,
+              "volume": 113246600.0
+            }
+          },
+          "market_data_schema": "execution_bars.v2",
+          "market_data_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+        },
+        "paper": {
+          "gate": {
+            "status": "succeeded",
+            "orders": 2,
+            "fills": 0
+          },
+          "no_gate": {
+            "status": "succeeded",
+            "orders": 2,
+            "fills": 2
+          }
+        }
+      },
+      "second_run": {
+        "date": "2026-09-21",
+        "status": "reused",
+        "run_id": "9fb383726e9d4fccb541ece4e3adde00",
+        "plan_hash": "1757d388864162ba3b6bfdba36ba45eacf7f7d61473b04bbae4f4a7d4822c2c3"
+      },
+      "plan_unchanged": true,
+      "repeat_accounts_unchanged": true,
+      "accounts": {
+        "gate": {
+          "orders": [
+            {
+              "id": 1,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "600036",
+              "side": "buy",
+              "qty": 0,
+              "planned_price": null,
+              "signal_source": "llm_gate",
+              "status": "blocked",
+              "reason": "market_ok=false 禁止买入",
+              "plan_hash": "1757d388864162ba3b6bfdba36ba45eacf7f7d61473b04bbae4f4a7d4822c2c3",
+              "fee": 0.0,
+              "fill_price": null
+            },
+            {
+              "id": 2,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "601899",
+              "side": "buy",
+              "qty": 0,
+              "planned_price": null,
+              "signal_source": "llm_gate",
+              "status": "blocked",
+              "reason": "market_ok=false 禁止买入",
+              "plan_hash": "1757d388864162ba3b6bfdba36ba45eacf7f7d61473b04bbae4f4a7d4822c2c3",
+              "fee": 0.0,
+              "fill_price": null
+            }
+          ],
+          "trades": [],
+          "account": {
+            "day": "2026-09-21",
+            "cash": 100000.0,
+            "equity": 100000.0,
+            "note": "llm_gate: 0 fills/2 orders"
+          },
+          "execution_inputs": {
+            "bars": {
+              "000300": {
+                "close": 4539.57,
+                "high": 4540.55,
+                "limit_down": null,
+                "limit_pct": 0.1,
+                "limit_up": null,
+                "low": 4512.15,
+                "open": 4524.34,
+                "prev_close": 4507.39,
+                "suspended": false,
+                "volume": 18636154200.0
+              },
+              "600036": {
+                "close": 41.04,
+                "high": 41.12,
+                "limit_down": 36.53,
+                "limit_pct": 0.1,
+                "limit_up": 44.65,
+                "low": 40.36,
+                "open": 40.65,
+                "prev_close": 40.59,
+                "suspended": false,
+                "volume": 54037400.0
+              },
+              "601899": {
+                "close": 31.3,
+                "high": 31.7,
+                "limit_down": 28.27,
+                "limit_pct": 0.1,
+                "limit_up": 34.55,
+                "low": 31.07,
+                "open": 31.48,
+                "prev_close": 31.41,
+                "suspended": false,
+                "volume": 113246600.0
+              }
+            },
+            "entry_contract": "a_share_entry.v1",
+            "exit_contract": "a_share_exit.v1",
+            "fees": {
+              "commission_rate": 0.00025,
+              "min_commission": 5.0,
+              "stamp_tax_rate": 0.0005,
+              "transfer_fee_rate": 2e-05
+            },
+            "model": "daily_bar_t1.v4",
+            "portfolio_policy": "explicit_intent.v1",
+            "risk_policy": "structured_risk.v1",
+            "slippage_rate": 0.002
+          },
+          "file_hash": "3908f5f8f585418947204b450325fed5413b12a2b1a906a1e3a8dacd5e1a6436"
+        },
+        "no_gate": {
+          "orders": [
+            {
+              "id": 1,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "600036",
+              "side": "buy",
+              "qty": 200,
+              "planned_price": 41.0,
+              "signal_source": "llm_no_gate",
+              "status": "filled",
+              "reason": "",
+              "plan_hash": "1757d388864162ba3b6bfdba36ba45eacf7f7d61473b04bbae4f4a7d4822c2c3",
+              "fee": 5.16,
+              "fill_price": 40.74
+            },
+            {
+              "id": 2,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "601899",
+              "side": "buy",
+              "qty": 100,
+              "planned_price": 31.65,
+              "signal_source": "llm_no_gate",
+              "status": "filled",
+              "reason": "",
+              "plan_hash": "1757d388864162ba3b6bfdba36ba45eacf7f7d61473b04bbae4f4a7d4822c2c3",
+              "fee": 5.06,
+              "fill_price": 31.55
+            }
+          ],
+          "trades": [
+            {
+              "id": 1,
+              "day": "2026-09-21",
+              "signal_day": "2026-09-18",
+              "code": "600036",
+              "side": "buy",
+              "qty": 200,
+              "price": 40.74,
+              "amount": 8148.0,
+              "fee": 5.16,
+              "signal_source": "llm_no_gate",
+              "plan_hash": "1757d388864162ba3b6bfdba36ba45eacf7f7d61473b04bbae4f4a7d4822c2c3",
+              "planned_price": 41.0,
+              "price_type": "limit_daily_bar"
+            },
+            {
+              "id": 2,
+              "day": "2026-09-21",
+              "signal_day": "2026-09-18",
+              "code": "601899",
+              "side": "buy",
+              "qty": 100,
+              "price": 31.55,
+              "amount": 3155.0,
+              "fee": 5.06,
+              "signal_source": "llm_no_gate",
+              "plan_hash": "1757d388864162ba3b6bfdba36ba45eacf7f7d61473b04bbae4f4a7d4822c2c3",
+              "planned_price": 31.65,
+              "price_type": "limit_daily_bar"
+            }
+          ],
+          "account": {
+            "day": "2026-09-21",
+            "cash": 88686.78,
+            "equity": 100024.78,
+            "note": "llm_no_gate: 2 fills/2 orders"
+          },
+          "execution_inputs": {
+            "bars": {
+              "000300": {
+                "close": 4539.57,
+                "high": 4540.55,
+                "limit_down": null,
+                "limit_pct": 0.1,
+                "limit_up": null,
+                "low": 4512.15,
+                "open": 4524.34,
+                "prev_close": 4507.39,
+                "suspended": false,
+                "volume": 18636154200.0
+              },
+              "600036": {
+                "close": 41.04,
+                "high": 41.12,
+                "limit_down": 36.53,
+                "limit_pct": 0.1,
+                "limit_up": 44.65,
+                "low": 40.36,
+                "open": 40.65,
+                "prev_close": 40.59,
+                "suspended": false,
+                "volume": 54037400.0
+              },
+              "601899": {
+                "close": 31.3,
+                "high": 31.7,
+                "limit_down": 28.27,
+                "limit_pct": 0.1,
+                "limit_up": 34.55,
+                "low": 31.07,
+                "open": 31.48,
+                "prev_close": 31.41,
+                "suspended": false,
+                "volume": 113246600.0
+              }
+            },
+            "entry_contract": "a_share_entry.v1",
+            "exit_contract": "a_share_exit.v1",
+            "fees": {
+              "commission_rate": 0.00025,
+              "min_commission": 5.0,
+              "stamp_tax_rate": 0.0005,
+              "transfer_fee_rate": 2e-05
+            },
+            "model": "daily_bar_t1.v4",
+            "portfolio_policy": "explicit_intent.v1",
+            "risk_policy": "structured_risk.v1",
+            "slippage_rate": 0.002
+          },
+          "file_hash": "e67ac428446c4e29d85597859259a75a26f096a018f640b8efd8d1afe4eb17f8"
+        }
+      },
+      "risk_review": {
+        "status": "validated_contract",
+        "contract": "a_share_risk.v1",
+        "reviewed_count": 4,
+        "passed_count": 0,
+        "reduced_count": 1,
+        "gate_only_count": 1,
+        "risk_rejected_count": 2,
+        "reviews": [
+          {
+            "code": "600036",
+            "decision": "否决",
+            "reason_codes": [
+              "market_gate"
+            ],
+            "reason": "synthetic gate-only fixture"
+          },
+          {
+            "code": "601318",
+            "decision": "否决",
+            "reason_codes": [
+              "market_gate",
+              "liquidity"
+            ],
+            "reason": "synthetic mixed-risk fixture",
+            "clause": "条款4"
+          },
+          {
+            "code": "601899",
+            "decision": "降仓通过",
+            "reason_codes": [
+              "position_limit"
+            ],
+            "position_pct": 0.05,
+            "reason": "synthetic reduction fixture; market_ok=false"
+          },
+          {
+            "code": "600900",
+            "decision": "否决",
+            "reason_codes": [
+              "data_quality"
+            ],
+            "reason": "synthetic non-gate fixture",
+            "clause": "条款4"
+          }
+        ]
+      },
+      "risk_scope": "validated_decisions",
+      "audit": {
+        "schema": "paper_reconciliation.v1",
+        "observed_at": "2026-09-22T05:16:02.662445+08:00",
+        "model": "daily_bar_t1.v4",
+        "fee_policy": {
+          "commission_rate": 0.00025,
+          "min_commission": 5.0,
+          "stamp_tax_rate": 0.0005,
+          "transfer_fee_rate": 2e-05
+        },
+        "slippage_rate": 0.002,
+        "entry_contract": "a_share_entry.v1",
+        "exit_contract": "a_share_exit.v1",
+        "portfolio_policy": "explicit_intent.v1",
+        "risk_contract": "a_share_risk.v1",
+        "risk_policy": "structured_risk.v1",
+        "scope": "historical_account_checks_not_execution_certification",
+        "limitations": [
+          "Cash-only initial account; no external transfers or corporate actions",
+          "Price replay uses recorded quantities, not independently reconstructed target sizing",
+          "Current model and fee comparison does not prove the historical runtime policy",
+          "Exit replay requires explicit intent and opening inventory matching the trade ledger",
+          "No certification of forward publication, free-text conditions or intraday queue fills"
+        ],
+        "portfolios": {
+          "gate": {
+            "status": "incomplete",
+            "execution_certified": false,
+            "checks": {
+              "cash": "matched",
+              "positions": "matched",
+              "order_trade": "matched",
+              "reconstructed_cash": 100000.0
+            },
+            "days": {
+              "2026-09-21": {
+                "orders": 2,
+                "trades": 0,
+                "price_replay": "matched_recorded_quantity",
+                "file_hashes": {
+                  "/private/tmp/quant-risk-verified-BXFVKn/typed/trading_team/outputs/2026-09-21/plan.json": "4aa1e4366719708e9c49a72143d83d9070e8b2cd09dd78ea3cdb8026260ae736",
+                  "/private/tmp/quant-risk-verified-BXFVKn/typed/trading_team/decisions/2026-09-21/paper_decision.json": "c8ad9f6a9ebc4f309afda2d2c022ebe3646d91401ab58c6ed872fe21ee14a607",
+                  "/private/tmp/quant-risk-verified-BXFVKn/typed/trading_team/replay_data/2026-09-21.json": "389ebef7cb36615bfee87d65fbd05fd08a5340e54981f9202376c3d1370fbf5f"
+                },
+                "plan_hash": "1757d388864162ba3b6bfdba36ba45eacf7f7d61473b04bbae4f4a7d4822c2c3",
+                "risk_review_state": "validated_contract",
+                "plan_binding": "matched",
+                "materialized_at": "2026-09-22T05:16:02",
+                "recorded_model": "daily_bar_t1.v4",
+                "recorded_entry_contract": "a_share_entry.v1",
+                "recorded_exit_contract": "a_share_exit.v1",
+                "recorded_portfolio_policy": "explicit_intent.v1",
+                "recorded_risk_policy": "structured_risk.v1",
+                "receipt": "internally_matched",
+                "receipt_created_at": "2026-09-22T05:16:02+08:00",
+                "market_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+              }
+            },
+            "issues": [
+              {
+                "code": "publication_timing",
+                "severity": "missing",
+                "date": "2026-09-21",
+                "actual": "2026-09-22T05:16:02",
+                "detail": "current materialization cannot establish pre-execution publication"
+              }
+            ],
+            "facts_hash": "25303dbbe883d6b0c91f38e02ba20caf8b5384a3d7b9ad7f368e957f6d8250b6",
+            "conflict_count": 0,
+            "missing_count": 1,
+            "recorded_trade_count": 0,
+            "forward_performance": "unverified"
+          },
+          "no_gate": {
+            "status": "incomplete",
+            "execution_certified": false,
+            "checks": {
+              "cash": "matched",
+              "positions": "matched",
+              "order_trade": "matched",
+              "reconstructed_cash": 88686.78
+            },
+            "days": {
+              "2026-09-21": {
+                "orders": 2,
+                "trades": 2,
+                "price_replay": "matched_recorded_quantity",
+                "file_hashes": {
+                  "/private/tmp/quant-risk-verified-BXFVKn/typed/trading_team/outputs/2026-09-21/plan.json": "4aa1e4366719708e9c49a72143d83d9070e8b2cd09dd78ea3cdb8026260ae736",
+                  "/private/tmp/quant-risk-verified-BXFVKn/typed/trading_team/decisions/2026-09-21/paper_decision.json": "c8ad9f6a9ebc4f309afda2d2c022ebe3646d91401ab58c6ed872fe21ee14a607",
+                  "/private/tmp/quant-risk-verified-BXFVKn/typed/trading_team/replay_data/2026-09-21.json": "389ebef7cb36615bfee87d65fbd05fd08a5340e54981f9202376c3d1370fbf5f"
+                },
+                "plan_hash": "1757d388864162ba3b6bfdba36ba45eacf7f7d61473b04bbae4f4a7d4822c2c3",
+                "risk_review_state": "validated_contract",
+                "plan_binding": "matched",
+                "materialized_at": "2026-09-22T05:16:02",
+                "recorded_model": "daily_bar_t1.v4",
+                "recorded_entry_contract": "a_share_entry.v1",
+                "recorded_exit_contract": "a_share_exit.v1",
+                "recorded_portfolio_policy": "explicit_intent.v1",
+                "recorded_risk_policy": "structured_risk.v1",
+                "receipt": "internally_matched",
+                "receipt_created_at": "2026-09-22T05:16:02+08:00",
+                "market_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+              }
+            },
+            "issues": [
+              {
+                "code": "publication_timing",
+                "severity": "missing",
+                "date": "2026-09-21",
+                "actual": "2026-09-22T05:16:02",
+                "detail": "current materialization cannot establish pre-execution publication"
+              }
+            ],
+            "facts_hash": "d597b25864fb65a5e91cbdcf1cc769b78d0039a1fc13c2f9c2cc803b06522406",
+            "conflict_count": 0,
+            "missing_count": 1,
+            "recorded_trade_count": 2,
+            "forward_performance": "unverified"
+          }
+        }
+      }
+    },
+    "legacy_original": {
+      "first_run": {
+        "date": "2026-09-21",
+        "status": "succeeded",
+        "run_id": "f5d7e7c99c8146f1afe3d7b7a565637e",
+        "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+        "session": {
+          "date": "2026-09-21",
+          "is_session": true,
+          "completed": true,
+          "calendar_hash": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+          "reason": "completed"
+        },
+        "materialize": {
+          "date": "2026-09-21",
+          "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+          "decision": "ok",
+          "paper_decision": "paper_auto"
+        },
+        "counterfactual": {
+          "plan_date": "2026-09-21",
+          "data_asof": "2026-09-18",
+          "sample_type": "forward_eligible",
+          "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+          "risk_review": {
+            "status": "legacy_missing",
+            "contract": null,
+            "reviewed_count": null,
+            "passed_count": null,
+            "reduced_count": null,
+            "gate_only_count": null,
+            "risk_rejected_count": null,
+            "reviews": []
+          },
+          "risk_scope": "unreviewed_hypothesis_no_auto_paper",
+          "evidence_kind": "DAILY_BAR_PROXY",
+          "opening_state": {
+            "cash": 100000,
+            "positions": {},
+            "scope": "daily_cash_reset"
+          },
+          "execution_model": {
+            "version": "daily_bar_t1.v4",
+            "entry_contract": "a_share_entry.v1",
+            "exit_contract": "a_share_exit.v1",
+            "portfolio_policy": "explicit_intent.v1",
+            "sale_proceeds_reuse": "next_session",
+            "signal_to_fill": "T+1",
+            "slippage_rate": 0.002,
+            "board_lot": 100,
+            "limit_touch": "daily_ohlc_strict",
+            "fees": "commission+stamp_tax+transfer_fee"
+          },
+          "portfolios": {
+            "gate": {
+              "initial_cash": 100000,
+              "initial_equity": 100000,
+              "positions": {},
+              "cash": 100000,
+              "equity": 100000,
+              "return": 0.0,
+              "orders": [
+                {
+                  "code": "600036",
+                  "name": "招商银行",
+                  "direction": "条件买入",
+                  "status": "blocked",
+                  "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only"
+                },
+                {
+                  "code": "601318",
+                  "name": "中国平安",
+                  "direction": "条件买入",
+                  "status": "blocked",
+                  "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only"
+                },
+                {
+                  "code": "601899",
+                  "name": "紫金矿业",
+                  "direction": "条件买入",
+                  "status": "blocked",
+                  "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only"
+                }
+              ]
+            },
+            "no_gate": {
+              "initial_cash": 100000,
+              "initial_equity": 100000,
+              "positions": {},
+              "cash": 100000,
+              "equity": 100000,
+              "return": 0.0,
+              "orders": [
+                {
+                  "code": "600036",
+                  "name": "招商银行",
+                  "direction": "条件买入",
+                  "status": "blocked",
+                  "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only"
+                },
+                {
+                  "code": "601318",
+                  "name": "中国平安",
+                  "direction": "条件买入",
+                  "status": "blocked",
+                  "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only"
+                },
+                {
+                  "code": "601899",
+                  "name": "紫金矿业",
+                  "direction": "条件买入",
+                  "status": "blocked",
+                  "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only"
+                }
+              ]
+            },
+            "csi300": {
+              "return": 0.007139
+            }
+          },
+          "bars": {
+            "000300": {
+              "open": 4524.34,
+              "high": 4540.55,
+              "low": 4512.15,
+              "close": 4539.57,
+              "prev_close": 4507.39,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": null,
+              "limit_down": null,
+              "volume": 18636154200.0
+            },
+            "600036": {
+              "open": 40.65,
+              "high": 41.12,
+              "low": 40.36,
+              "close": 41.04,
+              "prev_close": 40.59,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": 44.65,
+              "limit_down": 36.53,
+              "volume": 54037400.0
+            },
+            "601318": {
+              "open": 53.3,
+              "high": 54.0,
+              "low": 52.88,
+              "close": 53.98,
+              "prev_close": 53.37,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": 58.71,
+              "limit_down": 48.03,
+              "volume": 59078600.0
+            },
+            "601899": {
+              "open": 31.48,
+              "high": 31.7,
+              "low": 31.07,
+              "close": 31.3,
+              "prev_close": 31.41,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": 34.55,
+              "limit_down": 28.27,
+              "volume": 113246600.0
+            }
+          },
+          "market_data_schema": "execution_bars.v2",
+          "market_data_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+        },
+        "paper": {
+          "gate": {
+            "status": "succeeded",
+            "orders": 3,
+            "fills": 0
+          },
+          "no_gate": {
+            "status": "succeeded",
+            "orders": 3,
+            "fills": 0
+          }
+        }
+      },
+      "second_run": {
+        "date": "2026-09-21",
+        "status": "reused",
+        "run_id": "f5d7e7c99c8146f1afe3d7b7a565637e",
+        "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9"
+      },
+      "plan_unchanged": true,
+      "repeat_accounts_unchanged": true,
+      "accounts": {
+        "gate": {
+          "orders": [
+            {
+              "id": 1,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "600036",
+              "side": "buy",
+              "qty": 0,
+              "planned_price": null,
+              "signal_source": "llm_gate",
+              "status": "blocked",
+              "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only",
+              "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+              "fee": 0.0,
+              "fill_price": null
+            },
+            {
+              "id": 2,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "601318",
+              "side": "buy",
+              "qty": 0,
+              "planned_price": null,
+              "signal_source": "llm_gate",
+              "status": "blocked",
+              "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only",
+              "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+              "fee": 0.0,
+              "fill_price": null
+            },
+            {
+              "id": 3,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "601899",
+              "side": "buy",
+              "qty": 0,
+              "planned_price": null,
+              "signal_source": "llm_gate",
+              "status": "blocked",
+              "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only",
+              "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+              "fee": 0.0,
+              "fill_price": null
+            }
+          ],
+          "trades": [],
+          "account": {
+            "day": "2026-09-21",
+            "cash": 100000.0,
+            "equity": 100000.0,
+            "note": "llm_gate: 0 fills/3 orders"
+          },
+          "execution_inputs": {
+            "bars": {
+              "000300": {
+                "close": 4539.57,
+                "high": 4540.55,
+                "limit_down": null,
+                "limit_pct": 0.1,
+                "limit_up": null,
+                "low": 4512.15,
+                "open": 4524.34,
+                "prev_close": 4507.39,
+                "suspended": false,
+                "volume": 18636154200.0
+              },
+              "600036": {
+                "close": 41.04,
+                "high": 41.12,
+                "limit_down": 36.53,
+                "limit_pct": 0.1,
+                "limit_up": 44.65,
+                "low": 40.36,
+                "open": 40.65,
+                "prev_close": 40.59,
+                "suspended": false,
+                "volume": 54037400.0
+              },
+              "601318": {
+                "close": 53.98,
+                "high": 54.0,
+                "limit_down": 48.03,
+                "limit_pct": 0.1,
+                "limit_up": 58.71,
+                "low": 52.88,
+                "open": 53.3,
+                "prev_close": 53.37,
+                "suspended": false,
+                "volume": 59078600.0
+              },
+              "601899": {
+                "close": 31.3,
+                "high": 31.7,
+                "limit_down": 28.27,
+                "limit_pct": 0.1,
+                "limit_up": 34.55,
+                "low": 31.07,
+                "open": 31.48,
+                "prev_close": 31.41,
+                "suspended": false,
+                "volume": 113246600.0
+              }
+            },
+            "entry_contract": "a_share_entry.v1",
+            "exit_contract": "a_share_exit.v1",
+            "fees": {
+              "commission_rate": 0.00025,
+              "min_commission": 5.0,
+              "stamp_tax_rate": 0.0005,
+              "transfer_fee_rate": 2e-05
+            },
+            "model": "daily_bar_t1.v4",
+            "portfolio_policy": "explicit_intent.v1",
+            "risk_policy": "structured_risk.v1",
+            "slippage_rate": 0.002
+          },
+          "file_hash": "da089413967c9b92388518bb31a82f700da2a696b0bd13482a226068c502f4ac"
+        },
+        "no_gate": {
+          "orders": [
+            {
+              "id": 1,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "600036",
+              "side": "buy",
+              "qty": 0,
+              "planned_price": null,
+              "signal_source": "llm_no_gate",
+              "status": "blocked",
+              "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only",
+              "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+              "fee": 0.0,
+              "fill_price": null
+            },
+            {
+              "id": 2,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "601318",
+              "side": "buy",
+              "qty": 0,
+              "planned_price": null,
+              "signal_source": "llm_no_gate",
+              "status": "blocked",
+              "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only",
+              "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+              "fee": 0.0,
+              "fill_price": null
+            },
+            {
+              "id": 3,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "601899",
+              "side": "buy",
+              "qty": 0,
+              "planned_price": null,
+              "signal_source": "llm_no_gate",
+              "status": "blocked",
+              "reason": "entry contract: entry_type must be limit or breakout; entry must contain one finite positive numeric price; condition contains unmodeled text; use execution_conditions or observe only",
+              "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+              "fee": 0.0,
+              "fill_price": null
+            }
+          ],
+          "trades": [],
+          "account": {
+            "day": "2026-09-21",
+            "cash": 100000.0,
+            "equity": 100000.0,
+            "note": "llm_no_gate: 0 fills/3 orders"
+          },
+          "execution_inputs": {
+            "bars": {
+              "000300": {
+                "close": 4539.57,
+                "high": 4540.55,
+                "limit_down": null,
+                "limit_pct": 0.1,
+                "limit_up": null,
+                "low": 4512.15,
+                "open": 4524.34,
+                "prev_close": 4507.39,
+                "suspended": false,
+                "volume": 18636154200.0
+              },
+              "600036": {
+                "close": 41.04,
+                "high": 41.12,
+                "limit_down": 36.53,
+                "limit_pct": 0.1,
+                "limit_up": 44.65,
+                "low": 40.36,
+                "open": 40.65,
+                "prev_close": 40.59,
+                "suspended": false,
+                "volume": 54037400.0
+              },
+              "601318": {
+                "close": 53.98,
+                "high": 54.0,
+                "limit_down": 48.03,
+                "limit_pct": 0.1,
+                "limit_up": 58.71,
+                "low": 52.88,
+                "open": 53.3,
+                "prev_close": 53.37,
+                "suspended": false,
+                "volume": 59078600.0
+              },
+              "601899": {
+                "close": 31.3,
+                "high": 31.7,
+                "limit_down": 28.27,
+                "limit_pct": 0.1,
+                "limit_up": 34.55,
+                "low": 31.07,
+                "open": 31.48,
+                "prev_close": 31.41,
+                "suspended": false,
+                "volume": 113246600.0
+              }
+            },
+            "entry_contract": "a_share_entry.v1",
+            "exit_contract": "a_share_exit.v1",
+            "fees": {
+              "commission_rate": 0.00025,
+              "min_commission": 5.0,
+              "stamp_tax_rate": 0.0005,
+              "transfer_fee_rate": 2e-05
+            },
+            "model": "daily_bar_t1.v4",
+            "portfolio_policy": "explicit_intent.v1",
+            "risk_policy": "structured_risk.v1",
+            "slippage_rate": 0.002
+          },
+          "file_hash": "26533807a48b360748ad7dcc0fd5585113c06c3b8bce4fb84c417b4ae9c6c178"
+        }
+      },
+      "risk_review": {
+        "status": "legacy_missing",
+        "contract": null,
+        "reviewed_count": null,
+        "passed_count": null,
+        "reduced_count": null,
+        "gate_only_count": null,
+        "risk_rejected_count": null,
+        "reviews": []
+      },
+      "risk_scope": "unreviewed_hypothesis_no_auto_paper",
+      "audit": {
+        "schema": "paper_reconciliation.v1",
+        "observed_at": "2026-09-22T05:16:02.750501+08:00",
+        "model": "daily_bar_t1.v4",
+        "fee_policy": {
+          "commission_rate": 0.00025,
+          "min_commission": 5.0,
+          "stamp_tax_rate": 0.0005,
+          "transfer_fee_rate": 2e-05
+        },
+        "slippage_rate": 0.002,
+        "entry_contract": "a_share_entry.v1",
+        "exit_contract": "a_share_exit.v1",
+        "portfolio_policy": "explicit_intent.v1",
+        "risk_contract": "a_share_risk.v1",
+        "risk_policy": "structured_risk.v1",
+        "scope": "historical_account_checks_not_execution_certification",
+        "limitations": [
+          "Cash-only initial account; no external transfers or corporate actions",
+          "Price replay uses recorded quantities, not independently reconstructed target sizing",
+          "Current model and fee comparison does not prove the historical runtime policy",
+          "Exit replay requires explicit intent and opening inventory matching the trade ledger",
+          "No certification of forward publication, free-text conditions or intraday queue fills"
+        ],
+        "portfolios": {
+          "gate": {
+            "status": "incomplete",
+            "execution_certified": false,
+            "checks": {
+              "cash": "matched",
+              "positions": "matched",
+              "order_trade": "matched",
+              "reconstructed_cash": 100000.0
+            },
+            "days": {
+              "2026-09-21": {
+                "orders": 3,
+                "trades": 0,
+                "price_replay": "matched_recorded_quantity",
+                "file_hashes": {
+                  "/private/tmp/quant-risk-verified-BXFVKn/legacy_original/trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+                  "/private/tmp/quant-risk-verified-BXFVKn/legacy_original/trading_team/decisions/2026-09-21/paper_decision.json": "d214532ef62977d3c836b5bbf7d51162f7e6f8bf3fa3d30cc02ac722317eadc7",
+                  "/private/tmp/quant-risk-verified-BXFVKn/legacy_original/trading_team/replay_data/2026-09-21.json": "389ebef7cb36615bfee87d65fbd05fd08a5340e54981f9202376c3d1370fbf5f"
+                },
+                "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+                "risk_review_state": "legacy_missing",
+                "plan_binding": "matched",
+                "materialized_at": "2026-09-22T05:16:02",
+                "recorded_model": "daily_bar_t1.v4",
+                "recorded_entry_contract": "a_share_entry.v1",
+                "recorded_exit_contract": "a_share_exit.v1",
+                "recorded_portfolio_policy": "explicit_intent.v1",
+                "recorded_risk_policy": "structured_risk.v1",
+                "receipt": "internally_matched",
+                "receipt_created_at": "2026-09-22T05:16:02+08:00",
+                "market_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+              }
+            },
+            "issues": [
+              {
+                "code": "risk_review_evidence",
+                "severity": "missing",
+                "date": "2026-09-21",
+                "detail": "legacy risk reasons cannot authorize automatic Paper or certify gate-only restoration"
+              },
+              {
+                "code": "publication_timing",
+                "severity": "missing",
+                "date": "2026-09-21",
+                "actual": "2026-09-22T05:16:02",
+                "detail": "current materialization cannot establish pre-execution publication"
+              },
+              {
+                "code": "unmodeled_condition",
+                "severity": "missing",
+                "date": "2026-09-21",
+                "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+              }
+            ],
+            "facts_hash": "3efdbf195107317bc384839300c40a1286b14549d4b89e75613c8bc8212be73d",
+            "conflict_count": 0,
+            "missing_count": 3,
+            "recorded_trade_count": 0,
+            "forward_performance": "unverified"
+          },
+          "no_gate": {
+            "status": "incomplete",
+            "execution_certified": false,
+            "checks": {
+              "cash": "matched",
+              "positions": "matched",
+              "order_trade": "matched",
+              "reconstructed_cash": 100000.0
+            },
+            "days": {
+              "2026-09-21": {
+                "orders": 3,
+                "trades": 0,
+                "price_replay": "matched_recorded_quantity",
+                "file_hashes": {
+                  "/private/tmp/quant-risk-verified-BXFVKn/legacy_original/trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+                  "/private/tmp/quant-risk-verified-BXFVKn/legacy_original/trading_team/decisions/2026-09-21/paper_decision.json": "d214532ef62977d3c836b5bbf7d51162f7e6f8bf3fa3d30cc02ac722317eadc7",
+                  "/private/tmp/quant-risk-verified-BXFVKn/legacy_original/trading_team/replay_data/2026-09-21.json": "389ebef7cb36615bfee87d65fbd05fd08a5340e54981f9202376c3d1370fbf5f"
+                },
+                "plan_hash": "29c9ec07a8a858ba625a3964911bae0093f4a6674fd34e51587a23085ccb8ff9",
+                "risk_review_state": "legacy_missing",
+                "plan_binding": "matched",
+                "materialized_at": "2026-09-22T05:16:02",
+                "recorded_model": "daily_bar_t1.v4",
+                "recorded_entry_contract": "a_share_entry.v1",
+                "recorded_exit_contract": "a_share_exit.v1",
+                "recorded_portfolio_policy": "explicit_intent.v1",
+                "recorded_risk_policy": "structured_risk.v1",
+                "receipt": "internally_matched",
+                "receipt_created_at": "2026-09-22T05:16:02+08:00",
+                "market_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+              }
+            },
+            "issues": [
+              {
+                "code": "risk_review_evidence",
+                "severity": "missing",
+                "date": "2026-09-21",
+                "detail": "legacy risk reasons cannot authorize automatic Paper or certify gate-only restoration"
+              },
+              {
+                "code": "publication_timing",
+                "severity": "missing",
+                "date": "2026-09-21",
+                "actual": "2026-09-22T05:16:02",
+                "detail": "current materialization cannot establish pre-execution publication"
+              },
+              {
+                "code": "unmodeled_condition",
+                "severity": "missing",
+                "date": "2026-09-21",
+                "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+              }
+            ],
+            "facts_hash": "cff3878747b1729a700960abba500c4e06dfa98b446cbf01c23d40d751ccdc74",
+            "conflict_count": 0,
+            "missing_count": 3,
+            "recorded_trade_count": 0,
+            "forward_performance": "unverified"
+          }
+        }
+      }
+    },
+    "legacy_explicit": {
+      "first_run": {
+        "date": "2026-09-21",
+        "status": "succeeded",
+        "run_id": "ffbfbec828c54da3a88944206b4bd458",
+        "plan_hash": "771c11ae45332b53dae06ddb139b625868d3d2364b6c4aa814fa7d4c33534fbd",
+        "session": {
+          "date": "2026-09-21",
+          "is_session": true,
+          "completed": true,
+          "calendar_hash": "57dd7f539d1cdbefb528978a6c7bd79b118790f933ce63c37b10747b999f9585",
+          "reason": "completed"
+        },
+        "materialize": {
+          "date": "2026-09-21",
+          "plan_hash": "771c11ae45332b53dae06ddb139b625868d3d2364b6c4aa814fa7d4c33534fbd",
+          "decision": "ok",
+          "paper_decision": "paper_auto"
+        },
+        "counterfactual": {
+          "plan_date": "2026-09-21",
+          "data_asof": "2026-09-18",
+          "sample_type": "forward_eligible",
+          "plan_hash": "771c11ae45332b53dae06ddb139b625868d3d2364b6c4aa814fa7d4c33534fbd",
+          "risk_review": {
+            "status": "legacy_missing",
+            "contract": null,
+            "reviewed_count": null,
+            "passed_count": null,
+            "reduced_count": null,
+            "gate_only_count": null,
+            "risk_rejected_count": null,
+            "reviews": []
+          },
+          "risk_scope": "unreviewed_hypothesis_no_auto_paper",
+          "evidence_kind": "DAILY_BAR_PROXY",
+          "opening_state": {
+            "cash": 100000,
+            "positions": {},
+            "scope": "daily_cash_reset"
+          },
+          "execution_model": {
+            "version": "daily_bar_t1.v4",
+            "entry_contract": "a_share_entry.v1",
+            "exit_contract": "a_share_exit.v1",
+            "portfolio_policy": "explicit_intent.v1",
+            "sale_proceeds_reuse": "next_session",
+            "signal_to_fill": "T+1",
+            "slippage_rate": 0.002,
+            "board_lot": 100,
+            "limit_touch": "daily_ohlc_strict",
+            "fees": "commission+stamp_tax+transfer_fee"
+          },
+          "portfolios": {
+            "gate": {
+              "initial_cash": 100000,
+              "initial_equity": 100000,
+              "positions": {
+                "600036": {
+                  "qty": 200,
+                  "buy_day": "2026-09-21"
+                }
+              },
+              "cash": 91846.84,
+              "equity": 100054.84,
+              "return": 0.000548,
+              "orders": [
+                {
+                  "code": "600036",
+                  "name": "",
+                  "direction": "条件买入",
+                  "status": "filled",
+                  "reason": "",
+                  "qty": 200,
+                  "fill_price": 40.74,
+                  "amount": 8148.0,
+                  "fee": 5.16,
+                  "price_type": "limit_daily_bar"
+                }
+              ]
+            },
+            "no_gate": {
+              "initial_cash": 100000,
+              "initial_equity": 100000,
+              "positions": {
+                "600036": {
+                  "qty": 200,
+                  "buy_day": "2026-09-21"
+                }
+              },
+              "cash": 91846.84,
+              "equity": 100054.84,
+              "return": 0.000548,
+              "orders": [
+                {
+                  "code": "600036",
+                  "name": "",
+                  "direction": "条件买入",
+                  "status": "filled",
+                  "reason": "",
+                  "qty": 200,
+                  "fill_price": 40.74,
+                  "amount": 8148.0,
+                  "fee": 5.16,
+                  "price_type": "limit_daily_bar"
+                }
+              ]
+            },
+            "csi300": {
+              "return": 0.007139
+            }
+          },
+          "bars": {
+            "000300": {
+              "open": 4524.34,
+              "high": 4540.55,
+              "low": 4512.15,
+              "close": 4539.57,
+              "prev_close": 4507.39,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": null,
+              "limit_down": null,
+              "volume": 18636154200.0
+            },
+            "600036": {
+              "open": 40.65,
+              "high": 41.12,
+              "low": 40.36,
+              "close": 41.04,
+              "prev_close": 40.59,
+              "suspended": false,
+              "limit_pct": 0.1,
+              "limit_up": 44.65,
+              "limit_down": 36.53,
+              "volume": 54037400.0
+            }
+          },
+          "market_data_schema": "execution_bars.v2",
+          "market_data_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+        },
+        "paper": {
+          "gate": {
+            "status": "succeeded",
+            "orders": 1,
+            "fills": 0
+          },
+          "no_gate": {
+            "status": "succeeded",
+            "orders": 1,
+            "fills": 0
+          }
+        }
+      },
+      "second_run": {
+        "date": "2026-09-21",
+        "status": "reused",
+        "run_id": "ffbfbec828c54da3a88944206b4bd458",
+        "plan_hash": "771c11ae45332b53dae06ddb139b625868d3d2364b6c4aa814fa7d4c33534fbd"
+      },
+      "plan_unchanged": true,
+      "repeat_accounts_unchanged": true,
+      "accounts": {
+        "gate": {
+          "orders": [
+            {
+              "id": 1,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "600036",
+              "side": "buy",
+              "qty": 0,
+              "planned_price": null,
+              "signal_source": "llm_gate",
+              "status": "blocked",
+              "reason": "risk contract: structured review evidence missing; no automatic approval",
+              "plan_hash": "771c11ae45332b53dae06ddb139b625868d3d2364b6c4aa814fa7d4c33534fbd",
+              "fee": 0.0,
+              "fill_price": null
+            }
+          ],
+          "trades": [],
+          "account": {
+            "day": "2026-09-21",
+            "cash": 100000.0,
+            "equity": 100000.0,
+            "note": "llm_gate: 0 fills/1 orders"
+          },
+          "execution_inputs": {
+            "bars": {
+              "000300": {
+                "close": 4539.57,
+                "high": 4540.55,
+                "limit_down": null,
+                "limit_pct": 0.1,
+                "limit_up": null,
+                "low": 4512.15,
+                "open": 4524.34,
+                "prev_close": 4507.39,
+                "suspended": false,
+                "volume": 18636154200.0
+              },
+              "600036": {
+                "close": 41.04,
+                "high": 41.12,
+                "limit_down": 36.53,
+                "limit_pct": 0.1,
+                "limit_up": 44.65,
+                "low": 40.36,
+                "open": 40.65,
+                "prev_close": 40.59,
+                "suspended": false,
+                "volume": 54037400.0
+              }
+            },
+            "entry_contract": "a_share_entry.v1",
+            "exit_contract": "a_share_exit.v1",
+            "fees": {
+              "commission_rate": 0.00025,
+              "min_commission": 5.0,
+              "stamp_tax_rate": 0.0005,
+              "transfer_fee_rate": 2e-05
+            },
+            "model": "daily_bar_t1.v4",
+            "portfolio_policy": "explicit_intent.v1",
+            "risk_policy": "structured_risk.v1",
+            "slippage_rate": 0.002
+          },
+          "file_hash": "85101900cd967f8ce4a3fa5049f694f3c41ab61ac9f599967a66da80f11586c7"
+        },
+        "no_gate": {
+          "orders": [
+            {
+              "id": 1,
+              "signal_day": "2026-09-18",
+              "execution_day": "2026-09-21",
+              "code": "600036",
+              "side": "buy",
+              "qty": 0,
+              "planned_price": null,
+              "signal_source": "llm_no_gate",
+              "status": "blocked",
+              "reason": "risk contract: structured review evidence missing; no automatic approval",
+              "plan_hash": "771c11ae45332b53dae06ddb139b625868d3d2364b6c4aa814fa7d4c33534fbd",
+              "fee": 0.0,
+              "fill_price": null
+            }
+          ],
+          "trades": [],
+          "account": {
+            "day": "2026-09-21",
+            "cash": 100000.0,
+            "equity": 100000.0,
+            "note": "llm_no_gate: 0 fills/1 orders"
+          },
+          "execution_inputs": {
+            "bars": {
+              "000300": {
+                "close": 4539.57,
+                "high": 4540.55,
+                "limit_down": null,
+                "limit_pct": 0.1,
+                "limit_up": null,
+                "low": 4512.15,
+                "open": 4524.34,
+                "prev_close": 4507.39,
+                "suspended": false,
+                "volume": 18636154200.0
+              },
+              "600036": {
+                "close": 41.04,
+                "high": 41.12,
+                "limit_down": 36.53,
+                "limit_pct": 0.1,
+                "limit_up": 44.65,
+                "low": 40.36,
+                "open": 40.65,
+                "prev_close": 40.59,
+                "suspended": false,
+                "volume": 54037400.0
+              }
+            },
+            "entry_contract": "a_share_entry.v1",
+            "exit_contract": "a_share_exit.v1",
+            "fees": {
+              "commission_rate": 0.00025,
+              "min_commission": 5.0,
+              "stamp_tax_rate": 0.0005,
+              "transfer_fee_rate": 2e-05
+            },
+            "model": "daily_bar_t1.v4",
+            "portfolio_policy": "explicit_intent.v1",
+            "risk_policy": "structured_risk.v1",
+            "slippage_rate": 0.002
+          },
+          "file_hash": "a9e93243bf3e3922263b49e342fba469c92c6ad309da514e1e2546f87c7cb2c1"
+        }
+      },
+      "risk_review": {
+        "status": "legacy_missing",
+        "contract": null,
+        "reviewed_count": null,
+        "passed_count": null,
+        "reduced_count": null,
+        "gate_only_count": null,
+        "risk_rejected_count": null,
+        "reviews": []
+      },
+      "risk_scope": "unreviewed_hypothesis_no_auto_paper",
+      "audit": {
+        "schema": "paper_reconciliation.v1",
+        "observed_at": "2026-09-22T05:16:02.830313+08:00",
+        "model": "daily_bar_t1.v4",
+        "fee_policy": {
+          "commission_rate": 0.00025,
+          "min_commission": 5.0,
+          "stamp_tax_rate": 0.0005,
+          "transfer_fee_rate": 2e-05
+        },
+        "slippage_rate": 0.002,
+        "entry_contract": "a_share_entry.v1",
+        "exit_contract": "a_share_exit.v1",
+        "portfolio_policy": "explicit_intent.v1",
+        "risk_contract": "a_share_risk.v1",
+        "risk_policy": "structured_risk.v1",
+        "scope": "historical_account_checks_not_execution_certification",
+        "limitations": [
+          "Cash-only initial account; no external transfers or corporate actions",
+          "Price replay uses recorded quantities, not independently reconstructed target sizing",
+          "Current model and fee comparison does not prove the historical runtime policy",
+          "Exit replay requires explicit intent and opening inventory matching the trade ledger",
+          "No certification of forward publication, free-text conditions or intraday queue fills"
+        ],
+        "portfolios": {
+          "gate": {
+            "status": "incomplete",
+            "execution_certified": false,
+            "checks": {
+              "cash": "matched",
+              "positions": "matched",
+              "order_trade": "matched",
+              "reconstructed_cash": 100000.0
+            },
+            "days": {
+              "2026-09-21": {
+                "orders": 1,
+                "trades": 0,
+                "price_replay": "matched_recorded_quantity",
+                "file_hashes": {
+                  "/private/tmp/quant-risk-verified-BXFVKn/legacy_explicit/trading_team/outputs/2026-09-21/plan.json": "737468fd73c81222e7e67792edb6d9e8b0986c0229e44a47b878e163a0dad9f1",
+                  "/private/tmp/quant-risk-verified-BXFVKn/legacy_explicit/trading_team/decisions/2026-09-21/paper_decision.json": "f5f6a487086cd5ac3efe33addcfcb6bf8a2156a343196ee86a5efc095e470cbd",
+                  "/private/tmp/quant-risk-verified-BXFVKn/legacy_explicit/trading_team/replay_data/2026-09-21.json": "389ebef7cb36615bfee87d65fbd05fd08a5340e54981f9202376c3d1370fbf5f"
+                },
+                "plan_hash": "771c11ae45332b53dae06ddb139b625868d3d2364b6c4aa814fa7d4c33534fbd",
+                "risk_review_state": "legacy_missing",
+                "plan_binding": "matched",
+                "materialized_at": "2026-09-22T05:16:02",
+                "recorded_model": "daily_bar_t1.v4",
+                "recorded_entry_contract": "a_share_entry.v1",
+                "recorded_exit_contract": "a_share_exit.v1",
+                "recorded_portfolio_policy": "explicit_intent.v1",
+                "recorded_risk_policy": "structured_risk.v1",
+                "receipt": "internally_matched",
+                "receipt_created_at": "2026-09-22T05:16:02+08:00",
+                "market_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+              }
+            },
+            "issues": [
+              {
+                "code": "risk_review_evidence",
+                "severity": "missing",
+                "date": "2026-09-21",
+                "detail": "legacy risk reasons cannot authorize automatic Paper or certify gate-only restoration"
+              },
+              {
+                "code": "publication_timing",
+                "severity": "missing",
+                "date": "2026-09-21",
+                "actual": "2026-09-22T05:16:02",
+                "detail": "current materialization cannot establish pre-execution publication"
+              }
+            ],
+            "facts_hash": "7e2dca54d96f115317b22c7762a81f1fb2aed33191001a295bd68928bc7dcc08",
+            "conflict_count": 0,
+            "missing_count": 2,
+            "recorded_trade_count": 0,
+            "forward_performance": "unverified"
+          },
+          "no_gate": {
+            "status": "incomplete",
+            "execution_certified": false,
+            "checks": {
+              "cash": "matched",
+              "positions": "matched",
+              "order_trade": "matched",
+              "reconstructed_cash": 100000.0
+            },
+            "days": {
+              "2026-09-21": {
+                "orders": 1,
+                "trades": 0,
+                "price_replay": "matched_recorded_quantity",
+                "file_hashes": {
+                  "/private/tmp/quant-risk-verified-BXFVKn/legacy_explicit/trading_team/outputs/2026-09-21/plan.json": "737468fd73c81222e7e67792edb6d9e8b0986c0229e44a47b878e163a0dad9f1",
+                  "/private/tmp/quant-risk-verified-BXFVKn/legacy_explicit/trading_team/decisions/2026-09-21/paper_decision.json": "f5f6a487086cd5ac3efe33addcfcb6bf8a2156a343196ee86a5efc095e470cbd",
+                  "/private/tmp/quant-risk-verified-BXFVKn/legacy_explicit/trading_team/replay_data/2026-09-21.json": "389ebef7cb36615bfee87d65fbd05fd08a5340e54981f9202376c3d1370fbf5f"
+                },
+                "plan_hash": "771c11ae45332b53dae06ddb139b625868d3d2364b6c4aa814fa7d4c33534fbd",
+                "risk_review_state": "legacy_missing",
+                "plan_binding": "matched",
+                "materialized_at": "2026-09-22T05:16:02",
+                "recorded_model": "daily_bar_t1.v4",
+                "recorded_entry_contract": "a_share_entry.v1",
+                "recorded_exit_contract": "a_share_exit.v1",
+                "recorded_portfolio_policy": "explicit_intent.v1",
+                "recorded_risk_policy": "structured_risk.v1",
+                "receipt": "internally_matched",
+                "receipt_created_at": "2026-09-22T05:16:02+08:00",
+                "market_hash": "7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183"
+              }
+            },
+            "issues": [
+              {
+                "code": "risk_review_evidence",
+                "severity": "missing",
+                "date": "2026-09-21",
+                "detail": "legacy risk reasons cannot authorize automatic Paper or certify gate-only restoration"
+              },
+              {
+                "code": "publication_timing",
+                "severity": "missing",
+                "date": "2026-09-21",
+                "actual": "2026-09-22T05:16:02",
+                "detail": "current materialization cannot establish pre-execution publication"
+              }
+            ],
+            "facts_hash": "70b697dbf4bbc25342b560f738fbeacec17a06cb88a7e189ca64517d88021d2f",
+            "conflict_count": 0,
+            "missing_count": 2,
+            "recorded_trade_count": 0,
+            "forward_performance": "unverified"
+          }
+        }
+      }
+    }
+  },
+  "tampering_rejected_without_account_write": true,
+  "approval_version": {
+    "old_hash": "1757d388864162ba3b6bfdba36ba45eacf7f7d61473b04bbae4f4a7d4822c2c3",
+    "new_hash": "a39856a5254c554f9d5a6c240b2dccc6abb5117a06230ac54cb1e32d0b00e2e8",
+    "old_approval_invalidated": true,
+    "scope": "synthetic_approval_fixture_only"
+  },
+  "production_audit": {
+    "schema": "paper_reconciliation.v1",
+    "observed_at": "2026-09-22T05:16:02.846484+08:00",
+    "model": "daily_bar_t1.v4",
+    "fee_policy": {
+      "commission_rate": 0.00025,
+      "min_commission": 5.0,
+      "stamp_tax_rate": 0.0005,
+      "transfer_fee_rate": 2e-05
+    },
+    "slippage_rate": 0.002,
+    "entry_contract": "a_share_entry.v1",
+    "exit_contract": "a_share_exit.v1",
+    "portfolio_policy": "explicit_intent.v1",
+    "risk_contract": "a_share_risk.v1",
+    "risk_policy": "structured_risk.v1",
+    "scope": "historical_account_checks_not_execution_certification",
+    "limitations": [
+      "Cash-only initial account; no external transfers or corporate actions",
+      "Price replay uses recorded quantities, not independently reconstructed target sizing",
+      "Current model and fee comparison does not prove the historical runtime policy",
+      "Exit replay requires explicit intent and opening inventory matching the trade ledger",
+      "No certification of forward publication, free-text conditions or intraday queue fills"
+    ],
+    "portfolios": {
+      "gate": {
+        "status": "incomplete",
+        "execution_certified": false,
+        "checks": {
+          "cash": "matched",
+          "positions": "matched",
+          "order_trade": "matched",
+          "reconstructed_cash": 100000.0
+        },
+        "days": {
+          "2026-09-03": {
+            "orders": 3,
+            "trades": 0,
+            "price_replay": "unavailable",
+            "file_hashes": {
+              "/Users/henry/projects/quant/trading_team/outputs/2026-09-03/plan.json": "1d46d59df64a7f1a09c4e97797d6ec561e01c2164189f64b84eb18f0d2118aac",
+              "/Users/henry/projects/quant/trading_team/decisions/2026-09-03/paper_decision.json": "4af265b77e4cd24fe80c2cc2316239bb17dbf6a43ab13d373ce4777ec9c9890e",
+              "/Users/henry/projects/quant/trading_team/replay_data/2026-09-03.json": "d5478b34ae84aaeb9785984e72c0fdf34eeb4757859eac0845ffe2ce9a3df5dc"
+            },
+            "plan_hash": "a4d042d2a8aaafd1355f2227de3a6954f831320253520b51a775596bc175aaae",
+            "risk_review_state": "legacy_missing",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-21T22:16:51",
+            "receipt": "missing"
+          },
+          "2026-09-09": {
+            "orders": 3,
+            "trades": 0,
+            "price_replay": "unavailable",
+            "file_hashes": {
+              "/Users/henry/projects/quant/trading_team/outputs/2026-09-09/plan.json": "27f21b3787c13282db24890f2ade3b830c3ea76155043dd3ca7e51561b26718a",
+              "/Users/henry/projects/quant/trading_team/decisions/2026-09-09/paper_decision.json": "81bd5c36469a0d63def211205ef4f03393fbb730b19555539cb5e125f70a99f4",
+              "/Users/henry/projects/quant/trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72"
+            },
+            "plan_hash": "629fc179d81febf82e92c4d6f38f259e06f2d1a0d80e2aa97bd7f261afe189ca",
+            "risk_review_state": "legacy_missing",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-21T22:16:51",
+            "receipt": "missing"
+          },
+          "2026-09-10": {
+            "orders": 3,
+            "trades": 0,
+            "price_replay": "unavailable",
+            "file_hashes": {
+              "/Users/henry/projects/quant/trading_team/outputs/2026-09-10/plan.json": "b6b783ce88e933c5f06940f51df019f6c5c4e880170302be2a691c8ed8e1079e",
+              "/Users/henry/projects/quant/trading_team/decisions/2026-09-10/paper_decision.json": "fee88f88d74c731e6c1c65d670562da554b2456c0462a2514b2967a2afe58a81",
+              "/Users/henry/projects/quant/trading_team/replay_data/2026-09-10.json": "eabec27dfd77dbed91f77a0605c549917beefaa5f95462cf196b460e8a82d6d0"
+            },
+            "plan_hash": "115ba12d5408de4b129f71491b3886205bed717a485ad4c8a2694adc702d7f8f",
+            "risk_review_state": "legacy_missing",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-21T22:16:51",
+            "receipt": "missing"
+          },
+          "2026-09-11": {
+            "orders": 3,
+            "trades": 0,
+            "price_replay": "unavailable",
+            "file_hashes": {
+              "/Users/henry/projects/quant/trading_team/outputs/2026-09-11/plan.json": "9a74039362e902ce254d07b655a3d8576672e9bee3060ba99b8bbee3c91d6e79",
+              "/Users/henry/projects/quant/trading_team/decisions/2026-09-11/paper_decision.json": "812cfbebd4cdb7043ca6dbf1377f85f751dcb07b3bba4cc1cde65f62e7d21ed4",
+              "/Users/henry/projects/quant/trading_team/replay_data/2026-09-11.json": "d84dbd90513cf58933a4245d12fb886c2caef6a2181ee6e02fd66c29a6272c68"
+            },
+            "plan_hash": "35a372e5dd3434ee177d2816a78e01cb1aad5830d4e81af14436c4f1b80f3c03",
+            "risk_review_state": "legacy_missing",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-21T22:16:51",
+            "receipt": "missing"
+          }
+        },
+        "issues": [
+          {
+            "code": "risk_review_evidence",
+            "severity": "missing",
+            "date": "2026-09-03",
+            "detail": "legacy risk reasons cannot authorize automatic Paper or certify gate-only restoration"
+          },
+          {
+            "code": "publication_timing",
+            "severity": "missing",
+            "date": "2026-09-03",
+            "actual": "2026-09-21T22:16:51",
+            "detail": "current materialization cannot establish pre-execution publication"
+          },
+          {
+            "code": "unmodeled_condition",
+            "severity": "missing",
+            "date": "2026-09-03",
+            "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+          },
+          {
+            "code": "receipt_missing",
+            "severity": "missing",
+            "date": "2026-09-03"
+          },
+          {
+            "code": "market_evidence",
+            "severity": "missing",
+            "date": "2026-09-03",
+            "detail": "legacy replay cache requires audited replacement; schema mismatch"
+          },
+          {
+            "code": "risk_review_evidence",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "detail": "legacy risk reasons cannot authorize automatic Paper or certify gate-only restoration"
+          },
+          {
+            "code": "decision_selection_changed",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "detail": "historical buy-only decision matches its plan; current explicit exits were not materialized"
+          },
+          {
+            "code": "publication_timing",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "actual": "2026-09-21T22:16:51",
+            "detail": "current materialization cannot establish pre-execution publication"
+          },
+          {
+            "code": "unmodeled_condition",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+          },
+          {
+            "code": "receipt_missing",
+            "severity": "missing",
+            "date": "2026-09-09"
+          },
+          {
+            "code": "market_evidence",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "detail": "legacy replay cache requires audited replacement; schema mismatch"
+          },
+          {
+            "code": "risk_review_evidence",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "detail": "legacy risk reasons cannot authorize automatic Paper or certify gate-only restoration"
+          },
+          {
+            "code": "decision_selection_changed",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "detail": "historical buy-only decision matches its plan; current explicit exits were not materialized"
+          },
+          {
+            "code": "publication_timing",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "actual": "2026-09-21T22:16:51",
+            "detail": "current materialization cannot establish pre-execution publication"
+          },
+          {
+            "code": "unmodeled_condition",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+          },
+          {
+            "code": "receipt_missing",
+            "severity": "missing",
+            "date": "2026-09-10"
+          },
+          {
+            "code": "market_evidence",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "detail": "legacy replay cache requires audited replacement; schema mismatch"
+          },
+          {
+            "code": "risk_review_evidence",
+            "severity": "missing",
+            "date": "2026-09-11",
+            "detail": "legacy risk reasons cannot authorize automatic Paper or certify gate-only restoration"
+          },
+          {
+            "code": "publication_timing",
+            "severity": "missing",
+            "date": "2026-09-11",
+            "actual": "2026-09-21T22:16:51",
+            "detail": "current materialization cannot establish pre-execution publication"
+          },
+          {
+            "code": "unmodeled_condition",
+            "severity": "missing",
+            "date": "2026-09-11",
+            "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+          },
+          {
+            "code": "receipt_missing",
+            "severity": "missing",
+            "date": "2026-09-11"
+          },
+          {
+            "code": "market_evidence",
+            "severity": "missing",
+            "date": "2026-09-11",
+            "detail": "legacy replay cache requires audited replacement; schema mismatch"
+          }
+        ],
+        "facts_hash": "a289e19956240a19c73a84c9d8394d479805dad5c0e2a668300362eaca126a71",
+        "conflict_count": 0,
+        "missing_count": 22,
+        "recorded_trade_count": 0,
+        "forward_performance": "unverified"
+      },
+      "no_gate": {
+        "status": "conflict",
+        "execution_certified": false,
+        "checks": {
+          "cash": "matched",
+          "positions": "matched",
+          "order_trade": "matched",
+          "reconstructed_cash": 79601.66
+        },
+        "days": {
+          "2026-09-03": {
+            "orders": 3,
+            "trades": 0,
+            "price_replay": "unavailable",
+            "file_hashes": {
+              "/Users/henry/projects/quant/trading_team/outputs/2026-09-03/plan.json": "1d46d59df64a7f1a09c4e97797d6ec561e01c2164189f64b84eb18f0d2118aac",
+              "/Users/henry/projects/quant/trading_team/decisions/2026-09-03/paper_decision.json": "4af265b77e4cd24fe80c2cc2316239bb17dbf6a43ab13d373ce4777ec9c9890e",
+              "/Users/henry/projects/quant/trading_team/replay_data/2026-09-03.json": "d5478b34ae84aaeb9785984e72c0fdf34eeb4757859eac0845ffe2ce9a3df5dc"
+            },
+            "plan_hash": "a4d042d2a8aaafd1355f2227de3a6954f831320253520b51a775596bc175aaae",
+            "risk_review_state": "legacy_missing",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-21T22:16:51",
+            "receipt": "missing"
+          },
+          "2026-09-09": {
+            "orders": 3,
+            "trades": 3,
+            "price_replay": "unavailable",
+            "file_hashes": {
+              "/Users/henry/projects/quant/trading_team/outputs/2026-09-09/plan.json": "27f21b3787c13282db24890f2ade3b830c3ea76155043dd3ca7e51561b26718a",
+              "/Users/henry/projects/quant/trading_team/decisions/2026-09-09/paper_decision.json": "81bd5c36469a0d63def211205ef4f03393fbb730b19555539cb5e125f70a99f4",
+              "/Users/henry/projects/quant/trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72"
+            },
+            "plan_hash": "629fc179d81febf82e92c4d6f38f259e06f2d1a0d80e2aa97bd7f261afe189ca",
+            "risk_review_state": "legacy_missing",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-21T22:16:51",
+            "receipt": "missing"
+          },
+          "2026-09-10": {
+            "orders": 0,
+            "trades": 0,
+            "price_replay": "unavailable",
+            "file_hashes": {
+              "/Users/henry/projects/quant/trading_team/outputs/2026-09-10/plan.json": "b6b783ce88e933c5f06940f51df019f6c5c4e880170302be2a691c8ed8e1079e",
+              "/Users/henry/projects/quant/trading_team/decisions/2026-09-10/paper_decision.json": "fee88f88d74c731e6c1c65d670562da554b2456c0462a2514b2967a2afe58a81",
+              "/Users/henry/projects/quant/trading_team/replay_data/2026-09-10.json": "eabec27dfd77dbed91f77a0605c549917beefaa5f95462cf196b460e8a82d6d0"
+            },
+            "plan_hash": "115ba12d5408de4b129f71491b3886205bed717a485ad4c8a2694adc702d7f8f",
+            "risk_review_state": "legacy_missing",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-21T22:16:51",
+            "receipt": "missing"
+          },
+          "2026-09-11": {
+            "orders": 0,
+            "trades": 0,
+            "price_replay": "unavailable",
+            "file_hashes": {
+              "/Users/henry/projects/quant/trading_team/outputs/2026-09-11/plan.json": "9a74039362e902ce254d07b655a3d8576672e9bee3060ba99b8bbee3c91d6e79",
+              "/Users/henry/projects/quant/trading_team/decisions/2026-09-11/paper_decision.json": "812cfbebd4cdb7043ca6dbf1377f85f751dcb07b3bba4cc1cde65f62e7d21ed4",
+              "/Users/henry/projects/quant/trading_team/replay_data/2026-09-11.json": "d84dbd90513cf58933a4245d12fb886c2caef6a2181ee6e02fd66c29a6272c68"
+            },
+            "plan_hash": "35a372e5dd3434ee177d2816a78e01cb1aad5830d4e81af14436c4f1b80f3c03",
+            "risk_review_state": "legacy_missing",
+            "plan_binding": "matched",
+            "materialized_at": "2026-09-21T22:16:51",
+            "receipt": "missing"
+          }
+        },
+        "issues": [
+          {
+            "code": "price_tick",
+            "severity": "conflict",
+            "date": "2026-09-09",
+            "trade_id": 3,
+            "symbol": "601318",
+            "actual": 54.829,
+            "expected": "0.01 RMB tick"
+          },
+          {
+            "code": "amount_price",
+            "severity": "conflict",
+            "date": "2026-09-09",
+            "trade_id": 3,
+            "symbol": "601318",
+            "actual": 5482.94,
+            "expected": 5482.9
+          },
+          {
+            "code": "risk_review_evidence",
+            "severity": "missing",
+            "date": "2026-09-03",
+            "detail": "legacy risk reasons cannot authorize automatic Paper or certify gate-only restoration"
+          },
+          {
+            "code": "publication_timing",
+            "severity": "missing",
+            "date": "2026-09-03",
+            "actual": "2026-09-21T22:16:51",
+            "detail": "current materialization cannot establish pre-execution publication"
+          },
+          {
+            "code": "unmodeled_condition",
+            "severity": "missing",
+            "date": "2026-09-03",
+            "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+          },
+          {
+            "code": "receipt_missing",
+            "severity": "missing",
+            "date": "2026-09-03"
+          },
+          {
+            "code": "decision_policy_changed",
+            "severity": "missing",
+            "date": "2026-09-03",
+            "symbols": [
+              "600900",
+              "601899",
+              "601318"
+            ],
+            "detail": "recorded eligibility differs from the current order contract; original plan binding retained"
+          },
+          {
+            "code": "market_evidence",
+            "severity": "missing",
+            "date": "2026-09-03",
+            "detail": "legacy replay cache requires audited replacement; schema mismatch"
+          },
+          {
+            "code": "risk_review_evidence",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "detail": "legacy risk reasons cannot authorize automatic Paper or certify gate-only restoration"
+          },
+          {
+            "code": "decision_selection_changed",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "detail": "historical buy-only decision matches its plan; current explicit exits were not materialized"
+          },
+          {
+            "code": "publication_timing",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "actual": "2026-09-21T22:16:51",
+            "detail": "current materialization cannot establish pre-execution publication"
+          },
+          {
+            "code": "unmodeled_condition",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+          },
+          {
+            "code": "receipt_missing",
+            "severity": "missing",
+            "date": "2026-09-09"
+          },
+          {
+            "code": "decision_policy_changed",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "symbols": [
+              "600036",
+              "601899",
+              "601318"
+            ],
+            "detail": "recorded eligibility differs from the current order contract; original plan binding retained"
+          },
+          {
+            "code": "market_evidence",
+            "severity": "missing",
+            "date": "2026-09-09",
+            "detail": "legacy replay cache requires audited replacement; schema mismatch"
+          },
+          {
+            "code": "risk_review_evidence",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "detail": "legacy risk reasons cannot authorize automatic Paper or certify gate-only restoration"
+          },
+          {
+            "code": "decision_selection_changed",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "detail": "historical buy-only decision matches its plan; current explicit exits were not materialized"
+          },
+          {
+            "code": "publication_timing",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "actual": "2026-09-21T22:16:51",
+            "detail": "current materialization cannot establish pre-execution publication"
+          },
+          {
+            "code": "unmodeled_condition",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+          },
+          {
+            "code": "receipt_missing",
+            "severity": "missing",
+            "date": "2026-09-10"
+          },
+          {
+            "code": "decision_policy_changed",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "symbols": [
+              "601318",
+              "601899",
+              "600036"
+            ],
+            "detail": "recorded eligibility differs from the current order contract; original plan binding retained"
+          },
+          {
+            "code": "market_evidence",
+            "severity": "missing",
+            "date": "2026-09-10",
+            "detail": "legacy replay cache requires audited replacement; schema mismatch"
+          },
+          {
+            "code": "risk_review_evidence",
+            "severity": "missing",
+            "date": "2026-09-11",
+            "detail": "legacy risk reasons cannot authorize automatic Paper or certify gate-only restoration"
+          },
+          {
+            "code": "publication_timing",
+            "severity": "missing",
+            "date": "2026-09-11",
+            "actual": "2026-09-21T22:16:51",
+            "detail": "current materialization cannot establish pre-execution publication"
+          },
+          {
+            "code": "unmodeled_condition",
+            "severity": "missing",
+            "date": "2026-09-11",
+            "detail": "free-text entry conditions are not verified by the daily-bar matcher"
+          },
+          {
+            "code": "receipt_missing",
+            "severity": "missing",
+            "date": "2026-09-11"
+          },
+          {
+            "code": "decision_policy_changed",
+            "severity": "missing",
+            "date": "2026-09-11",
+            "symbols": [
+              "600036",
+              "601318",
+              "601899"
+            ],
+            "detail": "recorded eligibility differs from the current order contract; original plan binding retained"
+          },
+          {
+            "code": "market_evidence",
+            "severity": "missing",
+            "date": "2026-09-11",
+            "detail": "legacy replay cache requires audited replacement; schema mismatch"
+          }
+        ],
+        "facts_hash": "722ab56879806202aa0b81640761b7e551849bd0bf555dc97ba6ced758af7fc6",
+        "conflict_count": 2,
+        "missing_count": 26,
+        "recorded_trade_count": 3,
+        "forward_performance": "unverified"
+      }
+    }
+  },
+  "source_hashes_after": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-entry-contract.json": "5018b581f82f1348e537377bf5650d473d5335ead94f3a9a70cc9fcc37c05bd3",
+    "docs/audits/2026-09-22-execution-precision.json": "c5bbaa2b353015fa78d4ee26e291dc1b5e5effc4b0a328bed466a2f55e666c3c"
+  },
+  "production_sources_unchanged": true,
+  "model_calls": 0,
+  "notifications": 0,
+  "remote_multica_dispatches": 0,
+  "production_settlements": 0,
+  "limitations": [
+    "Synthetic typed risk judgments are not recommendations or forward performance.",
+    "Reason codes prove consistency, not completeness or correctness of model judgment.",
+    "Legacy hypothetical replay is not automatically approved Paper execution.",
+    "Continuous counterfactual, per-lot inventory, persistent protection, and full recovery remain incomplete.",
+    "Remote Multica execution is not verified by this local acceptance."
+  ]
+}

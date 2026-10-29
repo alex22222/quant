@@ -21,11 +21,8 @@ from strategies.turtle_bluechip import PARAMS, _effective_cap, compute_targets, 
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# 已完成 T+1 开盘成交改造的日线策略（demo_dual_ma 为退役教学策略，除外）
-DAILY_STRATEGIES = [
-    "turtle_bluechip", "momentum_rotation", "momentum_stops", "sharpe_momentum",
-    "week52_momentum", "ma_trend_bluechip", "rsi2_reversal", "rotation_300_500",
-]
+# 清理后策略库内仍需保持 T 日信号、T+1 开盘执行的研究策略。
+T1_STRATEGIES = ["turtle_bluechip", "momentum_rotation"]
 ORDER_APIS = {"order_target_percent", "order", "order_shares", "order_value",
               "order_market", "order_limit"}
 
@@ -219,7 +216,7 @@ class TestT1ExecutionGuard:
     """口径守卫（审查第 2 条）：日线策略下单只允许出现在 open_auction，
     handle_bar/rebalance 内禁止直接下单（当日收盘价成交 = 用信号价成交）。"""
 
-    @pytest.mark.parametrize("name", DAILY_STRATEGIES)
+    @pytest.mark.parametrize("name", T1_STRATEGIES)
     def test_orders_only_in_open_auction(self, name):
         tree = ast.parse((ROOT / "strategies" / f"{name}.py").read_text(encoding="utf-8"))
         funcs = {n.name: n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef)}

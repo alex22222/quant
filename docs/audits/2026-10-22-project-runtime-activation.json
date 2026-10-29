@@ -1,0 +1,164 @@
+{
+  "date": "2026-10-22",
+  "loop": 199,
+  "status": "runtime_online_two_agents_migrated_inference_pending",
+  "authorization": "User authorized shared daemon restart after explicit prerequisite notice; prior project-only runtime/two-agent migration authorization retained.",
+  "preflight": {
+    "all_eight_agents_idle": true,
+    "queued_issue_count": 0,
+    "in_progress_issue": "SATU-62",
+    "in_progress_issue_actual_task_status": "completed",
+    "in_progress_issue_task_id": "01a0ea5a-c241-72cc-8e44-7378a8087914",
+    "old_task_completed_at": "2026-09-28T23:48:28Z"
+  },
+  "restart": {
+    "command": "multica daemon restart",
+    "exit_code": 0,
+    "pid_before": 23263,
+    "pid_after": 94923,
+    "version": "0.6.5",
+    "daemon_id": "01a0c492-4f9e-797d-b6ba-653b1897dad2",
+    "count": 1
+  },
+  "runtime": {
+    "id": "68bb6092-57e9-4a0a-a318-71c8680a654c",
+    "profile_id": "d3e97ade-1757-4ca7-847b-85af4d668602",
+    "status": "online",
+    "version": "codex-cli 0.163.0",
+    "observed_at": "2026-10-22T07:51:03Z",
+    "old_codex_claude_kimi_openclaw_online": true,
+    "os_isolation_verified": false,
+    "inference_verified": false
+  },
+  "agents_readback": [
+    {
+      "id": "9f8b5673-249b-4688-8ddd-49452b91cfec",
+      "name": "Mika",
+      "runtime_id": "c738eeeb-c936-4255-9fe2-f4c6bc97b955",
+      "model": "",
+      "thinking_level": "",
+      "custom_args": [],
+      "status": "idle"
+    },
+    {
+      "id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+      "name": "Research Lead",
+      "runtime_id": "68bb6092-57e9-4a0a-a318-71c8680a654c",
+      "model": "gpt-6.1-sol",
+      "thinking_level": "xhigh",
+      "custom_args": [
+        "-c",
+        "model_reasoning_effort=\"xhigh\""
+      ],
+      "status": "idle"
+    },
+    {
+      "id": "d1657994-f3fb-441f-b8bf-c8b7181765cd",
+      "name": "Data Quality",
+      "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+      "model": "kimi-code/k3-256k",
+      "thinking_level": "",
+      "custom_args": [],
+      "status": "idle"
+    },
+    {
+      "id": "b765ae90-5a87-424f-9c26-fe3ce0644674",
+      "name": "Market Analysts",
+      "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+      "model": "claude-sonnet-5",
+      "thinking_level": "",
+      "custom_args": [],
+      "status": "idle"
+    },
+    {
+      "id": "5c69dae4-6ea4-48d3-8ec1-575d3f322a4e",
+      "name": "Strategy Research",
+      "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+      "model": "claude-opus-5-5",
+      "thinking_level": "",
+      "custom_args": [],
+      "status": "idle"
+    },
+    {
+      "id": "303a9540-46f1-4809-b3f7-0ce4de0e24ac",
+      "name": "Paper Trader",
+      "runtime_id": "f4543ac3-7f63-4fbd-97f2-c10476667ed9",
+      "model": "kimi-code/k3-256k",
+      "thinking_level": "",
+      "custom_args": [],
+      "status": "idle"
+    },
+    {
+      "id": "94249c35-4118-4eb7-8066-d5f5f1bff2fb",
+      "name": "Risk Manager",
+      "runtime_id": "bbebb96b-62f8-4c6c-8430-6882e57fe030",
+      "model": "claude-opus-5-5",
+      "thinking_level": "",
+      "custom_args": [],
+      "status": "idle"
+    },
+    {
+      "id": "91bfb847-5d2c-4d10-bb41-e2a514a30fe4",
+      "name": "Audit Verifier",
+      "runtime_id": "68bb6092-57e9-4a0a-a318-71c8680a654c",
+      "model": "gpt-6.1-sol",
+      "thinking_level": "xhigh",
+      "custom_args": [
+        "-c",
+        "model_reasoning_effort=\"xhigh\""
+      ],
+      "status": "idle"
+    }
+  ],
+  "changed_agents": [
+    "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+    "91bfb847-5d2c-4d10-bb41-e2a514a30fe4"
+  ],
+  "other_agents_runtime_model_unchanged": true,
+  "bootstrap": {
+    "only_changed_field": "runtime_id",
+    "before": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "after": "68bb6092-57e9-4a0a-a318-71c8680a654c"
+  },
+  "protected_sha256_before_and_after": {
+    "paper/active_cohort.json": "35a952b2192a01364f13145c161b30a42f37c014fe01cfc8b28bcd19070b4c3c",
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "paper/cohort_2026-09-28/llm_gate.db": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c",
+    "paper/cohort_2026-09-28/llm_no_gate.db": "e0e72f975425e419fa9d3ad31baed99020dfcbd8bea6495954e16c6457bc039c",
+    "trading_team/team.db": "b5d0172db165f1df06e85bb766bbf2afae3dea9c2781708fb01bfe0c40b90eb9",
+    "docs/MULTICA_PRODUCTION_RUNBOOK.md": "be2861c475d4a5ccdd07b243f70c4c5402b9661a55e9d4a67ac993857c8a4d31",
+    "/Users/henry/.local/bin/codex": "1da3f4e0e96028b8a771814293c3033dafd1971f943f6c7e79b0897fe705f590",
+    "/Users/henry/.codex/config.toml": "d901c6a474e244370524e25c342f3af2f64cd400b342881c88f10eaab29d93cc"
+  },
+  "original_failure": {
+    "issue": "SATU-98",
+    "task": "01a160cd-4d8d-70a7-a3d0-3d8d08375fb5",
+    "task_count_after": 1,
+    "status": "failed",
+    "retried": false
+  },
+  "automation": {
+    "id": "a",
+    "status": "ACTIVE",
+    "schedule_unchanged": true,
+    "facts_updated": true
+  },
+  "goal": {
+    "observed_card_status": "blocked",
+    "m2_passed": false,
+    "m3_started": false,
+    "scope_unchanged": true
+  },
+  "boundaries": {
+    "no_probe": true,
+    "no_new_production_task": true,
+    "no_global_cli_change": true,
+    "no_credentials_copied": true,
+    "no_live": true,
+    "no_paper_settlement": true,
+    "no_backup_override": true
+  },
+  "verification": "Configuration/readback/hash checks only; no application-code changes or full test-suite run. Future original-entry task must establish actual account/model inference.",
+  "next": "Use only future original 07:30 publication, real 09:15 cutoff, ordered independent reviews and deterministic Paper/notification evidence."
+}

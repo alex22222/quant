@@ -1,0 +1,249 @@
+{
+  "schema": "multica_review_gate_acceptance.v1",
+  "loop": 50,
+  "classification": "progress",
+  "observed_at": "2026-09-22T05:01:57.631Z",
+  "goal_complete": false,
+  "evidence_directory": "/private/tmp/quant-review-gate.ut2Y8m",
+  "requirements_verified": {
+    "positive_approval_requires_current_reviews": true,
+    "rejection_without_reviews": true,
+    "public_dual_paper_requires_current_reviews": true,
+    "legacy_llm_entry_requires_current_reviews": true,
+    "no_gate_and_dry_run_do_not_bypass": true,
+    "dual_paper_receipts_bind_review_gate": true,
+    "finalize_cache_revalidates_review_and_settlement_versions": true,
+    "counterfactual_output_survives_review_block": true,
+    "restored_reviewed_settlement_does_not_repeat_fills": true,
+    "dated_review_console_and_approval_controls": true
+  },
+  "gate_schema": "multica_review_gate.v1",
+  "verification": {
+    "baseline": {
+      "command": ".venv/bin/python -m pytest -q tests execution/tests",
+      "passed": 1104,
+      "seconds": 30.46
+    },
+    "initial_new_tests": {
+      "failed": 14,
+      "passed": 2
+    },
+    "additional_regressions_reproduced": [
+      "finalize cache paired new reviews with old settlement",
+      "review gate prevented non-executing counterfactual output"
+    ],
+    "new_integration_cases": 20,
+    "final_retained": {
+      "command": ".venv/bin/python -m pytest -q tests/test_review_gate.py tests/test_daily_finalize_workflow.py --basetemp=/private/tmp/quant-review-gate.ut2Y8m/final-cases",
+      "passed": 24,
+      "seconds": 6.22
+    },
+    "full": {
+      "command": ".venv/bin/python -m pytest -q tests execution/tests",
+      "passed": 1124,
+      "seconds": 36.7
+    },
+    "test_dependency_boundary": "Other-contract unit fixtures explicitly use stub_research_reviews; new integration tests use the actual local require_reviews with scripted model and fake task RPC.",
+    "independent_read_only": {
+      "accepted_status": "accepted",
+      "review_gate_hash": "046fb9def4705a2ae9c25f59011c085295b61332c6041d2025b365395280d872",
+      "accounts": {
+        "gate": {
+          "trade_count": 1,
+          "review_binding_matches": true
+        },
+        "no_gate": {
+          "trade_count": 1,
+          "review_binding_matches": true
+        }
+      },
+      "blocked_run": {
+        "status": "failed",
+        "review_step": "failed",
+        "counterfactual_step": "succeeded",
+        "paper_databases": []
+      }
+    },
+    "syntax": "passed",
+    "git_diff_check": "passed"
+  },
+  "browser": {
+    "method": "in-app browser, fixed-width same-origin iframe previews using read-only retained fixtures",
+    "viewports": [
+      {
+        "width": 390,
+        "document_scroll_width": 390,
+        "row_width": 362,
+        "row_scroll_width": 362,
+        "rows": 6
+      },
+      {
+        "width": 768,
+        "document_scroll_width": 768,
+        "row_width": 484,
+        "row_scroll_width": 484,
+        "rows": 6
+      },
+      {
+        "width": 1100,
+        "document_scroll_width": 1100,
+        "row_width": 816,
+        "row_scroll_width": 816,
+        "rows": 6
+      },
+      {
+        "width": 1280,
+        "document_scroll_width": 1280,
+        "row_width": 996,
+        "row_scroll_width": 996,
+        "rows": 6
+      }
+    ],
+    "screenshots_inspected": [
+      390,
+      768,
+      1280
+    ],
+    "states_verified": [
+      "accepted",
+      "stale",
+      "invalid",
+      "unavailable",
+      "source_unverified"
+    ],
+    "missing_review_approval_disabled": true,
+    "rejection_available": true,
+    "accepted_approval_enabled": true,
+    "evidence_html_escaped": true,
+    "injected_element_present": false,
+    "formal": {
+      "width": 1910,
+      "document_scroll_width": 1910,
+      "status": "source_unverified"
+    },
+    "fixture_server_stopped": true
+  },
+  "production_observation": {
+    "endpoint": "http://127.0.0.1:7100/api/multica-reviews?date=2026-09-22",
+    "http_status": 200,
+    "status": "source_unverified",
+    "execution_authorized": false,
+    "production_complete": false,
+    "console_service": "gui/502/com.hqcapital.console",
+    "service_pid": 80305,
+    "listener_verified": true,
+    "latest_remote_run_observed_in_console": "01a0c691-0e7a-7b98-b915-52955a79f325",
+    "remote_status": "failed",
+    "remote_runtime": "codex-cli 0.145.0",
+    "remote_read_only_observation": true
+  },
+  "protected": {
+    "count": 33,
+    "changed": [],
+    "before_sha256": {
+      "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818",
+      "docs/audits/2026-09-22-continuous-counterfactual.json": "2bafa984af423bda5136229a79aa7bf46613a0912fbc5663d04604b32ca6a50c",
+      "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+      "docs/audits/2026-09-22-lot-inventory.json": "9834742c64efe66fa261a7ead8e442ccc6a01d337dff0781ed1bf9b1cde8c576",
+      "docs/audits/2026-09-22-notification-recovery.json": "b6a2ef9a07602894720c19c2de6e56cf3dddeae78a265dbb378eaeec82496a12",
+      "docs/audits/2026-09-22-paper-protection.json": "ad090cf06b500bc80e705ba8a9318300c5b6456986113ecec06346b2c34bba56",
+      "docs/audits/2026-09-22-persistent-backup.json": "917b8103e93ae1bd288c681f955f7b2a4cbcb59e262802509f904f87165fce1d",
+      "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+      "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+      "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+      "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+      "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+      "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+      "trading_team/decisions/2026-09-22/decision.json": "64533e79126b528243577f65227ab79c87d84b575f265f446196b606b37cb516",
+      "trading_team/decisions/2026-09-22/paper_decision.json": "699c1922a4e3a6f61c7ab781adfe2756b318e17240780651ed6a44d71174ed0e",
+      "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+      "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+      "trading_team/outputs/2026-09-22/01_fundamental.md": "ff50fd15686fb6de950c58c4238113a63a9be2185becc0fb39ccb89cd463f7bb",
+      "trading_team/outputs/2026-09-22/02_sentiment.md": "d0600ecf3e381a57f664b9deb592a33dcde6a5a929c497b26d50125307fc4ff6",
+      "trading_team/outputs/2026-09-22/03_news.md": "806eb8b2af9729f099b611c8c13f80b2f0ddd9d7ac24718faa519cb2570c4cf4",
+      "trading_team/outputs/2026-09-22/04_technical.md": "94fbc7265a543e2bd21754eadf75ef8a9cdedab9242d7f914514f9dbb8495dd1",
+      "trading_team/outputs/2026-09-22/05_researcher.md": "c7a5812da86091860c8b482fb39df9b6fcca36880241dd9a5b8d4f0e5a9ccb24",
+      "trading_team/outputs/2026-09-22/06_trader.md": "9f64c8e1d472828058939a2458cca036f710d7a4e756eb862e3ee32555fa7131",
+      "trading_team/outputs/2026-09-22/07_risk_manager.md": "7a8a291d4a084cc2114095221b659e3c37a1687a318648160ed0eae87a4b7556",
+      "trading_team/outputs/2026-09-22/daily_conclusion.md": "6d57ab3ce5b76a191e331342475feddc3bfc44b0ab0ae67e086dbc894ad39d62",
+      "trading_team/outputs/2026-09-22/plan.json": "ab3c293ae4cc2e7a922ec5278e216ed4c5ce7f6785a883e73c2d35c65a8174e0",
+      "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+      "trading_team/team.db": "397b37b89a02a3dc4b87ff6ef0504def4ecd3e24362e66e23b424cbc0366aeee",
+      "docs/audits/2026-09-22-research-entrypoint.json": "e582421895dfd7110fc5097eb5881acd15d9d4d2c29196e880dac5c9d1179bc5",
+      "docs/audits/2026-09-22-multica-observation.json": "1cdb1927e348d0d87ba0306edbec392e4b8abae27b6045b4dcdb8abcfe2b6010",
+      "docs/audits/2026-09-22-model-transport.json": "fe7c7959e273aaf2b21ecb680d502e6e65cae6bf301fbbc79c8ba87914a4c646",
+      "docs/audits/2026-09-22-system-acceptance.json": "c715fd01a2c9a779384c788030830b6b8f259efd3ed610d051a93056b660c150",
+      "docs/audits/2026-09-22-multica-reviews.json": "db15411043dec672f9603f80ee3146e9206645de7f54988512fb3f4cbe654275"
+    },
+    "after_sha256": {
+      "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818",
+      "docs/audits/2026-09-22-continuous-counterfactual.json": "2bafa984af423bda5136229a79aa7bf46613a0912fbc5663d04604b32ca6a50c",
+      "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+      "docs/audits/2026-09-22-lot-inventory.json": "9834742c64efe66fa261a7ead8e442ccc6a01d337dff0781ed1bf9b1cde8c576",
+      "docs/audits/2026-09-22-notification-recovery.json": "b6a2ef9a07602894720c19c2de6e56cf3dddeae78a265dbb378eaeec82496a12",
+      "docs/audits/2026-09-22-paper-protection.json": "ad090cf06b500bc80e705ba8a9318300c5b6456986113ecec06346b2c34bba56",
+      "docs/audits/2026-09-22-persistent-backup.json": "917b8103e93ae1bd288c681f955f7b2a4cbcb59e262802509f904f87165fce1d",
+      "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+      "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+      "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+      "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+      "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+      "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+      "trading_team/decisions/2026-09-22/decision.json": "64533e79126b528243577f65227ab79c87d84b575f265f446196b606b37cb516",
+      "trading_team/decisions/2026-09-22/paper_decision.json": "699c1922a4e3a6f61c7ab781adfe2756b318e17240780651ed6a44d71174ed0e",
+      "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+      "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+      "trading_team/outputs/2026-09-22/01_fundamental.md": "ff50fd15686fb6de950c58c4238113a63a9be2185becc0fb39ccb89cd463f7bb",
+      "trading_team/outputs/2026-09-22/02_sentiment.md": "d0600ecf3e381a57f664b9deb592a33dcde6a5a929c497b26d50125307fc4ff6",
+      "trading_team/outputs/2026-09-22/03_news.md": "806eb8b2af9729f099b611c8c13f80b2f0ddd9d7ac24718faa519cb2570c4cf4",
+      "trading_team/outputs/2026-09-22/04_technical.md": "94fbc7265a543e2bd21754eadf75ef8a9cdedab9242d7f914514f9dbb8495dd1",
+      "trading_team/outputs/2026-09-22/05_researcher.md": "c7a5812da86091860c8b482fb39df9b6fcca36880241dd9a5b8d4f0e5a9ccb24",
+      "trading_team/outputs/2026-09-22/06_trader.md": "9f64c8e1d472828058939a2458cca036f710d7a4e756eb862e3ee32555fa7131",
+      "trading_team/outputs/2026-09-22/07_risk_manager.md": "7a8a291d4a084cc2114095221b659e3c37a1687a318648160ed0eae87a4b7556",
+      "trading_team/outputs/2026-09-22/daily_conclusion.md": "6d57ab3ce5b76a191e331342475feddc3bfc44b0ab0ae67e086dbc894ad39d62",
+      "trading_team/outputs/2026-09-22/plan.json": "ab3c293ae4cc2e7a922ec5278e216ed4c5ce7f6785a883e73c2d35c65a8174e0",
+      "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+      "trading_team/team.db": "397b37b89a02a3dc4b87ff6ef0504def4ecd3e24362e66e23b424cbc0366aeee",
+      "docs/audits/2026-09-22-research-entrypoint.json": "e582421895dfd7110fc5097eb5881acd15d9d4d2c29196e880dac5c9d1179bc5",
+      "docs/audits/2026-09-22-multica-observation.json": "1cdb1927e348d0d87ba0306edbec392e4b8abae27b6045b4dcdb8abcfe2b6010",
+      "docs/audits/2026-09-22-model-transport.json": "fe7c7959e273aaf2b21ecb680d502e6e65cae6bf301fbbc79c8ba87914a4c646",
+      "docs/audits/2026-09-22-system-acceptance.json": "c715fd01a2c9a779384c788030830b6b8f259efd3ed610d051a93056b660c150",
+      "docs/audits/2026-09-22-multica-reviews.json": "db15411043dec672f9603f80ee3146e9206645de7f54988512fb3f4cbe654275"
+    }
+  },
+  "component_sha256": {
+    "trading_team/multica_reviews.py": "b036d10b53611dee1cd76d0ebd4dc2b1813d0c0f93ec0d5d408a7495d2cf61f2",
+    "trading_team/paper_pipeline.py": "036dc7f565968ddab7e62ec32aa871272478a1b1605443997cc06692197368dd",
+    "trading_team/daily_finalize.py": "79cd8833ed7970f964da713075fa9e164f2aac2c36c3f89cbad26d238a0c2449",
+    "trading_team/approvals.py": "eff6c0f24abdad428e5849a29e2730e1a0932c413eef80259496c5fc872daf20",
+    "trading_team/execute.py": "7c9e4b1e77e4e8f65ef6beed07af07edf9aaba2613f0975e9c68594f341c0315",
+    "console/index.html": "88ad9c3eb3622d63415a67f68f5cd34b4ad64439d9b2e27a17dbc0fa8d16be26",
+    "console/serve.py": "f144082d68c4a118c62f05e3007d0425d18bad67e8792d1eb89dd42112c5facb",
+    "tests/test_review_gate.py": "91073cccb7c8df34359980cc195cef4430a33715609b964c250ba10d4694dd03",
+    "docs/MULTICA_REVIEWS.md": "791ba3f883379c69a8e3e45d82dc0c346d2a7664410e40ac82fa205a0bcc59cb",
+    "docs/SYSTEM_ACCEPTANCE.md": "5f3d931737e328c75f4b79b7504df7d9e53cb992912c43813d9370116a44e2c0"
+  },
+  "side_effects": {
+    "console_reload": true,
+    "real_model_calls": false,
+    "real_remote_dispatch": false,
+    "remote_runbook_sync": false,
+    "runtime_changes": false,
+    "schedule_changes": false,
+    "real_notifications": false,
+    "production_approvals": false,
+    "production_paper_settlement": false,
+    "live_orders": false,
+    "global_auth_config_change": false
+  },
+  "limitations": [
+    "Post-publication review is not an independent remote maker pipeline or proof of actual six-role completion.",
+    "Reviews are a prerequisite, not execution, profit or forward-performance certification.",
+    "The whole settlement is blocked on missing review, including standing protection evaluation in that path.",
+    "Legacy execute checks current reviews but is not upgraded to the dual-account receipt pipeline.",
+    "Existing approval retry only repairs historical projections; actual execution rechecks current reviews.",
+    "Low-level matching helpers and non-executing counterfactuals are not public order authorization.",
+    "No OS-level agent isolation or actor signatures are claimed.",
+    "Real runtime/fee-source selection, authorized remote acceptance, offsite recovery and forward validation remain unresolved."
+  ]
+}

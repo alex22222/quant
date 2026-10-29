@@ -1,0 +1,51 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 98,
+  "verified_at": "2026-09-23T14:09:47+08:00",
+  "classification_of_previous_goal_turn": "progress_real_v11_freeze_and_satu24_blocked_publication_with_preserved_reply",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "trigger": {
+    "issue": "SATU-24",
+    "issue_id": "01a0cccf-6ce7-733f-b77e-68ac0a697595",
+    "task_id": "01a0cccf-6cfb-720e-876d-f96d8c0b1ed8",
+    "failed_run_id": "c5a820d52b42439a8eb0f5cb6b805986",
+    "original_error": "ValueError: unverified fund flow: volume and turnover do not prove signed capital flow",
+    "rejected_reply_sha256": "7321c39ccdd5d9e7e88c1864f30235219f67f491ee747cc9aed95c6cc054ad69",
+    "false_positive_clause": "本报告未将任何量比、换手、成交额证据升级为资金净流入/流出或主力介入结论"
+  },
+  "behavioral_reproduction": {
+    "preexisting_focused_suite": "62 passed",
+    "first_red": "1 failed, 64 passed: the real negated clause was rejected",
+    "second_red": "2 failed, 65 passed: a prior unknown qualifier incorrectly excused a later factual inflow assertion",
+    "third_red": "1 failed, 68 passed: an explicit 'funds may concentrate' hypothesis inside the regex match was rejected",
+    "hard_assertions_preserved": [
+      "未将量比证据升级为资金净流入但资金真实流入是事实",
+      "将量比证据升级为资金净流入",
+      "资金净流入不可判但资金真实流入是事实"
+    ]
+  },
+  "change": {
+    "application_file": "trading_team/kimi_daily.py",
+    "new_runner_sha256": "a653865820be11dda24d939bec7410086ce659a5f220dfc4cdd67bbb7a127e65",
+    "test_file": "tests/test_model_identity.py",
+    "scope": "Recognize only the local negative construction '未将...升级为' before the matched fund-flow phrase; apply other uncertainty qualifiers adjacent to each match, or explicitly inside a matched '资金可能/疑似/或许/推测' hypothesis, not anywhere in the clause.",
+    "volume_causality_guard_unchanged": true,
+    "old_v11_report_or_reply_modified": false
+  },
+  "verification": {
+    "focused": "69 passed in 3.40s",
+    "full_suite": "1224 passed in 38.19s",
+    "independent_inspect_generation_case": "passed in the focused suite",
+    "real_sealed_satu24_role05_reply_probe": "fund-flow guard passed in memory without editing the sealed reply",
+    "v11_freeze_sha256_unchanged": "3f9e121e700d3c2ffdc71f95c46df59f9c90073480ef7a52656370552c9b92ed",
+    "satu24_rejected_reply_sha256_unchanged": "7321c39ccdd5d9e7e88c1864f30235219f67f491ee747cc9aed95c6cc054ad69",
+    "git_diff_check": "passed",
+    "new_remote_task": false,
+    "moonshot_call": false,
+    "paper_or_approval_action": false
+  },
+  "limitations": "This bounded phrase guard does not certify the report's other claims or replace independent Market Analysts review. SATU-24 remains a genuine failed historical attempt; no publication, plan, review gate or Paper result can be inferred from an in-memory probe.",
+  "milestones": {"m1": "incomplete", "m2": "not_started", "m3": "not_started"},
+  "next": "Build a new isolated freeze tied to the new runner hash, verify 38 archived inputs and exact full fingerprints, reuse only legitimately cached independent 01-04 outputs, and regenerate role 05 onward. Preserve SATU-24's failed run and rejected reply; after remote identity/runtime/exact-hash dedup checks, dispatch at most one Research Lead publication-only task."
+}

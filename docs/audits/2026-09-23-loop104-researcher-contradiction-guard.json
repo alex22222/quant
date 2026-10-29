@@ -1,0 +1,42 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 104,
+  "verified_at": "2026-09-23T17:22:20+08:00",
+  "classification_of_previous_goal_turn": "progress_real_strategy_research_reject_receipt_and_identified_contradiction",
+  "business_date": "2026-09-23",
+  "isolated_team": "/private/tmp/quant-real-chain-v12.sBy3zU/trading_team",
+  "blocker": "The researcher described bearish volume, trend and valuation evidence for 601318, then asserted no counter-signal while rating it bullish.",
+  "regression": {
+    "test": "test_researcher_cannot_claim_no_counter_signal_after_listing_one",
+    "before_fix": "Failed: DID NOT RAISE ValueError",
+    "after_fix": "passed",
+    "rejected_reply_retained": true,
+    "publication_prevented": true,
+    "independent_rehashed_inspection": "rejected",
+    "negated_statement_control": "passed"
+  },
+  "changes": {
+    "runner": "trading_team/kimi_daily.py",
+    "runner_sha256": "c8ea5986ce32f79bce1ed9755333ae71f9705935ad1a9e8209482198a435d2a1",
+    "role_charter": "trading_team/prompts/05_researcher.md",
+    "role_charter_sha256": "7b861ebf11096960e789917eecb968e4e6caecbf0d1f62a0b1c442a64f60449c",
+    "test_file": "tests/test_model_identity.py",
+    "test_file_sha256": "0b7f199a98fcf081abe752614c6943cff38a3dbaeb24d44dd1f8e02b7de4ac89",
+    "scope": "Role-05 prompt plus publication/reuse validation for an unqualified no-counter-signal assertion; no Paper, approval, Live or scheduler change."
+  },
+  "verification": {
+    "project_suite": "1228 passed in 45.05s (.venv/bin/pytest -q tests)",
+    "repository_wide_discovery": "31 collection errors from vendored rqalpha tests or missing talib when using bare .venv/bin/pytest -q; project tests passed separately",
+    "v12_current_review_status": "source_unverified",
+    "v12_current_inspection_error": "researcher counter-signal contradiction: absolute denial needs evidence reconciliation",
+    "v12_freeze_sha256": "d217bb5706b4933533b7094b60a687c019b062cbce119132dfa5fc13065cdc15",
+    "v12_strategy_bundle_sha256": "177f30f80d1453855c17337dea2f26180eea1a40d108cb131951f0709b4cdc65",
+    "satu29_response_sha256": "667899252a603aeb33b63e74bb940dc5c388c2ce1e88efe946d31eb06d8561ed",
+    "v12_decision_present": false,
+    "v12_paper_present": false,
+    "new_remote_task_created": false
+  },
+  "interpretation": "The new policy invalidates reuse of the old v12 generation under current code; source_unverified is not evidence that its historical publication or SATU-29 rejection disappeared. Keep those immutable artifacts and regenerate in a new isolation.",
+  "milestones": {"m1": "incomplete", "m2": "not_started", "m3": "not_started"},
+  "next": "Create a fresh isolated freeze with the changed role-05 prompt and runner. Verify source inputs, fingerprints, no preexisting duplicate task and unique production entrypoint scope before one real publication-only task. Then restart independent reviews at Data Quality; do not reuse v12 accepts, approve, settle Paper, notify or enable Live. Legacy production Multica Autopilot still requires separate authorization."
+}

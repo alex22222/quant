@@ -1,0 +1,27 @@
+{
+  "observed_at_local": "2026-09-25 00:30 Asia/Shanghai",
+  "scope": "read-only observation of existing LaunchAgent and backup catalog",
+  "launchd": {
+    "label": "com.hqcapital.workflow-backup",
+    "runs_before": 238,
+    "runs_after": 239,
+    "last_exit_code": 0,
+    "next_scheduled_at": "2026-09-25T00:45:00+08:00"
+  },
+  "catalog": {
+    "status": "healthy",
+    "last_check_at": "2026-09-25T00:30:05.772386+08:00",
+    "latest_snapshot_id": "c508038af1414b5c92fbfa163f83efae",
+    "latest_snapshot_started_at": "2026-09-24T23:55:52.372977+08:00",
+    "snapshot_count": 12,
+    "attempt_count": 12,
+    "unregistered_count": 0,
+    "snapshot_interval_seconds": 21600,
+    "cohort_snapshot_current": true,
+    "offsite_verified": false,
+    "execution_authorized": false
+  },
+  "new_snapshot_created": false,
+  "post_snapshot_notification_gate_persistently_covered": false,
+  "m2_accepted": false
+}

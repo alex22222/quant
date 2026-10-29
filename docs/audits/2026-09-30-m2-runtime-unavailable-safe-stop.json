@@ -1,0 +1,50 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-09-30T12:43:17+08:00",
+  "business_date": "2026-09-30",
+  "result": "runtime_unavailable_safe_stop",
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "schedule": {
+    "autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "trigger_id": "97a59a0a-ceda-4115-81f8-bc583a7c5eef",
+    "triggered_at": "2026-09-30T07:30:12+08:00",
+    "autopilot_run_id": "01a0ef81-2212-7e58-9a0d-f1246aac7a68",
+    "issue": "SATU-65",
+    "issue_id": "01a0ef81-221e-761b-9b93-742300953e86",
+    "task_id": "01a0ef81-2234-7a9e-a061-b99e8f11a31f",
+    "task_status": "failed",
+    "task_started_at": null,
+    "failure_reason": "runtime unavailable while task was queued",
+    "terminal_at": "2026-09-30T10:30:21+08:00",
+    "research_lead_agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7"
+  },
+  "host_evidence": {
+    "pmset_sleep": "2026-09-29T15:17:46+08:00 Entering Sleep state due to Low Power Sleep, battery 1%",
+    "pmset_wake": "2026-09-30T12:40:47+08:00 Wake from Hibernate on AC, battery 1%",
+    "daemon_at_observation": "running; project Codex runtime online; zero active tasks",
+    "interpretation": "The host was asleep throughout the 07:30 trigger and 10:30 queue expiry. This directly explains runtime unavailability; it does not establish why the machine was left without power."
+  },
+  "local_boundary": {
+    "review_status": "source_unverified; 2026-09-30 generation not found",
+    "paper_reconciliation_observed_at": "2026-09-30T12:43:14+08:00",
+    "gate": "checked; cash 100000 CNY; zero recorded trades",
+    "no_gate": "checked; cash 100000 CNY; zero recorded trades",
+    "archive_service": "healthy at 12:43; latest verified completed session 2026-09-29",
+    "publication_or_downstream_chain": "not_observed"
+  },
+  "actions": [
+    "No second issue, retry, publication, review, approval, Paper settlement, notification, or Live action was initiated.",
+    "No daemon, network, or power setting was changed."
+  ],
+  "next_candidate": "2026-10-08, subject to same-day calendar and runtime verification; SSE and SZSE announce October 1-7 closure",
+  "limitations": [
+    "This is a midday safe-stop snapshot, not a complete postclose external-side-effect audit.",
+    "Paper reconciliation does not certify execution or independently rule out external Live or notification effects.",
+    "The host must be powered and the runtime online before the next natural-day trigger; current online status does not prove future availability."
+  ]
+}

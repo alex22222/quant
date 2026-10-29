@@ -1,0 +1,79 @@
+{
+  "schema": "notification_recovery_acceptance.v1",
+  "observed_at": "2026-09-22T06:52:07.118459+08:00",
+  "scope": "isolated_process_crash_with_simulated_delivery",
+  "isolated_root": "/private/tmp/quant-notification-recovery-yqkNcM",
+  "source_hashes_before": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+    "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+    "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+    "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+    "trading_team/team.db": "acad0151f77237ab2d7cf0d75e2ef2bc3b968fed95eb06ffe2437d0723c37ef0",
+    "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818"
+  },
+  "cases": {
+    "after_send_before_receipt": {
+      "process_exit": 92,
+      "before_restore": "unknown",
+      "snapshot": {
+        "status": "verified",
+        "scope": "research_paper_workflow_evidence",
+        "path": "/private/tmp/quant-notification-recovery-yqkNcM/unknown-snapshot",
+        "manifest_hash": "c4247c06816d36c886493ff565363a01b9add4f77855944521842609f5558561",
+        "file_count": 695,
+        "database_count": 4,
+        "execution_authorized": false
+      },
+      "same_state_after_restore": true,
+      "resolution": "manual_attestation_delivered",
+      "simulated_delivery_count": 1,
+      "attempt_count": 1,
+      "repeat_resolution_changed_no_bytes": true,
+      "source_remains_unknown": true,
+      "account_bytes_unchanged": true
+    },
+    "intent_before_send": {
+      "process_exit": 93,
+      "before_resolution": "unknown",
+      "controlled_non_delivery_proof": true,
+      "attempt_count": 2,
+      "simulated_delivery_count": 1,
+      "retry_only_after_resolution": true,
+      "account_bytes_unchanged": true
+    }
+  },
+  "network_disabled": true,
+  "real_notifications": 0,
+  "model_calls": 0,
+  "production_approvals": 0,
+  "production_settlements": 0,
+  "remote_multica_dispatches": 0,
+  "forward_performance": false,
+  "source_hashes_after": {
+    "paper/llm_gate.db": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "paper/llm_no_gate.db": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391",
+    "trading_team/outputs/2026-09-21/plan.json": "b0532497af2d59d3e814b6299edd9b31d5c048d8a85de67008e63946cac6b8da",
+    "trading_team/replay_data/2026-09-09.json": "4ab2759be98cd722933fcda356ce0fbc2ba7b7b15fd1ab0fde4cbe0a73d30f72",
+    "docs/audits/2026-09-22-risk-contract.json": "084c68823ebd2908ecc46405015a695f7812da92e2173e5e572b9376bdda6b75",
+    "docs/audits/2026-09-22-exit-contract-verified.json": "45b17869003b9f4b1aa31140c2758e352d6badf1d10c09ef5e171ee94f8c6723",
+    "docs/audits/2026-09-22-workflow-recovery.json": "8e4f2038677fcf5ea10541cbbc6d85d87456b057a74d35fce6edf56ef66d0f4d",
+    "docs/audits/2026-09-22-state-concurrency.json": "e405aef74002ee010fe48a27ce4b2bab466e78a05ef2d31018d4ffd1cedb7643",
+    "trading_team/loops/approvals.json": "2118b1f823c712e2d45b73249e9eb2e65fa5c009e0254040225628f28d866f74",
+    "trading_team/decisions/2026-09-21/decision.json": "dd8c4ad8b185e5b126470bd9fe01bb182a26f9c298dbcb89f0168ed51eacb39c",
+    "trading_team/team.db": "acad0151f77237ab2d7cf0d75e2ef2bc3b968fed95eb06ffe2437d0723c37ef0",
+    "docs/audits/2026-09-22-approval-recovery.json": "489289d2fba579d0ceb4700c7a21046ba2db8b7a238cb5c57d3300006cb0d818"
+  },
+  "production_sources_unchanged": true,
+  "limitations": [
+    "No real Feishu request or recipient verification was performed; transport delivery was simulated.",
+    "Manual reconciliation is an operator attestation, not a cryptographic identity or provider query.",
+    "Unknown delivery blocks automated retries; lost local history or concurrent external senders remain outside this guarantee.",
+    "The provider UUID is supplementary; no infinite exactly-once or read-by-recipient claim is made."
+  ]
+}

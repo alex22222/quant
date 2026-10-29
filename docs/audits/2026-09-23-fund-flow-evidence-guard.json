@@ -1,0 +1,40 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 91,
+  "verified_at": "2026-09-23T11:54:52+08:00",
+  "classification_of_previous_goal_turn": "progress_real_strategy_research_rejection",
+  "direct_blocker": "SATU-19 rejected the researcher claim that volume and turnover prove actual capital inflow; the upstream sentiment structured summary also stated capital participation as fact without signed flow data",
+  "source_publication": {
+    "issue": "SATU-19",
+    "isolated_team": "/private/tmp/quant-real-chain-v8.thl5kgk2/trading_team",
+    "strategy_research_verdict": "reject",
+    "strategy_research_bundle_sha256": "2e68ef9fafbc0b93ca500150e42e2576e689ee3513c4979698ebc84207142b28",
+    "sentiment_report_sha256": "0d8e0568d8b4731f30363ba952d524a43b6c8317aade433e04da535f39c3beed",
+    "researcher_report_sha256": "eeb08ea60d0e8c5532414b1d5a75503ef6a9790b3c35bcc7025ccf6586bc7214"
+  },
+  "change": {
+    "runner": "trading_team/kimi_daily.py",
+    "runner_sha256": "d9fb642d1a930d5825692783fd2f8762cee53c4df10437d9413feb2957e7e9d6",
+    "sentiment_prompt_sha256": "52daed3bcdb96111d2fd7f614955e1aca94f381942723daaab0c6ab101a5fd8b",
+    "researcher_prompt_sha256": "8f768de168baf6b4fdc931f8ee27ecdd04332847fcc9d369b7e98db373e2294d",
+    "test_sha256": "f5ff09ccc2276c90d9c985d30d18f6f47a831cd08048ac6446e11f6a7f34fa7a",
+    "behavior": "Reject unqualified fund-flow claims in role 02 and 05 before cache or publication and during independent generation inspection; prompt both roles to keep volume-derived participation as inference"
+  },
+  "verification": {
+    "related_baseline": "99 passed",
+    "initial_regression_before_change": "6 failed, 3 passed",
+    "combined_modifier_regression_before_fix": "1 failed, 3 passed",
+    "focused_after": "10 passed",
+    "full_after": "1207 passed in 44.16s",
+    "archived_reports": "both archived role 02 and role 05 reports rejected by the new validator without changing them",
+    "sealed_bundle_sha256_unchanged": true
+  },
+  "limits": [
+    "This bounded wording check is not a general semantic or source-level verifier; a future genuine signed-flow source requires separately reviewed evidence handling.",
+    "The old v8 publication, SATU-19 rejection and review bundle remain unchanged; no same-bundle re-review or historical approval occurred.",
+    "No new Moonshot call, remote task, decision, notification, Paper fill or Live action occurred in this loop.",
+    "The Kimi direct-writer is paused, but the legacy production Multica Autopilot and its old Runbook were not changed here.",
+    "M1 is incomplete; M2 and M3 have not begun."
+  ],
+  "next": "Create a new isolated version from the verified v8 source data with updated role 02 and 05 prompts and runner; invalidate affected caches by complete fingerprint, verify protected state and remote identity, then perform one bounded publication before new sequential real reviews. Separately resolve the legacy production Autopilot entrypoint only on explicit authorization."
+}

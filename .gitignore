@@ -4,6 +4,8 @@ __pycache__/
 *.pyc
 .DS_Store
 .env
+trading_team/.runs/
+paper/*.db.lock
 
 # 第三方源码（pip 安装即可，见 README）
 rqalpha/
@@ -23,5 +25,25 @@ quant-x-monitor/state.json
 execution/config.json
 execution/*.db
 
+# Project-only Codex executable; version and hashes are kept in the audit record.
+.tools/codex-runtime/
+
 # 回测报告产物（可重算）
 reports/
+
+# Local databases, raw data and runtime evidence never belong in source control.
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+data/
+artifacts/
+output/
+tmp/
+backups/
+.pytest_cache/
+trading_team/context/
+trading_team/outputs/
+trading_team/decisions/
+trading_team/replay_data/
+trading_team/market_archive/

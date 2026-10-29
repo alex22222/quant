@@ -1,0 +1,66 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "business_date": "2026-09-24",
+  "scope": "post-09:15 prompt-only repair for future research versions after SATU-59 factual rejection",
+  "cutoff": "2026-09-24T09:15:00+08:00",
+  "triggering_rejection": {
+    "issue": "SATU-59",
+    "receipt_hash": "63c993b6f6c24fbf23d74e0745223aec6a007bf710939bff66999bb70b384984",
+    "verdict": "reject",
+    "findings": [
+      "02 sentiment inferred selling pressure, buying support and trader intent from price, volume and turnover",
+      "03 news called a single uncertified gold snapshot a continuing historical-high area",
+      "04 technical mistook ret_60d=16.31 for percent above MA60; close 40.60 versus MA60 39.24 implies about 3.47 percent"
+    ]
+  },
+  "changes": {
+    "prompts/02_sentiment.md": {
+      "old_sha256": "8fa4c78aec5e95670db868a63c9d6d6f30b601d6a784d7f3c6b5522100c07a2e",
+      "new_sha256": "cbd9ff090c26805482b3a0d4ac6c811de167a0785d28bc580d58dc4262b0f4b9",
+      "boundary": "Volume, turnover and price cannot establish selling pressure, buying support or participant intent."
+    },
+    "prompts/03_news.md": {
+      "old_sha256": "f57314fa5488a249534a09b87a32553220a233f4d1132054f49f411594d206ca",
+      "new_sha256": "333cfc142cf03f9b483222da7b2b4e75cbf9e8cf1ab7daa892f00ff2fdae8dc0",
+      "boundary": "An uncertified single snapshot and previous settlement do not prove historical highs or a sustained trend."
+    },
+    "prompts/04_technical.md": {
+      "old_sha256": "a7bb3473206585990985df12e636fd022838153d3afd2294308ed6f9336d3a86",
+      "new_sha256": "350e4a74a448132ea088d7c87db376802e5b2bcf9778c70d1a26218f50f92a0d",
+      "boundary": "ret_60d is a 60-day return, not distance from MA60; omit the latter percentage unless independently supplied."
+    }
+  },
+  "verification": {
+    "charter_regressions_before": "3 failed, 88 deselected",
+    "charter_regressions_after": "3 passed, 88 deselected",
+    "full_tests_after": "1250 passed in 38.74s",
+    "generation_input_count_before_and_after": 38,
+    "changed_generation_input_paths": [
+      "prompts/02_sentiment.md",
+      "prompts/03_news.md",
+      "prompts/04_technical.md"
+    ],
+    "old_generation_file_sha256_unchanged": "76cae0d5411fb28cbbe24db36ec666393e3ddc1d130b455a5038a1944c2a5fc9",
+    "old_reject_response_file_sha256_unchanged": "0a5eb97975844a25ccf22574bd3777ed2ecea7011286a2d7615fc2ec8f58a689",
+    "gate_paper_db_sha256_unchanged": "558b22520f96c10acb9c908814858ed38c57c54018257813317be7e14e9f4ee4",
+    "no_gate_paper_db_sha256_unchanged": "f2b3967b49f8f342175e08ce35baab686a633d97d2e04dca4109e66cc9002391"
+  },
+  "version_boundary": {
+    "new_research_publication": false,
+    "new_remote_issue_or_task": false,
+    "old_sat_u_59_verdict_modified": false,
+    "current_review_status": "source_unverified: the current prompt bytes no longer match the 2026-09-24 generation receipt",
+    "execution_authorized": false,
+    "m2_accepted_for_2026_09_24": false,
+    "note": "The three static charter tests prove the instructions changed, not that a future model will obey them. The next eligible business date requires a fresh generation and six independent same-version reviews."
+  },
+  "autonomous_finalization_readback": {
+    "project_active_multica_autopilots": 1,
+    "only_autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "only_autopilot_scope": "08:02 Asia/Shanghai publication-only Runbook",
+    "local_kimi_daily_launchd": "disabled",
+    "current_user_cron_quant_finalize_entry": false,
+    "repository_old_composite_runbook_still_exists": "multica/runbooks/daily-research.md",
+    "limitation": "This checks the known project Autopilot, current-user cron, launchd fallback and repo entry references; it is not proof that no unknown external scheduler exists. Post-close account and artifact readback remains required."
+  }
+}

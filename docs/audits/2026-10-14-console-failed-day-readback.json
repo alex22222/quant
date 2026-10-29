@@ -1,0 +1,203 @@
+{
+  "schema": "quant.served_failed_day_readback.v1",
+  "business_date": "2026-10-14",
+  "observed_at": "2026-10-14T07:51:38.314528+08:00",
+  "goal_status": "active",
+  "endpoints": {
+    "/api/multica-observation": {
+      "ok": true,
+      "schema": "multica_observation.v1",
+      "observed_at": "2026-10-14T07:51:38.314528+08:00",
+      "status": "attention",
+      "completion_verified": false,
+      "configuration": {
+        "status": "matched",
+        "differences": [],
+        "autopilot_id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+        "project_id": "a208df76-b63b-4cef-bd11-7512d7c80896",
+        "agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+        "remote_status": "active",
+        "local_runbook_hash": "be2861c475d4a5ccdd07b243f70c4c5402b9661a55e9d4a67ac993857c8a4d31",
+        "remote_runbook_hash": "be2861c475d4a5ccdd07b243f70c4c5402b9661a55e9d4a67ac993857c8a4d31",
+        "triggers": [
+          {
+            "id": "97a59a0a-ceda-4115-81f8-bc583a7c5eef",
+            "kind": "schedule",
+            "enabled": true,
+            "cron_expression": "30 7 * * 1-5",
+            "timezone": "Asia/Shanghai",
+            "last_fired_at": "2026-10-13T23:30:28Z",
+            "next_run_at": "2026-10-14T23:30:00Z"
+          }
+        ]
+      },
+      "history": {
+        "status": "available",
+        "total": 5,
+        "limit": 5,
+        "items": [
+          {
+            "id": "01a1379a-69b7-74d0-baa5-677d32f76ba9",
+            "status": "failed",
+            "source": "schedule",
+            "triggered_at": "2026-10-13T23:30:28Z",
+            "completed_at": "2026-10-13T23:30:53Z",
+            "issue_id": "01a1379a-69c2-73ea-9885-8978db17d248",
+            "task_id": null,
+            "failure_reason": "{\n  \"type\": \"error\",\n  \"error\": {\n    \"type\": \"invalid_request_error\",\n    \"code\": \"unsupported_value\",\n    \"message\": \"Unsupported value: 'max' is not supported with the 'gpt-5.5' model. Supported values are: 'none', 'low', 'medium', 'high', and 'xhigh'.\",\n    \"param\": \"reasoning.effort\"\n  },\n  \"status\": 400\n}"
+          },
+          {
+            "id": "01a13273-d528-7ce5-bc1f-247d8b54651c",
+            "status": "failed",
+            "source": "schedule",
+            "triggered_at": "2026-10-12T23:30:14Z",
+            "completed_at": "2026-10-12T23:30:30Z",
+            "issue_id": "01a13273-d535-7214-b427-4fd320d5a945",
+            "task_id": null,
+            "failure_reason": "{\n  \"type\": \"error\",\n  \"error\": {\n    \"type\": \"invalid_request_error\",\n    \"code\": \"unsupported_value\",\n    \"message\": \"Unsupported value: 'max' is not supported with the 'gpt-5.5' model. Supported values are: 'none', 'low', 'medium', 'high', and 'xhigh'.\",\n    \"param\": \"reasoning.effort\"\n  },\n  \"status\": 400\n}"
+          },
+          {
+            "id": "01a12d4d-7bec-7812-b005-2363fd15d5fb",
+            "status": "failed",
+            "source": "schedule",
+            "triggered_at": "2026-10-11T23:30:15Z",
+            "completed_at": "2026-10-11T23:30:31Z",
+            "issue_id": "01a12d4d-7bf7-7b77-aa30-712701b7fbbe",
+            "task_id": null,
+            "failure_reason": "{\n  \"type\": \"error\",\n  \"error\": {\n    \"type\": \"invalid_request_error\",\n    \"code\": \"unsupported_value\",\n    \"message\": \"Unsupported value: 'max' is not supported with the 'gpt-5.5' model. Supported values are: 'none', 'low', 'medium', 'high', and 'xhigh'.\",\n    \"param\": \"reasoning.effort\"\n  },\n  \"status\": 400\n}"
+          },
+          {
+            "id": "01a11dda-68ff-71f5-aa6f-bc83330e6d6c",
+            "status": "failed",
+            "source": "schedule",
+            "triggered_at": "2026-10-08T23:30:15Z",
+            "completed_at": "2026-10-08T23:40:35Z",
+            "issue_id": "01a11dda-690c-754c-aac0-be0cb1797c50",
+            "task_id": null,
+            "failure_reason": "issue blocked"
+          },
+          {
+            "id": "01a118b4-0b0b-71b8-a0ca-05a5f42d3b10",
+            "status": "failed",
+            "source": "schedule",
+            "triggered_at": "2026-10-07T23:30:14Z",
+            "completed_at": "2026-10-07T23:38:16Z",
+            "issue_id": "01a118b4-0b16-7b76-96dd-67c1ee323019",
+            "task_id": null,
+            "failure_reason": "issue blocked"
+          }
+        ],
+        "latest": {
+          "id": "01a1379a-69b7-74d0-baa5-677d32f76ba9",
+          "status": "failed",
+          "source": "schedule",
+          "triggered_at": "2026-10-13T23:30:28Z",
+          "completed_at": "2026-10-13T23:30:53Z",
+          "issue_id": "01a1379a-69c2-73ea-9885-8978db17d248",
+          "task_id": null,
+          "failure_reason": "{\n  \"type\": \"error\",\n  \"error\": {\n    \"type\": \"invalid_request_error\",\n    \"code\": \"unsupported_value\",\n    \"message\": \"Unsupported value: 'max' is not supported with the 'gpt-5.5' model. Supported values are: 'none', 'low', 'medium', 'high', and 'xhigh'.\",\n    \"param\": \"reasoning.effort\"\n  },\n  \"status\": 400\n}"
+        }
+      },
+      "runtime": {
+        "status": "matched",
+        "id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+        "daemon_id": "01a0c492-4f9e-797d-b6ba-653b1897dad2",
+        "remote_status": "online",
+        "provider": "codex",
+        "version": "codex-cli 0.145.0",
+        "model": "gpt-5.5",
+        "last_seen_at": "2026-10-13T23:51:26Z"
+      },
+      "local_attempt": {
+        "status": "missing"
+      }
+    },
+    "/api/multica-reviews?date=2026-10-14": {
+      "ok": true,
+      "review": {
+        "schema": "multica_review_status.v1",
+        "date": "2026-10-14",
+        "execution_authorized": false,
+        "production_complete": false,
+        "roles": {},
+        "status": "source_unverified",
+        "recorded": {},
+        "error": "Review source unavailable (FileNotFoundError)"
+      }
+    },
+    "/api/paper-audit": {
+      "ok": true,
+      "schema": "paper_reconciliation.v1",
+      "observed_at": "2026-10-14T07:51:43.380414+08:00",
+      "model": "daily_bar_t1.v4",
+      "fee_policy": {
+        "commission_rate": 0.00025,
+        "min_commission": 5,
+        "stamp_tax_rate": 0.0005,
+        "transfer_fee_rate": 0.00002
+      },
+      "slippage_rate": 0.002,
+      "entry_contract": "a_share_entry.v1",
+      "exit_contract": "a_share_exit.v1",
+      "portfolio_policy": "explicit_intent.v1",
+      "risk_contract": "a_share_risk.v1",
+      "risk_policy": "structured_risk.v1",
+      "inventory_policy": "fifo_acquisition.v1",
+      "scope": "historical_account_checks_not_execution_certification",
+      "limitations": [
+        "Cash-only initial account; no external transfers or corporate actions",
+        "Price replay uses recorded quantities, not independently reconstructed target sizing",
+        "Current model and fee comparison does not prove the historical runtime policy",
+        "Exit replay requires explicit intent and opening inventory matching the trade ledger",
+        "No certification of forward publication, free-text conditions or intraday queue fills"
+      ],
+      "portfolios": {
+        "gate": {
+          "status": "checked",
+          "execution_certified": false,
+          "checks": {
+            "cash": "matched",
+            "positions": "matched",
+            "order_trade": "matched",
+            "reconstructed_cash": 100000,
+            "protection": "not_recorded"
+          },
+          "days": {},
+          "issues": [],
+          "facts_hash": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+          "conflict_count": 0,
+          "missing_count": 0,
+          "recorded_trade_count": 0,
+          "forward_performance": "unverified"
+        },
+        "no_gate": {
+          "status": "checked",
+          "execution_certified": false,
+          "checks": {
+            "cash": "matched",
+            "positions": "matched",
+            "order_trade": "matched",
+            "reconstructed_cash": 100000,
+            "protection": "not_recorded"
+          },
+          "days": {},
+          "issues": [],
+          "facts_hash": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+          "conflict_count": 0,
+          "missing_count": 0,
+          "recorded_trade_count": 0,
+          "forward_performance": "unverified"
+        }
+      }
+    }
+  },
+  "checks": {
+    "original_issue_failure_visible": true,
+    "missing_publication_blocks_execution": true,
+    "dual_paper_initial_cash": 100000,
+    "dual_paper_trade_count": 0,
+    "no_UI_changes_needed": true
+  },
+  "scope": "actual_readonly_served_failure_state_not_complete_console_or_M2_acceptance",
+  "next": "Wait for actual postclose archive; preserve failed day, then validate a fresh original publication on the next eligible natural session."
+}

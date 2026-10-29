@@ -1,0 +1,72 @@
+{
+  "schema": "real_multica_audit_observation.v1",
+  "observed_at": "2026-09-22T19:38:34+08:00",
+  "loop": 58,
+  "authorization": {
+    "user_reply": "授权，走Moonshot API Key",
+    "scope": "existing Multica workspace bounded tasks; project entrypoint cutover only after isolated acceptance",
+    "research_transport": "existing Moonshot API Key",
+    "live_authorized": false
+  },
+  "runtime": {
+    "id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "daemon_id": "01a0c492-4f9e-797d-b6ba-653b1897dad2",
+    "cli_version": "0.145.0",
+    "model": "gpt-5.5",
+    "agent_id": "91bfb847-5d2c-4d10-bb41-e2a514a30fe4",
+    "previous_agent_model": "",
+    "global_cli_changed": false,
+    "other_agents_changed": false,
+    "project_resource_changed": false
+  },
+  "remote": {
+    "issue_id": "01a0c8e4-32b0-7df5-b2be-d4194b68cbb6",
+    "identifier": "SATU-2",
+    "issue_status": "done",
+    "task_id": "01a0c8e4-32c7-7381-9ad6-268f753f4421",
+    "status": "completed",
+    "started_at": "2026-09-22T11:33:15Z",
+    "completed_at": "2026-09-22T11:37:39Z",
+    "error": null,
+    "work_dir": "/Users/henry/projects/quant"
+  },
+  "local": {
+    "run_id": "ae382247c1f94da3b59f31498a529830",
+    "workflow": "multica_audit",
+    "status": "succeeded",
+    "identity_verification": "remote_verified",
+    "exit_code": 0,
+    "tests": "1138 passed in 28.85s",
+    "log_path": "trading_team/.runs/multica/audit/ae382247c1f94da3b59f31498a529830.log",
+    "log_sha256": "1a3d69818ef5b4fc6976581e04244251dcf56fc1339bd39c37a72c86b294e393",
+    "independent_log_hash_matches_step_and_run": true,
+    "code_unchanged_during_audit": true,
+    "independent_code_hashes_match": true,
+    "code_file_count": 142,
+    "temporary_reply_file_cleaned": true,
+    "daemon_active_task_count_after": 0,
+    "daemon_running_task_count_after": 0
+  },
+  "moonshot_probe": {
+    "official_endpoint": true,
+    "method": "GET",
+    "path": "/models",
+    "http_status": 200,
+    "configured_model": "kimi-k3",
+    "configured_model_available": true,
+    "model_count": 4,
+    "generation_called": false,
+    "balance_verified": false,
+    "credential_recorded": false
+  },
+  "acceptance": {
+    "real_runtime_audit": "passed",
+    "m1": "incomplete",
+    "m2": "not_started",
+    "m3": "not_started",
+    "production_entrypoint_switched": false,
+    "paper_executed": false,
+    "notification_sent": false
+  },
+  "next": "Deduplicate isolated Research Lead issue, preserve old production issue and accounts, pin only the required role runtime model, execute isolated Moonshot publication, then six real reviews and deterministic finalization."
+}

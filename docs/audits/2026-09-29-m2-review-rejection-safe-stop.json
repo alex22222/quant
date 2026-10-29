@@ -1,0 +1,55 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-09-29T08:00:46+08:00",
+  "business_date": "2026-09-29",
+  "result": "review_rejected_safe_stop",
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "publication": {
+    "issue": "SATU-62",
+    "task_id": "01a0ea5a-c241-72cc-8e44-7378a8087914",
+    "task_status": "completed",
+    "run_id": "1bd65bceb2ac4b208167cf770c4ee55d",
+    "generation_hash": "a1d574dcea50d7029a8ce4e6a3e90c8ef9c908476bd01da635f0b99ef1d8d98c",
+    "plan_hash": "2f33520a2da58b3b38ba791c3d6a46098f6f2bf375d7d2c1d182e21a5f49cd34",
+    "data_asof": "2026-09-28"
+  },
+  "reviews": [
+    {
+      "role": "data-quality",
+      "issue": "SATU-63",
+      "task_id": "01a0ea6a-d110-70c4-9916-f4304dfc00e3",
+      "task_status": "completed",
+      "verdict": "accept",
+      "receipt_hash": "b059e4189662f6775b64f3f92fe5db78cb41f81460d86b99304f7a1cdd2ad764"
+    },
+    {
+      "role": "market-analysts",
+      "issue": "SATU-64",
+      "task_id": "01a0ea71-a1b5-716d-b7a5-6a31e54ff6a3",
+      "task_status": "completed",
+      "bundle_hash": "89f619a01fa0e46f28b20a1b227920a12b119c2cf906c105d104bc089e66cce6",
+      "verdict": "reject",
+      "receipt_hash": "69549325eb9bad7d69b4439b8d9fe198a217fea561469f48ca6887db2fffa5c4",
+      "failed_checks": ["facts_supported", "missing_data_disclosed"]
+    }
+  ],
+  "independent_observation": "The sealed 03_news.md attributes tariff benefits to Midea US exports and KUKA, and fee cuts to China Merchants Bank wealth-management revenue; the reviewed news and fundamental inputs do not contain corresponding company-level exposure evidence. The rejection is substantively supported, not a lexical false positive.",
+  "local_boundary": {
+    "review_status": "incomplete",
+    "execution_authorized": false,
+    "downstream_roles": "blocked",
+    "paper_reconciliation_observed_at": "2026-09-29T08:00:21+08:00",
+    "gate": "checked; cash 100000 CNY; zero recorded trades; facts_hash 7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+    "no_gate": "checked; cash 100000 CNY; zero recorded trades; facts_hash 7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+    "decision_or_paper_finalization": "not_observed_as_of_audit"
+  },
+  "limitations": [
+    "This is a premarket snapshot, not a postclose audit.",
+    "Local Paper and review evidence do not independently prove absence of external Live or notification side effects.",
+    "No rejected report was edited, re-reviewed, approved, or settled; no M2/M3 credit."
+  ]
+}

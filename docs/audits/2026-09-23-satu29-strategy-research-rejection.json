@@ -1,0 +1,81 @@
+{
+  "schema": "real_chain_loop_audit.v1",
+  "loop": 103,
+  "verified_at": "2026-09-23T17:10:17+08:00",
+  "classification_of_previous_goal_turn": "progress_real_market_analysts_acceptance_and_sealed_strategy_review_bundle",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "isolated_team": "/private/tmp/quant-real-chain-v12.sBy3zU/trading_team",
+  "source": {
+    "publication_issue": "SATU-25",
+    "publication_task_id": "01a0ccef-9736-761a-8d1e-d895836ae8b8",
+    "data_quality_issue": "SATU-26",
+    "data_quality_receipt_hash": "2fe25aaca8f51a5fbf9c78b7227d25e2888d1ca1182c4d7770c0fd8feb8a4258",
+    "market_analysts_issue": "SATU-28",
+    "market_analysts_receipt_hash": "d8a45671d0f7810f84aa33c841ef5289fbdf9c86c7338c9f2f5a40eef3e43c1c",
+    "plan_hash": "7a7f1b0646925769a1f4330360d910eb2cb645864ec9d00051c45345dd1f9d2e",
+    "generation_hash": "199826c35ff889758435710262df8cc727a282863a4140b02b38970c135d2f80"
+  },
+  "sealed_input": {
+    "role": "strategy-research",
+    "bundle_hash": "59c958b6a8b6cbdaf153e034438c1afa92b41461f3be00c6c3c3899c8ae24bf2",
+    "bundle_file_sha256": "177f30f80d1453855c17337dea2f26180eea1a40d108cb131951f0709b4cdc65",
+    "file_count": 55,
+    "repeated_prepare_same_hash": true,
+    "embedded_and_disk_hash_mismatches": [],
+    "two_upstream_receipts_bound": true,
+    "remote_exact_hash_duplicates_before_dispatch": 0
+  },
+  "review": {
+    "issue": "SATU-29",
+    "issue_id": "01a0cd7f-4a21-7145-a34f-30b515510c11",
+    "issue_status": "done",
+    "task_id": "01a0cd7f-4a34-751a-943e-5a204a213cb6",
+    "task_status": "completed",
+    "task_count": 1,
+    "agent_id": "5c69dae4-6ea4-48d3-8ec1-575d3f322a4e",
+    "agent_model": "gpt-5.5",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "local_run_id": "cbda5b4ca00b4038b04784b71c25f67f",
+    "local_run_status": "succeeded",
+    "local_attempt": 1,
+    "receipt_hash": "2ec24b3a3a65e518a098651391af52641d5951d29faae1580e91c765eb195b13",
+    "response_file_sha256": "667899252a603aeb33b63e74bb940dc5c388c2ce1e88efe946d31eb06d8561ed",
+    "verdict": "reject",
+    "checks": {"counterevidence": "pass", "claims_vs_evidence": "fail"},
+    "remote_comment_matches_local_receipt": true,
+    "remote_message_count": 68,
+    "remote_tool_use_count": 20,
+    "submit_command_count": 1,
+    "force_command_count": 0,
+    "paper_execution_command_count": 0
+  },
+  "independent_blocker": {
+    "report_file": "outputs/2026-09-23/05_researcher.md",
+    "company": "中国平安 601318",
+    "contradictory_positive_claim": "四方无反向信号",
+    "same_section_counterevidence": [
+      "量比 0.85、反弹量能温和",
+      "价格仍低于 MA20 54.95 与 VWAP20 55.12",
+      "美债利率高企对保险估值端有轻微压制"
+    ],
+    "rating": "看多，信心度 3",
+    "materiality": "The only outright bullish stock rating rests on a claim of no opposing signal despite opposing evidence acknowledged in the same section.",
+    "separate_limit": "The 601012 loss statement uses archived net_profit_yi -36.84 and profit_yoy -43.386%, but missing 2025-06-30 raw values prevent independent reconstruction of the same-period loss change; this was not the decisive rejection reason."
+  },
+  "protection": {
+    "v12_freeze_sha256": "d217bb5706b4933533b7094b60a687c019b062cbce119132dfa5fc13065cdc15",
+    "strategy_bundle_unchanged": true,
+    "source_v11_rejected_reply_sha256": "7321c39ccdd5d9e7e88c1864f30235219f67f491ee747cc9aed95c6cc054ad69",
+    "old_SATU27_timeout_preserved": true,
+    "isolated_decisions_present": false,
+    "isolated_paper_present": false,
+    "notification_sent": false,
+    "execution_authorized": false,
+    "later_roles_status": "blocked",
+    "legacy_production_autopilot_modified": false
+  },
+  "tests": "No application code changed in Loop103; Loop98 full suite had 1224 passed. This loop independently verified the real reject receipt and its source contradiction.",
+  "milestones": {"m1": "incomplete", "m2": "not_started", "m3": "not_started"},
+  "next": "Use SATU-29's exact contradictory Ping An sentence to establish a failing behavioral regression, then make a narrow role-05 source constraint or validator repair without weakening existing fund-flow and volume-causality gates. Preserve the rejected bundle/receipt and all older failures. Create a new isolated freeze and re-publish only after verifying changed prompt/runner fingerprints; start reviews from Data Quality for the new version. Do not approve, settle Paper, notify or enable Live. Old production Autopilot still needs separate authorization."
+}

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>这家公司是干嘛的？· 图解说明书</title>
+<style>
+  :root {
+    --paper: #faf5ec;
+    --paper-deep: #f3ecdd;
+    --ink: #2b2620;
+    --ink-soft: #6b6154;
+    --terra: #c4552d;
+    --sage: #5d7a5d;
+    --gold: #c99b3f;
+    --sky: #4a7a9b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+  }
+
+  /* ── 通用版面 ── */
+  section {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 72px 24px;
+    text-align: center;
+    border-bottom: 2px dashed #e0d5bf;
+  }
+  section:last-child { border-bottom: none; }
+  .page-no {
+    font-size: 13px;
+    letter-spacing: .35em;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+  h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.25; font-weight: 800; }
+  h2 { font-size: clamp(30px, 4.6vw, 48px); line-height: 1.3; font-weight: 800; margin-bottom: 18px; }
+  .sub { font-size: clamp(17px, 2.2vw, 22px); color: var(--ink-soft); max-width: 640px; }
+  .big-emoji { font-size: clamp(88px, 14vw, 150px); line-height: 1.15; margin: 26px 0; }
+  .emoji-row { display: flex; gap: clamp(14px, 3vw, 36px); flex-wrap: wrap; justify-content: center; margin: 34px 0; }
+  .emoji-row span { font-size: clamp(56px, 8vw, 92px); }
+  .accent { color: var(--terra); }
+  .pill {
+    display: inline-block;
+    background: var(--paper-deep);
+    border: 1.5px solid #e0d5bf;
+    border-radius: 999px;
+    padding: 10px 26px;
+    font-size: 17px;
+    margin: 8px 6px;
+  }
+  .card-row { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; margin-top: 38px; max-width: 1080px; }
+  .card {
+    background: #fffdf8;
+    border: 1.5px solid #e8dfcc;
+    border-radius: 22px;
+    padding: 30px 26px 26px;
+    width: 210px;
+    box-shadow: 0 3px 0 #e8dfcc;
+  }
+  .card .face { font-size: 58px; }
+  .card .name { font-size: 19px; font-weight: 700; margin: 12px 0 6px; }
+  .card .job { font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
+
+  /* 封面 */
+  .cover { background: var(--ink); color: var(--paper); min-height: 100vh; }
+  .cover .sub { color: #b9ae9c; }
+  .cover .badge {
+    display: inline-block; border: 1.5px solid #57503f; color: #cfc4ae;
+    border-radius: 999px; padding: 8px 22px; font-size: 14px; letter-spacing: .3em; margin-bottom: 34px;
+  }
+  .scroll-hint { margin-top: 48px; font-size: 14px; color: #8d8270; animation: bob 2s infinite ease-in-out; }
+  @keyframes bob { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(8px);} }
+
+  /* 流水线 */
+  .flow { display: flex; align-items: center; gap: clamp(6px,1.4vw,18px); flex-wrap: wrap; justify-content: center; margin: 36px 0; }
+  .flow .step {
+    background: #fffdf8; border: 2px solid var(--ink); border-radius: 18px;
+    padding: 20px 18px 14px; width: 132px;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .flow .step .face { font-size: 46px; }
+  .flow .step .label { font-size: 15.5px; font-weight: 700; margin-top: 8px; }
+  .flow .arrow { font-size: 30px; color: var(--terra); font-weight: 800; }
+
+  /* 规则清单 */
+  .rules { text-align: left; max-width: 620px; margin-top: 34px; }
+  .rule {
+    display: flex; align-items: flex-start; gap: 16px;
+    background: #fffdf8; border: 1.5px solid #e8dfcc; border-radius: 16px;
+    padding: 16px 20px; margin-bottom: 14px; font-size: 18px;
+  }
+  .rule .ico { font-size: 26px; line-height: 1.3; }
+
+  /* 现状大数字 */
+  .numbers { display: flex; gap: clamp(18px,4vw,54px); flex-wrap: wrap; justify-content: center; margin-top: 36px; }
+  .num-box .v { font-size: clamp(40px,6vw,64px); font-weight: 800; color: var(--terra); }
+  .num-box .k { font-size: 16px; color: var(--ink-soft); margin-top: 4px; }
+
+  footer { padding: 42px 24px; text-align: center; color: var(--ink-soft); font-size: 14px; }
+</style>
+</head>
+<body>
+
+<!-- 封面 -->
+<section class="cover">
+  <div class="badge">H Q C a p i t a l · 图 解 说 明 书</div>
+  <div class="big-emoji">🏢💻</div>
+  <h1>你的电脑里，<br>开着一家「投资公司」</h1>
+  <p class="sub" style="margin-top:22px">有员工、有纪律、有会议纪要。<br>它只做一件事——用规则代替拍脑袋。</p>
+  <div class="scroll-hint">↓ 往下翻，5 分钟看懂</div>
+</section>
+
+<!-- 1 它是干嘛的 -->
+<section>
+  <div class="page-no">第 1 页 · 它是干嘛的</div>
+  <h2>帮你研究 A 股，<br>但<span class="accent">不信任任何直觉</span></h2>
+  <div class="emoji-row">
+    <span>🎲</span><span>➡️</span><span>📏</span>
+  </div>
+  <p class="sub">不靠猜，靠规则。<br>每个决定都要有数据，每个动作都要留记录。<br>而且——玩的是假钱，不碰你的真金白银。</p>
+  <div style="margin-top:30px">
+    <span class="pill">🧪 训练场</span>
+    <span class="pill">🔬 研究台</span>
+    <span class="pill">💴 只用模拟账户</span>
+  </div>
+</section>
+
+<!-- 2 公司里有哪些人 -->
+<section>
+  <div class="page-no">第 2 页 · 公司里有哪些「人」</div>
+  <h2>七个部门，六个是代码，<br>一个是你 👤</h2>
+  <div class="card-row">
+    <div class="card"><div class="face">🗄️</div><div class="name">数据部</div><div class="job">保管 5516 只股票的行情，保证新鲜</div></div>
+    <div class="card"><div class="face">📈</div><div class="name">投研部</div><div class="job">管理策略：研究 → 候选 → 上线 → 退休</div></div>
+    <div class="card"><div class="face">🛡️</div><div class="name">风控部</div><div class="job">给策略「考试」，考不过不许碰钱</div></div>
+    <div class="card"><div class="face">💼</div><div class="name">交易台</div><div class="job">拿 10 万假钱按策略调仓、记账</div></div>
+    <div class="card"><div class="face">📋</div><div class="name">投委会</div><div class="job">每转一圈写复盘，留档不篡改</div></div>
+    <div class="card"><div class="face">🤖</div><div class="name">晨会 AI 团</div><div class="job">7 个 AI 角色开会，只出「提案」</div></div>
+    <div class="card"><div class="face">📰</div><div class="name">情报线</div><div class="job">每天盯 9 个量化大 V 的推文</div></div>
+    <div class="card" style="border-color:var(--terra);box-shadow:0 3px 0 var(--terra)"><div class="face">👤</div><div class="name">老板</div><div class="job">批不批准，你说了算</div></div>
+  </div>
+</section>
+
+<!-- 3 五步流水线 -->
+<section>
+  <div class="page-no">第 3 页 · 核心机制一</div>
+  <h2>工厂流水线：转一圈叫一个 Loop</h2>
+  <div class="flow">
+    <div class="step"><div class="face">🗄️</div><div class="label">数据</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="face">📈</div><div class="label">策略</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="face">🛡️</div><div class="label">回测考试</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="face">💼</div><div class="label">模拟交易</div></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="face">📋</div><div class="label">复盘留痕</div></div>
+  </div>
+  <p class="sub">一条命令跑完全程。<br>结果写上公告栏（status.json），日记写进日志本（AGENT.md）。</p>
+</section>
+
+<!-- 4 策略考试 -->
+<section>
+  <div class="page-no">第 4 页 · 策略必须考试</div>
+  <h2>新策略想上线？<br>先过「三道分数线」</h2>
+  <div class="emoji-row">
+    <span>📝</span><span>🚪</span><span>✅</span>
+  </div>
+  <div class="card-row">
+    <div class="card"><div class="name" style="font-size:24px">年化 &gt; 5%</div><div class="job">得真的赚钱</div></div>
+    <div class="card"><div class="name" style="font-size:24px">回撤 &lt; 30%</div><div class="job">亏的时候不能太难看</div></div>
+    <div class="card"><div class="name" style="font-size:24px">夏普 &gt; 0.3</div><div class="job">赚得要比担惊受怕值当</div></div>
+  </div>
+  <p class="sub" style="margin-top:30px">考不过？乖乖回炉。<span class="accent">这道门，谁也不能绕。</span></p>
+</section>
+
+<!-- 5 晨会 -->
+<section>
+  <div class="page-no">第 5 页 · 核心机制二</div>
+  <h2>每周六，AI 团队开晨会</h2>
+  <div class="emoji-row">
+    <span>🔍</span><span>💬</span><span>⚔️</span><span>📊</span><span>🛡️</span>
+  </div>
+  <p class="sub">四位分析师发言 → 多空两派辩论 → 交易员出计划 → 风控逐条裁决。</p>
+  <div style="margin-top:34px;background:#fff3ec;border:2px solid var(--terra);border-radius:20px;padding:26px 34px;max-width:560px">
+    <div style="font-size:44px">✋</div>
+    <p style="font-size:20px;font-weight:700;margin-top:8px">AI 只有提案权，没有执行权</p>
+    <p style="font-size:16px;color:var(--ink-soft);margin-top:6px">提案状态永远是「待老板审批」。<br>你点头，才算数。</p>
+  </div>
+</section>
+
+<!-- 6 情报线 -->
+<section>
+  <div class="page-no">第 6 页 · 核心机制三</div>
+  <h2>每天还有一只「千里眼」</h2>
+  <div class="big-emoji">📡📰</div>
+  <p class="sub">每晚 21:43，抓取海外量化大 V 的新推文，<br>总结成日报，推到你的飞书。<br>好点子会沉淀成新的策略研究候选。</p>
+</section>
+
+<!-- 7 安全纪律 -->
+<section>
+  <div class="page-no">第 7 页 · 铁规矩</div>
+  <h2>五条不能碰的红线 🔒</h2>
+  <div class="rules">
+    <div class="rule"><span class="ico">🚪</span><span><b>门禁不可绕过</b> —— 考不过的策略，永远进不了交易台</span></div>
+    <div class="rule"><span class="ico">🤖</span><span><b>AI 不动钱</b> —— 它只写提案，执行归代码，批准归你</span></div>
+    <div class="rule"><span class="ico">🔑</span><span><b>凭证不入库</b> —— 密钥只留在你本机</span></div>
+    <div class="rule"><span class="ico">📖</span><span><b>日志只追加</b> —— 历史可审计，不许篡改</span></div>
+    <div class="rule"><span class="ico">💴</span><span><b>Paper 为止</b> —— 真钱的事，另立项目再议</span></div>
+  </div>
+</section>
+
+<!-- 8 现状 -->
+<section>
+  <div class="page-no">第 8 页 · 现在怎么样了</div>
+  <h2>公司现状一览</h2>
+  <div class="numbers">
+    <div class="num-box"><div class="v">1</div><div class="k">个上线策略<br>（海龟蓝筹海龟法）</div></div>
+    <div class="num-box"><div class="v">¥10万</div><div class="k">模拟账户本金<br>当前空仓观望中</div></div>
+    <div class="num-box"><div class="v">8项</div><div class="k">门禁指标全绿<br>（全样本 + 样本外）</div></div>
+    <div class="num-box"><div class="v">3</div><div class="k">个定时任务<br>日报 / 晨会 / 月检</div></div>
+  </div>
+  <p class="sub" style="margin-top:34px">大盘在 120 日线下方 → 风控生效，空仓等待。<br>这就是纪律的样子。</p>
+</section>
+
+<!-- 结尾 -->
+<section>
+  <div class="page-no">最后一页</div>
+  <div class="big-emoji">🌱</div>
+  <h2>一句话记住它</h2>
+  <p class="sub" style="font-size:clamp(19px,2.6vw,26px);color:var(--ink);max-width:560px;margin-top:14px">
+    代码管执行，AI 管动脑，<br>门禁管质量，日志管诚实，<br><span class="accent" style="font-weight:800">老板（你）管最后那支笔。</span>
+  </p>
+</section>
+
+<footer>
+  HQCapital · 图解说明书 v1.0 · 2026-08-23<br>
+  想深入细节？看 docs/ARCHITECTURE.md 与 AGENT.md
+</footer>
+
+</body>
+</html>

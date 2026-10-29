@@ -1,0 +1,40 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-09T00:08:36+08:00",
+  "result": "oct08_postclose_archive_verified_after_window_and_oct09_power_risk",
+  "observation_limit": "No 16:20 observation was made in this check. The 2026-10-08 closing session and downstream state were inspected after midnight; no earlier observation time is claimed.",
+  "2026-10-08_postclose": {
+    "production_issue": "SATU-85 remains blocked; no second 2026-10-08 production Issue observed",
+    "publication": "original daily_research Run failed at role_01 with no generation receipt or plan_hash",
+    "archive_service": "healthy with fresh heartbeat; expected and latest verified session both 2026-10-08; no missing or invalid sessions",
+    "independent_archive_receipt": "f4224eaf3f611229da3267695444e0eb07cd4b91ce5dec7be795d4b4d4a9f9f3",
+    "archive_payload_hash": "aade42d06c8986250b005c480070c756f3c90d39a096cd35ea7f60ada99606dc",
+    "archive_coverage": "verify_receipt independently checked calendar, payload and all 12 required symbols",
+    "formal_output_decision_outbox": "no dated file observed for 2026-10-08",
+    "active_paper_gate": "checked, CNY 100000 cash, zero trades, no issues",
+    "active_paper_no_gate": "checked, CNY 100000 cash, zero trades, no issues",
+    "paper_facts_hash_each": "7048d01b6c768f92876e67b253ded9506b6cc7733928eefbd3ba7fcea70dacdc",
+    "limit": "Local artifact and account absence does not independently certify absence of external notification or Live side effects."
+  },
+  "natural_backup": {
+    "snapshot_id": "c62fe18e66c2445bb345b7a9dae75087",
+    "started_at": "2026-10-08T18:29:50.355799+08:00",
+    "status": "succeeded and verified",
+    "manifest_sha256_registered_and_independently_recomputed": "1cff0ddeeafe237b8644939382b2b9cef1760a40d8c66cb54c6f87f88e5c8d88",
+    "served_state": "healthy, Runbook/runtime/cohort snapshots current, heartbeat fresh",
+    "limit": "Only the latest local snapshot and runtime fingerprint are verified; runtime code contents are not copied by this workflow snapshot. No isolated restore or offsite recovery was accepted."
+  },
+  "2026-10-09_candidate": {
+    "local_calendar": "trading day with previous session 2026-10-08; must be rechecked before publication",
+    "autopilot": "active; existing next_run_at 2026-10-08T23:30:00Z; exact title template and Research Lead binding unchanged",
+    "duplicate_check": "no 2026-10-09 production Issue observed as of this audit",
+    "host_power": "pmset displayed AC Power, but AppleSmartBattery ExternalConnected=No, battery 70% and discharging; reliable power and wakefulness at 07:30 are not established",
+    "required_user_action": "Connect the host to continuous external power before the premarket run; no system power settings were changed."
+  },
+  "milestones": {
+    "M1": "complete",
+    "M2": "not_accepted",
+    "M3": "not_started"
+  },
+  "next_boundary": "At the actual 2026-10-09 preopen window recheck exchange calendar, host power, unique original Issue/task, runtime, previous complete archive, exact title and 09:15 timestamps. Do not retry SATU-85, backdate a review or manufacture Paper fills."
+}

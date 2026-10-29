@@ -1,0 +1,23 @@
+{
+  "schema": "real_chain_audit.v1",
+  "observed_at": "2026-10-04T02:00:00+08:00",
+  "result": "console_only_reloaded_and_verified",
+  "authorization": "User authorized reloading only this project's 7100 console.",
+  "scope": "com.hqcapital.console; 127.0.0.1:7100; /Users/henry/projects/quant/console/serve.py",
+  "before": {
+    "pid": 39039,
+    "console_page": "HTTP 200",
+    "paper_accounts": "Both active cohort accounts held 100000 cash, no positions or orders; five Paper/config hashes and team.db hash recorded before reload.",
+    "multica": "Single production Autopilot configuration matched; Research Lead runtime online."
+  },
+  "operation": "One launchctl kickstart -k of com.hqcapital.console; no other service was restarted.",
+  "after": {
+    "pid": 47636,
+    "console_page": "HTTP 200; 117785 bytes",
+    "backup_api": "HTTP 200; status degraded because runtime differs from latest snapshot; latest registered snapshot remains 6800de8a63b741ee9bf3ae11d464daad; offsite_verified=false.",
+    "paper_audit": "HTTP 200; both active accounts checked, 100000 reconstructed cash, zero trades, zero conflicts.",
+    "protected_hashes": "active_cohort.json, both active Paper databases, both legacy Paper databases, and team.db unchanged."
+  },
+  "limitation": "Backup scheduler last_exit_code=1 reflects a degraded check and was not changed by this console reload; neither console health nor Paper reconciliation proves M2 or Live safety.",
+  "milestones": {"M1": "complete", "M2": "not_accepted", "M3": "not_started"}
+}

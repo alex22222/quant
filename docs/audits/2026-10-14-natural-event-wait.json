@@ -1,0 +1,36 @@
+{
+  "schema": "quant.natural_event_blocked_checkpoint.v1",
+  "observed_at": "2026-10-14 00:21:01 UTC",
+  "goal_status": "blocked",
+  "reason": "real_external_events_pending_after_three_consecutive_no_progress_turns",
+  "consecutive_no_progress_turns": 3,
+  "facts": {
+    "expected_completed_session": "2026-10-13",
+    "last_check_at": "2026-10-14T08:15:05.345146+08:00",
+    "latest_verified_session": "2026-10-13",
+    "runtime_snapshot_current": false,
+    "snapshot_count": 84,
+    "snapshot_id": "615d4b74200c48e7b8e6572ac09f3aac",
+    "status": "degraded"
+  },
+  "live_production_task_handles": [],
+  "scope_preserved": "交付一个有完整证据、可连续运行、可审计、可恢复、可验证的 A 股研究与 Paper 交易系统。保留已完成的 M1 真实 Multica 联调证据；完成 M2 一个未来合格自然交易日的唯一入口发布、六级独立审阅、plan_hash 绑定决策与审批、双 Paper T+1 结算、闸门/无闸门/沪深300 对照及通知送达回执；完成 M3 连续五个合格交易日完整证据和一次隔离恢复幂等验收；继续单独验收远端独立 maker、异地灾备、前向效果及控制台运行。保留全部失败与旧账，不倒填、不制造成交、不启用 Live。",
+  "automation": {
+    "id": "a",
+    "status": "ACTIVE",
+    "schedule_changed": false,
+    "paused_by_user": false,
+    "authorization": "existing_scheduled_observation_and_bounded_acceptance_continue_on_new_real_evidence",
+    "goal_card_resume": "not_changed_by_agent"
+  },
+  "pending": [
+    "natural_registered_backup_with_audit_JSON_scope_and_manifest_verification",
+    "2026-10-14_complete_postclose_archive_and_readonly_safe_stop",
+    "fresh_original_publication_on_future_eligible_natural_trading_day"
+  ],
+  "constraints": [
+    "No force backup, old task retry, historical approval, forged fills or Live.",
+    "No repeated isolation probes; maker operation constraint violation remains failed.",
+    "No completion claim for M2/M3 or original remaining scope."
+  ]
+}

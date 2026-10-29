@@ -1,0 +1,66 @@
+{
+  "schema": "real_market_analysts_review_acceptance.v1",
+  "loop": 72,
+  "verified_at": "2026-09-23T03:31:58+08:00",
+  "business_date": "2026-09-23",
+  "data_asof": "2026-09-22",
+  "isolated_team": "/private/tmp/quant-real-chain-v2.drq6k45z/trading_team",
+  "bundle": {
+    "bundle_hash": "894250397c40e50647c1461799acb74e19781626ffac5705274de3e70a190171",
+    "file_sha256": "849dcd1e505ed9cb45c7242c4a812a52b61eb6511745d6aa72cc9ad208e099dd",
+    "file_count": 52,
+    "embedded_or_disk_mismatches": []
+  },
+  "issue": {
+    "id": "01a0ca8d-3c67-719f-9a03-ce7dfc7e7eb6",
+    "identifier": "SATU-7",
+    "status": "done",
+    "revision": 4
+  },
+  "remote_task": {
+    "id": "01a0ca8d-3c9d-77ec-9cfc-64a33838adca",
+    "status": "completed",
+    "started_at": "2026-09-22T19:17:30Z",
+    "completed_at": "2026-09-22T19:25:33Z",
+    "agent_id": "b765ae90-5a87-424f-9c26-fe3ce0644674",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "message_count": 114,
+    "tool_use_count": 40,
+    "submit_command_count": 1,
+    "forbidden_business_command_count": 0
+  },
+  "review": {
+    "run_id": "82fe2d03095b453f861ca38826f7c1a6",
+    "recording_status": "succeeded",
+    "verdict": "reject",
+    "receipt_hash": "2e1c5280f9f4f2ef6cb1327c03a08d7f917eb0db4790a1a45e2ba08d28c1ce69",
+    "response_sha256": "f87d755835965fc38f8f643028df476e356b66d231c3d9766e296552114fcd7c",
+    "checks": {
+      "facts_supported": "fail",
+      "missing_data_disclosed": "pass"
+    },
+    "independent_finding": "The sealed fundamental report attributes company earnings to life-insurance reform, price war, hydrology/tariffs, computing/server mix and a gold/copper upcycle; no corresponding support was found in archived context JSON. It also makes valuation claims despite missing PE/PB inputs.",
+    "execution_authorized": false
+  },
+  "postconditions": {
+    "protected_file_count": 17,
+    "protected_files_changed": [],
+    "decisions_present": false,
+    "paper_databases_present": false,
+    "notification_sent": false,
+    "application_code_changed": false,
+    "tests_rerun": false
+  },
+  "chain": {
+    "data_quality": "accepted",
+    "market_analysts": "rejected",
+    "strategy_research": "blocked",
+    "paper_trader": "blocked",
+    "risk_manager": "blocked",
+    "audit_verifier": "blocked",
+    "m1_complete": false,
+    "m2_complete": false,
+    "m3_complete": false
+  },
+  "next": "Preserve the rejected bundle and receipt. Reproduce and minimally tighten the fundamental analyst evidence/valuation prompt, verify the focused contract, then publish and review a new version; do not patch or re-review the old sealed report."
+}

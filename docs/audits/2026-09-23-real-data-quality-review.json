@@ -1,0 +1,166 @@
+{
+  "schema": "real_data_quality_review_acceptance.v1",
+  "loop": 61,
+  "observed_at": "2026-09-23T00:27:23.793819+08:00",
+  "business_date": "2026-09-22",
+  "isolated_team": "/private/tmp/quant-real-chain.twKaRH/trading_team",
+  "run_id": "ca87e47c994648fd98e16202252ec7ed",
+  "recording_status": "succeeded",
+  "attempt": 1,
+  "recorded_at": "2026-09-23T00:24:44+08:00",
+  "receipt": {
+    "bundle_hash": "db6711193f8984866da92ea809863b388d2f3f022f67a5a6ff770272e4d1dbb6",
+    "execution_authorized": false,
+    "external_context": {
+      "agent_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd",
+      "evidence_hash": "abbc253f596e6ff13de9c247fadbfd81d5ea9554cc92b6153c3c483a4e563657",
+      "issue_id": "01a0c9e9-0034-7ca0-aa08-f8c76dc73e19",
+      "issue_identifier": "SATU-4",
+      "issue_title": "A-share review data-quality db6711193f8984866da92ea809863b388d2f3f022f67a5a6ff770272e4d1dbb6 2026-09-22",
+      "observed_at": "2026-09-23T00:24:44+08:00",
+      "observed_status": "running",
+      "project_id": "a208df76-b63b-4cef-bd11-7512d7c80896",
+      "provider": "multica",
+      "role": "Data Quality",
+      "squad_id": "e3593963-4e1d-4c7a-ae27-20b08e7ee110",
+      "task_id": "01a0c9e9-0047-7dd7-8e61-65efdca7f2a6",
+      "verification": "remote_verified",
+      "workspace_id": "cfcca519-15f5-4666-b1d8-2b67241d8f7b"
+    },
+    "receipt_hash": "d7c4494da2cc0f087efacfbc63aa9dd2b14532f2e5cda7e0e4c9c30c1e670c76",
+    "response": {
+      "bundle_hash": "db6711193f8984866da92ea809863b388d2f3f022f67a5a6ff770272e4d1dbb6",
+      "checks": [
+        {
+          "evidence": [
+            "context/2026-09-22/manifest.json",
+            "context/2026-09-22/execution_archive.json",
+            "market_archive/2026-09-21/7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183.json",
+            "watchlist.json"
+          ],
+          "name": "completed_session",
+          "reason": "Manifest session_alignment is ok with latest_trade_date 2026-09-21 and detail that 12 symbols share that date. The execution archive is dated 2026-09-21 and the archived payload contains unadjusted closing bars for the 11 watchlist stocks plus 000300 benchmark, matching the completed session required for the 2026-09-22 retrospective review.",
+          "result": "pass"
+        },
+        {
+          "evidence": [
+            "outputs/2026-09-22/generation.json",
+            "context/2026-09-22/manifest.json",
+            "context/2026-09-22/execution_archive.json",
+            "market_archive/2026-09-21/7db2fa2bc29bece28232eec056d3a8d7843fcf9cf791f7259cba51cde593d183.json"
+          ],
+          "name": "source_integrity",
+          "reason": "The sealed bundle hash matches the bundle content. Every bundle.files raw SHA-256 matches its inlined text; generation input hashes match using the project _sha256 convention; the generation receipt hash matches source.generation_hash; and the execution archive validates against its payload hash and source records. Manifest sources are all ok, so no source-integrity mismatch was found inside the sealed package.",
+          "result": "pass"
+        },
+        {
+          "evidence": [
+            "watchlist.json",
+            "context/2026-09-22/manifest.json",
+            "context/2026-09-22/sentiment.json",
+            "context/2026-09-22/snapshot.json",
+            "context/2026-09-22/news.json",
+            "context/2026-09-22/global_macro.json",
+            "context/2026-09-22/technical_600519.json",
+            "context/2026-09-22/fundamental_600519.json"
+          ],
+          "name": "coverage",
+          "reason": "The expected universe is represented: watchlist has 11 stocks plus benchmark, manifest lists ok technical, fundamental, snapshot, sentiment, news, macro, calendar, and archive sources, technical files are as_of 2026-09-21, and fundamentals include reports plus announcements for each stock. However, sentiment breadth is internally impossible: up_gt5, up, down, down_gt5, and flat are all 5560. Because a required non-price market breadth input is present but semantically invalid, coverage quality is not supported.",
+          "result": "fail"
+        }
+      ],
+      "role": "data-quality",
+      "schema": "multica_review_response.v1",
+      "summary": "Data Quality rejects the sealed retrospective 2026-09-22 review bundle. The completed price session is supported: the manifest and execution archive align the watchlist plus benchmark to 2026-09-21 with audited unadjusted closing bars. Source integrity also passes: bundle and generation hashes validate under the project hash conventions, inlined file SHA-256 values match their text, generation input hashes match, and the execution archive validates. The blocker is coverage quality: the non-price sentiment breadth evidence is internally invalid, with up_gt5, up, down, down_gt5, and flat all equal to 5560, so broad-market sentiment coverage is not semantically supportable even though the file is present. This review only assesses the sealed retrospective data package and does not certify timely premarket publication, Paper execution, or chain completion.",
+      "verdict": "reject"
+    },
+    "run_id": "ca87e47c994648fd98e16202252ec7ed",
+    "schema": "multica_review_receipt.v1"
+  },
+  "review_status": {
+    "schema": "multica_review_status.v1",
+    "date": "2026-09-22",
+    "execution_authorized": false,
+    "production_complete": false,
+    "roles": {
+      "data-quality": {
+        "status": "rejected",
+        "run_id": "ca87e47c994648fd98e16202252ec7ed",
+        "receipt_hash": "d7c4494da2cc0f087efacfbc63aa9dd2b14532f2e5cda7e0e4c9c30c1e670c76"
+      },
+      "market-analysts": {
+        "status": "blocked"
+      },
+      "strategy-research": {
+        "status": "blocked"
+      },
+      "paper-trader": {
+        "status": "blocked"
+      },
+      "risk-manager": {
+        "status": "blocked"
+      },
+      "audit-verifier": {
+        "status": "blocked"
+      }
+    },
+    "source": {
+      "run_id": "b9ab3538f7994f829dae6a0a14512bff",
+      "generation_hash": "2f05b0fb037772ef12437579597bebdcc487b070585b6c02b9ef3ba0fc69bb78",
+      "producer": {
+        "provider": "multica",
+        "verification": "remote_verified",
+        "role": "Research Lead",
+        "agent_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+        "task_id": "01a0c9d5-88e5-714c-a086-4ad2e02c0c1e",
+        "project_id": "a208df76-b63b-4cef-bd11-7512d7c80896",
+        "workspace_id": "cfcca519-15f5-4666-b1d8-2b67241d8f7b"
+      },
+      "files_hash": "059329249d7ff3bb49f697dd53565778c44479a772345cc072d2eaa35e82c11f",
+      "plan_hash": "e72835c8136efce3a121c482001887c02ca0df7bd2da4ba0535b6720861ee4bb",
+      "data_asof": "2026-09-21"
+    },
+    "status": "incomplete"
+  },
+  "protected_file_count": 17,
+  "protected_changed": [],
+  "paper_exists": false,
+  "decisions_exists": false,
+  "remote": {
+    "issue_id": "01a0c9e9-0034-7ca0-aa08-f8c76dc73e19",
+    "identifier": "SATU-4",
+    "issue_status": "done",
+    "task_id": "01a0c9e9-0047-7dd7-8e61-65efdca7f2a6",
+    "task_status": "completed",
+    "started_at": "2026-09-22T16:18:06Z",
+    "completed_at": "2026-09-22T16:25:47Z",
+    "error": null
+  },
+  "agent_change": {
+    "agent_id": "d1657994-f3fb-441f-b8bf-c8b7181765cd",
+    "runtime_id": "b8f30287-d5e3-4a63-aaea-eb6dcad15fb7",
+    "model_before": "",
+    "model_after": "gpt-5.5",
+    "thinking_level_before": "",
+    "runtime_config_before": {}
+  },
+  "independent_findings": {
+    "breadth": {
+      "up_gt5": 5560,
+      "up": 5560,
+      "down": 5560,
+      "down_gt5": 5560,
+      "flat": 5560
+    },
+    "suspect_code": "trading_team/collect.py:352",
+    "code_observation": "fetch_market_breadth reads data.total for five filtered queries; returned identical values have no semantic coverage validation before sentiment source is marked successful. Whether upstream ignores filter requires a scoped raw-response probe.",
+    "review_reason_caveat": "Reviewer coverage reason says macro is listed in manifest.sources; it is not. global_macro.json is present and generation-hash bound. This wording error does not invalidate the independent breadth blocker."
+  },
+  "application_code_changed": false,
+  "tests_rerun": false,
+  "natural_day_accepted": false,
+  "milestone_m1_complete": false,
+  "next": "Reproduce and fix the observed breadth acquisition defect with focused tests and scoped source verification. Preserve this rejected source, response and ledger; do not re-review unchanged data or rewrite frozen output. Resume independent reviews only on a genuinely valid newly published version.",
+  "gate_blocked": true,
+  "gate_reason": "Multica review gate blocked: data-quality:rejected"
+}

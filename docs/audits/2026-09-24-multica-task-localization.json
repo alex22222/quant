@@ -1,0 +1,37 @@
+{
+  "schema": "multica_task_localization.v1",
+  "checked_at_utc": "2026-09-23T23:48:37Z",
+  "scope": "future project issues only; historical issue titles and task records unchanged",
+  "chinese_titles_from_business_date": "2026-09-24",
+  "daily_title_template": "A股每日研究 {{date}}",
+  "review_title_template": "A股审阅 <中文角色名> <完整bundle_hash> <业务日期>",
+  "legacy_title_rule": "2026-09-23 and earlier retain exact English titles and receipt verification",
+  "autopilot": {
+    "id": "96f340ed-b1e8-44ca-9921-d8ff82d5d6c0",
+    "title": "A股每日研究",
+    "status": "active",
+    "project_id": "a208df76-b63b-4cef-bd11-7512d7c80896",
+    "assignee_id": "8a5df537-0f62-4d14-ae11-9b2769cd4b27",
+    "trigger_id": "97a59a0a-ceda-4115-81f8-bc583a7c5eef",
+    "trigger": "2 8 * * 1-5 Asia/Shanghai",
+    "next_run_at_utc": "2026-09-24T00:02:00Z",
+    "production_runbook_path": "docs/MULTICA_PRODUCTION_RUNBOOK.md",
+    "local_and_remote_runbook_sha256": "5b847d5386e2f6786e6d0c17c999deec220eee3c6c9c1703ec2d5551d531f484",
+    "project_observer_configuration": "matched",
+    "project_observer_overall": "attention: historical failed scheduled run retained"
+  },
+  "historical_issues": {
+    "count_before": 55,
+    "count_after": 55,
+    "historical_titles_edited": false,
+    "new_2026_09_24_issue_at_check": false,
+    "v21_six_review_status_after_change": "accepted"
+  },
+  "verification": {
+    "focused_tests": "84 passed",
+    "full_tests": "1243 passed",
+    "git_diff_check": "passed",
+    "remote_tasks_dispatched_by_localization": 0
+  },
+  "not_claimed": ["first localized schedule firing", "M2 natural day", "Paper fill", "Live approval"]
+}
